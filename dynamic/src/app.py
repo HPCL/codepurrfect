@@ -1,10 +1,9 @@
-
 from flask import Flask
 
-app=Flask(__name__)
+app = Flask(_name_)
 app.route('/')
 def index():
     return "Hellow, Code Analysis"
 
-if __name__=="__main__":
+if _name_=="_main_":
     app.run()
