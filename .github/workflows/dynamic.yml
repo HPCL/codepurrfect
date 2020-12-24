@@ -14,13 +14,22 @@ jobs:
         uses: actions/setup-python@v1
         with:
           python-version: 3.8
+      - name: Cache LLVM and Clang
+        id: cache-llvm
+        uses: actions/cache@v2
+        with:
+             path: ${{ runner.temp }}/llvm
+             key: llvm-10.0
+      - name: Install LLVM and Clang
+        uses: KyleMayes/install-llvm-action@v1
+        with:
+            version: "10.0"
+            directory: ${{ runner.temp }}/llvm
+            cached: ${{ steps.cache-llvm.outputs.cache-hit }}
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
           if [-f requirements.txt]; then pip install -r requirements.txt; fi
-      - name: Install Clang
-        run: |
-          pip install clang-3.5
       - name: Lint with flake8
         run: |
           pip install flake8
