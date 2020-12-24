@@ -12,8 +12,8 @@ def test_Function_List(name):
     tu=connect(name)
     FN=Extract_Function_Names(name,tu)
     #Display_Result(FN)
-    for f in FN:
-        print f
+    for fn in FN:
+        print fn
     #print(name)
 
 #def test_print_name_2(pytestconfig):
