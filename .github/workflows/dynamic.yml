@@ -32,7 +32,7 @@ jobs:
           if [-f requirements.txt]; then pip install -r requirements.txt; fi
       - name: Install LLVM and Clang
         run: |
-          pip install python-clang-3.5
+          pip install clang-3.5
       - name: Lint with flake8
         run: |
           pip install flake8
