@@ -14,12 +14,12 @@ jobs:
         uses: actions/setup-python@v1
         with:
           python-version: 3.8
-      - name: Cache LLVM and Clang
-        id: cache-llvm
-        uses: actions/cache@v2
-        with:
-             path: ${{ runner.temp }}/llvm
-             key: llvm-10.0
+     # - name: Cache LLVM and Clang
+     #   id: cache-llvm
+     #   uses: actions/cache@v2
+     #   with:
+     #        path: ${{ runner.temp }}/llvm
+     #        key: llvm-10.0
       - name: Install LLVM and Clang
         uses: KyleMayes/install-llvm-action@v1
         with:
