@@ -13,7 +13,7 @@ def test_Function_List(name):
     FN=Extract_Function_Names(name,tu)
     #Display_Result(FN)
     for fn in FN:
-        print fn
+        print (f"{fn}")
     #print(name)
 
 #def test_print_name_2(pytestconfig):
