@@ -41,7 +41,7 @@ jobs:
         #       library_path = ${os.path.join(os.path.dirname(os.path.realpath(__file__)), 'native'}
         run: |
           # python -m unittest discover -v
-          pip install llvm
+          pip install llvmcpy
           pip install clang
           
           #export library_path = os.path.join(os.path.dirname(os.path.realpath(__file__)), 'native')
