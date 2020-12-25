@@ -14,7 +14,10 @@ jobs:
         uses: actions/setup-python@v1
         with:
           python-version: 3.8
-     # - name: Cache LLVM and Clang
+      #- name: Cache LLVM and Clang
+        #env: 
+        #  key: PYTHONPATH=$(echo ~/llvm/tools/clang/bindings/python/)
+          #key: CLANG_LIBRARY_PATH=$(llvm-config --libdir)
      #   id: cache-llvm
      #   uses: actions/cache@v2
      #   with:
@@ -31,14 +34,15 @@ jobs:
           python -m pip install --upgrade pip
           if [-f requirements.txt]; then pip install -r requirements.txt; fi
       - name: Install LLVM and Clang
-        env:
-          PYTHONPATH=$(echo ~/llvm/tools/clang/bindings/python/)
-          CLANG_LIBRARY_PATH=$(llvm-config --libdir)
+
+       #   PYTHONPATH=$(echo ~/llvm/tools/clang/bindings/python/)
+       #   CLANG_LIBRARY_PATH=$(llvm-config --libdir)
           
         #       library_path = ${os.path.join(os.path.dirname(os.path.realpath(__file__)), 'native'}
         run: |
           python -m unittest discover -v
-          pip install clang
+          pip install llvmcpy
+          
           #export library_path = os.path.join(os.path.dirname(os.path.realpath(__file__)), 'native')
           #export PYTHONPATH=/path/to/clang/bindings/python
           #env PYTHONPATH=$(echo ~/llvm/tools/clang/bindings/python/) \
