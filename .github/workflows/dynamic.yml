@@ -40,8 +40,9 @@ jobs:
           
         #       library_path = ${os.path.join(os.path.dirname(os.path.realpath(__file__)), 'native'}
         run: |
-          python -m unittest discover -v
-          pip install llvmcpy
+          # python -m unittest discover -v
+          pip install llvm
+          pip install clang
           
           #export library_path = os.path.join(os.path.dirname(os.path.realpath(__file__)), 'native')
           #export PYTHONPATH=/path/to/clang/bindings/python
