@@ -31,8 +31,11 @@ jobs:
           python -m pip install --upgrade pip
           if [-f requirements.txt]; then pip install -r requirements.txt; fi
       - name: Install LLVM and Clang
+        #env:
+        #       library_path = ${os.path.join(os.path.dirname(os.path.realpath(__file__)), 'native'}
         run: |
           pip install clang
+          export library_path = os.path.join(os.path.dirname(os.path.realpath(__file__)), 'native'
       - name: Lint with flake8
         run: |
           pip install flake8
@@ -42,5 +45,6 @@ jobs:
         run: |
           pip install pytest
           export PYTHONPATH=src
+          
           pytest
            
