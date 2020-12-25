@@ -41,7 +41,7 @@ jobs:
         #       library_path = ${os.path.join(os.path.dirname(os.path.realpath(__file__)), 'native'}
         run: |
           # python -m unittest discover -v
-          #pip install llvmcpy
+          pip install llvmlite
           pip install clang
           
           #export library_path = os.path.join(os.path.dirname(os.path.realpath(__file__)), 'native')
@@ -58,11 +58,12 @@ jobs:
         run: |
           pip install pytest
           export PYTHONPATH=src
-          echo 'CLANG_LIBRARY_PATH' >> $GITHUB_ENV
-          echo "PATH" >> $GITHUB_PATH
+          pytest
+          #echo 'CLANG_LIBRARY_PATH' >> $GITHUB_ENV
+          #echo "PATH" >> $GITHUB_PATH
          # export CLANG_LIBRARY_PATH=$(llvm-config --libdir)
          # echo "{path}" >> $GITHUB_PATH
           #export PYTHONPATH=/path/to/clang/bindings/python
           
-          pytest
+        
            
