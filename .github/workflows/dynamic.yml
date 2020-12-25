@@ -45,6 +45,7 @@ jobs:
         run: |
           pip install pytest
           export PYTHONPATH=src
+          export library_path = os.path.join(os.path.dirname(os.path.realpath(__file__)), 'native')
           
           pytest
            
