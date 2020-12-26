@@ -14,56 +14,23 @@ jobs:
         uses: actions/setup-python@v1
         with:
           python-version: 3.8
-      #- name: Cache LLVM and Clang
-        #env: 
-        #  key: PYTHONPATH=$(echo ~/llvm/tools/clang/bindings/python/)
-          #key: CLANG_LIBRARY_PATH=$(llvm-config --libdir)
-     #   id: cache-llvm
-     #   uses: actions/cache@v2
-     #   with:
-     #        path: ${{ runner.temp }}/llvm
-     #        key: llvm-10.0
-     # - name: Install LLVM and Clang
-     #   uses: KyleMayes/install-llvm-action@v1
-     #   with:
-     #       version: "10.0"
-     #       directory: ${{ runner.temp }}/llvm
-     #       cached: ${{ steps.cache-llvm.outputs.cache-hit }}
       - name: Install dependencies
         run: |
-          python -m pip install --upgrade pip
-          if [-f requirements.txt]; then pip install -r requirements.txt; fi
-      - name: Install LLVM and Clang
-
-       #   PYTHONPATH=$(echo ~/llvm/tools/clang/bindings/python/)
-       #   CLANG_LIBRARY_PATH=$(llvm-config --libdir)
-          
-        #       library_path = ${os.path.join(os.path.dirname(os.path.realpath(__file__)), 'native'}
-        run: |
-          # python -m unittest discover -v
-          pip install llvmlite
-          pip install clang
-          
-          #export library_path = os.path.join(os.path.dirname(os.path.realpath(__file__)), 'native')
-          #export PYTHONPATH=/path/to/clang/bindings/python
-          #env PYTHONPATH=$(echo ~/llvm/tools/clang/bindings/python/) \
-          #CLANG_LIBRARY_PATH=$(llvm-config --libdir) \
-          
+          #python -m pip install --upgrade pip
+          #if [-f requirements.txt]; then pip install -r requirements.txt; fi
+          conda install -c anaconda llvm
+          conda install -c conda-forge clang               
       - name: Lint with flake8
         run: |
-          pip install flake8
+          conda install -c anaconda flake8
           flake8 . --count --select=E9,F63,F7,F82  --show-source --statistics
           flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
       - name: Test with pytest
         run: |
-          pip install pytest
-          export PYTHONPATH=src
+          conda install -c anaconda pytest
+          #export PYTHONPATH=src
           pytest
-          #echo 'CLANG_LIBRARY_PATH' >> $GITHUB_ENV
-          #echo "PATH" >> $GITHUB_PATH
-         # export CLANG_LIBRARY_PATH=$(llvm-config --libdir)
-         # echo "{path}" >> $GITHUB_PATH
-          #export PYTHONPATH=/path/to/clang/bindings/python
+        
           
         
            
