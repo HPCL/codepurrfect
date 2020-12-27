@@ -1,0 +1,9 @@
+name: Dynamic-Analysis
+channels:
+        - conda-forge
+        - defaults
+dependencies:
+        - llvm
+        - clang
+        - flake8
+        - pytest
