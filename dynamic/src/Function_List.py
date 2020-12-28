@@ -5,7 +5,7 @@ import sys
 #from os import path
 
 #sys.path.append(path.dirname(path.dirname(path.abspath(__file__))))
-
+clang.cindex.Config.set_library_path('/usr/local/Cellar/llvm/11.0.0/lib')
 def connect(file_name):
  #   sys.path.append(path.dirname(path.dirname(path.abspath(__file__))))
     index = clang.cindex.Index.create()
