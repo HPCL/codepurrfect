@@ -4,6 +4,7 @@ channels:
         - defaults
 dependencies:
         - llvm
-        - clang
+        - pip
+          - clang
         - flake8
         - pytest
