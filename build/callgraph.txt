@@ -1,0 +1,5 @@
+main,contruct_testtype, DIRECT
+main,../main.c::TestType->any pointer->i64 0, INDIRECT 
+main,contruct_testtype, DIRECT
+main,../main.c::TestType->any pointer->i64 0, INDIRECT 
+main,../main.c::TestType->any pointer->i64 16, INDIRECT 
