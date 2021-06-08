@@ -72,12 +72,12 @@ CMAKE_BINARY_DIR = /home/users/ndemeye/xSDK/code-analysis/static/pointer-call-an
 # Directory level rules for the build root directory
 
 # The main recursive "all" target.
-all: AliasCallPointers/all
+all: CallGraphWithIndirectCalls/all
 
 .PHONY : all
 
 # The main recursive "preinstall" target.
-preinstall: AliasCallPointers/preinstall
+preinstall: CallGraphWithIndirectCalls/preinstall
 
 .PHONY : preinstall
 
@@ -85,27 +85,27 @@ preinstall: AliasCallPointers/preinstall
 clean: CMakeFiles/acc_gen.dir/clean
 clean: CMakeFiles/omp_gen.dir/clean
 clean: CMakeFiles/intrinsics_gen.dir/clean
-clean: AliasCallPointers/clean
+clean: CallGraphWithIndirectCalls/clean
 
 .PHONY : clean
 
 #=============================================================================
-# Directory level rules for directory AliasCallPointers
+# Directory level rules for directory CallGraphWithIndirectCalls
 
 # Recursive "all" directory target.
-AliasCallPointers/all: AliasCallPointers/CMakeFiles/AliasCallPointers.dir/all
+CallGraphWithIndirectCalls/all: CallGraphWithIndirectCalls/CMakeFiles/CallGraphWithIndirectCalls.dir/all
 
-.PHONY : AliasCallPointers/all
+.PHONY : CallGraphWithIndirectCalls/all
 
 # Recursive "preinstall" directory target.
-AliasCallPointers/preinstall:
+CallGraphWithIndirectCalls/preinstall:
 
-.PHONY : AliasCallPointers/preinstall
+.PHONY : CallGraphWithIndirectCalls/preinstall
 
 # Recursive "clean" directory target.
-AliasCallPointers/clean: AliasCallPointers/CMakeFiles/AliasCallPointers.dir/clean
+CallGraphWithIndirectCalls/clean: CallGraphWithIndirectCalls/CMakeFiles/CallGraphWithIndirectCalls.dir/clean
 
-.PHONY : AliasCallPointers/clean
+.PHONY : CallGraphWithIndirectCalls/clean
 
 #=============================================================================
 # Target rules for target CMakeFiles/acc_gen.dir
@@ -189,31 +189,31 @@ CMakeFiles/intrinsics_gen.dir/clean:
 .PHONY : CMakeFiles/intrinsics_gen.dir/clean
 
 #=============================================================================
-# Target rules for target AliasCallPointers/CMakeFiles/AliasCallPointers.dir
+# Target rules for target CallGraphWithIndirectCalls/CMakeFiles/CallGraphWithIndirectCalls.dir
 
 # All Build rule for target.
-AliasCallPointers/CMakeFiles/AliasCallPointers.dir/all:
-	$(MAKE) $(MAKESILENT) -f AliasCallPointers/CMakeFiles/AliasCallPointers.dir/build.make AliasCallPointers/CMakeFiles/AliasCallPointers.dir/depend
-	$(MAKE) $(MAKESILENT) -f AliasCallPointers/CMakeFiles/AliasCallPointers.dir/build.make AliasCallPointers/CMakeFiles/AliasCallPointers.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/users/ndemeye/xSDK/code-analysis/static/pointer-call-analysis/build/CMakeFiles --progress-num=1,2 "Built target AliasCallPointers"
-.PHONY : AliasCallPointers/CMakeFiles/AliasCallPointers.dir/all
+CallGraphWithIndirectCalls/CMakeFiles/CallGraphWithIndirectCalls.dir/all:
+	$(MAKE) $(MAKESILENT) -f CallGraphWithIndirectCalls/CMakeFiles/CallGraphWithIndirectCalls.dir/build.make CallGraphWithIndirectCalls/CMakeFiles/CallGraphWithIndirectCalls.dir/depend
+	$(MAKE) $(MAKESILENT) -f CallGraphWithIndirectCalls/CMakeFiles/CallGraphWithIndirectCalls.dir/build.make CallGraphWithIndirectCalls/CMakeFiles/CallGraphWithIndirectCalls.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/users/ndemeye/xSDK/code-analysis/static/pointer-call-analysis/build/CMakeFiles --progress-num=1,2 "Built target CallGraphWithIndirectCalls"
+.PHONY : CallGraphWithIndirectCalls/CMakeFiles/CallGraphWithIndirectCalls.dir/all
 
 # Build rule for subdir invocation for target.
-AliasCallPointers/CMakeFiles/AliasCallPointers.dir/rule: cmake_check_build_system
+CallGraphWithIndirectCalls/CMakeFiles/CallGraphWithIndirectCalls.dir/rule: cmake_check_build_system
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/users/ndemeye/xSDK/code-analysis/static/pointer-call-analysis/build/CMakeFiles 2
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 AliasCallPointers/CMakeFiles/AliasCallPointers.dir/all
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CallGraphWithIndirectCalls/CMakeFiles/CallGraphWithIndirectCalls.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/users/ndemeye/xSDK/code-analysis/static/pointer-call-analysis/build/CMakeFiles 0
-.PHONY : AliasCallPointers/CMakeFiles/AliasCallPointers.dir/rule
+.PHONY : CallGraphWithIndirectCalls/CMakeFiles/CallGraphWithIndirectCalls.dir/rule
 
 # Convenience name for target.
-AliasCallPointers: AliasCallPointers/CMakeFiles/AliasCallPointers.dir/rule
+CallGraphWithIndirectCalls: CallGraphWithIndirectCalls/CMakeFiles/CallGraphWithIndirectCalls.dir/rule
 
-.PHONY : AliasCallPointers
+.PHONY : CallGraphWithIndirectCalls
 
 # clean rule for target.
-AliasCallPointers/CMakeFiles/AliasCallPointers.dir/clean:
-	$(MAKE) $(MAKESILENT) -f AliasCallPointers/CMakeFiles/AliasCallPointers.dir/build.make AliasCallPointers/CMakeFiles/AliasCallPointers.dir/clean
-.PHONY : AliasCallPointers/CMakeFiles/AliasCallPointers.dir/clean
+CallGraphWithIndirectCalls/CMakeFiles/CallGraphWithIndirectCalls.dir/clean:
+	$(MAKE) $(MAKESILENT) -f CallGraphWithIndirectCalls/CMakeFiles/CallGraphWithIndirectCalls.dir/build.make CallGraphWithIndirectCalls/CMakeFiles/CallGraphWithIndirectCalls.dir/clean
+.PHONY : CallGraphWithIndirectCalls/CMakeFiles/CallGraphWithIndirectCalls.dir/clean
 
 #=============================================================================
 # Special targets to cleanup operation of make.

@@ -3,6 +3,6 @@
 /home/users/ndemeye/xSDK/code-analysis/static/pointer-call-analysis/build/CMakeFiles/edit_cache.dir
 /home/users/ndemeye/xSDK/code-analysis/static/pointer-call-analysis/build/CMakeFiles/omp_gen.dir
 /home/users/ndemeye/xSDK/code-analysis/static/pointer-call-analysis/build/CMakeFiles/intrinsics_gen.dir
-/home/users/ndemeye/xSDK/code-analysis/static/pointer-call-analysis/build/AliasCallPointers/CMakeFiles/rebuild_cache.dir
-/home/users/ndemeye/xSDK/code-analysis/static/pointer-call-analysis/build/AliasCallPointers/CMakeFiles/edit_cache.dir
-/home/users/ndemeye/xSDK/code-analysis/static/pointer-call-analysis/build/AliasCallPointers/CMakeFiles/AliasCallPointers.dir
+/home/users/ndemeye/xSDK/code-analysis/static/pointer-call-analysis/build/CallGraphWithIndirectCalls/CMakeFiles/rebuild_cache.dir
+/home/users/ndemeye/xSDK/code-analysis/static/pointer-call-analysis/build/CallGraphWithIndirectCalls/CMakeFiles/edit_cache.dir
+/home/users/ndemeye/xSDK/code-analysis/static/pointer-call-analysis/build/CallGraphWithIndirectCalls/CMakeFiles/CallGraphWithIndirectCalls.dir

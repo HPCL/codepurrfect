@@ -169,17 +169,17 @@ intrinsics_gen/fast:
 .PHONY : intrinsics_gen/fast
 
 #=============================================================================
-# Target rules for targets named AliasCallPointers
+# Target rules for targets named CallGraphWithIndirectCalls
 
 # Build rule for target.
-AliasCallPointers: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 AliasCallPointers
-.PHONY : AliasCallPointers
+CallGraphWithIndirectCalls: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CallGraphWithIndirectCalls
+.PHONY : CallGraphWithIndirectCalls
 
 # fast build rule for target.
-AliasCallPointers/fast:
-	$(MAKE) $(MAKESILENT) -f AliasCallPointers/CMakeFiles/AliasCallPointers.dir/build.make AliasCallPointers/CMakeFiles/AliasCallPointers.dir/build
-.PHONY : AliasCallPointers/fast
+CallGraphWithIndirectCalls/fast:
+	$(MAKE) $(MAKESILENT) -f CallGraphWithIndirectCalls/CMakeFiles/CallGraphWithIndirectCalls.dir/build.make CallGraphWithIndirectCalls/CMakeFiles/CallGraphWithIndirectCalls.dir/build
+.PHONY : CallGraphWithIndirectCalls/fast
 
 # Help Target
 help:
@@ -192,7 +192,7 @@ help:
 	@echo "... acc_gen"
 	@echo "... intrinsics_gen"
 	@echo "... omp_gen"
-	@echo "... AliasCallPointers"
+	@echo "... CallGraphWithIndirectCalls"
 .PHONY : help
 
 
