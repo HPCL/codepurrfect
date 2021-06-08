@@ -62,10 +62,10 @@ RM = /usr/local/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/users/ndemeye/xSDK/pointer-call-analysis
+CMAKE_SOURCE_DIR = /home/users/ndemeye/xSDK/code-analysis/static/pointer-call-analysis
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/users/ndemeye/xSDK/pointer-call-analysis/build
+CMAKE_BINARY_DIR = /home/users/ndemeye/xSDK/code-analysis/static/pointer-call-analysis/build
 
 # Include any dependencies generated for this target.
 include AliasCallPointers/CMakeFiles/AliasCallPointers.dir/depend.make
@@ -78,16 +78,16 @@ include AliasCallPointers/CMakeFiles/AliasCallPointers.dir/flags.make
 
 AliasCallPointers/CMakeFiles/AliasCallPointers.dir/AliasCallPointers.cpp.o: AliasCallPointers/CMakeFiles/AliasCallPointers.dir/flags.make
 AliasCallPointers/CMakeFiles/AliasCallPointers.dir/AliasCallPointers.cpp.o: ../AliasCallPointers/AliasCallPointers.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/users/ndemeye/xSDK/pointer-call-analysis/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object AliasCallPointers/CMakeFiles/AliasCallPointers.dir/AliasCallPointers.cpp.o"
-	cd /home/users/ndemeye/xSDK/pointer-call-analysis/build/AliasCallPointers && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/AliasCallPointers.dir/AliasCallPointers.cpp.o -c /home/users/ndemeye/xSDK/pointer-call-analysis/AliasCallPointers/AliasCallPointers.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/users/ndemeye/xSDK/code-analysis/static/pointer-call-analysis/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object AliasCallPointers/CMakeFiles/AliasCallPointers.dir/AliasCallPointers.cpp.o"
+	cd /home/users/ndemeye/xSDK/code-analysis/static/pointer-call-analysis/build/AliasCallPointers && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/AliasCallPointers.dir/AliasCallPointers.cpp.o -c /home/users/ndemeye/xSDK/code-analysis/static/pointer-call-analysis/AliasCallPointers/AliasCallPointers.cpp
 
 AliasCallPointers/CMakeFiles/AliasCallPointers.dir/AliasCallPointers.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/AliasCallPointers.dir/AliasCallPointers.cpp.i"
-	cd /home/users/ndemeye/xSDK/pointer-call-analysis/build/AliasCallPointers && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/users/ndemeye/xSDK/pointer-call-analysis/AliasCallPointers/AliasCallPointers.cpp > CMakeFiles/AliasCallPointers.dir/AliasCallPointers.cpp.i
+	cd /home/users/ndemeye/xSDK/code-analysis/static/pointer-call-analysis/build/AliasCallPointers && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/users/ndemeye/xSDK/code-analysis/static/pointer-call-analysis/AliasCallPointers/AliasCallPointers.cpp > CMakeFiles/AliasCallPointers.dir/AliasCallPointers.cpp.i
 
 AliasCallPointers/CMakeFiles/AliasCallPointers.dir/AliasCallPointers.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/AliasCallPointers.dir/AliasCallPointers.cpp.s"
-	cd /home/users/ndemeye/xSDK/pointer-call-analysis/build/AliasCallPointers && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/users/ndemeye/xSDK/pointer-call-analysis/AliasCallPointers/AliasCallPointers.cpp -o CMakeFiles/AliasCallPointers.dir/AliasCallPointers.cpp.s
+	cd /home/users/ndemeye/xSDK/code-analysis/static/pointer-call-analysis/build/AliasCallPointers && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/users/ndemeye/xSDK/code-analysis/static/pointer-call-analysis/AliasCallPointers/AliasCallPointers.cpp -o CMakeFiles/AliasCallPointers.dir/AliasCallPointers.cpp.s
 
 # Object files for target AliasCallPointers
 AliasCallPointers_OBJECTS = \
@@ -99,8 +99,8 @@ AliasCallPointers_EXTERNAL_OBJECTS =
 AliasCallPointers/libAliasCallPointers.so: AliasCallPointers/CMakeFiles/AliasCallPointers.dir/AliasCallPointers.cpp.o
 AliasCallPointers/libAliasCallPointers.so: AliasCallPointers/CMakeFiles/AliasCallPointers.dir/build.make
 AliasCallPointers/libAliasCallPointers.so: AliasCallPointers/CMakeFiles/AliasCallPointers.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/users/ndemeye/xSDK/pointer-call-analysis/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Linking CXX shared module libAliasCallPointers.so"
-	cd /home/users/ndemeye/xSDK/pointer-call-analysis/build/AliasCallPointers && $(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/AliasCallPointers.dir/link.txt --verbose=$(VERBOSE)
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/users/ndemeye/xSDK/code-analysis/static/pointer-call-analysis/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Linking CXX shared module libAliasCallPointers.so"
+	cd /home/users/ndemeye/xSDK/code-analysis/static/pointer-call-analysis/build/AliasCallPointers && $(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/AliasCallPointers.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
 AliasCallPointers/CMakeFiles/AliasCallPointers.dir/build: AliasCallPointers/libAliasCallPointers.so
@@ -108,10 +108,10 @@ AliasCallPointers/CMakeFiles/AliasCallPointers.dir/build: AliasCallPointers/libA
 .PHONY : AliasCallPointers/CMakeFiles/AliasCallPointers.dir/build
 
 AliasCallPointers/CMakeFiles/AliasCallPointers.dir/clean:
-	cd /home/users/ndemeye/xSDK/pointer-call-analysis/build/AliasCallPointers && $(CMAKE_COMMAND) -P CMakeFiles/AliasCallPointers.dir/cmake_clean.cmake
+	cd /home/users/ndemeye/xSDK/code-analysis/static/pointer-call-analysis/build/AliasCallPointers && $(CMAKE_COMMAND) -P CMakeFiles/AliasCallPointers.dir/cmake_clean.cmake
 .PHONY : AliasCallPointers/CMakeFiles/AliasCallPointers.dir/clean
 
 AliasCallPointers/CMakeFiles/AliasCallPointers.dir/depend:
-	cd /home/users/ndemeye/xSDK/pointer-call-analysis/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/users/ndemeye/xSDK/pointer-call-analysis /home/users/ndemeye/xSDK/pointer-call-analysis/AliasCallPointers /home/users/ndemeye/xSDK/pointer-call-analysis/build /home/users/ndemeye/xSDK/pointer-call-analysis/build/AliasCallPointers /home/users/ndemeye/xSDK/pointer-call-analysis/build/AliasCallPointers/CMakeFiles/AliasCallPointers.dir/DependInfo.cmake --color=$(COLOR)
+	cd /home/users/ndemeye/xSDK/code-analysis/static/pointer-call-analysis/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/users/ndemeye/xSDK/code-analysis/static/pointer-call-analysis /home/users/ndemeye/xSDK/code-analysis/static/pointer-call-analysis/AliasCallPointers /home/users/ndemeye/xSDK/code-analysis/static/pointer-call-analysis/build /home/users/ndemeye/xSDK/code-analysis/static/pointer-call-analysis/build/AliasCallPointers /home/users/ndemeye/xSDK/code-analysis/static/pointer-call-analysis/build/AliasCallPointers/CMakeFiles/AliasCallPointers.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : AliasCallPointers/CMakeFiles/AliasCallPointers.dir/depend
 

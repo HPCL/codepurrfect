@@ -67,10 +67,10 @@ RM = /usr/local/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/users/ndemeye/xSDK/pointer-call-analysis
+CMAKE_SOURCE_DIR = /home/users/ndemeye/xSDK/code-analysis/static/pointer-call-analysis
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/users/ndemeye/xSDK/pointer-call-analysis/build
+CMAKE_BINARY_DIR = /home/users/ndemeye/xSDK/code-analysis/static/pointer-call-analysis/build
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -99,14 +99,14 @@ edit_cache/fast: edit_cache
 
 # The main all target
 all: cmake_check_build_system
-	cd /home/users/ndemeye/xSDK/pointer-call-analysis/build && $(CMAKE_COMMAND) -E cmake_progress_start /home/users/ndemeye/xSDK/pointer-call-analysis/build/CMakeFiles /home/users/ndemeye/xSDK/pointer-call-analysis/build/AliasCallPointers//CMakeFiles/progress.marks
-	cd /home/users/ndemeye/xSDK/pointer-call-analysis/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 AliasCallPointers/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/users/ndemeye/xSDK/pointer-call-analysis/build/CMakeFiles 0
+	cd /home/users/ndemeye/xSDK/code-analysis/static/pointer-call-analysis/build && $(CMAKE_COMMAND) -E cmake_progress_start /home/users/ndemeye/xSDK/code-analysis/static/pointer-call-analysis/build/CMakeFiles /home/users/ndemeye/xSDK/code-analysis/static/pointer-call-analysis/build/AliasCallPointers//CMakeFiles/progress.marks
+	cd /home/users/ndemeye/xSDK/code-analysis/static/pointer-call-analysis/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 AliasCallPointers/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/users/ndemeye/xSDK/code-analysis/static/pointer-call-analysis/build/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
 clean:
-	cd /home/users/ndemeye/xSDK/pointer-call-analysis/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 AliasCallPointers/clean
+	cd /home/users/ndemeye/xSDK/code-analysis/static/pointer-call-analysis/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 AliasCallPointers/clean
 .PHONY : clean
 
 # The main clean target
@@ -116,22 +116,22 @@ clean/fast: clean
 
 # Prepare targets for installation.
 preinstall: all
-	cd /home/users/ndemeye/xSDK/pointer-call-analysis/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 AliasCallPointers/preinstall
+	cd /home/users/ndemeye/xSDK/code-analysis/static/pointer-call-analysis/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 AliasCallPointers/preinstall
 .PHONY : preinstall
 
 # Prepare targets for installation.
 preinstall/fast:
-	cd /home/users/ndemeye/xSDK/pointer-call-analysis/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 AliasCallPointers/preinstall
+	cd /home/users/ndemeye/xSDK/code-analysis/static/pointer-call-analysis/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 AliasCallPointers/preinstall
 .PHONY : preinstall/fast
 
 # clear depends
 depend:
-	cd /home/users/ndemeye/xSDK/pointer-call-analysis/build && $(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 1
+	cd /home/users/ndemeye/xSDK/code-analysis/static/pointer-call-analysis/build && $(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 1
 .PHONY : depend
 
 # Convenience name for target.
 AliasCallPointers/CMakeFiles/AliasCallPointers.dir/rule:
-	cd /home/users/ndemeye/xSDK/pointer-call-analysis/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 AliasCallPointers/CMakeFiles/AliasCallPointers.dir/rule
+	cd /home/users/ndemeye/xSDK/code-analysis/static/pointer-call-analysis/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 AliasCallPointers/CMakeFiles/AliasCallPointers.dir/rule
 .PHONY : AliasCallPointers/CMakeFiles/AliasCallPointers.dir/rule
 
 # Convenience name for target.
@@ -141,7 +141,7 @@ AliasCallPointers: AliasCallPointers/CMakeFiles/AliasCallPointers.dir/rule
 
 # fast build rule for target.
 AliasCallPointers/fast:
-	cd /home/users/ndemeye/xSDK/pointer-call-analysis/build && $(MAKE) $(MAKESILENT) -f AliasCallPointers/CMakeFiles/AliasCallPointers.dir/build.make AliasCallPointers/CMakeFiles/AliasCallPointers.dir/build
+	cd /home/users/ndemeye/xSDK/code-analysis/static/pointer-call-analysis/build && $(MAKE) $(MAKESILENT) -f AliasCallPointers/CMakeFiles/AliasCallPointers.dir/build.make AliasCallPointers/CMakeFiles/AliasCallPointers.dir/build
 .PHONY : AliasCallPointers/fast
 
 AliasCallPointers.o: AliasCallPointers.cpp.o
@@ -150,7 +150,7 @@ AliasCallPointers.o: AliasCallPointers.cpp.o
 
 # target to build an object file
 AliasCallPointers.cpp.o:
-	cd /home/users/ndemeye/xSDK/pointer-call-analysis/build && $(MAKE) $(MAKESILENT) -f AliasCallPointers/CMakeFiles/AliasCallPointers.dir/build.make AliasCallPointers/CMakeFiles/AliasCallPointers.dir/AliasCallPointers.cpp.o
+	cd /home/users/ndemeye/xSDK/code-analysis/static/pointer-call-analysis/build && $(MAKE) $(MAKESILENT) -f AliasCallPointers/CMakeFiles/AliasCallPointers.dir/build.make AliasCallPointers/CMakeFiles/AliasCallPointers.dir/AliasCallPointers.cpp.o
 .PHONY : AliasCallPointers.cpp.o
 
 AliasCallPointers.i: AliasCallPointers.cpp.i
@@ -159,7 +159,7 @@ AliasCallPointers.i: AliasCallPointers.cpp.i
 
 # target to preprocess a source file
 AliasCallPointers.cpp.i:
-	cd /home/users/ndemeye/xSDK/pointer-call-analysis/build && $(MAKE) $(MAKESILENT) -f AliasCallPointers/CMakeFiles/AliasCallPointers.dir/build.make AliasCallPointers/CMakeFiles/AliasCallPointers.dir/AliasCallPointers.cpp.i
+	cd /home/users/ndemeye/xSDK/code-analysis/static/pointer-call-analysis/build && $(MAKE) $(MAKESILENT) -f AliasCallPointers/CMakeFiles/AliasCallPointers.dir/build.make AliasCallPointers/CMakeFiles/AliasCallPointers.dir/AliasCallPointers.cpp.i
 .PHONY : AliasCallPointers.cpp.i
 
 AliasCallPointers.s: AliasCallPointers.cpp.s
@@ -168,7 +168,7 @@ AliasCallPointers.s: AliasCallPointers.cpp.s
 
 # target to generate assembly for a file
 AliasCallPointers.cpp.s:
-	cd /home/users/ndemeye/xSDK/pointer-call-analysis/build && $(MAKE) $(MAKESILENT) -f AliasCallPointers/CMakeFiles/AliasCallPointers.dir/build.make AliasCallPointers/CMakeFiles/AliasCallPointers.dir/AliasCallPointers.cpp.s
+	cd /home/users/ndemeye/xSDK/code-analysis/static/pointer-call-analysis/build && $(MAKE) $(MAKESILENT) -f AliasCallPointers/CMakeFiles/AliasCallPointers.dir/build.make AliasCallPointers/CMakeFiles/AliasCallPointers.dir/AliasCallPointers.cpp.s
 .PHONY : AliasCallPointers.cpp.s
 
 # Help Target
@@ -194,6 +194,6 @@ help:
 # No rule that depends on this can have commands that come from listfiles
 # because they might be regenerated.
 cmake_check_build_system:
-	cd /home/users/ndemeye/xSDK/pointer-call-analysis/build && $(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 0
+	cd /home/users/ndemeye/xSDK/code-analysis/static/pointer-call-analysis/build && $(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 0
 .PHONY : cmake_check_build_system
 

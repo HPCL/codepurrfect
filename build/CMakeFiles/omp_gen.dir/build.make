@@ -62,10 +62,10 @@ RM = /usr/local/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/users/ndemeye/xSDK/pointer-call-analysis
+CMAKE_SOURCE_DIR = /home/users/ndemeye/xSDK/code-analysis/static/pointer-call-analysis
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/users/ndemeye/xSDK/pointer-call-analysis/build
+CMAKE_BINARY_DIR = /home/users/ndemeye/xSDK/code-analysis/static/pointer-call-analysis/build
 
 # Utility rule file for omp_gen.
 
@@ -86,6 +86,6 @@ CMakeFiles/omp_gen.dir/clean:
 .PHONY : CMakeFiles/omp_gen.dir/clean
 
 CMakeFiles/omp_gen.dir/depend:
-	cd /home/users/ndemeye/xSDK/pointer-call-analysis/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/users/ndemeye/xSDK/pointer-call-analysis /home/users/ndemeye/xSDK/pointer-call-analysis /home/users/ndemeye/xSDK/pointer-call-analysis/build /home/users/ndemeye/xSDK/pointer-call-analysis/build /home/users/ndemeye/xSDK/pointer-call-analysis/build/CMakeFiles/omp_gen.dir/DependInfo.cmake --color=$(COLOR)
+	cd /home/users/ndemeye/xSDK/code-analysis/static/pointer-call-analysis/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/users/ndemeye/xSDK/code-analysis/static/pointer-call-analysis /home/users/ndemeye/xSDK/code-analysis/static/pointer-call-analysis /home/users/ndemeye/xSDK/code-analysis/static/pointer-call-analysis/build /home/users/ndemeye/xSDK/code-analysis/static/pointer-call-analysis/build /home/users/ndemeye/xSDK/code-analysis/static/pointer-call-analysis/build/CMakeFiles/omp_gen.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : CMakeFiles/omp_gen.dir/depend
 

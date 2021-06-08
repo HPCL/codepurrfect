@@ -63,10 +63,10 @@ RM = /usr/local/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/users/ndemeye/xSDK/pointer-call-analysis
+CMAKE_SOURCE_DIR = /home/users/ndemeye/xSDK/code-analysis/static/pointer-call-analysis
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/users/ndemeye/xSDK/pointer-call-analysis/build
+CMAKE_BINARY_DIR = /home/users/ndemeye/xSDK/code-analysis/static/pointer-call-analysis/build
 
 #=============================================================================
 # Directory level rules for the build root directory
@@ -114,14 +114,14 @@ AliasCallPointers/clean: AliasCallPointers/CMakeFiles/AliasCallPointers.dir/clea
 CMakeFiles/acc_gen.dir/all:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/acc_gen.dir/build.make CMakeFiles/acc_gen.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/acc_gen.dir/build.make CMakeFiles/acc_gen.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/users/ndemeye/xSDK/pointer-call-analysis/build/CMakeFiles --progress-num= "Built target acc_gen"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/users/ndemeye/xSDK/code-analysis/static/pointer-call-analysis/build/CMakeFiles --progress-num= "Built target acc_gen"
 .PHONY : CMakeFiles/acc_gen.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/acc_gen.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/users/ndemeye/xSDK/pointer-call-analysis/build/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/users/ndemeye/xSDK/code-analysis/static/pointer-call-analysis/build/CMakeFiles 0
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/acc_gen.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/users/ndemeye/xSDK/pointer-call-analysis/build/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/users/ndemeye/xSDK/code-analysis/static/pointer-call-analysis/build/CMakeFiles 0
 .PHONY : CMakeFiles/acc_gen.dir/rule
 
 # Convenience name for target.
@@ -141,14 +141,14 @@ CMakeFiles/acc_gen.dir/clean:
 CMakeFiles/omp_gen.dir/all:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/omp_gen.dir/build.make CMakeFiles/omp_gen.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/omp_gen.dir/build.make CMakeFiles/omp_gen.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/users/ndemeye/xSDK/pointer-call-analysis/build/CMakeFiles --progress-num= "Built target omp_gen"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/users/ndemeye/xSDK/code-analysis/static/pointer-call-analysis/build/CMakeFiles --progress-num= "Built target omp_gen"
 .PHONY : CMakeFiles/omp_gen.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/omp_gen.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/users/ndemeye/xSDK/pointer-call-analysis/build/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/users/ndemeye/xSDK/code-analysis/static/pointer-call-analysis/build/CMakeFiles 0
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/omp_gen.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/users/ndemeye/xSDK/pointer-call-analysis/build/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/users/ndemeye/xSDK/code-analysis/static/pointer-call-analysis/build/CMakeFiles 0
 .PHONY : CMakeFiles/omp_gen.dir/rule
 
 # Convenience name for target.
@@ -168,14 +168,14 @@ CMakeFiles/omp_gen.dir/clean:
 CMakeFiles/intrinsics_gen.dir/all:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/intrinsics_gen.dir/build.make CMakeFiles/intrinsics_gen.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/intrinsics_gen.dir/build.make CMakeFiles/intrinsics_gen.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/users/ndemeye/xSDK/pointer-call-analysis/build/CMakeFiles --progress-num= "Built target intrinsics_gen"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/users/ndemeye/xSDK/code-analysis/static/pointer-call-analysis/build/CMakeFiles --progress-num= "Built target intrinsics_gen"
 .PHONY : CMakeFiles/intrinsics_gen.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/intrinsics_gen.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/users/ndemeye/xSDK/pointer-call-analysis/build/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/users/ndemeye/xSDK/code-analysis/static/pointer-call-analysis/build/CMakeFiles 0
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/intrinsics_gen.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/users/ndemeye/xSDK/pointer-call-analysis/build/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/users/ndemeye/xSDK/code-analysis/static/pointer-call-analysis/build/CMakeFiles 0
 .PHONY : CMakeFiles/intrinsics_gen.dir/rule
 
 # Convenience name for target.
@@ -195,14 +195,14 @@ CMakeFiles/intrinsics_gen.dir/clean:
 AliasCallPointers/CMakeFiles/AliasCallPointers.dir/all:
 	$(MAKE) $(MAKESILENT) -f AliasCallPointers/CMakeFiles/AliasCallPointers.dir/build.make AliasCallPointers/CMakeFiles/AliasCallPointers.dir/depend
 	$(MAKE) $(MAKESILENT) -f AliasCallPointers/CMakeFiles/AliasCallPointers.dir/build.make AliasCallPointers/CMakeFiles/AliasCallPointers.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/users/ndemeye/xSDK/pointer-call-analysis/build/CMakeFiles --progress-num=1,2 "Built target AliasCallPointers"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/users/ndemeye/xSDK/code-analysis/static/pointer-call-analysis/build/CMakeFiles --progress-num=1,2 "Built target AliasCallPointers"
 .PHONY : AliasCallPointers/CMakeFiles/AliasCallPointers.dir/all
 
 # Build rule for subdir invocation for target.
 AliasCallPointers/CMakeFiles/AliasCallPointers.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/users/ndemeye/xSDK/pointer-call-analysis/build/CMakeFiles 2
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/users/ndemeye/xSDK/code-analysis/static/pointer-call-analysis/build/CMakeFiles 2
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 AliasCallPointers/CMakeFiles/AliasCallPointers.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/users/ndemeye/xSDK/pointer-call-analysis/build/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/users/ndemeye/xSDK/code-analysis/static/pointer-call-analysis/build/CMakeFiles 0
 .PHONY : AliasCallPointers/CMakeFiles/AliasCallPointers.dir/rule
 
 # Convenience name for target.

@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.19)
-project(llvm-pass-project)
+project(pointer-call-analysis)
 find_package(LLVM REQUIRED CONFIG)
 
 add_definitions(${LLVM_DEFINITIONS})

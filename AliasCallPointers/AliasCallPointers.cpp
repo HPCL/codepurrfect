@@ -19,10 +19,13 @@
 #include "llvm/IR/InstrTypes.h"
 #include "llvm/IR/Value.h"
 #include "llvm/IR/Metadata.h"
+#include <llvm/IR/DebugLoc.h>
+#include <llvm/IR/DebugInfoMetadata.h>
 #include "llvm/Support/raw_ostream.h"
 #include <iostream> 
 #include <fstream>
-#include <system_error>
+#include <system_error> 
+#include <functional>
 
 using namespace llvm; 
 
@@ -37,10 +40,17 @@ struct AliasCallPointersPass : public PassInfoMixin<AliasCallPointersPass> {
     raw_fd_ostream csv_file(StringRef(filename), e);
     for (Function &F : M)
     {
+      std::vector<LoadInst*> load_stack; 
       for (BasicBlock &BB : F)
       {
         for (Instruction &I : BB)
         {
+          if (isa<LoadInst>(I))
+          {
+            LoadInst* to_push = dyn_cast<LoadInst>(&I); 
+            load_stack.push_back(to_push);
+          }
+          
           if (auto *Call = dyn_cast<CallBase>(&I))
           {
             if (!Call -> isIndirectCall())
@@ -51,17 +61,34 @@ struct AliasCallPointersPass : public PassInfoMixin<AliasCallPointersPass> {
                 if (!Callee -> isIntrinsic())
                 {
                   csv_file << F.getName().str() << "," << Call -> getCalledFunction() -> getName().str() << ", DIRECT\n";
-                }else{
+                }
+              }
+            }else{
                     // We assume that the calling instruction*of the form: register(params)* 
                     // always follows a load that stores information related to the 
                     // indirect call, including type based alias analysis (tbaa) metadata 
                     // which we use to retrieve the name of the struct, as well as the offset of the member 
                     // function (pointer) being indirectly called.
-                    // Instruction* prev_inst = I.getPrevNonDebugInstruction(); // find closest instruction with metadata info instead 
-                    Instruction* prev_inst = getClosestInstWithMeta(I); 
+                    Value* op_val = Call -> getCalledOperand(); 
+                    LoadInst* prev_inst = NULL; 
+                    int count = 0; 
+                    while (!load_stack.empty())
+                    {
+                      LoadInst* prev = load_stack.back(); 
+                      load_stack.pop_back(); 
+                      if (prev)
+                      {
+                        if (prev -> getType() == op_val -> getType())
+                        {
+                            prev_inst = prev; 
+                            break;        
+                        }  
+                      }
+                    } 
                     if (prev_inst)
                     {
-                        if (prev_inst -> hasMetadata()){
+                      if (prev_inst -> hasMetadata())
+                      {
                               MDNode* access_tag = prev_inst -> getMetadata(StringRef("tbaa"));
                               // the above should have 3 or 4 operands. 
                               // first operand: mdnode for base type 
@@ -83,7 +110,39 @@ struct AliasCallPointersPass : public PassInfoMixin<AliasCallPointersPass> {
 
                                 // our task is to construct a string representation of the above metadata that fits on one line and print it to file 
                                 // see `show`. 
-                                csv_file << F.getName().str() << "," << F.getParent() -> getSourceFileName() << "::";
+                                std::string module_name_full = F.getParent() -> getSourceFileName(); 
+                                std::size_t petsc_offet = module_name_full.find("petsc"); 
+                                const DebugLoc& location = I.getDebugLoc();        
+                                if (module_name_full.size() > petsc_offet)
+                                {
+                                  std::string new_module_name = module_name_full.substr(petsc_offet);
+                                  if (location)
+                                  {
+                                    int line = location.getLine(); 
+                                    int col  = location.getCol(); 
+                                    csv_file << F.getName().str() << "," << new_module_name << " || " << line << ":" << col << " "; 
+                                  }else
+                                  {
+                                    csv_file << F.getName().str() << "," << new_module_name << " || "; 
+                                  } 
+                                }else
+                                {
+                                  csv_file << F.getName().str() << "," << F.getParent() -> getSourceFileName() << " || ";
+                                } 
+
+                                // const DebugLoc& inst_loc = I.getDebugLoc(); 
+                                // if (inst_loc)
+                                // {
+                                //   unsigned line = inst_loc.getLine(); 
+                                //   unsigned col  = inst_loc.getCol(); 
+
+                                //   csv_file << line << ":" << col;
+                                // }
+                                
+                                
+
+                                csv_file << prev_inst -> getPointerOperand() -> getName().str() << " :: ("; 
+                                
                                 MDString* name_md = dyn_cast<MDString>(baseTy -> getOperand(0)); 
                                 std::string name = name_md->getString().str();
                                 csv_file << name << "->"; 
@@ -94,25 +153,24 @@ struct AliasCallPointersPass : public PassInfoMixin<AliasCallPointersPass> {
                                   ConstantInt* is_const_mem = dyn_cast<ConstantInt>(dyn_cast<ValueAsMetadata>(access_tag->getOperand(3))->getValue());
                                   csv_file << "(is_const = " << *is_const_mem << ")"; 
                                 }
+                                csv_file << ") :: ";
+
+                                op_val -> getType() -> print(csv_file); 
                                 csv_file << ", INDIRECT \n";
                               }else{
                                 csv_file << "fail, fail, FAILED \n"; 
-                              } 
+                              }
                         }else{
-                          csv_file << "missing, missing, FAILED \n"; 
+                          csv_file << "failed!\n"; 
                         }
-                  }
+                    }
                 }
-              }
           }
         }
         
       }
       
     }
-
-    }
-    
     csv_file.close();
     return PreservedAnalyses::all();
   }
@@ -120,26 +178,6 @@ struct AliasCallPointersPass : public PassInfoMixin<AliasCallPointersPass> {
   bool isScalarType(MDNode* node){
     unsigned num_ops = node -> getNumOperands(); 
     return num_ops == 2; 
-  }
-
-  Instruction* getClosestInstWithMeta(Instruction& inst){
-    Instruction* prev_inst = inst.getPrevNonDebugInstruction(); 
-    if (prev_inst)
-    {
-      if (prev_inst -> hasMetadata())
-      {
-        return prev_inst; 
-      }else{
-        Instruction& new_i = *prev_inst; 
-        Instruction* to_return = getClosestInstWithMeta(new_i); 
-        if (to_return)
-        {
-          return to_return;
-        } 
-      }
-      
-    }
-    
   }
 
   void show(MDNode* node, raw_fd_ostream& file){

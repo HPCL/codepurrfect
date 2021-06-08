@@ -1,4 +1,4 @@
-# Install script for directory: /home/users/ndemeye/xSDK/pointer-call-analysis/AliasCallPointers
+# Install script for directory: /home/users/ndemeye/xSDK/code-analysis/static/pointer-call-analysis/AliasCallPointers
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)

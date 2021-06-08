@@ -4,7 +4,7 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
-  "/home/users/ndemeye/xSDK/pointer-call-analysis/AliasCallPointers/AliasCallPointers.cpp" "/home/users/ndemeye/xSDK/pointer-call-analysis/build/AliasCallPointers/CMakeFiles/AliasCallPointers.dir/AliasCallPointers.cpp.o"
+  "/home/users/ndemeye/xSDK/code-analysis/static/pointer-call-analysis/AliasCallPointers/AliasCallPointers.cpp" "/home/users/ndemeye/xSDK/code-analysis/static/pointer-call-analysis/build/AliasCallPointers/CMakeFiles/AliasCallPointers.dir/AliasCallPointers.cpp.o"
   )
 set(CMAKE_CXX_COMPILER_ID "GNU")
 
