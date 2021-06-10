@@ -6,7 +6,8 @@ import os
 if __name__ == "__main__": 
     dirname = sys.argv[1] 
     for root, subdirs, files in os.walk(dirname): 
-        dir_csv = os.path.join(root, "callgraph.csv") 
+        parent = os.path.join(root, os.pardir)
+        dir_csv = os.path.join(parent, "callgraph.csv") 
         with open(dir_csv, 'w') as dir_csv_file: 
             for filename in files: 
                 file_path = os.path.join(root, filename) 

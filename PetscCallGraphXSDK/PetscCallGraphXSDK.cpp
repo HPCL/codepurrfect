@@ -20,6 +20,7 @@
 #include "llvm/IR/Value.h"
 #include "llvm/IR/Metadata.h"
 #include <llvm/IR/DebugLoc.h>
+#include <llvm/IR/Attributes.h>
 #include <llvm/IR/DebugInfoMetadata.h>
 #include "llvm/Support/raw_ostream.h"
 #include <iostream> 
@@ -31,7 +32,7 @@ using namespace llvm;
 
 
 namespace {
-struct AliasCallPointersPass : public PassInfoMixin<AliasCallPointersPass> {
+struct PetscCallGraphXSDK : public PassInfoMixin<PetscCallGraphXSDK> {
   std::string filename; 
   PreservedAnalyses run(Module &M,
                         ModuleAnalysisManager &MAM) {
@@ -40,11 +41,17 @@ struct AliasCallPointersPass : public PassInfoMixin<AliasCallPointersPass> {
     raw_fd_ostream csv_file(StringRef(filename), e);
     for (Function &F : M)
     {
-      std::vector<LoadInst*> load_stack; 
+      if (!F.isIntrinsic())
+      {
+      std::vector<LoadInst*> load_stack;
+      int count = 0;
       for (BasicBlock &BB : F)
       {
         for (Instruction &I : BB)
         {
+          // construct the stack of load instructions 
+          // to be used while identifying 
+          // indirect calls.         
           if (isa<LoadInst>(I))
           {
             LoadInst* to_push = dyn_cast<LoadInst>(&I); 
@@ -58,12 +65,23 @@ struct AliasCallPointersPass : public PassInfoMixin<AliasCallPointersPass> {
               Function *Callee = Call -> getCalledFunction();
               if (Callee)
               {
-                if (!Callee -> isIntrinsic())
-                {
-                  csv_file << F.getName().str() << "," << Call -> getCalledFunction() -> getName().str() << ", DIRECT\n";
-                }
+                  std::string c_name = Callee -> getName().str(); 
+                  std::size_t llvm_present = c_name.find("llvm"); 
+                  if (llvm_present == std::string::npos)
+                  {
+                    count++;
+                    csv_file << F.getName().str() << "," << c_name << ", DIRECT\n"; 
+                  }else{
+                    if (count == 0)
+                    {
+                      csv_file << F.getName().str() << ", INTRINSIC, FILLER \n"; 
+                      count++;
+                    } 
+                  }
               }
-            }else{
+              
+            }
+            else{
                     // We assume that the calling instruction*of the form: register(params)* 
                     // always follows a load that stores information related to the 
                     // indirect call, including type based alias analysis (tbaa) metadata 
@@ -110,38 +128,28 @@ struct AliasCallPointersPass : public PassInfoMixin<AliasCallPointersPass> {
 
                                 // our task is to construct a string representation of the above metadata that fits on one line and print it to file 
                                 // see `show`. 
-                                std::string module_name_full = F.getParent() -> getSourceFileName(); 
-                                std::size_t petsc_offet = module_name_full.find("petsc"); 
-                                const DebugLoc& location = I.getDebugLoc();        
-                                if (module_name_full.size() > petsc_offet)
-                                {
-                                  std::string new_module_name = module_name_full.substr(petsc_offet);
-                                  if (location)
-                                  {
-                                    int line = location.getLine(); 
-                                    int col  = location.getCol(); 
-                                    csv_file << F.getName().str() << "," << new_module_name << " || " << line << ":" << col << " "; 
-                                  }else
-                                  {
-                                    csv_file << F.getName().str() << "," << new_module_name << " || "; 
-                                  } 
-                                }else
-                                {
-                                  csv_file << F.getName().str() << "," << F.getParent() -> getSourceFileName() << " || ";
-                                } 
-
-                                // const DebugLoc& inst_loc = I.getDebugLoc(); 
-                                // if (inst_loc)
+                                // std::string module_name_full = F.getParent() -> getSourceFileName(); 
+                                // std::size_t petsc_offet = module_name_full.find("petsc"); 
+                                // const DebugLoc& location = I.getDebugLoc();        
+                                // if (module_name_full.size() > petsc_offet)
                                 // {
-                                //   unsigned line = inst_loc.getLine(); 
-                                //   unsigned col  = inst_loc.getCol(); 
-
-                                //   csv_file << line << ":" << col;
-                                // }
+                                //   std::string new_module_name = module_name_full.substr(petsc_offet);
+                                //   if (location)
+                                //   {
+                                //     int line = location.getLine(); 
+                                //     int col  = location.getCol(); 
+                                //     csv_file << F.getName().str() << "," << new_module_name << " || " << line << ":" << col << " "; 
+                                //   }else
+                                //   {
+                                //     csv_file << F.getName().str() << "," << new_module_name << " || "; 
+                                //   } 
+                                // }else
+                                // {
+                                //   csv_file << F.getName().str() << "," << F.getParent() -> getSourceFileName() << " || ";
+                                // } 
                                 
-                                
-
-                                csv_file << prev_inst -> getPointerOperand() -> getName().str() << " :: ("; 
+                                csv_file << F.getName().str() << ","; 
+                                csv_file << prev_inst -> getPointerOperand() -> getName().str() << " = ("; 
                                 
                                 MDString* name_md = dyn_cast<MDString>(baseTy -> getOperand(0)); 
                                 std::string name = name_md->getString().str();
@@ -169,6 +177,8 @@ struct AliasCallPointersPass : public PassInfoMixin<AliasCallPointersPass> {
         }
         
       }
+        
+      } 
       
     }
     csv_file.close();
@@ -191,32 +201,29 @@ struct AliasCallPointersPass : public PassInfoMixin<AliasCallPointersPass> {
       unsigned num_ops = node -> getNumOperands(); 
       MDString* name_md = dyn_cast<MDString>(node -> getOperand(0)); 
       std::string name = name_md->getString().str(); 
-      file << name << "->"; 
+      file << name << "@"; 
       for (int N = 1; N < num_ops - 2; N+=2)
       {
         MDNode* field            = dyn_cast<MDNode>(node -> getOperand(N)); 
         Constant* fieldOffset = dyn_cast<Constant>(dyn_cast<ValueAsMetadata>(node->getOperand(N+1))->getValue());
         show(field, file);
-        file << "->" << *fieldOffset; 
+        file << "@" << *fieldOffset; 
       }   
     }
   }
 };
-// std::string AliasCallPointersPass::filename = "callgraph.csv"; 
 } // end anonymous namespace
-
-
 
 extern "C" ::llvm::PassPluginLibraryInfo LLVM_ATTRIBUTE_WEAK
 llvmGetPassPluginInfo() {
   return {
-    LLVM_PLUGIN_API_VERSION, "AliasCallPointersPass", "v0.1",
+    LLVM_PLUGIN_API_VERSION, "PetscCallGraphXSDK", "v0.1",
     [](PassBuilder &PB) {
       PB.registerPipelineParsingCallback(
         [](StringRef Name, ModulePassManager &MPM,
            ArrayRef<PassBuilder::PipelineElement>) {
-          if(Name == "alias-call-pointers-pass"){
-            MPM.addPass(AliasCallPointersPass());
+          if(Name == "petsc-callgraph-xsdk"){
+            MPM.addPass(PetscCallGraphXSDK());
             return true;
           }
           return false;

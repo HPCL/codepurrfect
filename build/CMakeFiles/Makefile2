@@ -63,21 +63,21 @@ RM = /usr/local/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/users/ndemeye/xSDK/code-analysis/static/pointer-call-analysis
+CMAKE_SOURCE_DIR = /home/users/ndemeye/xSDK/code-analysis/static/petsc-callgraph-xsdk
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/users/ndemeye/xSDK/code-analysis/static/pointer-call-analysis/build
+CMAKE_BINARY_DIR = /home/users/ndemeye/xSDK/code-analysis/static/petsc-callgraph-xsdk/build
 
 #=============================================================================
 # Directory level rules for the build root directory
 
 # The main recursive "all" target.
-all: CallGraphWithIndirectCalls/all
+all: PetscCallGraphXSDK/all
 
 .PHONY : all
 
 # The main recursive "preinstall" target.
-preinstall: CallGraphWithIndirectCalls/preinstall
+preinstall: PetscCallGraphXSDK/preinstall
 
 .PHONY : preinstall
 
@@ -85,27 +85,27 @@ preinstall: CallGraphWithIndirectCalls/preinstall
 clean: CMakeFiles/acc_gen.dir/clean
 clean: CMakeFiles/omp_gen.dir/clean
 clean: CMakeFiles/intrinsics_gen.dir/clean
-clean: CallGraphWithIndirectCalls/clean
+clean: PetscCallGraphXSDK/clean
 
 .PHONY : clean
 
 #=============================================================================
-# Directory level rules for directory CallGraphWithIndirectCalls
+# Directory level rules for directory PetscCallGraphXSDK
 
 # Recursive "all" directory target.
-CallGraphWithIndirectCalls/all: CallGraphWithIndirectCalls/CMakeFiles/CallGraphWithIndirectCalls.dir/all
+PetscCallGraphXSDK/all: PetscCallGraphXSDK/CMakeFiles/PetscCallGraphXSDK.dir/all
 
-.PHONY : CallGraphWithIndirectCalls/all
+.PHONY : PetscCallGraphXSDK/all
 
 # Recursive "preinstall" directory target.
-CallGraphWithIndirectCalls/preinstall:
+PetscCallGraphXSDK/preinstall:
 
-.PHONY : CallGraphWithIndirectCalls/preinstall
+.PHONY : PetscCallGraphXSDK/preinstall
 
 # Recursive "clean" directory target.
-CallGraphWithIndirectCalls/clean: CallGraphWithIndirectCalls/CMakeFiles/CallGraphWithIndirectCalls.dir/clean
+PetscCallGraphXSDK/clean: PetscCallGraphXSDK/CMakeFiles/PetscCallGraphXSDK.dir/clean
 
-.PHONY : CallGraphWithIndirectCalls/clean
+.PHONY : PetscCallGraphXSDK/clean
 
 #=============================================================================
 # Target rules for target CMakeFiles/acc_gen.dir
@@ -114,14 +114,14 @@ CallGraphWithIndirectCalls/clean: CallGraphWithIndirectCalls/CMakeFiles/CallGrap
 CMakeFiles/acc_gen.dir/all:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/acc_gen.dir/build.make CMakeFiles/acc_gen.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/acc_gen.dir/build.make CMakeFiles/acc_gen.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/users/ndemeye/xSDK/code-analysis/static/pointer-call-analysis/build/CMakeFiles --progress-num= "Built target acc_gen"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/users/ndemeye/xSDK/code-analysis/static/petsc-callgraph-xsdk/build/CMakeFiles --progress-num= "Built target acc_gen"
 .PHONY : CMakeFiles/acc_gen.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/acc_gen.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/users/ndemeye/xSDK/code-analysis/static/pointer-call-analysis/build/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/users/ndemeye/xSDK/code-analysis/static/petsc-callgraph-xsdk/build/CMakeFiles 0
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/acc_gen.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/users/ndemeye/xSDK/code-analysis/static/pointer-call-analysis/build/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/users/ndemeye/xSDK/code-analysis/static/petsc-callgraph-xsdk/build/CMakeFiles 0
 .PHONY : CMakeFiles/acc_gen.dir/rule
 
 # Convenience name for target.
@@ -141,14 +141,14 @@ CMakeFiles/acc_gen.dir/clean:
 CMakeFiles/omp_gen.dir/all:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/omp_gen.dir/build.make CMakeFiles/omp_gen.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/omp_gen.dir/build.make CMakeFiles/omp_gen.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/users/ndemeye/xSDK/code-analysis/static/pointer-call-analysis/build/CMakeFiles --progress-num= "Built target omp_gen"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/users/ndemeye/xSDK/code-analysis/static/petsc-callgraph-xsdk/build/CMakeFiles --progress-num= "Built target omp_gen"
 .PHONY : CMakeFiles/omp_gen.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/omp_gen.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/users/ndemeye/xSDK/code-analysis/static/pointer-call-analysis/build/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/users/ndemeye/xSDK/code-analysis/static/petsc-callgraph-xsdk/build/CMakeFiles 0
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/omp_gen.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/users/ndemeye/xSDK/code-analysis/static/pointer-call-analysis/build/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/users/ndemeye/xSDK/code-analysis/static/petsc-callgraph-xsdk/build/CMakeFiles 0
 .PHONY : CMakeFiles/omp_gen.dir/rule
 
 # Convenience name for target.
@@ -168,14 +168,14 @@ CMakeFiles/omp_gen.dir/clean:
 CMakeFiles/intrinsics_gen.dir/all:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/intrinsics_gen.dir/build.make CMakeFiles/intrinsics_gen.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/intrinsics_gen.dir/build.make CMakeFiles/intrinsics_gen.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/users/ndemeye/xSDK/code-analysis/static/pointer-call-analysis/build/CMakeFiles --progress-num= "Built target intrinsics_gen"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/users/ndemeye/xSDK/code-analysis/static/petsc-callgraph-xsdk/build/CMakeFiles --progress-num= "Built target intrinsics_gen"
 .PHONY : CMakeFiles/intrinsics_gen.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/intrinsics_gen.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/users/ndemeye/xSDK/code-analysis/static/pointer-call-analysis/build/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/users/ndemeye/xSDK/code-analysis/static/petsc-callgraph-xsdk/build/CMakeFiles 0
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/intrinsics_gen.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/users/ndemeye/xSDK/code-analysis/static/pointer-call-analysis/build/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/users/ndemeye/xSDK/code-analysis/static/petsc-callgraph-xsdk/build/CMakeFiles 0
 .PHONY : CMakeFiles/intrinsics_gen.dir/rule
 
 # Convenience name for target.
@@ -189,31 +189,31 @@ CMakeFiles/intrinsics_gen.dir/clean:
 .PHONY : CMakeFiles/intrinsics_gen.dir/clean
 
 #=============================================================================
-# Target rules for target CallGraphWithIndirectCalls/CMakeFiles/CallGraphWithIndirectCalls.dir
+# Target rules for target PetscCallGraphXSDK/CMakeFiles/PetscCallGraphXSDK.dir
 
 # All Build rule for target.
-CallGraphWithIndirectCalls/CMakeFiles/CallGraphWithIndirectCalls.dir/all:
-	$(MAKE) $(MAKESILENT) -f CallGraphWithIndirectCalls/CMakeFiles/CallGraphWithIndirectCalls.dir/build.make CallGraphWithIndirectCalls/CMakeFiles/CallGraphWithIndirectCalls.dir/depend
-	$(MAKE) $(MAKESILENT) -f CallGraphWithIndirectCalls/CMakeFiles/CallGraphWithIndirectCalls.dir/build.make CallGraphWithIndirectCalls/CMakeFiles/CallGraphWithIndirectCalls.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/users/ndemeye/xSDK/code-analysis/static/pointer-call-analysis/build/CMakeFiles --progress-num=1,2 "Built target CallGraphWithIndirectCalls"
-.PHONY : CallGraphWithIndirectCalls/CMakeFiles/CallGraphWithIndirectCalls.dir/all
+PetscCallGraphXSDK/CMakeFiles/PetscCallGraphXSDK.dir/all:
+	$(MAKE) $(MAKESILENT) -f PetscCallGraphXSDK/CMakeFiles/PetscCallGraphXSDK.dir/build.make PetscCallGraphXSDK/CMakeFiles/PetscCallGraphXSDK.dir/depend
+	$(MAKE) $(MAKESILENT) -f PetscCallGraphXSDK/CMakeFiles/PetscCallGraphXSDK.dir/build.make PetscCallGraphXSDK/CMakeFiles/PetscCallGraphXSDK.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/users/ndemeye/xSDK/code-analysis/static/petsc-callgraph-xsdk/build/CMakeFiles --progress-num=1,2 "Built target PetscCallGraphXSDK"
+.PHONY : PetscCallGraphXSDK/CMakeFiles/PetscCallGraphXSDK.dir/all
 
 # Build rule for subdir invocation for target.
-CallGraphWithIndirectCalls/CMakeFiles/CallGraphWithIndirectCalls.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/users/ndemeye/xSDK/code-analysis/static/pointer-call-analysis/build/CMakeFiles 2
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CallGraphWithIndirectCalls/CMakeFiles/CallGraphWithIndirectCalls.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/users/ndemeye/xSDK/code-analysis/static/pointer-call-analysis/build/CMakeFiles 0
-.PHONY : CallGraphWithIndirectCalls/CMakeFiles/CallGraphWithIndirectCalls.dir/rule
+PetscCallGraphXSDK/CMakeFiles/PetscCallGraphXSDK.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/users/ndemeye/xSDK/code-analysis/static/petsc-callgraph-xsdk/build/CMakeFiles 2
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 PetscCallGraphXSDK/CMakeFiles/PetscCallGraphXSDK.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/users/ndemeye/xSDK/code-analysis/static/petsc-callgraph-xsdk/build/CMakeFiles 0
+.PHONY : PetscCallGraphXSDK/CMakeFiles/PetscCallGraphXSDK.dir/rule
 
 # Convenience name for target.
-CallGraphWithIndirectCalls: CallGraphWithIndirectCalls/CMakeFiles/CallGraphWithIndirectCalls.dir/rule
+PetscCallGraphXSDK: PetscCallGraphXSDK/CMakeFiles/PetscCallGraphXSDK.dir/rule
 
-.PHONY : CallGraphWithIndirectCalls
+.PHONY : PetscCallGraphXSDK
 
 # clean rule for target.
-CallGraphWithIndirectCalls/CMakeFiles/CallGraphWithIndirectCalls.dir/clean:
-	$(MAKE) $(MAKESILENT) -f CallGraphWithIndirectCalls/CMakeFiles/CallGraphWithIndirectCalls.dir/build.make CallGraphWithIndirectCalls/CMakeFiles/CallGraphWithIndirectCalls.dir/clean
-.PHONY : CallGraphWithIndirectCalls/CMakeFiles/CallGraphWithIndirectCalls.dir/clean
+PetscCallGraphXSDK/CMakeFiles/PetscCallGraphXSDK.dir/clean:
+	$(MAKE) $(MAKESILENT) -f PetscCallGraphXSDK/CMakeFiles/PetscCallGraphXSDK.dir/build.make PetscCallGraphXSDK/CMakeFiles/PetscCallGraphXSDK.dir/clean
+.PHONY : PetscCallGraphXSDK/CMakeFiles/PetscCallGraphXSDK.dir/clean
 
 #=============================================================================
 # Special targets to cleanup operation of make.

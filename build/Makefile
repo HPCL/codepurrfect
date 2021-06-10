@@ -67,10 +67,10 @@ RM = /usr/local/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/users/ndemeye/xSDK/code-analysis/static/pointer-call-analysis
+CMAKE_SOURCE_DIR = /home/users/ndemeye/xSDK/code-analysis/static/petsc-callgraph-xsdk
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/users/ndemeye/xSDK/code-analysis/static/pointer-call-analysis/build
+CMAKE_BINARY_DIR = /home/users/ndemeye/xSDK/code-analysis/static/petsc-callgraph-xsdk/build
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -99,9 +99,9 @@ edit_cache/fast: edit_cache
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/users/ndemeye/xSDK/code-analysis/static/pointer-call-analysis/build/CMakeFiles /home/users/ndemeye/xSDK/code-analysis/static/pointer-call-analysis/build//CMakeFiles/progress.marks
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/users/ndemeye/xSDK/code-analysis/static/petsc-callgraph-xsdk/build/CMakeFiles /home/users/ndemeye/xSDK/code-analysis/static/petsc-callgraph-xsdk/build//CMakeFiles/progress.marks
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/users/ndemeye/xSDK/code-analysis/static/pointer-call-analysis/build/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/users/ndemeye/xSDK/code-analysis/static/petsc-callgraph-xsdk/build/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
@@ -169,17 +169,17 @@ intrinsics_gen/fast:
 .PHONY : intrinsics_gen/fast
 
 #=============================================================================
-# Target rules for targets named CallGraphWithIndirectCalls
+# Target rules for targets named PetscCallGraphXSDK
 
 # Build rule for target.
-CallGraphWithIndirectCalls: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CallGraphWithIndirectCalls
-.PHONY : CallGraphWithIndirectCalls
+PetscCallGraphXSDK: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 PetscCallGraphXSDK
+.PHONY : PetscCallGraphXSDK
 
 # fast build rule for target.
-CallGraphWithIndirectCalls/fast:
-	$(MAKE) $(MAKESILENT) -f CallGraphWithIndirectCalls/CMakeFiles/CallGraphWithIndirectCalls.dir/build.make CallGraphWithIndirectCalls/CMakeFiles/CallGraphWithIndirectCalls.dir/build
-.PHONY : CallGraphWithIndirectCalls/fast
+PetscCallGraphXSDK/fast:
+	$(MAKE) $(MAKESILENT) -f PetscCallGraphXSDK/CMakeFiles/PetscCallGraphXSDK.dir/build.make PetscCallGraphXSDK/CMakeFiles/PetscCallGraphXSDK.dir/build
+.PHONY : PetscCallGraphXSDK/fast
 
 # Help Target
 help:
@@ -192,7 +192,7 @@ help:
 	@echo "... acc_gen"
 	@echo "... intrinsics_gen"
 	@echo "... omp_gen"
-	@echo "... CallGraphWithIndirectCalls"
+	@echo "... PetscCallGraphXSDK"
 .PHONY : help
 
 

@@ -1,1 +1,0 @@
-/usr/bin/c++ -fPIC -shared  -o libCallGraphWithIndirectCalls.so CMakeFiles/CallGraphWithIndirectCalls.dir/CallGraphWithIndirectCalls.cpp.o 

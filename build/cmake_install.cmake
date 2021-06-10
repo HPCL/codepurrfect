@@ -1,4 +1,4 @@
-# Install script for directory: /home/users/ndemeye/xSDK/code-analysis/static/pointer-call-analysis
+# Install script for directory: /home/users/ndemeye/xSDK/code-analysis/static/petsc-callgraph-xsdk
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -44,7 +44,7 @@ endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for the subdirectory.
-  include("/home/users/ndemeye/xSDK/code-analysis/static/pointer-call-analysis/build/CallGraphWithIndirectCalls/cmake_install.cmake")
+  include("/home/users/ndemeye/xSDK/code-analysis/static/petsc-callgraph-xsdk/build/PetscCallGraphXSDK/cmake_install.cmake")
 endif()
 
 if(CMAKE_INSTALL_COMPONENT)
@@ -55,5 +55,5 @@ endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-file(WRITE "/home/users/ndemeye/xSDK/code-analysis/static/pointer-call-analysis/build/${CMAKE_INSTALL_MANIFEST}"
+file(WRITE "/home/users/ndemeye/xSDK/code-analysis/static/petsc-callgraph-xsdk/build/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")

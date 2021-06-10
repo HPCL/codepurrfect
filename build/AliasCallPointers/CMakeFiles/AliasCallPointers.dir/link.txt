@@ -1,1 +1,0 @@
-/usr/bin/c++ -fPIC -shared  -o libAliasCallPointers.so CMakeFiles/AliasCallPointers.dir/AliasCallPointers.cpp.o 

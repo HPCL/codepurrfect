@@ -62,10 +62,10 @@ RM = /usr/local/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/users/ndemeye/xSDK/code-analysis/static/pointer-call-analysis
+CMAKE_SOURCE_DIR = /home/users/ndemeye/xSDK/code-analysis/static/petsc-callgraph-xsdk
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/users/ndemeye/xSDK/code-analysis/static/pointer-call-analysis/build
+CMAKE_BINARY_DIR = /home/users/ndemeye/xSDK/code-analysis/static/petsc-callgraph-xsdk/build
 
 # Utility rule file for intrinsics_gen.
 
@@ -86,6 +86,6 @@ CMakeFiles/intrinsics_gen.dir/clean:
 .PHONY : CMakeFiles/intrinsics_gen.dir/clean
 
 CMakeFiles/intrinsics_gen.dir/depend:
-	cd /home/users/ndemeye/xSDK/code-analysis/static/pointer-call-analysis/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/users/ndemeye/xSDK/code-analysis/static/pointer-call-analysis /home/users/ndemeye/xSDK/code-analysis/static/pointer-call-analysis /home/users/ndemeye/xSDK/code-analysis/static/pointer-call-analysis/build /home/users/ndemeye/xSDK/code-analysis/static/pointer-call-analysis/build /home/users/ndemeye/xSDK/code-analysis/static/pointer-call-analysis/build/CMakeFiles/intrinsics_gen.dir/DependInfo.cmake --color=$(COLOR)
+	cd /home/users/ndemeye/xSDK/code-analysis/static/petsc-callgraph-xsdk/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/users/ndemeye/xSDK/code-analysis/static/petsc-callgraph-xsdk /home/users/ndemeye/xSDK/code-analysis/static/petsc-callgraph-xsdk /home/users/ndemeye/xSDK/code-analysis/static/petsc-callgraph-xsdk/build /home/users/ndemeye/xSDK/code-analysis/static/petsc-callgraph-xsdk/build /home/users/ndemeye/xSDK/code-analysis/static/petsc-callgraph-xsdk/build/CMakeFiles/intrinsics_gen.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : CMakeFiles/intrinsics_gen.dir/depend
 
