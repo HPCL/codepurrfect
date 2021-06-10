@@ -1,0 +1,3 @@
+/home/users/ndemeye/xSDK/code-analysis/static/clang-tidifier/build/CMakeFiles/rebuild_cache.dir
+/home/users/ndemeye/xSDK/code-analysis/static/clang-tidifier/build/CMakeFiles/edit_cache.dir
+/home/users/ndemeye/xSDK/code-analysis/static/clang-tidifier/build/CMakeFiles/LintXSDK.dir
