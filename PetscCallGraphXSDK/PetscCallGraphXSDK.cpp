@@ -143,10 +143,7 @@ struct PetscCallGraphXSDK : public PassInfoMixin<PetscCallGraphXSDK> {
                                 //   {
                                 //     csv_file << F.getName().str() << "," << new_module_name << " || "; 
                                 //   } 
-                                // }else
-                                // {
-                                //   csv_file << F.getName().str() << "," << F.getParent() -> getSourceFileName() << " || ";
-                                // } 
+                                // }
                                 
                                 csv_file << F.getName().str() << ","; 
                                 csv_file << prev_inst -> getPointerOperand() -> getName().str() << " = ("; 
