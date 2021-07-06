@@ -15,9 +15,12 @@
 #include "llvm/Passes/PassBuilder.h"
 #include "llvm/Passes/PassPlugin.h"
 #include "llvm/Support/raw_ostream.h"
+#include "llvm/IR/Module.h"
 #include "llvm/IR/Instruction.h"
 #include "llvm/IR/InstrTypes.h"
+#include "llvm/IR/DerivedTypes.h"
 #include "llvm/IR/Value.h"
+#include "llvm/IR/Type.h"
 #include "llvm/IR/Metadata.h"
 #include <llvm/IR/DebugLoc.h>
 #include <llvm/IR/Attributes.h>
@@ -39,6 +42,26 @@ struct PetscCallGraphXSDK : public PassInfoMixin<PetscCallGraphXSDK> {
     std::error_code e = std::error_code(static_cast<int>(2), std::generic_category()); 
     filename = M.getSourceFileName() + "_callgraph.csv"; 
     raw_fd_ostream csv_file(StringRef(filename), e);
+    for (StructType *S : M.getIdentifiedStructTypes())
+    {
+      if (S -> hasName())
+      {
+        outs() << S -> getName().str() << "\n"; 
+        outs() << "|- elem count: " << S -> getNumElements() << "\n"; 
+        for (Type *t : S -> elements())
+        {
+          outs() << "|--"; 
+          if (t -> isPointerTy())
+          {
+            t -> print(outs());
+            outs() << "\n";  
+          }
+          
+        }
+        
+      }
+      
+    }
     for (Function &F : M)
     {
       if (!F.isIntrinsic())
@@ -210,6 +233,9 @@ struct PetscCallGraphXSDK : public PassInfoMixin<PetscCallGraphXSDK> {
   }
 };
 } // end anonymous namespace
+
+
+
 
 extern "C" ::llvm::PassPluginLibraryInfo LLVM_ATTRIBUTE_WEAK
 llvmGetPassPluginInfo() {
