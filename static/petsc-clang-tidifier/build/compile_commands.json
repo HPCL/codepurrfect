@@ -1,7 +1,0 @@
-[
-{
-  "directory": "/home/users/ndemeye/xSDK/code-analysis/static/clang-tidifier/build",
-  "command": "/usr/bin/c++ -DLintXSDK_EXPORTS  -fPIC -fno-rtti -o CMakeFiles/LintXSDK.dir/LintXSDK.cpp.o -c /home/users/ndemeye/xSDK/code-analysis/static/clang-tidifier/LintXSDK.cpp",
-  "file": "/home/users/ndemeye/xSDK/code-analysis/static/clang-tidifier/LintXSDK.cpp"
-}
-]

@@ -1,1 +1,0 @@
-/usr/bin/c++ -fPIC -shared  -o libLintXSDK.so CMakeFiles/LintXSDK.dir/LintXSDK.cpp.o 
