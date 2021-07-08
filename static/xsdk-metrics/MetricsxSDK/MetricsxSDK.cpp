@@ -23,6 +23,8 @@
 #include "llvm/IR/Value.h"
 #include "llvm/IR/Type.h"
 #include "llvm/IR/Metadata.h"
+#include "llvm/IR/ValueSymbolTable.h" 
+#include "llvm/IR/ValueMap.h"
 #include <llvm/IR/DebugLoc.h>
 #include <llvm/IR/Attributes.h>
 #include <llvm/IR/DebugInfoMetadata.h>
@@ -46,21 +48,20 @@ struct MetricsxSDK : public PassInfoMixin<MetricsxSDK> {
                                                      // -- indicator of how difficult replacing function 
                                          , "chepin-s-metric" // Information strength of method 
                                                              // -- difficulty of test case generation
-                                         , "lines-of-code"   // number of lines of code
                                          }; 
   std::vector<std::string> class_metrics = {"lcom1"  // lack of cohesion in Methods: numbero of pairs 
                                                      // of methods in the class with no commmon inst vars
-                                          , "lcom2" // similar to above with slightly different formula
-                                          , "lcom3" // similar to aboce with slightly different formula
-                                          , "lcom3" // similar to above with slightly different formula
-                                          , "avg-fan-in" // average inter-procedural complexity at function level 
-                                          , "avg-fan-out" // same as above but fan-out 
-                                          , "weightd-mthds-p-app" // complexity of all methods in class/application
+                                                     // we will assume "instance variable" to be synonymous 
+                                                     // with "global variable" in an LLVM IR module.
                                           , "num-of-methods" // total number of methods in class/function 
+                                          , "rfc" // response for a class  
+                                                  // -- total methods in class A + number of distinct 
+                                                  // methods of other classes directly invoked by methods 
+                                                  // of class A (we will assume every callee with external 
+                                                  // linkage meets this criteria)
                                           , "sensitive-class-cohesion" // ratio of summation of similarities btwn 
                                                                        // all pairs of methods to num of pairs of 
                                                                       // methods
-                                          , "cyclo-complex" // Given graph G, CC(G) = E - N + 2
                                          };  
   PreservedAnalyses run(Module &M,
                         ModuleAnalysisManager &MAM) {
@@ -69,8 +70,59 @@ struct MetricsxSDK : public PassInfoMixin<MetricsxSDK> {
     filename = src_filename + "_xsdk-metrics.csv"; 
     raw_fd_ostream csv_file(StringRef(filename), e);
     write_title_function(csv_file); 
+    std::vector<Function*> module_funcs; 
+    int nom = 0; // number of methods 
+    int moc = 0; // number of methods of other classes invoked by methods of this class
+    int rfc = 0; // nom + moc (assuming class = LLVM IR module)
+    // to calculate lcom, first collect all functions into vector
+    int lcom = 0; 
+    for(Function &F : M)
+    {
+      Function* f = dyn_cast<Function>(&F); 
+      module_funcs.push_back(f); 
+    }
+    for(size_t i = 0; i < module_funcs.size() - 1; i++)
+    {
+      Function* fi = module_funcs[i]; 
+      ValueSymbolTable* fi_table = fi -> getValueSymbolTable(); 
+      for(auto it = fi_table -> begin(); it != fi_table -> end(); it++)
+      { 
+        Value* &val_i = it -> getValue(); 
+        if (isa<GlobalValue>(val_i))
+        {
+          std::string val_i_name = it -> getKey().str(); 
+          for(size_t j = i + 1; j < module_funcs.size(); j++)
+          {
+            // find set of instance variables for functions at i and j 
+            // if intersection is empty  
+            // add one to lcom
+            // else continue (unless doing lcom2)
+            Function* fj = module_funcs[j]; 
+            ValueSymbolTable* fj_table = fj -> getValueSymbolTable(); 
+            for(auto it_j = fj_table -> begin(); it_j != fj_table -> end(); it_j++)
+            { 
+              Value* &val_j = it_j -> getValue(); 
+              if (isa<GlobalValue>(val_j))
+              {
+                std::string val_j_name = it_j -> getKey().str(); 
+                // if val_i_name == val_j_name and val_i == val_j, must be same objects.
+                bool eq_cond = val_i_name == val_j_name && (val_i == val_j); 
+                if (!eq_cond)
+                {
+                  lcom++; 
+                }
+              }
+              
+            }
+          }
+        }
+        
+
+      }
+    }
     for (Function &F : M)
     {
+        nom++; 
         std::string f_name = F.getName().str(); 
         init_metrics_map_function(f_name); 
 
@@ -80,7 +132,19 @@ struct MetricsxSDK : public PassInfoMixin<MetricsxSDK> {
             for(Instruction &I :BB){
                 if (isa<CallInst>(I))
                 {
-                    fan_out++; 
+                    fan_out++;
+                    CallBase *ICB = dyn_cast<CallBase>(&I); 
+                    Function *Called = ICB -> getCalledFunction(); 
+                    if (Called)
+                    {
+                      bool moc_cond = (Called -> hasLocalLinkage()) || Called -> isIntrinsic(); 
+                      if (!moc_cond)
+                      {
+                        moc++; 
+                      }
+                      
+                    }
+                     
                 }
                 
             }
@@ -88,21 +152,26 @@ struct MetricsxSDK : public PassInfoMixin<MetricsxSDK> {
         function_metrics_map[f_name]["fan-out"] = fan_out; 
 
         // lines of code calculation
-        DISubprogram *f_sub_program = F.getSubprogram(); 
-        if (f_sub_program)
-        {
-            DIScope *f_scope = f_sub_program -> getScope(); 
-            f_scope -> print(outs());
-            outs() << "\n";   
-            DILocalScope *sub_prog_scope = f_sub_program -> getNonLexicalBlockFileScope();  
-            outs() << sub_prog_scope -> getFilename().str() << "::";
-            outs() << sub_prog_scope -> getName().str() << "\n";
-            DIScope *scope = sub_prog_scope -> getScope(); 
-            scope -> print(outs()); 
-            outs() << "\n\n"; 
-        } 
+        // DISubprogram *f_sub_program = F.getSubprogram(); 
+        // if (f_sub_program)
+        // {
+        //     DIScope *f_scope = f_sub_program -> getScope(); 
+        //     f_scope -> print(outs());
+        //     outs() << "\n";   
+        //     DILocalScope *sub_prog_scope = f_sub_program -> getNonLexicalBlockFileScope();  
+        //     outs() << sub_prog_scope -> getFilename().str() << "::";
+        //     outs() << sub_prog_scope -> getName().str() << "\n";
+        //     DIScope *scope = sub_prog_scope -> getScope(); 
+        //     scope -> print(outs()); 
+        //     outs() << "\n\n"; 
+        // } 
 
     }
+    rfc = nom + moc; 
+    errs() << "nom: " << nom << "\n"; 
+    errs() << "moc: " << moc << "\n"; 
+    errs() << "rfc: " << rfc << "\n"; 
+    errs() << "lcom: " << lcom << "\n"; 
     csv_file.close();
     return PreservedAnalyses::all();
   }
@@ -117,9 +186,6 @@ struct MetricsxSDK : public PassInfoMixin<MetricsxSDK> {
     for(std::string s : func_metrics){
         function_metrics_map[function_name][s] = 0; 
     }
-    // for(std::string s :: class_metrics){
-    //     metrics_map[s] = 0; 
-    // }
   }
 };
 } // end anonymous namespace

@@ -4,6 +4,7 @@
 #include "test.c"
 
 int main(){
+    int k = 0; 
     TestType t1; 
     contruct_testtype(&t1, 0, 1, 3); 
     TestType* t2 = &t1; 

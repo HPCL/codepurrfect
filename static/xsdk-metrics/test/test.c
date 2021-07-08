@@ -5,6 +5,7 @@
 
 float my_test_add(TestType* testT)
 {
+    int k = 0; 
     float a = ((testT -> i) + (testT -> j)); 
     return a; 
 }
