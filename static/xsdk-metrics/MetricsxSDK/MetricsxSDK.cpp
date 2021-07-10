@@ -75,6 +75,7 @@ struct MetricsxSDK : public PassInfoMixin<MetricsxSDK> {
     int moc = 0; // number of methods of other classes invoked by methods of this class
     int rfc = 0; // nom + moc (assuming class = LLVM IR module)
     // to calculate lcom, first collect all functions into vector
+    // then for any two functions in the vec check if any have any global vars in common
     int lcom = 0; 
     for(Function &F : M)
     {
