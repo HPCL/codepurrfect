@@ -1,1 +1,0 @@
-/usr/bin/c++ -fPIC -shared  -o libMetricsxSDK.so CMakeFiles/MetricsxSDK.dir/MetricsxSDK.cpp.o 
