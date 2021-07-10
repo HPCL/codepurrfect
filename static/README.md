@@ -3,9 +3,9 @@
 This project aims to develop a tool for diagnosing the quality of [multiple xSDK project codes](https://github.com/xsdk-project/xsdk-community-policies). The tool is based on *clang-llvm* and employs *clang-tooling* ast manipulation capabilities, to develop various metrics related to code quality. 
 
 The code is organized as follows: 
-*   Checks that have to do with style guidelines such as [this Petsc Style and Usage Guide](https://petsc.org/release/developers/style/) are developed as part of, and incorporated with [clang-tidy](https://clang.llvm.org/extra/clang-tidy/checks/list.html). An implementation of various guidelines mentioned in the usage guide above can be found in [petsc-llvm-clang-tidifier/llvm-project/clang-tools-extra/clang-tidy/petsc/](petsc-llvm-clang-tidifier/llvm-project/clang-tools-extra/clang-tidy/petsc/). 
+*   Checks that have to do with style guidelines such as [this Petsc Style and Usage Guide](https://petsc.org/release/developers/style/) are developed as part of, and incorporated with [clang-tidy](https://clang.llvm.org/extra/clang-tidy/checks/list.html). An implementation of various guidelines mentioned in the usage guide above can be found in [https://github.com/HPCL/llvm-project/tree/xsdk-uo/clang-tools-extra/clang-tidy/petsc](https://github.com/HPCL/llvm-project/tree/xsdk-uo/clang-tools-extra/clang-tidy/petsc). 
 
-    Once our fork of the llvm-project (under [petsc-llvm-clang-tidifier/llvm-project](petsc-llvm-clang-tidifier/llvm-project)) has been built (and installed) with *clang-tools-extra* enabled, each implemented pass can be run so: 
+    Once our fork of the llvm-project (under [https://github.com/HPCL/llvm-project/tree/xsdk-uo](https://github.com/HPCL/llvm-project/tree/xsdk-uo)) has been built (and installed) with *clang-tools-extra* enabled, each implemented pass can be run so: 
     ```
     clang-tidy -checks=-*,<insert-check-name> <path-to-petsc-header-or-source-file>
     ```
@@ -15,7 +15,7 @@ The code is organized as follows:
     ```
     If a macro violates the style guideline, the above will prompt clang to generate an appropriate warning message.
 
-    For a full list of checks supported as of now, see [petsc-llvm-clang-tidifier/llvm-project/clang-tools-extra/clang-tidy/petsc/README.md](petsc-llvm-clang-tidifier/llvm-project/clang-tools-extra/clang-tidy/petsc/README.md). 
+    For a full list of checks supported as of now, see [https://github.com/HPCL/llvm-project/tree/xsdk-uo/clang-tools-extra/clang-tidy/petsc/README.md](https://github.com/HPCL/llvm-project/tree/xsdk-uo/clang-tools-extra/clang-tidy/petsc/README.md). 
 
     **Note** `clang-tidy` assumes that a *compilation database* has been generated and is stored in the root directory of a given project. For projects that can be built using `cmake`, one can generate such a database by enabling `CMAKE_EXPORT_COMPILE_COMMANDS`. For other projects, this [bear tool](https://github.com/rizsotto/Bear) might help.
 
