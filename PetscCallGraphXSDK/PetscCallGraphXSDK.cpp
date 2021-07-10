@@ -58,7 +58,6 @@ struct PetscCallGraphXSDK : public PassInfoMixin<PetscCallGraphXSDK> {
           }
           
         }
-        
       }
       
     }
