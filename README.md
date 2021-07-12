@@ -15,7 +15,7 @@ The dynamic analysis tool is implemented in Python and has the following prerequ
 * Conda
 * Linux or MacOS
 
-For more details and examples, view or run this [Jupyter notebook](./dynamic/Dynamic_analysis.ipynb).
+For more details and examples, view or run this [Jupyter notebook](./docs/notebooks/Dynamic_analysis.ipynb).
 
 ## Static Analysis
 
@@ -23,4 +23,4 @@ The static code analysis tool is implemented in C++ based on clang-llvm,
 and employs clang-tooling AST manipulation capabilities. 
 It can be used and extended to compute various metrics related to code quality.
 
-For more details and examples, refer to this [README](./static/README.md)   
+For more details and examples, refer to this [README](./src/static/README.md)   
