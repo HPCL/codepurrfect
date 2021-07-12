@@ -19,10 +19,10 @@ The code is organized as follows:
 
     **Note** `clang-tidy` assumes that a *compilation database* has been generated and is stored in the root directory of a given project. For projects that can be built using `cmake`, one can generate such a database by enabling `CMAKE_EXPORT_COMPILE_COMMANDS`. For other projects, this [bear tool](https://github.com/rizsotto/Bear) might help.
 
-*   A more complete callgraph implementation to be used in deriving various code complexity metrics is being developed (see [../static/petsc-callgraph-xsdk/README.md](petsc-callgraph-xsdk/README.md) for an argument about why clang LLVM's built-in callgraph pass is insufficient 
-    for our purposes as it lacks any facilities for dealing with dynamic properties of modern codes such as parametric polymorphism and inheritance). 
+*   A more complete callgraph implementation to be used in deriving various code complexity metrics is being developed (see [petsc-callgraph-xsdk/README.md](petsc-callgraph-xsdk/README.md). *clang*'s current implementation is insufficient 
+    for our purposes because it lacks any facilities for dealing with dynamic properties of modern codes such as parametric polymorphism and inheritance). 
     
-    Our current implementation will walk over the LLVM IR generated for a given source file and build and export the resulting callgraph in a corresponding *csv* file. The implementation can be found in [petsc-callgraph-xsdk](petsc-callgraph-xsdk). It can be built outside of the *llvm-project* source tree and run with the `opt` tool so: 
+    Our implementation will walk over the LLVM IR generated for a given source file and build and export the resulting callgraph in a corresponding *csv* file. The implementation can be found in [petsc-callgraph-xsdk](petsc-callgraph-xsdk). It can be built outside of the *llvm-project* source tree and run with the `opt` tool so: 
     ```
     opt -disable-output -load-pass-plugin=PetscCallGraphXSDK/libPetscCallGraphXSDK.so -passes="petsc-callgraph-xsdk"
     ```
