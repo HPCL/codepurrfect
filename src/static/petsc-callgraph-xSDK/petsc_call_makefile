@@ -1,0 +1,34 @@
+CFLAGS = -g -O3 -fno-inline-functions -emit-llvm -S  
+CC = clang 
+VERSION=3.15.0
+SRCDIR = ~/xSDK/hpc-apps/petsc/petsc-$(VERSION)/src/vec/vec/impls/                                                                                                  
+ROOTDIR = ~/xSDK/hpc-apps/petsc/petsc-$(VERSION)/ 
+INC_DIRS := $(shell find $(ROOTDIR)/include -type d) 
+C_INC_FLAGS := $(addprefix -I,$(INC_DIRS)) -I/packages/mpich/gcc7/include -I"${MKLROOT}/include" 
+LDFLAGS = -S 
+FILT=
+
+OPTIMIZER = opt 
+OPT_FLAGS = -disable-output -load-pass-plugin=PetscCallGraphXSDK/libPetscCallGraphXSDK.so -passes="petsc-callgraph-xsdk"
+
+.PHONY: all clean 
+ 
+
+OBJECTS = $(patsubst %.c, %.ll, $(shell find $(SRCDIR) -name '*.c'))
+HEADERS = $(shell find $(SRCDIR) -name '*.h')
+
+%.ll: %.c $(HEADERS)
+	$(CC) $(CFLAGS) $(C_INC_FLAGS) -c $< -o $@
+
+all : $(OBJECTS)  
+	for f in $(shell find $(SRCDIR) -name '*.ll'); do \
+		$(OPTIMIZER) $(OPT_FLAGS) $$f; \
+	done  
+	# python ../Append.py $(SRCDIR)
+
+
+clean: 
+	rm $(shell find $(ROOTDIR) -name '*.ll')
+	rm $(shell find $(ROOTDIR) -name '*.csv')
+
+
