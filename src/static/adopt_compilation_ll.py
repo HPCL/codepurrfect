@@ -28,8 +28,8 @@ def main(argv):
             for i, x in enumerate(item["arguments"]): 
                 if x == "cc":
                     item["arguments"][i] = "clang"
-                if x == "O0":
-                    item["arguments"][i] = "O3"
+                if x == "-O0":
+                    item["arguments"][i] = "-O3"
                 if x == "-o":
                     item["arguments"][i] = "-S"
                 if x[-2:] == ".o": 
