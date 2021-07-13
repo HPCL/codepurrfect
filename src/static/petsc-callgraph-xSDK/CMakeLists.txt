@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.19)
-project(petsc-callgraph-xsdk)
+project(petsc-callgraph-xSDK)
 find_package(LLVM REQUIRED CONFIG)
 
 add_definitions(${LLVM_DEFINITIONS})
