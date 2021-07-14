@@ -1,0 +1,8 @@
+/home/users/ndemeye/xSDK/code-analysis/static/petsc-callgraph-xsdk/build/CMakeFiles/rebuild_cache.dir
+/home/users/ndemeye/xSDK/code-analysis/static/petsc-callgraph-xsdk/build/CMakeFiles/acc_gen.dir
+/home/users/ndemeye/xSDK/code-analysis/static/petsc-callgraph-xsdk/build/CMakeFiles/edit_cache.dir
+/home/users/ndemeye/xSDK/code-analysis/static/petsc-callgraph-xsdk/build/CMakeFiles/omp_gen.dir
+/home/users/ndemeye/xSDK/code-analysis/static/petsc-callgraph-xsdk/build/CMakeFiles/intrinsics_gen.dir
+/home/users/ndemeye/xSDK/code-analysis/static/petsc-callgraph-xsdk/build/PetscCallGraphXSDK/CMakeFiles/rebuild_cache.dir
+/home/users/ndemeye/xSDK/code-analysis/static/petsc-callgraph-xsdk/build/PetscCallGraphXSDK/CMakeFiles/edit_cache.dir
+/home/users/ndemeye/xSDK/code-analysis/static/petsc-callgraph-xsdk/build/PetscCallGraphXSDK/CMakeFiles/PetscCallGraphXSDK.dir
