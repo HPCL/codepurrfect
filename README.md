@@ -15,7 +15,8 @@ The dynamic analysis tool is implemented in Python and has the following prerequ
 * Conda
 * Linux or MacOS
 
-For more details and examples, view or run this [Jupyter notebook](./docs/notebooks/Dynamic_analysis.ipynb).
+For more details and examples of computing several software quality metrics on xSDK projects, 
+view or run this [Jupyter notebook](./docs/notebooks/Dynamic_Analysis.ipynb).
 
 ## Static Analysis
 
