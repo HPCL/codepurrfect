@@ -28,7 +28,7 @@ all : $(OBJECTS)
 
 
 clean: 
-	rm $(shell find $(ROOTDIR) -name '*.ll')
-	rm $(shell find $(ROOTDIR) -name '*.csv')
+	rm $(shell find $(ROOTDIR) -name '*_indirects.txt')
+	rm $(shell find $(ROOTDIR) -name '*_callgraph.csv')
 
 
