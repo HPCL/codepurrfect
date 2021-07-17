@@ -8,7 +8,7 @@ import os
 import time 
 
 
-def identify_header(pointer_name, root_dir): 
+def identify_header(pointer_name, root_dir, ind_file): 
     header         = "empty"
     interface      = "empty" 
     impl           = "empty"
@@ -16,6 +16,7 @@ def identify_header(pointer_name, root_dir):
     act_func_proto = "empty"
     func_p_name    = "constructor"
     class_name     = "empty"
+    class_names    = ["ksp", "mat", "snes", "sys", "tao", "ts", "vec", "dm", "is"]
 
     name_pair = pointer_name.split('=')
     name_temp_1 = name_pair[0] 
@@ -43,11 +44,41 @@ def identify_header(pointer_name, root_dir):
                     op_i = pntr_struct_name.find("Ops") 
                     if op_i != -1: 
                         pntr_class_name = pntr_struct_name[1:op_i]
+                        # for structures like _KSPGuessOps 
+                        if not (pntr_class_name.lower() in class_names): 
+                            for name in class_names: 
+                                if name in pntr_class_name.lower(): 
+                                    pntr_class_name = name 
+
                         class_name = pntr_class_name
                         header = "include/petsc/private/" + \
                                 pntr_class_name.lower() + "impl.h"
-                        if not os.path.isfile(header): 
-                            header = "include/" + pntr_class_name.lower() + ".h"
+                        print("header ", header)
+                        print('/'.join([root_dir, header]))
+                        header_found = lambda h : os.path.isfile('/'.join([root_dir, h]))
+                        while not header_found(header): 
+                            print("pointer name (header not file)", pointer_name)
+                            if "petsc" in pntr_class_name.lower(): 
+                                header = "include/" + pntr_class_name.lower() + ".h"
+                                if header_found(header): 
+                                    break 
+                            else: 
+                                header = "include/petsc" + pntr_class_name.lower() + ".h"
+                                if header_found(header): 
+                                    break 
+                                else: 
+                                    # look in the same folder 
+                                    header = '/'.join(ind_file.split('_')[:-1]) + "impl.h"
+                                    print(header)
+                                    header = header[1:]
+                                    src_index = header.find("src")
+                                    header    = header[src_index:]
+                                    if header_found(header): 
+                                        break 
+                                    else: 
+                                        print("still can't find right header") 
+                                        break 
+
                         interface = '/'.join(["src", 
                                             pntr_class_name.lower(),
                                             "interface"])
@@ -104,8 +135,8 @@ def resolve_unique_ptr(indpath, root_dir, callpath, outpath):
         with open('/'.join([indpath, f]), 'r') as read_f: 
             contents = read_f.readlines() 
             contents = uniquefy(contents) 
-
-        contents = list(map(lambda x: identify_header(x, root_dir),
+        print("analyzing indirects call file: ", '/'.join([indpath, f]))
+        contents = list(map(lambda x: identify_header(x, root_dir, f),
                                 contents))
         # print("resolved pointer name length: ", len(contents))
         all_f_contents.append(contents)
