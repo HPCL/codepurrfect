@@ -53,11 +53,11 @@ def identify_header(pointer_name, root_dir, ind_file):
                         class_name = pntr_class_name
                         header = "include/petsc/private/" + \
                                 pntr_class_name.lower() + "impl.h"
-                        print("header ", header)
-                        print('/'.join([root_dir, header]))
+                        # print("header ", header)
+                        # print('/'.join([root_dir, header]))
                         header_found = lambda h : os.path.isfile('/'.join([root_dir, h]))
                         while not header_found(header): 
-                            print("pointer name (header not file)", pointer_name)
+                            # print("pointer name (header not file)", pointer_name)
                             if "petsc" in pntr_class_name.lower(): 
                                 header = "include/" + pntr_class_name.lower() + ".h"
                                 if header_found(header): 
@@ -69,14 +69,14 @@ def identify_header(pointer_name, root_dir, ind_file):
                                 else: 
                                     # look in the same folder 
                                     header = '/'.join(ind_file.split('_')[:-1]) + "impl.h"
-                                    print(header)
+                                    # print(header)
                                     header = header[1:]
                                     src_index = header.find("src")
                                     header    = header[src_index:]
                                     if header_found(header): 
                                         break 
                                     else: 
-                                        print("still can't find right header") 
+                                        # print("still can't find right header") 
                                         break 
 
                         interface = '/'.join(["src", 
@@ -308,7 +308,9 @@ def main(argv):
         if opt == "-o":
             outpath = arg 
     run(dirpath, llpath, callpath, indpath, pluginpath)
+    print("started resolving pointer runtime names ...")
     resolve_unique_ptr(indpath, dirpath, callpath, outpath)
+    print("done resolving pointer runtime names.")
     return 
 
 if __name__ == '__main__': 
