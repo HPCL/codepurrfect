@@ -76,7 +76,7 @@ def identify_header(pointer_name, root_dir, ind_file):
                                     if header_found(header): 
                                         break 
                                     else: 
-                                        # print("still can't find right header") 
+                                        print("still can't find right header") 
                                         break 
 
                         interface = '/'.join(["src", 
@@ -110,7 +110,8 @@ def identify_header(pointer_name, root_dir, ind_file):
                 else: 
                     pass 
             else: 
-                print("pointer with no name: ", pointer_name) # these seem to be constructor-like prototypes
+                # print("pointer with no name: ", pointer_name) # these seem to be constructor-like prototypes
+                pass 
         else: 
             pass 
     if act_func_proto != "empty": 
@@ -135,7 +136,7 @@ def resolve_unique_ptr(indpath, root_dir, callpath, outpath):
         with open('/'.join([indpath, f]), 'r') as read_f: 
             contents = read_f.readlines() 
             contents = uniquefy(contents) 
-        print("analyzing indirects call file: ", '/'.join([indpath, f]))
+        # print("analyzing indirects call file: ", '/'.join([indpath, f]))
         contents = list(map(lambda x: identify_header(x, root_dir, f),
                                 contents))
         # print("resolved pointer name length: ", len(contents))
@@ -229,7 +230,7 @@ def run(dirpath, llpath, callpath, indpath, pluginpath):
     end = time.time() 
     print("compilation took: ", end - start)
     # create callgraph dir 
-    print("number of llfiles: ", len(os.listdir(llpath)))
+    # print("number of llfiles: ", len(os.listdir(llpath)))
     if not os.path.exists(callpath):
         os.mkdir(callpath)
     # create indirect_calls dir 
@@ -308,9 +309,9 @@ def main(argv):
         if opt == "-o":
             outpath = arg 
     run(dirpath, llpath, callpath, indpath, pluginpath)
-    print("started resolving pointer runtime names ...")
+    print("start generating runtime names for pointers")
     resolve_unique_ptr(indpath, dirpath, callpath, outpath)
-    print("done resolving pointer runtime names.")
+    print("start generating runtime names for pointers")
     return 
 
 if __name__ == '__main__': 
