@@ -38,7 +38,6 @@ def identify_header(pointer_name, root_dir, ind_file):
        class_name = "sys"
     else:
         if name_temp_1.strip() == "EMPTYNAME": 
-            # print("pointer struct name: ", pntr_struct_name)
             if len(pntr_struct_name) != 0:
                 if pntr_struct_name[0] == '_':
                     op_i = pntr_struct_name.find("Ops") 
@@ -53,11 +52,8 @@ def identify_header(pointer_name, root_dir, ind_file):
                         class_name = pntr_class_name
                         header = "include/petsc/private/" + \
                                 pntr_class_name.lower() + "impl.h"
-                        # print("header ", header)
-                        # print('/'.join([root_dir, header]))
                         header_found = lambda h : os.path.isfile('/'.join([root_dir, h]))
                         while not header_found(header): 
-                            # print("pointer name (header not file)", pointer_name)
                             if "petsc" in pntr_class_name.lower(): 
                                 header = "include/" + pntr_class_name.lower() + ".h"
                                 if header_found(header): 
@@ -69,7 +65,6 @@ def identify_header(pointer_name, root_dir, ind_file):
                                 else: 
                                     # look in the same folder 
                                     header = '/'.join(ind_file.split('_')[:-1]) + "impl.h"
-                                    # print(header)
                                     header = header[1:]
                                     src_index = header.find("src")
                                     header    = header[src_index:]
@@ -82,23 +77,32 @@ def identify_header(pointer_name, root_dir, ind_file):
                         interface = '/'.join(["src", 
                                             pntr_class_name.lower(),
                                             "interface"])
-                        # print('/'.join([root_dir, header]))
                         # could probably optimize so don't have to open 
                         # this file for every line 
                         with open('/'.join([root_dir, header]), 'r') as header_reader: 
-                            h_contents = list(map(lambda x: x.strip(), header_reader.readlines()))
+                            h_contents = list(map(
+                                                  lambda x: x.strip(), 
+                                                  header_reader.readlines())
+                                                )
                             strct_line = "struct " + pntr_struct_name + " {"
                             if strct_line in h_contents: # hack for now, might fix later
                                 strct_index = h_contents.index(strct_line)
-                                next_brckt_i = h_contents[strct_index:].index("};")
-                                strct_contents = h_contents[strct_index+1:][:next_brckt_i]
-                                # print(len(strct_contents))
-                                strct_contents = list(filter(lambda x: x[:2] != "/*", strct_contents))
-                                # print(len(strct_contents))
-                                ptr_strct_offset_n = int(pntr_struct_offset.split()[1]) 
-                                if int(ptr_strct_offset_n / ptr_size) < len(strct_contents): 
-                                    act_func_proto = strct_contents[int(ptr_strct_offset_n / ptr_size)]
-                                    # print(act_func_proto)
+                                next_brckt_i = h_contents[strct_index:]    \
+                                                         .index("};")
+                                strct_contents = h_contents[strct_index+1:] \
+                                                           [:next_brckt_i]
+                                strct_contents     = list(filter(
+                                                             lambda x: x[:2] != "/*" 
+                                                           , strct_contents)
+                                                         ) 
+                                ptr_strct_offset_n = int(pntr_struct_offset
+                                                         .split()[1]) 
+                                if int(ptr_strct_offset_n / ptr_size) \
+                                   < len(strct_contents): 
+                                    act_func_proto = strct_contents[
+                                                        int(ptr_strct_offset_n 
+                                                            / ptr_size)
+                                                        ]
                                     if ")(" in act_func_proto:
                                         func_p_name = act_func_proto.split(")(")[0].split("*")[1]
                                     elif len(act_func_proto.split()) == 2: # prototype is "Type name;"" only 
@@ -110,7 +114,7 @@ def identify_header(pointer_name, root_dir, ind_file):
                 else: 
                     pass 
             else: 
-                # print("pointer with no name: ", pointer_name) # these seem to be constructor-like prototypes
+                # these seem to be constructor-like prototypes
                 pass 
         else: 
             pass 
@@ -131,27 +135,36 @@ def identify_header(pointer_name, root_dir, ind_file):
 def resolve_unique_ptr(indpath, root_dir, callpath, outpath):
     uniquefy = lambda l : list(set(l))
     all_f_contents = [] 
+    # for every file with list of indirect calls 
+    # remove duplicates 
+    # and identify header that defines/specifies 
+    # the pointer and its signature 
     for f in os.listdir(indpath):
         contents = []  
         with open('/'.join([indpath, f]), 'r') as read_f: 
             contents = read_f.readlines() 
             contents = uniquefy(contents) 
-        # print("analyzing indirects call file: ", '/'.join([indpath, f]))
         contents = list(map(lambda x: identify_header(x, root_dir, f),
                                 contents))
-        # print("resolved pointer name length: ", len(contents))
         all_f_contents.append(contents)
+
+    # for every file content (with header info already found) 
+    # for each line of the form: CLASS, FUNCTION_POINTER_NAME, 
+    # STRUCTNAME, OFFSET, PROTOTYPE, HEADER
+    # For every CALLER, CALLEE pair in the corresponding callgraph 
+    # file 
+    # If the function pointer name is a substring of CALLER 
+    # Add caller to list of potential runtime names for the function 
+    # pointer. 
 
     all_f_ptr_dict = {}
     for f_contents in all_f_contents: 
         for line in f_contents: 
-            # print(line)
             line_d     = line.split(",")
             class_name = line_d[0] 
             func_name  = line_d[1]
             all_f_ptr_dict[func_name] = [] 
             for f in os.listdir(callpath): 
-                # if class_name != "sys": # ignore kernel for now
                 if not (class_name.lower() in f):
                     continue 
                 if class_name.lower() in f: 
@@ -166,9 +179,6 @@ def resolve_unique_ptr(indpath, root_dir, callpath, outpath):
                                 count += 1 
                             else:
                                 pass  
-                                # print("pointer name", func_name.lower()) 
-                                # print("function name", call_f_func_name.lower())
-                        # print("number of matches: ", count)
 
     # dump all_f_ptr_dict in file 
     with open(outpath, 'w') as write_f: 
@@ -212,10 +222,8 @@ def compile_dir(dirpath, outpath):
                            .replace('/', '_')])[:-2] + ".ll"
         item["arguments"].append("-o") 
         item["arguments"].append(out_file_name)
-        # print(' '.join(item["arguments"]))
         print("compiling: ", comp_file_name, "...")
         subprocess.run(item["arguments"])  
-        # print("DONE GENERATING LLVM IR!")
 
 def run(dirpath, llpath, callpath, indpath, pluginpath): 
     # create directory to hold .ll files 
@@ -230,7 +238,6 @@ def run(dirpath, llpath, callpath, indpath, pluginpath):
     end = time.time() 
     print("compilation took: ", end - start)
     # create callgraph dir 
-    # print("number of llfiles: ", len(os.listdir(llpath)))
     if not os.path.exists(callpath):
         os.mkdir(callpath)
     # create indirect_calls dir 
@@ -310,8 +317,11 @@ def main(argv):
             outpath = arg 
     run(dirpath, llpath, callpath, indpath, pluginpath)
     print("start generating runtime names for pointers")
+    start = time.time()
     resolve_unique_ptr(indpath, dirpath, callpath, outpath)
-    print("start generating runtime names for pointers")
+    end   = time.time()
+    print("end generating runtime names for pointers")
+    print("Generating runtime names for pointers took: ", end - start)
     return 
 
 if __name__ == '__main__': 
