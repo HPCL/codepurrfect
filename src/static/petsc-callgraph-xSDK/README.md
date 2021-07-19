@@ -1,3 +1,38 @@
+```
+./callgraph_gen.py -d <path-to-project-root-directory> 
+                   -l <name-of-directory-to-hold-llvm-IR files>
+                   -c <name-of-directory-to-hold-callgraph-csv-files> 
+                   -i <name-of-directory-to-hold-files-with-pointer-names> 
+                   -p <path-to-opt-plugin> 
+                   -o <name-of-json-file-to-hold-pointer-to-runtime-names-map>
+```
+
+Assuming a compilation database (`compile_commands.json`) file exists in the root directory of a project (*petsc* for now), 
+running the above command will create 3 directories and one json file. A directory to hold human 
+readable llvm ir files (*.ll*), a directory to hold callgraphs (`<filepath>_callgraph.csv`), a directory with files 
+that list all pointers called in the corresponding file (`<filepath>_indirects.txt`), and a json file with 
+a mapping `pointer_name -> list of functions that might be called in pointers place at runtime`.
+
+*Note* `<filepath>` is the file's full path with '/' replaced with '_'.
+
+For example, assuming `~/xSDK/hpc-apps/petsc/petsc-3.15.0` is the path to *petsc* and our plugin 
+is stored in `~/xSDK/hpc-apps/petsc/petsc-3.15.0`, running 
+
+```
+./callgraph_gen.py -d ~/xSDK/hpc-apps/petsc/petsc-3.15.0 
+                   -l petsc-ll 
+                   -c petsc-callgraph 
+                   -i petsc-indirects 
+                   -p build/PetscCallGraphXSDK/libPetscCallGraphXSDK.so 
+                   -o indirect_calls.json 
+```
+will store callgraph files in `./petsc-callgraph`, *.ll* files in `./petsc-ll` 
+and `<filepath>_indirects.txt` files in `./petsc-indirects`; while the mapping 
+of pointer names to their corresponding concrete function names will be written 
+to `indirect_calls.json`
+
+--- 
+
 Many code quality metrics rely on the code's control flow structures, among which its *callgraph*. Examples include metrics related to coupling, cohesion and code complexity in general.
 
 The implementation in this directory addresses shortcomings in the callgraph-generating-capabilities provided by clang. 
@@ -10,8 +45,6 @@ Even though C has no operator overloading, and does not support inheritance --- 
 
 However, even though we are unable to deduce which exact implementation of the child class will be executed statically; we argue that for the purposes of callgraph construction, we can do more than represent all indirect calls with a single node in the graph --- as clang currently does.  
 
-The implementation we propose relies on *type-directed alias analysis* --- an analysis that attaches its results as *metadata* in LLVM's compilation pipeline --- to resolve the name of the anonymous function pointer in LLVM IR to its actual offset in the abstract struct. Because we have access to the whole implementation codebase, we can resolve the name of the polymorphic function and go even a step further and speculate about which actual implementation  provided by a child class will be called at runtime.  
+The implementation we propose relies on *type-directed alias analysis* --- an analysis that attaches its results as *metadata* in LLVM's compilation pipeline --- to resolve the name of the anonymous function pointer in LLVM IR to its actual offset in the abstract struct. Because we have access to the whole implementation codebase, we can resolve the name of the polymorphic function and go even a step further and speculate about which actual implementation  provided by a child class will be called at runtime.   
 
-As the project stands, we are able to resolve the name of an offset in the actual struct. To test this implementation, `cd code-analysis/static/petsc-callgraph-xSDK/` and take a look at the `code-analysis/static/petsc-callgraph-xSDK/petsc_call_makefile`, change the variable `SRCDIR` to point to a directory with an implementation in C and then run `make -f petsc_call_makefile all`. For every `.c` file in the directory, this should generate a corresponding `.ll` file as well as a `._callgraph.csv` with the callgraph. Running `make -f petsc_call_makefile clean` should delete all these `.ll` and `._callgraph.csv` files from your project. 
-
-The source code for this pass can be found in `code-analysis/static/petsc-call-graph-xSDK/PetscCallGraphXSDK/PetscCallGraphXSDK.cpp`. Once this file has been updated, `cd code-analysis/static/petsc-call-graph-xSDK/build/ && make`. This should make sure that the line that loads `opt` with the new pass in `code-analysis/static/petsc-callgraph-xSDK/petsc_call_makefile` works correctly. That is `opt -disable-output -load-pass-plugin=PetscCallGraphXSDK/libPetscCallGraphXSDK.so -passes="petsc-callgraph-xsdk"` 
+---
