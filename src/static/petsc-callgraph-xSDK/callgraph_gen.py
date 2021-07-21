@@ -189,41 +189,83 @@ def resolve_unique_ptr(indpath, root_dir, callpath, outpath):
 
 def compile_dir(dirpath, outpath): 
     # locate and read compilation db  
+    print("running compilation...")
     data = None 
     comp_json_path = ""
+    print("dirpath: ", dirpath)
     comp_json_path = '/'.join([dirpath, "compile_commands.json"])
+    print(comp_json_path)
     with open(comp_json_path, "r") as read_f: 
         data = json.load(read_f)
+    print("data length", len(data))
     # replace cc flags with clang's for emitting IR  
     new_data = []
     for item in data: 
-        for i, x in enumerate(item["arguments"]): 
-            if x == "cc":
-                item["arguments"][i] = "clang"
-            if x == "-O0":
-                item["arguments"][i] = "-O3"
-            if x == "-o":
-                item["arguments"][i] = "-S"
-            if x[-2:] == ".o": 
-                item["arguments"][i] = "-emit-llvm"
-            if x == "-g3": 
-                item["arguments"][i] = "-g"
+        if "arguments" in item.keys():
+            for i, x in enumerate(item["arguments"]): 
+                if x == "cc":
+                    item["arguments"][i] = "clang"
+                if x == "-O0":
+                    item["arguments"][i] = "-O3"
+                if x == "-o":
+                    item["arguments"][i] = "-S"
+                if x[-2:] == ".o": 
+                    item["arguments"][i] = "-emit-llvm"
+                if x == "-g3": 
+                    item["arguments"][i] = "-g"
+            print(item["arguments"])
+        elif "command" in item.keys():
+            item["command"] = item["command"].split()
+            for i, x in enumerate(item["command"]): 
+                if "c++" in x:
+                    item["command"][i] = "clang++"
+                if "cc" in x: 
+                    item["command"][i] = "clang"
+                if x == "-O0":
+                    item["command"][i] = "-O3"
+                if x == "-o":
+                    item["command"][i] = "-S"
+                if x[-2:] == ".o": 
+                    item["command"][i] = "-emit-llvm"
+                if x == "-g3": 
+                    item["command"][i] = "-g"
+                if x == "-c":
+                    item["command"].remove(x) 
+
         new_data.append(item) 
+    print("new data length: ", len(new_data))
 
     # for debugging only work on first 50 items 
     # new_data = new_data[:5]
 
     # run command for each file 
     for item in new_data: 
-        comp_file_name = '/'.join([dirpath, item["file"]])
-        item["arguments"] = item["arguments"][:-1] 
-        item["arguments"].append(comp_file_name)
-        out_file_name = '/'.join([outpath, item["file"]
-                           .replace('/', '_')])[:-2] + ".ll"
-        item["arguments"].append("-o") 
-        item["arguments"].append(out_file_name)
-        print("compiling: ", comp_file_name, "...")
-        subprocess.run(item["arguments"])  
+        comp_file_name = "" 
+        if os.path.isabs(item["file"]): 
+            comp_file_name = item["file"]
+        elif ("directory" in item.keys()) and os.path.isabs(item["directory"]): 
+            comp_file_name = '/'.join([item["directory"], item["file"]])
+        else: 
+            comp_file_name = '/'.join([dirpath, item["file"]])
+        if "arguments" in item.keys():
+            item["arguments"] = item["arguments"][:-1] 
+            item["arguments"].append(comp_file_name)
+            out_file_name = '/'.join([outpath, item["file"]
+                            .replace('/', '_')])[:-2] + ".ll"
+            item["arguments"].append("-o") 
+            item["arguments"].append(out_file_name)
+            print("compiling: ", comp_file_name, "...")
+            subprocess.run(item["arguments"]) 
+        if "command" in item.keys(): #assume we are dealing with c++ .cpp 
+            item["command"] = item["command"][:-1] 
+            item["command"].append(comp_file_name)
+            out_file_name = '/'.join([outpath, item["file"]
+                            .replace('/', '_')])[:-4] + ".ll"
+            item["command"].append("-o") 
+            item["command"].append(out_file_name)
+            print("compiling: ", comp_file_name, "...")
+            print(' '.join(item["command"]))
+            subprocess.run(item["command"])
 
 def run(dirpath, llpath, callpath, indpath, pluginpath): 
     # create directory to hold .ll files 
@@ -313,15 +355,15 @@ def main(argv):
             indpath = arg 
         if opt == "-p": 
             pluginpath = arg 
-        if opt == "-o":
-            outpath = arg 
+        # if opt == "-o":
+        #     outpath = arg 
     run(dirpath, llpath, callpath, indpath, pluginpath)
-    print("start generating runtime names for pointers")
-    start = time.time()
-    resolve_unique_ptr(indpath, dirpath, callpath, outpath)
-    end   = time.time()
-    print("end generating runtime names for pointers")
-    print("Generating runtime names for pointers took: ", end - start)
+    # print("start generating runtime names for pointers")
+    # start = time.time()
+    # resolve_unique_ptr(indpath, dirpath, callpath, outpath)
+    # end   = time.time()
+    # print("end generating runtime names for pointers")
+    # print("Generating runtime names for pointers took: ", end - start)
     return 
 
 if __name__ == '__main__': 
