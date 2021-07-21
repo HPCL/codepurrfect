@@ -131,8 +131,7 @@ def identify_header(pointer_name, root_dir, ind_file):
            act_func_proto + "," +  
            header + "\n")
 
-
-def resolve_unique_ptr(indpath, root_dir, callpath, outpath):
+def read_all_unique_indirect_calls(root_dir, indpath):
     uniquefy = lambda l : list(set(l))
     all_f_contents = [] 
     # for every file with list of indirect calls 
@@ -147,7 +146,9 @@ def resolve_unique_ptr(indpath, root_dir, callpath, outpath):
         contents = list(map(lambda x: identify_header(x, root_dir, f),
                                 contents))
         all_f_contents.append(contents)
+    return all_f_contents
 
+def gen_pntr_rntime_func_name_map(all_f_contents, callpath):
     # for every file content (with header info already found) 
     # for each line of the form: CLASS, FUNCTION_POINTER_NAME, 
     # STRUCTNAME, OFFSET, PROTOTYPE, HEADER
@@ -178,18 +179,19 @@ def resolve_unique_ptr(indpath, root_dir, callpath, outpath):
                                 all_f_ptr_dict[func_name].append(call_f_func_name)
                                 count += 1 
                             else:
-                                pass  
+                                pass
+    return all_f_ptr_dict
 
+
+def resolve_unique_ptr(indpath, root_dir, callpath, outpath):
+    all_f_contents = read_all_unique_indirect_calls(root_dir, indpath)
+    all_f_ptr_dict = gen_pntr_rntime_func_name_map(all_f_contents, callpath)
     # dump all_f_ptr_dict in file 
     with open(outpath, 'w') as write_f: 
         json.dump(all_f_ptr_dict, write_f) 
     return 
 
-
-
-def compile_dir(dirpath, outpath): 
-    # locate and read compilation db  
-    print("running compilation...")
+def read_compilation_db(dirpath): 
     data = None 
     comp_json_path = ""
     print("dirpath: ", dirpath)
@@ -197,7 +199,9 @@ def compile_dir(dirpath, outpath):
     print(comp_json_path)
     with open(comp_json_path, "r") as read_f: 
         data = json.load(read_f)
-    print("data length", len(data))
+    return data 
+
+def make_comp_be_clang(data):
     # replace cc flags with clang's for emitting IR  
     new_data = []
     for item in data: 
@@ -205,6 +209,9 @@ def compile_dir(dirpath, outpath):
             for i, x in enumerate(item["arguments"]): 
                 if x == "cc":
                     item["arguments"][i] = "clang"
+                if "c++" in x:
+                    item["arguments"][i] = "clang++"
+                    item["arguments"].append("-std=c++17")
                 if x == "-O0":
                     item["arguments"][i] = "-O3"
                 if x == "-o":
@@ -213,13 +220,14 @@ def compile_dir(dirpath, outpath):
                     item["arguments"][i] = "-emit-llvm"
                 if x == "-g3": 
                     item["arguments"][i] = "-g"
+                
             print(item["arguments"])
         elif "command" in item.keys():
             item["command"] = item["command"].split()
             for i, x in enumerate(item["command"]): 
                 if "c++" in x:
                     item["command"][i] = "clang++"
-                if "cc" in x: 
+                if ("cc" in x) and (i == 0): 
                     item["command"][i] = "clang"
                 if x == "-O0":
                     item["command"][i] = "-O3"
@@ -231,15 +239,11 @@ def compile_dir(dirpath, outpath):
                     item["command"][i] = "-g"
                 if x == "-c":
                     item["command"].remove(x) 
+        new_data.append(item)
+    return new_data 
 
-        new_data.append(item) 
-    print("new data length: ", len(new_data))
-
-    # for debugging only work on first 50 items 
-    # new_data = new_data[:5]
-
-    # run command for each file 
-    for item in new_data: 
+def run_compile_commands(dirpath, outpath, db_data):
+    for item in db_data: 
         comp_file_name = "" 
         if os.path.isabs(item["file"]): 
             comp_file_name = item["file"]
@@ -256,7 +260,7 @@ def compile_dir(dirpath, outpath):
             item["arguments"].append(out_file_name)
             print("compiling: ", comp_file_name, "...")
             subprocess.run(item["arguments"]) 
-        if "command" in item.keys(): #assume we are dealing with c++ .cpp 
+        if "command" in item.keys(): #assume we are dealing with c++ (.cpp) 
             item["command"] = item["command"][:-1] 
             item["command"].append(comp_file_name)
             out_file_name = '/'.join([outpath, item["file"]
@@ -266,6 +270,53 @@ def compile_dir(dirpath, outpath):
             print("compiling: ", comp_file_name, "...")
             print(' '.join(item["command"]))
             subprocess.run(item["command"])
+    return 
+
+def compile_dir(dirpath, outpath): 
+    # locate and read compilation db  
+    print("running compilation...")
+    data = read_compilation_db(dirpath)
+    print("data length", len(data))
+    # replace cc flags with clang's for emitting IR  
+    new_data = make_comp_be_clang(data)
+    print("new data length: ", len(new_data))
+    # for debugging only work on first 50 items 
+    # new_data = new_data[:5]
+    # run command for each file 
+    run_compile_commands(dirpath, outpath, new_data)
+    return 
+    
+
+def move_files(frm, to, extensions): 
+    for f in os.listdir(frm):
+        command = []
+        if os.path.isfile(f): 
+            for e in extensions: 
+                if e in f: 
+                    command = ["mv", f, to] 
+            if command != []: 
+                subprocess.run(command)
+    return
+
+def run_opt_pass(pluginpath, llpath):
+    opt_str_args = ["opt",
+                    "-disable-output", 
+                    "-load-pass-plugin=" + pluginpath,
+                    "-passes=petsc-callgraph-xsdk"
+                   ]
+    llfiles = ['/'.join([llpath, f]) for f in os.listdir(llpath) 
+                 if os.path.isfile('/'.join([llpath, f]))] 
+    llf_len = len(llfiles) 
+    count   = 0
+    for llfile in llfiles: 
+        opt_str_args.append(llfile)
+        # running this should store generated files in current dir
+        print(".ll file: ", llfile)
+        print(opt_str_args)
+        subprocess.run(opt_str_args)
+        if count != llf_len - 1:
+            opt_str_args = opt_str_args[:-1]
+    return 
 
 def run(dirpath, llpath, callpath, indpath, pluginpath): 
     # create directory to hold .ll files 
@@ -287,43 +338,24 @@ def run(dirpath, llpath, callpath, indpath, pluginpath):
         os.mkdir(indpath)
     # run pass to generate callgraph.csv and 
     # indirects.txt given .ll file 
-    print(pluginpath)
-    opt_str_args = ["opt",
-                    "-disable-output", 
-                    "-load-pass-plugin=" + pluginpath,
-                    "-passes=petsc-callgraph-xsdk"
-                   ]
-    llfiles = ['/'.join([llpath, f]) for f in os.listdir(llpath) 
-                 if os.path.isfile('/'.join([llpath, f]))]
-    print("started running opt pass ...")
-    start = time.time() 
-    for llfile in llfiles: 
-        opt_str_args.append(llfile)
-        # running this should store generated files in current dir
-        print(llfile)
-        subprocess.run(opt_str_args)
-        opt_str_args = opt_str_args[:-1]  
-    # store callgraph.csv in callgraph dir 
-    # store indirects.txt in indirect_calls dir
+    print("start running opt pass") 
+    start = time.time()
+    run_opt_pass(pluginpath, llpath)  
     print("running opt pass done.") 
     end = time.time() 
     print("running opt pass took: ", end - start)
+    # store callgraph.csv in callgraph dir 
+    # store indirects.txt in indirect_calls dir
     cwd = os.getcwd() 
     print("moving files graph and indirect files to respective dirs ...") 
     start = time.time() 
-    for f in os.listdir(cwd):
-        command = []
-        if os.path.isfile(f):  
-            if "_callgraph.csv" in f: 
-                command = ["mv", f, callpath] 
-            elif "_indirects.txt" in f: 
-                command = ["mv", f, indpath] 
-            if command != []:
-                subprocess.run(command)
+    move_files(cwd, callpath
+                  , extensions=["_callgraph.csv", "_indirects.txt"])
     print("done moving files.")
     end = time.time() 
     print("moving files took: ", end - start)
-    return 
+    return  
+
 
 
 def main(argv): 
@@ -358,12 +390,14 @@ def main(argv):
         # if opt == "-o":
         #     outpath = arg 
     run(dirpath, llpath, callpath, indpath, pluginpath)
-    # print("start generating runtime names for pointers")
-    # start = time.time()
-    # resolve_unique_ptr(indpath, dirpath, callpath, outpath)
-    # end   = time.time()
-    # print("end generating runtime names for pointers")
-    # print("Generating runtime names for pointers took: ", end - start)
+    #if dealing with petsc, generate runtime names for pointers
+    if "petsc" in dirpath:
+        print("start generating runtime names for pointers")
+        start = time.time()
+        resolve_unique_ptr(indpath, dirpath, callpath, outpath)
+        end   = time.time()
+        print("end generating runtime names for pointers")
+        print("Generating runtime names for pointers took: ", end - start)
     return 
 
 if __name__ == '__main__': 
