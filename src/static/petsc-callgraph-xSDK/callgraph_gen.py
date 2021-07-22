@@ -203,7 +203,8 @@ def read_compilation_db(dirpath):
 
 def make_comp_be_clang(data):
     # replace cc flags with clang's for emitting IR  
-    new_data = []
+    new_data       = []
+    is_cpp_project = False 
     for item in data: 
         if "arguments" in item.keys():
             for i, x in enumerate(item["arguments"]): 
@@ -227,6 +228,7 @@ def make_comp_be_clang(data):
             for i, x in enumerate(item["command"]): 
                 if "c++" in x:
                     item["command"][i] = "clang++"
+                    is_cpp_project = is_cpp_project or True 
                 if ("cc" in x) and (i == 0): 
                     item["command"][i] = "clang"
                 if x == "-O0":
@@ -240,7 +242,7 @@ def make_comp_be_clang(data):
                 if x == "-c":
                     item["command"].remove(x) 
         new_data.append(item)
-    return new_data 
+    return (is_cpp_project, new_data) 
 
 def run_compile_commands(dirpath, outpath, db_data):
     for item in db_data: 
@@ -277,25 +279,27 @@ def compile_dir(dirpath, outpath):
     print("running compilation...")
     data = read_compilation_db(dirpath)
     print("data length", len(data))
-    # replace cc flags with clang's for emitting IR  
-    new_data = make_comp_be_clang(data)
-    print("new data length: ", len(new_data))
+
     # for debugging only work on first 50 items 
-    # new_data = new_data[:5]
+    data = data[:5]
+    # replace cc flags with clang's for emitting IR  
+    (is_cpp_pro, new_data) = make_comp_be_clang(data)
+    print("new data length: ", len(new_data))
     # run command for each file 
     run_compile_commands(dirpath, outpath, new_data)
-    return 
+    return is_cpp_pro
     
 
-def move_files(frm, to, extensions): 
+def move_files(frm, destinations, extensions): 
     for f in os.listdir(frm):
         command = []
         if os.path.isfile(f): 
             for e in extensions: 
-                if e in f: 
-                    command = ["mv", f, to] 
-            if command != []: 
-                subprocess.run(command)
+                for to, e in zip(destinations, extensions):
+                    if e in f: 
+                        command = ["mv", f, to] 
+                    if command != []: 
+                        subprocess.run(command)
     return
 
 def run_opt_pass(pluginpath, llpath):
@@ -306,16 +310,89 @@ def run_opt_pass(pluginpath, llpath):
                    ]
     llfiles = ['/'.join([llpath, f]) for f in os.listdir(llpath) 
                  if os.path.isfile('/'.join([llpath, f]))] 
-    llf_len = len(llfiles) 
-    count   = 0
     for llfile in llfiles: 
         opt_str_args.append(llfile)
         # running this should store generated files in current dir
         print(".ll file: ", llfile)
         print(opt_str_args)
         subprocess.run(opt_str_args)
-        if count != llf_len - 1:
-            opt_str_args = opt_str_args[:-1]
+        opt_str_args = opt_str_args[:-1]
+    return 
+
+def demangle_cpp_names(filepath, outfilepath): 
+    contents = None 
+    with open(filepath, 'r') as filepath_r: 
+        contents = filepath_r.readlines(); 
+    # assuming csv file, and mangled name leftmost 
+    new_contents = [] 
+    for line in contents: 
+        line_l       = line.split(",") 
+        if "callgraph" in filepath: 
+            mangled_name_1 = line_l[0] 
+            mangled_name_2 = ""
+            ind_call_name_s = []
+            if line_l[-1].strip() == "DIRECT":
+                mangled_name_2 = line_l[1].strip()
+            if line_l[-1].strip() == "INDIRECT": 
+                ind_call_name = line_l[1].strip() 
+                ind_call_name_s  = ind_call_name.split("=") 
+                if ind_call_name_s[0].strip() != "EMPTYNAME": 
+                    mangled_name_2 = ind_call_name_s[0].strip() 
+                else: 
+                    mangled_name_2 = ind_call_name_s[1].strip().split('->')[0][1:]
+            fst_2_demangled = [] 
+            for mangled_name in [mangled_name_1, mangled_name_2]: 
+                # adapted from https://stackoverflow.com/questions/2804543/read-subprocess-stdout-line-by-line
+                proc = subprocess.Popen(['c++filt', '-p', mangled_name]
+                                                , stdout=subprocess.PIPE)
+                names = []
+                for line in proc.stdout: 
+                    names.append(line.decode('ascii').strip())
+                name = ' '.join(names) 
+                fst_2_demangled.append(name)
+            if line_l[-1].strip() == "DIRECT":
+                new_line = fst_2_demangled + line_l[2:]
+                new_contents.append(','.join(new_line))
+            elif line_l[-1].strip() == "INDIRECT":
+                ptr_strct_nm = fst_2_demangled[1].strip() 
+                starter_s = "typeinfo name for "
+                s_index = ptr_strct_nm.find(starter_s) 
+                ptr_strct_nm = ptr_strct_nm[s_index + len(starter_s):]
+                snd_nm = ptr_strct_nm.strip() + "->(" + \
+                           ''.join(ind_call_name_s[1].strip().split("->")[1:])
+                new_line = [fst_2_demangled[0].strip(), snd_nm.strip()] + line_l[2:]
+                new_contents.append(','.join(new_line))
+
+        if "indirects" in filepath: 
+            print("LINE: ", line)
+            line_l         = line.split("=")
+            print(line_l)
+            demangled_name = line_l[0]
+            mangled_name = ""
+            if demangled_name.strip() == "EMPTYNAME": 
+                mangled_name = line_l[1].strip().split("->")[0]
+                print("mangled name: ", mangled_name)
+            proc = subprocess.Popen(['c++filt', '-p', mangled_name]
+                                                , stdout=subprocess.PIPE)
+            names = []
+            for line in proc.stdout: 
+                names.append(line.decode('ascii').strip())
+            name = ' '.join(names) 
+            starter_s    = "typeinfo name for "
+            s_index      = name.find(starter_s) 
+            ptr_strct_nm = name[s_index + len(starter_s):]
+            print(line_l)
+            snd_nm = ptr_strct_nm + "->(" + ''.join(line_l[1].strip().split("->")[1:])
+            print(snd_nm)
+            new_line = [demangled_name, snd_nm.strip()] + line_l[2:]
+            new_contents.append(','.join(new_line)+"\n")
+
+        # if "indirects" in filepath: 
+    print(len(new_contents))
+    with open(outfilepath, 'w') as outfilepath_w: 
+        outfilepath_w.writelines(new_contents)
+
+
     return 
 
 def run(dirpath, llpath, callpath, indpath, pluginpath): 
@@ -326,7 +403,7 @@ def run(dirpath, llpath, callpath, indpath, pluginpath):
     # generate corresponding .ll file
     print("starting compilation ...")
     start = time.time()
-    compile_dir(dirpath, llpath)
+    is_cpp_project = compile_dir(dirpath, llpath)
     print("compilation done.") 
     end = time.time() 
     print("compilation took: ", end - start)
@@ -349,11 +426,26 @@ def run(dirpath, llpath, callpath, indpath, pluginpath):
     cwd = os.getcwd() 
     print("moving files graph and indirect files to respective dirs ...") 
     start = time.time() 
-    move_files(cwd, callpath
+    move_files(cwd, [callpath, indpath]
                   , extensions=["_callgraph.csv", "_indirects.txt"])
     print("done moving files.")
     end = time.time() 
     print("moving files took: ", end - start)
+
+    if is_cpp_project: 
+        for file in os.listdir(callpath): 
+            outfile = ""
+            if file[-4:] == ".csv":
+                outfile = file[:-4] + "_demangled.csv"
+                demangle_cpp_names('/'.join([callpath, file])
+                                  ,'/'.join([callpath, outfile]))
+        for file in os.listdir(indpath):
+            outfile = ""
+            if file[-4:] == ".txt": 
+                outfile = file[:-4] + "_demangled.txt"
+                demangle_cpp_names('/'.join([indpath, file])
+                                  ,'/'.join([indpath, outfile]))
+            
     return  
 
 
