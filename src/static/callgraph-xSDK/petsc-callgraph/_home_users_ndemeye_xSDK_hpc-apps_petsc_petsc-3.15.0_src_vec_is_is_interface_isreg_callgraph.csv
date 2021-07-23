@@ -1,0 +1,55 @@
+CALLER, CALLEE, CALLTYPE
+ISCreate,PetscError, DIRECT
+ISCreate,PetscCheckPointer, DIRECT
+ISCreate,PetscError, DIRECT
+ISCreate,ISInitializePackage, DIRECT
+ISCreate,PetscError, DIRECT
+ISCreate,PetscMallocA, DIRECT
+ISCreate,PetscHeaderCreate_Private, DIRECT
+ISCreate,PetscLogPHC = (any pointer->any pointer@i64 0) :: i32 (%struct._p_PetscObject*)*, INDIRECT 
+ISCreate,PetscLogObjectMemory, DIRECT
+ISCreate,PetscError, DIRECT
+ISCreate,PetscLayoutCreate, DIRECT
+ISCreate,PetscError, DIRECT
+ISCreate,printf, DIRECT
+ISCreate,printf, DIRECT
+ISSetType,PetscError, DIRECT
+ISSetType,PetscCheckPointer, DIRECT
+ISSetType,PetscError, DIRECT
+ISSetType,PetscError, DIRECT
+ISSetType,PetscError, DIRECT
+ISSetType,PetscObjectTypeCompare, DIRECT
+ISSetType,PetscError, DIRECT
+ISSetType,printf, DIRECT
+ISSetType,printf, DIRECT
+ISSetType,ISRegisterAll, DIRECT
+ISSetType,PetscError, DIRECT
+ISSetType,PetscFunctionListFind_Private, DIRECT
+ISSetType,PetscError, DIRECT
+ISSetType,PetscError, DIRECT
+ISSetType,EMPTYNAME = (_ISOps->any pointer@i64 56) :: i32 (%struct._p_IS*)*, INDIRECT 
+ISSetType,PetscError, DIRECT
+ISSetType,EMPTYNAME = (any pointer->any pointer@i64 0) :: i32 (%struct._p_IS*)*, INDIRECT 
+ISSetType,PetscError, DIRECT
+ISSetType,PetscObjectChangeTypeName, DIRECT
+ISSetType,PetscError, DIRECT
+ISSetType,printf, DIRECT
+ISSetType,printf, DIRECT
+ISGetType,PetscError, DIRECT
+ISGetType,PetscCheckPointer, DIRECT
+ISGetType,PetscError, DIRECT
+ISGetType,PetscError, DIRECT
+ISGetType,PetscError, DIRECT
+ISGetType,PetscError, DIRECT
+ISGetType,PetscCheckPointer, DIRECT
+ISGetType,PetscError, DIRECT
+ISGetType,ISRegisterAll, DIRECT
+ISGetType,PetscError, DIRECT
+ISGetType,printf, DIRECT
+ISGetType,printf, DIRECT
+ISRegister,ISInitializePackage, DIRECT
+ISRegister,PetscError, DIRECT
+ISRegister,PetscFunctionListAdd_Private, DIRECT
+ISRegister,PetscError, DIRECT
+ISRegister,printf, DIRECT
+ISRegister,printf, DIRECT

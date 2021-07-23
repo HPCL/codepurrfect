@@ -1,0 +1,37 @@
+CALLER, CALLEE, CALLTYPE
+petsc_viewer_draw__,MPI_Comm_f2c, DIRECT
+petsc_viewer_draw__,PETSC_VIEWER_DRAW_, DIRECT
+petscviewerdrawgetdraw_,PETSC_VIEWER_DRAW_, DIRECT
+petscviewerdrawgetdraw_,PETSC_VIEWER_DRAW_, DIRECT
+petscviewerdrawgetdraw_,PETSC_VIEWER_STDOUT_, DIRECT
+petscviewerdrawgetdraw_,PETSC_VIEWER_STDOUT_, DIRECT
+petscviewerdrawgetdraw_,PETSC_VIEWER_STDERR_, DIRECT
+petscviewerdrawgetdraw_,PETSC_VIEWER_STDERR_, DIRECT
+petscviewerdrawgetdraw_,PETSC_VIEWER_BINARY_, DIRECT
+petscviewerdrawgetdraw_,PETSC_VIEWER_BINARY_, DIRECT
+petscviewerdrawgetdraw_,PETSC_VIEWER_BINARY_, DIRECT
+petscviewerdrawgetdraw_,PETSC_VIEWER_BINARY_, DIRECT
+petscviewerdrawgetdraw_,PETSC_VIEWER_SOCKET_, DIRECT
+petscviewerdrawgetdraw_,PETSC_VIEWER_SOCKET_, DIRECT
+petscviewerdrawgetdraw_,PetscViewerDrawGetDraw, DIRECT
+petscviewerdrawgetdrawlg_,PETSC_VIEWER_DRAW_, DIRECT
+petscviewerdrawgetdrawlg_,PETSC_VIEWER_DRAW_, DIRECT
+petscviewerdrawgetdrawlg_,PETSC_VIEWER_STDOUT_, DIRECT
+petscviewerdrawgetdrawlg_,PETSC_VIEWER_STDOUT_, DIRECT
+petscviewerdrawgetdrawlg_,PETSC_VIEWER_STDERR_, DIRECT
+petscviewerdrawgetdrawlg_,PETSC_VIEWER_STDERR_, DIRECT
+petscviewerdrawgetdrawlg_,PETSC_VIEWER_BINARY_, DIRECT
+petscviewerdrawgetdrawlg_,PETSC_VIEWER_BINARY_, DIRECT
+petscviewerdrawgetdrawlg_,PETSC_VIEWER_BINARY_, DIRECT
+petscviewerdrawgetdrawlg_,PETSC_VIEWER_BINARY_, DIRECT
+petscviewerdrawgetdrawlg_,PETSC_VIEWER_SOCKET_, DIRECT
+petscviewerdrawgetdrawlg_,PETSC_VIEWER_SOCKET_, DIRECT
+petscviewerdrawgetdrawlg_,PetscViewerDrawGetDrawLG, DIRECT
+petscviewerdrawopen_,PetscMallocA, DIRECT
+petscviewerdrawopen_,PetscStrncpy, DIRECT
+petscviewerdrawopen_,PetscMallocA, DIRECT
+petscviewerdrawopen_,PetscStrncpy, DIRECT
+petscviewerdrawopen_,MPI_Comm_f2c, DIRECT
+petscviewerdrawopen_,PetscViewerDrawOpen, DIRECT
+petscviewerdrawopen_,PetscTrFree = (any pointer->any pointer@i64 0) :: i32 (i8*, i32, i8*, i8*)*, INDIRECT 
+petscviewerdrawopen_,PetscTrFree = (any pointer->any pointer@i64 0) :: i32 (i8*, i32, i8*, i8*)*, INDIRECT 

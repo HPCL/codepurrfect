@@ -1,0 +1,6 @@
+CALLER, CALLEE, CALLTYPE
+pfviewfromoptions_,PetscMallocA, DIRECT
+pfviewfromoptions_,PetscStrncpy, DIRECT
+pfviewfromoptions_,PetscError, DIRECT
+pfviewfromoptions_,PFViewFromOptions, DIRECT
+pfviewfromoptions_,PetscTrFree = (any pointer->any pointer@i64 0) :: i32 (i8*, i32, i8*, i8*)*, INDIRECT 

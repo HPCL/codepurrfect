@@ -1,0 +1,5 @@
+CALLER, CALLEE, CALLTYPE
+dmdaglobaltonaturalbegin_,DMDAGlobalToNaturalBegin, DIRECT
+dmdaglobaltonaturalend_,DMDAGlobalToNaturalEnd, DIRECT
+dmdanaturaltoglobalbegin_,DMDANaturalToGlobalBegin, DIRECT
+dmdanaturaltoglobalend_,DMDANaturalToGlobalEnd, DIRECT

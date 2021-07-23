@@ -1,0 +1,66 @@
+CALLER, CALLEE, CALLTYPE
+MatColoringCreateBipartiteGraph,MatGetOwnershipRange, DIRECT
+MatColoringCreateBipartiteGraph,PetscError, DIRECT
+MatColoringCreateBipartiteGraph,MatGetOwnershipRangeColumn, DIRECT
+MatColoringCreateBipartiteGraph,PetscError, DIRECT
+MatColoringCreateBipartiteGraph,MatGetRow, DIRECT
+MatColoringCreateBipartiteGraph,MatRestoreRow, DIRECT
+MatColoringCreateBipartiteGraph,PetscError, DIRECT
+MatColoringCreateBipartiteGraph,PetscError, DIRECT
+MatColoringCreateBipartiteGraph,PetscMallocA, DIRECT
+MatColoringCreateBipartiteGraph,PetscError, DIRECT
+MatColoringCreateBipartiteGraph,PetscMallocA, DIRECT
+MatColoringCreateBipartiteGraph,PetscError, DIRECT
+MatColoringCreateBipartiteGraph,MatGetRow, DIRECT
+MatColoringCreateBipartiteGraph,PetscError, DIRECT
+MatColoringCreateBipartiteGraph,MatRestoreRow, DIRECT
+MatColoringCreateBipartiteGraph,PetscError, DIRECT
+MatColoringCreateBipartiteGraph,PetscObjectComm, DIRECT
+MatColoringCreateBipartiteGraph,PetscError, DIRECT
+MatColoringCreateBipartiteGraph,PetscSFCreate, DIRECT
+MatColoringCreateBipartiteGraph,PetscError, DIRECT
+MatColoringCreateBipartiteGraph,PetscObjectComm, DIRECT
+MatColoringCreateBipartiteGraph,PetscSFCreate, DIRECT
+MatColoringCreateBipartiteGraph,PetscError, DIRECT
+MatColoringCreateBipartiteGraph,PetscSFSetGraphLayout, DIRECT
+MatColoringCreateBipartiteGraph,PetscError, DIRECT
+MatColoringCreateBipartiteGraph,PetscSFSetFromOptions, DIRECT
+MatColoringCreateBipartiteGraph,PetscError, DIRECT
+MatColoringCreateBipartiteGraph,PetscLogPLB = (any pointer->any pointer@i64 0) :: i32 (i32, i32, %struct._p_PetscObject*, %struct._p_PetscObject*, %struct._p_PetscObject*, %struct._p_PetscObject*)*, INDIRECT 
+MatColoringCreateBipartiteGraph,PetscError, DIRECT
+MatColoringCreateBipartiteGraph,PetscSFComputeDegreeBegin, DIRECT
+MatColoringCreateBipartiteGraph,PetscError, DIRECT
+MatColoringCreateBipartiteGraph,PetscSFComputeDegreeEnd, DIRECT
+MatColoringCreateBipartiteGraph,PetscError, DIRECT
+MatColoringCreateBipartiteGraph,PetscLogPLE = (any pointer->any pointer@i64 0) :: i32 (i32, i32, %struct._p_PetscObject*, %struct._p_PetscObject*, %struct._p_PetscObject*, %struct._p_PetscObject*)*, INDIRECT 
+MatColoringCreateBipartiteGraph,PetscError, DIRECT
+MatColoringCreateBipartiteGraph,PetscMallocA, DIRECT
+MatColoringCreateBipartiteGraph,PetscError, DIRECT
+MatColoringCreateBipartiteGraph,PetscLogPLB = (any pointer->any pointer@i64 0) :: i32 (i32, i32, %struct._p_PetscObject*, %struct._p_PetscObject*, %struct._p_PetscObject*, %struct._p_PetscObject*)*, INDIRECT 
+MatColoringCreateBipartiteGraph,PetscError, DIRECT
+MatColoringCreateBipartiteGraph,PetscSFGatherBegin, DIRECT
+MatColoringCreateBipartiteGraph,PetscError, DIRECT
+MatColoringCreateBipartiteGraph,PetscSFGatherEnd, DIRECT
+MatColoringCreateBipartiteGraph,PetscError, DIRECT
+MatColoringCreateBipartiteGraph,PetscLogPLE = (any pointer->any pointer@i64 0) :: i32 (i32, i32, %struct._p_PetscObject*, %struct._p_PetscObject*, %struct._p_PetscObject*, %struct._p_PetscObject*)*, INDIRECT 
+MatColoringCreateBipartiteGraph,PetscError, DIRECT
+MatColoringCreateBipartiteGraph,PetscSFSetGraphLayout, DIRECT
+MatColoringCreateBipartiteGraph,PetscError, DIRECT
+MatColoringCreateBipartiteGraph,PetscSFSetFromOptions, DIRECT
+MatColoringCreateBipartiteGraph,PetscError, DIRECT
+MatColoringCreateBipartiteGraph,PetscLogPLB = (any pointer->any pointer@i64 0) :: i32 (i32, i32, %struct._p_PetscObject*, %struct._p_PetscObject*, %struct._p_PetscObject*, %struct._p_PetscObject*)*, INDIRECT 
+MatColoringCreateBipartiteGraph,PetscError, DIRECT
+MatColoringCreateBipartiteGraph,PetscSFComputeDegreeBegin, DIRECT
+MatColoringCreateBipartiteGraph,PetscError, DIRECT
+MatColoringCreateBipartiteGraph,PetscSFComputeDegreeEnd, DIRECT
+MatColoringCreateBipartiteGraph,PetscError, DIRECT
+MatColoringCreateBipartiteGraph,PetscLogPLE = (any pointer->any pointer@i64 0) :: i32 (i32, i32, %struct._p_PetscObject*, %struct._p_PetscObject*, %struct._p_PetscObject*, %struct._p_PetscObject*)*, INDIRECT 
+MatColoringCreateBipartiteGraph,PetscError, DIRECT
+MatColoringCreateBipartiteGraph,PetscTrFree = (any pointer->any pointer@i64 0) :: i32 (i8*, i32, i8*, i8*)*, INDIRECT 
+MatColoringCreateBipartiteGraph,PetscError, DIRECT
+MatColoringCreateBipartiteGraph,PetscTrFree = (any pointer->any pointer@i64 0) :: i32 (i8*, i32, i8*, i8*)*, INDIRECT 
+MatColoringCreateBipartiteGraph,PetscError, DIRECT
+MatColoringCreateBipartiteGraph,PetscTrFree = (any pointer->any pointer@i64 0) :: i32 (i8*, i32, i8*, i8*)*, INDIRECT 
+MatColoringCreateBipartiteGraph,PetscError, DIRECT
+MatColoringCreateBipartiteGraph,printf, DIRECT
+MatColoringCreateBipartiteGraph,printf, DIRECT

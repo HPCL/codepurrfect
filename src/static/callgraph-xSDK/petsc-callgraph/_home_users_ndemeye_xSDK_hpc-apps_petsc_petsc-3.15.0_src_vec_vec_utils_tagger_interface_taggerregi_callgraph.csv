@@ -1,0 +1,19 @@
+CALLER, CALLEE, CALLTYPE
+VecTaggerRegisterAll,printf, DIRECT
+VecTaggerRegisterAll,printf, DIRECT
+VecTaggerRegisterAll,VecTaggerRegister, DIRECT
+VecTaggerRegisterAll,PetscError, DIRECT
+VecTaggerRegisterAll,VecTaggerRegister, DIRECT
+VecTaggerRegisterAll,PetscError, DIRECT
+VecTaggerRegisterAll,VecTaggerRegister, DIRECT
+VecTaggerRegisterAll,PetscError, DIRECT
+VecTaggerRegisterAll,VecTaggerRegister, DIRECT
+VecTaggerRegisterAll,PetscError, DIRECT
+VecTaggerRegisterAll,VecTaggerRegister, DIRECT
+VecTaggerRegisterAll,PetscError, DIRECT
+VecTaggerRegisterAll,printf, DIRECT
+VecTaggerRegisterAll,printf, DIRECT
+VecTaggerRegister,PetscFunctionListAdd_Private, DIRECT
+VecTaggerRegister,PetscError, DIRECT
+VecTaggerRegister,printf, DIRECT
+VecTaggerRegister,printf, DIRECT

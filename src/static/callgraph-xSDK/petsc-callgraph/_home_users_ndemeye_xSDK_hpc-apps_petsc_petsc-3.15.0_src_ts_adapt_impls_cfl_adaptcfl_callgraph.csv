@@ -1,0 +1,17 @@
+CALLER, CALLEE, CALLTYPE
+TSAdaptCreate_CFL,printf, DIRECT
+TSAdaptCreate_CFL,printf, DIRECT
+TSAdaptChoose_CFL,TSGetCFLTime, DIRECT
+TSAdaptChoose_CFL,PetscError, DIRECT
+TSAdaptChoose_CFL,TSAdaptCandidatesGet, DIRECT
+TSAdaptChoose_CFL,PetscError, DIRECT
+TSAdaptChoose_CFL,PetscObjectComm, DIRECT
+TSAdaptChoose_CFL,PetscError, DIRECT
+TSAdaptChoose_CFL,PetscInfo_Private, DIRECT
+TSAdaptChoose_CFL,PetscError, DIRECT
+TSAdaptChoose_CFL,PetscInfo_Private, DIRECT
+TSAdaptChoose_CFL,PetscError, DIRECT
+TSAdaptChoose_CFL,PetscInfo_Private, DIRECT
+TSAdaptChoose_CFL,PetscError, DIRECT
+TSAdaptChoose_CFL,printf, DIRECT
+TSAdaptChoose_CFL,printf, DIRECT

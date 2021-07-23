@@ -1,0 +1,7 @@
+CALLER, CALLEE, CALLTYPE
+tsarkimexsettype_,PetscMallocA, DIRECT
+tsarkimexsettype_,PetscStrncpy, DIRECT
+tsarkimexsettype_,TSARKIMEXSetType, DIRECT
+tsarkimexsettype_,PetscTrFree = (any pointer->any pointer@i64 0) :: i32 (i8*, i32, i8*, i8*)*, INDIRECT 
+tsarkimexgettype_,TSARKIMEXGetType, DIRECT
+tsarkimexgettype_,PetscStrncpy, DIRECT

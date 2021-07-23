@@ -1,0 +1,53 @@
+CALLER, CALLEE, CALLTYPE
+MatCholeskyFactorNumeric_SeqSBAIJ_4,PetscMallocA, DIRECT
+MatCholeskyFactorNumeric_SeqSBAIJ_4,PetscError, DIRECT
+MatCholeskyFactorNumeric_SeqSBAIJ_4,PetscMallocA, DIRECT
+MatCholeskyFactorNumeric_SeqSBAIJ_4,PetscError, DIRECT
+MatCholeskyFactorNumeric_SeqSBAIJ_4,PetscMallocA, DIRECT
+MatCholeskyFactorNumeric_SeqSBAIJ_4,PetscError, DIRECT
+MatCholeskyFactorNumeric_SeqSBAIJ_4,ISGetIndices, DIRECT
+MatCholeskyFactorNumeric_SeqSBAIJ_4,PetscError, DIRECT
+MatCholeskyFactorNumeric_SeqSBAIJ_4,PetscMallocA, DIRECT
+MatCholeskyFactorNumeric_SeqSBAIJ_4,PetscError, DIRECT
+MatCholeskyFactorNumeric_SeqSBAIJ_4,PetscMemcpy, DIRECT
+MatCholeskyFactorNumeric_SeqSBAIJ_4,PetscError, DIRECT
+MatCholeskyFactorNumeric_SeqSBAIJ_4,PetscMallocA, DIRECT
+MatCholeskyFactorNumeric_SeqSBAIJ_4,PetscError, DIRECT
+MatCholeskyFactorNumeric_SeqSBAIJ_4,PetscMemcpy, DIRECT
+MatCholeskyFactorNumeric_SeqSBAIJ_4,PetscError, DIRECT
+MatCholeskyFactorNumeric_SeqSBAIJ_4,PetscTrFree = (any pointer->any pointer@i64 0) :: i32 (i8*, i32, i8*, i8*)*, INDIRECT 
+MatCholeskyFactorNumeric_SeqSBAIJ_4,PetscError, DIRECT
+MatCholeskyFactorNumeric_SeqSBAIJ_4,PetscMemcpy, DIRECT
+MatCholeskyFactorNumeric_SeqSBAIJ_4,PetscError, DIRECT
+MatCholeskyFactorNumeric_SeqSBAIJ_4,PetscLogFlops, DIRECT
+MatCholeskyFactorNumeric_SeqSBAIJ_4,PetscError, DIRECT
+MatCholeskyFactorNumeric_SeqSBAIJ_4,PetscMemcpy, DIRECT
+MatCholeskyFactorNumeric_SeqSBAIJ_4,PetscError, DIRECT
+MatCholeskyFactorNumeric_SeqSBAIJ_4,PetscLogFlops, DIRECT
+MatCholeskyFactorNumeric_SeqSBAIJ_4,PetscError, DIRECT
+MatCholeskyFactorNumeric_SeqSBAIJ_4,PetscMemcpy, DIRECT
+MatCholeskyFactorNumeric_SeqSBAIJ_4,PetscError, DIRECT
+MatCholeskyFactorNumeric_SeqSBAIJ_4,PetscKernel_A_gets_inverse_A_4, DIRECT
+MatCholeskyFactorNumeric_SeqSBAIJ_4,PetscError, DIRECT
+MatCholeskyFactorNumeric_SeqSBAIJ_4,PetscTrFree = (any pointer->any pointer@i64 0) :: i32 (i8*, i32, i8*, i8*)*, INDIRECT 
+MatCholeskyFactorNumeric_SeqSBAIJ_4,PetscError, DIRECT
+MatCholeskyFactorNumeric_SeqSBAIJ_4,PetscFreeA, DIRECT
+MatCholeskyFactorNumeric_SeqSBAIJ_4,PetscError, DIRECT
+MatCholeskyFactorNumeric_SeqSBAIJ_4,PetscFreeA, DIRECT
+MatCholeskyFactorNumeric_SeqSBAIJ_4,PetscError, DIRECT
+MatCholeskyFactorNumeric_SeqSBAIJ_4,PetscTrFree = (any pointer->any pointer@i64 0) :: i32 (i8*, i32, i8*, i8*)*, INDIRECT 
+MatCholeskyFactorNumeric_SeqSBAIJ_4,PetscError, DIRECT
+MatCholeskyFactorNumeric_SeqSBAIJ_4,ISRestoreIndices, DIRECT
+MatCholeskyFactorNumeric_SeqSBAIJ_4,PetscError, DIRECT
+MatCholeskyFactorNumeric_SeqSBAIJ_4,PetscLogFlops, DIRECT
+MatCholeskyFactorNumeric_SeqSBAIJ_4,PetscError, DIRECT
+MatCholeskyFactorNumeric_SeqSBAIJ_4,printf, DIRECT
+MatCholeskyFactorNumeric_SeqSBAIJ_4,printf, DIRECT
+PetscMemcpy,PetscError, DIRECT
+PetscMemcpy,PetscError, DIRECT
+PetscMemcpy,PetscError, DIRECT
+PetscMemcpy,printf, DIRECT
+PetscMemcpy,printf, DIRECT
+PetscLogFlops,PetscError, DIRECT
+PetscLogFlops,printf, DIRECT
+PetscLogFlops,printf, DIRECT

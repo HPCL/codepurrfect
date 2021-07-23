@@ -1,0 +1,14 @@
+CALLER, CALLEE, CALLTYPE
+KSPPythonSetType,PetscError, DIRECT
+KSPPythonSetType,PetscCheckPointer, DIRECT
+KSPPythonSetType,PetscError, DIRECT
+KSPPythonSetType,PetscError, DIRECT
+KSPPythonSetType,PetscError, DIRECT
+KSPPythonSetType,PetscError, DIRECT
+KSPPythonSetType,PetscCheckPointer, DIRECT
+KSPPythonSetType,PetscError, DIRECT
+KSPPythonSetType,PetscObjectQueryFunction_Private, DIRECT
+KSPPythonSetType,EMPTYNAME = (any pointer->any pointer@i64 0) :: i32 (%struct._p_KSP*, i8*)*, INDIRECT 
+KSPPythonSetType,PetscError, DIRECT
+KSPPythonSetType,printf, DIRECT
+KSPPythonSetType,printf, DIRECT

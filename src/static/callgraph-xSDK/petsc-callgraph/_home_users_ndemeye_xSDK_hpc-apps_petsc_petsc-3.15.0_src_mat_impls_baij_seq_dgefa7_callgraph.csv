@@ -1,0 +1,9 @@
+CALLER, CALLEE, CALLTYPE
+PetscKernel_A_gets_inverse_A_7,PetscInfo_Private, DIRECT
+PetscKernel_A_gets_inverse_A_7,PetscError, DIRECT
+PetscKernel_A_gets_inverse_A_7,PetscError, DIRECT
+PetscKernel_A_gets_inverse_A_7,PetscInfo_Private, DIRECT
+PetscKernel_A_gets_inverse_A_7,PetscError, DIRECT
+PetscKernel_A_gets_inverse_A_7,PetscError, DIRECT
+PetscKernel_A_gets_inverse_A_7,printf, DIRECT
+PetscKernel_A_gets_inverse_A_7,printf, DIRECT

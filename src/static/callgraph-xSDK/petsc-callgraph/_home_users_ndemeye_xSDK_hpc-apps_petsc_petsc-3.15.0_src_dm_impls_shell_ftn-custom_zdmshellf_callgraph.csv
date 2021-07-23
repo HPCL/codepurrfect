@@ -1,0 +1,70 @@
+CALLER, CALLEE, CALLTYPE
+dmshellsetcreatematrix_,PetscObjectSetFortranCallback, DIRECT
+dmshellsetcreatematrix_,DMShellSetCreateMatrix, DIRECT
+ourcreatematrix,PetscObjectGetFortranCallback, DIRECT
+ourcreatematrix,PetscError, DIRECT
+ourcreatematrix,EMPTYNAME = (any pointer->any pointer@i64 0) :: void (%struct._p_DM**, %struct._p_Mat**, i32*)*, INDIRECT 
+ourcreatematrix,PetscError, DIRECT
+ourcreatematrix,printf, DIRECT
+ourcreatematrix,printf, DIRECT
+dmshellsetcreateglobalvector_,PetscObjectSetFortranCallback, DIRECT
+dmshellsetcreateglobalvector_,DMShellSetCreateGlobalVector, DIRECT
+ourcreateglobalvector,PetscObjectGetFortranCallback, DIRECT
+ourcreateglobalvector,PetscError, DIRECT
+ourcreateglobalvector,EMPTYNAME = (any pointer->any pointer@i64 0) :: void (%struct._p_DM**, %struct._p_Vec**, i32*)*, INDIRECT 
+ourcreateglobalvector,PetscError, DIRECT
+ourcreateglobalvector,printf, DIRECT
+ourcreateglobalvector,printf, DIRECT
+dmshellsetcreatelocalvector_,PetscObjectSetFortranCallback, DIRECT
+dmshellsetcreatelocalvector_,DMShellSetCreateLocalVector, DIRECT
+ourcreatelocalvector,PetscObjectGetFortranCallback, DIRECT
+ourcreatelocalvector,PetscError, DIRECT
+ourcreatelocalvector,EMPTYNAME = (any pointer->any pointer@i64 0) :: void (%struct._p_DM**, %struct._p_Vec**, i32*)*, INDIRECT 
+ourcreatelocalvector,PetscError, DIRECT
+ourcreatelocalvector,printf, DIRECT
+ourcreatelocalvector,printf, DIRECT
+dmshellsetglobaltolocal_,PetscObjectSetFortranCallback, DIRECT
+dmshellsetglobaltolocal_,PetscObjectSetFortranCallback, DIRECT
+dmshellsetglobaltolocal_,DMShellSetGlobalToLocal, DIRECT
+ourglobaltolocalbegin,PetscObjectGetFortranCallback, DIRECT
+ourglobaltolocalbegin,PetscError, DIRECT
+ourglobaltolocalbegin,EMPTYNAME = (any pointer->any pointer@i64 0) :: void (%struct._p_DM**, %struct._p_Vec**, i32*, %struct._p_Vec**, i32*)*, INDIRECT 
+ourglobaltolocalbegin,PetscError, DIRECT
+ourglobaltolocalbegin,printf, DIRECT
+ourglobaltolocalbegin,printf, DIRECT
+ourglobaltolocalend,PetscObjectGetFortranCallback, DIRECT
+ourglobaltolocalend,PetscError, DIRECT
+ourglobaltolocalend,EMPTYNAME = (any pointer->any pointer@i64 0) :: void (%struct._p_DM**, %struct._p_Vec**, i32*, %struct._p_Vec**, i32*)*, INDIRECT 
+ourglobaltolocalend,PetscError, DIRECT
+ourglobaltolocalend,printf, DIRECT
+ourglobaltolocalend,printf, DIRECT
+dmshellsetlocaltoglobal_,PetscObjectSetFortranCallback, DIRECT
+dmshellsetlocaltoglobal_,PetscObjectSetFortranCallback, DIRECT
+dmshellsetlocaltoglobal_,DMShellSetLocalToGlobal, DIRECT
+ourlocaltoglobalbegin,PetscObjectGetFortranCallback, DIRECT
+ourlocaltoglobalbegin,PetscError, DIRECT
+ourlocaltoglobalbegin,EMPTYNAME = (any pointer->any pointer@i64 0) :: void (%struct._p_DM**, %struct._p_Vec**, i32*, %struct._p_Vec**, i32*)*, INDIRECT 
+ourlocaltoglobalbegin,PetscError, DIRECT
+ourlocaltoglobalbegin,printf, DIRECT
+ourlocaltoglobalbegin,printf, DIRECT
+ourlocaltoglobalend,PetscObjectGetFortranCallback, DIRECT
+ourlocaltoglobalend,PetscError, DIRECT
+ourlocaltoglobalend,EMPTYNAME = (any pointer->any pointer@i64 0) :: void (%struct._p_DM**, %struct._p_Vec**, i32*, %struct._p_Vec**, i32*)*, INDIRECT 
+ourlocaltoglobalend,PetscError, DIRECT
+ourlocaltoglobalend,printf, DIRECT
+ourlocaltoglobalend,printf, DIRECT
+dmshellsetlocaltolocal_,PetscObjectSetFortranCallback, DIRECT
+dmshellsetlocaltolocal_,PetscObjectSetFortranCallback, DIRECT
+dmshellsetlocaltolocal_,DMShellSetLocalToLocal, DIRECT
+ourlocaltolocalbegin,PetscObjectGetFortranCallback, DIRECT
+ourlocaltolocalbegin,PetscError, DIRECT
+ourlocaltolocalbegin,EMPTYNAME = (any pointer->any pointer@i64 0) :: void (%struct._p_DM**, %struct._p_Vec**, i32*, %struct._p_Vec**, i32*)*, INDIRECT 
+ourlocaltolocalbegin,PetscError, DIRECT
+ourlocaltolocalbegin,printf, DIRECT
+ourlocaltolocalbegin,printf, DIRECT
+ourlocaltolocalend,PetscObjectGetFortranCallback, DIRECT
+ourlocaltolocalend,PetscError, DIRECT
+ourlocaltolocalend,EMPTYNAME = (any pointer->any pointer@i64 0) :: void (%struct._p_DM**, %struct._p_Vec**, i32*, %struct._p_Vec**, i32*)*, INDIRECT 
+ourlocaltolocalend,PetscError, DIRECT
+ourlocaltolocalend,printf, DIRECT
+ourlocaltolocalend,printf, DIRECT

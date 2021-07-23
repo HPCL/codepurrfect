@@ -1,0 +1,9 @@
+CALLER, CALLEE, CALLTYPE
+MatMFFDRegisterAll,printf, DIRECT
+MatMFFDRegisterAll,printf, DIRECT
+MatMFFDRegisterAll,MatMFFDRegister, DIRECT
+MatMFFDRegisterAll,PetscError, DIRECT
+MatMFFDRegisterAll,MatMFFDRegister, DIRECT
+MatMFFDRegisterAll,PetscError, DIRECT
+MatMFFDRegisterAll,printf, DIRECT
+MatMFFDRegisterAll,printf, DIRECT

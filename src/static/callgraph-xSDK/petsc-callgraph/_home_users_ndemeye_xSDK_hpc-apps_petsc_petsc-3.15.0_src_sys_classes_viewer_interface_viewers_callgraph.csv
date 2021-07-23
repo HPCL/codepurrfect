@@ -1,0 +1,35 @@
+CALLER, CALLEE, CALLTYPE
+PetscViewersDestroy,printf, DIRECT
+PetscViewersDestroy,printf, DIRECT
+PetscViewersDestroy,PetscViewerDestroy, DIRECT
+PetscViewersDestroy,PetscError, DIRECT
+PetscViewersDestroy,PetscTrFree = (any pointer->any pointer@i64 0) :: i32 (i8*, i32, i8*, i8*)*, INDIRECT 
+PetscViewersDestroy,PetscError, DIRECT
+PetscViewersDestroy,PetscTrFree = (any pointer->any pointer@i64 0) :: i32 (i8*, i32, i8*, i8*)*, INDIRECT 
+PetscViewersDestroy,PetscError, DIRECT
+PetscViewersDestroy,printf, DIRECT
+PetscViewersDestroy,printf, DIRECT
+PetscViewersCreate,PetscMallocA, DIRECT
+PetscViewersCreate,PetscError, DIRECT
+PetscViewersCreate,PetscMallocA, DIRECT
+PetscViewersCreate,PetscError, DIRECT
+PetscViewersCreate,printf, DIRECT
+PetscViewersCreate,printf, DIRECT
+PetscViewersGetViewer,PetscError, DIRECT
+PetscViewersGetViewer,PetscMallocA, DIRECT
+PetscViewersGetViewer,PetscError, DIRECT
+PetscViewersGetViewer,PetscError, DIRECT
+PetscViewersGetViewer,PetscError, DIRECT
+PetscViewersGetViewer,PetscError, DIRECT
+PetscViewersGetViewer,printf, DIRECT
+PetscViewersGetViewer,printf, DIRECT
+PetscViewersGetViewer,PetscError, DIRECT
+PetscViewersGetViewer,PetscTrFree = (any pointer->any pointer@i64 0) :: i32 (i8*, i32, i8*, i8*)*, INDIRECT 
+PetscViewersGetViewer,PetscError, DIRECT
+PetscViewersGetViewer,PetscViewerCreate, DIRECT
+PetscViewersGetViewer,PetscError, DIRECT
+PetscViewersGetViewer,printf, DIRECT
+PetscViewersGetViewer,printf, DIRECT
+PetscMonitorCompare,PetscError, DIRECT
+PetscMonitorCompare,printf, DIRECT
+PetscMonitorCompare,printf, DIRECT

@@ -1,0 +1,22 @@
+CALLER, CALLEE, CALLTYPE
+petscsortedint_,PetscSortedInt, DIRECT
+petscsortint_,PetscSortInt, DIRECT
+petscsortreverseint_,PetscSortReverseInt, DIRECT
+petscsortedremovedupsint_,PetscSortedRemoveDupsInt, DIRECT
+petscsortremovedupsint_,PetscSortRemoveDupsInt, DIRECT
+petscfindint_,PetscFindInt, DIRECT
+petsccheckdupsint_,PetscCheckDupsInt, DIRECT
+petscfindmpiint_,PetscFindMPIInt, DIRECT
+petscsortintwitharray_,PetscSortIntWithArray, DIRECT
+petscsortintwitharraypair_,PetscSortIntWithArrayPair, DIRECT
+petscsortedmpiint_,PetscSortedMPIInt, DIRECT
+petscsortmpiint_,PetscSortMPIInt, DIRECT
+petscsortremovedupsmpiint_,PetscSortRemoveDupsMPIInt, DIRECT
+petscsortmpiintwitharray_,PetscSortMPIIntWithArray, DIRECT
+petscsortmpiintwithintarray_,PetscSortMPIIntWithIntArray, DIRECT
+petscsortintwithscalararray_,PetscSortIntWithScalarArray, DIRECT
+petscmergeintarray_,PetscMergeIntArray, DIRECT
+petscmergeintarraypair_,PetscMergeIntArrayPair, DIRECT
+petscmergempiintarray_,PetscMergeMPIIntArray, DIRECT
+petscparallelsortedint_,MPI_Comm_f2c, DIRECT
+petscparallelsortedint_,PetscParallelSortedInt, DIRECT

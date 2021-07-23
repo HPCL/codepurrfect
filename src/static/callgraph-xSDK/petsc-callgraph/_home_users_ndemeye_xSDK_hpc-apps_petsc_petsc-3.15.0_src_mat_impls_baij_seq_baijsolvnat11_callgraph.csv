@@ -1,0 +1,16 @@
+CALLER, CALLEE, CALLTYPE
+MatSolve_SeqBAIJ_11_NaturalOrdering,VecGetArrayRead, DIRECT
+MatSolve_SeqBAIJ_11_NaturalOrdering,PetscError, DIRECT
+MatSolve_SeqBAIJ_11_NaturalOrdering,VecGetArray, DIRECT
+MatSolve_SeqBAIJ_11_NaturalOrdering,PetscError, DIRECT
+MatSolve_SeqBAIJ_11_NaturalOrdering,VecRestoreArrayRead, DIRECT
+MatSolve_SeqBAIJ_11_NaturalOrdering,PetscError, DIRECT
+MatSolve_SeqBAIJ_11_NaturalOrdering,VecRestoreArray, DIRECT
+MatSolve_SeqBAIJ_11_NaturalOrdering,PetscError, DIRECT
+MatSolve_SeqBAIJ_11_NaturalOrdering,PetscLogFlops, DIRECT
+MatSolve_SeqBAIJ_11_NaturalOrdering,PetscError, DIRECT
+MatSolve_SeqBAIJ_11_NaturalOrdering,printf, DIRECT
+MatSolve_SeqBAIJ_11_NaturalOrdering,printf, DIRECT
+PetscLogFlops,PetscError, DIRECT
+PetscLogFlops,printf, DIRECT
+PetscLogFlops,printf, DIRECT

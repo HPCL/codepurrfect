@@ -1,0 +1,4 @@
+CALLER, CALLEE, CALLTYPE
+matmaijgetaij_,MatMAIJGetAIJ, DIRECT
+matmaijredimension_,MatMAIJRedimension, DIRECT
+matcreatemaij_,MatCreateMAIJ, DIRECT

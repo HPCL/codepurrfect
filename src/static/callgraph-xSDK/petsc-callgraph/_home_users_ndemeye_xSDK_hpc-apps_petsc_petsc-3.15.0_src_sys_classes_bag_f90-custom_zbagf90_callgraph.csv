@@ -1,0 +1,108 @@
+CALLER, CALLEE, CALLTYPE
+petscbagcreate_,MPI_Comm_f2c, DIRECT
+petscbagcreate_,PetscBagCreate, DIRECT
+petscbagdestroy_,PetscBagDestroy, DIRECT
+petscbagview_,PETSC_VIEWER_DRAW_, DIRECT
+petscbagview_,PETSC_VIEWER_DRAW_, DIRECT
+petscbagview_,PETSC_VIEWER_STDOUT_, DIRECT
+petscbagview_,PETSC_VIEWER_STDOUT_, DIRECT
+petscbagview_,PETSC_VIEWER_STDERR_, DIRECT
+petscbagview_,PETSC_VIEWER_STDERR_, DIRECT
+petscbagview_,PETSC_VIEWER_BINARY_, DIRECT
+petscbagview_,PETSC_VIEWER_BINARY_, DIRECT
+petscbagview_,PETSC_VIEWER_BINARY_, DIRECT
+petscbagview_,PETSC_VIEWER_BINARY_, DIRECT
+petscbagview_,PETSC_VIEWER_SOCKET_, DIRECT
+petscbagview_,PETSC_VIEWER_SOCKET_, DIRECT
+petscbagview_,PetscBagView, DIRECT
+petscbagload_,PETSC_VIEWER_DRAW_, DIRECT
+petscbagload_,PETSC_VIEWER_DRAW_, DIRECT
+petscbagload_,PETSC_VIEWER_STDOUT_, DIRECT
+petscbagload_,PETSC_VIEWER_STDOUT_, DIRECT
+petscbagload_,PETSC_VIEWER_STDERR_, DIRECT
+petscbagload_,PETSC_VIEWER_STDERR_, DIRECT
+petscbagload_,PETSC_VIEWER_BINARY_, DIRECT
+petscbagload_,PETSC_VIEWER_BINARY_, DIRECT
+petscbagload_,PETSC_VIEWER_BINARY_, DIRECT
+petscbagload_,PETSC_VIEWER_BINARY_, DIRECT
+petscbagload_,PETSC_VIEWER_SOCKET_, DIRECT
+petscbagload_,PETSC_VIEWER_SOCKET_, DIRECT
+petscbagload_,PetscBagLoad, DIRECT
+petscbagregisterint_,PetscMallocA, DIRECT
+petscbagregisterint_,PetscStrncpy, DIRECT
+petscbagregisterint_,PetscMallocA, DIRECT
+petscbagregisterint_,PetscStrncpy, DIRECT
+petscbagregisterint_,PetscBagRegisterInt, DIRECT
+petscbagregisterint_,PetscTrFree = (any pointer->any pointer@i64 0) :: i32 (i8*, i32, i8*, i8*)*, INDIRECT 
+petscbagregisterint_,PetscTrFree = (any pointer->any pointer@i64 0) :: i32 (i8*, i32, i8*, i8*)*, INDIRECT 
+petscbagregisterint64_,PetscMallocA, DIRECT
+petscbagregisterint64_,PetscStrncpy, DIRECT
+petscbagregisterint64_,PetscMallocA, DIRECT
+petscbagregisterint64_,PetscStrncpy, DIRECT
+petscbagregisterint64_,PetscBagRegisterInt64, DIRECT
+petscbagregisterint64_,PetscTrFree = (any pointer->any pointer@i64 0) :: i32 (i8*, i32, i8*, i8*)*, INDIRECT 
+petscbagregisterint64_,PetscTrFree = (any pointer->any pointer@i64 0) :: i32 (i8*, i32, i8*, i8*)*, INDIRECT 
+petscbagregisterintarray_,PetscMallocA, DIRECT
+petscbagregisterintarray_,PetscStrncpy, DIRECT
+petscbagregisterintarray_,PetscMallocA, DIRECT
+petscbagregisterintarray_,PetscStrncpy, DIRECT
+petscbagregisterintarray_,PetscBagRegisterIntArray, DIRECT
+petscbagregisterintarray_,PetscTrFree = (any pointer->any pointer@i64 0) :: i32 (i8*, i32, i8*, i8*)*, INDIRECT 
+petscbagregisterintarray_,PetscTrFree = (any pointer->any pointer@i64 0) :: i32 (i8*, i32, i8*, i8*)*, INDIRECT 
+petscbagregisterscalar_,PetscMallocA, DIRECT
+petscbagregisterscalar_,PetscStrncpy, DIRECT
+petscbagregisterscalar_,PetscMallocA, DIRECT
+petscbagregisterscalar_,PetscStrncpy, DIRECT
+petscbagregisterscalar_,PetscBagRegisterScalar, DIRECT
+petscbagregisterscalar_,PetscTrFree = (any pointer->any pointer@i64 0) :: i32 (i8*, i32, i8*, i8*)*, INDIRECT 
+petscbagregisterscalar_,PetscTrFree = (any pointer->any pointer@i64 0) :: i32 (i8*, i32, i8*, i8*)*, INDIRECT 
+petscbagregisterreal_,PetscMallocA, DIRECT
+petscbagregisterreal_,PetscStrncpy, DIRECT
+petscbagregisterreal_,PetscMallocA, DIRECT
+petscbagregisterreal_,PetscStrncpy, DIRECT
+petscbagregisterreal_,PetscBagRegisterReal, DIRECT
+petscbagregisterreal_,PetscTrFree = (any pointer->any pointer@i64 0) :: i32 (i8*, i32, i8*, i8*)*, INDIRECT 
+petscbagregisterreal_,PetscTrFree = (any pointer->any pointer@i64 0) :: i32 (i8*, i32, i8*, i8*)*, INDIRECT 
+petscbagregisterrealarray_,PetscMallocA, DIRECT
+petscbagregisterrealarray_,PetscStrncpy, DIRECT
+petscbagregisterrealarray_,PetscMallocA, DIRECT
+petscbagregisterrealarray_,PetscStrncpy, DIRECT
+petscbagregisterrealarray_,PetscBagRegisterRealArray, DIRECT
+petscbagregisterrealarray_,PetscTrFree = (any pointer->any pointer@i64 0) :: i32 (i8*, i32, i8*, i8*)*, INDIRECT 
+petscbagregisterrealarray_,PetscTrFree = (any pointer->any pointer@i64 0) :: i32 (i8*, i32, i8*, i8*)*, INDIRECT 
+petscbagregisterbool_,PetscMallocA, DIRECT
+petscbagregisterbool_,PetscStrncpy, DIRECT
+petscbagregisterbool_,PetscMallocA, DIRECT
+petscbagregisterbool_,PetscStrncpy, DIRECT
+petscbagregisterbool_,PetscBagRegisterBool, DIRECT
+petscbagregisterbool_,PetscTrFree = (any pointer->any pointer@i64 0) :: i32 (i8*, i32, i8*, i8*)*, INDIRECT 
+petscbagregisterbool_,PetscTrFree = (any pointer->any pointer@i64 0) :: i32 (i8*, i32, i8*, i8*)*, INDIRECT 
+petscbagregisterboolarray_,PetscMallocA, DIRECT
+petscbagregisterboolarray_,PetscStrncpy, DIRECT
+petscbagregisterboolarray_,PetscMallocA, DIRECT
+petscbagregisterboolarray_,PetscStrncpy, DIRECT
+petscbagregisterboolarray_,PetscBagRegisterBoolArray, DIRECT
+petscbagregisterboolarray_,PetscTrFree = (any pointer->any pointer@i64 0) :: i32 (i8*, i32, i8*, i8*)*, INDIRECT 
+petscbagregisterboolarray_,PetscTrFree = (any pointer->any pointer@i64 0) :: i32 (i8*, i32, i8*, i8*)*, INDIRECT 
+petscbagregisterstring_,PetscMallocA, DIRECT
+petscbagregisterstring_,PetscStrncpy, DIRECT
+petscbagregisterstring_,PetscMallocA, DIRECT
+petscbagregisterstring_,PetscStrncpy, DIRECT
+petscbagregisterstring_,PetscMallocA, DIRECT
+petscbagregisterstring_,PetscStrncpy, DIRECT
+petscbagregisterstring_,PetscBagRegisterString, DIRECT
+petscbagregisterstring_,PetscTrFree = (any pointer->any pointer@i64 0) :: i32 (i8*, i32, i8*, i8*)*, INDIRECT 
+petscbagregisterstring_,PetscTrFree = (any pointer->any pointer@i64 0) :: i32 (i8*, i32, i8*, i8*)*, INDIRECT 
+petscbagregisterstring_,PetscTrFree = (any pointer->any pointer@i64 0) :: i32 (i8*, i32, i8*, i8*)*, INDIRECT 
+petscbaggetdata_,PetscBagGetData, DIRECT
+petscbagsetname_,PetscMallocA, DIRECT
+petscbagsetname_,PetscStrncpy, DIRECT
+petscbagsetname_,PetscMallocA, DIRECT
+petscbagsetname_,PetscStrncpy, DIRECT
+petscbagsetname_,PetscBagSetName, DIRECT
+petscbagsetname_,PetscTrFree = (any pointer->any pointer@i64 0) :: i32 (i8*, i32, i8*, i8*)*, INDIRECT 
+petscbagsetname_,PetscTrFree = (any pointer->any pointer@i64 0) :: i32 (i8*, i32, i8*, i8*)*, INDIRECT 
+petscbagsetoptionsprefix_,PetscMallocA, DIRECT
+petscbagsetoptionsprefix_,PetscStrncpy, DIRECT
+petscbagsetoptionsprefix_,PetscBagSetOptionsPrefix, DIRECT
+petscbagsetoptionsprefix_,PetscTrFree = (any pointer->any pointer@i64 0) :: i32 (i8*, i32, i8*, i8*)*, INDIRECT 

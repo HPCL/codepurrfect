@@ -1,0 +1,5 @@
+CALLER, CALLEE, CALLTYPE
+pcgalerkinsetrestriction_,PCGalerkinSetRestriction, DIRECT
+pcgalerkinsetinterpolation_,PCGalerkinSetInterpolation, DIRECT
+pcgalerkinsetcomputesubmatrix_,PCGalerkinSetComputeSubmatrix, DIRECT
+pcgalerkingetksp_,PCGalerkinGetKSP, DIRECT

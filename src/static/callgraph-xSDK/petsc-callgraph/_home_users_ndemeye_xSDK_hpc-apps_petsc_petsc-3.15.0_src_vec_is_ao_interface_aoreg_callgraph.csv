@@ -1,0 +1,39 @@
+CALLER, CALLEE, CALLTYPE
+AOSetType,PetscError, DIRECT
+AOSetType,PetscCheckPointer, DIRECT
+AOSetType,PetscError, DIRECT
+AOSetType,PetscError, DIRECT
+AOSetType,PetscError, DIRECT
+AOSetType,PetscObjectTypeCompare, DIRECT
+AOSetType,PetscError, DIRECT
+AOSetType,printf, DIRECT
+AOSetType,printf, DIRECT
+AOSetType,AORegisterAll, DIRECT
+AOSetType,PetscError, DIRECT
+AOSetType,PetscFunctionListFind_Private, DIRECT
+AOSetType,PetscError, DIRECT
+AOSetType,PetscError, DIRECT
+AOSetType,EMPTYNAME = (_AOOps->any pointer@i64 8) :: i32 (%struct._p_AO*)*, INDIRECT 
+AOSetType,PetscError, DIRECT
+AOSetType,EMPTYNAME = (any pointer->any pointer@i64 0) :: i32 (%struct._p_AO*)*, INDIRECT 
+AOSetType,PetscError, DIRECT
+AOSetType,printf, DIRECT
+AOSetType,printf, DIRECT
+AOGetType,PetscError, DIRECT
+AOGetType,PetscCheckPointer, DIRECT
+AOGetType,PetscError, DIRECT
+AOGetType,PetscError, DIRECT
+AOGetType,PetscError, DIRECT
+AOGetType,PetscError, DIRECT
+AOGetType,PetscCheckPointer, DIRECT
+AOGetType,PetscError, DIRECT
+AOGetType,AORegisterAll, DIRECT
+AOGetType,PetscError, DIRECT
+AOGetType,printf, DIRECT
+AOGetType,printf, DIRECT
+AORegister,AOInitializePackage, DIRECT
+AORegister,PetscError, DIRECT
+AORegister,PetscFunctionListAdd_Private, DIRECT
+AORegister,PetscError, DIRECT
+AORegister,printf, DIRECT
+AORegister,printf, DIRECT

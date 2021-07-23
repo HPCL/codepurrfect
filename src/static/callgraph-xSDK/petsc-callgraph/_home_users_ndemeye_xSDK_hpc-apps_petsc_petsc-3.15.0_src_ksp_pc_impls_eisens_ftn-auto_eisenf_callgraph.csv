@@ -1,0 +1,5 @@
+CALLER, CALLEE, CALLTYPE
+pceisenstatsetomega_,PCEisenstatSetOmega, DIRECT
+pceisenstatsetnodiagonalscaling_,PCEisenstatSetNoDiagonalScaling, DIRECT
+pceisenstatgetomega_,PCEisenstatGetOmega, DIRECT
+pceisenstatgetnodiagonalscaling_,PCEisenstatGetNoDiagonalScaling, DIRECT

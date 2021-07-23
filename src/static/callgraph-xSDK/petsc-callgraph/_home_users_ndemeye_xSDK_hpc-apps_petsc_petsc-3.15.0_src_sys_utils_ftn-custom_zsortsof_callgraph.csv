@@ -1,0 +1,4 @@
+CALLER, CALLEE, CALLTYPE
+cmp_via_fortran,EMPTYNAME = (fc_c->any pointer@i64 0) :: void (i8*, i8*, i8*, i32*)*, INDIRECT 
+petsctimsort_,PetscTimSort, DIRECT
+petsctimsortwitharray_,PetscTimSortWithArray, DIRECT

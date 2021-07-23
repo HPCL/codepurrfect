@@ -1,0 +1,12 @@
+CALLER, CALLEE, CALLTYPE
+pcasmsetoverlap_,PCASMSetOverlap, DIRECT
+pcasmsettype_,PCASMSetType, DIRECT
+pcasmgettype_,PCASMGetType, DIRECT
+pcasmsetlocaltype_,PCASMSetLocalType, DIRECT
+pcasmgetlocaltype_,PCASMGetLocalType, DIRECT
+pcasmsetsortindices_,PCASMSetSortIndices, DIRECT
+pcasmcreatesubdomains2d_,PCASMCreateSubdomains2D, DIRECT
+pcasmsetdmsubdomains_,PCASMSetDMSubdomains, DIRECT
+pcasmgetdmsubdomains_,PCASMGetDMSubdomains, DIRECT
+pcasmgetsubmattype_,PCASMGetSubMatType, DIRECT
+pcasmsetsubmattype_,PCASMSetSubMatType, DIRECT

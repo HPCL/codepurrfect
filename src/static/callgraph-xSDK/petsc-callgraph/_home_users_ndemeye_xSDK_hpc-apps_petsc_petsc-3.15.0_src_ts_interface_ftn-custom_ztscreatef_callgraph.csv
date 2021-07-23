@@ -1,0 +1,4 @@
+CALLER, CALLEE, CALLTYPE
+tscreate_,MPI_Comm_f2c, DIRECT
+tscreate_,TSCreate, DIRECT
+tsdestroy_,TSDestroy, DIRECT

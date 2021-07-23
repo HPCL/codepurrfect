@@ -1,0 +1,5 @@
+CALLER, CALLEE, CALLTYPE
+petscviewerasciigetstdout_,MPI_Comm_f2c, DIRECT
+petscviewerasciigetstdout_,PetscViewerASCIIGetStdout, DIRECT
+petscviewerasciigetstderr_,MPI_Comm_f2c, DIRECT
+petscviewerasciigetstderr_,PetscViewerASCIIGetStderr, DIRECT

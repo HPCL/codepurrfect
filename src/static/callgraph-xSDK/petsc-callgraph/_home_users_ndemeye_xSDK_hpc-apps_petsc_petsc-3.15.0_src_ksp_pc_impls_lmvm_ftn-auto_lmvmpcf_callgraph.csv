@@ -1,0 +1,5 @@
+CALLER, CALLEE, CALLTYPE
+pclmvmsetmatlmvm_,PCLMVMSetMatLMVM, DIRECT
+pclmvmgetmatlmvm_,PCLMVMGetMatLMVM, DIRECT
+pclmvmsetis_,PCLMVMSetIS, DIRECT
+pclmvmclearis_,PCLMVMClearIS, DIRECT

@@ -1,0 +1,11 @@
+CALLER, CALLEE, CALLTYPE
+pcfactorsetmatorderingtype_,PetscMallocA, DIRECT
+pcfactorsetmatorderingtype_,PetscStrncpy, DIRECT
+pcfactorsetmatorderingtype_,PCFactorSetMatOrderingType, DIRECT
+pcfactorsetmatorderingtype_,PetscTrFree = (any pointer->any pointer@i64 0) :: i32 (i8*, i32, i8*, i8*)*, INDIRECT 
+pcfactorsetmatsolvertype_,PetscMallocA, DIRECT
+pcfactorsetmatsolvertype_,PetscStrncpy, DIRECT
+pcfactorsetmatsolvertype_,PCFactorSetMatSolverType, DIRECT
+pcfactorsetmatsolvertype_,PetscTrFree = (any pointer->any pointer@i64 0) :: i32 (i8*, i32, i8*, i8*)*, INDIRECT 
+pcfactorgetmatsolvertype_,PCFactorGetMatSolverType, DIRECT
+pcfactorgetmatsolvertype_,PetscStrncpy, DIRECT

@@ -1,0 +1,3 @@
+CALLER, CALLEE, CALLTYPE
+petscspacepointsetpoints_,PetscSpacePointSetPoints, DIRECT
+petscspacepointgetpoints_,PetscSpacePointGetPoints, DIRECT

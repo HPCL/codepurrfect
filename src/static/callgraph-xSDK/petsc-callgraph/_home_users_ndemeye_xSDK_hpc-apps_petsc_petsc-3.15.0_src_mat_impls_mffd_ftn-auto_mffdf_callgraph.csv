@@ -1,0 +1,10 @@
+CALLER, CALLEE, CALLTYPE
+matcreatemffd_,MPI_Comm_f2c, DIRECT
+matcreatemffd_,MatCreateMFFD, DIRECT
+matmffdgeth_,MatMFFDGetH, DIRECT
+matmffdsetperiod_,MatMFFDSetPeriod, DIRECT
+matmffdsetfunctionerror_,MatMFFDSetFunctionError, DIRECT
+matmffdsethhistory_,MatMFFDSetHHistory, DIRECT
+matmffdresethhistory_,MatMFFDResetHHistory, DIRECT
+matmffdsetbase_,MatMFFDSetBase, DIRECT
+matmffdcheckpositivity_,MatMFFDCheckPositivity, DIRECT

@@ -1,0 +1,56 @@
+CALLER, CALLEE, CALLTYPE
+PetscFEGeomCreate,PetscQuadratureGetData, DIRECT
+PetscFEGeomCreate,PetscError, DIRECT
+PetscFEGeomCreate,PetscMallocA, DIRECT
+PetscFEGeomCreate,PetscError, DIRECT
+PetscFEGeomCreate,PetscMallocA, DIRECT
+PetscFEGeomCreate,PetscError, DIRECT
+PetscFEGeomCreate,PetscMallocA, DIRECT
+PetscFEGeomCreate,PetscError, DIRECT
+PetscFEGeomCreate,PetscMallocA, DIRECT
+PetscFEGeomCreate,PetscError, DIRECT
+PetscFEGeomCreate,PetscMallocA, DIRECT
+PetscFEGeomCreate,PetscError, DIRECT
+PetscFEGeomCreate,printf, DIRECT
+PetscFEGeomCreate,printf, DIRECT
+PetscFEGeomDestroy,printf, DIRECT
+PetscFEGeomDestroy,printf, DIRECT
+PetscFEGeomDestroy,PetscFreeA, DIRECT
+PetscFEGeomDestroy,PetscError, DIRECT
+PetscFEGeomDestroy,PetscTrFree = (any pointer->any pointer@i64 0) :: i32 (i8*, i32, i8*, i8*)*, INDIRECT 
+PetscFEGeomDestroy,PetscError, DIRECT
+PetscFEGeomDestroy,PetscFreeA, DIRECT
+PetscFEGeomDestroy,PetscError, DIRECT
+PetscFEGeomDestroy,PetscFreeA, DIRECT
+PetscFEGeomDestroy,PetscError, DIRECT
+PetscFEGeomDestroy,PetscTrFree = (any pointer->any pointer@i64 0) :: i32 (i8*, i32, i8*, i8*)*, INDIRECT 
+PetscFEGeomDestroy,PetscError, DIRECT
+PetscFEGeomDestroy,printf, DIRECT
+PetscFEGeomDestroy,printf, DIRECT
+PetscFEGeomGetChunk,PetscError, DIRECT
+PetscFEGeomGetChunk,PetscCheckPointer, DIRECT
+PetscFEGeomGetChunk,PetscError, DIRECT
+PetscFEGeomGetChunk,PetscError, DIRECT
+PetscFEGeomGetChunk,PetscCheckPointer, DIRECT
+PetscFEGeomGetChunk,PetscError, DIRECT
+PetscFEGeomGetChunk,PetscMallocA, DIRECT
+PetscFEGeomGetChunk,PetscError, DIRECT
+PetscFEGeomGetChunk,printf, DIRECT
+PetscFEGeomGetChunk,printf, DIRECT
+PetscFEGeomRestoreChunk,PetscTrFree = (any pointer->any pointer@i64 0) :: i32 (i8*, i32, i8*, i8*)*, INDIRECT 
+PetscFEGeomRestoreChunk,PetscError, DIRECT
+PetscFEGeomRestoreChunk,printf, DIRECT
+PetscFEGeomRestoreChunk,printf, DIRECT
+PetscFEGeomGetPoint,printf, DIRECT
+PetscFEGeomGetPoint,printf, DIRECT
+PetscFEGeomGetCellPoint,printf, DIRECT
+PetscFEGeomGetCellPoint,printf, DIRECT
+PetscFEGeomComplete,PetscLogFlops, DIRECT
+PetscFEGeomComplete,PetscLogFlops, DIRECT
+PetscFEGeomComplete,PetscLogFlops, DIRECT
+PetscFEGeomComplete,PetscLogFlops, DIRECT
+PetscFEGeomComplete,printf, DIRECT
+PetscFEGeomComplete,printf, DIRECT
+PetscLogFlops,PetscError, DIRECT
+PetscLogFlops,printf, DIRECT
+PetscLogFlops,printf, DIRECT

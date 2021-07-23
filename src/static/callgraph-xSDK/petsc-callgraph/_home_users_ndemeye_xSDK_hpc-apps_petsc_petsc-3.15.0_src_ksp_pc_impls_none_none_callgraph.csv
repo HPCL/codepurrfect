@@ -1,0 +1,11 @@
+CALLER, CALLEE, CALLTYPE
+PCApply_None,VecCopy, DIRECT
+PCApply_None,PetscError, DIRECT
+PCApply_None,printf, DIRECT
+PCApply_None,printf, DIRECT
+PCMatApply_None,MatCopy, DIRECT
+PCMatApply_None,PetscError, DIRECT
+PCMatApply_None,printf, DIRECT
+PCMatApply_None,printf, DIRECT
+PCCreate_None,printf, DIRECT
+PCCreate_None,printf, DIRECT

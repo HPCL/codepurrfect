@@ -1,0 +1,19 @@
+CALLER, CALLEE, CALLTYPE
+taobrgnsetregularizerobjectiveandgradientroutine_,PetscError, DIRECT
+taobrgnsetregularizerobjectiveandgradientroutine_,PetscObjectSetFortranCallback, DIRECT
+taobrgnsetregularizerobjectiveandgradientroutine_,TaoBRGNSetRegularizerObjectiveAndGradientRoutine, DIRECT
+ourtaobrgnregobjgradroutine,PetscObjectGetFortranCallback, DIRECT
+ourtaobrgnregobjgradroutine,PetscError, DIRECT
+ourtaobrgnregobjgradroutine,EMPTYNAME = (any pointer->any pointer@i64 0) :: void (%struct._p_Tao**, %struct._p_Vec**, double*, %struct._p_Vec**, i8*, i32*)*, INDIRECT 
+ourtaobrgnregobjgradroutine,PetscError, DIRECT
+ourtaobrgnregobjgradroutine,printf, DIRECT
+ourtaobrgnregobjgradroutine,printf, DIRECT
+taobrgnsetregularizerhessianroutine_,PetscError, DIRECT
+taobrgnsetregularizerhessianroutine_,PetscObjectSetFortranCallback, DIRECT
+taobrgnsetregularizerhessianroutine_,TaoBRGNSetRegularizerHessianRoutine, DIRECT
+ourtaobrgnreghessroutine,PetscObjectGetFortranCallback, DIRECT
+ourtaobrgnreghessroutine,PetscError, DIRECT
+ourtaobrgnreghessroutine,EMPTYNAME = (any pointer->any pointer@i64 0) :: void (%struct._p_Tao**, %struct._p_Vec**, %struct._p_Mat**, i8*, i32*)*, INDIRECT 
+ourtaobrgnreghessroutine,PetscError, DIRECT
+ourtaobrgnreghessroutine,printf, DIRECT
+ourtaobrgnreghessroutine,printf, DIRECT

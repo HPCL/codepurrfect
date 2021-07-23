@@ -1,0 +1,6 @@
+CALLER, CALLEE, CALLTYPE
+petscviewerasciisettab_,PetscViewerASCIISetTab, DIRECT
+petscviewerasciigettab_,PetscViewerASCIIGetTab, DIRECT
+petscviewerasciiaddtab_,PetscViewerASCIIAddTab, DIRECT
+petscviewerasciisubtracttab_,PetscViewerASCIISubtractTab, DIRECT
+petscviewerasciiusetabs_,PetscViewerASCIIUseTabs, DIRECT

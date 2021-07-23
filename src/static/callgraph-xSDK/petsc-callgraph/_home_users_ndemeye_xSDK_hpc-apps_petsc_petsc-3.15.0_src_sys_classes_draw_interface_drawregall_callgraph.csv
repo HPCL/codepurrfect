@@ -1,0 +1,13 @@
+CALLER, CALLEE, CALLTYPE
+PetscDrawRegisterAll,printf, DIRECT
+PetscDrawRegisterAll,printf, DIRECT
+PetscDrawRegisterAll,PetscDrawRegister, DIRECT
+PetscDrawRegisterAll,PetscError, DIRECT
+PetscDrawRegisterAll,PetscDrawRegister, DIRECT
+PetscDrawRegisterAll,PetscError, DIRECT
+PetscDrawRegisterAll,PetscDrawRegister, DIRECT
+PetscDrawRegisterAll,PetscError, DIRECT
+PetscDrawRegisterAll,PetscDrawRegister, DIRECT
+PetscDrawRegisterAll,PetscError, DIRECT
+PetscDrawRegisterAll,printf, DIRECT
+PetscDrawRegisterAll,printf, DIRECT

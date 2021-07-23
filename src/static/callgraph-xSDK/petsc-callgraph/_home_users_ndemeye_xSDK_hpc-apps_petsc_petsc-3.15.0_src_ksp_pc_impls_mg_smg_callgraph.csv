@@ -1,0 +1,51 @@
+CALLER, CALLEE, CALLTYPE
+failed!
+PCMGACycle_Private,PetscError, DIRECT
+PCMGACycle_Private,MatMatRestrict, DIRECT
+PCMGACycle_Private,PetscError, DIRECT
+PCMGACycle_Private,MatRestrict, DIRECT
+PCMGACycle_Private,PetscError, DIRECT
+PCMGACycle_Private,MatMatRestrict, DIRECT
+PCMGACycle_Private,PetscError, DIRECT
+PCMGACycle_Private,MatRestrict, DIRECT
+PCMGACycle_Private,PetscError, DIRECT
+failed!
+PCMGACycle_Private,PetscError, DIRECT
+PCMGACycle_Private,MatDuplicate, DIRECT
+PCMGACycle_Private,PetscError, DIRECT
+PCMGACycle_Private,MatZeroEntries, DIRECT
+PCMGACycle_Private,PetscError, DIRECT
+PCMGACycle_Private,VecZeroEntries, DIRECT
+PCMGACycle_Private,PetscError, DIRECT
+failed!
+PCMGACycle_Private,PetscError, DIRECT
+PCMGACycle_Private,KSPMatSolve, DIRECT
+PCMGACycle_Private,PetscError, DIRECT
+PCMGACycle_Private,KSPCheckSolve, DIRECT
+PCMGACycle_Private,PetscError, DIRECT
+PCMGACycle_Private,KSPSolve, DIRECT
+PCMGACycle_Private,PetscError, DIRECT
+PCMGACycle_Private,KSPCheckSolve, DIRECT
+PCMGACycle_Private,PetscError, DIRECT
+PCMGACycle_Private,PetscObjectComm, DIRECT
+PCMGACycle_Private,PetscError, DIRECT
+PCMGACycle_Private,KSPSolveTranspose, DIRECT
+PCMGACycle_Private,PetscError, DIRECT
+PCMGACycle_Private,KSPCheckSolve, DIRECT
+PCMGACycle_Private,PetscError, DIRECT
+failed!
+PCMGACycle_Private,PetscError, DIRECT
+failed!
+PCMGACycle_Private,PetscError, DIRECT
+PCMGACycle_Private,MatMatInterpolateAdd, DIRECT
+PCMGACycle_Private,PetscError, DIRECT
+PCMGACycle_Private,MatInterpolateAdd, DIRECT
+PCMGACycle_Private,PetscError, DIRECT
+PCMGACycle_Private,MatMatInterpolateAdd, DIRECT
+PCMGACycle_Private,PetscError, DIRECT
+PCMGACycle_Private,MatInterpolateAdd, DIRECT
+PCMGACycle_Private,PetscError, DIRECT
+failed!
+PCMGACycle_Private,PetscError, DIRECT
+PCMGACycle_Private,printf, DIRECT
+PCMGACycle_Private,printf, DIRECT

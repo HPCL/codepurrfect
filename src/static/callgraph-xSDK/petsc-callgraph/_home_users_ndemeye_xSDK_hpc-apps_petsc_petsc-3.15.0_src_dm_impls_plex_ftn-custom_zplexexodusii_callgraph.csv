@@ -1,0 +1,11 @@
+CALLER, CALLEE, CALLTYPE
+dmplexcreateexodusfromfile_,PetscMallocA, DIRECT
+dmplexcreateexodusfromfile_,PetscStrncpy, DIRECT
+dmplexcreateexodusfromfile_,MPI_Comm_f2c, DIRECT
+dmplexcreateexodusfromfile_,DMPlexCreateExodusFromFile, DIRECT
+dmplexcreateexodusfromfile_,PetscTrFree = (any pointer->any pointer@i64 0) :: i32 (i8*, i32, i8*, i8*)*, INDIRECT 
+petscviewerexodusiiopen_,PetscMallocA, DIRECT
+petscviewerexodusiiopen_,PetscStrncpy, DIRECT
+petscviewerexodusiiopen_,MPI_Comm_f2c, DIRECT
+petscviewerexodusiiopen_,PetscViewerExodusIIOpen, DIRECT
+petscviewerexodusiiopen_,PetscTrFree = (any pointer->any pointer@i64 0) :: i32 (i8*, i32, i8*, i8*)*, INDIRECT 

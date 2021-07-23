@@ -1,0 +1,7 @@
+CALLER, CALLEE, CALLTYPE
+dmcompositegetnumberdm_,DMCompositeGetNumberDM, DIRECT
+dmcompositescatterarray_,DMCompositeScatterArray, DIRECT
+dmcompositegatherarray_,DMCompositeGatherArray, DIRECT
+dmcompositeadddm_,DMCompositeAddDM, DIRECT
+dmcompositecreate_,MPI_Comm_f2c, DIRECT
+dmcompositecreate_,DMCompositeCreate, DIRECT

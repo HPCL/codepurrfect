@@ -1,0 +1,3 @@
+CALLER, CALLEE, CALLTYPE
+petsccommgetnewtag_,MPI_Comm_f2c, DIRECT
+petsccommgetnewtag_,PetscCommGetNewTag, DIRECT

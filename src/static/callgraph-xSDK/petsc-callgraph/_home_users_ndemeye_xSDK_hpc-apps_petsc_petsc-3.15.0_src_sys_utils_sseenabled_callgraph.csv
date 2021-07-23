@@ -1,0 +1,20 @@
+CALLER, CALLEE, CALLTYPE
+PetscSSEEnabledTest_FALSE,printf, DIRECT
+PetscSSEEnabledTest_FALSE,printf, DIRECT
+PetscSSEIsEnabled,PetscOptionsGetBool, DIRECT
+PetscSSEIsEnabled,PetscError, DIRECT
+PetscSSEIsEnabled,PetscSSEEnabledTest_FALSE, DIRECT
+PetscSSEIsEnabled,PetscSSEEnabledTest_FALSE, DIRECT
+PetscSSEIsEnabled,MPI_Comm_size, DIRECT
+PetscSSEIsEnabled,MPI_Allreduce, DIRECT
+PetscSSEIsEnabled,MPI_Error_string, DIRECT
+PetscSSEIsEnabled,PetscError, DIRECT
+PetscSSEIsEnabled,PetscError, DIRECT
+PetscSSEIsEnabled,PetscError, DIRECT
+PetscSSEIsEnabled,PetscError, DIRECT
+PetscSSEIsEnabled,MPI_Comm_size, DIRECT
+PetscSSEIsEnabled,MPI_Allreduce, DIRECT
+PetscSSEIsEnabled,MPI_Error_string, DIRECT
+PetscSSEIsEnabled,PetscError, DIRECT
+PetscSSEIsEnabled,printf, DIRECT
+PetscSSEIsEnabled,printf, DIRECT

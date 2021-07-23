@@ -1,0 +1,23 @@
+CALLER, CALLEE, CALLTYPE
+aoview_,PETSC_VIEWER_DRAW_, DIRECT
+aoview_,PETSC_VIEWER_DRAW_, DIRECT
+aoview_,PETSC_VIEWER_STDOUT_, DIRECT
+aoview_,PETSC_VIEWER_STDOUT_, DIRECT
+aoview_,PETSC_VIEWER_STDERR_, DIRECT
+aoview_,PETSC_VIEWER_STDERR_, DIRECT
+aoview_,PETSC_VIEWER_BINARY_, DIRECT
+aoview_,PETSC_VIEWER_BINARY_, DIRECT
+aoview_,PETSC_VIEWER_BINARY_, DIRECT
+aoview_,PETSC_VIEWER_BINARY_, DIRECT
+aoview_,PETSC_VIEWER_SOCKET_, DIRECT
+aoview_,PETSC_VIEWER_SOCKET_, DIRECT
+aoview_,AOView, DIRECT
+aosettype_,PetscMallocA, DIRECT
+aosettype_,PetscStrncpy, DIRECT
+aosettype_,AOSetType, DIRECT
+aosettype_,PetscTrFree = (any pointer->any pointer@i64 0) :: i32 (i8*, i32, i8*, i8*)*, INDIRECT 
+aoviewfromoptions_,PetscMallocA, DIRECT
+aoviewfromoptions_,PetscStrncpy, DIRECT
+aoviewfromoptions_,PetscError, DIRECT
+aoviewfromoptions_,AOViewFromOptions, DIRECT
+aoviewfromoptions_,PetscTrFree = (any pointer->any pointer@i64 0) :: i32 (i8*, i32, i8*, i8*)*, INDIRECT 

@@ -1,0 +1,12 @@
+EMPTYNAME = _TSAdaptOps->any pointer@i64 8 :: i32 (%struct._p_TSAdapt*)*
+EMPTYNAME = any pointer->any pointer@i64 0 :: i32 (%struct._p_TSAdapt*)*
+EMPTYNAME = _TSAdaptOps->any pointer@i64 40 :: i32 (%struct._p_TSAdapt*, %struct._p_PetscViewer*)*
+EMPTYNAME = _TSAdaptOps->any pointer@i64 24 :: i32 (%struct._p_TSAdapt*, %struct._p_PetscViewer*)*
+EMPTYNAME = _TSAdaptOps->any pointer@i64 24 :: i32 (%struct._p_TSAdapt*, %struct._p_PetscViewer*)*
+EMPTYNAME = _TSAdaptOps->any pointer@i64 16 :: i32 (%struct._p_TSAdapt*)*
+EMPTYNAME = _TSAdaptOps->any pointer@i64 8 :: i32 (%struct._p_TSAdapt*)*
+PetscTrFree = any pointer->any pointer@i64 0 :: i32 (i8*, i32, i8*, i8*)*
+EMPTYNAME = _TSAdaptOps->any pointer@i64 32 :: i32 (%struct._p_PetscOptionItems*, %struct._p_TSAdapt*)*
+EMPTYNAME = _TSAdaptOps->any pointer@i64 0 :: i32 (%struct._p_TSAdapt*, %struct._p_TS*, double, i32*, double*, i32*, double*, double*, double*)*
+EMPTYNAME = _p_TSAdapt->any pointer@i64 616 :: i32 (%struct._p_TSAdapt*, %struct._p_TS*, double, %struct._p_Vec*, i32*)*
+PetscLogPHC = any pointer->any pointer@i64 0 :: i32 (%struct._p_PetscObject*)*

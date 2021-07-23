@@ -1,0 +1,5 @@
+CALLER, CALLEE, CALLTYPE
+pchmgsetreuseinterpolation_,PCHMGSetReuseInterpolation, DIRECT
+pchmgsetusesubspacecoarsening_,PCHMGSetUseSubspaceCoarsening, DIRECT
+pchmgsetcoarseningcomponent_,PCHMGSetCoarseningComponent, DIRECT
+pchmgusematmaij_,PCHMGUseMatMAIJ, DIRECT

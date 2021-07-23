@@ -1,0 +1,5 @@
+CALLER, CALLEE, CALLTYPE
+snesmultiblocksetfields_,SNESMultiblockSetFields, DIRECT
+snesmultiblocksetis_,SNESMultiblockSetIS, DIRECT
+snesmultiblocksettype_,SNESMultiblockSetType, DIRECT
+snesmultiblocksetblocksize_,SNESMultiblockSetBlockSize, DIRECT

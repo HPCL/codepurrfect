@@ -1,0 +1,7 @@
+CALLER, CALLEE, CALLTYPE
+dmgetlocalvector_,DMGetLocalVector, DIRECT
+dmrestorelocalvector_,DMRestoreLocalVector, DIRECT
+dmgetglobalvector_,DMGetGlobalVector, DIRECT
+dmclearglobalvectors_,DMClearGlobalVectors, DIRECT
+dmclearlocalvectors_,DMClearLocalVectors, DIRECT
+dmrestoreglobalvector_,DMRestoreGlobalVector, DIRECT

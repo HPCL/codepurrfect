@@ -1,0 +1,16 @@
+CALLER, CALLEE, CALLTYPE
+petscdrawlggetaxis_,PetscDrawLGGetAxis, DIRECT
+petscdrawlggetdraw_,PetscDrawLGGetDraw, DIRECT
+petscdrawlgspdraw_,PetscDrawLGSPDraw, DIRECT
+petscdrawlgcreate_,PetscDrawLGCreate, DIRECT
+petscdrawlgsetcolors_,PetscDrawLGSetColors, DIRECT
+petscdrawlggetdimension_,PetscDrawLGGetDimension, DIRECT
+petscdrawlgsetdimension_,PetscDrawLGSetDimension, DIRECT
+petscdrawlgsetlimits_,PetscDrawLGSetLimits, DIRECT
+petscdrawlgreset_,PetscDrawLGReset, DIRECT
+petscdrawlgdestroy_,PetscDrawLGDestroy, DIRECT
+petscdrawlgsetusemarkers_,PetscDrawLGSetUseMarkers, DIRECT
+petscdrawlgdraw_,PetscDrawLGDraw, DIRECT
+petscdrawlgsave_,PetscDrawLGSave, DIRECT
+petscdrawlgview_,PetscDrawLGView, DIRECT
+petscdrawlgsetfromoptions_,PetscDrawLGSetFromOptions, DIRECT

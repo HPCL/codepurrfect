@@ -1,0 +1,6 @@
+CALLER, CALLEE, CALLTYPE
+matcreateseqsell_,PetscError, DIRECT
+matcreateseqsell_,MPI_Comm_f2c, DIRECT
+matcreateseqsell_,MatCreateSeqSELL, DIRECT
+matseqsellsetpreallocation_,PetscError, DIRECT
+matseqsellsetpreallocation_,MatSeqSELLSetPreallocation, DIRECT

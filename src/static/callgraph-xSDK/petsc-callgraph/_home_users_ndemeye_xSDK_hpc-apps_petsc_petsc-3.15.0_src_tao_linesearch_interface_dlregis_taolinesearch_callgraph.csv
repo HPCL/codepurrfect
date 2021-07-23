@@ -1,0 +1,27 @@
+CALLER, CALLEE, CALLTYPE
+TaoLineSearchFinalizePackage,PetscFunctionListDestroy, DIRECT
+TaoLineSearchFinalizePackage,PetscError, DIRECT
+TaoLineSearchFinalizePackage,printf, DIRECT
+TaoLineSearchFinalizePackage,printf, DIRECT
+TaoLineSearchInitializePackage,printf, DIRECT
+TaoLineSearchInitializePackage,printf, DIRECT
+TaoLineSearchInitializePackage,PetscClassIdRegister, DIRECT
+TaoLineSearchInitializePackage,PetscError, DIRECT
+TaoLineSearchInitializePackage,TaoLineSearchRegister, DIRECT
+TaoLineSearchInitializePackage,PetscError, DIRECT
+TaoLineSearchInitializePackage,TaoLineSearchRegister, DIRECT
+TaoLineSearchInitializePackage,PetscError, DIRECT
+TaoLineSearchInitializePackage,TaoLineSearchRegister, DIRECT
+TaoLineSearchInitializePackage,PetscError, DIRECT
+TaoLineSearchInitializePackage,TaoLineSearchRegister, DIRECT
+TaoLineSearchInitializePackage,PetscError, DIRECT
+TaoLineSearchInitializePackage,TaoLineSearchRegister, DIRECT
+TaoLineSearchInitializePackage,PetscError, DIRECT
+TaoLineSearchInitializePackage,PetscLogEventRegister, DIRECT
+TaoLineSearchInitializePackage,PetscError, DIRECT
+TaoLineSearchInitializePackage,PetscLogEventRegister, DIRECT
+TaoLineSearchInitializePackage,PetscError, DIRECT
+TaoLineSearchInitializePackage,PetscRegisterFinalize, DIRECT
+TaoLineSearchInitializePackage,PetscError, DIRECT
+TaoLineSearchInitializePackage,printf, DIRECT
+TaoLineSearchInitializePackage,printf, DIRECT

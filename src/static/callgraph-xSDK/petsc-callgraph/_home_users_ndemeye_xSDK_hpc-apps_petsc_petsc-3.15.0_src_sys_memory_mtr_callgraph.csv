@@ -1,0 +1,296 @@
+CALLER, CALLEE, CALLTYPE
+PetscMallocValidate,PetscErrorPrintf = (any pointer->any pointer@i64 0) :: i32 (i8*, ...)*, INDIRECT 
+PetscMallocValidate,PetscErrorPrintf = (any pointer->any pointer@i64 0) :: i32 (i8*, ...)*, INDIRECT 
+PetscMallocValidate,PetscErrorPrintf = (any pointer->any pointer@i64 0) :: i32 (i8*, ...)*, INDIRECT 
+PetscMallocValidate,PetscErrorPrintf = (any pointer->any pointer@i64 0) :: i32 (i8*, ...)*, INDIRECT 
+PetscMallocValidate,PetscErrorPrintf = (any pointer->any pointer@i64 0) :: i32 (i8*, ...)*, INDIRECT 
+PetscMallocValidate,PetscErrorPrintf = (any pointer->any pointer@i64 0) :: i32 (i8*, ...)*, INDIRECT 
+PetscMallocValidate,abort, DIRECT
+PetscMallocValidate,PetscErrorPrintf = (any pointer->any pointer@i64 0) :: i32 (i8*, ...)*, INDIRECT 
+PetscMallocValidate,PetscErrorPrintf = (any pointer->any pointer@i64 0) :: i32 (i8*, ...)*, INDIRECT 
+PetscMallocValidate,PetscErrorPrintf = (any pointer->any pointer@i64 0) :: i32 (i8*, ...)*, INDIRECT 
+PetscMallocValidate,PetscErrorPrintf = (any pointer->any pointer@i64 0) :: i32 (i8*, ...)*, INDIRECT 
+PetscMallocValidate,PetscErrorPrintf = (any pointer->any pointer@i64 0) :: i32 (i8*, ...)*, INDIRECT 
+PetscMallocValidate,PetscErrorPrintf = (any pointer->any pointer@i64 0) :: i32 (i8*, ...)*, INDIRECT 
+PetscMallocValidate,PetscErrorPrintf = (any pointer->any pointer@i64 0) :: i32 (i8*, ...)*, INDIRECT 
+PetscTrMallocDefault,printf, DIRECT
+PetscTrMallocDefault,printf, DIRECT
+PetscTrMallocDefault,PetscMallocValidate, DIRECT
+PetscTrMallocDefault,printf, DIRECT
+PetscTrMallocDefault,printf, DIRECT
+PetscTrMallocDefault,PetscMallocAlign, DIRECT
+PetscTrMallocDefault,PetscError, DIRECT
+PetscTrMallocDefault,PetscStackCopy, DIRECT
+PetscTrMallocDefault,PetscError, DIRECT
+PetscTrMallocDefault,malloc, DIRECT
+PetscTrMallocDefault,PetscError, DIRECT
+PetscTrMallocDefault,malloc, DIRECT
+PetscTrMallocDefault,PetscError, DIRECT
+PetscTrMallocDefault,malloc, DIRECT
+PetscTrMallocDefault,PetscError, DIRECT
+PetscTrMallocDefault,PetscViewerASCIIPrintf, DIRECT
+PetscTrMallocDefault,PetscError, DIRECT
+PetscTrMallocDefault,printf, DIRECT
+PetscTrMallocDefault,printf, DIRECT
+PetscTrFreeDefault,printf, DIRECT
+PetscTrFreeDefault,printf, DIRECT
+PetscTrFreeDefault,PetscMallocValidate, DIRECT
+PetscTrFreeDefault,PetscError, DIRECT
+PetscTrFreeDefault,PetscErrorPrintf = (any pointer->any pointer@i64 0) :: i32 (i8*, ...)*, INDIRECT 
+PetscTrFreeDefault,PetscErrorPrintf = (any pointer->any pointer@i64 0) :: i32 (i8*, ...)*, INDIRECT 
+PetscTrFreeDefault,PetscError, DIRECT
+PetscTrFreeDefault,PetscErrorPrintf = (any pointer->any pointer@i64 0) :: i32 (i8*, ...)*, INDIRECT 
+PetscTrFreeDefault,PetscErrorPrintf = (any pointer->any pointer@i64 0) :: i32 (i8*, ...)*, INDIRECT 
+PetscTrFreeDefault,PetscErrorPrintf = (any pointer->any pointer@i64 0) :: i32 (i8*, ...)*, INDIRECT 
+PetscTrFreeDefault,PetscError, DIRECT
+PetscTrFreeDefault,PetscErrorPrintf = (any pointer->any pointer@i64 0) :: i32 (i8*, ...)*, INDIRECT 
+PetscTrFreeDefault,PetscErrorPrintf = (any pointer->any pointer@i64 0) :: i32 (i8*, ...)*, INDIRECT 
+PetscTrFreeDefault,PetscErrorPrintf = (any pointer->any pointer@i64 0) :: i32 (i8*, ...)*, INDIRECT 
+PetscTrFreeDefault,PetscError, DIRECT
+PetscTrFreeDefault,PetscViewerASCIIPrintf, DIRECT
+PetscTrFreeDefault,PetscError, DIRECT
+PetscTrFreeDefault,PetscError, DIRECT
+PetscTrFreeDefault,PetscFreeAlign, DIRECT
+PetscTrFreeDefault,PetscError, DIRECT
+PetscTrFreeDefault,printf, DIRECT
+PetscTrFreeDefault,printf, DIRECT
+PetscTrReallocDefault,PetscTrFreeDefault, DIRECT
+PetscTrReallocDefault,PetscError, DIRECT
+PetscTrReallocDefault,printf, DIRECT
+PetscTrReallocDefault,printf, DIRECT
+PetscTrReallocDefault,PetscTrMallocDefault, DIRECT
+PetscTrReallocDefault,PetscError, DIRECT
+PetscTrReallocDefault,printf, DIRECT
+PetscTrReallocDefault,printf, DIRECT
+PetscTrReallocDefault,PetscMallocValidate, DIRECT
+PetscTrReallocDefault,printf, DIRECT
+PetscTrReallocDefault,printf, DIRECT
+PetscTrReallocDefault,PetscErrorPrintf = (any pointer->any pointer@i64 0) :: i32 (i8*, ...)*, INDIRECT 
+PetscTrReallocDefault,PetscErrorPrintf = (any pointer->any pointer@i64 0) :: i32 (i8*, ...)*, INDIRECT 
+PetscTrReallocDefault,PetscError, DIRECT
+PetscTrReallocDefault,PetscErrorPrintf = (any pointer->any pointer@i64 0) :: i32 (i8*, ...)*, INDIRECT 
+PetscTrReallocDefault,PetscErrorPrintf = (any pointer->any pointer@i64 0) :: i32 (i8*, ...)*, INDIRECT 
+PetscTrReallocDefault,PetscErrorPrintf = (any pointer->any pointer@i64 0) :: i32 (i8*, ...)*, INDIRECT 
+PetscTrReallocDefault,PetscError, DIRECT
+PetscTrReallocDefault,PetscErrorPrintf = (any pointer->any pointer@i64 0) :: i32 (i8*, ...)*, INDIRECT 
+PetscTrReallocDefault,PetscErrorPrintf = (any pointer->any pointer@i64 0) :: i32 (i8*, ...)*, INDIRECT 
+PetscTrReallocDefault,PetscErrorPrintf = (any pointer->any pointer@i64 0) :: i32 (i8*, ...)*, INDIRECT 
+PetscTrReallocDefault,PetscError, DIRECT
+PetscTrReallocDefault,PetscReallocAlign, DIRECT
+PetscTrReallocDefault,PetscError, DIRECT
+PetscTrReallocDefault,PetscStackCopy, DIRECT
+PetscTrReallocDefault,PetscError, DIRECT
+PetscTrReallocDefault,malloc, DIRECT
+PetscTrReallocDefault,PetscError, DIRECT
+PetscTrReallocDefault,malloc, DIRECT
+PetscTrReallocDefault,PetscError, DIRECT
+PetscTrReallocDefault,malloc, DIRECT
+PetscTrReallocDefault,PetscError, DIRECT
+PetscTrReallocDefault,printf, DIRECT
+PetscTrReallocDefault,printf, DIRECT
+PetscMemoryView,PETSC_VIEWER_STDOUT_, DIRECT
+PetscMemoryView,PetscMallocGetCurrentUsage, DIRECT
+PetscMemoryView,PetscMallocGetMaximumUsage, DIRECT
+PetscMemoryView,PetscMemoryGetCurrentUsage, DIRECT
+PetscMemoryView,PetscError, DIRECT
+PetscMemoryView,PetscMemoryGetMaximumUsage, DIRECT
+PetscMemoryView,PetscError, DIRECT
+PetscMemoryView,PetscObjectGetComm, DIRECT
+PetscMemoryView,PetscError, DIRECT
+PetscMemoryView,PetscViewerASCIIPrintf, DIRECT
+PetscMemoryView,PetscError, DIRECT
+PetscMemoryView,MPI_Reduce, DIRECT
+PetscMemoryView,MPI_Error_string, DIRECT
+PetscMemoryView,PetscError, DIRECT
+PetscMemoryView,MPI_Reduce, DIRECT
+PetscMemoryView,MPI_Error_string, DIRECT
+PetscMemoryView,PetscError, DIRECT
+PetscMemoryView,MPI_Reduce, DIRECT
+PetscMemoryView,MPI_Error_string, DIRECT
+PetscMemoryView,PetscError, DIRECT
+PetscMemoryView,PetscViewerASCIIPrintf, DIRECT
+PetscMemoryView,PetscError, DIRECT
+PetscMemoryView,MPI_Reduce, DIRECT
+PetscMemoryView,MPI_Error_string, DIRECT
+PetscMemoryView,PetscError, DIRECT
+PetscMemoryView,MPI_Reduce, DIRECT
+PetscMemoryView,MPI_Error_string, DIRECT
+PetscMemoryView,PetscError, DIRECT
+PetscMemoryView,MPI_Reduce, DIRECT
+PetscMemoryView,MPI_Error_string, DIRECT
+PetscMemoryView,PetscError, DIRECT
+PetscMemoryView,PetscViewerASCIIPrintf, DIRECT
+PetscMemoryView,PetscError, DIRECT
+PetscMemoryView,MPI_Reduce, DIRECT
+PetscMemoryView,MPI_Error_string, DIRECT
+PetscMemoryView,PetscError, DIRECT
+PetscMemoryView,MPI_Reduce, DIRECT
+PetscMemoryView,MPI_Error_string, DIRECT
+PetscMemoryView,PetscError, DIRECT
+PetscMemoryView,MPI_Reduce, DIRECT
+PetscMemoryView,MPI_Error_string, DIRECT
+PetscMemoryView,PetscError, DIRECT
+PetscMemoryView,PetscViewerASCIIPrintf, DIRECT
+PetscMemoryView,PetscError, DIRECT
+PetscMemoryView,MPI_Reduce, DIRECT
+PetscMemoryView,MPI_Error_string, DIRECT
+PetscMemoryView,PetscError, DIRECT
+PetscMemoryView,MPI_Reduce, DIRECT
+PetscMemoryView,MPI_Error_string, DIRECT
+PetscMemoryView,PetscError, DIRECT
+PetscMemoryView,MPI_Reduce, DIRECT
+PetscMemoryView,MPI_Error_string, DIRECT
+PetscMemoryView,PetscError, DIRECT
+PetscMemoryView,PetscViewerASCIIPrintf, DIRECT
+PetscMemoryView,PetscError, DIRECT
+PetscMemoryView,MPI_Reduce, DIRECT
+PetscMemoryView,MPI_Error_string, DIRECT
+PetscMemoryView,PetscError, DIRECT
+PetscMemoryView,MPI_Reduce, DIRECT
+PetscMemoryView,MPI_Error_string, DIRECT
+PetscMemoryView,PetscError, DIRECT
+PetscMemoryView,MPI_Reduce, DIRECT
+PetscMemoryView,MPI_Error_string, DIRECT
+PetscMemoryView,PetscError, DIRECT
+PetscMemoryView,PetscViewerASCIIPrintf, DIRECT
+PetscMemoryView,PetscError, DIRECT
+PetscMemoryView,MPI_Reduce, DIRECT
+PetscMemoryView,MPI_Error_string, DIRECT
+PetscMemoryView,PetscError, DIRECT
+PetscMemoryView,MPI_Reduce, DIRECT
+PetscMemoryView,MPI_Error_string, DIRECT
+PetscMemoryView,PetscError, DIRECT
+PetscMemoryView,MPI_Reduce, DIRECT
+PetscMemoryView,MPI_Error_string, DIRECT
+PetscMemoryView,PetscError, DIRECT
+PetscMemoryView,PetscViewerASCIIPrintf, DIRECT
+PetscMemoryView,PetscError, DIRECT
+PetscMemoryView,MPI_Reduce, DIRECT
+PetscMemoryView,MPI_Error_string, DIRECT
+PetscMemoryView,PetscError, DIRECT
+PetscMemoryView,MPI_Reduce, DIRECT
+PetscMemoryView,MPI_Error_string, DIRECT
+PetscMemoryView,PetscError, DIRECT
+PetscMemoryView,MPI_Reduce, DIRECT
+PetscMemoryView,MPI_Error_string, DIRECT
+PetscMemoryView,PetscError, DIRECT
+PetscMemoryView,PetscViewerASCIIPrintf, DIRECT
+PetscMemoryView,PetscError, DIRECT
+PetscMemoryView,MPI_Reduce, DIRECT
+PetscMemoryView,MPI_Error_string, DIRECT
+PetscMemoryView,PetscError, DIRECT
+PetscMemoryView,MPI_Reduce, DIRECT
+PetscMemoryView,MPI_Error_string, DIRECT
+PetscMemoryView,PetscError, DIRECT
+PetscMemoryView,MPI_Reduce, DIRECT
+PetscMemoryView,MPI_Error_string, DIRECT
+PetscMemoryView,PetscError, DIRECT
+PetscMemoryView,PetscViewerASCIIPrintf, DIRECT
+PetscMemoryView,PetscError, DIRECT
+PetscMemoryView,PetscViewerASCIIPrintf, DIRECT
+PetscMemoryView,PetscError, DIRECT
+PetscMemoryView,MPI_Reduce, DIRECT
+PetscMemoryView,MPI_Error_string, DIRECT
+PetscMemoryView,PetscError, DIRECT
+PetscMemoryView,MPI_Reduce, DIRECT
+PetscMemoryView,MPI_Error_string, DIRECT
+PetscMemoryView,PetscError, DIRECT
+PetscMemoryView,MPI_Reduce, DIRECT
+PetscMemoryView,MPI_Error_string, DIRECT
+PetscMemoryView,PetscError, DIRECT
+PetscMemoryView,PetscViewerASCIIPrintf, DIRECT
+PetscMemoryView,PetscError, DIRECT
+PetscMemoryView,PetscViewerASCIIPrintf, DIRECT
+PetscMemoryView,PetscError, DIRECT
+PetscMemoryView,PetscViewerASCIIPrintf, DIRECT
+PetscMemoryView,PetscError, DIRECT
+PetscMemoryView,PetscViewerASCIIPrintf, DIRECT
+PetscMemoryView,PetscError, DIRECT
+PetscMemoryView,PetscViewerFlush, DIRECT
+PetscMemoryView,PetscError, DIRECT
+PetscMemoryView,printf, DIRECT
+PetscMemoryView,printf, DIRECT
+PetscMallocGetCurrentUsage,printf, DIRECT
+PetscMallocGetCurrentUsage,printf, DIRECT
+PetscMallocGetMaximumUsage,printf, DIRECT
+PetscMallocGetMaximumUsage,printf, DIRECT
+PetscMallocPushMaximumUsage,printf, DIRECT
+PetscMallocPushMaximumUsage,printf, DIRECT
+PetscMallocPushMaximumUsage,printf, DIRECT
+PetscMallocPushMaximumUsage,printf, DIRECT
+PetscMallocPopMaximumUsage,printf, DIRECT
+PetscMallocPopMaximumUsage,printf, DIRECT
+PetscMallocPopMaximumUsage,PetscError, DIRECT
+PetscMallocPopMaximumUsage,printf, DIRECT
+PetscMallocPopMaximumUsage,printf, DIRECT
+PetscMallocGetStack,printf, DIRECT
+PetscMallocGetStack,printf, DIRECT
+PetscMallocDump,MPI_Comm_rank, DIRECT
+PetscMallocDump,MPI_Error_string, DIRECT
+PetscMallocDump,PetscError, DIRECT
+PetscMallocDump,fprintf, DIRECT
+PetscMallocDump,PetscStrcmp, DIRECT
+PetscMallocDump,PetscError, DIRECT
+PetscMallocDump,fprintf, DIRECT
+PetscMallocDump,PetscStackPrint, DIRECT
+PetscMallocDump,PetscError, DIRECT
+PetscMallocDump,printf, DIRECT
+PetscMallocDump,printf, DIRECT
+PetscMallocViewSet,PetscMemorySetGetMaximumUsage, DIRECT
+PetscMallocViewSet,PetscError, DIRECT
+PetscMallocViewSet,printf, DIRECT
+PetscMallocViewSet,printf, DIRECT
+PetscMallocViewGet,printf, DIRECT
+PetscMallocViewGet,printf, DIRECT
+PetscMallocTraceSet,printf, DIRECT
+PetscMallocTraceSet,printf, DIRECT
+PetscMallocTraceSet,PETSC_VIEWER_STDOUT_, DIRECT
+PetscMallocTraceSet,PetscMemorySetGetMaximumUsage, DIRECT
+PetscMallocTraceSet,PetscError, DIRECT
+PetscMallocTraceSet,printf, DIRECT
+PetscMallocTraceSet,printf, DIRECT
+PetscMallocTraceGet,printf, DIRECT
+PetscMallocTraceGet,printf, DIRECT
+PetscMallocView,MPI_Comm_rank, DIRECT
+PetscMallocView,MPI_Error_string, DIRECT
+PetscMallocView,PetscError, DIRECT
+PetscMallocView,fflush, DIRECT
+PetscMallocView,PetscError, DIRECT
+PetscMallocView,PetscError, DIRECT
+PetscMallocView,PetscMemoryGetMaximumUsage, DIRECT
+PetscMallocView,PetscError, DIRECT
+PetscMallocView,fprintf, DIRECT
+PetscMallocView,fprintf, DIRECT
+PetscMallocView,malloc, DIRECT
+PetscMallocView,PetscError, DIRECT
+PetscMallocView,malloc, DIRECT
+PetscMallocView,PetscError, DIRECT
+PetscMallocView,malloc, DIRECT
+PetscMallocView,PetscError, DIRECT
+PetscMallocView,PetscStrcmp, DIRECT
+PetscMallocView,PetscError, DIRECT
+PetscMallocView,malloc, DIRECT
+PetscMallocView,PetscError, DIRECT
+PetscMallocView,PetscSortStrWithPermutation, DIRECT
+PetscMallocView,PetscError, DIRECT
+PetscMallocView,fprintf, DIRECT
+PetscMallocView,fprintf, DIRECT
+PetscMallocView,free, DIRECT
+PetscMallocView,free, DIRECT
+PetscMallocView,free, DIRECT
+PetscMallocView,free, DIRECT
+PetscMallocView,fflush, DIRECT
+PetscMallocView,PetscError, DIRECT
+PetscMallocView,printf, DIRECT
+PetscMallocView,printf, DIRECT
+PetscMallocSetDebug,PetscError, DIRECT
+PetscMallocSetDebug,PetscMallocSet, DIRECT
+PetscMallocSetDebug,PetscError, DIRECT
+PetscMallocSetDebug,printf, DIRECT
+PetscMallocSetDebug,printf, DIRECT
+PetscMallocGetDebug,printf, DIRECT
+PetscMallocGetDebug,printf, DIRECT
+PetscMallocLogRequestedSizeSet,printf, DIRECT
+PetscMallocLogRequestedSizeSet,printf, DIRECT
+PetscMallocLogRequestedSizeGet,printf, DIRECT
+PetscMallocLogRequestedSizeGet,printf, DIRECT

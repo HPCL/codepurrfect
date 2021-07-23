@@ -1,0 +1,174 @@
+CALLER, CALLEE, CALLTYPE
+snesnewtontrsetprecheck_,PetscObjectSetFortranCallback, DIRECT
+snesnewtontrsetprecheck_,SNESNewtonTRSetPreCheck, DIRECT
+ourtrprecheckfunction,PetscObjectGetFortranCallback, DIRECT
+ourtrprecheckfunction,PetscError, DIRECT
+ourtrprecheckfunction,EMPTYNAME = (any pointer->any pointer@i64 0) :: void (%struct._p_SNES**, %struct._p_Vec**, %struct._p_Vec**, i32*, i8*, i32*)*, INDIRECT 
+ourtrprecheckfunction,PetscError, DIRECT
+ourtrprecheckfunction,printf, DIRECT
+ourtrprecheckfunction,printf, DIRECT
+snesnewtontrsetpostcheck_,PetscObjectSetFortranCallback, DIRECT
+snesnewtontrsetpostcheck_,SNESNewtonTRSetPostCheck, DIRECT
+ourtrpostcheckfunction,PetscObjectGetFortranCallback, DIRECT
+ourtrpostcheckfunction,PetscError, DIRECT
+ourtrpostcheckfunction,EMPTYNAME = (any pointer->any pointer@i64 0) :: void (%struct._p_SNES**, %struct._p_Vec**, %struct._p_Vec**, %struct._p_Vec**, i32*, i32*, i8*, i32*)*, INDIRECT 
+ourtrpostcheckfunction,PetscError, DIRECT
+ourtrpostcheckfunction,printf, DIRECT
+ourtrpostcheckfunction,printf, DIRECT
+matmffdcomputejacobian_,MatMFFDComputeJacobian, DIRECT
+snescomputejacobiandefault_,SNESComputeJacobianDefault, DIRECT
+snescomputejacobiandefaultcolor_,SNESComputeJacobianDefaultColor, DIRECT
+snessetjacobian_,PetscError, DIRECT
+snessetjacobian_,SNESSetJacobian, DIRECT
+snessetjacobian_,SNESSetJacobian, DIRECT
+snessetjacobian_,SNESSetJacobian, DIRECT
+snessetjacobian_,PetscObjectSetFortranCallback, DIRECT
+snessetjacobian_,SNESSetJacobian, DIRECT
+oursnesjacobian,PetscObjectGetFortranCallback, DIRECT
+oursnesjacobian,PetscError, DIRECT
+oursnesjacobian,EMPTYNAME = (any pointer->any pointer@i64 0) :: void (%struct._p_SNES**, %struct._p_Vec**, %struct._p_Mat**, %struct._p_Mat**, i8*, i32*)*, INDIRECT 
+oursnesjacobian,PetscError, DIRECT
+oursnesjacobian,printf, DIRECT
+oursnesjacobian,printf, DIRECT
+snessetjacobian1_,snessetjacobian_, DIRECT
+snessetjacobian2_,snessetjacobian_, DIRECT
+snessetpicard_,PetscObjectSetFortranCallback, DIRECT
+snessetpicard_,PetscObjectSetFortranCallback, DIRECT
+snessetpicard_,SNESSetPicard, DIRECT
+oursnespicardfunction,PetscObjectGetFortranCallback, DIRECT
+oursnespicardfunction,PetscError, DIRECT
+oursnespicardfunction,EMPTYNAME = (any pointer->any pointer@i64 0) :: void (%struct._p_SNES**, %struct._p_Vec**, %struct._p_Vec**, i8*, i32*)*, INDIRECT 
+oursnespicardfunction,PetscError, DIRECT
+oursnespicardfunction,printf, DIRECT
+oursnespicardfunction,printf, DIRECT
+oursnespicardjacobian,PetscObjectGetFortranCallback, DIRECT
+oursnespicardjacobian,PetscError, DIRECT
+oursnespicardjacobian,EMPTYNAME = (any pointer->any pointer@i64 0) :: void (%struct._p_SNES**, %struct._p_Vec**, %struct._p_Mat**, %struct._p_Mat**, i8*, i32*)*, INDIRECT 
+oursnespicardjacobian,PetscError, DIRECT
+oursnespicardjacobian,printf, DIRECT
+oursnespicardjacobian,printf, DIRECT
+snesgetoptionsprefix_,SNESGetOptionsPrefix, DIRECT
+snesgetoptionsprefix_,PetscStrncpy, DIRECT
+snesgettype_,SNESGetType, DIRECT
+snesgettype_,PetscStrncpy, DIRECT
+snessetfunction_,PetscObjectSetFortranCallback, DIRECT
+snessetfunction_,SNESSetFunction, DIRECT
+oursnesfunction,PetscObjectGetFortranCallback, DIRECT
+oursnesfunction,PetscError, DIRECT
+oursnesfunction,EMPTYNAME = (any pointer->any pointer@i64 0) :: void (%struct._p_SNES**, %struct._p_Vec**, %struct._p_Vec**, i8*, i32*)*, INDIRECT 
+oursnesfunction,PetscError, DIRECT
+oursnesfunction,printf, DIRECT
+oursnesfunction,printf, DIRECT
+snessetngs_,PetscObjectSetFortranCallback, DIRECT
+snessetngs_,SNESSetNGS, DIRECT
+oursnesngs,PetscObjectGetFortranCallback, DIRECT
+oursnesngs,PetscError, DIRECT
+oursnesngs,EMPTYNAME = (any pointer->any pointer@i64 0) :: void (%struct._p_SNES**, %struct._p_Vec**, %struct._p_Vec**, i8*, i32*)*, INDIRECT 
+oursnesngs,PetscError, DIRECT
+oursnesngs,printf, DIRECT
+oursnesngs,printf, DIRECT
+snessetupdate_,PetscObjectSetFortranCallback, DIRECT
+snessetupdate_,SNESSetUpdate, DIRECT
+oursnesupdate,PetscObjectGetFortranCallback, DIRECT
+oursnesupdate,PetscError, DIRECT
+oursnesupdate,EMPTYNAME = (any pointer->any pointer@i64 0) :: void (%struct._p_SNES**, i32*, i32*)*, INDIRECT 
+oursnesupdate,PetscError, DIRECT
+oursnesupdate,printf, DIRECT
+oursnesupdate,printf, DIRECT
+snesgetfunction_,PetscError, DIRECT
+snesgetfunction_,SNESGetFunction, DIRECT
+snesgetfunction_,PetscObjectGetFortranCallback, DIRECT
+snesgetngs_,PetscObjectGetFortranCallback, DIRECT
+snesconvergeddefault_,SNESConvergedDefault, DIRECT
+snesconvergedskip_,SNESConvergedSkip, DIRECT
+snessetconvergencetest_,PetscError, DIRECT
+snessetconvergencetest_,SNESSetConvergenceTest, DIRECT
+snessetconvergencetest_,SNESSetConvergenceTest, DIRECT
+snessetconvergencetest_,PetscObjectSetFortranCallback, DIRECT
+snessetconvergencetest_,PetscObjectSetFortranCallback, DIRECT
+snessetconvergencetest_,SNESSetConvergenceTest, DIRECT
+oursnestest,PetscObjectGetFortranCallback, DIRECT
+oursnestest,PetscError, DIRECT
+oursnestest,EMPTYNAME = (any pointer->any pointer@i64 0) :: void (%struct._p_SNES**, i32*, double*, double*, double*, i32*, i8*, i32*)*, INDIRECT 
+oursnestest,PetscError, DIRECT
+oursnestest,printf, DIRECT
+oursnestest,printf, DIRECT
+ourdestroy,PetscObjectGetFortranCallback, DIRECT
+ourdestroy,PetscError, DIRECT
+ourdestroy,EMPTYNAME = (any pointer->any pointer@i64 0) :: void (i8*, i32*)*, INDIRECT 
+ourdestroy,PetscError, DIRECT
+ourdestroy,printf, DIRECT
+ourdestroy,printf, DIRECT
+snesview_,PETSC_VIEWER_DRAW_, DIRECT
+snesview_,PETSC_VIEWER_DRAW_, DIRECT
+snesview_,PETSC_VIEWER_STDOUT_, DIRECT
+snesview_,PETSC_VIEWER_STDOUT_, DIRECT
+snesview_,PETSC_VIEWER_STDERR_, DIRECT
+snesview_,PETSC_VIEWER_STDERR_, DIRECT
+snesview_,PETSC_VIEWER_BINARY_, DIRECT
+snesview_,PETSC_VIEWER_BINARY_, DIRECT
+snesview_,PETSC_VIEWER_BINARY_, DIRECT
+snesview_,PETSC_VIEWER_BINARY_, DIRECT
+snesview_,PETSC_VIEWER_SOCKET_, DIRECT
+snesview_,PETSC_VIEWER_SOCKET_, DIRECT
+snesview_,SNESView, DIRECT
+snesgetjacobian_,PetscError, DIRECT
+snesgetjacobian_,PetscError, DIRECT
+snesgetjacobian_,PetscError, DIRECT
+snesgetjacobian_,SNESGetJacobian, DIRECT
+snesgetjacobian_,PetscObjectGetFortranCallback, DIRECT
+snesgetconvergencehistory_,SNESGetConvergenceHistory, DIRECT
+snessettype_,PetscMallocA, DIRECT
+snessettype_,PetscStrncpy, DIRECT
+snessettype_,SNESSetType, DIRECT
+snessettype_,PetscTrFree = (any pointer->any pointer@i64 0) :: i32 (i8*, i32, i8*, i8*)*, INDIRECT 
+snesappendoptionsprefix_,PetscMallocA, DIRECT
+snesappendoptionsprefix_,PetscStrncpy, DIRECT
+snesappendoptionsprefix_,SNESAppendOptionsPrefix, DIRECT
+snesappendoptionsprefix_,PetscTrFree = (any pointer->any pointer@i64 0) :: i32 (i8*, i32, i8*, i8*)*, INDIRECT 
+snessetoptionsprefix_,PetscMallocA, DIRECT
+snessetoptionsprefix_,PetscStrncpy, DIRECT
+snessetoptionsprefix_,SNESSetOptionsPrefix, DIRECT
+snessetoptionsprefix_,PetscTrFree = (any pointer->any pointer@i64 0) :: i32 (i8*, i32, i8*, i8*)*, INDIRECT 
+snesmonitordefault_,SNESMonitorDefault, DIRECT
+snesmonitorsolution_,SNESMonitorSolution, DIRECT
+snesmonitorsolutionupdate_,SNESMonitorSolutionUpdate, DIRECT
+snesmonitorset_,PetscError, DIRECT
+snesmonitorset_,SNESMonitorSet, DIRECT
+snesmonitorset_,SNESMonitorSet, DIRECT
+snesmonitorset_,SNESMonitorSet, DIRECT
+snesmonitorset_,PetscObjectSetFortranCallback, DIRECT
+snesmonitorset_,PetscObjectSetFortranCallback, DIRECT
+snesmonitorset_,SNESMonitorSet, DIRECT
+oursnesmonitor,PetscObjectGetFortranCallback, DIRECT
+oursnesmonitor,PetscError, DIRECT
+oursnesmonitor,EMPTYNAME = (any pointer->any pointer@i64 0) :: void (%struct._p_SNES**, i32*, double*, i8*, i32*)*, INDIRECT 
+oursnesmonitor,PetscError, DIRECT
+oursnesmonitor,printf, DIRECT
+oursnesmonitor,printf, DIRECT
+ourmondestroy,PetscObjectGetFortranCallback, DIRECT
+ourmondestroy,PetscError, DIRECT
+ourmondestroy,EMPTYNAME = (any pointer->any pointer@i64 0) :: void (i8*, i32*)*, INDIRECT 
+ourmondestroy,PetscError, DIRECT
+ourmondestroy,printf, DIRECT
+ourmondestroy,printf, DIRECT
+snesviewfromoptions_,PetscMallocA, DIRECT
+snesviewfromoptions_,PetscStrncpy, DIRECT
+snesviewfromoptions_,PetscError, DIRECT
+snesviewfromoptions_,SNESViewFromOptions, DIRECT
+snesviewfromoptions_,PetscTrFree = (any pointer->any pointer@i64 0) :: i32 (i8*, i32, i8*, i8*)*, INDIRECT 
+snesconvergedreasonview_,PETSC_VIEWER_DRAW_, DIRECT
+snesconvergedreasonview_,PETSC_VIEWER_DRAW_, DIRECT
+snesconvergedreasonview_,PETSC_VIEWER_STDOUT_, DIRECT
+snesconvergedreasonview_,PETSC_VIEWER_STDOUT_, DIRECT
+snesconvergedreasonview_,PETSC_VIEWER_STDERR_, DIRECT
+snesconvergedreasonview_,PETSC_VIEWER_STDERR_, DIRECT
+snesconvergedreasonview_,PETSC_VIEWER_BINARY_, DIRECT
+snesconvergedreasonview_,PETSC_VIEWER_BINARY_, DIRECT
+snesconvergedreasonview_,PETSC_VIEWER_BINARY_, DIRECT
+snesconvergedreasonview_,PETSC_VIEWER_BINARY_, DIRECT
+snesconvergedreasonview_,PETSC_VIEWER_SOCKET_, DIRECT
+snesconvergedreasonview_,PETSC_VIEWER_SOCKET_, DIRECT
+snesconvergedreasonview_,SNESConvergedReasonView, DIRECT
+snesgetconvergedreasonstring_,SNESGetConvergedReasonString, DIRECT
+snesgetconvergedreasonstring_,PetscStrncpy, DIRECT

@@ -1,0 +1,23 @@
+CALLER, CALLEE, CALLTYPE
+dmsnessetjacobianlocal_,DMGetDMSNESWrite, DIRECT
+dmsnessetjacobianlocal_,PetscObjectSetFortranCallback, DIRECT
+dmsnessetjacobianlocal_,DMSNESSetJacobianLocal, DIRECT
+sourlj,DMGetDMSNES, DIRECT
+sourlj,PetscError, DIRECT
+sourlj,PetscObjectGetFortranCallback, DIRECT
+sourlj,PetscError, DIRECT
+sourlj,EMPTYNAME = (any pointer->any pointer@i64 0) :: void (%struct._p_DM**, %struct._p_Vec**, %struct._p_Mat**, %struct._p_Mat**, i8*, i32*)*, INDIRECT 
+sourlj,PetscError, DIRECT
+sourlj,printf, DIRECT
+sourlj,printf, DIRECT
+dmsnessetfunctionlocal_,DMGetDMSNESWrite, DIRECT
+dmsnessetfunctionlocal_,PetscObjectSetFortranCallback, DIRECT
+dmsnessetfunctionlocal_,DMSNESSetFunctionLocal, DIRECT
+sourlf,DMGetDMSNES, DIRECT
+sourlf,PetscError, DIRECT
+sourlf,PetscObjectGetFortranCallback, DIRECT
+sourlf,PetscError, DIRECT
+sourlf,EMPTYNAME = (any pointer->any pointer@i64 0) :: void (%struct._p_DM**, %struct._p_Vec**, %struct._p_Vec**, i8*, i32*)*, INDIRECT 
+sourlf,PetscError, DIRECT
+sourlf,printf, DIRECT
+sourlf,printf, DIRECT

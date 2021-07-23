@@ -1,0 +1,49 @@
+CALLER, CALLEE, CALLTYPE
+matcreateshell_,MPI_Comm_f2c, DIRECT
+matcreateshell_,MatCreateShell, DIRECT
+matshellsetoperation_,PetscObjectGetComm, DIRECT
+matshellsetoperation_,PetscTrMalloc = (any pointer->any pointer@i64 0) :: i32 (i64, i32, i32, i8*, i8*, i8**)*, INDIRECT 
+matshellsetoperation_,PetscError, DIRECT
+matshellsetoperation_,MatShellSetOperation, DIRECT
+matshellsetoperation_,MatShellSetOperation, DIRECT
+matshellsetoperation_,MatShellSetOperation, DIRECT
+matshellsetoperation_,MatShellSetOperation, DIRECT
+matshellsetoperation_,MatShellSetOperation, DIRECT
+matshellsetoperation_,MatShellSetOperation, DIRECT
+matshellsetoperation_,MatShellSetOperation, DIRECT
+matshellsetoperation_,MatShellSetOperation, DIRECT
+matshellsetoperation_,MatShellSetOperation, DIRECT
+matshellsetoperation_,MatShellSetOperation, DIRECT
+matshellsetoperation_,MatShellSetOperation, DIRECT
+matshellsetoperation_,MatShellSetOperation, DIRECT
+matshellsetoperation_,MatShellSetOperation, DIRECT
+matshellsetoperation_,MatShellSetOperation, DIRECT
+matshellsetoperation_,MatShellSetOperation, DIRECT
+matshellsetoperation_,MatShellSetOperation, DIRECT
+matshellsetoperation_,MatShellSetOperation, DIRECT
+matshellsetoperation_,MatShellSetOperation, DIRECT
+matshellsetoperation_,MatShellSetOperation, DIRECT
+matshellsetoperation_,MatShellSetOperation, DIRECT
+matshellsetoperation_,MatShellSetOperation, DIRECT
+matshellsetoperation_,PetscError, DIRECT
+ourmult,EMPTYNAME = (any pointer->any pointer@i64 0) :: i32 (%struct._p_Mat**, %struct._p_Vec**, %struct._p_Vec**, i32*)*, INDIRECT 
+ourmultadd,EMPTYNAME = (any pointer->any pointer@i64 0) :: i32 (%struct._p_Mat**, %struct._p_Vec**, %struct._p_Vec**, %struct._p_Vec**, i32*)*, INDIRECT 
+ourmulttranspose,EMPTYNAME = (any pointer->any pointer@i64 0) :: i32 (%struct._p_Mat**, %struct._p_Vec**, %struct._p_Vec**, i32*)*, INDIRECT 
+ourmulttransposeadd,EMPTYNAME = (any pointer->any pointer@i64 0) :: i32 (%struct._p_Mat**, %struct._p_Vec**, %struct._p_Vec**, %struct._p_Vec**, i32*)*, INDIRECT 
+oursor,EMPTYNAME = (any pointer->any pointer@i64 0) :: i32 (%struct._p_Mat**, %struct._p_Vec**, double*, i32*, double*, i32*, i32*, %struct._p_Vec**, i32*)*, INDIRECT 
+ourtranspose,EMPTYNAME = (any pointer->any pointer@i64 0) :: i32 (%struct._p_Mat**, i32*, %struct._p_Mat**, i32*)*, INDIRECT 
+ourgetdiagonal,EMPTYNAME = (any pointer->any pointer@i64 0) :: i32 (%struct._p_Mat**, %struct._p_Vec**, i32*)*, INDIRECT 
+ourdiagonalscale,EMPTYNAME = (any pointer->any pointer@i64 0) :: i32 (%struct._p_Mat**, %struct._p_Vec**, %struct._p_Vec**, i32*)*, INDIRECT 
+ourzeroentries,EMPTYNAME = (any pointer->any pointer@i64 0) :: i32 (%struct._p_Mat**, i32*)*, INDIRECT 
+ouraxpy,EMPTYNAME = (any pointer->any pointer@i64 0) :: i32 (%struct._p_Mat**, double*, %struct._p_Mat**, i32*, i32*)*, INDIRECT 
+ourshift,EMPTYNAME = (any pointer->any pointer@i64 0) :: i32 (%struct._p_Mat**, double*, i32*)*, INDIRECT 
+ourdiagonalset,EMPTYNAME = (any pointer->any pointer@i64 0) :: i32 (%struct._p_Mat**, %struct._p_Vec**, i32*, i32*)*, INDIRECT 
+ourdestroy,EMPTYNAME = (any pointer->any pointer@i64 0) :: i32 (%struct._p_Mat**, i32*)*, INDIRECT 
+ourview,EMPTYNAME = (any pointer->any pointer@i64 0) :: i32 (%struct._p_Mat**, %struct._p_PetscViewer**, i32*)*, INDIRECT 
+ourgetvecs,EMPTYNAME = (any pointer->any pointer@i64 0) :: i32 (%struct._p_Mat**, %struct._p_Vec**, %struct._p_Vec**, i32*)*, INDIRECT 
+ourgetdiagonalblock,EMPTYNAME = (any pointer->any pointer@i64 0) :: i32 (%struct._p_Mat**, %struct._p_Mat**, i32*)*, INDIRECT 
+ourcopy,EMPTYNAME = (any pointer->any pointer@i64 0) :: i32 (%struct._p_Mat**, %struct._p_Mat**, i32*, i32*)*, INDIRECT 
+ourscale,EMPTYNAME = (any pointer->any pointer@i64 0) :: i32 (%struct._p_Mat**, double*, i32*)*, INDIRECT 
+oursetrandom,EMPTYNAME = (any pointer->any pointer@i64 0) :: i32 (%struct._p_Mat**, %struct._p_PetscRandom**, i32*)*, INDIRECT 
+ourassemblybegin,EMPTYNAME = (any pointer->any pointer@i64 0) :: i32 (%struct._p_Mat**, i32*, i32*)*, INDIRECT 
+ourassemblyend,EMPTYNAME = (any pointer->any pointer@i64 0) :: i32 (%struct._p_Mat**, i32*, i32*)*, INDIRECT 

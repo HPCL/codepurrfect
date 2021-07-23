@@ -1,0 +1,2 @@
+CALLER, CALLEE, CALLTYPE
+petscobjectdestroy_,PetscObjectDestroy, DIRECT

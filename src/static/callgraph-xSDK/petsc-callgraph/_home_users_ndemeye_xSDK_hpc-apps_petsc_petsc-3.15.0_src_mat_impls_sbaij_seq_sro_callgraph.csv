@@ -1,0 +1,4 @@
+CALLER, CALLEE, CALLTYPE
+MatReorderingSeqSBAIJ,printf, DIRECT
+MatReorderingSeqSBAIJ,printf, DIRECT
+MatReorderingSeqSBAIJ,PetscError, DIRECT

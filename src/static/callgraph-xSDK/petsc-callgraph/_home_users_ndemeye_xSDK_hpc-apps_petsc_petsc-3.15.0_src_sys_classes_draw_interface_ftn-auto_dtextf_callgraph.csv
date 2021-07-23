@@ -1,0 +1,3 @@
+CALLER, CALLEE, CALLTYPE
+petscdrawstringsetsize_,PetscDrawStringSetSize, DIRECT
+petscdrawstringgetsize_,PetscDrawStringGetSize, DIRECT

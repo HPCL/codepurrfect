@@ -1,0 +1,3 @@
+CALLER, CALLEE, CALLTYPE
+kspgltrgetmineig_,KSPGLTRGetMinEig, DIRECT
+kspgltrgetlambda_,KSPGLTRGetLambda, DIRECT

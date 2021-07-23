@@ -1,0 +1,67 @@
+CALLER, CALLEE, CALLTYPE
+MatMatMatMultSymbolic_MPIAIJ_MPIAIJ_MPIAIJ,PetscError, DIRECT
+MatMatMatMultSymbolic_MPIAIJ_MPIAIJ_MPIAIJ,PetscObjectComm, DIRECT
+MatMatMatMultSymbolic_MPIAIJ_MPIAIJ_MPIAIJ,PetscError, DIRECT
+MatMatMatMultSymbolic_MPIAIJ_MPIAIJ_MPIAIJ,MatProductCreate, DIRECT
+MatMatMatMultSymbolic_MPIAIJ_MPIAIJ_MPIAIJ,PetscError, DIRECT
+MatMatMatMultSymbolic_MPIAIJ_MPIAIJ_MPIAIJ,MatProductSetType, DIRECT
+MatMatMatMultSymbolic_MPIAIJ_MPIAIJ_MPIAIJ,PetscError, DIRECT
+MatMatMatMultSymbolic_MPIAIJ_MPIAIJ_MPIAIJ,PetscStrcmp, DIRECT
+MatMatMatMultSymbolic_MPIAIJ_MPIAIJ_MPIAIJ,PetscError, DIRECT
+MatMatMatMultSymbolic_MPIAIJ_MPIAIJ_MPIAIJ,MatMatMultSymbolic_MPIAIJ_MPIAIJ, DIRECT
+MatMatMatMultSymbolic_MPIAIJ_MPIAIJ_MPIAIJ,PetscError, DIRECT
+MatMatMatMultSymbolic_MPIAIJ_MPIAIJ_MPIAIJ,MatZeroEntries, DIRECT
+MatMatMatMultSymbolic_MPIAIJ_MPIAIJ_MPIAIJ,PetscError, DIRECT
+MatMatMatMultSymbolic_MPIAIJ_MPIAIJ_MPIAIJ,MatMatMultSymbolic_MPIAIJ_MPIAIJ, DIRECT
+MatMatMatMultSymbolic_MPIAIJ_MPIAIJ_MPIAIJ,PetscError, DIRECT
+MatMatMatMultSymbolic_MPIAIJ_MPIAIJ_MPIAIJ,MatMatMultSymbolic_MPIAIJ_MPIAIJ_nonscalable, DIRECT
+MatMatMatMultSymbolic_MPIAIJ_MPIAIJ_MPIAIJ,PetscError, DIRECT
+MatMatMatMultSymbolic_MPIAIJ_MPIAIJ_MPIAIJ,MatZeroEntries, DIRECT
+MatMatMatMultSymbolic_MPIAIJ_MPIAIJ_MPIAIJ,PetscError, DIRECT
+MatMatMatMultSymbolic_MPIAIJ_MPIAIJ_MPIAIJ,MatMatMultSymbolic_MPIAIJ_MPIAIJ_nonscalable, DIRECT
+MatMatMatMultSymbolic_MPIAIJ_MPIAIJ_MPIAIJ,PetscError, DIRECT
+MatMatMatMultSymbolic_MPIAIJ_MPIAIJ_MPIAIJ,MatDestroy, DIRECT
+MatMatMatMultSymbolic_MPIAIJ_MPIAIJ_MPIAIJ,PetscError, DIRECT
+MatMatMatMultSymbolic_MPIAIJ_MPIAIJ_MPIAIJ,printf, DIRECT
+MatMatMatMultSymbolic_MPIAIJ_MPIAIJ_MPIAIJ,printf, DIRECT
+MatMatMatMultNumeric_MPIAIJ_MPIAIJ_MPIAIJ,PetscError, DIRECT
+MatMatMatMultNumeric_MPIAIJ_MPIAIJ_MPIAIJ,PetscObjectComm, DIRECT
+MatMatMatMultNumeric_MPIAIJ_MPIAIJ_MPIAIJ,PetscError, DIRECT
+MatMatMatMultNumeric_MPIAIJ_MPIAIJ_MPIAIJ,PetscObjectComm, DIRECT
+MatMatMatMultNumeric_MPIAIJ_MPIAIJ_MPIAIJ,PetscError, DIRECT
+MatMatMatMultNumeric_MPIAIJ_MPIAIJ_MPIAIJ,EMPTYNAME = (_MatOps->any pointer@i64 728) :: i32 (%struct._p_Mat*, %struct._p_Mat*, %struct._p_Mat*)*, INDIRECT 
+MatMatMatMultNumeric_MPIAIJ_MPIAIJ_MPIAIJ,PetscError, DIRECT
+MatMatMatMultNumeric_MPIAIJ_MPIAIJ_MPIAIJ,PetscObjectComm, DIRECT
+MatMatMatMultNumeric_MPIAIJ_MPIAIJ_MPIAIJ,PetscError, DIRECT
+MatMatMatMultNumeric_MPIAIJ_MPIAIJ_MPIAIJ,EMPTYNAME = (_MatOps->any pointer@i64 728) :: i32 (%struct._p_Mat*, %struct._p_Mat*, %struct._p_Mat*)*, INDIRECT 
+MatMatMatMultNumeric_MPIAIJ_MPIAIJ_MPIAIJ,PetscError, DIRECT
+MatMatMatMultNumeric_MPIAIJ_MPIAIJ_MPIAIJ,printf, DIRECT
+MatMatMatMultNumeric_MPIAIJ_MPIAIJ_MPIAIJ,printf, DIRECT
+MatDestroy_MPIAIJ_RARt,MatDestroy, DIRECT
+MatDestroy_MPIAIJ_RARt,PetscError, DIRECT
+MatDestroy_MPIAIJ_RARt,EMPTYNAME = (->any pointer@i64 48) :: i32 (i8*)*, INDIRECT 
+MatDestroy_MPIAIJ_RARt,PetscError, DIRECT
+MatDestroy_MPIAIJ_RARt,PetscTrFree = (any pointer->any pointer@i64 0) :: i32 (i8*, i32, i8*, i8*)*, INDIRECT 
+MatDestroy_MPIAIJ_RARt,PetscError, DIRECT
+MatDestroy_MPIAIJ_RARt,printf, DIRECT
+MatDestroy_MPIAIJ_RARt,printf, DIRECT
+MatProductNumeric_RARt_MPIAIJ_MPIAIJ,PetscError, DIRECT
+MatProductNumeric_RARt_MPIAIJ_MPIAIJ,PetscObjectComm, DIRECT
+MatProductNumeric_RARt_MPIAIJ_MPIAIJ,PetscError, DIRECT
+MatProductNumeric_RARt_MPIAIJ_MPIAIJ,MatTranspose, DIRECT
+MatProductNumeric_RARt_MPIAIJ_MPIAIJ,PetscError, DIRECT
+MatProductNumeric_RARt_MPIAIJ_MPIAIJ,EMPTYNAME = (_MatOps->any pointer@i64 520) :: i32 (%struct._p_Mat*, %struct._p_Mat*, %struct._p_Mat*, %struct._p_Mat*)*, INDIRECT 
+MatProductNumeric_RARt_MPIAIJ_MPIAIJ,PetscError, DIRECT
+MatProductNumeric_RARt_MPIAIJ_MPIAIJ,printf, DIRECT
+MatProductNumeric_RARt_MPIAIJ_MPIAIJ,printf, DIRECT
+MatProductSymbolic_RARt_MPIAIJ_MPIAIJ,PetscError, DIRECT
+MatProductSymbolic_RARt_MPIAIJ_MPIAIJ,PetscObjectComm, DIRECT
+MatProductSymbolic_RARt_MPIAIJ_MPIAIJ,PetscError, DIRECT
+MatProductSymbolic_RARt_MPIAIJ_MPIAIJ,MatTranspose, DIRECT
+MatProductSymbolic_RARt_MPIAIJ_MPIAIJ,PetscError, DIRECT
+MatProductSymbolic_RARt_MPIAIJ_MPIAIJ,MatMatMatMultSymbolic_MPIAIJ_MPIAIJ_MPIAIJ, DIRECT
+MatProductSymbolic_RARt_MPIAIJ_MPIAIJ,PetscError, DIRECT
+MatProductSymbolic_RARt_MPIAIJ_MPIAIJ,PetscMallocA, DIRECT
+MatProductSymbolic_RARt_MPIAIJ_MPIAIJ,PetscError, DIRECT
+MatProductSymbolic_RARt_MPIAIJ_MPIAIJ,printf, DIRECT
+MatProductSymbolic_RARt_MPIAIJ_MPIAIJ,printf, DIRECT

@@ -1,0 +1,4 @@
+CALLER, CALLEE, CALLTYPE
+dmdacreate1d_,PetscError, DIRECT
+dmdacreate1d_,MPI_Comm_f2c, DIRECT
+dmdacreate1d_,DMDACreate1d, DIRECT

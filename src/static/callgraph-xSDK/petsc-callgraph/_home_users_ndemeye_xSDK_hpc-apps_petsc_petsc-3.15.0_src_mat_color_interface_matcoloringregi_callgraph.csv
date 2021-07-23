@@ -1,0 +1,19 @@
+CALLER, CALLEE, CALLTYPE
+MatColoringRegisterAll,printf, DIRECT
+MatColoringRegisterAll,printf, DIRECT
+MatColoringRegisterAll,MatColoringRegister, DIRECT
+MatColoringRegisterAll,PetscError, DIRECT
+MatColoringRegisterAll,MatColoringRegister, DIRECT
+MatColoringRegisterAll,PetscError, DIRECT
+MatColoringRegisterAll,MatColoringRegister, DIRECT
+MatColoringRegisterAll,PetscError, DIRECT
+MatColoringRegisterAll,MatColoringRegister, DIRECT
+MatColoringRegisterAll,PetscError, DIRECT
+MatColoringRegisterAll,MatColoringRegister, DIRECT
+MatColoringRegisterAll,PetscError, DIRECT
+MatColoringRegisterAll,MatColoringRegister, DIRECT
+MatColoringRegisterAll,PetscError, DIRECT
+MatColoringRegisterAll,MatColoringRegister, DIRECT
+MatColoringRegisterAll,PetscError, DIRECT
+MatColoringRegisterAll,printf, DIRECT
+MatColoringRegisterAll,printf, DIRECT

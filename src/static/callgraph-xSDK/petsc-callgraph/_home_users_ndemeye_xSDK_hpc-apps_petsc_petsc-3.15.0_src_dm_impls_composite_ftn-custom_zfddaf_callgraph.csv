@@ -1,0 +1,25 @@
+CALLER, CALLEE, CALLTYPE
+dmcompositegetentries1_,DMCompositeGetEntries, DIRECT
+dmcompositegetentries2_,DMCompositeGetEntries, DIRECT
+dmcompositegetentries3_,DMCompositeGetEntries, DIRECT
+dmcompositegetentries4_,DMCompositeGetEntries, DIRECT
+dmcompositegetentries5_,DMCompositeGetEntries, DIRECT
+dmcompositegetaccess4_,DMCompositeGetAccess, DIRECT
+dmcompositescatter4_,DMCompositeScatter, DIRECT
+dmcompositerestoreaccess4_,DMCompositeRestoreAccess, DIRECT
+dmcompositegetlocalvectors4_,DMCompositeGetLocalVectors, DIRECT
+dmcompositerestorelocalvectors4_,DMCompositeRestoreLocalVectors, DIRECT
+dmcompositegetglobaliss_,DMCompositeGetGlobalISs, DIRECT
+dmcompositegetglobaliss_,DMCompositeGetNumberDM, DIRECT
+dmcompositegetglobaliss_,PetscTrFree = (any pointer->any pointer@i64 0) :: i32 (i8*, i32, i8*, i8*)*, INDIRECT 
+dmcompositegetlocaliss_,DMCompositeGetLocalISs, DIRECT
+dmcompositegetlocaliss_,DMCompositeGetNumberDM, DIRECT
+dmcompositegetlocaliss_,PetscTrFree = (any pointer->any pointer@i64 0) :: i32 (i8*, i32, i8*, i8*)*, INDIRECT 
+dmcompositegetaccessarray_,PetscError, DIRECT
+dmcompositegetaccessarray_,DMCompositeGetAccessArray, DIRECT
+dmcompositerestoreaccessarray_,PetscError, DIRECT
+dmcompositerestoreaccessarray_,DMCompositeRestoreAccessArray, DIRECT
+dmcompositegetlocalaccessarray_,PetscError, DIRECT
+dmcompositegetlocalaccessarray_,DMCompositeGetLocalAccessArray, DIRECT
+dmcompositerestorelocalaccessarray_,PetscError, DIRECT
+dmcompositerestorelocalaccessarray_,DMCompositeRestoreLocalAccessArray, DIRECT

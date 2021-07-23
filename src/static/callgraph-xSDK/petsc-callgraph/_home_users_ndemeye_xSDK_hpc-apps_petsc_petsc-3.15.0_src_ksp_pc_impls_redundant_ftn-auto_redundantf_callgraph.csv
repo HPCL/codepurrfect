@@ -1,0 +1,5 @@
+CALLER, CALLEE, CALLTYPE
+pcredundantsetnumber_,PCRedundantSetNumber, DIRECT
+pcredundantsetscatter_,PCRedundantSetScatter, DIRECT
+pcredundantgetksp_,PCRedundantGetKSP, DIRECT
+pcredundantgetoperators_,PCRedundantGetOperators, DIRECT

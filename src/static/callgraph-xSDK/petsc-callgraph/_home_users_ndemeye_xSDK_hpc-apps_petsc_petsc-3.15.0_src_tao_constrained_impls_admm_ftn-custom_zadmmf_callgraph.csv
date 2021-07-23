@@ -1,0 +1,55 @@
+CALLER, CALLEE, CALLTYPE
+taoadmmsetmisfitobjectiveandgradientroutine_,PetscError, DIRECT
+taoadmmsetmisfitobjectiveandgradientroutine_,PetscObjectSetFortranCallback, DIRECT
+taoadmmsetmisfitobjectiveandgradientroutine_,TaoADMMSetMisfitObjectiveAndGradientRoutine, DIRECT
+ourtaoadmmmisfitobjgradroutine,PetscObjectGetFortranCallback, DIRECT
+ourtaoadmmmisfitobjgradroutine,PetscError, DIRECT
+ourtaoadmmmisfitobjgradroutine,EMPTYNAME = (any pointer->any pointer@i64 0) :: void (%struct._p_Tao**, %struct._p_Vec**, double*, %struct._p_Vec**, i8*, i32*)*, INDIRECT 
+ourtaoadmmmisfitobjgradroutine,PetscError, DIRECT
+ourtaoadmmmisfitobjgradroutine,printf, DIRECT
+ourtaoadmmmisfitobjgradroutine,printf, DIRECT
+taoadmmsetmisfithessianroutine_,PetscError, DIRECT
+taoadmmsetmisfithessianroutine_,PetscObjectSetFortranCallback, DIRECT
+taoadmmsetmisfithessianroutine_,TaoADMMSetMisfitHessianRoutine, DIRECT
+ourtaoadmmmisfithessroutine,PetscObjectGetFortranCallback, DIRECT
+ourtaoadmmmisfithessroutine,PetscError, DIRECT
+ourtaoadmmmisfithessroutine,EMPTYNAME = (any pointer->any pointer@i64 0) :: void (%struct._p_Tao**, %struct._p_Vec**, %struct._p_Mat**, %struct._p_Mat**, i8*, i32*)*, INDIRECT 
+ourtaoadmmmisfithessroutine,PetscError, DIRECT
+ourtaoadmmmisfithessroutine,printf, DIRECT
+ourtaoadmmmisfithessroutine,printf, DIRECT
+taoadmmsetmisfitconstraintjacobian_,PetscError, DIRECT
+taoadmmsetmisfitconstraintjacobian_,PetscObjectSetFortranCallback, DIRECT
+taoadmmsetmisfitconstraintjacobian_,TaoADMMSetMisfitConstraintJacobian, DIRECT
+ourtaoadmmmisfitconstraintjacobian,PetscObjectGetFortranCallback, DIRECT
+ourtaoadmmmisfitconstraintjacobian,PetscError, DIRECT
+ourtaoadmmmisfitconstraintjacobian,EMPTYNAME = (any pointer->any pointer@i64 0) :: void (%struct._p_Tao**, %struct._p_Vec**, %struct._p_Mat**, %struct._p_Mat**, i8*, i32*)*, INDIRECT 
+ourtaoadmmmisfitconstraintjacobian,PetscError, DIRECT
+ourtaoadmmmisfitconstraintjacobian,printf, DIRECT
+ourtaoadmmmisfitconstraintjacobian,printf, DIRECT
+taoadmmsetregularizerobjectiveandgradientroutine_,PetscError, DIRECT
+taoadmmsetregularizerobjectiveandgradientroutine_,PetscObjectSetFortranCallback, DIRECT
+taoadmmsetregularizerobjectiveandgradientroutine_,TaoADMMSetRegularizerObjectiveAndGradientRoutine, DIRECT
+ourtaoadmmregularizerobjgradroutine,PetscObjectGetFortranCallback, DIRECT
+ourtaoadmmregularizerobjgradroutine,PetscError, DIRECT
+ourtaoadmmregularizerobjgradroutine,EMPTYNAME = (any pointer->any pointer@i64 0) :: void (%struct._p_Tao**, %struct._p_Vec**, double*, %struct._p_Vec**, i8*, i32*)*, INDIRECT 
+ourtaoadmmregularizerobjgradroutine,PetscError, DIRECT
+ourtaoadmmregularizerobjgradroutine,printf, DIRECT
+ourtaoadmmregularizerobjgradroutine,printf, DIRECT
+taoadmmsetregularizerhessianroutine_,PetscError, DIRECT
+taoadmmsetregularizerhessianroutine_,PetscObjectSetFortranCallback, DIRECT
+taoadmmsetregularizerhessianroutine_,TaoADMMSetRegularizerHessianRoutine, DIRECT
+ourtaoadmmregularizerhessroutine,PetscObjectGetFortranCallback, DIRECT
+ourtaoadmmregularizerhessroutine,PetscError, DIRECT
+ourtaoadmmregularizerhessroutine,EMPTYNAME = (any pointer->any pointer@i64 0) :: void (%struct._p_Tao**, %struct._p_Vec**, %struct._p_Mat**, %struct._p_Mat**, i8*, i32*)*, INDIRECT 
+ourtaoadmmregularizerhessroutine,PetscError, DIRECT
+ourtaoadmmregularizerhessroutine,printf, DIRECT
+ourtaoadmmregularizerhessroutine,printf, DIRECT
+taoadmmsetregularizerconstraintjacobian_,PetscError, DIRECT
+taoadmmsetregularizerconstraintjacobian_,PetscObjectSetFortranCallback, DIRECT
+taoadmmsetregularizerconstraintjacobian_,TaoADMMSetRegularizerConstraintJacobian, DIRECT
+ourtaoadmmregularizerconstraintjacobian,PetscObjectGetFortranCallback, DIRECT
+ourtaoadmmregularizerconstraintjacobian,PetscError, DIRECT
+ourtaoadmmregularizerconstraintjacobian,EMPTYNAME = (any pointer->any pointer@i64 0) :: void (%struct._p_Tao**, %struct._p_Vec**, %struct._p_Mat**, %struct._p_Mat**, i8*, i32*)*, INDIRECT 
+ourtaoadmmregularizerconstraintjacobian,PetscError, DIRECT
+ourtaoadmmregularizerconstraintjacobian,printf, DIRECT
+ourtaoadmmregularizerconstraintjacobian,printf, DIRECT

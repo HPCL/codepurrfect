@@ -1,0 +1,5 @@
+CALLER, CALLEE, CALLTYPE
+snesgetconvergencehistoryf90_,SNESGetConvergenceHistory, DIRECT
+snesgetconvergencehistoryf90_,F90Array1dCreate, DIRECT
+snesgetconvergencehistoryf90_,F90Array1dCreate, DIRECT
+snesdestroy_,SNESDestroy, DIRECT

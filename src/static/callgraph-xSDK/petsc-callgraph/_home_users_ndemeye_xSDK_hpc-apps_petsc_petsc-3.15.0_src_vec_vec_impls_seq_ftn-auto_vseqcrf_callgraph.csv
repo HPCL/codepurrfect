@@ -1,0 +1,3 @@
+CALLER, CALLEE, CALLTYPE
+veccreateseq_,MPI_Comm_f2c, DIRECT
+veccreateseq_,VecCreateSeq, DIRECT

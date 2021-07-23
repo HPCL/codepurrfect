@@ -1,0 +1,4 @@
+PetscTrFree = any pointer->any pointer@i64 0 :: i32 (i8*, i32, i8*, i8*)*
+PetscVFPrintf = any pointer->any pointer@i64 0 :: i32 (%struct._IO_FILE*, i8*, %struct.__va_list_tag*)*
+PetscTrFree = any pointer->any pointer@i64 0 :: i32 (i8*, i32, i8*, i8*)*
+PetscTrFree = any pointer->any pointer@i64 0 :: i32 (i8*, i32, i8*, i8*)*

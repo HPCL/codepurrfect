@@ -1,0 +1,8 @@
+CALLER, CALLEE, CALLTYPE
+DMPlexCreateMedFromFile,MPI_Comm_rank, DIRECT
+DMPlexCreateMedFromFile,MPI_Error_string, DIRECT
+DMPlexCreateMedFromFile,PetscError, DIRECT
+DMPlexCreateMedFromFile,MPI_Comm_size, DIRECT
+DMPlexCreateMedFromFile,MPI_Error_string, DIRECT
+DMPlexCreateMedFromFile,PetscError, DIRECT
+DMPlexCreateMedFromFile,PetscError, DIRECT

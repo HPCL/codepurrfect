@@ -1,0 +1,12 @@
+CALLER, CALLEE, CALLTYPE
+pcgasmgetsubksp1_,PetscError, DIRECT
+pcgasmgetsubksp1_,PetscError, DIRECT
+pcgasmgetsubksp1_,PetscError, DIRECT
+pcgasmgetsubksp1_,PCGASMGetSubKSP, DIRECT
+pcgasmgetsubksp2_,pcgasmgetsubksp1_, DIRECT
+pcgasmgetsubksp3_,pcgasmgetsubksp1_, DIRECT
+pcgasmgetsubksp4_,pcgasmgetsubksp1_, DIRECT
+pcgasmgetsubksp5_,pcgasmgetsubksp1_, DIRECT
+pcgasmgetsubksp6_,pcgasmgetsubksp1_, DIRECT
+pcgasmgetsubksp7_,pcgasmgetsubksp1_, DIRECT
+pcgasmgetsubksp8_,pcgasmgetsubksp1_, DIRECT

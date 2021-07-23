@@ -1,0 +1,5 @@
+CALLER, CALLEE, CALLTYPE
+TSAdaptCreate_None,printf, DIRECT
+TSAdaptCreate_None,printf, DIRECT
+TSAdaptChoose_None,printf, DIRECT
+TSAdaptChoose_None,printf, DIRECT

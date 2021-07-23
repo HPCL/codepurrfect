@@ -1,0 +1,3 @@
+CALLER, CALLEE, CALLTYPE
+petscobjectgetname_,PetscObjectGetName, DIRECT
+petscobjectgetname_,PetscStrncpy, DIRECT

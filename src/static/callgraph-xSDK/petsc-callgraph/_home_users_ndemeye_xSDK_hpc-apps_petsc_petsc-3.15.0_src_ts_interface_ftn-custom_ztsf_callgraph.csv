@@ -1,0 +1,128 @@
+CALLER, CALLEE, CALLTYPE
+tsmonitorlgsettransform_,TSMonitorLGSetTransform, DIRECT
+tsmonitorlgsettransform_,PetscObjectSetFortranCallback, DIRECT
+ourtransform,PetscObjectGetFortranCallback, DIRECT
+ourtransform,PetscError, DIRECT
+ourtransform,EMPTYNAME = (any pointer->any pointer@i64 0) :: void (i8*, %struct._p_Vec**, %struct._p_Vec**, i32*)*, INDIRECT 
+ourtransform,PetscError, DIRECT
+ourtransform,printf, DIRECT
+ourtransform,printf, DIRECT
+tssetprestep_,TSSetPreStep, DIRECT
+tssetprestep_,PetscObjectSetFortranCallback, DIRECT
+ourprestep,PetscObjectGetFortranCallback, DIRECT
+ourprestep,PetscError, DIRECT
+ourprestep,EMPTYNAME = (any pointer->any pointer@i64 0) :: void (%struct._p_TS**, i32*)*, INDIRECT 
+ourprestep,PetscError, DIRECT
+ourprestep,printf, DIRECT
+ourprestep,printf, DIRECT
+tssetpoststep_,TSSetPostStep, DIRECT
+tssetpoststep_,PetscObjectSetFortranCallback, DIRECT
+ourpoststep,PetscObjectGetFortranCallback, DIRECT
+ourpoststep,PetscError, DIRECT
+ourpoststep,EMPTYNAME = (any pointer->any pointer@i64 0) :: void (%struct._p_TS**, i32*)*, INDIRECT 
+ourpoststep,PetscError, DIRECT
+ourpoststep,printf, DIRECT
+ourpoststep,printf, DIRECT
+tscomputerhsfunctionlinear_,TSComputeRHSFunctionLinear, DIRECT
+tssetrhsfunction_,PetscError, DIRECT
+tssetrhsfunction_,PetscError, DIRECT
+tssetrhsfunction_,TSSetRHSFunction, DIRECT
+tssetrhsfunction_,PetscObjectSetFortranCallback, DIRECT
+tssetrhsfunction_,TSSetRHSFunction, DIRECT
+ourrhsfunction,PetscObjectGetFortranCallback, DIRECT
+ourrhsfunction,PetscError, DIRECT
+ourrhsfunction,EMPTYNAME = (any pointer->any pointer@i64 0) :: void (%struct._p_TS**, double*, %struct._p_Vec**, %struct._p_Vec**, i8*, i32*)*, INDIRECT 
+ourrhsfunction,PetscError, DIRECT
+ourrhsfunction,printf, DIRECT
+ourrhsfunction,printf, DIRECT
+tsgetrhsfunction_,PetscError, DIRECT
+tsgetrhsfunction_,PetscError, DIRECT
+tsgetrhsfunction_,TSGetRHSFunction, DIRECT
+tscomputeifunctionlinear_,TSComputeIFunctionLinear, DIRECT
+tssetifunction_,PetscError, DIRECT
+tssetifunction_,PetscError, DIRECT
+tssetifunction_,TSSetIFunction, DIRECT
+tssetifunction_,PetscObjectSetFortranCallback, DIRECT
+tssetifunction_,TSSetIFunction, DIRECT
+ourifunction,PetscObjectGetFortranCallback, DIRECT
+ourifunction,PetscError, DIRECT
+ourifunction,EMPTYNAME = (any pointer->any pointer@i64 0) :: void (%struct._p_TS**, double*, %struct._p_Vec**, %struct._p_Vec**, %struct._p_Vec**, i8*, i32*)*, INDIRECT 
+ourifunction,PetscError, DIRECT
+ourifunction,printf, DIRECT
+ourifunction,printf, DIRECT
+tsgetifunction_,PetscError, DIRECT
+tsgetifunction_,PetscError, DIRECT
+tsgetifunction_,TSGetIFunction, DIRECT
+tscomputerhsjacobianconstant_,TSComputeRHSJacobianConstant, DIRECT
+tssetrhsjacobian_,PetscError, DIRECT
+tssetrhsjacobian_,TSSetRHSJacobian, DIRECT
+tssetrhsjacobian_,PetscObjectSetFortranCallback, DIRECT
+tssetrhsjacobian_,TSSetRHSJacobian, DIRECT
+ourrhsjacobian,PetscObjectGetFortranCallback, DIRECT
+ourrhsjacobian,PetscError, DIRECT
+ourrhsjacobian,EMPTYNAME = (any pointer->any pointer@i64 0) :: void (%struct._p_TS**, double*, %struct._p_Vec**, %struct._p_Mat**, %struct._p_Mat**, i8*, i32*)*, INDIRECT 
+ourrhsjacobian,PetscError, DIRECT
+ourrhsjacobian,printf, DIRECT
+ourrhsjacobian,printf, DIRECT
+tscomputeijacobianconstant_,TSComputeIJacobianConstant, DIRECT
+tssetijacobian_,PetscError, DIRECT
+tssetijacobian_,TSSetIJacobian, DIRECT
+tssetijacobian_,PetscObjectSetFortranCallback, DIRECT
+tssetijacobian_,TSSetIJacobian, DIRECT
+ourijacobian,PetscObjectGetFortranCallback, DIRECT
+ourijacobian,PetscError, DIRECT
+ourijacobian,EMPTYNAME = (any pointer->any pointer@i64 0) :: void (%struct._p_TS**, double*, %struct._p_Vec**, %struct._p_Vec**, double*, %struct._p_Mat**, %struct._p_Mat**, i8*, i32*)*, INDIRECT 
+ourijacobian,PetscError, DIRECT
+ourijacobian,printf, DIRECT
+ourijacobian,printf, DIRECT
+tsgetijacobian_,PetscError, DIRECT
+tsgetijacobian_,PetscError, DIRECT
+tsgetijacobian_,PetscError, DIRECT
+tsgetijacobian_,TSGetIJacobian, DIRECT
+tsmonitordefault_,TSMonitorDefault, DIRECT
+tsmonitorset_,PetscError, DIRECT
+tsmonitorset_,TSMonitorSet, DIRECT
+tsmonitorset_,PetscObjectSetFortranCallback, DIRECT
+tsmonitorset_,PetscObjectSetFortranCallback, DIRECT
+tsmonitorset_,TSMonitorSet, DIRECT
+ourmonitor,PetscObjectGetFortranCallback, DIRECT
+ourmonitor,PetscError, DIRECT
+ourmonitor,EMPTYNAME = (any pointer->any pointer@i64 0) :: void (%struct._p_TS**, i32*, double*, %struct._p_Vec**, i8*, i32*)*, INDIRECT 
+ourmonitor,PetscError, DIRECT
+ourmonitor,printf, DIRECT
+ourmonitor,printf, DIRECT
+ourmonitordestroy,PetscObjectGetFortranCallback, DIRECT
+ourmonitordestroy,PetscError, DIRECT
+ourmonitordestroy,EMPTYNAME = (any pointer->any pointer@i64 0) :: void (i8*, i32*)*, INDIRECT 
+ourmonitordestroy,PetscError, DIRECT
+ourmonitordestroy,printf, DIRECT
+ourmonitordestroy,printf, DIRECT
+tsgetrhsjacobian_,TSGetRHSJacobian, DIRECT
+tsview_,PETSC_VIEWER_DRAW_, DIRECT
+tsview_,PETSC_VIEWER_DRAW_, DIRECT
+tsview_,PETSC_VIEWER_STDOUT_, DIRECT
+tsview_,PETSC_VIEWER_STDOUT_, DIRECT
+tsview_,PETSC_VIEWER_STDERR_, DIRECT
+tsview_,PETSC_VIEWER_STDERR_, DIRECT
+tsview_,PETSC_VIEWER_BINARY_, DIRECT
+tsview_,PETSC_VIEWER_BINARY_, DIRECT
+tsview_,PETSC_VIEWER_BINARY_, DIRECT
+tsview_,PETSC_VIEWER_BINARY_, DIRECT
+tsview_,PETSC_VIEWER_SOCKET_, DIRECT
+tsview_,PETSC_VIEWER_SOCKET_, DIRECT
+tsview_,TSView, DIRECT
+tssetoptionsprefix_,PetscMallocA, DIRECT
+tssetoptionsprefix_,PetscStrncpy, DIRECT
+tssetoptionsprefix_,TSSetOptionsPrefix, DIRECT
+tssetoptionsprefix_,PetscTrFree = (any pointer->any pointer@i64 0) :: i32 (i8*, i32, i8*, i8*)*, INDIRECT 
+tsgetoptionsprefix_,TSGetOptionsPrefix, DIRECT
+tsgetoptionsprefix_,PetscStrncpy, DIRECT
+tsappendoptionsprefix_,PetscMallocA, DIRECT
+tsappendoptionsprefix_,PetscStrncpy, DIRECT
+tsappendoptionsprefix_,TSAppendOptionsPrefix, DIRECT
+tsappendoptionsprefix_,PetscTrFree = (any pointer->any pointer@i64 0) :: i32 (i8*, i32, i8*, i8*)*, INDIRECT 
+tsviewfromoptions_,PetscMallocA, DIRECT
+tsviewfromoptions_,PetscStrncpy, DIRECT
+tsviewfromoptions_,PetscError, DIRECT
+tsviewfromoptions_,TSViewFromOptions, DIRECT
+tsviewfromoptions_,PetscTrFree = (any pointer->any pointer@i64 0) :: i32 (i8*, i32, i8*, i8*)*, INDIRECT 

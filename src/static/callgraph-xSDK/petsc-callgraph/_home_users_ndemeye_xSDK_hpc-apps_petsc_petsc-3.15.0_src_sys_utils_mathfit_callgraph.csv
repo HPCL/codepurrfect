@@ -1,0 +1,21 @@
+CALLER, CALLEE, CALLTYPE
+PetscLinearRegression,PetscMallocA, DIRECT
+PetscLinearRegression,PetscError, DIRECT
+PetscLinearRegression,PetscFPTrapPush, DIRECT
+PetscLinearRegression,PetscError, DIRECT
+PetscLinearRegression,dgetrf_, DIRECT
+PetscLinearRegression,PetscMallocValidate, DIRECT
+PetscLinearRegression,PetscError, DIRECT
+PetscLinearRegression,printf, DIRECT
+PetscLinearRegression,printf, DIRECT
+PetscLinearRegression,dgetri_, DIRECT
+PetscLinearRegression,PetscMallocValidate, DIRECT
+PetscLinearRegression,PetscError, DIRECT
+PetscLinearRegression,printf, DIRECT
+PetscLinearRegression,printf, DIRECT
+PetscLinearRegression,PetscFPTrapPop, DIRECT
+PetscLinearRegression,PetscError, DIRECT
+PetscLinearRegression,PetscFreeA, DIRECT
+PetscLinearRegression,PetscError, DIRECT
+PetscLinearRegression,printf, DIRECT
+PetscLinearRegression,printf, DIRECT

@@ -1,0 +1,5 @@
+CALLER, CALLEE, CALLTYPE
+matsnesmfgetsnes_,MatSNESMFGetSNES, DIRECT
+matsnesmfsetreusebase_,MatSNESMFSetReuseBase, DIRECT
+matsnesmfgetreusebase_,MatSNESMFGetReuseBase, DIRECT
+matcreatesnesmf_,MatCreateSNESMF, DIRECT

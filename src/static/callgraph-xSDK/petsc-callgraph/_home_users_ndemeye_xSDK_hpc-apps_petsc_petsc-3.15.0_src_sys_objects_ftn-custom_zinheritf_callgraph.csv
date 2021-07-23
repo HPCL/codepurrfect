@@ -1,0 +1,12 @@
+CALLER, CALLEE, CALLTYPE
+petscobjectcompose_,PetscMallocA, DIRECT
+petscobjectcompose_,PetscStrncpy, DIRECT
+petscobjectcompose_,PetscObjectCompose, DIRECT
+petscobjectcompose_,PetscTrFree = (any pointer->any pointer@i64 0) :: i32 (i8*, i32, i8*, i8*)*, INDIRECT 
+petscobjectquery_,PetscMallocA, DIRECT
+petscobjectquery_,PetscStrncpy, DIRECT
+petscobjectquery_,PetscObjectQuery, DIRECT
+petscobjectquery_,PetscTrFree = (any pointer->any pointer@i64 0) :: i32 (i8*, i32, i8*, i8*)*, INDIRECT 
+petscobjectreference_,PetscObjectReference, DIRECT
+petscobjectdereference_,PetscObjectDereference, DIRECT
+petscobjectgetreference_,PetscObjectGetReference, DIRECT

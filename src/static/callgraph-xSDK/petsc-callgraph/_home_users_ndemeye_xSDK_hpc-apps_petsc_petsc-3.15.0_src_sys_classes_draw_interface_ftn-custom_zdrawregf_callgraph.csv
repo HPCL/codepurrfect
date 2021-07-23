@@ -1,0 +1,22 @@
+CALLER, CALLEE, CALLTYPE
+petscdrawsettype_,PetscMallocA, DIRECT
+petscdrawsettype_,PetscStrncpy, DIRECT
+petscdrawsettype_,PetscDrawSetType, DIRECT
+petscdrawsettype_,PetscTrFree = (any pointer->any pointer@i64 0) :: i32 (i8*, i32, i8*, i8*)*, INDIRECT 
+petscdrawcreate_,PetscMallocA, DIRECT
+petscdrawcreate_,PetscStrncpy, DIRECT
+petscdrawcreate_,PetscMallocA, DIRECT
+petscdrawcreate_,PetscStrncpy, DIRECT
+petscdrawcreate_,MPI_Comm_f2c, DIRECT
+petscdrawcreate_,PetscDrawCreate, DIRECT
+petscdrawcreate_,PetscTrFree = (any pointer->any pointer@i64 0) :: i32 (i8*, i32, i8*, i8*)*, INDIRECT 
+petscdrawcreate_,PetscTrFree = (any pointer->any pointer@i64 0) :: i32 (i8*, i32, i8*, i8*)*, INDIRECT 
+petscdrawsetoptionsprefix_,PetscMallocA, DIRECT
+petscdrawsetoptionsprefix_,PetscStrncpy, DIRECT
+petscdrawsetoptionsprefix_,PetscDrawSetOptionsPrefix, DIRECT
+petscdrawsetoptionsprefix_,PetscTrFree = (any pointer->any pointer@i64 0) :: i32 (i8*, i32, i8*, i8*)*, INDIRECT 
+petscdrawviewfromoptions_,PetscMallocA, DIRECT
+petscdrawviewfromoptions_,PetscStrncpy, DIRECT
+petscdrawviewfromoptions_,PetscError, DIRECT
+petscdrawviewfromoptions_,PetscDrawViewFromOptions, DIRECT
+petscdrawviewfromoptions_,PetscTrFree = (any pointer->any pointer@i64 0) :: i32 (i8*, i32, i8*, i8*)*, INDIRECT 

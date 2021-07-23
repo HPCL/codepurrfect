@@ -1,0 +1,4 @@
+CALLER, CALLEE, CALLTYPE
+snesqnsetrestarttype_,SNESQNSetRestartType, DIRECT
+snesqnsetscaletype_,SNESQNSetScaleType, DIRECT
+snesqnsettype_,SNESQNSetType, DIRECT

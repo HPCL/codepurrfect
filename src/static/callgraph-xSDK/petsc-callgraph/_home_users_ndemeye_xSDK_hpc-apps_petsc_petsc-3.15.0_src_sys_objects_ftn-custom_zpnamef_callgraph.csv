@@ -1,0 +1,5 @@
+CALLER, CALLEE, CALLTYPE
+petscobjectsetname_,PetscMallocA, DIRECT
+petscobjectsetname_,PetscStrncpy, DIRECT
+petscobjectsetname_,PetscObjectSetName, DIRECT
+petscobjectsetname_,PetscTrFree = (any pointer->any pointer@i64 0) :: i32 (i8*, i32, i8*, i8*)*, INDIRECT 

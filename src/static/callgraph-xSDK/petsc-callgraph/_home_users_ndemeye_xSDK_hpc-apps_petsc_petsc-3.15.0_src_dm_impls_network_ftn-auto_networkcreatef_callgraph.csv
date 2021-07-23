@@ -1,0 +1,3 @@
+CALLER, CALLEE, CALLTYPE
+dmnetworkcreate_,MPI_Comm_f2c, DIRECT
+dmnetworkcreate_,DMNetworkCreate, DIRECT

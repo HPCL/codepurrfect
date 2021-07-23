@@ -1,0 +1,24 @@
+CALLER, CALLEE, CALLTYPE
+MatGetOrdering_ND,MatGetRowIJ, DIRECT
+MatGetOrdering_ND,PetscError, DIRECT
+MatGetOrdering_ND,MatConvert, DIRECT
+MatGetOrdering_ND,PetscError, DIRECT
+MatGetOrdering_ND,MatGetRowIJ, DIRECT
+MatGetOrdering_ND,PetscError, DIRECT
+MatGetOrdering_ND,PetscMallocA, DIRECT
+MatGetOrdering_ND,PetscError, DIRECT
+MatGetOrdering_ND,SPARSEPACKgennd, DIRECT
+MatGetOrdering_ND,MatRestoreRowIJ, DIRECT
+MatGetOrdering_ND,PetscError, DIRECT
+MatGetOrdering_ND,MatDestroy, DIRECT
+MatGetOrdering_ND,PetscError, DIRECT
+MatGetOrdering_ND,MatRestoreRowIJ, DIRECT
+MatGetOrdering_ND,PetscError, DIRECT
+MatGetOrdering_ND,ISCreateGeneral, DIRECT
+MatGetOrdering_ND,PetscError, DIRECT
+MatGetOrdering_ND,ISCreateGeneral, DIRECT
+MatGetOrdering_ND,PetscError, DIRECT
+MatGetOrdering_ND,PetscFreeA, DIRECT
+MatGetOrdering_ND,PetscError, DIRECT
+MatGetOrdering_ND,printf, DIRECT
+MatGetOrdering_ND,printf, DIRECT

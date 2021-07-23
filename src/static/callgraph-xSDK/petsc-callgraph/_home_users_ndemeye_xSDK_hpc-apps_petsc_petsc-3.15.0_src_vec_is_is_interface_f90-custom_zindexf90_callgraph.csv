@@ -1,0 +1,8 @@
+CALLER, CALLEE, CALLTYPE
+isgetindicesf90_,ISGetIndices, DIRECT
+isgetindicesf90_,ISGetLocalSize, DIRECT
+isgetindicesf90_,F90Array1dCreate, DIRECT
+isrestoreindicesf90_,F90Array1dAccess, DIRECT
+isrestoreindicesf90_,F90Array1dDestroy, DIRECT
+isrestoreindicesf90_,ISRestoreIndices, DIRECT
+isdestroy_,ISDestroy, DIRECT

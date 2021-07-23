@@ -1,0 +1,4 @@
+CALLER, CALLEE, CALLTYPE
+kspgetresidualhistoryf90_,KSPGetResidualHistory, DIRECT
+kspgetresidualhistoryf90_,F90Array1dCreate, DIRECT
+kspdestroy_,KSPDestroy, DIRECT

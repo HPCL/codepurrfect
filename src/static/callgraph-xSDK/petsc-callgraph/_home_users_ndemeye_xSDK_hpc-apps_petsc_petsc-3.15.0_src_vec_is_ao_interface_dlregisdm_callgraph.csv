@@ -1,0 +1,27 @@
+CALLER, CALLEE, CALLTYPE
+AOFinalizePackage,PetscFunctionListDestroy, DIRECT
+AOFinalizePackage,PetscError, DIRECT
+AOFinalizePackage,printf, DIRECT
+AOFinalizePackage,printf, DIRECT
+AOInitializePackage,printf, DIRECT
+AOInitializePackage,printf, DIRECT
+AOInitializePackage,PetscClassIdRegister, DIRECT
+AOInitializePackage,PetscError, DIRECT
+AOInitializePackage,AORegisterAll, DIRECT
+AOInitializePackage,PetscError, DIRECT
+AOInitializePackage,PetscLogEventRegister, DIRECT
+AOInitializePackage,PetscError, DIRECT
+AOInitializePackage,PetscLogEventRegister, DIRECT
+AOInitializePackage,PetscError, DIRECT
+AOInitializePackage,PetscInfoProcessClass, DIRECT
+AOInitializePackage,PetscError, DIRECT
+AOInitializePackage,PetscOptionsGetString, DIRECT
+AOInitializePackage,PetscError, DIRECT
+AOInitializePackage,PetscStrInList, DIRECT
+AOInitializePackage,PetscError, DIRECT
+AOInitializePackage,PetscLogEventExcludeClass, DIRECT
+AOInitializePackage,PetscError, DIRECT
+AOInitializePackage,PetscRegisterFinalize, DIRECT
+AOInitializePackage,PetscError, DIRECT
+AOInitializePackage,printf, DIRECT
+AOInitializePackage,printf, DIRECT

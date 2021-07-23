@@ -1,0 +1,27 @@
+CALLER, CALLEE, CALLTYPE
+kspgettype_,KSPGetType, DIRECT
+kspgettype_,PetscStrncpy, DIRECT
+kspsettype_,PetscMallocA, DIRECT
+kspsettype_,PetscStrncpy, DIRECT
+kspsettype_,KSPSetType, DIRECT
+kspsettype_,PetscTrFree = (any pointer->any pointer@i64 0) :: i32 (i8*, i32, i8*, i8*)*, INDIRECT 
+kspview_,PETSC_VIEWER_DRAW_, DIRECT
+kspview_,PETSC_VIEWER_DRAW_, DIRECT
+kspview_,PETSC_VIEWER_STDOUT_, DIRECT
+kspview_,PETSC_VIEWER_STDOUT_, DIRECT
+kspview_,PETSC_VIEWER_STDERR_, DIRECT
+kspview_,PETSC_VIEWER_STDERR_, DIRECT
+kspview_,PETSC_VIEWER_BINARY_, DIRECT
+kspview_,PETSC_VIEWER_BINARY_, DIRECT
+kspview_,PETSC_VIEWER_BINARY_, DIRECT
+kspview_,PETSC_VIEWER_BINARY_, DIRECT
+kspview_,PETSC_VIEWER_SOCKET_, DIRECT
+kspview_,PETSC_VIEWER_SOCKET_, DIRECT
+kspview_,KSPView, DIRECT
+kspviewfromoptions_,PetscMallocA, DIRECT
+kspviewfromoptions_,PetscStrncpy, DIRECT
+kspviewfromoptions_,PetscError, DIRECT
+kspviewfromoptions_,KSPViewFromOptions, DIRECT
+kspviewfromoptions_,PetscTrFree = (any pointer->any pointer@i64 0) :: i32 (i8*, i32, i8*, i8*)*, INDIRECT 
+kspgetconvergedreasonstring_,KSPGetConvergedReasonString, DIRECT
+kspgetconvergedreasonstring_,PetscStrncpy, DIRECT

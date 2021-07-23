@@ -1,0 +1,16 @@
+CALLER, CALLEE, CALLTYPE
+VecCreate_Seq,PetscObjectComm, DIRECT
+VecCreate_Seq,MPI_Comm_size, DIRECT
+VecCreate_Seq,MPI_Error_string, DIRECT
+VecCreate_Seq,PetscError, DIRECT
+VecCreate_Seq,PetscError, DIRECT
+VecCreate_Seq,PetscMallocA, DIRECT
+VecCreate_Seq,PetscError, DIRECT
+VecCreate_Seq,PetscLogObjectMemory, DIRECT
+VecCreate_Seq,PetscError, DIRECT
+VecCreate_Seq,VecCreate_Seq_Private, DIRECT
+VecCreate_Seq,PetscError, DIRECT
+VecCreate_Seq,VecSet, DIRECT
+VecCreate_Seq,PetscError, DIRECT
+VecCreate_Seq,printf, DIRECT
+VecCreate_Seq,printf, DIRECT

@@ -1,0 +1,9 @@
+CALLER, CALLEE, CALLTYPE
+AORegisterAll,printf, DIRECT
+AORegisterAll,printf, DIRECT
+AORegisterAll,AORegister, DIRECT
+AORegisterAll,PetscError, DIRECT
+AORegisterAll,AORegister, DIRECT
+AORegisterAll,PetscError, DIRECT
+AORegisterAll,printf, DIRECT
+AORegisterAll,printf, DIRECT

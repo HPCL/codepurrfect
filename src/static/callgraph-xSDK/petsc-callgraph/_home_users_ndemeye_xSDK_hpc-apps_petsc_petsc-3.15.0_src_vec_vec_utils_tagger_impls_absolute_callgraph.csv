@@ -1,0 +1,19 @@
+CALLER, CALLEE, CALLTYPE
+VecTaggerAbsoluteSetBox,VecTaggerSetBox_Simple, DIRECT
+VecTaggerAbsoluteSetBox,PetscError, DIRECT
+VecTaggerAbsoluteSetBox,printf, DIRECT
+VecTaggerAbsoluteSetBox,printf, DIRECT
+VecTaggerAbsoluteGetBox,VecTaggerGetBox_Simple, DIRECT
+VecTaggerAbsoluteGetBox,PetscError, DIRECT
+VecTaggerAbsoluteGetBox,printf, DIRECT
+VecTaggerAbsoluteGetBox,printf, DIRECT
+VecTaggerCreate_Absolute,VecTaggerCreate_Simple, DIRECT
+VecTaggerCreate_Absolute,PetscError, DIRECT
+VecTaggerCreate_Absolute,printf, DIRECT
+VecTaggerCreate_Absolute,printf, DIRECT
+VecTaggerComputeBoxes_Absolute,VecTaggerGetBlockSize, DIRECT
+VecTaggerComputeBoxes_Absolute,PetscError, DIRECT
+VecTaggerComputeBoxes_Absolute,PetscMallocA, DIRECT
+VecTaggerComputeBoxes_Absolute,PetscError, DIRECT
+VecTaggerComputeBoxes_Absolute,printf, DIRECT
+VecTaggerComputeBoxes_Absolute,printf, DIRECT

@@ -1,0 +1,14 @@
+CALLER, CALLEE, CALLTYPE
+TSPythonSetType,PetscError, DIRECT
+TSPythonSetType,PetscCheckPointer, DIRECT
+TSPythonSetType,PetscError, DIRECT
+TSPythonSetType,PetscError, DIRECT
+TSPythonSetType,PetscError, DIRECT
+TSPythonSetType,PetscError, DIRECT
+TSPythonSetType,PetscCheckPointer, DIRECT
+TSPythonSetType,PetscError, DIRECT
+TSPythonSetType,PetscObjectQueryFunction_Private, DIRECT
+TSPythonSetType,EMPTYNAME = (any pointer->any pointer@i64 0) :: i32 (%struct._p_TS*, i8*)*, INDIRECT 
+TSPythonSetType,PetscError, DIRECT
+TSPythonSetType,printf, DIRECT
+TSPythonSetType,printf, DIRECT

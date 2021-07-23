@@ -1,0 +1,16 @@
+CALLER, CALLEE, CALLTYPE
+dmplexmarkboundaryfaces_,DMPlexMarkBoundaryFaces, DIRECT
+dmplexlabelcomplete_,DMPlexLabelComplete, DIRECT
+dmplexlabeladdcells_,DMPlexLabelAddCells, DIRECT
+dmplexlabeladdfacecells_,DMPlexLabelAddFaceCells, DIRECT
+dmplexlabelclearcells_,DMPlexLabelClearCells, DIRECT
+dmplexlabelcohesivecomplete_,DMPlexLabelCohesiveComplete, DIRECT
+dmplexcreatehybridmesh_,DMPlexCreateHybridMesh, DIRECT
+dmplexgetorientedface_,DMPlexGetOrientedFace, DIRECT
+dmplexcreatesubmesh_,DMPlexCreateSubmesh, DIRECT
+dmplexfilter_,DMPlexFilter, DIRECT
+dmplexgetsubpointmap_,DMPlexGetSubpointMap, DIRECT
+dmplexsetsubpointmap_,DMPlexSetSubpointMap, DIRECT
+dmplexgetsubpointis_,DMPlexGetSubpointIS, DIRECT
+dmgetenclosurerelation_,DMGetEnclosureRelation, DIRECT
+dmgetenclosurepoint_,DMGetEnclosurePoint, DIRECT

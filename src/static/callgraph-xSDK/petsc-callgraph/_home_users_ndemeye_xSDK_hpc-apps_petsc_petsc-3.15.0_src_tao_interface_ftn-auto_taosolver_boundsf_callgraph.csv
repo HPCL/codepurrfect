@@ -1,0 +1,5 @@
+CALLER, CALLEE, CALLTYPE
+taosetvariablebounds_,TaoSetVariableBounds, DIRECT
+taosetinequalitybounds_,TaoSetInequalityBounds, DIRECT
+taocomputedualvariables_,TaoComputeDualVariables, DIRECT
+taogetdualvariables_,TaoGetDualVariables, DIRECT

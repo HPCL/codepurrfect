@@ -1,0 +1,10 @@
+CALLER, CALLEE, CALLTYPE
+DMDAGetGhostCorners,PetscCheckPointer, DIRECT
+DMDAGetGhostCorners,PetscError, DIRECT
+DMDAGetGhostCorners,PetscError, DIRECT
+DMDAGetGhostCorners,PetscError, DIRECT
+DMDAGetGhostCorners,PetscObjectTypeCompare, DIRECT
+DMDAGetGhostCorners,PetscError, DIRECT
+DMDAGetGhostCorners,PetscError, DIRECT
+DMDAGetGhostCorners,printf, DIRECT
+DMDAGetGhostCorners,printf, DIRECT

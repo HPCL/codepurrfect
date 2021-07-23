@@ -1,0 +1,8 @@
+CALLER, CALLEE, CALLTYPE
+landauaddmaxwellians_,LandauAddMaxwellians, DIRECT
+landaudestroyvelocityspace_,LandauDestroyVelocitySpace, DIRECT
+landauprintnorms_,LandauPrintNorms, DIRECT
+landaucreatecoloring_,LandauCreateColoring, DIRECT
+landaucreatemassmatrix_,LandauCreateMassMatrix, DIRECT
+landauifunction_,LandauIFunction, DIRECT
+landauijacobian_,LandauIJacobian, DIRECT

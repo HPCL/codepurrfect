@@ -1,0 +1,126 @@
+CALLER, CALLEE, CALLTYPE
+PetscClassRegLogCreate,PetscMallocA, DIRECT
+PetscClassRegLogCreate,PetscError, DIRECT
+PetscClassRegLogCreate,PetscMallocA, DIRECT
+PetscClassRegLogCreate,PetscError, DIRECT
+PetscClassRegLogCreate,printf, DIRECT
+PetscClassRegLogCreate,printf, DIRECT
+PetscClassRegLogDestroy,PetscClassRegInfoDestroy, DIRECT
+PetscClassRegLogDestroy,PetscError, DIRECT
+PetscClassRegLogDestroy,PetscTrFree = (any pointer->any pointer@i64 0) :: i32 (i8*, i32, i8*, i8*)*, INDIRECT 
+PetscClassRegLogDestroy,PetscError, DIRECT
+PetscClassRegLogDestroy,PetscTrFree = (any pointer->any pointer@i64 0) :: i32 (i8*, i32, i8*, i8*)*, INDIRECT 
+PetscClassRegLogDestroy,PetscError, DIRECT
+PetscClassRegLogDestroy,printf, DIRECT
+PetscClassRegLogDestroy,printf, DIRECT
+PetscClassRegInfoDestroy,PetscTrFree = (any pointer->any pointer@i64 0) :: i32 (i8*, i32, i8*, i8*)*, INDIRECT 
+PetscClassRegInfoDestroy,PetscError, DIRECT
+PetscClassRegInfoDestroy,printf, DIRECT
+PetscClassRegInfoDestroy,printf, DIRECT
+PetscClassPerfLogCreate,PetscMallocA, DIRECT
+PetscClassPerfLogCreate,PetscError, DIRECT
+PetscClassPerfLogCreate,PetscMallocA, DIRECT
+PetscClassPerfLogCreate,PetscError, DIRECT
+PetscClassPerfLogCreate,printf, DIRECT
+PetscClassPerfLogCreate,printf, DIRECT
+PetscClassPerfLogDestroy,PetscTrFree = (any pointer->any pointer@i64 0) :: i32 (i8*, i32, i8*, i8*)*, INDIRECT 
+PetscClassPerfLogDestroy,PetscError, DIRECT
+PetscClassPerfLogDestroy,PetscTrFree = (any pointer->any pointer@i64 0) :: i32 (i8*, i32, i8*, i8*)*, INDIRECT 
+PetscClassPerfLogDestroy,PetscError, DIRECT
+PetscClassPerfLogDestroy,printf, DIRECT
+PetscClassPerfLogDestroy,printf, DIRECT
+PetscClassPerfInfoClear,printf, DIRECT
+PetscClassPerfInfoClear,printf, DIRECT
+PetscClassPerfLogEnsureSize,PetscMallocA, DIRECT
+PetscClassPerfLogEnsureSize,PetscError, DIRECT
+PetscClassPerfLogEnsureSize,PetscMemcpy, DIRECT
+PetscClassPerfLogEnsureSize,PetscError, DIRECT
+PetscClassPerfLogEnsureSize,PetscTrFree = (any pointer->any pointer@i64 0) :: i32 (i8*, i32, i8*, i8*)*, INDIRECT 
+PetscClassPerfLogEnsureSize,PetscError, DIRECT
+PetscClassPerfLogEnsureSize,PetscClassPerfInfoClear, DIRECT
+PetscClassPerfLogEnsureSize,printf, DIRECT
+PetscClassPerfLogEnsureSize,printf, DIRECT
+PetscMemcpy,PetscError, DIRECT
+PetscMemcpy,PetscError, DIRECT
+PetscMemcpy,PetscError, DIRECT
+PetscMemcpy,printf, DIRECT
+PetscMemcpy,printf, DIRECT
+PetscClassRegLogRegister,PetscError, DIRECT
+PetscClassRegLogRegister,PetscCheckPointer, DIRECT
+PetscClassRegLogRegister,PetscError, DIRECT
+PetscClassRegLogRegister,PetscMallocA, DIRECT
+PetscClassRegLogRegister,PetscError, DIRECT
+PetscClassRegLogRegister,PetscMemcpy, DIRECT
+PetscClassRegLogRegister,PetscError, DIRECT
+PetscClassRegLogRegister,PetscTrFree = (any pointer->any pointer@i64 0) :: i32 (i8*, i32, i8*, i8*)*, INDIRECT 
+PetscClassRegLogRegister,PetscError, DIRECT
+PetscClassRegLogRegister,PetscStrallocpy, DIRECT
+PetscClassRegLogRegister,PetscError, DIRECT
+PetscClassRegLogRegister,printf, DIRECT
+PetscClassRegLogRegister,printf, DIRECT
+PetscClassRegLogGetClass,PetscError, DIRECT
+PetscClassRegLogGetClass,PetscCheckPointer, DIRECT
+PetscClassRegLogGetClass,PetscError, DIRECT
+PetscClassRegLogGetClass,PetscError, DIRECT
+PetscClassRegLogGetClass,printf, DIRECT
+PetscClassRegLogGetClass,printf, DIRECT
+PetscLogObjCreateDefault,PetscLogGetStageLog, DIRECT
+PetscLogObjCreateDefault,PetscError, DIRECT
+PetscLogObjCreateDefault,PetscStageLogGetCurrent, DIRECT
+PetscLogObjCreateDefault,PetscError, DIRECT
+PetscLogObjCreateDefault,PetscStageLogGetClassRegLog, DIRECT
+PetscLogObjCreateDefault,PetscError, DIRECT
+PetscLogObjCreateDefault,PetscStageLogGetClassPerfLog, DIRECT
+PetscLogObjCreateDefault,PetscError, DIRECT
+PetscLogObjCreateDefault,PetscClassRegLogGetClass, DIRECT
+PetscLogObjCreateDefault,PetscError, DIRECT
+PetscLogObjCreateDefault,MPI_Wtime, DIRECT
+PetscLogObjCreateDefault,PetscMallocA, DIRECT
+PetscLogObjCreateDefault,PetscError, DIRECT
+PetscLogObjCreateDefault,PetscMemcpy, DIRECT
+PetscLogObjCreateDefault,PetscError, DIRECT
+PetscLogObjCreateDefault,PetscTrFree = (any pointer->any pointer@i64 0) :: i32 (i8*, i32, i8*, i8*)*, INDIRECT 
+PetscLogObjCreateDefault,PetscError, DIRECT
+PetscLogObjCreateDefault,MPI_Wtime, DIRECT
+PetscLogObjCreateDefault,MPI_Wtime, DIRECT
+PetscLogObjCreateDefault,PetscMallocGetCurrentUsage, DIRECT
+PetscLogObjCreateDefault,PetscError, DIRECT
+PetscLogObjCreateDefault,PetscMallocGetMaximumUsage, DIRECT
+PetscLogObjCreateDefault,PetscError, DIRECT
+PetscLogObjCreateDefault,MPI_Wtime, DIRECT
+PetscLogObjCreateDefault,PetscMallocA, DIRECT
+PetscLogObjCreateDefault,PetscError, DIRECT
+PetscLogObjCreateDefault,PetscMemcpy, DIRECT
+PetscLogObjCreateDefault,PetscError, DIRECT
+PetscLogObjCreateDefault,PetscTrFree = (any pointer->any pointer@i64 0) :: i32 (i8*, i32, i8*, i8*)*, INDIRECT 
+PetscLogObjCreateDefault,PetscError, DIRECT
+PetscLogObjCreateDefault,MPI_Wtime, DIRECT
+PetscLogObjCreateDefault,printf, DIRECT
+PetscLogObjCreateDefault,printf, DIRECT
+PetscLogObjDestroyDefault,PetscLogGetStageLog, DIRECT
+PetscLogObjDestroyDefault,PetscError, DIRECT
+PetscLogObjDestroyDefault,PetscStageLogGetCurrent, DIRECT
+PetscLogObjDestroyDefault,PetscError, DIRECT
+PetscLogObjDestroyDefault,PetscStageLogGetClassRegLog, DIRECT
+PetscLogObjDestroyDefault,PetscError, DIRECT
+PetscLogObjDestroyDefault,PetscStageLogGetClassPerfLog, DIRECT
+PetscLogObjDestroyDefault,PetscError, DIRECT
+PetscLogObjDestroyDefault,PetscClassRegLogGetClass, DIRECT
+PetscLogObjDestroyDefault,PetscError, DIRECT
+PetscLogObjDestroyDefault,MPI_Wtime, DIRECT
+PetscLogObjDestroyDefault,PetscMallocA, DIRECT
+PetscLogObjDestroyDefault,PetscError, DIRECT
+PetscLogObjDestroyDefault,PetscMemcpy, DIRECT
+PetscLogObjDestroyDefault,PetscError, DIRECT
+PetscLogObjDestroyDefault,PetscTrFree = (any pointer->any pointer@i64 0) :: i32 (i8*, i32, i8*, i8*)*, INDIRECT 
+PetscLogObjDestroyDefault,PetscError, DIRECT
+PetscLogObjDestroyDefault,MPI_Wtime, DIRECT
+PetscLogObjDestroyDefault,MPI_Wtime, DIRECT
+PetscLogObjDestroyDefault,PetscMallocGetCurrentUsage, DIRECT
+PetscLogObjDestroyDefault,PetscError, DIRECT
+PetscLogObjDestroyDefault,PetscMallocGetMaximumUsage, DIRECT
+PetscLogObjDestroyDefault,PetscError, DIRECT
+PetscLogObjDestroyDefault,PetscStrncpy, DIRECT
+PetscLogObjDestroyDefault,PetscError, DIRECT
+PetscLogObjDestroyDefault,printf, DIRECT
+PetscLogObjDestroyDefault,printf, DIRECT

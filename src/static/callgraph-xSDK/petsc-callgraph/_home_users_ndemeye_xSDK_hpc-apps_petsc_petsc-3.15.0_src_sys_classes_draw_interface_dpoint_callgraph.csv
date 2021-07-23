@@ -1,0 +1,31 @@
+CALLER, CALLEE, CALLTYPE
+PetscDrawPoint,PetscError, DIRECT
+PetscDrawPoint,PetscCheckPointer, DIRECT
+PetscDrawPoint,PetscError, DIRECT
+PetscDrawPoint,PetscError, DIRECT
+PetscDrawPoint,PetscError, DIRECT
+PetscDrawPoint,PetscError, DIRECT
+PetscDrawPoint,EMPTYNAME = (_PetscDrawOps->any pointer@i64 40) :: i32 (%struct._p_PetscDraw*, double, double, i32)*, INDIRECT 
+PetscDrawPoint,PetscError, DIRECT
+PetscDrawPoint,printf, DIRECT
+PetscDrawPoint,printf, DIRECT
+PetscDrawPointPixel,PetscError, DIRECT
+PetscDrawPointPixel,PetscCheckPointer, DIRECT
+PetscDrawPointPixel,PetscError, DIRECT
+PetscDrawPointPixel,PetscError, DIRECT
+PetscDrawPointPixel,PetscError, DIRECT
+PetscDrawPointPixel,PetscError, DIRECT
+PetscDrawPointPixel,EMPTYNAME = (_PetscDrawOps->any pointer@i64 272) :: i32 (%struct._p_PetscDraw*, i32, i32, i32)*, INDIRECT 
+PetscDrawPointPixel,PetscError, DIRECT
+PetscDrawPointPixel,printf, DIRECT
+PetscDrawPointPixel,printf, DIRECT
+PetscDrawPointSetSize,PetscError, DIRECT
+PetscDrawPointSetSize,PetscCheckPointer, DIRECT
+PetscDrawPointSetSize,PetscError, DIRECT
+PetscDrawPointSetSize,PetscError, DIRECT
+PetscDrawPointSetSize,PetscError, DIRECT
+PetscDrawPointSetSize,PetscError, DIRECT
+PetscDrawPointSetSize,EMPTYNAME = (_PetscDrawOps->any pointer@i64 48) :: i32 (%struct._p_PetscDraw*, double)*, INDIRECT 
+PetscDrawPointSetSize,PetscError, DIRECT
+PetscDrawPointSetSize,printf, DIRECT
+PetscDrawPointSetSize,printf, DIRECT

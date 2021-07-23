@@ -1,0 +1,5 @@
+EMPTYNAME = _PetscDrawOps->any pointer@i64 56 :: i32 (%struct._p_PetscDraw*, double, double, i32, i8*)*
+EMPTYNAME = _PetscDrawOps->any pointer@i64 64 :: i32 (%struct._p_PetscDraw*, double, double, i32, i8*)*
+EMPTYNAME = _PetscDrawOps->any pointer@i64 80 :: i32 (%struct._p_PetscDraw*, double*, double*)*
+EMPTYNAME = _PetscDrawOps->any pointer@i64 280 :: i32 (%struct._p_PetscDraw*, double, double, i32, i32, i8*, double*, double*)*
+EMPTYNAME = _PetscDrawOps->any pointer@i64 72 :: i32 (%struct._p_PetscDraw*, double, double)*

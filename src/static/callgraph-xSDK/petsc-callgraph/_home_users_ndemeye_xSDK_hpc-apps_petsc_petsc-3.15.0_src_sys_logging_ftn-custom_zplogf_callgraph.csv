@@ -1,0 +1,45 @@
+CALLER, CALLEE, CALLTYPE
+petsclogeventbegin_,PetscLogPLB = (any pointer->any pointer@i64 0) :: i32 (i32, i32, %struct._p_PetscObject*, %struct._p_PetscObject*, %struct._p_PetscObject*, %struct._p_PetscObject*)*, INDIRECT 
+petsclogeventend_,PetscLogPLE = (any pointer->any pointer@i64 0) :: i32 (i32, i32, %struct._p_PetscObject*, %struct._p_PetscObject*, %struct._p_PetscObject*, %struct._p_PetscObject*)*, INDIRECT 
+petsclogflops_,PetscError, DIRECT
+petsclogflops_,printf, DIRECT
+petsclogflops_,printf, DIRECT
+petsclogview_,PETSC_VIEWER_DRAW_, DIRECT
+petsclogview_,PETSC_VIEWER_DRAW_, DIRECT
+petsclogview_,PETSC_VIEWER_STDOUT_, DIRECT
+petsclogview_,PETSC_VIEWER_STDOUT_, DIRECT
+petsclogview_,PETSC_VIEWER_STDERR_, DIRECT
+petsclogview_,PETSC_VIEWER_STDERR_, DIRECT
+petsclogview_,PETSC_VIEWER_BINARY_, DIRECT
+petsclogview_,PETSC_VIEWER_BINARY_, DIRECT
+petsclogview_,PETSC_VIEWER_BINARY_, DIRECT
+petsclogview_,PETSC_VIEWER_BINARY_, DIRECT
+petsclogview_,PETSC_VIEWER_SOCKET_, DIRECT
+petsclogview_,PETSC_VIEWER_SOCKET_, DIRECT
+petsclogview_,PetscLogView, DIRECT
+petsclogdump_,PetscMallocA, DIRECT
+petsclogdump_,PetscStrncpy, DIRECT
+petsclogdump_,PetscLogDump, DIRECT
+petsclogdump_,PetscTrFree = (any pointer->any pointer@i64 0) :: i32 (i8*, i32, i8*, i8*)*, INDIRECT 
+petsclogeventregister_,PetscMallocA, DIRECT
+petsclogeventregister_,PetscStrncpy, DIRECT
+petsclogeventregister_,PetscLogEventRegister, DIRECT
+petsclogeventregister_,PetscTrFree = (any pointer->any pointer@i64 0) :: i32 (i8*, i32, i8*, i8*)*, INDIRECT 
+petscclassidregister_,PetscMallocA, DIRECT
+petscclassidregister_,PetscStrncpy, DIRECT
+petscclassidregister_,PetscClassIdRegister, DIRECT
+petscclassidregister_,PetscTrFree = (any pointer->any pointer@i64 0) :: i32 (i8*, i32, i8*, i8*)*, INDIRECT 
+petsclogallbegin_,PetscLogAllBegin, DIRECT
+petsclogdefaultbegin_,PetscLogDefaultBegin, DIRECT
+petsclognestedbegin_,PetscLogNestedBegin, DIRECT
+petsclogstagepop_,PetscLogStagePop, DIRECT
+petsclogstageregister_,PetscMallocA, DIRECT
+petsclogstageregister_,PetscStrncpy, DIRECT
+petsclogstageregister_,PetscLogStageRegister, DIRECT
+petsclogstageregister_,PetscTrFree = (any pointer->any pointer@i64 0) :: i32 (i8*, i32, i8*, i8*)*, INDIRECT 
+petsclogstagepush_,PetscLogStagePush, DIRECT
+petscgetflops_,PetscGetFlops, DIRECT
+petsclogstagegetid_,PetscMallocA, DIRECT
+petsclogstagegetid_,PetscStrncpy, DIRECT
+petsclogstagegetid_,PetscLogStageGetId, DIRECT
+petsclogstagegetid_,PetscTrFree = (any pointer->any pointer@i64 0) :: i32 (i8*, i32, i8*, i8*)*, INDIRECT 

@@ -1,0 +1,4 @@
+PetscTrFree = any pointer->any pointer@i64 0 :: i32 (i8*, i32, i8*, i8*)*
+EMPTYNAME = _SNESOps->any pointer@i64 24 :: i32 (%struct._p_SNES*, i32, double, double, double, i32*, i8*)*
+EMPTYNAME = _SNESOps->any pointer@i64 16 :: i32 (%struct._p_SNES*, i32)*
+EMPTYNAME = _SNESOps->any pointer@i64 24 :: i32 (%struct._p_SNES*, i32, double, double, double, i32*, i8*)*

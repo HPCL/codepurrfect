@@ -1,0 +1,24 @@
+CALLER, CALLEE, CALLTYPE
+petscfesetfromoptions_,PetscFESetFromOptions, DIRECT
+petscfedestroy_,PetscFEDestroy, DIRECT
+petscfecreate_,MPI_Comm_f2c, DIRECT
+petscfecreate_,PetscFECreate, DIRECT
+petscfegetspatialdimension_,PetscFEGetSpatialDimension, DIRECT
+petscfesetnumcomponents_,PetscFESetNumComponents, DIRECT
+petscfegetnumcomponents_,PetscFEGetNumComponents, DIRECT
+petscfesettilesizes_,PetscFESetTileSizes, DIRECT
+petscfegettilesizes_,PetscFEGetTileSizes, DIRECT
+petscfegetbasisspace_,PetscFEGetBasisSpace, DIRECT
+petscfesetbasisspace_,PetscFESetBasisSpace, DIRECT
+petscfegetdualspace_,PetscFEGetDualSpace, DIRECT
+petscfesetdualspace_,PetscFESetDualSpace, DIRECT
+petscfegetquadrature_,PetscFEGetQuadrature, DIRECT
+petscfesetquadrature_,PetscFESetQuadrature, DIRECT
+petscfegetfacequadrature_,PetscFEGetFaceQuadrature, DIRECT
+petscfesetfacequadrature_,PetscFESetFaceQuadrature, DIRECT
+petscfecopyquadrature_,PetscFECopyQuadrature, DIRECT
+petscfegetdimension_,PetscFEGetDimension, DIRECT
+petscfegetheightsubspace_,PetscFEGetHeightSubspace, DIRECT
+petscferefine_,PetscFERefine, DIRECT
+petscfecreatelagrange_,MPI_Comm_f2c, DIRECT
+petscfecreatelagrange_,PetscFECreateLagrange, DIRECT

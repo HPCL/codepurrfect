@@ -1,0 +1,14 @@
+CALLER, CALLEE, CALLTYPE
+tstrajectorysetdirname_,PetscMallocA, DIRECT
+tstrajectorysetdirname_,PetscStrncpy, DIRECT
+tstrajectorysetdirname_,TSTrajectorySetDirname, DIRECT
+tstrajectorysetdirname_,PetscTrFree = (any pointer->any pointer@i64 0) :: i32 (i8*, i32, i8*, i8*)*, INDIRECT 
+tstrajectorysetfiletemplate_,PetscMallocA, DIRECT
+tstrajectorysetfiletemplate_,PetscStrncpy, DIRECT
+tstrajectorysetfiletemplate_,TSTrajectorySetFiletemplate, DIRECT
+tstrajectorysetfiletemplate_,PetscTrFree = (any pointer->any pointer@i64 0) :: i32 (i8*, i32, i8*, i8*)*, INDIRECT 
+tstrajectoryviewfromoptions_,PetscMallocA, DIRECT
+tstrajectoryviewfromoptions_,PetscStrncpy, DIRECT
+tstrajectoryviewfromoptions_,PetscError, DIRECT
+tstrajectoryviewfromoptions_,TSTrajectoryViewFromOptions, DIRECT
+tstrajectoryviewfromoptions_,PetscTrFree = (any pointer->any pointer@i64 0) :: i32 (i8*, i32, i8*, i8*)*, INDIRECT 

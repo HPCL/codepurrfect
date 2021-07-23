@@ -1,0 +1,6 @@
+PetscTrFree = any pointer->any pointer@i64 0 :: i32 (i8*, i32, i8*, i8*)*
+PetscTrFree = any pointer->any pointer@i64 0 :: i32 (i8*, i32, i8*, i8*)*
+PetscTrFree = any pointer->any pointer@i64 0 :: i32 (i8*, i32, i8*, i8*)*
+EMPTYNAME = _PetscDrawOps->any pointer@i64 224 :: i32 (%struct._p_PetscDraw*)*
+EMPTYNAME = _PetscDrawOps->any pointer@i64 232 :: i32 (%struct._p_PetscDraw*, [3 x i8]*, i32*, i32*, i8**)*
+PetscTrFree = any pointer->any pointer@i64 0 :: i32 (i8*, i32, i8*, i8*)*

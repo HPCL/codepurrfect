@@ -1,0 +1,12 @@
+CALLER, CALLEE, CALLTYPE
+petscpartitionergettype_,PetscPartitionerGetType, DIRECT
+petscpartitionergettype_,PetscStrncpy, DIRECT
+petscpartitionerviewfromoptions_,PetscMallocA, DIRECT
+petscpartitionerviewfromoptions_,PetscStrncpy, DIRECT
+petscpartitionerviewfromoptions_,PetscError, DIRECT
+petscpartitionerviewfromoptions_,PetscPartitionerViewFromOptions, DIRECT
+petscpartitionerviewfromoptions_,PetscTrFree = (any pointer->any pointer@i64 0) :: i32 (i8*, i32, i8*, i8*)*, INDIRECT 
+petscpartitionersettype_,PetscMallocA, DIRECT
+petscpartitionersettype_,PetscStrncpy, DIRECT
+petscpartitionersettype_,PetscPartitionerSetType, DIRECT
+petscpartitionersettype_,PetscTrFree = (any pointer->any pointer@i64 0) :: i32 (i8*, i32, i8*, i8*)*, INDIRECT 

@@ -1,0 +1,11 @@
+CALLER, CALLEE, CALLTYPE
+TaoCreate_BQNKTL,TaoCreate_BQNK, DIRECT
+TaoCreate_BQNKTL,PetscError, DIRECT
+TaoCreate_BQNKTL,printf, DIRECT
+TaoCreate_BQNKTL,printf, DIRECT
+TaoSetUp_BQNKTL,TaoSetUp_BQNK, DIRECT
+TaoSetUp_BQNKTL,PetscError, DIRECT
+TaoSetUp_BQNKTL,PetscObjectComm, DIRECT
+TaoSetUp_BQNKTL,PetscError, DIRECT
+TaoSetUp_BQNKTL,printf, DIRECT
+TaoSetUp_BQNKTL,printf, DIRECT

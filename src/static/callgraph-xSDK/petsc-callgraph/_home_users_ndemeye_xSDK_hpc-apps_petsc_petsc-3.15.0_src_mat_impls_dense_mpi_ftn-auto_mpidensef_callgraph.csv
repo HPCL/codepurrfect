@@ -1,0 +1,5 @@
+CALLER, CALLEE, CALLTYPE
+matdensegetlocalmatrix_,MatDenseGetLocalMatrix, DIRECT
+matdenseplacearray_,MatDensePlaceArray, DIRECT
+matdenseresetarray_,MatDenseResetArray, DIRECT
+matdensereplacearray_,MatDenseReplaceArray, DIRECT

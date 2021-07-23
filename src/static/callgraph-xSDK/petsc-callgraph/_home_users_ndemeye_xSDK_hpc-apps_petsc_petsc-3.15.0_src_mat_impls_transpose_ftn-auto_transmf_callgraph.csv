@@ -1,0 +1,3 @@
+CALLER, CALLEE, CALLTYPE
+mattransposegetmat_,MatTransposeGetMat, DIRECT
+matcreatetranspose_,MatCreateTranspose, DIRECT

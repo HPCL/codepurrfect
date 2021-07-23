@@ -1,0 +1,14 @@
+CALLER, CALLEE, CALLTYPE
+kspgetresidualnorm_,KSPGetResidualNorm, DIRECT
+kspgetiterationnumber_,KSPGetIterationNumber, DIRECT
+kspgettotaliterations_,KSPGetTotalIterations, DIRECT
+kspconvergeddefaultsetuirnorm_,KSPConvergedDefaultSetUIRNorm, DIRECT
+kspconvergeddefaultsetumirnorm_,KSPConvergedDefaultSetUMIRNorm, DIRECT
+kspconvergeddefaultsetconvergedmaxits_,KSPConvergedDefaultSetConvergedMaxits, DIRECT
+kspgetconvergedreason_,KSPGetConvergedReason, DIRECT
+kspsetdm_,KSPSetDM, DIRECT
+kspsetdmactive_,KSPSetDMActive, DIRECT
+kspgetdm_,KSPGetDM, DIRECT
+kspsetapplicationcontext_,KSPSetApplicationContext, DIRECT
+kspgetapplicationcontext_,KSPGetApplicationContext, DIRECT
+kspchecksolve_,KSPCheckSolve, DIRECT

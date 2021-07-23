@@ -1,0 +1,4 @@
+CALLER, CALLEE, CALLTYPE
+tsadapthistorygetstep_,TSAdaptHistoryGetStep, DIRECT
+tsadapthistorysethistory_,TSAdaptHistorySetHistory, DIRECT
+tsadapthistorysettrajectory_,TSAdaptHistorySetTrajectory, DIRECT

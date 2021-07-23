@@ -1,0 +1,9 @@
+EMPTYNAME = any pointer->any pointer@i64 0 :: i32 (%struct._p_PC*, %struct._p_Mat*)*
+EMPTYNAME = any pointer->any pointer@i64 0 :: i32 (%struct._p_PC*, %struct._p_Mat*)*
+EMPTYNAME = any pointer->any pointer@i64 0 :: i32 (%struct._p_PC*, i32 (%struct._p_PC*, %struct._p_Mat*, %struct._p_Mat*, %struct._p_Mat**, i8*)*, i8*)*
+EMPTYNAME = any pointer->any pointer@i64 0 :: i32 (%struct._p_PC*, %struct._p_KSP**)*
+EMPTYNAME = ->any pointer@i64 40 :: i32 (%struct._p_PC*, %struct._p_Mat*, %struct._p_Mat*, %struct._p_Mat**, i8*)*
+EMPTYNAME = ->any pointer@i64 40 :: i32 (%struct._p_PC*, %struct._p_Mat*, %struct._p_Mat*, %struct._p_Mat**, i8*)*
+PetscTrFree = any pointer->any pointer@i64 0 :: i32 (i8*, i32, i8*, i8*)*
+PetscTrFree = any pointer->any pointer@i64 0 :: i32 (i8*, i32, i8*, i8*)*
+PetscTrFree = any pointer->any pointer@i64 0 :: i32 (i8*, i32, i8*, i8*)*

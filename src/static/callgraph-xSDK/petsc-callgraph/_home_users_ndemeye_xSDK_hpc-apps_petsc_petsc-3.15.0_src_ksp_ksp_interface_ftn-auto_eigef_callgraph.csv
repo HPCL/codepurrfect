@@ -1,0 +1,3 @@
+CALLER, CALLEE, CALLTYPE
+kspcomputeoperator_,KSPComputeOperator, DIRECT
+kspcomputeeigenvaluesexplicitly_,KSPComputeEigenvaluesExplicitly, DIRECT

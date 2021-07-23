@@ -1,0 +1,24 @@
+CALLER, CALLEE, CALLTYPE
+MatGetOrdering_QMD,MatGetRowIJ, DIRECT
+MatGetOrdering_QMD,PetscError, DIRECT
+MatGetOrdering_QMD,PetscObjectComm, DIRECT
+MatGetOrdering_QMD,PetscError, DIRECT
+MatGetOrdering_QMD,PetscMallocA, DIRECT
+MatGetOrdering_QMD,PetscError, DIRECT
+MatGetOrdering_QMD,PetscMallocA, DIRECT
+MatGetOrdering_QMD,PetscError, DIRECT
+MatGetOrdering_QMD,PetscMallocA, DIRECT
+MatGetOrdering_QMD,PetscError, DIRECT
+MatGetOrdering_QMD,SPARSEPACKgenqmd, DIRECT
+MatGetOrdering_QMD,MatRestoreRowIJ, DIRECT
+MatGetOrdering_QMD,PetscError, DIRECT
+MatGetOrdering_QMD,PetscFreeA, DIRECT
+MatGetOrdering_QMD,PetscError, DIRECT
+MatGetOrdering_QMD,PetscFreeA, DIRECT
+MatGetOrdering_QMD,PetscError, DIRECT
+MatGetOrdering_QMD,ISCreateGeneral, DIRECT
+MatGetOrdering_QMD,PetscError, DIRECT
+MatGetOrdering_QMD,ISCreateGeneral, DIRECT
+MatGetOrdering_QMD,PetscError, DIRECT
+MatGetOrdering_QMD,printf, DIRECT
+MatGetOrdering_QMD,printf, DIRECT

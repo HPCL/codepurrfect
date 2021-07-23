@@ -1,0 +1,20 @@
+CALLER, CALLEE, CALLTYPE
+PetscRandomSeed_Rand48,srand48, DIRECT
+PetscRandomSeed_Rand48,printf, DIRECT
+PetscRandomSeed_Rand48,printf, DIRECT
+PetscRandomGetValue_Rand48,drand48, DIRECT
+PetscRandomGetValue_Rand48,drand48, DIRECT
+PetscRandomGetValue_Rand48,printf, DIRECT
+PetscRandomGetValue_Rand48,printf, DIRECT
+PetscRandomGetValueReal_Rand48,drand48, DIRECT
+PetscRandomGetValueReal_Rand48,drand48, DIRECT
+PetscRandomGetValueReal_Rand48,printf, DIRECT
+PetscRandomGetValueReal_Rand48,printf, DIRECT
+PetscRandomCreate_Rand48,printf, DIRECT
+PetscRandomCreate_Rand48,printf, DIRECT
+PetscRandomCreate_Rand48,PetscError, DIRECT
+PetscRandomCreate_Rand48,PetscError, DIRECT
+PetscRandomCreate_Rand48,PetscObjectChangeTypeName, DIRECT
+PetscRandomCreate_Rand48,PetscError, DIRECT
+PetscRandomCreate_Rand48,printf, DIRECT
+PetscRandomCreate_Rand48,printf, DIRECT

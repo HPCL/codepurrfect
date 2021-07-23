@@ -1,0 +1,5 @@
+CALLER, CALLEE, CALLTYPE
+snesngssettolerances_,SNESNGSSetTolerances, DIRECT
+snesngsgettolerances_,SNESNGSGetTolerances, DIRECT
+snesngssetsweeps_,SNESNGSSetSweeps, DIRECT
+snesngsgetsweeps_,SNESNGSGetSweeps, DIRECT

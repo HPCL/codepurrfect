@@ -1,0 +1,10 @@
+CALLER, CALLEE, CALLTYPE
+PetscGetDate,time, DIRECT
+PetscGetDate,localtime, DIRECT
+PetscGetDate,asctime, DIRECT
+PetscGetDate,PetscStrncpy, DIRECT
+PetscGetDate,PetscError, DIRECT
+PetscGetDate,PetscStrstr, DIRECT
+PetscGetDate,PetscError, DIRECT
+PetscGetDate,printf, DIRECT
+PetscGetDate,printf, DIRECT

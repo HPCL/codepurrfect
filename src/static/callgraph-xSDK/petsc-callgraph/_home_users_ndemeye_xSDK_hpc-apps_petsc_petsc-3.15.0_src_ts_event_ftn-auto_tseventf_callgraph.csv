@@ -1,0 +1,4 @@
+CALLER, CALLEE, CALLTYPE
+tssetposteventintervalstep_,TSSetPostEventIntervalStep, DIRECT
+tsseteventtolerances_,TSSetEventTolerances, DIRECT
+tsgetnumevents_,TSGetNumEvents, DIRECT

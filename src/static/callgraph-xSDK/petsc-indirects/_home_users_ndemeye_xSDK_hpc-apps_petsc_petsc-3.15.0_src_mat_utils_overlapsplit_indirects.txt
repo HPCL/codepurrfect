@@ -1,0 +1,4 @@
+EMPTYNAME = _MatOps->any pointer@i64 328 :: i32 (%struct._p_Mat*, i32, %struct._p_IS**, i32)*
+PetscTrFree = any pointer->any pointer@i64 0 :: i32 (i8*, i32, i8*, i8*)*
+PetscTrFree = any pointer->any pointer@i64 0 :: i32 (i8*, i32, i8*, i8*)*
+PetscTrFree = any pointer->any pointer@i64 0 :: i32 (i8*, i32, i8*, i8*)*

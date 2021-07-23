@@ -1,0 +1,10 @@
+CALLER, CALLEE, CALLTYPE
+kspsetnormtype_,KSPSetNormType, DIRECT
+kspsetchecknormiteration_,KSPSetCheckNormIteration, DIRECT
+kspsetlagnorm_,KSPSetLagNorm, DIRECT
+kspsetsupportednorm_,KSPSetSupportedNorm, DIRECT
+kspgetnormtype_,KSPGetNormType, DIRECT
+kspsetoperators_,KSPSetOperators, DIRECT
+kspgetoperators_,KSPGetOperators, DIRECT
+kspcreate_,MPI_Comm_f2c, DIRECT
+kspcreate_,KSPCreate, DIRECT

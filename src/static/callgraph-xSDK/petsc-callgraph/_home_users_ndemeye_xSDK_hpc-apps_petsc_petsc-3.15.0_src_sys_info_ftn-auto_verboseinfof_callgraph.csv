@@ -1,0 +1,9 @@
+CALLER, CALLEE, CALLTYPE
+petscinfoenabled_,PetscInfoEnabled, DIRECT
+petscinfoallow_,PetscInfoAllow, DIRECT
+petscinfogetinfo_,PetscInfoGetInfo, DIRECT
+petscinfosetfiltercommself_,PetscInfoSetFilterCommSelf, DIRECT
+petscinfosetfromoptions_,PetscInfoSetFromOptions, DIRECT
+petscinfodestroy_,PetscInfoDestroy, DIRECT
+petscinfodeactivateclass_,PetscInfoDeactivateClass, DIRECT
+petscinfoactivateclass_,PetscInfoActivateClass, DIRECT

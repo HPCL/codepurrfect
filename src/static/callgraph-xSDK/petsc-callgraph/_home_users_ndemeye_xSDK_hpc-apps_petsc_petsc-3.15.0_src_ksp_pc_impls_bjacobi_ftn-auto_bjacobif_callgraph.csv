@@ -1,0 +1,3 @@
+CALLER, CALLEE, CALLTYPE
+pcbjacobisettotalblocks_,PCBJacobiSetTotalBlocks, DIRECT
+pcbjacobisetlocalblocks_,PCBJacobiSetLocalBlocks, DIRECT

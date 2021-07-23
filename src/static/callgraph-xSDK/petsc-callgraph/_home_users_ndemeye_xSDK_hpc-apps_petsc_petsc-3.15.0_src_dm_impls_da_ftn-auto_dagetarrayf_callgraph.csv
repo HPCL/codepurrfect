@@ -1,0 +1,6 @@
+CALLER, CALLEE, CALLTYPE
+dmdavecrestorearray_,DMDAVecRestoreArray, DIRECT
+dmdavecrestorearraywrite_,DMDAVecRestoreArrayWrite, DIRECT
+dmdavecrestorearraydof_,DMDAVecRestoreArrayDOF, DIRECT
+dmdavecrestorearrayread_,DMDAVecRestoreArrayRead, DIRECT
+dmdavecrestorearraydofread_,DMDAVecRestoreArrayDOFRead, DIRECT

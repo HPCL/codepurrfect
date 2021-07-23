@@ -1,0 +1,3 @@
+CALLER, CALLEE, CALLTYPE
+vectaggerdestroy_,VecTaggerDestroy, DIRECT
+vectaggersetup_,VecTaggerSetUp, DIRECT

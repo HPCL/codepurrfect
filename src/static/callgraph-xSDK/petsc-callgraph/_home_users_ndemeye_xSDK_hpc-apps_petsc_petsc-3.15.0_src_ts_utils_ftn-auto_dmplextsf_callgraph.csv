@@ -1,0 +1,5 @@
+CALLER, CALLEE, CALLTYPE
+dmplextscomputerhsfunctionfvm_,DMPlexTSComputeRHSFunctionFVM, DIRECT
+dmplextscomputeboundary_,DMPlexTSComputeBoundary, DIRECT
+dmplextscomputeifunctionfem_,DMPlexTSComputeIFunctionFEM, DIRECT
+dmplextscomputeijacobianfem_,DMPlexTSComputeIJacobianFEM, DIRECT

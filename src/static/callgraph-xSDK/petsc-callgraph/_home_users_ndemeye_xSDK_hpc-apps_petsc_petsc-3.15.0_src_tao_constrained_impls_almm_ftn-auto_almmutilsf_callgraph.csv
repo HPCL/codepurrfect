@@ -1,0 +1,9 @@
+CALLER, CALLEE, CALLTYPE
+taoalmmgettype_,TaoALMMGetType, DIRECT
+taoalmmsettype_,TaoALMMSetType, DIRECT
+taoalmmgetsubsolver_,TaoALMMGetSubsolver, DIRECT
+taoalmmsetsubsolver_,TaoALMMSetSubsolver, DIRECT
+taoalmmgetmultipliers_,TaoALMMGetMultipliers, DIRECT
+taoalmmsetmultipliers_,TaoALMMSetMultipliers, DIRECT
+taoalmmgetprimalis_,TaoALMMGetPrimalIS, DIRECT
+taoalmmgetdualis_,TaoALMMGetDualIS, DIRECT

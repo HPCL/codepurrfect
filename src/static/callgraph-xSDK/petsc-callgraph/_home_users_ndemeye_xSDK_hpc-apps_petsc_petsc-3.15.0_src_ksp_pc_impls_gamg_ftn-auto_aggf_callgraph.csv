@@ -1,0 +1,4 @@
+CALLER, CALLEE, CALLTYPE
+pcgamgsetnsmooths_,PCGAMGSetNSmooths, DIRECT
+pcgamgsetsymgraph_,PCGAMGSetSymGraph, DIRECT
+pcgamgsetsquaregraph_,PCGAMGSetSquareGraph, DIRECT

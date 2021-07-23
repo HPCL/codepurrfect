@@ -1,0 +1,5 @@
+CALLER, CALLEE, CALLTYPE
+petscspacepolynomialsettensor_,PetscSpacePolynomialSetTensor, DIRECT
+petscspacepolynomialgettensor_,PetscSpacePolynomialGetTensor, DIRECT
+petscspacepolynomialsetsymmetric_,PetscSpacePolynomialSetSymmetric, DIRECT
+petscspacepolynomialgetsymmetric_,PetscSpacePolynomialGetSymmetric, DIRECT

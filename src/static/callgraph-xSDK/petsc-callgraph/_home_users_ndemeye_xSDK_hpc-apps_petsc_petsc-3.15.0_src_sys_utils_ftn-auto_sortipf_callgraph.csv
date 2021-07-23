@@ -1,0 +1,3 @@
+CALLER, CALLEE, CALLTYPE
+petscsortintwithpermutation_,PetscSortIntWithPermutation, DIRECT
+petscsortrealwithpermutation_,PetscSortRealWithPermutation, DIRECT

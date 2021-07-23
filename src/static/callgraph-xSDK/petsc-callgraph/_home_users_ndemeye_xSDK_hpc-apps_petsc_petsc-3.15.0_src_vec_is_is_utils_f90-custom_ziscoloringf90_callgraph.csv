@@ -1,0 +1,8 @@
+CALLER, CALLEE, CALLTYPE
+iscoloringgetisf90_,ISColoringGetIS, DIRECT
+iscoloringgetisf90_,PetscMallocA, DIRECT
+iscoloringgetisf90_,F90Array1dCreate, DIRECT
+iscoloringrestoreisf90_,F90Array1dAccess, DIRECT
+iscoloringrestoreisf90_,F90Array1dDestroy, DIRECT
+iscoloringrestoreisf90_,ISColoringRestoreIS, DIRECT
+iscoloringrestoreisf90_,PetscTrFree = (any pointer->any pointer@i64 0) :: i32 (i8*, i32, i8*, i8*)*, INDIRECT 

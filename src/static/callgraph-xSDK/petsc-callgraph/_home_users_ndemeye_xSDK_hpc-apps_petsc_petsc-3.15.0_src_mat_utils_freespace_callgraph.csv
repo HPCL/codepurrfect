@@ -1,0 +1,44 @@
+CALLER, CALLEE, CALLTYPE
+PetscFreeSpaceGet,PetscMallocA, DIRECT
+PetscFreeSpaceGet,PetscError, DIRECT
+PetscFreeSpaceGet,PetscMallocA, DIRECT
+PetscFreeSpaceGet,PetscError, DIRECT
+PetscFreeSpaceGet,printf, DIRECT
+PetscFreeSpaceGet,printf, DIRECT
+PetscFreeSpaceContiguous,PetscMemcpy, DIRECT
+PetscFreeSpaceContiguous,PetscError, DIRECT
+PetscFreeSpaceContiguous,PetscTrFree = (any pointer->any pointer@i64 0) :: i32 (i8*, i32, i8*, i8*)*, INDIRECT 
+PetscFreeSpaceContiguous,PetscError, DIRECT
+PetscFreeSpaceContiguous,PetscTrFree = (any pointer->any pointer@i64 0) :: i32 (i8*, i32, i8*, i8*)*, INDIRECT 
+PetscFreeSpaceContiguous,PetscError, DIRECT
+PetscFreeSpaceContiguous,printf, DIRECT
+PetscFreeSpaceContiguous,printf, DIRECT
+PetscMemcpy,PetscError, DIRECT
+PetscMemcpy,PetscError, DIRECT
+PetscMemcpy,PetscError, DIRECT
+PetscMemcpy,printf, DIRECT
+PetscMemcpy,printf, DIRECT
+PetscFreeSpaceContiguous_LU,PetscMemcpy, DIRECT
+PetscFreeSpaceContiguous_LU,PetscError, DIRECT
+PetscFreeSpaceContiguous_LU,PetscMemcpy, DIRECT
+PetscFreeSpaceContiguous_LU,PetscError, DIRECT
+PetscFreeSpaceContiguous_LU,PetscTrFree = (any pointer->any pointer@i64 0) :: i32 (i8*, i32, i8*, i8*)*, INDIRECT 
+PetscFreeSpaceContiguous_LU,PetscError, DIRECT
+PetscFreeSpaceContiguous_LU,PetscTrFree = (any pointer->any pointer@i64 0) :: i32 (i8*, i32, i8*, i8*)*, INDIRECT 
+PetscFreeSpaceContiguous_LU,PetscError, DIRECT
+PetscFreeSpaceContiguous_LU,printf, DIRECT
+PetscFreeSpaceContiguous_LU,printf, DIRECT
+PetscFreeSpaceContiguous_Cholesky,PetscMemcpy, DIRECT
+PetscFreeSpaceContiguous_Cholesky,PetscError, DIRECT
+PetscFreeSpaceContiguous_Cholesky,PetscTrFree = (any pointer->any pointer@i64 0) :: i32 (i8*, i32, i8*, i8*)*, INDIRECT 
+PetscFreeSpaceContiguous_Cholesky,PetscError, DIRECT
+PetscFreeSpaceContiguous_Cholesky,PetscTrFree = (any pointer->any pointer@i64 0) :: i32 (i8*, i32, i8*, i8*)*, INDIRECT 
+PetscFreeSpaceContiguous_Cholesky,PetscError, DIRECT
+PetscFreeSpaceContiguous_Cholesky,printf, DIRECT
+PetscFreeSpaceContiguous_Cholesky,printf, DIRECT
+PetscFreeSpaceDestroy,PetscTrFree = (any pointer->any pointer@i64 0) :: i32 (i8*, i32, i8*, i8*)*, INDIRECT 
+PetscFreeSpaceDestroy,PetscError, DIRECT
+PetscFreeSpaceDestroy,PetscTrFree = (any pointer->any pointer@i64 0) :: i32 (i8*, i32, i8*, i8*)*, INDIRECT 
+PetscFreeSpaceDestroy,PetscError, DIRECT
+PetscFreeSpaceDestroy,printf, DIRECT
+PetscFreeSpaceDestroy,printf, DIRECT

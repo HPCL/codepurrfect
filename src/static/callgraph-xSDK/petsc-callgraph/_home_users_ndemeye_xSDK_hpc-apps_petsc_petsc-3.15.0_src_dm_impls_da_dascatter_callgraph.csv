@@ -1,0 +1,12 @@
+CALLER, CALLEE, CALLTYPE
+DMDAGetScatter,PetscCheckPointer, DIRECT
+DMDAGetScatter,PetscError, DIRECT
+DMDAGetScatter,PetscError, DIRECT
+DMDAGetScatter,PetscError, DIRECT
+DMDAGetScatter,PetscObjectTypeCompare, DIRECT
+DMDAGetScatter,PetscError, DIRECT
+DMDAGetScatter,PetscError, DIRECT
+DMDAGetScatter,DMLocalToLocalCreate_DA, DIRECT
+DMDAGetScatter,PetscError, DIRECT
+DMDAGetScatter,printf, DIRECT
+DMDAGetScatter,printf, DIRECT

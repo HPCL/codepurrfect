@@ -1,0 +1,4 @@
+EMPTYNAME = _PetscDrawOps->any pointer@i64 200 :: i32 (%struct._p_PetscDraw*, %struct._p_PetscViewer*)*
+PetscLogPHC = any pointer->any pointer@i64 0 :: i32 (%struct._p_PetscObject*)*
+EMPTYNAME = _PetscDrawOps->any pointer@i64 192 :: i32 (%struct._p_PetscDraw*)*
+EMPTYNAME = any pointer->any pointer@i64 0 :: i32 (%struct._p_PetscDraw*)*

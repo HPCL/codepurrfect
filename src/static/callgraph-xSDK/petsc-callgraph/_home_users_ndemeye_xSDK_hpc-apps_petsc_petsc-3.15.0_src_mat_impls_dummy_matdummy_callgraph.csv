@@ -1,0 +1,24 @@
+CALLER, CALLEE, CALLTYPE
+MatDestroySubMatrix_Dummy,EMPTYNAME = (->any pointer@i64 176) :: i32 (%struct._p_Mat*)*, INDIRECT 
+MatDestroySubMatrix_Dummy,PetscError, DIRECT
+MatDestroySubMatrix_Dummy,MatDestroySubMatrix_Private, DIRECT
+MatDestroySubMatrix_Dummy,PetscError, DIRECT
+MatDestroySubMatrix_Dummy,printf, DIRECT
+MatDestroySubMatrix_Dummy,printf, DIRECT
+MatDestroySubMatrices_Dummy,PetscObjectTypeCompare, DIRECT
+MatDestroySubMatrices_Dummy,PetscError, DIRECT
+MatDestroySubMatrices_Dummy,MatDestroy, DIRECT
+MatDestroySubMatrices_Dummy,MatDestroy, DIRECT
+MatDestroySubMatrices_Dummy,PetscError, DIRECT
+MatDestroySubMatrices_Dummy,PetscTrFree = (any pointer->any pointer@i64 0) :: i32 (i8*, i32, i8*, i8*)*, INDIRECT 
+MatDestroySubMatrices_Dummy,PetscError, DIRECT
+MatDestroySubMatrices_Dummy,printf, DIRECT
+MatDestroySubMatrices_Dummy,printf, DIRECT
+MatDestroy_Dummy,PetscObjectChangeTypeName, DIRECT
+MatDestroy_Dummy,PetscError, DIRECT
+MatDestroy_Dummy,printf, DIRECT
+MatDestroy_Dummy,printf, DIRECT
+MatCreate_Dummy,PetscObjectChangeTypeName, DIRECT
+MatCreate_Dummy,PetscError, DIRECT
+MatCreate_Dummy,printf, DIRECT
+MatCreate_Dummy,printf, DIRECT

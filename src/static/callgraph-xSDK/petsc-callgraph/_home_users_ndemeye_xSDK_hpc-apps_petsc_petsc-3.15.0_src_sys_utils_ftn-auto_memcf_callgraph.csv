@@ -1,0 +1,2 @@
+CALLER, CALLEE, CALLTYPE
+petscmemcmp_,PetscMemcmp, DIRECT

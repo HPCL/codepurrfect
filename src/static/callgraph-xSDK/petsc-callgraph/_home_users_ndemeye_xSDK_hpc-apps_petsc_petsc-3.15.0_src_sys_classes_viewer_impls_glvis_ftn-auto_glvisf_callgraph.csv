@@ -1,0 +1,3 @@
+CALLER, CALLEE, CALLTYPE
+petscviewerglvissetprecision_,PetscViewerGLVisSetPrecision, DIRECT
+petscviewerglvissetsnapid_,PetscViewerGLVisSetSnapId, DIRECT

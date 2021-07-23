@@ -1,0 +1,6 @@
+CALLER, CALLEE, CALLTYPE
+PetscSleep,_IO_getc, DIRECT
+PetscSleep,nanosleep, DIRECT
+PetscSleep,sleep, DIRECT
+PetscSleep,printf, DIRECT
+PetscSleep,printf, DIRECT

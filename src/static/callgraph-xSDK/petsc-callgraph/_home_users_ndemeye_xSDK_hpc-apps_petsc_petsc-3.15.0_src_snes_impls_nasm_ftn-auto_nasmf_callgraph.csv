@@ -1,0 +1,12 @@
+CALLER, CALLEE, CALLTYPE
+snesnasmsettype_,SNESNASMSetType, DIRECT
+snesnasmgettype_,SNESNASMGetType, DIRECT
+snesnasmsetsubdomains_,SNESNASMSetSubdomains, DIRECT
+snesnasmgetsubdomains_,SNESNASMGetSubdomains, DIRECT
+snesnasmgetsubdomainvecs_,SNESNASMGetSubdomainVecs, DIRECT
+snesnasmsetcomputefinaljacobian_,SNESNASMSetComputeFinalJacobian, DIRECT
+snesnasmsetdamping_,SNESNASMSetDamping, DIRECT
+snesnasmgetdamping_,SNESNASMGetDamping, DIRECT
+snesnasmgetsnes_,SNESNASMGetSNES, DIRECT
+snesnasmgetnumber_,SNESNASMGetNumber, DIRECT
+snesnasmsetweight_,SNESNASMSetWeight, DIRECT

@@ -1,0 +1,6 @@
+CALLER, CALLEE, CALLTYPE
+dmplexcreatefluentfromfile_,PetscMallocA, DIRECT
+dmplexcreatefluentfromfile_,PetscStrncpy, DIRECT
+dmplexcreatefluentfromfile_,MPI_Comm_f2c, DIRECT
+dmplexcreatefluentfromfile_,DMPlexCreateFluentFromFile, DIRECT
+dmplexcreatefluentfromfile_,PetscTrFree = (any pointer->any pointer@i64 0) :: i32 (i8*, i32, i8*, i8*)*, INDIRECT 

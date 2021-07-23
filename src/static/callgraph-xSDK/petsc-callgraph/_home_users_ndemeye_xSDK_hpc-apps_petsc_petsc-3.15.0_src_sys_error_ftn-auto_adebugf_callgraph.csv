@@ -1,0 +1,3 @@
+CALLER, CALLEE, CALLTYPE
+petscwaitonerror_,PetscWaitOnError, DIRECT
+petscattachdebugger_,PetscAttachDebugger, DIRECT

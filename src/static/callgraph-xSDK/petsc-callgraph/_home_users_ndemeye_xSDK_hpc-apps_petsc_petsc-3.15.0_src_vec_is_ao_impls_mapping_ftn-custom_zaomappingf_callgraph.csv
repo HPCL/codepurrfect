@@ -1,0 +1,5 @@
+CALLER, CALLEE, CALLTYPE
+aocreatemapping_,PetscError, DIRECT
+aocreatemapping_,PetscError, DIRECT
+aocreatemapping_,MPI_Comm_f2c, DIRECT
+aocreatemapping_,AOCreateMapping, DIRECT

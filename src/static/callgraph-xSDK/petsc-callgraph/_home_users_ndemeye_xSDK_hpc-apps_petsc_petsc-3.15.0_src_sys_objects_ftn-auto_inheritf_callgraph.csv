@@ -1,0 +1,5 @@
+CALLER, CALLEE, CALLTYPE
+petscobjectsetprintedoptions_,PetscObjectSetPrintedOptions, DIRECT
+petscobjectinheritprintedoptions_,PetscObjectInheritPrintedOptions, DIRECT
+petscobjectsetfromoptions_,PetscObjectSetFromOptions, DIRECT
+petscobjectsetup_,PetscObjectSetUp, DIRECT

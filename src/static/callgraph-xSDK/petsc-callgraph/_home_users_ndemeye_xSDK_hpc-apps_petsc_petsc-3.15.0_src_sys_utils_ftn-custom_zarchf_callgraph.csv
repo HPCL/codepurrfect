@@ -1,0 +1,3 @@
+CALLER, CALLEE, CALLTYPE
+petscgetarchtype_,PetscGetArchType, DIRECT
+petscbarrier_,PetscBarrier, DIRECT

@@ -1,0 +1,31 @@
+CALLER, CALLEE, CALLTYPE
+matpartitioningsetvertexweights_,MatGetLocalSize, DIRECT
+matpartitioningsetvertexweights_,PetscMallocA, DIRECT
+matpartitioningsetvertexweights_,PetscError, DIRECT
+matpartitioningsetvertexweights_,PetscError, DIRECT
+matpartitioningsetvertexweights_,PetscError, DIRECT
+matpartitioningsetvertexweights_,printf, DIRECT
+matpartitioningsetvertexweights_,printf, DIRECT
+matpartitioningsetvertexweights_,MatPartitioningSetVertexWeights, DIRECT
+matpartitioningview_,PETSC_VIEWER_DRAW_, DIRECT
+matpartitioningview_,PETSC_VIEWER_DRAW_, DIRECT
+matpartitioningview_,PETSC_VIEWER_STDOUT_, DIRECT
+matpartitioningview_,PETSC_VIEWER_STDOUT_, DIRECT
+matpartitioningview_,PETSC_VIEWER_STDERR_, DIRECT
+matpartitioningview_,PETSC_VIEWER_STDERR_, DIRECT
+matpartitioningview_,PETSC_VIEWER_BINARY_, DIRECT
+matpartitioningview_,PETSC_VIEWER_BINARY_, DIRECT
+matpartitioningview_,PETSC_VIEWER_BINARY_, DIRECT
+matpartitioningview_,PETSC_VIEWER_BINARY_, DIRECT
+matpartitioningview_,PETSC_VIEWER_SOCKET_, DIRECT
+matpartitioningview_,PETSC_VIEWER_SOCKET_, DIRECT
+matpartitioningview_,MatPartitioningView, DIRECT
+matpartitioningsettype_,PetscMallocA, DIRECT
+matpartitioningsettype_,PetscStrncpy, DIRECT
+matpartitioningsettype_,MatPartitioningSetType, DIRECT
+matpartitioningsettype_,PetscTrFree = (any pointer->any pointer@i64 0) :: i32 (i8*, i32, i8*, i8*)*, INDIRECT 
+matpartitioningviewfromoptions_,PetscMallocA, DIRECT
+matpartitioningviewfromoptions_,PetscStrncpy, DIRECT
+matpartitioningviewfromoptions_,PetscError, DIRECT
+matpartitioningviewfromoptions_,MatPartitioningViewFromOptions, DIRECT
+matpartitioningviewfromoptions_,PetscTrFree = (any pointer->any pointer@i64 0) :: i32 (i8*, i32, i8*, i8*)*, INDIRECT 

@@ -1,0 +1,2 @@
+EMPTYNAME = _TSOps->any pointer@i64 72 :: i32 (%struct._p_TS*)*
+EMPTYNAME = any pointer->any pointer@i64 0 :: i32 (%struct._p_TS*)*

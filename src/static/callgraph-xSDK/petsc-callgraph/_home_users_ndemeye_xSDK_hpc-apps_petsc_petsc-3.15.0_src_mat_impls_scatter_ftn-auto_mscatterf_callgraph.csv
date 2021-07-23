@@ -1,0 +1,3 @@
+CALLER, CALLEE, CALLTYPE
+matscattergetvecscatter_,MatScatterGetVecScatter, DIRECT
+matscattersetvecscatter_,MatScatterSetVecScatter, DIRECT

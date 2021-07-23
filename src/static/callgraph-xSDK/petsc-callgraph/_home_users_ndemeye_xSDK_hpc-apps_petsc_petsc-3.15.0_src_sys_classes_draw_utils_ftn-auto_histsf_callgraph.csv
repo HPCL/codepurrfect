@@ -1,0 +1,11 @@
+CALLER, CALLEE, CALLTYPE
+petscdrawhgsetnumberbins_,PetscDrawHGSetNumberBins, DIRECT
+petscdrawhgreset_,PetscDrawHGReset, DIRECT
+petscdrawhgaddvalue_,PetscDrawHGAddValue, DIRECT
+petscdrawhgdraw_,PetscDrawHGDraw, DIRECT
+petscdrawhgsave_,PetscDrawHGSave, DIRECT
+petscdrawhgview_,PetscDrawHGView, DIRECT
+petscdrawhgsetcolor_,PetscDrawHGSetColor, DIRECT
+petscdrawhgsetlimits_,PetscDrawHGSetLimits, DIRECT
+petscdrawhgcalcstats_,PetscDrawHGCalcStats, DIRECT
+petscdrawhgintegerbins_,PetscDrawHGIntegerBins, DIRECT

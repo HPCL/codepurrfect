@@ -1,0 +1,27 @@
+CALLER, CALLEE, CALLTYPE
+PetscDrawGetMouseButton,PetscError, DIRECT
+PetscDrawGetMouseButton,PetscCheckPointer, DIRECT
+PetscDrawGetMouseButton,PetscError, DIRECT
+PetscDrawGetMouseButton,PetscError, DIRECT
+PetscDrawGetMouseButton,PetscError, DIRECT
+PetscDrawGetMouseButton,PetscError, DIRECT
+PetscDrawGetMouseButton,PetscCheckPointer, DIRECT
+PetscDrawGetMouseButton,PetscError, DIRECT
+PetscDrawGetMouseButton,printf, DIRECT
+PetscDrawGetMouseButton,printf, DIRECT
+PetscDrawGetMouseButton,EMPTYNAME = (_PetscDrawOps->any pointer@i64 128) :: i32 (%struct._p_PetscDraw*, i32*, double*, double*, double*, double*)*, INDIRECT 
+PetscDrawGetMouseButton,PetscError, DIRECT
+PetscDrawGetMouseButton,PetscObjectComm, DIRECT
+PetscDrawGetMouseButton,MPI_Comm_size, DIRECT
+PetscDrawGetMouseButton,PetscObjectComm, DIRECT
+PetscDrawGetMouseButton,MPI_Bcast, DIRECT
+PetscDrawGetMouseButton,MPI_Error_string, DIRECT
+PetscDrawGetMouseButton,PetscError, DIRECT
+PetscDrawGetMouseButton,PetscObjectComm, DIRECT
+PetscDrawGetMouseButton,MPI_Comm_size, DIRECT
+PetscDrawGetMouseButton,PetscObjectComm, DIRECT
+PetscDrawGetMouseButton,MPI_Bcast, DIRECT
+PetscDrawGetMouseButton,MPI_Error_string, DIRECT
+PetscDrawGetMouseButton,PetscError, DIRECT
+PetscDrawGetMouseButton,printf, DIRECT
+PetscDrawGetMouseButton,printf, DIRECT

@@ -1,0 +1,4 @@
+CALLER, CALLEE, CALLTYPE
+vecnestgetsubvec_,VecNestGetSubVec, DIRECT
+vecnestsetsubvec_,VecNestSetSubVec, DIRECT
+vecnestgetsize_,VecNestGetSize, DIRECT

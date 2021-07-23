@@ -1,0 +1,48 @@
+CALLER, CALLEE, CALLTYPE
+PetscIntAddressToFortran,PetscErrorPrintf = (any pointer->any pointer@i64 0) :: i32 (i8*, ...)*, INDIRECT 
+PetscIntAddressToFortran,PetscErrorPrintf = (any pointer->any pointer@i64 0) :: i32 (i8*, ...)*, INDIRECT 
+PetscIntAddressToFortran,PetscErrorPrintf = (any pointer->any pointer@i64 0) :: i32 (i8*, ...)*, INDIRECT 
+PetscIntAddressToFortran,PetscAbortFindSourceFile_Private, DIRECT
+PetscIntAddressToFortran,PetscSleep, DIRECT
+PetscIntAddressToFortran,abort, DIRECT
+PetscIntAddressToFortran,MPI_Abort, DIRECT
+PetscScalarAddressToFortran,PetscMallocA, DIRECT
+PetscScalarAddressToFortran,PetscError, DIRECT
+PetscScalarAddressToFortran,PetscMemcpy, DIRECT
+PetscScalarAddressToFortran,PetscError, DIRECT
+PetscScalarAddressToFortran,PetscContainerCreate, DIRECT
+PetscScalarAddressToFortran,PetscError, DIRECT
+PetscScalarAddressToFortran,PetscContainerSetPointer, DIRECT
+PetscScalarAddressToFortran,PetscError, DIRECT
+PetscScalarAddressToFortran,PetscObjectCompose, DIRECT
+PetscScalarAddressToFortran,PetscError, DIRECT
+PetscScalarAddressToFortran,PetscErrorPrintf = (any pointer->any pointer@i64 0) :: i32 (i8*, ...)*, INDIRECT 
+PetscScalarAddressToFortran,PetscErrorPrintf = (any pointer->any pointer@i64 0) :: i32 (i8*, ...)*, INDIRECT 
+PetscScalarAddressToFortran,PetscErrorPrintf = (any pointer->any pointer@i64 0) :: i32 (i8*, ...)*, INDIRECT 
+PetscScalarAddressToFortran,PetscAbortFindSourceFile_Private, DIRECT
+PetscScalarAddressToFortran,PetscSleep, DIRECT
+PetscScalarAddressToFortran,abort, DIRECT
+PetscScalarAddressToFortran,MPI_Abort, DIRECT
+PetscScalarAddressToFortran,PetscInfo_Private, DIRECT
+PetscScalarAddressToFortran,PetscError, DIRECT
+PetscMemcpy,PetscError, DIRECT
+PetscMemcpy,PetscError, DIRECT
+PetscMemcpy,PetscError, DIRECT
+PetscMemcpy,printf, DIRECT
+PetscMemcpy,printf, DIRECT
+PetscScalarAddressFromFortran,PetscObjectQuery, DIRECT
+PetscScalarAddressFromFortran,PetscError, DIRECT
+PetscScalarAddressFromFortran,PetscContainerGetPointer, DIRECT
+PetscScalarAddressFromFortran,PetscError, DIRECT
+PetscScalarAddressFromFortran,PetscMemcpy, DIRECT
+PetscScalarAddressFromFortran,PetscError, DIRECT
+PetscScalarAddressFromFortran,PetscTrFree = (any pointer->any pointer@i64 0) :: i32 (i8*, i32, i8*, i8*)*, INDIRECT 
+PetscScalarAddressFromFortran,PetscError, DIRECT
+PetscScalarAddressFromFortran,PetscContainerDestroy, DIRECT
+PetscScalarAddressFromFortran,PetscError, DIRECT
+PetscScalarAddressFromFortran,PetscObjectCompose, DIRECT
+PetscScalarAddressFromFortran,PetscError, DIRECT
+petscisinfornanscalar_,PetscIsInfReal, DIRECT
+petscisinfornanscalar_,PetscIsNanReal, DIRECT
+petscisinfornanreal_,PetscIsInfReal, DIRECT
+petscisinfornanreal_,PetscIsNanReal, DIRECT

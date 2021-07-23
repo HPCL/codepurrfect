@@ -1,0 +1,27 @@
+CALLER, CALLEE, CALLTYPE
+petscinfosetfile_,PetscMallocA, DIRECT
+petscinfosetfile_,PetscStrncpy, DIRECT
+petscinfosetfile_,PetscMallocA, DIRECT
+petscinfosetfile_,PetscStrncpy, DIRECT
+petscinfosetfile_,PetscInfoSetFile, DIRECT
+petscinfosetfile_,PetscTrFree = (any pointer->any pointer@i64 0) :: i32 (i8*, i32, i8*, i8*)*, INDIRECT 
+petscinfosetfile_,PetscTrFree = (any pointer->any pointer@i64 0) :: i32 (i8*, i32, i8*, i8*)*, INDIRECT 
+petscinfogetclass_,PetscMallocA, DIRECT
+petscinfogetclass_,PetscStrncpy, DIRECT
+petscinfogetclass_,PetscInfoGetClass, DIRECT
+petscinfogetclass_,PetscTrFree = (any pointer->any pointer@i64 0) :: i32 (i8*, i32, i8*, i8*)*, INDIRECT 
+petscinfoprocessclass_,PetscMallocA, DIRECT
+petscinfoprocessclass_,PetscStrncpy, DIRECT
+petscinfoprocessclass_,PetscInfoProcessClass, DIRECT
+petscinfoprocessclass_,PetscTrFree = (any pointer->any pointer@i64 0) :: i32 (i8*, i32, i8*, i8*)*, INDIRECT 
+petscinfo_,PetscMallocA, DIRECT
+petscinfo_,PetscStrncpy, DIRECT
+petscinfo_,PetscStrallocpy, DIRECT
+petscinfo_,PetscError, DIRECT
+petscinfo_,PetscStrlen, DIRECT
+petscinfo_,PetscError, DIRECT
+petscinfo_,printf, DIRECT
+petscinfo_,printf, DIRECT
+petscinfo_,PetscTrFree = (any pointer->any pointer@i64 0) :: i32 (i8*, i32, i8*, i8*)*, INDIRECT 
+petscinfo_,PetscInfo_Private, DIRECT
+petscinfo_,PetscTrFree = (any pointer->any pointer@i64 0) :: i32 (i8*, i32, i8*, i8*)*, INDIRECT 

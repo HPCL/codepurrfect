@@ -1,0 +1,4 @@
+CALLER, CALLEE, CALLTYPE
+matmpibaijsethashtablefactor_,MatMPIBAIJSetHashTableFactor, DIRECT
+matcreatempibaijwitharrays_,MPI_Comm_f2c, DIRECT
+matcreatempibaijwitharrays_,MatCreateMPIBAIJWithArrays, DIRECT

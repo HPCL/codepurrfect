@@ -1,0 +1,27 @@
+CALLER, CALLEE, CALLTYPE
+petscmallocdump_,PetscMallocDump, DIRECT
+petscmallocview_,PetscMallocView, DIRECT
+petscmallocvalidate_,PetscMallocValidate, DIRECT
+petscmemoryview_,PetscMallocA, DIRECT
+petscmemoryview_,PetscStrncpy, DIRECT
+petscmemoryview_,PetscStrallocpy, DIRECT
+petscmemoryview_,PetscError, DIRECT
+petscmemoryview_,PetscStrlen, DIRECT
+petscmemoryview_,PetscError, DIRECT
+petscmemoryview_,printf, DIRECT
+petscmemoryview_,printf, DIRECT
+petscmemoryview_,PetscTrFree = (any pointer->any pointer@i64 0) :: i32 (i8*, i32, i8*, i8*)*, INDIRECT 
+petscmemoryview_,PETSC_VIEWER_DRAW_, DIRECT
+petscmemoryview_,PETSC_VIEWER_DRAW_, DIRECT
+petscmemoryview_,PETSC_VIEWER_STDOUT_, DIRECT
+petscmemoryview_,PETSC_VIEWER_STDOUT_, DIRECT
+petscmemoryview_,PETSC_VIEWER_STDERR_, DIRECT
+petscmemoryview_,PETSC_VIEWER_STDERR_, DIRECT
+petscmemoryview_,PETSC_VIEWER_BINARY_, DIRECT
+petscmemoryview_,PETSC_VIEWER_BINARY_, DIRECT
+petscmemoryview_,PETSC_VIEWER_BINARY_, DIRECT
+petscmemoryview_,PETSC_VIEWER_BINARY_, DIRECT
+petscmemoryview_,PETSC_VIEWER_SOCKET_, DIRECT
+petscmemoryview_,PETSC_VIEWER_SOCKET_, DIRECT
+petscmemoryview_,PetscMemoryView, DIRECT
+petscmemoryview_,PetscTrFree = (any pointer->any pointer@i64 0) :: i32 (i8*, i32, i8*, i8*)*, INDIRECT 

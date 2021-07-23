@@ -1,0 +1,39 @@
+CALLER, CALLEE, CALLTYPE
+petscbinarywriteint_,PetscBinaryWrite, DIRECT
+petscbinarywritereal_,PetscBinaryWrite, DIRECT
+petscbinarywritecomplex_,PetscBinaryWrite, DIRECT
+petscbinarywriteint1_,PetscBinaryWrite, DIRECT
+petscbinarywritereal1_,PetscBinaryWrite, DIRECT
+petscbinarywritecomplex1_,PetscBinaryWrite, DIRECT
+petscbinaryopen_,PetscMallocA, DIRECT
+petscbinaryopen_,PetscStrncpy, DIRECT
+petscbinaryopen_,PetscBinaryOpen, DIRECT
+petscbinaryopen_,PetscTrFree = (any pointer->any pointer@i64 0) :: i32 (i8*, i32, i8*, i8*)*, INDIRECT 
+petscbinaryreadint_,PetscError, DIRECT
+petscbinaryreadint_,PetscBinaryRead, DIRECT
+petscbinaryreadreal_,PetscError, DIRECT
+petscbinaryreadreal_,PetscBinaryRead, DIRECT
+petscbinaryreadcomplex_,PetscError, DIRECT
+petscbinaryreadcomplex_,PetscBinaryRead, DIRECT
+petscbinaryreadint1_,PetscError, DIRECT
+petscbinaryreadint1_,PetscBinaryRead, DIRECT
+petscbinaryreadreal1_,PetscError, DIRECT
+petscbinaryreadreal1_,PetscBinaryRead, DIRECT
+petscbinaryreadcomplex1_,PetscError, DIRECT
+petscbinaryreadcomplex1_,PetscBinaryRead, DIRECT
+petscbinaryreadintcnt_,PetscError, DIRECT
+petscbinaryreadintcnt_,PetscBinaryRead, DIRECT
+petscbinaryreadrealcnt_,PetscError, DIRECT
+petscbinaryreadrealcnt_,PetscBinaryRead, DIRECT
+petscbinaryreadcomplexcnt_,PetscError, DIRECT
+petscbinaryreadcomplexcnt_,PetscBinaryRead, DIRECT
+petscbinaryreadint1cnt_,PetscError, DIRECT
+petscbinaryreadint1cnt_,PetscBinaryRead, DIRECT
+petscbinaryreadreal1cnt_,PetscError, DIRECT
+petscbinaryreadreal1cnt_,PetscBinaryRead, DIRECT
+petscbinaryreadcomplex1cnt_,PetscError, DIRECT
+petscbinaryreadcomplex1cnt_,PetscBinaryRead, DIRECT
+petsctestfile_,PetscMallocA, DIRECT
+petsctestfile_,PetscStrncpy, DIRECT
+petsctestfile_,PetscTestFile, DIRECT
+petsctestfile_,PetscTrFree = (any pointer->any pointer@i64 0) :: i32 (i8*, i32, i8*, i8*)*, INDIRECT 

@@ -1,0 +1,13 @@
+CALLER, CALLEE, CALLTYPE
+petscmallocgetcurrentusage_,PetscMallocGetCurrentUsage, DIRECT
+petscmallocgetmaximumusage_,PetscMallocGetMaximumUsage, DIRECT
+petscmallocpushmaximumusage_,PetscMallocPushMaximumUsage, DIRECT
+petscmallocpopmaximumusage_,PetscMallocPopMaximumUsage, DIRECT
+petscmallocviewset_,PetscMallocViewSet, DIRECT
+petscmallocviewget_,PetscMallocViewGet, DIRECT
+petscmalloctraceset_,PetscMallocTraceSet, DIRECT
+petscmalloctraceget_,PetscMallocTraceGet, DIRECT
+petscmallocsetdebug_,PetscMallocSetDebug, DIRECT
+petscmallocgetdebug_,PetscMallocGetDebug, DIRECT
+petscmalloclogrequestedsizeset_,PetscMallocLogRequestedSizeSet, DIRECT
+petscmalloclogrequestedsizeget_,PetscMallocLogRequestedSizeGet, DIRECT

@@ -1,0 +1,5 @@
+CALLER, CALLEE, CALLTYPE
+tsthetagettheta_,TSThetaGetTheta, DIRECT
+tsthetasettheta_,TSThetaSetTheta, DIRECT
+tsthetagetendpoint_,TSThetaGetEndpoint, DIRECT
+tsthetasetendpoint_,TSThetaSetEndpoint, DIRECT

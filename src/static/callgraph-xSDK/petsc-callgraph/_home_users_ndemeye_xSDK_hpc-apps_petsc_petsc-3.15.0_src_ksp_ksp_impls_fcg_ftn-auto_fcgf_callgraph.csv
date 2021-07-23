@@ -1,0 +1,7 @@
+CALLER, CALLEE, CALLTYPE
+kspfcgsetmmax_,KSPFCGSetMmax, DIRECT
+kspfcggetmmax_,KSPFCGGetMmax, DIRECT
+kspfcgsetnprealloc_,KSPFCGSetNprealloc, DIRECT
+kspfcggetnprealloc_,KSPFCGGetNprealloc, DIRECT
+kspfcgsettruncationtype_,KSPFCGSetTruncationType, DIRECT
+kspfcggettruncationtype_,KSPFCGGetTruncationType, DIRECT

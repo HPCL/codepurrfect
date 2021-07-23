@@ -1,0 +1,23 @@
+CALLER, CALLEE, CALLTYPE
+KSPMatRegisterAll,printf, DIRECT
+KSPMatRegisterAll,printf, DIRECT
+KSPMatRegisterAll,MatRegister, DIRECT
+KSPMatRegisterAll,PetscError, DIRECT
+KSPMatRegisterAll,MatRegister, DIRECT
+KSPMatRegisterAll,PetscError, DIRECT
+KSPMatRegisterAll,MatRegister, DIRECT
+KSPMatRegisterAll,PetscError, DIRECT
+KSPMatRegisterAll,MatRegister, DIRECT
+KSPMatRegisterAll,PetscError, DIRECT
+KSPMatRegisterAll,MatRegister, DIRECT
+KSPMatRegisterAll,PetscError, DIRECT
+KSPMatRegisterAll,MatRegister, DIRECT
+KSPMatRegisterAll,PetscError, DIRECT
+KSPMatRegisterAll,MatRegister, DIRECT
+KSPMatRegisterAll,PetscError, DIRECT
+KSPMatRegisterAll,MatRegister, DIRECT
+KSPMatRegisterAll,PetscError, DIRECT
+KSPMatRegisterAll,MatRegister, DIRECT
+KSPMatRegisterAll,PetscError, DIRECT
+KSPMatRegisterAll,printf, DIRECT
+KSPMatRegisterAll,printf, DIRECT

@@ -1,0 +1,13 @@
+CALLER, CALLEE, CALLTYPE
+aocreatebasic_,PetscError, DIRECT
+aocreatebasic_,PetscError, DIRECT
+aocreatebasic_,MPI_Comm_f2c, DIRECT
+aocreatebasic_,AOCreateBasic, DIRECT
+aocreatebasicis_,PetscError, DIRECT
+aocreatebasicis_,AOCreateBasicIS, DIRECT
+aocreatememoryscalable_,PetscError, DIRECT
+aocreatememoryscalable_,PetscError, DIRECT
+aocreatememoryscalable_,MPI_Comm_f2c, DIRECT
+aocreatememoryscalable_,AOCreateMemoryScalable, DIRECT
+aocreatememoryscalableis_,PetscError, DIRECT
+aocreatememoryscalableis_,AOCreateMemoryScalableIS, DIRECT

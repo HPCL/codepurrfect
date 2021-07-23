@@ -1,0 +1,10 @@
+CALLER, CALLEE, CALLTYPE
+petscpartitionerdmplexpartition_,PetscPartitionerDMPlexPartition, DIRECT
+dmplexgetpartitioner_,DMPlexGetPartitioner, DIRECT
+dmplexsetpartitioner_,DMPlexSetPartitioner, DIRECT
+dmplexpartitionlabelclosure_,DMPlexPartitionLabelClosure, DIRECT
+dmplexpartitionlabeladjacency_,DMPlexPartitionLabelAdjacency, DIRECT
+dmplexpartitionlabelpropagate_,DMPlexPartitionLabelPropagate, DIRECT
+dmplexpartitionlabelinvert_,DMPlexPartitionLabelInvert, DIRECT
+dmplexpartitionlabelcreatesf_,DMPlexPartitionLabelCreateSF, DIRECT
+dmplexrebalancesharedpoints_,DMPlexRebalanceSharedPoints, DIRECT

@@ -1,0 +1,9 @@
+CALLER, CALLEE, CALLTYPE
+ksppipegcrsetunrollw_,KSPPIPEGCRSetUnrollW, DIRECT
+ksppipegcrgetunrollw_,KSPPIPEGCRGetUnrollW, DIRECT
+ksppipegcrsetmmax_,KSPPIPEGCRSetMmax, DIRECT
+ksppipegcrgetmmax_,KSPPIPEGCRGetMmax, DIRECT
+ksppipegcrsetnprealloc_,KSPPIPEGCRSetNprealloc, DIRECT
+ksppipegcrgetnprealloc_,KSPPIPEGCRGetNprealloc, DIRECT
+ksppipegcrsettruncationtype_,KSPPIPEGCRSetTruncationType, DIRECT
+ksppipegcrgettruncationtype_,KSPPIPEGCRGetTruncationType, DIRECT

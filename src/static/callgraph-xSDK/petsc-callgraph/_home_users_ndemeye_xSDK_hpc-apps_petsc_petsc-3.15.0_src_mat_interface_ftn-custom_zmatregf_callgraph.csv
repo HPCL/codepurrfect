@@ -1,0 +1,13 @@
+CALLER, CALLEE, CALLTYPE
+matsettype_,PetscMallocA, DIRECT
+matsettype_,PetscStrncpy, DIRECT
+matsettype_,MatSetType, DIRECT
+matsettype_,PetscTrFree = (any pointer->any pointer@i64 0) :: i32 (i8*, i32, i8*, i8*)*, INDIRECT 
+matgettype_,MatGetType, DIRECT
+matgettype_,PetscStrncpy, DIRECT
+matsetvectype_,PetscMallocA, DIRECT
+matsetvectype_,PetscStrncpy, DIRECT
+matsetvectype_,MatSetVecType, DIRECT
+matsetvectype_,PetscTrFree = (any pointer->any pointer@i64 0) :: i32 (i8*, i32, i8*, i8*)*, INDIRECT 
+matgetvectype_,MatGetVecType, DIRECT
+matgetvectype_,PetscStrncpy, DIRECT

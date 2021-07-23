@@ -1,0 +1,7 @@
+CALLER, CALLEE, CALLTYPE
+pcsorgetsymmetric_,PCSORGetSymmetric, DIRECT
+pcsorgetomega_,PCSORGetOmega, DIRECT
+pcsorgetiterations_,PCSORGetIterations, DIRECT
+pcsorsetsymmetric_,PCSORSetSymmetric, DIRECT
+pcsorsetomega_,PCSORSetOmega, DIRECT
+pcsorsetiterations_,PCSORSetIterations, DIRECT

@@ -1,0 +1,5 @@
+CALLER, CALLEE, CALLTYPE
+dmdagetprocessorsubset_,DMDAGetProcessorSubset, DIRECT
+dmdagetprocessorsubset_,MPI_Comm_c2f, DIRECT
+dmdagetprocessorsubsets_,DMDAGetProcessorSubsets, DIRECT
+dmdagetprocessorsubsets_,MPI_Comm_c2f, DIRECT

@@ -1,0 +1,36 @@
+CALLER, CALLEE, CALLTYPE
+SNESLineSearchShellSetUserFunc,PetscCheckPointer, DIRECT
+SNESLineSearchShellSetUserFunc,PetscError, DIRECT
+SNESLineSearchShellSetUserFunc,PetscError, DIRECT
+SNESLineSearchShellSetUserFunc,PetscError, DIRECT
+SNESLineSearchShellSetUserFunc,PetscObjectTypeCompare, DIRECT
+SNESLineSearchShellSetUserFunc,PetscError, DIRECT
+SNESLineSearchShellSetUserFunc,printf, DIRECT
+SNESLineSearchShellSetUserFunc,printf, DIRECT
+SNESLineSearchShellGetUserFunc,PetscCheckPointer, DIRECT
+SNESLineSearchShellGetUserFunc,PetscError, DIRECT
+SNESLineSearchShellGetUserFunc,PetscError, DIRECT
+SNESLineSearchShellGetUserFunc,PetscError, DIRECT
+SNESLineSearchShellGetUserFunc,PetscCheckPointer, DIRECT
+SNESLineSearchShellGetUserFunc,PetscError, DIRECT
+SNESLineSearchShellGetUserFunc,PetscCheckPointer, DIRECT
+SNESLineSearchShellGetUserFunc,PetscError, DIRECT
+SNESLineSearchShellGetUserFunc,PetscObjectTypeCompare, DIRECT
+SNESLineSearchShellGetUserFunc,PetscError, DIRECT
+SNESLineSearchShellGetUserFunc,printf, DIRECT
+SNESLineSearchShellGetUserFunc,printf, DIRECT
+SNESLineSearchCreate_Shell,PetscMallocA, DIRECT
+SNESLineSearchCreate_Shell,PetscLogObjectMemory, DIRECT
+SNESLineSearchCreate_Shell,PetscError, DIRECT
+SNESLineSearchCreate_Shell,printf, DIRECT
+SNESLineSearchCreate_Shell,printf, DIRECT
+SNESLineSearchApply_Shell,EMPTYNAME = (->any pointer@i64 0) :: i32 (%struct._p_LineSearch*, i8*)*, INDIRECT 
+SNESLineSearchApply_Shell,PetscError, DIRECT
+SNESLineSearchApply_Shell,PetscObjectComm, DIRECT
+SNESLineSearchApply_Shell,PetscError, DIRECT
+SNESLineSearchApply_Shell,printf, DIRECT
+SNESLineSearchApply_Shell,printf, DIRECT
+SNESLineSearchDestroy_Shell,PetscTrFree = (any pointer->any pointer@i64 0) :: i32 (i8*, i32, i8*, i8*)*, INDIRECT 
+SNESLineSearchDestroy_Shell,PetscError, DIRECT
+SNESLineSearchDestroy_Shell,printf, DIRECT
+SNESLineSearchDestroy_Shell,printf, DIRECT

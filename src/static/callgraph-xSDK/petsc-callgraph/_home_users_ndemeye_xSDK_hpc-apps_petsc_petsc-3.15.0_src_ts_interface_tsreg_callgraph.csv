@@ -1,0 +1,40 @@
+CALLER, CALLEE, CALLTYPE
+TSSetType,PetscError, DIRECT
+TSSetType,PetscCheckPointer, DIRECT
+TSSetType,PetscError, DIRECT
+TSSetType,PetscError, DIRECT
+TSSetType,PetscError, DIRECT
+TSSetType,PetscError, DIRECT
+TSSetType,PetscCheckPointer, DIRECT
+TSSetType,PetscError, DIRECT
+TSSetType,PetscObjectTypeCompare, DIRECT
+TSSetType,PetscError, DIRECT
+TSSetType,printf, DIRECT
+TSSetType,printf, DIRECT
+TSSetType,PetscFunctionListFind_Private, DIRECT
+TSSetType,PetscError, DIRECT
+TSSetType,PetscError, DIRECT
+TSSetType,EMPTYNAME = (_TSOps->any pointer@i64 72) :: i32 (%struct._p_TS*)*, INDIRECT 
+TSSetType,PetscError, DIRECT
+TSSetType,PetscObjectChangeTypeName, DIRECT
+TSSetType,PetscError, DIRECT
+TSSetType,EMPTYNAME = (any pointer->any pointer@i64 0) :: i32 (%struct._p_TS*)*, INDIRECT 
+TSSetType,PetscError, DIRECT
+TSSetType,printf, DIRECT
+TSSetType,printf, DIRECT
+TSGetType,PetscError, DIRECT
+TSGetType,PetscCheckPointer, DIRECT
+TSGetType,PetscError, DIRECT
+TSGetType,PetscError, DIRECT
+TSGetType,PetscError, DIRECT
+TSGetType,PetscError, DIRECT
+TSGetType,PetscCheckPointer, DIRECT
+TSGetType,PetscError, DIRECT
+TSGetType,printf, DIRECT
+TSGetType,printf, DIRECT
+TSRegister,TSInitializePackage, DIRECT
+TSRegister,PetscError, DIRECT
+TSRegister,PetscFunctionListAdd_Private, DIRECT
+TSRegister,PetscError, DIRECT
+TSRegister,printf, DIRECT
+TSRegister,printf, DIRECT

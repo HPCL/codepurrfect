@@ -1,0 +1,7 @@
+CALLER, CALLEE, CALLTYPE
+matcreate_,MPI_Comm_f2c, DIRECT
+matcreate_,MatCreate, DIRECT
+matseterroriffailure_,MatSetErrorIfFailure, DIRECT
+matsetsizes_,MatSetSizes, DIRECT
+matsetfromoptions_,MatSetFromOptions, DIRECT
+matbindtocpu_,MatBindToCPU, DIRECT

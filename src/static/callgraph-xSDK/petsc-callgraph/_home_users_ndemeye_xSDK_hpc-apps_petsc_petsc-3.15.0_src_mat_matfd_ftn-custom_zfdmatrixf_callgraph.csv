@@ -1,0 +1,25 @@
+CALLER, CALLEE, CALLTYPE
+matfdcoloringgetperturbedcolumnsf90_,MatFDColoringGetPerturbedColumns, DIRECT
+matfdcoloringgetperturbedcolumnsf90_,F90Array1dCreate, DIRECT
+matfdcoloringrestoreperturbedcolumnsf90_,F90Array1dDestroy, DIRECT
+matfdcoloringsetfunctionts_,MatFDColoringSetFunction, DIRECT
+ourmatfdcoloringfunctionts,EMPTYNAME = (_p_MatFDColoring->any pointer@i64 752) :: void (%struct._p_TS**, double*, %struct._p_Vec**, %struct._p_Vec**, i8*, i32*)*, INDIRECT 
+matfdcoloringsetfunction_,MatFDColoringSetFunction, DIRECT
+ourmatfdcoloringfunctionsnes,EMPTYNAME = (_p_MatFDColoring->any pointer@i64 752) :: void (%struct._p_SNES**, %struct._p_Vec**, %struct._p_Vec**, i8*, i32*)*, INDIRECT 
+matfdcoloringview_,PETSC_VIEWER_DRAW_, DIRECT
+matfdcoloringview_,PETSC_VIEWER_DRAW_, DIRECT
+matfdcoloringview_,PETSC_VIEWER_STDOUT_, DIRECT
+matfdcoloringview_,PETSC_VIEWER_STDOUT_, DIRECT
+matfdcoloringview_,PETSC_VIEWER_STDERR_, DIRECT
+matfdcoloringview_,PETSC_VIEWER_STDERR_, DIRECT
+matfdcoloringview_,PETSC_VIEWER_BINARY_, DIRECT
+matfdcoloringview_,PETSC_VIEWER_BINARY_, DIRECT
+matfdcoloringview_,PETSC_VIEWER_BINARY_, DIRECT
+matfdcoloringview_,PETSC_VIEWER_BINARY_, DIRECT
+matfdcoloringview_,PETSC_VIEWER_SOCKET_, DIRECT
+matfdcoloringview_,PETSC_VIEWER_SOCKET_, DIRECT
+matfdcoloringview_,MatFDColoringView, DIRECT
+matfdcoloringsettype_,PetscMallocA, DIRECT
+matfdcoloringsettype_,PetscStrncpy, DIRECT
+matfdcoloringsettype_,MatFDColoringSetType, DIRECT
+matfdcoloringsettype_,PetscTrFree = (any pointer->any pointer@i64 0) :: i32 (i8*, i32, i8*, i8*)*, INDIRECT 

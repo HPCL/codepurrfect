@@ -1,0 +1,51 @@
+CALLER, CALLEE, CALLTYPE
+VecSetType,PetscError, DIRECT
+VecSetType,PetscCheckPointer, DIRECT
+VecSetType,PetscError, DIRECT
+VecSetType,PetscError, DIRECT
+VecSetType,PetscError, DIRECT
+VecSetType,PetscObjectTypeCompare, DIRECT
+VecSetType,PetscError, DIRECT
+VecSetType,printf, DIRECT
+VecSetType,printf, DIRECT
+VecSetType,PetscObjectComm, DIRECT
+VecSetType,MPI_Comm_size, DIRECT
+VecSetType,MPI_Error_string, DIRECT
+VecSetType,PetscError, DIRECT
+VecSetType,PetscStrcmp, DIRECT
+VecSetType,PetscError, DIRECT
+VecSetType,PetscObjectTypeCompare, DIRECT
+VecSetType,PetscError, DIRECT
+VecSetType,printf, DIRECT
+VecSetType,printf, DIRECT
+VecSetType,PetscFunctionListFind_Private, DIRECT
+VecSetType,PetscError, DIRECT
+VecSetType,PetscError, DIRECT
+VecSetType,EMPTYNAME = (_VecOps->any pointer@i64 256) :: i32 (%struct._p_Vec*)*, INDIRECT 
+VecSetType,PetscError, DIRECT
+VecSetType,PetscTrFree = (any pointer->any pointer@i64 0) :: i32 (i8*, i32, i8*, i8*)*, INDIRECT 
+VecSetType,PetscError, DIRECT
+VecSetType,PetscStrallocpy, DIRECT
+VecSetType,PetscError, DIRECT
+VecSetType,EMPTYNAME = (any pointer->any pointer@i64 0) :: i32 (%struct._p_Vec*)*, INDIRECT 
+VecSetType,PetscError, DIRECT
+VecSetType,printf, DIRECT
+VecSetType,printf, DIRECT
+VecGetType,PetscError, DIRECT
+VecGetType,PetscCheckPointer, DIRECT
+VecGetType,PetscError, DIRECT
+VecGetType,PetscError, DIRECT
+VecGetType,PetscError, DIRECT
+VecGetType,PetscError, DIRECT
+VecGetType,PetscCheckPointer, DIRECT
+VecGetType,PetscError, DIRECT
+VecGetType,VecRegisterAll, DIRECT
+VecGetType,PetscError, DIRECT
+VecGetType,printf, DIRECT
+VecGetType,printf, DIRECT
+VecRegister,VecInitializePackage, DIRECT
+VecRegister,PetscError, DIRECT
+VecRegister,PetscFunctionListAdd_Private, DIRECT
+VecRegister,PetscError, DIRECT
+VecRegister,printf, DIRECT
+VecRegister,printf, DIRECT

@@ -1,0 +1,15 @@
+CALLER, CALLEE, CALLTYPE
+DMFieldInitializePackage,printf, DIRECT
+DMFieldInitializePackage,printf, DIRECT
+DMFieldInitializePackage,PetscClassIdRegister, DIRECT
+DMFieldInitializePackage,PetscError, DIRECT
+DMFieldInitializePackage,DMFieldRegisterAll, DIRECT
+DMFieldInitializePackage,PetscError, DIRECT
+DMFieldInitializePackage,PetscRegisterFinalize, DIRECT
+DMFieldInitializePackage,PetscError, DIRECT
+DMFieldInitializePackage,printf, DIRECT
+DMFieldInitializePackage,printf, DIRECT
+DMFieldFinalizePackage,PetscFunctionListDestroy, DIRECT
+DMFieldFinalizePackage,PetscError, DIRECT
+DMFieldFinalizePackage,printf, DIRECT
+DMFieldFinalizePackage,printf, DIRECT

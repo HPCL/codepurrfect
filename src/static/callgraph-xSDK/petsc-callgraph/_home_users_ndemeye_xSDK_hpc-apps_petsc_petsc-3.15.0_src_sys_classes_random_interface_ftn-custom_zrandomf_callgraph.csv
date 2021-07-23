@@ -1,0 +1,14 @@
+CALLER, CALLEE, CALLTYPE
+petscrandomgetseed_,PetscRandomGetSeed, DIRECT
+petscrandomsetseed_,PetscRandomSetSeed, DIRECT
+petscrandomsettype_,PetscMallocA, DIRECT
+petscrandomsettype_,PetscStrncpy, DIRECT
+petscrandomsettype_,PetscRandomSetType, DIRECT
+petscrandomsettype_,PetscTrFree = (any pointer->any pointer@i64 0) :: i32 (i8*, i32, i8*, i8*)*, INDIRECT 
+petscrandomgettype_,PetscRandomGetType, DIRECT
+petscrandomgettype_,PetscStrncpy, DIRECT
+petscrandomviewfromoptions_,PetscMallocA, DIRECT
+petscrandomviewfromoptions_,PetscStrncpy, DIRECT
+petscrandomviewfromoptions_,PetscError, DIRECT
+petscrandomviewfromoptions_,PetscRandomViewFromOptions, DIRECT
+petscrandomviewfromoptions_,PetscTrFree = (any pointer->any pointer@i64 0) :: i32 (i8*, i32, i8*, i8*)*, INDIRECT 

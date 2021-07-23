@@ -1,0 +1,29 @@
+CALLER, CALLEE, CALLTYPE
+KSPGMRESModifiedGramSchmidtOrthogonalization,PetscLogPLB = (any pointer->any pointer@i64 0) :: i32 (i32, i32, %struct._p_PetscObject*, %struct._p_PetscObject*, %struct._p_PetscObject*, %struct._p_PetscObject*)*, INDIRECT 
+KSPGMRESModifiedGramSchmidtOrthogonalization,PetscError, DIRECT
+KSPGMRESModifiedGramSchmidtOrthogonalization,VecDot, DIRECT
+KSPGMRESModifiedGramSchmidtOrthogonalization,PetscError, DIRECT
+KSPGMRESModifiedGramSchmidtOrthogonalization,PetscIsInfReal, DIRECT
+KSPGMRESModifiedGramSchmidtOrthogonalization,PetscIsNanReal, DIRECT
+KSPGMRESModifiedGramSchmidtOrthogonalization,PetscObjectComm, DIRECT
+KSPGMRESModifiedGramSchmidtOrthogonalization,PetscError, DIRECT
+KSPGMRESModifiedGramSchmidtOrthogonalization,PCGetFailedReasonRank, DIRECT
+KSPGMRESModifiedGramSchmidtOrthogonalization,PetscError, DIRECT
+KSPGMRESModifiedGramSchmidtOrthogonalization,PetscObjectComm, DIRECT
+KSPGMRESModifiedGramSchmidtOrthogonalization,MPI_Comm_size, DIRECT
+KSPGMRESModifiedGramSchmidtOrthogonalization,PetscObjectComm, DIRECT
+KSPGMRESModifiedGramSchmidtOrthogonalization,MPI_Allreduce, DIRECT
+KSPGMRESModifiedGramSchmidtOrthogonalization,MPI_Error_string, DIRECT
+KSPGMRESModifiedGramSchmidtOrthogonalization,PetscError, DIRECT
+KSPGMRESModifiedGramSchmidtOrthogonalization,PCSetFailedReason, DIRECT
+KSPGMRESModifiedGramSchmidtOrthogonalization,PetscError, DIRECT
+KSPGMRESModifiedGramSchmidtOrthogonalization,VecSetInf, DIRECT
+KSPGMRESModifiedGramSchmidtOrthogonalization,PetscError, DIRECT
+KSPGMRESModifiedGramSchmidtOrthogonalization,printf, DIRECT
+KSPGMRESModifiedGramSchmidtOrthogonalization,printf, DIRECT
+KSPGMRESModifiedGramSchmidtOrthogonalization,VecAXPY, DIRECT
+KSPGMRESModifiedGramSchmidtOrthogonalization,PetscError, DIRECT
+KSPGMRESModifiedGramSchmidtOrthogonalization,PetscLogPLE = (any pointer->any pointer@i64 0) :: i32 (i32, i32, %struct._p_PetscObject*, %struct._p_PetscObject*, %struct._p_PetscObject*, %struct._p_PetscObject*)*, INDIRECT 
+KSPGMRESModifiedGramSchmidtOrthogonalization,PetscError, DIRECT
+KSPGMRESModifiedGramSchmidtOrthogonalization,printf, DIRECT
+KSPGMRESModifiedGramSchmidtOrthogonalization,printf, DIRECT

@@ -1,0 +1,6 @@
+CALLER, CALLEE, CALLTYPE
+pcbjacobigetsubksp1_,PetscError, DIRECT
+pcbjacobigetsubksp1_,PetscError, DIRECT
+pcbjacobigetsubksp1_,PCBJacobiGetSubKSP, DIRECT
+pcbjacobigetsubksp1_,PetscError, DIRECT
+pcbjacobigetsubksp2_,pcbjacobigetsubksp1_, DIRECT

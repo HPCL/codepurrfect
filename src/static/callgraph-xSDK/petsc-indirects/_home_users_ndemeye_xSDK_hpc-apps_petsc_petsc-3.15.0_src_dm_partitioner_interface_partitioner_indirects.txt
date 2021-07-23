@@ -1,0 +1,10 @@
+EMPTYNAME = _PetscPartitionerOps->any pointer@i64 32 :: i32 (%struct._p_PetscPartitioner*)*
+EMPTYNAME = any pointer->any pointer@i64 0 :: i32 (%struct._p_PetscPartitioner*)*
+EMPTYNAME = _PetscPartitionerOps->any pointer@i64 24 :: i32 (%struct._p_PetscPartitioner*, %struct._p_PetscViewer*)*
+EMPTYNAME = _PetscPartitionerOps->any pointer@i64 0 :: i32 (%struct._p_PetscOptionItems*, %struct._p_PetscPartitioner*)*
+EMPTYNAME = _PetscPartitionerOps->any pointer@i64 8 :: i32 (%struct._p_PetscPartitioner*)*
+EMPTYNAME = _PetscPartitionerOps->any pointer@i64 16 :: i32 (%struct._p_PetscPartitioner*)*
+EMPTYNAME = _PetscPartitionerOps->any pointer@i64 32 :: i32 (%struct._p_PetscPartitioner*)*
+PetscTrFree = any pointer->any pointer@i64 0 :: i32 (i8*, i32, i8*, i8*)*
+EMPTYNAME = _PetscPartitionerOps->any pointer@i64 40 :: i32 (%struct._p_PetscPartitioner*, i32, i32, i32*, i32*, %struct._p_PetscSection*, %struct._p_PetscSection*, %struct._p_PetscSection*, %struct._p_IS**)*
+PetscLogPHC = any pointer->any pointer@i64 0 :: i32 (%struct._p_PetscObject*)*

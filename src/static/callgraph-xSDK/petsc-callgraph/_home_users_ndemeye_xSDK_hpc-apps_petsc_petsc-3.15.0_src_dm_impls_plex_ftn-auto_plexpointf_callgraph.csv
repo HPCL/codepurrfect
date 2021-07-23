@@ -1,0 +1,13 @@
+CALLER, CALLEE, CALLTYPE
+dmplexgetpointlocal_,DMPlexGetPointLocal, DIRECT
+dmplexpointlocalread_,DMPlexPointLocalRead, DIRECT
+dmplexpointlocalref_,DMPlexPointLocalRef, DIRECT
+dmplexgetpointlocalfield_,DMPlexGetPointLocalField, DIRECT
+dmplexpointlocalfieldread_,DMPlexPointLocalFieldRead, DIRECT
+dmplexpointlocalfieldref_,DMPlexPointLocalFieldRef, DIRECT
+dmplexgetpointglobal_,DMPlexGetPointGlobal, DIRECT
+dmplexpointglobalread_,DMPlexPointGlobalRead, DIRECT
+dmplexpointglobalref_,DMPlexPointGlobalRef, DIRECT
+dmplexgetpointglobalfield_,DMPlexGetPointGlobalField, DIRECT
+dmplexpointglobalfieldread_,DMPlexPointGlobalFieldRead, DIRECT
+dmplexpointglobalfieldref_,DMPlexPointGlobalFieldRef, DIRECT

@@ -1,0 +1,16 @@
+EMPTYNAME = ->any pointer@i64 72 :: i32 (%struct._p_DM*, %struct._p_DM*)*
+PetscTrFree = any pointer->any pointer@i64 0 :: i32 (i8*, i32, i8*, i8*)*
+PetscTrFree = any pointer->any pointer@i64 0 :: i32 (i8*, i32, i8*, i8*)*
+EMPTYNAME = ->any pointer@i64 16 :: i32 (%struct._p_DM*)*
+EMPTYNAME = ->any pointer@i64 24 :: i32 (%struct._p_DM*, i32*)*
+EMPTYNAME = ->any pointer@i64 32 :: i32 (%struct._p_DM*, %struct._p_Vec*, %struct._p_DM*, %struct._p_Vec*, i32, double)*
+EMPTYNAME = ->any pointer@i64 40 :: i32 (%struct._p_DM*, %struct._p_Vec*, %struct._p_Vec*)*
+EMPTYNAME = ->any pointer@i64 48 :: i32 (%struct._p_DM*, i32*, i32*)*
+EMPTYNAME = ->any pointer@i64 56 :: i32 (%struct._p_DM*, %struct._p_PetscSF**)*
+PetscTrFree = any pointer->any pointer@i64 0 :: i32 (i8*, i32, i8*, i8*)*
+PetscTrFree = any pointer->any pointer@i64 0 :: i32 (i8*, i32, i8*, i8*)*
+PetscTrFree = any pointer->any pointer@i64 0 :: i32 (i8*, i32, i8*, i8*)*
+EMPTYNAME = ->any pointer@i64 64 :: i32 (%struct._p_DM*)*
+PetscTrFree = any pointer->any pointer@i64 0 :: i32 (i8*, i32, i8*, i8*)*
+PetscTrFree = any pointer->any pointer@i64 0 :: i32 (i8*, i32, i8*, i8*)*
+PetscTrFree = any pointer->any pointer@i64 0 :: i32 (i8*, i32, i8*, i8*)*

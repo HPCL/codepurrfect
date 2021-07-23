@@ -1,0 +1,8 @@
+CALLER, CALLEE, CALLTYPE
+petscviewerasciiopen_,PetscMallocA, DIRECT
+petscviewerasciiopen_,PetscStrncpy, DIRECT
+petscviewerasciiopen_,MPI_Comm_f2c, DIRECT
+petscviewerasciiopen_,PetscViewerASCIIOpen, DIRECT
+petscviewerasciiopen_,PetscTrFree = (any pointer->any pointer@i64 0) :: i32 (i8*, i32, i8*, i8*)*, INDIRECT 
+petsc_viewer_stdout__,MPI_Comm_f2c, DIRECT
+petsc_viewer_stdout__,PETSC_VIEWER_STDOUT_, DIRECT

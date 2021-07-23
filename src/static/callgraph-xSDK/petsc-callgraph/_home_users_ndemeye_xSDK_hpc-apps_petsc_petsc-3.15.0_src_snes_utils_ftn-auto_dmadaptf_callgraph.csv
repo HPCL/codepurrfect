@@ -1,0 +1,12 @@
+CALLER, CALLEE, CALLTYPE
+dmadaptorcreate_,MPI_Comm_f2c, DIRECT
+dmadaptorcreate_,DMAdaptorCreate, DIRECT
+dmadaptordestroy_,DMAdaptorDestroy, DIRECT
+dmadaptorsetfromoptions_,DMAdaptorSetFromOptions, DIRECT
+dmadaptorview_,DMAdaptorView, DIRECT
+dmadaptorgetsolver_,DMAdaptorGetSolver, DIRECT
+dmadaptorsetsolver_,DMAdaptorSetSolver, DIRECT
+dmadaptorgetsequencelength_,DMAdaptorGetSequenceLength, DIRECT
+dmadaptorsetsequencelength_,DMAdaptorSetSequenceLength, DIRECT
+dmadaptorsetup_,DMAdaptorSetUp, DIRECT
+dmadaptoradapt_,DMAdaptorAdapt, DIRECT

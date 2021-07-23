@@ -1,0 +1,3 @@
+CALLER, CALLEE, CALLTYPE
+matgetcolumnvector_,MatGetColumnVector, DIRECT
+matgetcolumnnorms_,MatGetColumnNorms, DIRECT

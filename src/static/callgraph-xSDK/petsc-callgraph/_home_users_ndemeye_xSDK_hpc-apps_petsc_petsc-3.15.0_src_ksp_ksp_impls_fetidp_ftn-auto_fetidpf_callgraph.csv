@@ -1,0 +1,5 @@
+CALLER, CALLEE, CALLTYPE
+kspfetidpsetpressureoperator_,KSPFETIDPSetPressureOperator, DIRECT
+kspfetidpgetinnerksp_,KSPFETIDPGetInnerKSP, DIRECT
+kspfetidpgetinnerbddc_,KSPFETIDPGetInnerBDDC, DIRECT
+kspfetidpsetinnerbddc_,KSPFETIDPSetInnerBDDC, DIRECT

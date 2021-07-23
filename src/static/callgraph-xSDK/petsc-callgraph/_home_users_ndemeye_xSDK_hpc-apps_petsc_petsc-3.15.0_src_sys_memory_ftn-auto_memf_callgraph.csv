@@ -1,0 +1,4 @@
+CALLER, CALLEE, CALLTYPE
+petscmemorygetcurrentusage_,PetscMemoryGetCurrentUsage, DIRECT
+petscmemorygetmaximumusage_,PetscMemoryGetMaximumUsage, DIRECT
+petscmemorysetgetmaximumusage_,PetscMemorySetGetMaximumUsage, DIRECT

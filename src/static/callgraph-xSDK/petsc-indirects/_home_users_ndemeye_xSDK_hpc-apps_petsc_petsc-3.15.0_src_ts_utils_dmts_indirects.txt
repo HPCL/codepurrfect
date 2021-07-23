@@ -1,0 +1,8 @@
+EMPTYNAME = _DMTSOps->any pointer@i64 32 :: i32 (i8**, %struct._p_PetscViewer*)*
+EMPTYNAME = _DMTSOps->any pointer@i64 56 :: i32 (i8**, %struct._p_PetscViewer*)*
+EMPTYNAME = _DMTSOps->any pointer@i64 24 :: i32 (i8*, %struct._p_PetscViewer*)*
+EMPTYNAME = _DMTSOps->any pointer@i64 48 :: i32 (i8*, %struct._p_PetscViewer*)*
+EMPTYNAME = _DMTSOps->any pointer@i64 112 :: i32 (%struct._p_DMTS*, %struct._p_DMTS*)*
+PetscLogPHC = any pointer->any pointer@i64 0 :: i32 (%struct._p_PetscObject*)*
+EMPTYNAME = _DMTSOps->any pointer@i64 104 :: i32 (%struct._p_DMTS*)*
+PetscTrFree = any pointer->any pointer@i64 0 :: i32 (i8*, i32, i8*, i8*)*

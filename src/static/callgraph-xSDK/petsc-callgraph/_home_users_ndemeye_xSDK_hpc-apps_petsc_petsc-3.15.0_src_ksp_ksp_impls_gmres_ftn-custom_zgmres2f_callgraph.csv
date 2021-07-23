@@ -1,0 +1,11 @@
+CALLER, CALLEE, CALLTYPE
+kspgmresmodifiedgramschmidtorthogonalization_,KSPGMRESModifiedGramSchmidtOrthogonalization, DIRECT
+kspgmresclassicalgramschmidtorthogonalization_,KSPGMRESClassicalGramSchmidtOrthogonalization, DIRECT
+kspgmressetorthogonalization_,PetscObjectSetFortranCallback, DIRECT
+kspgmressetorthogonalization_,KSPGMRESSetOrthogonalization, DIRECT
+ourorthog,PetscObjectGetFortranCallback, DIRECT
+ourorthog,PetscError, DIRECT
+ourorthog,EMPTYNAME = (any pointer->any pointer@i64 0) :: void (%struct._p_KSP**, i32*, i32*)*, INDIRECT 
+ourorthog,PetscError, DIRECT
+ourorthog,printf, DIRECT
+ourorthog,printf, DIRECT

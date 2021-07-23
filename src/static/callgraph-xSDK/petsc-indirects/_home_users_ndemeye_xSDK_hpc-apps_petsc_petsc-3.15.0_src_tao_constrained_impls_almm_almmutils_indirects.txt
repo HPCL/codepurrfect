@@ -1,0 +1,8 @@
+EMPTYNAME = any pointer->any pointer@i64 0 :: i32 (%struct._p_Tao*, i32*)*
+EMPTYNAME = any pointer->any pointer@i64 0 :: i32 (%struct._p_Tao*, i32)*
+EMPTYNAME = any pointer->any pointer@i64 0 :: i32 (%struct._p_Tao*, %struct._p_Tao**)*
+EMPTYNAME = any pointer->any pointer@i64 0 :: i32 (%struct._p_Tao*, %struct._p_Tao*)*
+EMPTYNAME = any pointer->any pointer@i64 0 :: i32 (%struct._p_Tao*, %struct._p_Vec**)*
+EMPTYNAME = any pointer->any pointer@i64 0 :: i32 (%struct._p_Tao*, %struct._p_Vec*)*
+EMPTYNAME = any pointer->any pointer@i64 0 :: i32 (%struct._p_Tao*, %struct._p_IS**, %struct._p_IS**)*
+EMPTYNAME = any pointer->any pointer@i64 0 :: i32 (%struct._p_Tao*, %struct._p_IS**, %struct._p_IS**)*

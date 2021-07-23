@@ -1,0 +1,28 @@
+CALLER, CALLEE, CALLTYPE
+MatGetColumnIJ_SeqSELL_Color,printf, DIRECT
+MatGetColumnIJ_SeqSELL_Color,printf, DIRECT
+MatGetColumnIJ_SeqSELL_Color,PetscMallocA, DIRECT
+MatGetColumnIJ_SeqSELL_Color,PetscError, DIRECT
+MatGetColumnIJ_SeqSELL_Color,PetscMallocA, DIRECT
+MatGetColumnIJ_SeqSELL_Color,PetscError, DIRECT
+MatGetColumnIJ_SeqSELL_Color,PetscMallocA, DIRECT
+MatGetColumnIJ_SeqSELL_Color,PetscError, DIRECT
+MatGetColumnIJ_SeqSELL_Color,PetscMallocA, DIRECT
+MatGetColumnIJ_SeqSELL_Color,PetscError, DIRECT
+MatGetColumnIJ_SeqSELL_Color,PetscMemzero, DIRECT
+MatGetColumnIJ_SeqSELL_Color,PetscError, DIRECT
+MatGetColumnIJ_SeqSELL_Color,PetscTrFree = (any pointer->any pointer@i64 0) :: i32 (i8*, i32, i8*, i8*)*, INDIRECT 
+MatGetColumnIJ_SeqSELL_Color,PetscError, DIRECT
+MatGetColumnIJ_SeqSELL_Color,printf, DIRECT
+MatGetColumnIJ_SeqSELL_Color,printf, DIRECT
+PetscMemzero,PetscError, DIRECT
+MatRestoreColumnIJ_SeqSELL_Color,printf, DIRECT
+MatRestoreColumnIJ_SeqSELL_Color,printf, DIRECT
+MatRestoreColumnIJ_SeqSELL_Color,PetscTrFree = (any pointer->any pointer@i64 0) :: i32 (i8*, i32, i8*, i8*)*, INDIRECT 
+MatRestoreColumnIJ_SeqSELL_Color,PetscError, DIRECT
+MatRestoreColumnIJ_SeqSELL_Color,PetscTrFree = (any pointer->any pointer@i64 0) :: i32 (i8*, i32, i8*, i8*)*, INDIRECT 
+MatRestoreColumnIJ_SeqSELL_Color,PetscError, DIRECT
+MatRestoreColumnIJ_SeqSELL_Color,PetscTrFree = (any pointer->any pointer@i64 0) :: i32 (i8*, i32, i8*, i8*)*, INDIRECT 
+MatRestoreColumnIJ_SeqSELL_Color,PetscError, DIRECT
+MatRestoreColumnIJ_SeqSELL_Color,printf, DIRECT
+MatRestoreColumnIJ_SeqSELL_Color,printf, DIRECT

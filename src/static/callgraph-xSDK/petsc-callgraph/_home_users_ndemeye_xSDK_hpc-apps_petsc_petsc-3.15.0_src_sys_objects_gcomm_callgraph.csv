@@ -1,0 +1,34 @@
+CALLER, CALLEE, CALLTYPE
+PetscObjectGetComm,PetscError, DIRECT
+PetscObjectGetComm,PetscCheckPointer, DIRECT
+PetscObjectGetComm,PetscError, DIRECT
+PetscObjectGetComm,PetscError, DIRECT
+PetscObjectGetComm,PetscError, DIRECT
+PetscObjectGetComm,PetscError, DIRECT
+PetscObjectGetComm,PetscCheckPointer, DIRECT
+PetscObjectGetComm,PetscError, DIRECT
+PetscObjectGetComm,EMPTYNAME = (->any pointer@i64 0) :: i32 (%struct._p_PetscObject*, %struct.ompi_communicator_t**)*, INDIRECT 
+PetscObjectGetComm,PetscError, DIRECT
+PetscObjectGetComm,printf, DIRECT
+PetscObjectGetComm,printf, DIRECT
+PetscObjectGetTabLevel,PetscError, DIRECT
+PetscObjectGetTabLevel,PetscCheckPointer, DIRECT
+PetscObjectGetTabLevel,PetscError, DIRECT
+PetscObjectGetTabLevel,PetscError, DIRECT
+PetscObjectGetTabLevel,PetscError, DIRECT
+PetscObjectGetTabLevel,printf, DIRECT
+PetscObjectGetTabLevel,printf, DIRECT
+PetscObjectSetTabLevel,PetscError, DIRECT
+PetscObjectSetTabLevel,PetscCheckPointer, DIRECT
+PetscObjectSetTabLevel,PetscError, DIRECT
+PetscObjectSetTabLevel,PetscError, DIRECT
+PetscObjectSetTabLevel,PetscError, DIRECT
+PetscObjectSetTabLevel,printf, DIRECT
+PetscObjectSetTabLevel,printf, DIRECT
+PetscObjectIncrementTabLevel,PetscError, DIRECT
+PetscObjectIncrementTabLevel,PetscCheckPointer, DIRECT
+PetscObjectIncrementTabLevel,PetscError, DIRECT
+PetscObjectIncrementTabLevel,PetscError, DIRECT
+PetscObjectIncrementTabLevel,PetscError, DIRECT
+PetscObjectIncrementTabLevel,printf, DIRECT
+PetscObjectIncrementTabLevel,printf, DIRECT

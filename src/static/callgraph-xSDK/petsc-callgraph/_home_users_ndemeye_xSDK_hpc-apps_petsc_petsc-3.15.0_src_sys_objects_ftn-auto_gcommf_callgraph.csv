@@ -1,0 +1,4 @@
+CALLER, CALLEE, CALLTYPE
+petscobjectgettablevel_,PetscObjectGetTabLevel, DIRECT
+petscobjectsettablevel_,PetscObjectSetTabLevel, DIRECT
+petscobjectincrementtablevel_,PetscObjectIncrementTabLevel, DIRECT

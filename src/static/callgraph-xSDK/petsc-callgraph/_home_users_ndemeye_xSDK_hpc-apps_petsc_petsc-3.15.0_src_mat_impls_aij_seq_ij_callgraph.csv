@@ -1,0 +1,11 @@
+CALLER, CALLEE, CALLTYPE
+MatToSymmetricIJ_SeqAIJ,PetscMallocA, DIRECT
+MatToSymmetricIJ_SeqAIJ,PetscError, DIRECT
+MatToSymmetricIJ_SeqAIJ,PetscMallocA, DIRECT
+MatToSymmetricIJ_SeqAIJ,PetscError, DIRECT
+MatToSymmetricIJ_SeqAIJ,PetscMallocA, DIRECT
+MatToSymmetricIJ_SeqAIJ,PetscError, DIRECT
+MatToSymmetricIJ_SeqAIJ,PetscTrFree = (any pointer->any pointer@i64 0) :: i32 (i8*, i32, i8*, i8*)*, INDIRECT 
+MatToSymmetricIJ_SeqAIJ,PetscError, DIRECT
+MatToSymmetricIJ_SeqAIJ,printf, DIRECT
+MatToSymmetricIJ_SeqAIJ,printf, DIRECT

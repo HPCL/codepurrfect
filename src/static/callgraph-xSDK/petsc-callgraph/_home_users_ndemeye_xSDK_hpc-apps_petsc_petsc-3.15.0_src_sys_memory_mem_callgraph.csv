@@ -1,0 +1,17 @@
+CALLER, CALLEE, CALLTYPE
+PetscMemoryGetCurrentUsage,getpid, DIRECT
+PetscMemoryGetCurrentUsage,sprintf, DIRECT
+PetscMemoryGetCurrentUsage,fopen, DIRECT
+PetscMemoryGetCurrentUsage,PetscError, DIRECT
+PetscMemoryGetCurrentUsage,fscanf, DIRECT
+PetscMemoryGetCurrentUsage,PetscError, DIRECT
+PetscMemoryGetCurrentUsage,getpagesize, DIRECT
+PetscMemoryGetCurrentUsage,fclose, DIRECT
+PetscMemoryGetCurrentUsage,PetscError, DIRECT
+PetscMemoryGetCurrentUsage,printf, DIRECT
+PetscMemoryGetCurrentUsage,printf, DIRECT
+PetscMemoryGetMaximumUsage,PetscError, DIRECT
+PetscMemoryGetMaximumUsage,printf, DIRECT
+PetscMemoryGetMaximumUsage,printf, DIRECT
+PetscMemorySetGetMaximumUsage,printf, DIRECT
+PetscMemorySetGetMaximumUsage,printf, DIRECT

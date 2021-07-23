@@ -1,0 +1,4 @@
+CALLER, CALLEE, CALLTYPE
+PetscIsNormalReal,__fpclassify, DIRECT
+PetscIsInfReal,__isinf, DIRECT
+PetscIsNanReal,__isnan, DIRECT

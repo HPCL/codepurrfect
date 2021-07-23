@@ -1,0 +1,2 @@
+EMPTYNAME = any pointer->any pointer@i64 0 :: void (%struct._p_SNES**, %struct._p_Vec**, %struct._p_Mat**, %struct._p_Mat**, i8*, i32*)*
+EMPTYNAME = any pointer->any pointer@i64 0 :: void (%struct._p_SNES**, %struct._p_Vec**, %struct._p_Vec**, i8*, i32*)*

@@ -1,0 +1,20 @@
+CALLER, CALLEE, CALLTYPE
+kspguessgettype_,KSPGuessGetType, DIRECT
+kspguessgettype_,PetscStrncpy, DIRECT
+kspguesssettype_,PetscMallocA, DIRECT
+kspguesssettype_,PetscStrncpy, DIRECT
+kspguesssettype_,KSPGuessSetType, DIRECT
+kspguesssettype_,PetscTrFree = (any pointer->any pointer@i64 0) :: i32 (i8*, i32, i8*, i8*)*, INDIRECT 
+kspguessview_,PETSC_VIEWER_DRAW_, DIRECT
+kspguessview_,PETSC_VIEWER_DRAW_, DIRECT
+kspguessview_,PETSC_VIEWER_STDOUT_, DIRECT
+kspguessview_,PETSC_VIEWER_STDOUT_, DIRECT
+kspguessview_,PETSC_VIEWER_STDERR_, DIRECT
+kspguessview_,PETSC_VIEWER_STDERR_, DIRECT
+kspguessview_,PETSC_VIEWER_BINARY_, DIRECT
+kspguessview_,PETSC_VIEWER_BINARY_, DIRECT
+kspguessview_,PETSC_VIEWER_BINARY_, DIRECT
+kspguessview_,PETSC_VIEWER_BINARY_, DIRECT
+kspguessview_,PETSC_VIEWER_SOCKET_, DIRECT
+kspguessview_,PETSC_VIEWER_SOCKET_, DIRECT
+kspguessview_,KSPGuessView, DIRECT

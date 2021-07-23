@@ -1,0 +1,12 @@
+EMPTYNAME = _VecOps->any pointer@i64 472 :: i32 (%struct._p_Vec*, i32, %struct._p_Vec*, i32)*
+EMPTYNAME = _VecOps->any pointer@i64 480 :: i32 (%struct._p_Vec*, i32, %struct._p_Vec*, i32)*
+EMPTYNAME = _VecOps->any pointer@i64 528 :: i32 (%struct._p_Vec*, i32, i32*, i32*, %struct._p_Vec*, i32)*
+EMPTYNAME = _VecOps->any pointer@i64 536 :: i32 (%struct._p_Vec*, i32, i32*, i32*, %struct._p_Vec*, i32)*
+EMPTYNAME = _VecOps->any pointer@i64 440 :: i32 (%struct._p_Vec*)*
+EMPTYNAME = _VecOps->any pointer@i64 448 :: i32 (%struct._p_Vec*)*
+EMPTYNAME = _VecOps->any pointer@i64 424 :: i32 (%struct._p_Vec*)*
+PetscLogPLB = any pointer->any pointer@i64 0 :: i32 (i32, i32, %struct._p_PetscObject*, %struct._p_PetscObject*, %struct._p_PetscObject*, %struct._p_PetscObject*)*
+EMPTYNAME = _VecOps->any pointer@i64 488 :: i32 (%struct._p_Vec*, %struct._p_Vec*, double*, double*)*
+PetscLogPLE = any pointer->any pointer@i64 0 :: i32 (i32, i32, %struct._p_PetscObject*, %struct._p_PetscObject*, %struct._p_PetscObject*, %struct._p_PetscObject*)*
+EMPTYNAME = _VecOps->any pointer@i64 456 :: i32 (%struct._p_Vec*, double)*
+EMPTYNAME = _VecOps->any pointer@i64 432 :: i32 (%struct._p_Vec*)*

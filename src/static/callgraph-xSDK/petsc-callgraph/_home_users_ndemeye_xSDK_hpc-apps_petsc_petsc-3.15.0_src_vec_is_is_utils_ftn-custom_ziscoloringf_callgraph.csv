@@ -1,0 +1,19 @@
+CALLER, CALLEE, CALLTYPE
+iscoloringview_,PETSC_VIEWER_DRAW_, DIRECT
+iscoloringview_,PETSC_VIEWER_DRAW_, DIRECT
+iscoloringview_,PETSC_VIEWER_STDOUT_, DIRECT
+iscoloringview_,PETSC_VIEWER_STDOUT_, DIRECT
+iscoloringview_,PETSC_VIEWER_STDERR_, DIRECT
+iscoloringview_,PETSC_VIEWER_STDERR_, DIRECT
+iscoloringview_,PETSC_VIEWER_BINARY_, DIRECT
+iscoloringview_,PETSC_VIEWER_BINARY_, DIRECT
+iscoloringview_,PETSC_VIEWER_BINARY_, DIRECT
+iscoloringview_,PETSC_VIEWER_BINARY_, DIRECT
+iscoloringview_,PETSC_VIEWER_SOCKET_, DIRECT
+iscoloringview_,PETSC_VIEWER_SOCKET_, DIRECT
+iscoloringview_,ISColoringView, DIRECT
+iscoloringviewfromoptions_,PetscMallocA, DIRECT
+iscoloringviewfromoptions_,PetscStrncpy, DIRECT
+iscoloringviewfromoptions_,PetscError, DIRECT
+iscoloringviewfromoptions_,ISColoringViewFromOptions, DIRECT
+iscoloringviewfromoptions_,PetscTrFree = (any pointer->any pointer@i64 0) :: i32 (i8*, i32, i8*, i8*)*, INDIRECT 

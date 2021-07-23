@@ -1,0 +1,62 @@
+CALLER, CALLEE, CALLTYPE
+PCCreate_CP,PetscMallocA, DIRECT
+PCCreate_CP,PetscLogObjectMemory, DIRECT
+PCCreate_CP,PetscError, DIRECT
+PCCreate_CP,printf, DIRECT
+PCCreate_CP,printf, DIRECT
+PCApply_CP,VecCopy, DIRECT
+PCApply_CP,PetscError, DIRECT
+PCApply_CP,VecGetArray, DIRECT
+PCApply_CP,PetscError, DIRECT
+PCApply_CP,VecGetArray, DIRECT
+PCApply_CP,PetscError, DIRECT
+PCApply_CP,VecRestoreArray, DIRECT
+PCApply_CP,PetscError, DIRECT
+PCApply_CP,VecRestoreArray, DIRECT
+PCApply_CP,PetscError, DIRECT
+PCApply_CP,printf, DIRECT
+PCApply_CP,printf, DIRECT
+PCSetUp_CP,PetscObjectTypeCompare, DIRECT
+PCSetUp_CP,PetscError, DIRECT
+PCSetUp_CP,PetscObjectComm, DIRECT
+PCSetUp_CP,PetscError, DIRECT
+PCSetUp_CP,MatGetLocalSize, DIRECT
+PCSetUp_CP,PetscError, DIRECT
+PCSetUp_CP,PetscError, DIRECT
+PCSetUp_CP,MatCreateVecs, DIRECT
+PCSetUp_CP,PetscError, DIRECT
+PCSetUp_CP,PetscMallocA, DIRECT
+PCSetUp_CP,PetscError, DIRECT
+PCSetUp_CP,PetscFreeA, DIRECT
+PCSetUp_CP,PetscError, DIRECT
+PCSetUp_CP,PetscMallocA, DIRECT
+PCSetUp_CP,PetscError, DIRECT
+PCSetUp_CP,PetscMallocA, DIRECT
+PCSetUp_CP,PetscError, DIRECT
+PCSetUp_CP,PetscMemzero, DIRECT
+PCSetUp_CP,PetscError, DIRECT
+PCSetUp_CP,PetscTrFree = (any pointer->any pointer@i64 0) :: i32 (i8*, i32, i8*, i8*)*, INDIRECT 
+PCSetUp_CP,PetscError, DIRECT
+PCSetUp_CP,printf, DIRECT
+PCSetUp_CP,printf, DIRECT
+PCReset_CP,PetscTrFree = (any pointer->any pointer@i64 0) :: i32 (i8*, i32, i8*, i8*)*, INDIRECT 
+PCReset_CP,PetscError, DIRECT
+PCReset_CP,VecDestroy, DIRECT
+PCReset_CP,PetscError, DIRECT
+PCReset_CP,PetscFreeA, DIRECT
+PCReset_CP,PetscError, DIRECT
+PCReset_CP,printf, DIRECT
+PCReset_CP,printf, DIRECT
+PCDestroy_CP,PCReset_CP, DIRECT
+PCDestroy_CP,PetscError, DIRECT
+PCDestroy_CP,PetscTrFree = (any pointer->any pointer@i64 0) :: i32 (i8*, i32, i8*, i8*)*, INDIRECT 
+PCDestroy_CP,PetscError, DIRECT
+PCDestroy_CP,PetscFreeA, DIRECT
+PCDestroy_CP,PetscError, DIRECT
+PCDestroy_CP,PetscTrFree = (any pointer->any pointer@i64 0) :: i32 (i8*, i32, i8*, i8*)*, INDIRECT 
+PCDestroy_CP,PetscError, DIRECT
+PCDestroy_CP,printf, DIRECT
+PCDestroy_CP,printf, DIRECT
+PCSetFromOptions_CP,printf, DIRECT
+PCSetFromOptions_CP,printf, DIRECT
+PetscMemzero,PetscError, DIRECT

@@ -1,0 +1,5 @@
+CALLER, CALLEE, CALLTYPE
+dmnetworkmonitorcreate_,DMNetworkMonitorCreate, DIRECT
+dmnetworkmonitordestroy_,DMNetworkMonitorDestroy, DIRECT
+dmnetworkmonitorpop_,DMNetworkMonitorPop, DIRECT
+dmnetworkmonitorview_,DMNetworkMonitorView, DIRECT

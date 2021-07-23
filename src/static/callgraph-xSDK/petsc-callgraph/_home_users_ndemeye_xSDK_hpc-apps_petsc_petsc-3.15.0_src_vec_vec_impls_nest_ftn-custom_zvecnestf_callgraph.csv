@@ -1,0 +1,9 @@
+CALLER, CALLEE, CALLTYPE
+vecnestgetsubvecs_,PetscError, DIRECT
+vecnestgetsubvecs_,VecNestGetSubVecs, DIRECT
+vecnestgetsubvecs_,PetscError, DIRECT
+vecnestsetsubvecs_,VecNestSetSubVecs, DIRECT
+veccreatenest_,PetscError, DIRECT
+veccreatenest_,PetscError, DIRECT
+veccreatenest_,MPI_Comm_f2c, DIRECT
+veccreatenest_,VecCreateNest, DIRECT

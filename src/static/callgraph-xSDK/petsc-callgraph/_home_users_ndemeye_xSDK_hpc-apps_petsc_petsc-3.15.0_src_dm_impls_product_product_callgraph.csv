@@ -1,0 +1,17 @@
+CALLER, CALLEE, CALLTYPE
+DMCreate_Product,PetscError, DIRECT
+DMCreate_Product,PetscCheckPointer, DIRECT
+DMCreate_Product,PetscError, DIRECT
+DMCreate_Product,PetscMallocA, DIRECT
+DMCreate_Product,PetscLogObjectMemory, DIRECT
+DMCreate_Product,PetscError, DIRECT
+DMCreate_Product,printf, DIRECT
+DMCreate_Product,printf, DIRECT
+DMDestroy_Product,DMDestroy, DIRECT
+DMDestroy_Product,DMDestroy, DIRECT
+DMDestroy_Product,PetscError, DIRECT
+DMDestroy_Product,PetscError, DIRECT
+DMDestroy_Product,printf, DIRECT
+DMDestroy_Product,printf, DIRECT
+DMDestroy_Product,DMDestroy, DIRECT
+DMDestroy_Product,PetscTrFree = (any pointer->any pointer@i64 0) :: i32 (i8*, i32, i8*, i8*)*, INDIRECT 

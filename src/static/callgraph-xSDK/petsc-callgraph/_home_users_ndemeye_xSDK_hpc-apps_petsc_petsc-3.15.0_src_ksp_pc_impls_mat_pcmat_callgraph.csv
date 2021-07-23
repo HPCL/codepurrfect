@@ -1,0 +1,17 @@
+CALLER, CALLEE, CALLTYPE
+PCCreate_Mat,printf, DIRECT
+PCCreate_Mat,printf, DIRECT
+PCApply_Mat,MatMult, DIRECT
+PCApply_Mat,PetscError, DIRECT
+PCApply_Mat,printf, DIRECT
+PCApply_Mat,printf, DIRECT
+PCMatApply_Mat,MatMatMult, DIRECT
+PCMatApply_Mat,PetscError, DIRECT
+PCMatApply_Mat,printf, DIRECT
+PCMatApply_Mat,printf, DIRECT
+PCApplyTranspose_Mat,MatMultTranspose, DIRECT
+PCApplyTranspose_Mat,PetscError, DIRECT
+PCApplyTranspose_Mat,printf, DIRECT
+PCApplyTranspose_Mat,printf, DIRECT
+PCDestroy_Mat,printf, DIRECT
+PCDestroy_Mat,printf, DIRECT

@@ -1,0 +1,37 @@
+CALLER, CALLEE, CALLTYPE
+PCCreate_VPBJacobi,PetscMallocA, DIRECT
+PCCreate_VPBJacobi,PetscLogObjectMemory, DIRECT
+PCCreate_VPBJacobi,PetscError, DIRECT
+PCCreate_VPBJacobi,printf, DIRECT
+PCCreate_VPBJacobi,printf, DIRECT
+PCApply_VPBJacobi,MatGetVariableBlockSizes, DIRECT
+PCApply_VPBJacobi,PetscError, DIRECT
+PCApply_VPBJacobi,VecGetArrayRead, DIRECT
+PCApply_VPBJacobi,PetscError, DIRECT
+PCApply_VPBJacobi,VecGetArray, DIRECT
+PCApply_VPBJacobi,PetscError, DIRECT
+PCApply_VPBJacobi,VecRestoreArrayRead, DIRECT
+PCApply_VPBJacobi,PetscError, DIRECT
+PCApply_VPBJacobi,VecRestoreArray, DIRECT
+PCApply_VPBJacobi,PetscError, DIRECT
+PCApply_VPBJacobi,printf, DIRECT
+PCApply_VPBJacobi,printf, DIRECT
+PCSetUp_VPBJacobi,MatGetVariableBlockSizes, DIRECT
+PCSetUp_VPBJacobi,PetscError, DIRECT
+PCSetUp_VPBJacobi,MatGetLocalSize, DIRECT
+PCSetUp_VPBJacobi,PetscError, DIRECT
+PCSetUp_VPBJacobi,PetscError, DIRECT
+PCSetUp_VPBJacobi,PetscMallocA, DIRECT
+PCSetUp_VPBJacobi,PetscError, DIRECT
+PCSetUp_VPBJacobi,MatInvertVariableBlockDiagonal, DIRECT
+PCSetUp_VPBJacobi,PetscError, DIRECT
+PCSetUp_VPBJacobi,MatFactorGetError, DIRECT
+PCSetUp_VPBJacobi,PetscError, DIRECT
+PCSetUp_VPBJacobi,printf, DIRECT
+PCSetUp_VPBJacobi,printf, DIRECT
+PCDestroy_VPBJacobi,PetscTrFree = (any pointer->any pointer@i64 0) :: i32 (i8*, i32, i8*, i8*)*, INDIRECT 
+PCDestroy_VPBJacobi,PetscError, DIRECT
+PCDestroy_VPBJacobi,PetscTrFree = (any pointer->any pointer@i64 0) :: i32 (i8*, i32, i8*, i8*)*, INDIRECT 
+PCDestroy_VPBJacobi,PetscError, DIRECT
+PCDestroy_VPBJacobi,printf, DIRECT
+PCDestroy_VPBJacobi,printf, DIRECT

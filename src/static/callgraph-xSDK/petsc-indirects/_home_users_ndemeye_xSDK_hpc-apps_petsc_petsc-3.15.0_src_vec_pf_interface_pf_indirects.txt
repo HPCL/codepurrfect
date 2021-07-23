@@ -1,0 +1,10 @@
+EMPTYNAME = _PFOps->any pointer@i64 16 :: i32 (i8*)*
+PetscTrFree = any pointer->any pointer@i64 0 :: i32 (i8*, i32, i8*, i8*)*
+PetscLogPHC = any pointer->any pointer@i64 0 :: i32 (%struct._p_PetscObject*)*
+EMPTYNAME = _PFOps->any pointer@i64 24 :: i32 (i8*, %struct._p_PetscViewer*)*
+EMPTYNAME = _PFOps->any pointer@i64 8 :: i32 (i8*, %struct._p_Vec*, %struct._p_Vec*)*
+EMPTYNAME = _PFOps->any pointer@i64 0 :: i32 (i8*, i32, double*, double*)*
+EMPTYNAME = _PFOps->any pointer@i64 0 :: i32 (i8*, i32, double*, double*)*
+EMPTYNAME = _PFOps->any pointer@i64 16 :: i32 (i8*)*
+EMPTYNAME = any pointer->any pointer@i64 0 :: i32 (%struct._p_PF*, i8*)*
+EMPTYNAME = _PFOps->any pointer@i64 32 :: i32 (%struct._p_PetscOptionItems*, %struct._p_PF*)*

@@ -1,0 +1,77 @@
+CALLER, CALLEE, CALLTYPE
+MatGetSymbolicTranspose_SeqAIJ,PetscInfo_Private, DIRECT
+MatGetSymbolicTranspose_SeqAIJ,PetscError, DIRECT
+MatGetSymbolicTranspose_SeqAIJ,PetscLogPLB = (any pointer->any pointer@i64 0) :: i32 (i32, i32, %struct._p_PetscObject*, %struct._p_PetscObject*, %struct._p_PetscObject*, %struct._p_PetscObject*)*, INDIRECT 
+MatGetSymbolicTranspose_SeqAIJ,PetscError, DIRECT
+MatGetSymbolicTranspose_SeqAIJ,PetscMallocA, DIRECT
+MatGetSymbolicTranspose_SeqAIJ,PetscError, DIRECT
+MatGetSymbolicTranspose_SeqAIJ,PetscMallocA, DIRECT
+MatGetSymbolicTranspose_SeqAIJ,PetscError, DIRECT
+MatGetSymbolicTranspose_SeqAIJ,PetscMallocA, DIRECT
+MatGetSymbolicTranspose_SeqAIJ,PetscError, DIRECT
+MatGetSymbolicTranspose_SeqAIJ,PetscMemcpy, DIRECT
+MatGetSymbolicTranspose_SeqAIJ,PetscError, DIRECT
+MatGetSymbolicTranspose_SeqAIJ,PetscTrFree = (any pointer->any pointer@i64 0) :: i32 (i8*, i32, i8*, i8*)*, INDIRECT 
+MatGetSymbolicTranspose_SeqAIJ,PetscError, DIRECT
+MatGetSymbolicTranspose_SeqAIJ,PetscLogPLE = (any pointer->any pointer@i64 0) :: i32 (i32, i32, %struct._p_PetscObject*, %struct._p_PetscObject*, %struct._p_PetscObject*, %struct._p_PetscObject*)*, INDIRECT 
+MatGetSymbolicTranspose_SeqAIJ,PetscError, DIRECT
+MatGetSymbolicTranspose_SeqAIJ,printf, DIRECT
+MatGetSymbolicTranspose_SeqAIJ,printf, DIRECT
+PetscMemcpy,PetscError, DIRECT
+PetscMemcpy,PetscError, DIRECT
+PetscMemcpy,PetscError, DIRECT
+PetscMemcpy,printf, DIRECT
+PetscMemcpy,printf, DIRECT
+MatGetSymbolicTransposeReduced_SeqAIJ,PetscInfo_Private, DIRECT
+MatGetSymbolicTransposeReduced_SeqAIJ,PetscError, DIRECT
+MatGetSymbolicTransposeReduced_SeqAIJ,PetscLogPLB = (any pointer->any pointer@i64 0) :: i32 (i32, i32, %struct._p_PetscObject*, %struct._p_PetscObject*, %struct._p_PetscObject*, %struct._p_PetscObject*)*, INDIRECT 
+MatGetSymbolicTransposeReduced_SeqAIJ,PetscError, DIRECT
+MatGetSymbolicTransposeReduced_SeqAIJ,PetscMallocA, DIRECT
+MatGetSymbolicTransposeReduced_SeqAIJ,PetscError, DIRECT
+MatGetSymbolicTransposeReduced_SeqAIJ,PetscMallocA, DIRECT
+MatGetSymbolicTransposeReduced_SeqAIJ,PetscError, DIRECT
+MatGetSymbolicTransposeReduced_SeqAIJ,PetscMallocA, DIRECT
+MatGetSymbolicTransposeReduced_SeqAIJ,PetscError, DIRECT
+MatGetSymbolicTransposeReduced_SeqAIJ,PetscMemcpy, DIRECT
+MatGetSymbolicTransposeReduced_SeqAIJ,PetscError, DIRECT
+MatGetSymbolicTransposeReduced_SeqAIJ,PetscTrFree = (any pointer->any pointer@i64 0) :: i32 (i8*, i32, i8*, i8*)*, INDIRECT 
+MatGetSymbolicTransposeReduced_SeqAIJ,PetscError, DIRECT
+MatGetSymbolicTransposeReduced_SeqAIJ,PetscLogPLE = (any pointer->any pointer@i64 0) :: i32 (i32, i32, %struct._p_PetscObject*, %struct._p_PetscObject*, %struct._p_PetscObject*, %struct._p_PetscObject*)*, INDIRECT 
+MatGetSymbolicTransposeReduced_SeqAIJ,PetscError, DIRECT
+MatGetSymbolicTransposeReduced_SeqAIJ,printf, DIRECT
+MatGetSymbolicTransposeReduced_SeqAIJ,printf, DIRECT
+MatTranspose_SeqAIJ,MatSeqAIJGetArrayRead, DIRECT
+MatTranspose_SeqAIJ,PetscError, DIRECT
+MatTranspose_SeqAIJ,PetscMallocA, DIRECT
+MatTranspose_SeqAIJ,PetscError, DIRECT
+MatTranspose_SeqAIJ,PetscMallocA, DIRECT
+MatTranspose_SeqAIJ,PetscError, DIRECT
+MatTranspose_SeqAIJ,PetscMallocA, DIRECT
+MatTranspose_SeqAIJ,PetscError, DIRECT
+MatTranspose_SeqAIJ,PetscMallocA, DIRECT
+MatTranspose_SeqAIJ,PetscError, DIRECT
+MatTranspose_SeqAIJ,PetscMemcpy, DIRECT
+MatTranspose_SeqAIJ,PetscError, DIRECT
+MatTranspose_SeqAIJ,MatSeqAIJRestoreArrayRead, DIRECT
+MatTranspose_SeqAIJ,PetscError, DIRECT
+MatTranspose_SeqAIJ,PetscTrFree = (any pointer->any pointer@i64 0) :: i32 (i8*, i32, i8*, i8*)*, INDIRECT 
+MatTranspose_SeqAIJ,PetscError, DIRECT
+MatTranspose_SeqAIJ,PetscObjectComm, DIRECT
+MatTranspose_SeqAIJ,MatCreateSeqAIJWithArrays, DIRECT
+MatTranspose_SeqAIJ,PetscError, DIRECT
+MatTranspose_SeqAIJ,MatSetBlockSizes, DIRECT
+MatTranspose_SeqAIJ,PetscError, DIRECT
+MatTranspose_SeqAIJ,MatSetType, DIRECT
+MatTranspose_SeqAIJ,PetscError, DIRECT
+MatTranspose_SeqAIJ,MatHeaderMerge, DIRECT
+MatTranspose_SeqAIJ,PetscError, DIRECT
+MatTranspose_SeqAIJ,printf, DIRECT
+MatTranspose_SeqAIJ,printf, DIRECT
+MatRestoreSymbolicTranspose_SeqAIJ,PetscInfo_Private, DIRECT
+MatRestoreSymbolicTranspose_SeqAIJ,PetscError, DIRECT
+MatRestoreSymbolicTranspose_SeqAIJ,PetscTrFree = (any pointer->any pointer@i64 0) :: i32 (i8*, i32, i8*, i8*)*, INDIRECT 
+MatRestoreSymbolicTranspose_SeqAIJ,PetscError, DIRECT
+MatRestoreSymbolicTranspose_SeqAIJ,PetscTrFree = (any pointer->any pointer@i64 0) :: i32 (i8*, i32, i8*, i8*)*, INDIRECT 
+MatRestoreSymbolicTranspose_SeqAIJ,PetscError, DIRECT
+MatRestoreSymbolicTranspose_SeqAIJ,printf, DIRECT
+MatRestoreSymbolicTranspose_SeqAIJ,printf, DIRECT

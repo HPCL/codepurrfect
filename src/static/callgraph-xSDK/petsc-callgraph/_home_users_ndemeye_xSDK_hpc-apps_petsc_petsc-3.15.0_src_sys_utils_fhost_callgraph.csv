@@ -1,0 +1,20 @@
+CALLER, CALLEE, CALLTYPE
+PetscGetHostName,uname, DIRECT
+PetscGetHostName,PetscStrncpy, DIRECT
+PetscGetHostName,PetscError, DIRECT
+PetscGetHostName,PetscStrchr, DIRECT
+PetscGetHostName,PetscError, DIRECT
+PetscGetHostName,PetscStrlen, DIRECT
+PetscGetHostName,PetscError, DIRECT
+PetscGetHostName,printf, DIRECT
+PetscGetHostName,printf, DIRECT
+PetscGetHostName,getdomainname, DIRECT
+PetscGetHostName,PetscError, DIRECT
+PetscGetHostName,PetscStrlen, DIRECT
+PetscGetHostName,PetscError, DIRECT
+PetscGetHostName,PetscStrendswithwhich, DIRECT
+PetscGetHostName,PetscError, DIRECT
+PetscGetHostName,PetscInfo_Private, DIRECT
+PetscGetHostName,PetscError, DIRECT
+PetscGetHostName,printf, DIRECT
+PetscGetHostName,printf, DIRECT

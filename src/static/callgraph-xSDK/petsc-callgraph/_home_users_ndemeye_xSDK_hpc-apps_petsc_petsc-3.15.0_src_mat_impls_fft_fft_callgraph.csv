@@ -1,0 +1,41 @@
+CALLER, CALLEE, CALLTYPE
+MatDestroy_FFT,EMPTYNAME = (->any pointer@i64 32) :: i32 (%struct._p_Mat*)*, INDIRECT 
+MatDestroy_FFT,PetscError, DIRECT
+MatDestroy_FFT,PetscTrFree = (any pointer->any pointer@i64 0) :: i32 (i8*, i32, i8*, i8*)*, INDIRECT 
+MatDestroy_FFT,PetscError, DIRECT
+MatDestroy_FFT,PetscTrFree = (any pointer->any pointer@i64 0) :: i32 (i8*, i32, i8*, i8*)*, INDIRECT 
+MatDestroy_FFT,PetscError, DIRECT
+MatDestroy_FFT,PetscObjectChangeTypeName, DIRECT
+MatDestroy_FFT,PetscError, DIRECT
+MatDestroy_FFT,printf, DIRECT
+MatDestroy_FFT,printf, DIRECT
+MatCreateFFT,PetscError, DIRECT
+MatCreateFFT,MPI_Comm_size, DIRECT
+MatCreateFFT,MPI_Error_string, DIRECT
+MatCreateFFT,PetscError, DIRECT
+MatCreateFFT,MatCreate, DIRECT
+MatCreateFFT,PetscError, DIRECT
+MatCreateFFT,PetscMallocA, DIRECT
+MatCreateFFT,PetscLogObjectMemory, DIRECT
+MatCreateFFT,PetscError, DIRECT
+MatCreateFFT,PetscError, DIRECT
+MatCreateFFT,PetscMallocA, DIRECT
+MatCreateFFT,PetscError, DIRECT
+MatCreateFFT,PetscMemcpy, DIRECT
+MatCreateFFT,PetscError, DIRECT
+MatCreateFFT,MatSetType, DIRECT
+MatCreateFFT,PetscError, DIRECT
+MatCreateFFT,PetscObjectComm, DIRECT
+MatCreateFFT,PetscOptionsBegin_Private, DIRECT
+MatCreateFFT,PetscError, DIRECT
+MatCreateFFT,PetscOptionsEnd_Private, DIRECT
+MatCreateFFT,PetscError, DIRECT
+MatCreateFFT,PetscObjectComm, DIRECT
+MatCreateFFT,PetscOptionsBegin_Private, DIRECT
+MatCreateFFT,printf, DIRECT
+MatCreateFFT,printf, DIRECT
+PetscMemcpy,PetscError, DIRECT
+PetscMemcpy,PetscError, DIRECT
+PetscMemcpy,PetscError, DIRECT
+PetscMemcpy,printf, DIRECT
+PetscMemcpy,printf, DIRECT

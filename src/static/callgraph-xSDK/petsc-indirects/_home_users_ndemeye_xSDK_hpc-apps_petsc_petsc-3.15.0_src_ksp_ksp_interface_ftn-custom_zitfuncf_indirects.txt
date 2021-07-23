@@ -1,0 +1,4 @@
+EMPTYNAME = any pointer->any pointer@i64 0 :: void (%struct._p_KSP**, i32*, double*, i8*, i32*)*
+EMPTYNAME = any pointer->any pointer@i64 0 :: void (i8*, i32*)*
+EMPTYNAME = any pointer->any pointer@i64 0 :: void (%struct._p_KSP**, i32*, double*, i32*, i8*, i32*)*
+EMPTYNAME = any pointer->any pointer@i64 0 :: void (i8*, i32*)*

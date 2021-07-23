@@ -1,0 +1,77 @@
+CALLER, CALLEE, CALLTYPE
+pcshellgetcontext_,PCShellGetContext, DIRECT
+pcshellsetapply_,PetscTrMalloc = (any pointer->any pointer@i64 0) :: i32 (i64, i32, i32, i8*, i8*, i8**)*, INDIRECT 
+pcshellsetapply_,PetscError, DIRECT
+pcshellsetapply_,PCShellSetApply, DIRECT
+ourshellapply,EMPTYNAME = (any pointer->any pointer@i64 0) :: void (%struct._p_PC**, %struct._p_Vec**, %struct._p_Vec**, i32*)*, INDIRECT 
+ourshellapply,PetscError, DIRECT
+pcshellsetapplysymmetricleft_,PetscTrMalloc = (any pointer->any pointer@i64 0) :: i32 (i64, i32, i32, i8*, i8*, i8**)*, INDIRECT 
+pcshellsetapplysymmetricleft_,PetscError, DIRECT
+pcshellsetapplysymmetricleft_,PCShellSetApplySymmetricLeft, DIRECT
+ourshellapplysymmetricleft,EMPTYNAME = (any pointer->any pointer@i64 0) :: void (%struct._p_PC**, %struct._p_Vec**, %struct._p_Vec**, i32*)*, INDIRECT 
+ourshellapplysymmetricleft,PetscError, DIRECT
+pcshellsetapplysymmetricright_,PetscTrMalloc = (any pointer->any pointer@i64 0) :: i32 (i64, i32, i32, i8*, i8*, i8**)*, INDIRECT 
+pcshellsetapplysymmetricright_,PetscError, DIRECT
+pcshellsetapplysymmetricright_,PCShellSetApplySymmetricRight, DIRECT
+ourshellapplysymmetricright,EMPTYNAME = (any pointer->any pointer@i64 0) :: void (%struct._p_PC**, %struct._p_Vec**, %struct._p_Vec**, i32*)*, INDIRECT 
+ourshellapplysymmetricright,PetscError, DIRECT
+pcshellsetapplyctx_,PetscTrMalloc = (any pointer->any pointer@i64 0) :: i32 (i64, i32, i32, i8*, i8*, i8**)*, INDIRECT 
+pcshellsetapplyctx_,PetscError, DIRECT
+pcshellsetapplyctx_,PCShellSetApply, DIRECT
+ourshellapplyctx,PCShellGetContext, DIRECT
+ourshellapplyctx,PetscError, DIRECT
+ourshellapplyctx,EMPTYNAME = (any pointer->any pointer@i64 0) :: void (%struct._p_PC**, i8*, %struct._p_Vec**, %struct._p_Vec**, i32*)*, INDIRECT 
+ourshellapplyctx,PetscError, DIRECT
+pcshellsetapplyba_,PetscTrMalloc = (any pointer->any pointer@i64 0) :: i32 (i64, i32, i32, i8*, i8*, i8**)*, INDIRECT 
+pcshellsetapplyba_,PetscError, DIRECT
+pcshellsetapplyba_,PCShellSetApplyBA, DIRECT
+ourshellapplyba,EMPTYNAME = (any pointer->any pointer@i64 0) :: void (%struct._p_PC**, i32*, %struct._p_Vec**, %struct._p_Vec**, %struct._p_Vec**, i32*)*, INDIRECT 
+ourshellapplyba,PetscError, DIRECT
+pcshellsetapplyrichardson_,PetscTrMalloc = (any pointer->any pointer@i64 0) :: i32 (i64, i32, i32, i8*, i8*, i8**)*, INDIRECT 
+pcshellsetapplyrichardson_,PetscError, DIRECT
+pcshellsetapplyrichardson_,PCShellSetApplyRichardson, DIRECT
+ourapplyrichardson,EMPTYNAME = (any pointer->any pointer@i64 0) :: void (%struct._p_PC**, %struct._p_Vec**, %struct._p_Vec**, %struct._p_Vec**, double*, double*, double*, i32*, i32*, i32*, i32*, i32*)*, INDIRECT 
+ourapplyrichardson,PetscError, DIRECT
+pcshellsetapplytranspose_,PetscTrMalloc = (any pointer->any pointer@i64 0) :: i32 (i64, i32, i32, i8*, i8*, i8**)*, INDIRECT 
+pcshellsetapplytranspose_,PetscError, DIRECT
+pcshellsetapplytranspose_,PCShellSetApplyTranspose, DIRECT
+ourshellapplytranspose,EMPTYNAME = (any pointer->any pointer@i64 0) :: void (i8*, %struct._p_Vec**, %struct._p_Vec**, i32*)*, INDIRECT 
+ourshellapplytranspose,PetscError, DIRECT
+pcshellsetsetupctx_,PetscTrMalloc = (any pointer->any pointer@i64 0) :: i32 (i64, i32, i32, i8*, i8*, i8**)*, INDIRECT 
+pcshellsetsetupctx_,PetscError, DIRECT
+pcshellsetsetupctx_,PCShellSetSetUp, DIRECT
+ourshellsetupctx,PCShellGetContext, DIRECT
+ourshellsetupctx,PetscError, DIRECT
+ourshellsetupctx,EMPTYNAME = (any pointer->any pointer@i64 0) :: void (%struct._p_PC**, i8*, i32*)*, INDIRECT 
+ourshellsetupctx,PetscError, DIRECT
+pcshellsetsetup_,PetscTrMalloc = (any pointer->any pointer@i64 0) :: i32 (i64, i32, i32, i8*, i8*, i8**)*, INDIRECT 
+pcshellsetsetup_,PetscError, DIRECT
+pcshellsetsetup_,PCShellSetSetUp, DIRECT
+ourshellsetup,EMPTYNAME = (any pointer->any pointer@i64 0) :: void (%struct._p_PC**, i32*)*, INDIRECT 
+ourshellsetup,PetscError, DIRECT
+pcshellsetdestroy_,PetscTrMalloc = (any pointer->any pointer@i64 0) :: i32 (i64, i32, i32, i8*, i8*, i8**)*, INDIRECT 
+pcshellsetdestroy_,PetscError, DIRECT
+pcshellsetdestroy_,PCShellSetDestroy, DIRECT
+ourshelldestroy,EMPTYNAME = (any pointer->any pointer@i64 0) :: void (i8*, i32*)*, INDIRECT 
+ourshelldestroy,PetscError, DIRECT
+pcshellsetpresolve_,PetscTrMalloc = (any pointer->any pointer@i64 0) :: i32 (i64, i32, i32, i8*, i8*, i8**)*, INDIRECT 
+pcshellsetpresolve_,PetscError, DIRECT
+pcshellsetpresolve_,PCShellSetPreSolve, DIRECT
+ourshellpresolve,EMPTYNAME = (any pointer->any pointer@i64 0) :: void (%struct._p_PC**, %struct._p_KSP**, %struct._p_Vec**, %struct._p_Vec**, i32*)*, INDIRECT 
+ourshellpresolve,PetscError, DIRECT
+pcshellsetpostsolve_,PetscTrMalloc = (any pointer->any pointer@i64 0) :: i32 (i64, i32, i32, i8*, i8*, i8**)*, INDIRECT 
+pcshellsetpostsolve_,PetscError, DIRECT
+pcshellsetpostsolve_,PCShellSetPostSolve, DIRECT
+ourshellpostsolve,EMPTYNAME = (any pointer->any pointer@i64 0) :: void (%struct._p_PC**, %struct._p_KSP**, %struct._p_Vec**, %struct._p_Vec**, i32*)*, INDIRECT 
+ourshellpostsolve,PetscError, DIRECT
+pcshellsetview_,PetscTrMalloc = (any pointer->any pointer@i64 0) :: i32 (i64, i32, i32, i8*, i8*, i8**)*, INDIRECT 
+pcshellsetview_,PetscError, DIRECT
+pcshellsetview_,PCShellSetView, DIRECT
+ourshellview,EMPTYNAME = (any pointer->any pointer@i64 0) :: void (%struct._p_PC**, %struct._p_PetscViewer**, i32*)*, INDIRECT 
+ourshellview,PetscError, DIRECT
+pcshellsetname_,PetscMallocA, DIRECT
+pcshellsetname_,PetscStrncpy, DIRECT
+pcshellsetname_,PCShellSetName, DIRECT
+pcshellsetname_,PetscTrFree = (any pointer->any pointer@i64 0) :: i32 (i8*, i32, i8*, i8*)*, INDIRECT 
+pcshellgetname_,PCShellGetName, DIRECT
+pcshellgetname_,PetscStrncpy, DIRECT

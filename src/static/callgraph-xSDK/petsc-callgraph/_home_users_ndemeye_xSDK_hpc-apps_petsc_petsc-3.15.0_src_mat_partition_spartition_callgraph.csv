@@ -1,0 +1,13 @@
+CALLER, CALLEE, CALLTYPE
+MatPartitioningRegisterAll,printf, DIRECT
+MatPartitioningRegisterAll,printf, DIRECT
+MatPartitioningRegisterAll,MatPartitioningRegister, DIRECT
+MatPartitioningRegisterAll,PetscError, DIRECT
+MatPartitioningRegisterAll,MatPartitioningRegister, DIRECT
+MatPartitioningRegisterAll,PetscError, DIRECT
+MatPartitioningRegisterAll,MatPartitioningRegister, DIRECT
+MatPartitioningRegisterAll,PetscError, DIRECT
+MatPartitioningRegisterAll,MatPartitioningRegister, DIRECT
+MatPartitioningRegisterAll,PetscError, DIRECT
+MatPartitioningRegisterAll,printf, DIRECT
+MatPartitioningRegisterAll,printf, DIRECT

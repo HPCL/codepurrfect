@@ -1,0 +1,49 @@
+CALLER, CALLEE, CALLTYPE
+MatFactorSetUpInPlaceSchur_Private,MatSetUnfactored, DIRECT
+MatFactorSetUpInPlaceSchur_Private,PetscError, DIRECT
+MatFactorSetUpInPlaceSchur_Private,MatGetFactor, DIRECT
+MatFactorSetUpInPlaceSchur_Private,PetscError, DIRECT
+MatFactorSetUpInPlaceSchur_Private,MatCholeskyFactorSymbolic, DIRECT
+MatFactorSetUpInPlaceSchur_Private,PetscError, DIRECT
+MatFactorSetUpInPlaceSchur_Private,MatLUFactorSymbolic, DIRECT
+MatFactorSetUpInPlaceSchur_Private,PetscError, DIRECT
+MatFactorSetUpInPlaceSchur_Private,MatDestroy, DIRECT
+MatFactorSetUpInPlaceSchur_Private,PetscError, DIRECT
+MatFactorSetUpInPlaceSchur_Private,printf, DIRECT
+MatFactorSetUpInPlaceSchur_Private,printf, DIRECT
+MatFactorUpdateSchurStatus_Private,PetscTrFree = (any pointer->any pointer@i64 0) :: i32 (i8*, i32, i8*, i8*)*, INDIRECT 
+MatFactorUpdateSchurStatus_Private,PetscError, DIRECT
+MatFactorUpdateSchurStatus_Private,PetscObjectComm, DIRECT
+MatFactorUpdateSchurStatus_Private,PetscError, DIRECT
+MatFactorUpdateSchurStatus_Private,printf, DIRECT
+MatFactorUpdateSchurStatus_Private,printf, DIRECT
+MatFactorFactorizeSchurComplement_Private,PetscLogPLB = (any pointer->any pointer@i64 0) :: i32 (i32, i32, %struct._p_PetscObject*, %struct._p_PetscObject*, %struct._p_PetscObject*, %struct._p_PetscObject*)*, INDIRECT 
+MatFactorFactorizeSchurComplement_Private,PetscError, DIRECT
+MatFactorFactorizeSchurComplement_Private,MatCholeskyFactor, DIRECT
+MatFactorFactorizeSchurComplement_Private,PetscError, DIRECT
+MatFactorFactorizeSchurComplement_Private,MatLUFactor, DIRECT
+MatFactorFactorizeSchurComplement_Private,PetscError, DIRECT
+MatFactorFactorizeSchurComplement_Private,PetscLogPLE = (any pointer->any pointer@i64 0) :: i32 (i32, i32, %struct._p_PetscObject*, %struct._p_PetscObject*, %struct._p_PetscObject*, %struct._p_PetscObject*)*, INDIRECT 
+MatFactorFactorizeSchurComplement_Private,PetscError, DIRECT
+MatFactorFactorizeSchurComplement_Private,printf, DIRECT
+MatFactorFactorizeSchurComplement_Private,printf, DIRECT
+MatFactorInvertSchurComplement_Private,PetscObjectComm, DIRECT
+MatFactorInvertSchurComplement_Private,MPI_Comm_size, DIRECT
+MatFactorInvertSchurComplement_Private,MPI_Error_string, DIRECT
+MatFactorInvertSchurComplement_Private,PetscError, DIRECT
+MatFactorInvertSchurComplement_Private,PetscObjectComm, DIRECT
+MatFactorInvertSchurComplement_Private,PetscError, DIRECT
+MatFactorInvertSchurComplement_Private,PetscObjectTypeCompare, DIRECT
+MatFactorInvertSchurComplement_Private,PetscError, DIRECT
+MatFactorInvertSchurComplement_Private,PetscObjectTypeCompare, DIRECT
+MatFactorInvertSchurComplement_Private,PetscError, DIRECT
+MatFactorInvertSchurComplement_Private,PetscLogPLB = (any pointer->any pointer@i64 0) :: i32 (i32, i32, %struct._p_PetscObject*, %struct._p_PetscObject*, %struct._p_PetscObject*, %struct._p_PetscObject*)*, INDIRECT 
+MatFactorInvertSchurComplement_Private,PetscError, DIRECT
+MatFactorInvertSchurComplement_Private,MatSeqDenseInvertFactors_Private, DIRECT
+MatFactorInvertSchurComplement_Private,PetscError, DIRECT
+MatFactorInvertSchurComplement_Private,PetscObjectComm, DIRECT
+MatFactorInvertSchurComplement_Private,PetscError, DIRECT
+MatFactorInvertSchurComplement_Private,PetscLogPLE = (any pointer->any pointer@i64 0) :: i32 (i32, i32, %struct._p_PetscObject*, %struct._p_PetscObject*, %struct._p_PetscObject*, %struct._p_PetscObject*)*, INDIRECT 
+MatFactorInvertSchurComplement_Private,PetscError, DIRECT
+MatFactorInvertSchurComplement_Private,printf, DIRECT
+MatFactorInvertSchurComplement_Private,printf, DIRECT

@@ -1,0 +1,20 @@
+CALLER, CALLEE, CALLTYPE
+matlmvmupdate_,MatLMVMUpdate, DIRECT
+matlmvmclearj0_,MatLMVMClearJ0, DIRECT
+matlmvmsetj0scale_,MatLMVMSetJ0Scale, DIRECT
+matlmvmsetj0diag_,MatLMVMSetJ0Diag, DIRECT
+matlmvmsetj0_,MatLMVMSetJ0, DIRECT
+matlmvmsetj0pc_,MatLMVMSetJ0PC, DIRECT
+matlmvmsetj0ksp_,MatLMVMSetJ0KSP, DIRECT
+matlmvmgetj0_,MatLMVMGetJ0, DIRECT
+matlmvmgetj0pc_,MatLMVMGetJ0PC, DIRECT
+matlmvmgetj0ksp_,MatLMVMGetJ0KSP, DIRECT
+matlmvmapplyj0fwd_,MatLMVMApplyJ0Fwd, DIRECT
+matlmvmapplyj0inv_,MatLMVMApplyJ0Inv, DIRECT
+matlmvmisallocated_,MatLMVMIsAllocated, DIRECT
+matlmvmallocate_,MatLMVMAllocate, DIRECT
+matlmvmresetshift_,MatLMVMResetShift, DIRECT
+matlmvmreset_,MatLMVMReset, DIRECT
+matlmvmsethistorysize_,MatLMVMSetHistorySize, DIRECT
+matlmvmgetupdatecount_,MatLMVMGetUpdateCount, DIRECT
+matlmvmgetrejectcount_,MatLMVMGetRejectCount, DIRECT

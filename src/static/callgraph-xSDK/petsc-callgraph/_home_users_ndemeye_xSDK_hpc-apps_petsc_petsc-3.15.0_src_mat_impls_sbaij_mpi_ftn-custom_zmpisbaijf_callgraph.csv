@@ -1,0 +1,8 @@
+CALLER, CALLEE, CALLTYPE
+matcreatesbaij_,PetscError, DIRECT
+matcreatesbaij_,PetscError, DIRECT
+matcreatesbaij_,MPI_Comm_f2c, DIRECT
+matcreatesbaij_,MatCreateSBAIJ, DIRECT
+matmpisbaijsetpreallocation_,PetscError, DIRECT
+matmpisbaijsetpreallocation_,PetscError, DIRECT
+matmpisbaijsetpreallocation_,MatMPISBAIJSetPreallocation, DIRECT

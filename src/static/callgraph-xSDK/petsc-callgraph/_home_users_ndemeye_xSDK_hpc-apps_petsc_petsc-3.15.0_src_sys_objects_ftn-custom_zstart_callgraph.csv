@@ -1,0 +1,104 @@
+CALLER, CALLEE, CALLTYPE
+PETScParseFortranArgs_Private,MPI_Comm_rank, DIRECT
+PETScParseFortranArgs_Private,MPI_Error_string, DIRECT
+PETScParseFortranArgs_Private,PetscError, DIRECT
+PETScParseFortranArgs_Private,petsccommandargumentcount_, DIRECT
+PETScParseFortranArgs_Private,MPI_Comm_size, DIRECT
+PETScParseFortranArgs_Private,MPI_Bcast, DIRECT
+PETScParseFortranArgs_Private,MPI_Error_string, DIRECT
+PETScParseFortranArgs_Private,PetscError, DIRECT
+PETScParseFortranArgs_Private,PetscMallocAlign, DIRECT
+PETScParseFortranArgs_Private,PetscError, DIRECT
+PETScParseFortranArgs_Private,PetscMemzero, DIRECT
+PETScParseFortranArgs_Private,PetscError, DIRECT
+PETScParseFortranArgs_Private,petscgetcommandargument_, DIRECT
+PETScParseFortranArgs_Private,MPI_Comm_size, DIRECT
+PETScParseFortranArgs_Private,MPI_Bcast, DIRECT
+PETScParseFortranArgs_Private,MPI_Error_string, DIRECT
+PETScParseFortranArgs_Private,PetscError, DIRECT
+PetscMemzero,PetscError, DIRECT
+petscinitializef_,PetscOptionsCreateDefault, DIRECT
+petscinitializef_,petscgetcommandargument_, DIRECT
+petscinitializef_,PetscStrncpy, DIRECT
+petscinitializef_,PetscSetProgramName, DIRECT
+petscinitializef_,PetscErrorPrintf = (any pointer->any pointer@i64 0) :: i32 (i8*, ...)*, INDIRECT 
+petscinitializef_,petscgetcomm_, DIRECT
+petscinitializef_,MPI_Initialized, DIRECT
+petscinitializef_,PetscPreMPIInit_Private, DIRECT
+petscinitializef_,mpi_init_, DIRECT
+petscinitializef_,PetscErrorPrintf = (any pointer->any pointer@i64 0) :: i32 (i8*, ...)*, INDIRECT 
+petscinitializef_,MPI_Comm_f2c, DIRECT
+petscinitializef_,MPI_Comm_set_errhandler, DIRECT
+petscinitializef_,PetscErrorPrintf = (any pointer->any pointer@i64 0) :: i32 (i8*, ...)*, INDIRECT 
+petscinitializef_,PetscErrorPrintfInitialize, DIRECT
+petscinitializef_,PetscErrorPrintf = (any pointer->any pointer@i64 0) :: i32 (i8*, ...)*, INDIRECT 
+petscinitializef_,MPI_Comm_rank, DIRECT
+petscinitializef_,PetscErrorPrintf = (any pointer->any pointer@i64 0) :: i32 (i8*, ...)*, INDIRECT 
+petscinitializef_,MPI_Comm_size, DIRECT
+petscinitializef_,PetscErrorPrintf = (any pointer->any pointer@i64 0) :: i32 (i8*, ...)*, INDIRECT 
+petscinitializef_,MPI_Op_create, DIRECT
+petscinitializef_,PetscErrorPrintf = (any pointer->any pointer@i64 0) :: i32 (i8*, ...)*, INDIRECT 
+petscinitializef_,MPI_Type_contiguous, DIRECT
+petscinitializef_,PetscErrorPrintf = (any pointer->any pointer@i64 0) :: i32 (i8*, ...)*, INDIRECT 
+petscinitializef_,MPI_Type_commit, DIRECT
+petscinitializef_,PetscErrorPrintf = (any pointer->any pointer@i64 0) :: i32 (i8*, ...)*, INDIRECT 
+petscinitializef_,MPI_Type_create_struct, DIRECT
+petscinitializef_,PetscErrorPrintf = (any pointer->any pointer@i64 0) :: i32 (i8*, ...)*, INDIRECT 
+petscinitializef_,MPI_Type_create_resized, DIRECT
+petscinitializef_,PetscErrorPrintf = (any pointer->any pointer@i64 0) :: i32 (i8*, ...)*, INDIRECT 
+petscinitializef_,MPI_Type_free, DIRECT
+petscinitializef_,PetscErrorPrintf = (any pointer->any pointer@i64 0) :: i32 (i8*, ...)*, INDIRECT 
+petscinitializef_,MPI_Type_commit, DIRECT
+petscinitializef_,PetscErrorPrintf = (any pointer->any pointer@i64 0) :: i32 (i8*, ...)*, INDIRECT 
+petscinitializef_,MPI_Type_create_struct, DIRECT
+petscinitializef_,PetscErrorPrintf = (any pointer->any pointer@i64 0) :: i32 (i8*, ...)*, INDIRECT 
+petscinitializef_,MPI_Type_create_resized, DIRECT
+petscinitializef_,PetscErrorPrintf = (any pointer->any pointer@i64 0) :: i32 (i8*, ...)*, INDIRECT 
+petscinitializef_,MPI_Type_free, DIRECT
+petscinitializef_,PetscErrorPrintf = (any pointer->any pointer@i64 0) :: i32 (i8*, ...)*, INDIRECT 
+petscinitializef_,MPI_Type_commit, DIRECT
+petscinitializef_,PetscErrorPrintf = (any pointer->any pointer@i64 0) :: i32 (i8*, ...)*, INDIRECT 
+petscinitializef_,MPI_Comm_create_keyval, DIRECT
+petscinitializef_,PetscErrorPrintf = (any pointer->any pointer@i64 0) :: i32 (i8*, ...)*, INDIRECT 
+petscinitializef_,MPI_Comm_create_keyval, DIRECT
+petscinitializef_,PetscErrorPrintf = (any pointer->any pointer@i64 0) :: i32 (i8*, ...)*, INDIRECT 
+petscinitializef_,MPI_Comm_create_keyval, DIRECT
+petscinitializef_,PetscErrorPrintf = (any pointer->any pointer@i64 0) :: i32 (i8*, ...)*, INDIRECT 
+petscinitializef_,MPI_Comm_create_keyval, DIRECT
+petscinitializef_,PetscErrorPrintf = (any pointer->any pointer@i64 0) :: i32 (i8*, ...)*, INDIRECT 
+petscinitializef_,PetscInitializeFortran, DIRECT
+petscinitializef_,PETScParseFortranArgs_Private, DIRECT
+petscinitializef_,PetscMallocA, DIRECT
+petscinitializef_,PetscStrncpy, DIRECT
+petscinitializef_,PetscOptionsInsert, DIRECT
+petscinitializef_,PetscErrorPrintf = (any pointer->any pointer@i64 0) :: i32 (i8*, ...)*, INDIRECT 
+petscinitializef_,PetscTrFree = (any pointer->any pointer@i64 0) :: i32 (i8*, i32, i8*, i8*)*, INDIRECT 
+petscinitializef_,PetscErrorPrintf = (any pointer->any pointer@i64 0) :: i32 (i8*, ...)*, INDIRECT 
+petscinitializef_,PetscOptionsCheckInitial_Private, DIRECT
+petscinitializef_,PetscErrorPrintf = (any pointer->any pointer@i64 0) :: i32 (i8*, ...)*, INDIRECT 
+petscinitializef_,PetscErrorPrintfInitialize, DIRECT
+petscinitializef_,PetscErrorPrintf = (any pointer->any pointer@i64 0) :: i32 (i8*, ...)*, INDIRECT 
+petscinitializef_,PetscCitationsInitialize, DIRECT
+petscinitializef_,PetscErrorPrintf = (any pointer->any pointer@i64 0) :: i32 (i8*, ...)*, INDIRECT 
+petscinitializef_,PetscLogInitialize, DIRECT
+petscinitializef_,PetscErrorPrintf = (any pointer->any pointer@i64 0) :: i32 (i8*, ...)*, INDIRECT 
+petscinitializef_,PetscInitialize_DynamicLibraries, DIRECT
+petscinitializef_,PetscErrorPrintf = (any pointer->any pointer@i64 0) :: i32 (i8*, ...)*, INDIRECT 
+petscinitializef_,PetscInitializeFortran, DIRECT
+petscinitializef_,PetscErrorPrintf = (any pointer->any pointer@i64 0) :: i32 (i8*, ...)*, INDIRECT 
+petscinitializef_,MPI_Comm_size, DIRECT
+petscinitializef_,PetscErrorPrintf = (any pointer->any pointer@i64 0) :: i32 (i8*, ...)*, INDIRECT 
+petscinitializef_,PetscInfo_Private, DIRECT
+petscinitializef_,PetscErrorPrintf = (any pointer->any pointer@i64 0) :: i32 (i8*, ...)*, INDIRECT 
+petscinitializef_,PetscGetHostName, DIRECT
+petscinitializef_,PetscErrorPrintf = (any pointer->any pointer@i64 0) :: i32 (i8*, ...)*, INDIRECT 
+petscinitializef_,PetscInfo_Private, DIRECT
+petscinitializef_,PetscErrorPrintf = (any pointer->any pointer@i64 0) :: i32 (i8*, ...)*, INDIRECT 
+petscinitializef_,PetscOptionsGetBool, DIRECT
+petscinitializef_,PetscErrorPrintf = (any pointer->any pointer@i64 0) :: i32 (i8*, ...)*, INDIRECT 
+petscinitializef_,PetscStackCreate, DIRECT
+petscinitializef_,PetscErrorPrintf = (any pointer->any pointer@i64 0) :: i32 (i8*, ...)*, INDIRECT 
+petscfinalize_,PetscFreeAlign, DIRECT
+petscfinalize_,PetscErrorPrintf = (any pointer->any pointer@i64 0) :: i32 (i8*, ...)*, INDIRECT 
+petscfinalize_,PetscFinalize, DIRECT
+petscend_,PetscEnd, DIRECT

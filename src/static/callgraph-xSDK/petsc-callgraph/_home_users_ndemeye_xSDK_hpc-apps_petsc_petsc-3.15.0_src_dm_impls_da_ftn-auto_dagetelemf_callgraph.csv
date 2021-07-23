@@ -1,0 +1,7 @@
+CALLER, CALLEE, CALLTYPE
+dmdagetelementscorners_,DMDAGetElementsCorners, DIRECT
+dmdagetelementssizes_,DMDAGetElementsSizes, DIRECT
+dmdasetelementtype_,DMDASetElementType, DIRECT
+dmdagetelementtype_,DMDAGetElementType, DIRECT
+dmdagetsubdomaincornersis_,DMDAGetSubdomainCornersIS, DIRECT
+dmdarestoresubdomaincornersis_,DMDARestoreSubdomainCornersIS, DIRECT

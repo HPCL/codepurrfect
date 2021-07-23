@@ -1,0 +1,23 @@
+CALLER, CALLEE, CALLTYPE
+dmdasetsizes_,DMDASetSizes, DIRECT
+dmdasetnumprocs_,DMDASetNumProcs, DIRECT
+dmdasetboundarytype_,DMDASetBoundaryType, DIRECT
+dmdasetdof_,DMDASetDof, DIRECT
+dmdagetdof_,DMDAGetDof, DIRECT
+dmdagetoverlap_,DMDAGetOverlap, DIRECT
+dmdasetoverlap_,DMDASetOverlap, DIRECT
+dmdagetnumlocalsubdomains_,DMDAGetNumLocalSubDomains, DIRECT
+dmdasetnumlocalsubdomains_,DMDASetNumLocalSubDomains, DIRECT
+dmdasetoffset_,DMDASetOffset, DIRECT
+dmdagetoffset_,DMDAGetOffset, DIRECT
+dmdagetnonoverlappingregion_,DMDAGetNonOverlappingRegion, DIRECT
+dmdasetnonoverlappingregion_,DMDASetNonOverlappingRegion, DIRECT
+dmdasetstenciltype_,DMDASetStencilType, DIRECT
+dmdagetstenciltype_,DMDAGetStencilType, DIRECT
+dmdasetstencilwidth_,DMDASetStencilWidth, DIRECT
+dmdagetstencilwidth_,DMDAGetStencilWidth, DIRECT
+dmdasetownershipranges_,DMDASetOwnershipRanges, DIRECT
+dmdasetinterpolationtype_,DMDASetInterpolationType, DIRECT
+dmdagetinterpolationtype_,DMDAGetInterpolationType, DIRECT
+dmdasetrefinementfactor_,DMDASetRefinementFactor, DIRECT
+dmdasetgllcoordinates_,DMDASetGLLCoordinates, DIRECT

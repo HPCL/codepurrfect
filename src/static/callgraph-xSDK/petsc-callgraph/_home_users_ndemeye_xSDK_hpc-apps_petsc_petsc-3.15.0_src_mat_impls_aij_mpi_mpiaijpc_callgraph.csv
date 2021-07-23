@@ -1,0 +1,3 @@
+CALLER, CALLEE, CALLTYPE
+MatGetDiagonalBlock_MPIAIJ,printf, DIRECT
+MatGetDiagonalBlock_MPIAIJ,printf, DIRECT

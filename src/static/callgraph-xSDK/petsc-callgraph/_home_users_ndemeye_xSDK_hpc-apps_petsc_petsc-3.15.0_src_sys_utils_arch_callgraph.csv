@@ -1,0 +1,5 @@
+CALLER, CALLEE, CALLTYPE
+PetscGetArchType,PetscStrncpy, DIRECT
+PetscGetArchType,PetscError, DIRECT
+PetscGetArchType,printf, DIRECT
+PetscGetArchType,printf, DIRECT

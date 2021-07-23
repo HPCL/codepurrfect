@@ -1,0 +1,7 @@
+CALLER, CALLEE, CALLTYPE
+petscintsortsemiordered_,PetscIntSortSemiOrdered, DIRECT
+petscintsortsemiorderedwitharray_,PetscIntSortSemiOrderedWithArray, DIRECT
+petscmpiintsortsemiordered_,PetscMPIIntSortSemiOrdered, DIRECT
+petscmpiintsortsemiorderedwitharray_,PetscMPIIntSortSemiOrderedWithArray, DIRECT
+petscrealsortsemiordered_,PetscRealSortSemiOrdered, DIRECT
+petscrealsortsemiorderedwitharrayint_,PetscRealSortSemiOrderedWithArrayInt, DIRECT

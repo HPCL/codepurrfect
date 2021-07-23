@@ -1,0 +1,8 @@
+CALLER, CALLEE, CALLTYPE
+pcgasmsettotalsubdomains_,PCGASMSetTotalSubdomains, DIRECT
+pcgasmsetoverlap_,PCGASMSetOverlap, DIRECT
+pcgasmsettype_,PCGASMSetType, DIRECT
+pcgasmsetsortindices_,PCGASMSetSortIndices, DIRECT
+pcgasmcreatesubdomains2d_,PCGASMCreateSubdomains2D, DIRECT
+pcgasmsetusedmsubdomains_,PCGASMSetUseDMSubdomains, DIRECT
+pcgasmgetusedmsubdomains_,PCGASMGetUseDMSubdomains, DIRECT

@@ -1,0 +1,9 @@
+CALLER, CALLEE, CALLTYPE
+iscoloringdestroy_,ISColoringDestroy, DIRECT
+iscoloringcreate_,MPI_Comm_f2c, DIRECT
+iscoloringcreate_,ISColoringCreate, DIRECT
+isbuildtwosided_,ISBuildTwoSided, DIRECT
+ispartitioningtonumbering_,ISPartitioningToNumbering, DIRECT
+ispartitioningcount_,ISPartitioningCount, DIRECT
+isallgather_,ISAllGather, DIRECT
+iscomplement_,ISComplement, DIRECT

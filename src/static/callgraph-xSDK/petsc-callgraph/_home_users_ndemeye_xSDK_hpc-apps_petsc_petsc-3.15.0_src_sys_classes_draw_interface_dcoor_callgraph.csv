@@ -1,0 +1,29 @@
+CALLER, CALLEE, CALLTYPE
+PetscDrawSetCoordinates,PetscError, DIRECT
+PetscDrawSetCoordinates,PetscCheckPointer, DIRECT
+PetscDrawSetCoordinates,PetscError, DIRECT
+PetscDrawSetCoordinates,PetscError, DIRECT
+PetscDrawSetCoordinates,PetscError, DIRECT
+PetscDrawSetCoordinates,EMPTYNAME = (_PetscDrawOps->any pointer@i64 240) :: i32 (%struct._p_PetscDraw*, double, double, double, double)*, INDIRECT 
+PetscDrawSetCoordinates,PetscError, DIRECT
+PetscDrawSetCoordinates,printf, DIRECT
+PetscDrawSetCoordinates,printf, DIRECT
+PetscDrawGetCoordinates,PetscError, DIRECT
+PetscDrawGetCoordinates,PetscCheckPointer, DIRECT
+PetscDrawGetCoordinates,PetscError, DIRECT
+PetscDrawGetCoordinates,PetscError, DIRECT
+PetscDrawGetCoordinates,PetscError, DIRECT
+PetscDrawGetCoordinates,PetscError, DIRECT
+PetscDrawGetCoordinates,PetscCheckPointer, DIRECT
+PetscDrawGetCoordinates,PetscError, DIRECT
+PetscDrawGetCoordinates,PetscError, DIRECT
+PetscDrawGetCoordinates,PetscCheckPointer, DIRECT
+PetscDrawGetCoordinates,PetscError, DIRECT
+PetscDrawGetCoordinates,PetscError, DIRECT
+PetscDrawGetCoordinates,PetscCheckPointer, DIRECT
+PetscDrawGetCoordinates,PetscError, DIRECT
+PetscDrawGetCoordinates,PetscError, DIRECT
+PetscDrawGetCoordinates,PetscCheckPointer, DIRECT
+PetscDrawGetCoordinates,PetscError, DIRECT
+PetscDrawGetCoordinates,printf, DIRECT
+PetscDrawGetCoordinates,printf, DIRECT

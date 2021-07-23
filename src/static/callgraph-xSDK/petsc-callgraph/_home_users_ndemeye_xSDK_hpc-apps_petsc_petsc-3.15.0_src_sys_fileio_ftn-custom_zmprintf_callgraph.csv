@@ -1,0 +1,37 @@
+CALLER, CALLEE, CALLTYPE
+petscsynchronizedflush_,MPI_Comm_f2c, DIRECT
+petscsynchronizedflush_,PetscSynchronizedFlush, DIRECT
+petscfprintf_,PetscMallocA, DIRECT
+petscfprintf_,PetscStrncpy, DIRECT
+petscfprintf_,PetscFixSlashN, DIRECT
+petscfprintf_,PetscTrFree = (any pointer->any pointer@i64 0) :: i32 (i8*, i32, i8*, i8*)*, INDIRECT 
+petscfprintf_,MPI_Comm_f2c, DIRECT
+petscfprintf_,PetscFPrintf, DIRECT
+petscfprintf_,PetscTrFree = (any pointer->any pointer@i64 0) :: i32 (i8*, i32, i8*, i8*)*, INDIRECT 
+PetscFixSlashN,PetscStrallocpy, DIRECT
+PetscFixSlashN,PetscError, DIRECT
+PetscFixSlashN,PetscStrlen, DIRECT
+PetscFixSlashN,PetscError, DIRECT
+PetscFixSlashN,printf, DIRECT
+PetscFixSlashN,printf, DIRECT
+petscprintf_,PetscMallocA, DIRECT
+petscprintf_,PetscStrncpy, DIRECT
+petscprintf_,PetscFixSlashN, DIRECT
+petscprintf_,PetscTrFree = (any pointer->any pointer@i64 0) :: i32 (i8*, i32, i8*, i8*)*, INDIRECT 
+petscprintf_,MPI_Comm_f2c, DIRECT
+petscprintf_,PetscPrintf, DIRECT
+petscprintf_,PetscTrFree = (any pointer->any pointer@i64 0) :: i32 (i8*, i32, i8*, i8*)*, INDIRECT 
+petscsynchronizedfprintf_,PetscMallocA, DIRECT
+petscsynchronizedfprintf_,PetscStrncpy, DIRECT
+petscsynchronizedfprintf_,PetscFixSlashN, DIRECT
+petscsynchronizedfprintf_,PetscTrFree = (any pointer->any pointer@i64 0) :: i32 (i8*, i32, i8*, i8*)*, INDIRECT 
+petscsynchronizedfprintf_,MPI_Comm_f2c, DIRECT
+petscsynchronizedfprintf_,PetscSynchronizedFPrintf, DIRECT
+petscsynchronizedfprintf_,PetscTrFree = (any pointer->any pointer@i64 0) :: i32 (i8*, i32, i8*, i8*)*, INDIRECT 
+petscsynchronizedprintf_,PetscMallocA, DIRECT
+petscsynchronizedprintf_,PetscStrncpy, DIRECT
+petscsynchronizedprintf_,PetscFixSlashN, DIRECT
+petscsynchronizedprintf_,PetscTrFree = (any pointer->any pointer@i64 0) :: i32 (i8*, i32, i8*, i8*)*, INDIRECT 
+petscsynchronizedprintf_,MPI_Comm_f2c, DIRECT
+petscsynchronizedprintf_,PetscSynchronizedPrintf, DIRECT
+petscsynchronizedprintf_,PetscTrFree = (any pointer->any pointer@i64 0) :: i32 (i8*, i32, i8*, i8*)*, INDIRECT 

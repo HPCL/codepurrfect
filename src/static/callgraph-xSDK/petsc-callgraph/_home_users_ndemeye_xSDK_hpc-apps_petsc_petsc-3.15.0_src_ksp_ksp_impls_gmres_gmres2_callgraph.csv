@@ -1,0 +1,24 @@
+CALLER, CALLEE, CALLTYPE
+KSPGMRESSetOrthogonalization,PetscError, DIRECT
+KSPGMRESSetOrthogonalization,PetscCheckPointer, DIRECT
+KSPGMRESSetOrthogonalization,PetscError, DIRECT
+KSPGMRESSetOrthogonalization,PetscError, DIRECT
+KSPGMRESSetOrthogonalization,PetscError, DIRECT
+KSPGMRESSetOrthogonalization,PetscObjectQueryFunction_Private, DIRECT
+KSPGMRESSetOrthogonalization,EMPTYNAME = (any pointer->any pointer@i64 0) :: i32 (%struct._p_KSP*, i32 (%struct._p_KSP*, i32)*)*, INDIRECT 
+KSPGMRESSetOrthogonalization,PetscError, DIRECT
+KSPGMRESSetOrthogonalization,printf, DIRECT
+KSPGMRESSetOrthogonalization,printf, DIRECT
+KSPGMRESGetOrthogonalization,PetscError, DIRECT
+KSPGMRESGetOrthogonalization,PetscCheckPointer, DIRECT
+KSPGMRESGetOrthogonalization,PetscError, DIRECT
+KSPGMRESGetOrthogonalization,PetscError, DIRECT
+KSPGMRESGetOrthogonalization,PetscError, DIRECT
+KSPGMRESGetOrthogonalization,PetscObjectQueryFunction_Private, DIRECT
+KSPGMRESGetOrthogonalization,PetscError, DIRECT
+KSPGMRESGetOrthogonalization,EMPTYNAME = (any pointer->any pointer@i64 0) :: i32 (%struct._p_KSP*, i32 (%struct._p_KSP*, i32)**)*, INDIRECT 
+KSPGMRESGetOrthogonalization,PetscError, DIRECT
+KSPGMRESGetOrthogonalization,PetscObjectComm, DIRECT
+KSPGMRESGetOrthogonalization,PetscError, DIRECT
+KSPGMRESGetOrthogonalization,printf, DIRECT
+KSPGMRESGetOrthogonalization,printf, DIRECT

@@ -1,0 +1,10 @@
+CALLER, CALLEE, CALLTYPE
+PetscViewerFlush,PetscError, DIRECT
+PetscViewerFlush,PetscCheckPointer, DIRECT
+PetscViewerFlush,PetscError, DIRECT
+PetscViewerFlush,PetscError, DIRECT
+PetscViewerFlush,PetscError, DIRECT
+PetscViewerFlush,EMPTYNAME = (_PetscViewerOps->any pointer@i64 16) :: i32 (%struct._p_PetscViewer*)*, INDIRECT 
+PetscViewerFlush,PetscError, DIRECT
+PetscViewerFlush,printf, DIRECT
+PetscViewerFlush,printf, DIRECT

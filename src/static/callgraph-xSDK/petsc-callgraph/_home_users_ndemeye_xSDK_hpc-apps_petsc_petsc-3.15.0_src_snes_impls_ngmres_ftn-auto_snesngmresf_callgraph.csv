@@ -1,0 +1,4 @@
+CALLER, CALLEE, CALLTYPE
+snesngmressetrestartfmrise_,SNESNGMRESSetRestartFmRise, DIRECT
+snesngmressetrestarttype_,SNESNGMRESSetRestartType, DIRECT
+snesngmressetselecttype_,SNESNGMRESSetSelectType, DIRECT

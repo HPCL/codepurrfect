@@ -1,0 +1,26 @@
+CALLER, CALLEE, CALLTYPE
+KSPComputeEigenvalues_CG,PetscObjectComm, DIRECT
+KSPComputeEigenvalues_CG,PetscError, DIRECT
+KSPComputeEigenvalues_CG,PetscError, DIRECT
+KSPComputeEigenvalues_CG,PetscError, DIRECT
+KSPComputeEigenvalues_CG,printf, DIRECT
+KSPComputeEigenvalues_CG,printf, DIRECT
+KSPComputeEigenvalues_CG,LINPACKcgtql1, DIRECT
+KSPComputeEigenvalues_CG,PetscError, DIRECT
+KSPComputeEigenvalues_CG,PetscSortReal, DIRECT
+KSPComputeEigenvalues_CG,PetscError, DIRECT
+KSPComputeEigenvalues_CG,printf, DIRECT
+KSPComputeEigenvalues_CG,printf, DIRECT
+LINPACKcgtql1,LINPACKcgpthy, DIRECT
+LINPACKcgtql1,printf, DIRECT
+LINPACKcgtql1,printf, DIRECT
+LINPACKcgtql1,printf, DIRECT
+LINPACKcgtql1,printf, DIRECT
+KSPComputeExtremeSingularValues_CG,printf, DIRECT
+KSPComputeExtremeSingularValues_CG,printf, DIRECT
+KSPComputeExtremeSingularValues_CG,LINPACKcgtql1, DIRECT
+KSPComputeExtremeSingularValues_CG,PetscError, DIRECT
+KSPComputeExtremeSingularValues_CG,printf, DIRECT
+KSPComputeExtremeSingularValues_CG,printf, DIRECT
+LINPACKcgpthy,printf, DIRECT
+LINPACKcgpthy,printf, DIRECT

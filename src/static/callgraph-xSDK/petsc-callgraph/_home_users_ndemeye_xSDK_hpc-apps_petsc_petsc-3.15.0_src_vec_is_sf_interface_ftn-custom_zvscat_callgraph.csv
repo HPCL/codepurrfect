@@ -1,0 +1,22 @@
+CALLER, CALLEE, CALLTYPE
+vecscattercreatetoall_,PetscError, DIRECT
+vecscattercreatetoall_,VecScatterCreateToAll, DIRECT
+vecscattercreatetozero_,PetscError, DIRECT
+vecscattercreatetozero_,VecScatterCreateToZero, DIRECT
+vecscatterview_,PETSC_VIEWER_DRAW_, DIRECT
+vecscatterview_,PETSC_VIEWER_DRAW_, DIRECT
+vecscatterview_,PETSC_VIEWER_STDOUT_, DIRECT
+vecscatterview_,PETSC_VIEWER_STDOUT_, DIRECT
+vecscatterview_,PETSC_VIEWER_STDERR_, DIRECT
+vecscatterview_,PETSC_VIEWER_STDERR_, DIRECT
+vecscatterview_,PETSC_VIEWER_BINARY_, DIRECT
+vecscatterview_,PETSC_VIEWER_BINARY_, DIRECT
+vecscatterview_,PETSC_VIEWER_BINARY_, DIRECT
+vecscatterview_,PETSC_VIEWER_BINARY_, DIRECT
+vecscatterview_,PETSC_VIEWER_SOCKET_, DIRECT
+vecscatterview_,PETSC_VIEWER_SOCKET_, DIRECT
+vecscatterview_,VecScatterView, DIRECT
+vecscatterremap_,PetscError, DIRECT
+vecscatterremap_,PetscError, DIRECT
+vecscatterremap_,VecScatterRemap, DIRECT
+vecscatterdestroy_,VecScatterDestroy, DIRECT

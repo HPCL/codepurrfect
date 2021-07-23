@@ -1,0 +1,6 @@
+CALLER, CALLEE, CALLTYPE
+vecghostgetlocalform_,VecGhostGetLocalForm, DIRECT
+vecghostislocalform_,VecGhostIsLocalForm, DIRECT
+vecghostrestorelocalform_,VecGhostRestoreLocalForm, DIRECT
+vecghostupdatebegin_,VecGhostUpdateBegin, DIRECT
+vecghostupdateend_,VecGhostUpdateEnd, DIRECT

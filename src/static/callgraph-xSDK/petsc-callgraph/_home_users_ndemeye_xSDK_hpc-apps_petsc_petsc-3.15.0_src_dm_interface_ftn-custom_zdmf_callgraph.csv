@@ -1,0 +1,91 @@
+CALLER, CALLEE, CALLTYPE
+dmgetmattype_,DMGetMatType, DIRECT
+dmgetmattype_,PetscStrncpy, DIRECT
+dmgetvectype_,DMGetVecType, DIRECT
+dmgetvectype_,PetscStrncpy, DIRECT
+dmview_,PETSC_VIEWER_DRAW_, DIRECT
+dmview_,PETSC_VIEWER_DRAW_, DIRECT
+dmview_,PETSC_VIEWER_STDOUT_, DIRECT
+dmview_,PETSC_VIEWER_STDOUT_, DIRECT
+dmview_,PETSC_VIEWER_STDERR_, DIRECT
+dmview_,PETSC_VIEWER_STDERR_, DIRECT
+dmview_,PETSC_VIEWER_BINARY_, DIRECT
+dmview_,PETSC_VIEWER_BINARY_, DIRECT
+dmview_,PETSC_VIEWER_BINARY_, DIRECT
+dmview_,PETSC_VIEWER_BINARY_, DIRECT
+dmview_,PETSC_VIEWER_SOCKET_, DIRECT
+dmview_,PETSC_VIEWER_SOCKET_, DIRECT
+dmview_,DMView, DIRECT
+dmsetoptionsprefix_,PetscMallocA, DIRECT
+dmsetoptionsprefix_,PetscStrncpy, DIRECT
+dmsetoptionsprefix_,DMSetOptionsPrefix, DIRECT
+dmsetoptionsprefix_,PetscTrFree = (any pointer->any pointer@i64 0) :: i32 (i8*, i32, i8*, i8*)*, INDIRECT 
+dmsettype_,PetscMallocA, DIRECT
+dmsettype_,PetscStrncpy, DIRECT
+dmsettype_,DMSetType, DIRECT
+dmsettype_,PetscTrFree = (any pointer->any pointer@i64 0) :: i32 (i8*, i32, i8*, i8*)*, INDIRECT 
+dmgettype_,DMGetType, DIRECT
+dmgettype_,PetscStrncpy, DIRECT
+dmsetmattype_,PetscMallocA, DIRECT
+dmsetmattype_,PetscStrncpy, DIRECT
+dmsetmattype_,DMSetMatType, DIRECT
+dmsetmattype_,PetscTrFree = (any pointer->any pointer@i64 0) :: i32 (i8*, i32, i8*, i8*)*, INDIRECT 
+dmsetvectype_,PetscMallocA, DIRECT
+dmsetvectype_,PetscStrncpy, DIRECT
+dmsetvectype_,DMSetVecType, DIRECT
+dmsetvectype_,PetscTrFree = (any pointer->any pointer@i64 0) :: i32 (i8*, i32, i8*, i8*)*, INDIRECT 
+dmcreatelabel_,PetscMallocA, DIRECT
+dmcreatelabel_,PetscStrncpy, DIRECT
+dmcreatelabel_,DMCreateLabel, DIRECT
+dmcreatelabel_,PetscTrFree = (any pointer->any pointer@i64 0) :: i32 (i8*, i32, i8*, i8*)*, INDIRECT 
+dmhaslabel_,PetscMallocA, DIRECT
+dmhaslabel_,PetscStrncpy, DIRECT
+dmhaslabel_,DMHasLabel, DIRECT
+dmhaslabel_,PetscTrFree = (any pointer->any pointer@i64 0) :: i32 (i8*, i32, i8*, i8*)*, INDIRECT 
+dmgetlabelvalue_,PetscMallocA, DIRECT
+dmgetlabelvalue_,PetscStrncpy, DIRECT
+dmgetlabelvalue_,DMGetLabelValue, DIRECT
+dmgetlabelvalue_,PetscTrFree = (any pointer->any pointer@i64 0) :: i32 (i8*, i32, i8*, i8*)*, INDIRECT 
+dmsetlabelvalue_,PetscMallocA, DIRECT
+dmsetlabelvalue_,PetscStrncpy, DIRECT
+dmsetlabelvalue_,DMSetLabelValue, DIRECT
+dmsetlabelvalue_,PetscTrFree = (any pointer->any pointer@i64 0) :: i32 (i8*, i32, i8*, i8*)*, INDIRECT 
+dmgetlabelsize_,PetscMallocA, DIRECT
+dmgetlabelsize_,PetscStrncpy, DIRECT
+dmgetlabelsize_,DMGetLabelSize, DIRECT
+dmgetlabelsize_,PetscTrFree = (any pointer->any pointer@i64 0) :: i32 (i8*, i32, i8*, i8*)*, INDIRECT 
+dmgetlabelidis_,PetscMallocA, DIRECT
+dmgetlabelidis_,PetscStrncpy, DIRECT
+dmgetlabelidis_,DMGetLabelIdIS, DIRECT
+dmgetlabelidis_,PetscTrFree = (any pointer->any pointer@i64 0) :: i32 (i8*, i32, i8*, i8*)*, INDIRECT 
+dmgetlabelname_,DMGetLabelName, DIRECT
+dmgetlabelname_,PetscStrncpy, DIRECT
+dmgetlabel_,PetscMallocA, DIRECT
+dmgetlabel_,PetscStrncpy, DIRECT
+dmgetlabel_,DMGetLabel, DIRECT
+dmgetlabel_,PetscTrFree = (any pointer->any pointer@i64 0) :: i32 (i8*, i32, i8*, i8*)*, INDIRECT 
+dmgetstratumsize_,PetscMallocA, DIRECT
+dmgetstratumsize_,PetscStrncpy, DIRECT
+dmgetstratumsize_,DMGetStratumSize, DIRECT
+dmgetstratumsize_,PetscTrFree = (any pointer->any pointer@i64 0) :: i32 (i8*, i32, i8*, i8*)*, INDIRECT 
+dmgetstratumis_,PetscMallocA, DIRECT
+dmgetstratumis_,PetscStrncpy, DIRECT
+dmgetstratumis_,DMGetStratumIS, DIRECT
+dmgetstratumis_,PetscTrFree = (any pointer->any pointer@i64 0) :: i32 (i8*, i32, i8*, i8*)*, INDIRECT 
+dmsetstratumis_,PetscMallocA, DIRECT
+dmsetstratumis_,PetscStrncpy, DIRECT
+dmsetstratumis_,DMSetStratumIS, DIRECT
+dmsetstratumis_,PetscTrFree = (any pointer->any pointer@i64 0) :: i32 (i8*, i32, i8*, i8*)*, INDIRECT 
+dmremovelabel_,PetscMallocA, DIRECT
+dmremovelabel_,PetscStrncpy, DIRECT
+dmremovelabel_,DMRemoveLabel, DIRECT
+dmremovelabel_,PetscTrFree = (any pointer->any pointer@i64 0) :: i32 (i8*, i32, i8*, i8*)*, INDIRECT 
+dmviewfromoptions_,PetscMallocA, DIRECT
+dmviewfromoptions_,PetscStrncpy, DIRECT
+dmviewfromoptions_,PetscError, DIRECT
+dmviewfromoptions_,DMViewFromOptions, DIRECT
+dmviewfromoptions_,PetscTrFree = (any pointer->any pointer@i64 0) :: i32 (i8*, i32, i8*, i8*)*, INDIRECT 
+dmcreateinterpolation_,PetscError, DIRECT
+dmcreateinterpolation_,DMCreateInterpolation, DIRECT
+dmcreatesuperdm_,DMCreateSuperDM, DIRECT
+dmdestroy_,DMDestroy, DIRECT

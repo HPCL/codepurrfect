@@ -1,0 +1,15 @@
+CALLER, CALLEE, CALLTYPE
+dmplexsetadjacencyuseanchors_,DMPlexSetAdjacencyUseAnchors, DIRECT
+dmplexgetadjacencyuseanchors_,DMPlexGetAdjacencyUseAnchors, DIRECT
+dmplexgetadjacency_,DMPlexGetAdjacency, DIRECT
+dmplexcreatetwosidedprocesssf_,DMPlexCreateTwoSidedProcessSF, DIRECT
+dmplexdistributeownership_,DMPlexDistributeOwnership, DIRECT
+dmplexstratifymigrationsf_,DMPlexStratifyMigrationSF, DIRECT
+dmplexdistributefield_,DMPlexDistributeField, DIRECT
+dmplexdistributefieldis_,DMPlexDistributeFieldIS, DIRECT
+dmplexdistributedata_,MPI_Type_f2c, DIRECT
+dmplexdistributedata_,DMPlexDistributeData, DIRECT
+dmplexsetpartitionbalance_,DMPlexSetPartitionBalance, DIRECT
+dmplexgetpartitionbalance_,DMPlexGetPartitionBalance, DIRECT
+dmplexgetoverlap_,DMPlexGetOverlap, DIRECT
+dmplexisdistributed_,DMPlexIsDistributed, DIRECT

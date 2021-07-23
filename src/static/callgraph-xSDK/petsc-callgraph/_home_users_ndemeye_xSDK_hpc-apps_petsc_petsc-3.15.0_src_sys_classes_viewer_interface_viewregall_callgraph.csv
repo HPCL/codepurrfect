@@ -1,0 +1,21 @@
+CALLER, CALLEE, CALLTYPE
+PetscViewerRegisterAll,printf, DIRECT
+PetscViewerRegisterAll,printf, DIRECT
+PetscViewerRegisterAll,PetscViewerRegister, DIRECT
+PetscViewerRegisterAll,PetscError, DIRECT
+PetscViewerRegisterAll,PetscViewerRegister, DIRECT
+PetscViewerRegisterAll,PetscError, DIRECT
+PetscViewerRegisterAll,PetscViewerRegister, DIRECT
+PetscViewerRegisterAll,PetscError, DIRECT
+PetscViewerRegisterAll,PetscViewerRegister, DIRECT
+PetscViewerRegisterAll,PetscError, DIRECT
+PetscViewerRegisterAll,PetscViewerRegister, DIRECT
+PetscViewerRegisterAll,PetscError, DIRECT
+PetscViewerRegisterAll,PetscViewerRegister, DIRECT
+PetscViewerRegisterAll,PetscError, DIRECT
+PetscViewerRegisterAll,PetscViewerRegister, DIRECT
+PetscViewerRegisterAll,PetscError, DIRECT
+PetscViewerRegisterAll,PetscViewerRegister, DIRECT
+PetscViewerRegisterAll,PetscError, DIRECT
+PetscViewerRegisterAll,printf, DIRECT
+PetscViewerRegisterAll,printf, DIRECT

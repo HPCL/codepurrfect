@@ -1,0 +1,117 @@
+CALLER, CALLEE, CALLTYPE
+SNESLineSearchCreate_L2,printf, DIRECT
+SNESLineSearchCreate_L2,printf, DIRECT
+SNESLineSearchApply_L2,SNESLineSearchGetVecs, DIRECT
+SNESLineSearchApply_L2,PetscError, DIRECT
+SNESLineSearchApply_L2,SNESLineSearchGetNorms, DIRECT
+SNESLineSearchApply_L2,PetscError, DIRECT
+SNESLineSearchApply_L2,SNESLineSearchGetLambda, DIRECT
+SNESLineSearchApply_L2,PetscError, DIRECT
+SNESLineSearchApply_L2,SNESLineSearchGetSNES, DIRECT
+SNESLineSearchApply_L2,PetscError, DIRECT
+SNESLineSearchApply_L2,SNESLineSearchSetReason, DIRECT
+SNESLineSearchApply_L2,PetscError, DIRECT
+SNESLineSearchApply_L2,SNESLineSearchGetTolerances, DIRECT
+SNESLineSearchApply_L2,PetscError, DIRECT
+SNESLineSearchApply_L2,SNESLineSearchGetDefaultMonitor, DIRECT
+SNESLineSearchApply_L2,PetscError, DIRECT
+SNESLineSearchApply_L2,SNESGetObjective, DIRECT
+SNESLineSearchApply_L2,PetscError, DIRECT
+SNESLineSearchApply_L2,SNESLineSearchPreCheck, DIRECT
+SNESLineSearchApply_L2,PetscError, DIRECT
+SNESLineSearchApply_L2,SNESComputeObjective, DIRECT
+SNESLineSearchApply_L2,PetscError, DIRECT
+SNESLineSearchApply_L2,VecCopy, DIRECT
+SNESLineSearchApply_L2,PetscError, DIRECT
+SNESLineSearchApply_L2,VecAXPY, DIRECT
+SNESLineSearchApply_L2,PetscError, DIRECT
+SNESLineSearchApply_L2,EMPTYNAME = (_LineSearchOps->any pointer@i64 24) :: i32 (%struct._p_SNES*, %struct._p_Vec*)*, INDIRECT 
+SNESLineSearchApply_L2,PetscError, DIRECT
+SNESLineSearchApply_L2,EMPTYNAME = (_LineSearchOps->any pointer@i64 80) :: i32 (%struct._p_SNES*, %struct._p_Vec*, %struct._p_Vec*)*, INDIRECT 
+SNESLineSearchApply_L2,PetscError, DIRECT
+SNESLineSearchApply_L2,EMPTYNAME = (_LineSearchOps->any pointer@i64 32) :: i32 (%struct._p_SNES*, %struct._p_Vec*, %struct._p_Vec*, double*)*, INDIRECT 
+SNESLineSearchApply_L2,PetscError, DIRECT
+SNESLineSearchApply_L2,VecNorm, DIRECT
+SNESLineSearchApply_L2,PetscError, DIRECT
+SNESLineSearchApply_L2,VecCopy, DIRECT
+SNESLineSearchApply_L2,PetscError, DIRECT
+SNESLineSearchApply_L2,VecAXPY, DIRECT
+SNESLineSearchApply_L2,PetscError, DIRECT
+SNESLineSearchApply_L2,EMPTYNAME = (_LineSearchOps->any pointer@i64 24) :: i32 (%struct._p_SNES*, %struct._p_Vec*)*, INDIRECT 
+SNESLineSearchApply_L2,PetscError, DIRECT
+SNESLineSearchApply_L2,EMPTYNAME = (_LineSearchOps->any pointer@i64 80) :: i32 (%struct._p_SNES*, %struct._p_Vec*, %struct._p_Vec*)*, INDIRECT 
+SNESLineSearchApply_L2,PetscError, DIRECT
+SNESLineSearchApply_L2,EMPTYNAME = (_LineSearchOps->any pointer@i64 32) :: i32 (%struct._p_SNES*, %struct._p_Vec*, %struct._p_Vec*, double*)*, INDIRECT 
+SNESLineSearchApply_L2,PetscError, DIRECT
+SNESLineSearchApply_L2,VecNorm, DIRECT
+SNESLineSearchApply_L2,PetscError, DIRECT
+SNESLineSearchApply_L2,VecCopy, DIRECT
+SNESLineSearchApply_L2,PetscError, DIRECT
+SNESLineSearchApply_L2,VecAXPY, DIRECT
+SNESLineSearchApply_L2,PetscError, DIRECT
+SNESLineSearchApply_L2,SNESComputeObjective, DIRECT
+SNESLineSearchApply_L2,PetscError, DIRECT
+SNESLineSearchApply_L2,VecCopy, DIRECT
+SNESLineSearchApply_L2,PetscError, DIRECT
+SNESLineSearchApply_L2,VecAXPY, DIRECT
+SNESLineSearchApply_L2,PetscError, DIRECT
+SNESLineSearchApply_L2,SNESComputeObjective, DIRECT
+SNESLineSearchApply_L2,PetscError, DIRECT
+SNESLineSearchApply_L2,PetscIsInfOrNanReal, DIRECT
+SNESLineSearchApply_L2,PetscViewerASCIIAddTab, DIRECT
+SNESLineSearchApply_L2,PetscError, DIRECT
+SNESLineSearchApply_L2,PetscViewerASCIIPrintf, DIRECT
+SNESLineSearchApply_L2,PetscError, DIRECT
+SNESLineSearchApply_L2,PetscViewerASCIISubtractTab, DIRECT
+SNESLineSearchApply_L2,PetscError, DIRECT
+SNESLineSearchApply_L2,SNESLineSearchSetReason, DIRECT
+SNESLineSearchApply_L2,PetscError, DIRECT
+SNESLineSearchApply_L2,printf, DIRECT
+SNESLineSearchApply_L2,printf, DIRECT
+SNESLineSearchApply_L2,VecCopy, DIRECT
+SNESLineSearchApply_L2,PetscViewerASCIIAddTab, DIRECT
+SNESLineSearchApply_L2,PetscError, DIRECT
+SNESLineSearchApply_L2,sqrt, DIRECT
+SNESLineSearchApply_L2,sqrt, DIRECT
+SNESLineSearchApply_L2,sqrt, DIRECT
+SNESLineSearchApply_L2,PetscViewerASCIIPrintf, DIRECT
+SNESLineSearchApply_L2,PetscError, DIRECT
+SNESLineSearchApply_L2,PetscViewerASCIIPrintf, DIRECT
+SNESLineSearchApply_L2,PetscError, DIRECT
+SNESLineSearchApply_L2,PetscViewerASCIISubtractTab, DIRECT
+SNESLineSearchApply_L2,PetscError, DIRECT
+SNESLineSearchApply_L2,PetscIsInfOrNanReal, DIRECT
+SNESLineSearchApply_L2,VecCopy, DIRECT
+SNESLineSearchApply_L2,PetscError, DIRECT
+SNESLineSearchApply_L2,VecAXPY, DIRECT
+SNESLineSearchApply_L2,PetscError, DIRECT
+SNESLineSearchApply_L2,EMPTYNAME = (_LineSearchOps->any pointer@i64 24) :: i32 (%struct._p_SNES*, %struct._p_Vec*)*, INDIRECT 
+SNESLineSearchApply_L2,PetscError, DIRECT
+SNESLineSearchApply_L2,SNESLineSearchPostCheck, DIRECT
+SNESLineSearchApply_L2,PetscError, DIRECT
+SNESLineSearchApply_L2,VecAXPY, DIRECT
+SNESLineSearchApply_L2,PetscError, DIRECT
+SNESLineSearchApply_L2,EMPTYNAME = (_LineSearchOps->any pointer@i64 24) :: i32 (%struct._p_SNES*, %struct._p_Vec*)*, INDIRECT 
+SNESLineSearchApply_L2,PetscError, DIRECT
+SNESLineSearchApply_L2,VecCopy, DIRECT
+SNESLineSearchApply_L2,PetscError, DIRECT
+SNESLineSearchApply_L2,EMPTYNAME = (_LineSearchOps->any pointer@i64 80) :: i32 (%struct._p_SNES*, %struct._p_Vec*, %struct._p_Vec*)*, INDIRECT 
+SNESLineSearchApply_L2,PetscError, DIRECT
+SNESLineSearchApply_L2,SNESLineSearchSetLambda, DIRECT
+SNESLineSearchApply_L2,PetscError, DIRECT
+SNESLineSearchApply_L2,SNESLineSearchComputeNorms, DIRECT
+SNESLineSearchApply_L2,PetscError, DIRECT
+SNESLineSearchApply_L2,SNESLineSearchGetNorms, DIRECT
+SNESLineSearchApply_L2,PetscError, DIRECT
+SNESLineSearchApply_L2,PetscViewerASCIIAddTab, DIRECT
+SNESLineSearchApply_L2,PetscError, DIRECT
+SNESLineSearchApply_L2,PetscViewerASCIIPrintf, DIRECT
+SNESLineSearchApply_L2,PetscError, DIRECT
+SNESLineSearchApply_L2,PetscViewerASCIISubtractTab, DIRECT
+SNESLineSearchApply_L2,PetscError, DIRECT
+SNESLineSearchApply_L2,SNESLineSearchSetReason, DIRECT
+SNESLineSearchApply_L2,PetscError, DIRECT
+SNESLineSearchApply_L2,printf, DIRECT
+SNESLineSearchApply_L2,printf, DIRECT
+PetscIsInfOrNanReal,PetscIsInfReal, DIRECT
+PetscIsInfOrNanReal,PetscIsNanReal, DIRECT

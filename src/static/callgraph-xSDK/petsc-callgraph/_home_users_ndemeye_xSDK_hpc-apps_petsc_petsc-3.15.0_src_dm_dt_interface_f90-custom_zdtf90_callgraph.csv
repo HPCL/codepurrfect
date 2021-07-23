@@ -1,0 +1,9 @@
+CALLER, CALLEE, CALLTYPE
+petscquadraturegetdata_,PetscQuadratureGetData, DIRECT
+petscquadraturegetdata_,F90Array1dCreate, DIRECT
+petscquadraturegetdata_,F90Array1dCreate, DIRECT
+petscquadraturerestoredata_,F90Array1dDestroy, DIRECT
+petscquadraturerestoredata_,F90Array1dDestroy, DIRECT
+petscquadraturesetdata_,F90Array1dAccess, DIRECT
+petscquadraturesetdata_,F90Array1dAccess, DIRECT
+petscquadraturesetdata_,PetscQuadratureSetData, DIRECT

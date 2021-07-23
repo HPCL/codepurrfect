@@ -1,0 +1,3 @@
+CALLER, CALLEE, CALLTYPE
+petscpartitionershellsetrandom_,PetscPartitionerShellSetRandom, DIRECT
+petscpartitionershellgetrandom_,PetscPartitionerShellGetRandom, DIRECT

@@ -1,0 +1,19 @@
+CALLER, CALLEE, CALLTYPE
+petsclayoutcreate_,MPI_Comm_f2c, DIRECT
+petsclayoutcreate_,PetscLayoutCreate, DIRECT
+petsclayoutcreatefromsizes_,MPI_Comm_f2c, DIRECT
+petsclayoutcreatefromsizes_,PetscLayoutCreateFromSizes, DIRECT
+petsclayoutdestroy_,PetscLayoutDestroy, DIRECT
+petsclayoutcreatefromranges_,MPI_Comm_f2c, DIRECT
+petsclayoutcreatefromranges_,PetscLayoutCreateFromRanges, DIRECT
+petsclayoutsetup_,PetscLayoutSetUp, DIRECT
+petsclayoutduplicate_,PetscLayoutDuplicate, DIRECT
+petsclayoutreference_,PetscLayoutReference, DIRECT
+petsclayoutsetislocaltoglobalmapping_,PetscLayoutSetISLocalToGlobalMapping, DIRECT
+petsclayoutsetlocalsize_,PetscLayoutSetLocalSize, DIRECT
+petsclayoutsetsize_,PetscLayoutSetSize, DIRECT
+petsclayoutgetsize_,PetscLayoutGetSize, DIRECT
+petsclayoutsetblocksize_,PetscLayoutSetBlockSize, DIRECT
+petsclayoutgetblocksize_,PetscLayoutGetBlockSize, DIRECT
+petsclayoutgetrange_,PetscLayoutGetRange, DIRECT
+petsclayoutcompare_,PetscLayoutCompare, DIRECT
