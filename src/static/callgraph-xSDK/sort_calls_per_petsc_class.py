@@ -30,7 +30,7 @@ def main(argv):
     for file in os.listdir(callpath): 
         if os.path.isfile('/'.join([callpath, file])):
             for name, dir_path in zip(class_names, class_dir_pths): 
-                if name in file: 
+                if "_".join(["src", name]) in file: 
                     subprocess.run(["mv", '/'.join([callpath, file])
                                         , dir_path])
 
