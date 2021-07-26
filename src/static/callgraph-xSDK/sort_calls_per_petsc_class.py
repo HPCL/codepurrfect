@@ -5,7 +5,7 @@ import subprocess
 
 def main(argv): 
     try: 
-        opts, _ = getopt.getopt(argv, "p:")
+        opts, _ = getopt.getopt(argv, "p:m:")
     except getopt.GetoptError: 
         print("Usage: ./sort_calls_per_petsc_class.py -p " + 
               "<path-to-call-graph-dir>")
@@ -32,6 +32,19 @@ def main(argv):
             if name in file: 
                 subprocess.run(["mv", '/'.join([callpath, file])
                                     , dir_path])
+
+    for namepath, name in zip(class_dir_pths, class_names): 
+        with open('/'.join([namepath, name]) + ".csv", 'w') as name_w: 
+            for csv_file in os.listdir(namepath): 
+                with open('/'.join([namepath, csv_file]), 'r') as csv_file_r: 
+                    csv_contents = csv_file_r.readlines() 
+                    count = 0 
+                    for line in csv_contents: 
+                        if count != 0 and ("CALLER, CALLEE, CALLTYPE" in line): 
+                            continue
+                        else:
+                            name_w.write(line + "\n")
+                        count += 1
 
     
 
