@@ -46,7 +46,7 @@ def main(argv):
                             if count != 0 and ("CALLER, CALLEE, CALLTYPE" in line): 
                                 continue
                             else:
-                                name_w.write(line + "\n")
+                                name_w.write(line)
                             count += 1
 
     
