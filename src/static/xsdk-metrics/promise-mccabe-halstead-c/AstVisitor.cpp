@@ -55,8 +55,10 @@ class McCabeMetricsVisitor : public RecursiveASTVisitor<McCabeMetricsVisitor>
 // - T  = time to write program = E / 18 seconds 
 
 public:
-    explicit McCabeMetricsVisitor(ASTContext *p_context)
-      : context(p_context) {} 
+    explicit McCabeMetricsVisitor(ASTContext *p_context, std::string metrics_filename)
+      : context(p_context), metrics_filename(metrics_filename) {} 
+
+     
     double mu1 = 0.0; 
     double mu2 = 0.0; 
     double N1  = 0.0; 
@@ -76,6 +78,21 @@ public:
     double E = 0.0; 
     double T = 0.0; 
     double binops = 0.0; 
+    ofstream metrics_file; 
+
+    void open_metrics_file()
+    {
+      metrics_file.open(this -> metrics_filename);
+    }
+    
+
+    void write_file_header()
+    {
+      metrics_file << "function_name, "
+                      "mu1, mu2, N1, N2, " 
+                      "N, mu, mu1', mu2', " 
+                      "V, V*, L, D, I, E, T" << "\n"; 
+    }
 
     bool VisitBinaryOperator(BinaryOperator* binop){
       N2                += 2; 
@@ -166,9 +183,8 @@ public:
     { 
       resetMetrics();
       cout << "------------------\n";
-      cout << "Function name: " << func_D -> getNameInfo().getName()
-                                                          .getAsString() 
-                                                          << "\n";
+      std::string func_D_name = func_D -> getNameInfo().getName().getAsString();
+      cout << "Function name: " << func_D_name << "\n";
       cout << "------------------\n"; 
       if(func_D -> hasPrototype()){
         mu1_p++; 
@@ -218,33 +234,56 @@ public:
       cout << "mu = mu1 + mu2 : "    << mu << "\n";
       cout << "potential operator count mu1_p : " << mu1_p << "\n";
       cout << "potential operand count mu2_p : " << mu2_p << "\n";
+
+      metrics_file << func_D_name << ", " 
+                   << mu1         << ", " 
+                   << mu2         << ", " 
+                   << N1          << ", " 
+                   << N2          << ", " 
+                   << N           << ", " 
+                   << mu          << ", " 
+                   << mu1_p       << ", " 
+                   << mu2_p       << ", " 
+                   << V           << ", " 
+                   << V_star      << ", " 
+                   << L           << ", " 
+                   << D           << ", " 
+                   << I           << ", " 
+                   << E           << ", " 
+                   << T           << "\n"; 
       return true; 
     }
 
 private:
     ASTContext *context;
+    std::string metrics_filename; 
 };
 
 
 class McCabeMetricsConsumer : public clang::ASTConsumer {
 public:
-  explicit McCabeMetricsConsumer(ASTContext *context)
-    : visitor(context) {}
+  explicit McCabeMetricsConsumer(ASTContext *context, std::string metrics_filename)
+    : visitor(context, metrics_filename) {}
 
   virtual void HandleTranslationUnit(clang::ASTContext &context) {
+    visitor.open_metrics_file(); 
+    visitor.write_file_header(); 
     visitor.TraverseDecl(context.getTranslationUnitDecl());
     // print structure with metrics per function
   }
 private:
-  McCabeMetricsVisitor visitor;
+  McCabeMetricsVisitor visitor; 
 };
 
 class McCabeMetricsAction : public clang::ASTFrontendAction {
 public:
   virtual std::unique_ptr<clang::ASTConsumer> CreateASTConsumer(
     clang::CompilerInstance &compiler, llvm::StringRef inFile) {
+    std::string inFile_str = inFile.str(); 
+    size_t dot_index = inFile_str.find_last_of(".");
+    std::string metrics_filename = inFile_str.substr(0, dot_index) + "_metrics.csv";
     return std::unique_ptr<clang::ASTConsumer>(
-        new McCabeMetricsConsumer(&compiler.getASTContext()));
+        new McCabeMetricsConsumer(&compiler.getASTContext(), metrics_filename));
   }
 };
 
