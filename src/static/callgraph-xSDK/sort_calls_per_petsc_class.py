@@ -23,9 +23,9 @@ def main(argv):
 
     print(callpath)
 
-    for name in class_dir_pths: 
-        if not os.path.exists(name): 
-            os.mkdir(name)
+    for cls_name in class_dir_pths: 
+        if not os.path.exists(cls_name): 
+            os.mkdir(cls_name)
 
     for file in os.listdir(callpath): 
         if os.path.isfile('/'.join([callpath, file])):

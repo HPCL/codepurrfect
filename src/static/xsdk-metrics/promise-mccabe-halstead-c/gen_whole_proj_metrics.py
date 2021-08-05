@@ -8,6 +8,7 @@ import os
 from types import new_class 
 
 def runtool(rootpath, execpath, outpath):
+    petsc_class_names = ["mat", "vec", "ts", "ksp", "snes", "dm", "tao", "sys"]
     comp_db_path = '/'.join([rootpath, "compile_commands.json"]) 
     comp_data = None 
     with open(comp_db_path, 'r') as comp_db_r: 
@@ -36,6 +37,14 @@ def runtool(rootpath, execpath, outpath):
         command2 = ["mv", new_metrics_filepath, outpath]
         subprocess.run(command2)
 
+    for name in petsc_class_names: 
+        with open('/'.join([outpath, name]) + ".csv", 'w') as name_w:
+            for file in os.listdir(outpath): 
+                if ('_'.join(["src", name])) in file:
+                    with open('/'.join([outpath, file]), 'r') as file_r: 
+                        file_contents = file_r.readlines() 
+                        for line in file_contents: 
+                            name_w.write(line)
     return 
 
 

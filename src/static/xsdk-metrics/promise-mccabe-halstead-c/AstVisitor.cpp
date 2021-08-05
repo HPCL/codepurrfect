@@ -1,5 +1,6 @@
-/* A recursive visitor that visits all nodes.
- * Based on https://clang.llvm.org/docs/RAVFrontendAction.html
+/* A recursive visitor function nodes.
+ * recording metrics as specified by 
+ * http://promise.site.uottawa.ca/SERepository/datasets/pc1.arff
  */
 #include <iostream>
 #include <clang/AST/ASTConsumer.h>
@@ -250,34 +251,17 @@ public:
          && (func_D -> isThisDeclarationADefinition())
          && (func_D -> getBuiltinID() == 0) 
          ){
-
-        // cout << "------------------\n";
         std::string func_D_name = func_D -> getNameInfo().getName().getAsString();
-        // cout << "Function name: " << func_D_name << "\n";
-        // cout << "------------------\n";
 
         mu1_p++; 
         QualType func_D_decl_retT = func_D -> getDeclaredReturnType(); 
-        // const IdentifierInfo* t_str = func_D_decl_retT  
-        //                                       ->  getBaseTypeIdentifier(); 
-        // if (t_str -> getName().str().find("void") == std::string::npos){ // return type is not 
-        //                                               // void so if we trust 
-        //                                               // the type checker
-        //                                               // return keyword must 
-        //                                               // exist thus increment 
-        //                                               // all relevant metrics
-        //   mu1++; 
-        //   N1++; 
-        //   mu1_p++;  
-        // }
-        // find number of arguments 
         unsigned func_D_param_n = func_D -> getNumParams(); 
         mu2_p                  += func_D_param_n; 
         N2                     += func_D_param_n; 
         mu2                    += func_D_param_n; 
+
         if (func_D -> hasBody())
-        {
-          // cout << "function has body\n"; 
+        { 
           Stmt* func_D_body       = func_D -> getBody();
           this -> TraverseStmt(func_D_body); 
         } 
@@ -366,13 +350,6 @@ static llvm::cl::OptionCategory ctCategory("ast-traverse options");
 
 int main(int argc, const char **argv)
 {
-
-    /* From week2/clang-babysteps, this processes the source code as a string argument (not file)
-    if (argc > 1) {
-        clang::tooling::runToolOnCode(std::make_unique<McCabeMetricsAction>(), argv[1]);
-    }
-    */
-
     auto expectedParser = CommonOptionsParser::create(argc, argv, ctCategory);
     if (!expectedParser) {
        // Fail gracefully for unsupported options.

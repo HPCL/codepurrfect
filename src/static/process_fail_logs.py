@@ -40,24 +40,28 @@ def extract_unique_funcs_frm_graph(graph_list):
 
 def main(argv): 
     try: 
-        opts, _ = getopt.getopt(argv, "l:g:o") 
+        opts, _ = getopt.getopt(argv, "d:g:o:") 
     except getopt.GetoptError: 
-        print("usage: ./process_fail_logs.py -l <log-file>" + 
+        print("usage: ./process_fail_logs.py -d <log-files-dir>" + 
              " -g <csv-callgraph-file>" +
               " -o <output-file>") 
         sys.exit(2) 
 
-    logfile      = "" 
+    logfiles_dir      = "" 
     outfile      = "" 
     callfile     = ""
-    data         = []
+    all_data         = []
     failed_funcs = []
     calldata     = []
     for opt, arg in opts: 
-        if opt == "-l": 
-            logfile = arg 
-            with open(logfile, "r") as read_f: 
-                data = read_f.readlines() 
+        if opt == "-d": 
+            logfiles_dir = arg 
+            for logfile in os.listdir(logfiles_dir):
+                logfile_path = '/'.join([logfiles_dir, logfile])
+                if os.path.isfile(logfile_path):
+                    with open(logfile_path, "r") as read_f: 
+                        data = read_f.readlines() 
+                        all_data.append(data)
         if opt == "-o": 
             outfile = arg  
 
@@ -68,20 +72,25 @@ def main(argv):
 
     call_func_list = extract_unique_funcs_frm_graph(calldata) 
 
-    print("data length: ", len(data))
+    all_failed_funcs = set() 
+    for data in all_data:
+        failed_funcs = []
+        for i, line in enumerate(data): 
+            if "exceeded limit" in line: 
+                print(i, line)
+            elif "Error during compile" in line: 
+                print(i, line)
+            elif "error:" in line:
+                print(i, line) 
+            elif "Error code:" in line:  
+                log_msg = retrieve_error_msg(i, data)
+                funcs   = extract_funcs_from_msg(call_func_list, log_msg) 
+                failed_funcs += funcs 
+        all_failed_funcs = all_failed_funcs.union(set(failed_funcs))
 
-    for i, line in enumerate(data): 
-        if "exceeded limit" in line: 
-            print(i, line)
-        elif "Error during compile" in line: 
-            print(i, line)
-        elif "error:" in line:
-            print(i, line) 
-        elif "Error code:" in line:  
-            log_msg = retrieve_error_msg(i, data)
-            funcs   = extract_funcs_from_msg(call_func_list, log_msg) 
-            failed_funcs += funcs 
-    print(list(set(failed_funcs))) 
+    with open(outfile, 'w') as outfile_w: 
+        for item in all_failed_funcs: 
+            outfile_w.write("%s\n" % item)
     return 
 
 
