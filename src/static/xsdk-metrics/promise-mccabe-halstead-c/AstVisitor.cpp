@@ -12,8 +12,10 @@
 #include <clang/AST/Type.h>
 #include <clang/AST/Stmt.h>
 #include <clang/AST/Expr.h>
+#include <clang/AST/OperationKinds.h>
 #include "llvm/Support/raw_ostream.h"
-#include <vector>
+#include <vector> 
+#include <algorithm>
 
 
 #include "utils.hpp"
@@ -94,10 +96,36 @@ public:
                       "V, V*, L, D, I, E, T" << "\n"; 
     }
 
+    template <class T>
+    bool in(std::vector<T> vec, T item) 
+    {
+      return std::find(vec.begin(), vec.end(), item) != vec.end(); 
+    }
+
     bool VisitBinaryOperator(BinaryOperator* binop){
       N2                += 2; 
 
-      mu1++; 
+      if (binop -> refersToBitField())
+      {
+        FieldDecl* binop_decl  = binop      -> getSourceBitField();
+        std::string binop_name = binop_decl -> getNameAsString(); 
+        if (!in(this -> seen_binops, binop_name))
+        {
+          mu1++; 
+          this -> seen_binops.push_back(binop_name);
+        }
+        
+      }else
+      {
+        std::string binop_str = binop -> getOpcodeStr().str(); 
+        if(!in(this -> seen_binops, binop_str))
+        {
+          mu1++; 
+          this -> seen_binops.push_back(binop_str); 
+        }
+
+      }
+      
       N1++;
       return true; 
     }
@@ -106,7 +134,26 @@ public:
     { 
       N2                += 1; 
 
-      mu1++; 
+      if (unop -> refersToBitField())
+      {
+        FieldDecl* unop_decl  = unop      -> getSourceBitField();
+        std::string unop_name = unop_decl -> getNameAsString(); 
+        if (!in(this -> seen_unops, unop_name))
+        {
+          mu1++; 
+          this -> seen_unops.push_back(unop_name);
+        }
+        
+      }else
+      {
+        std::string unop_str = UnaryOperator::getOpcodeStr(unop -> getOpcode()).str(); 
+        if(!in(this -> seen_unops, unop_str))
+        {
+          mu1++; 
+          this -> seen_unops.push_back(unop_str); 
+        } 
+
+      }
       N1++;
       return true; 
     }
@@ -114,28 +161,44 @@ public:
     bool VisitConditionalOperator(ConditionalOperator* condop)
     { 
       N2 += 3; 
-
-      mu1++; 
+      if (this -> cond_ops_count <= 1)
+      {
+        mu1++;
+        this -> cond_ops_count++; 
+      }
       N1++;
       return true; 
     }
 
     bool VisitCallExpr(CallExpr* callexpr)
     {
-    unsigned num_args   = callexpr -> getNumArgs(); 
-    N2                += num_args; 
+      unsigned num_args   = callexpr -> getNumArgs(); 
+      N2                += num_args;
 
-    mu1++; 
-    N1++; 
+      FunctionDecl* callee = callexpr -> getDirectCallee(); 
+      if (callee)
+      {
+        std::string callee_name = callee -> getNameInfo().getName().getAsString(); 
+        if (!in(this -> seen_func_calls, callee_name))
+        {
+          mu1++; 
+          this -> seen_func_calls.push_back(callee_name); 
+        }
+
+      }
+      N1++; 
       return true; 
     }
 
     bool VisitBinaryConditionalOperator(BinaryConditionalOperator* bincondop)
     {
-    N2 += 2; 
-
-    mu1++; 
-    N1++;
+      N2 += 2; 
+      if (this -> bin_cond_ops_count <= 1)
+      {
+        mu1++; 
+        this -> bin_cond_ops_count++; 
+      } 
+      N1++;
       return true; 
     }
 
@@ -181,12 +244,18 @@ public:
 
     bool VisitFunctionDecl(FunctionDecl* func_D)
     { 
-      resetMetrics();
-      cout << "------------------\n";
-      std::string func_D_name = func_D -> getNameInfo().getName().getAsString();
-      cout << "Function name: " << func_D_name << "\n";
-      cout << "------------------\n"; 
-      if(func_D -> hasPrototype()){
+      resetMetrics(); 
+      if(func_D -> hasWrittenPrototype() 
+         && (func_D -> isUserProvided())
+         && (func_D -> isThisDeclarationADefinition())
+         && (func_D -> getBuiltinID() == 0) 
+         ){
+
+        // cout << "------------------\n";
+        std::string func_D_name = func_D -> getNameInfo().getName().getAsString();
+        // cout << "Function name: " << func_D_name << "\n";
+        // cout << "------------------\n";
+
         mu1_p++; 
         QualType func_D_decl_retT = func_D -> getDeclaredReturnType(); 
         // const IdentifierInfo* t_str = func_D_decl_retT  
@@ -208,55 +277,60 @@ public:
         mu2                    += func_D_param_n; 
         if (func_D -> hasBody())
         {
-          cout << "function has body\n"; 
+          // cout << "function has body\n"; 
           Stmt* func_D_body       = func_D -> getBody();
           this -> TraverseStmt(func_D_body); 
         } 
-      } 
-      N  = N1 + N2; 
-      mu = mu1 + mu2; 
+        N  = N1 + N2; 
+        mu = mu1 + mu2; 
 
-      // -- 
-      V = N * log2(mu); 
-      V_star = (2 + mu2_p) * log2(2 + mu2_p); 
-      L      = V_star / N; 
-      D      = 1 / L; 
-      L_p    = 1 / D; 
-      I      = L_p * V_star; 
-      E      = V / L; 
-      T      = E / 18; // 18 seems magical. time to make a mental comparison 
-      //                 // for a program of length N? 
-      cout << "number of unique operators mu1 : "   << mu1 << "\n"; 
-      cout << "number of unique operands mu2 : "   << mu2 << "\n";
-      cout << "Total operators N1 : "    << N1 << "\n";
-      cout << "Total operands N2 : "    << N2 << "\n";
-      cout << "N = N1 + N2 : "     << N << "\n";
-      cout << "mu = mu1 + mu2 : "    << mu << "\n";
-      cout << "potential operator count mu1_p : " << mu1_p << "\n";
-      cout << "potential operand count mu2_p : " << mu2_p << "\n";
+        // -- 
+        V = N * log2(mu); 
+        V_star = (2 + mu2_p) * log2(2 + mu2_p); 
+        L      = V_star / N; 
+        D      = 1 / L; 
+        L_p    = 1 / D; 
+        I      = L_p * V_star; 
+        E      = V / L; 
+        T      = E / 18; // 18 seems magical. time to make a mental comparison 
+        //                 // for a program of length N? 
+        // cout << "number of unique operators mu1 : "   << mu1 << "\n"; 
+        // cout << "number of unique operands mu2 : "   << mu2 << "\n";
+        // cout << "Total operators N1 : "    << N1 << "\n";
+        // cout << "Total operands N2 : "    << N2 << "\n";
+        // cout << "N = N1 + N2 : "     << N << "\n";
+        // cout << "mu = mu1 + mu2 : "    << mu << "\n";
+        // cout << "potential operator count mu1_p : " << mu1_p << "\n";
+        // cout << "potential operand count mu2_p : " << mu2_p << "\n";
 
-      metrics_file << func_D_name << ", " 
-                   << mu1         << ", " 
-                   << mu2         << ", " 
-                   << N1          << ", " 
-                   << N2          << ", " 
-                   << N           << ", " 
-                   << mu          << ", " 
-                   << mu1_p       << ", " 
-                   << mu2_p       << ", " 
-                   << V           << ", " 
-                   << V_star      << ", " 
-                   << L           << ", " 
-                   << D           << ", " 
-                   << I           << ", " 
-                   << E           << ", " 
-                   << T           << "\n"; 
+        metrics_file << func_D_name << ", " 
+                    << mu1         << ", " 
+                    << mu2         << ", " 
+                    << N1          << ", " 
+                    << N2          << ", " 
+                    << N           << ", " 
+                    << mu          << ", " 
+                    << mu1_p       << ", " 
+                    << mu2_p       << ", " 
+                    << V           << ", " 
+                    << V_star      << ", " 
+                    << L           << ", " 
+                    << D           << ", " 
+                    << I           << ", " 
+                    << E           << ", " 
+                    << T           << "\n";
+      }  
       return true; 
     }
 
 private:
     ASTContext *context;
     std::string metrics_filename; 
+    std::vector<std::string> seen_func_calls; 
+    std::vector<std::string> seen_binops;  
+    std::vector<std::string> seen_unops; 
+    int cond_ops_count     = 0; 
+    int bin_cond_ops_count = 0;
 };
 
 
@@ -269,10 +343,10 @@ public:
     visitor.open_metrics_file(); 
     visitor.write_file_header(); 
     visitor.TraverseDecl(context.getTranslationUnitDecl());
-    // print structure with metrics per function
   }
 private:
   McCabeMetricsVisitor visitor; 
+
 };
 
 class McCabeMetricsAction : public clang::ASTFrontendAction {
