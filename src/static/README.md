@@ -40,16 +40,19 @@ The code is organized as follows:
     ```
 
     The last flag is currenlty only available for the following projects: 
-        * Petsc 
+
+            - Petsc 
 
     Moreover, if the project is one of the following: 
-        * Petsc 
+
+            - Petsc 
 
     One can sort the resulting callgraphs by the top-level source folder they appear in by calling: 
     ```
     ./sort_calls_per_petsc_class.y -p <directory-with-callgraph-files>
     ```
     For *petsc* this will group the callgraph files into the following folders: 
+
         - dm 
         - ksp 
         - mat 
@@ -60,6 +63,7 @@ The code is organized as follows:
         - vec 
 
 * Once callgraph files have been generated, we rely on [cytoscape](https://cytoscape.org/) to generate the following function-level metrics for our directed graph/callgraph: 
+
         - Indegree 
         - Outdegree
         - AverageShortestPathLength 
@@ -83,6 +87,7 @@ cd /src/static/xsdk-metrics/promise-mccabe-halstead-c
 ```
 
 This will generate a *.csv* with a function per row and each of the following Halstead metrics per column: 
+
             - mu1 (number of unique operators) 
             - mu2 (number of unique operands) 
             - N1  (total occurrences of operators) 
@@ -101,6 +106,7 @@ This will generate a *.csv* with a function per row and each of the following Ha
             - T   (E/18 time to write program)
 
 **N.B** note that, contrary to those metrics that were generated from the callgraph (and thus through LLVM IR), the above Halstead metrics were generated from clang's ast instead. However, clang has a common ast representation for both C and C++, and therefore our implementation should be able to work with both languages.   
+
 
 
 * Part of this project is to investigate whether a combination of any of the metrics listead above (whether callgraph related or not) can be used to predict 
