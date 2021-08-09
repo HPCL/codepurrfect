@@ -124,12 +124,13 @@ def identify_header(pointer_name, root_dir, ind_file):
     if func_p_name != "constructor": 
         name_temp_1 = func_p_name
 
-    return (class_name + "," + 
-           name_temp_1 + "," + 
-           pntr_struct_name + "," + 
-           pntr_struct_offset + "," + 
-           act_func_proto + "," +  
-           header + "\n")
+    return ([pointer_name.strip(), 
+           class_name,  
+           name_temp_1, 
+           pntr_struct_name, 
+           pntr_struct_offset, 
+           act_func_proto,  
+           header])
 
 def read_all_unique_indirect_calls(root_dir, indpath):
     uniquefy = lambda l : list(set(l))
@@ -148,6 +149,21 @@ def read_all_unique_indirect_calls(root_dir, indpath):
         all_f_contents.append(contents)
     return all_f_contents
 
+def split_quoted(string, character, quote): 
+    start_quote    = string.find(quote) 
+    end_quote      = start_quote + string[start_quote+1:].find(quote)
+    quoted_sub_str = string[start_quote:end_quote+2]
+    start_sub_str  = string[:start_quote] 
+    end_sub_str    = string[end_quote+2:] 
+    to_return      = "" 
+    if len(quoted_sub_str) > 0:
+        to_return      = start_sub_str.split(character) + \
+                        [quoted_sub_str] + \
+                        end_sub_str.split(character) 
+    else: 
+        to_return = string.split(character)
+    return to_return
+
 def gen_pntr_rntime_func_name_map(all_f_contents, callpath):
     # for every file content (with header info already found) 
     # for each line of the form: CLASS, FUNCTION_POINTER_NAME, 
@@ -160,27 +176,28 @@ def gen_pntr_rntime_func_name_map(all_f_contents, callpath):
 
     all_f_ptr_dict = {}
     for f_contents in all_f_contents: 
-        for line in f_contents: 
-            line_d     = line.split(",")
-            class_name = line_d[0] 
-            func_name  = line_d[1]
-            all_f_ptr_dict[func_name] = [] 
+        for line_d in f_contents: 
+            ptr_name = line_d[0]
+            class_name = "_" + line_d[1] + "_" 
+            func_name  = line_d[2]
+            all_f_ptr_dict[func_name] = {'pointer' : ptr_name, 'names' : []}
             for f in os.listdir(callpath): 
-                if not (class_name.lower() in f):
-                    continue 
-                if class_name.lower() in f: 
-                    with open('/'.join([callpath,f]), 'r') as read_call_f: 
-                        call_f_contents = read_call_f.readlines() 
-                        count = 0
-                        for call_f_line in call_f_contents: 
-                            call_f_line_d = call_f_line.split(",") 
-                            call_f_func_name = call_f_line_d[0]
-                            if (func_name.lower() in call_f_func_name.lower()): 
-                                all_f_ptr_dict[func_name].append(call_f_func_name)
+                f_path = '/'.join([callpath,f])
+                if os.path.isfile(f_path): 
+                    if not (class_name.lower() in f):
+                        continue 
+                    if class_name.lower() in f: 
+                        with open(f_path, 'r') as read_call_f: 
+                            call_f_contents = read_call_f.readlines() 
+                            count = 0
+                            for call_f_line in call_f_contents: 
+                                call_f_line_d = split_quoted(call_f_line, ',', '!') 
+                                call_f_func_name = call_f_line_d[0]
+                                if (func_name.lower() in call_f_func_name.lower()): 
+                                    all_f_ptr_dict[func_name]['names'].append(call_f_func_name)
                                 count += 1 
-                            else:
-                                pass
-    return all_f_ptr_dict
+    return all_f_ptr_dict 
+
 
 
 def resolve_unique_ptr(indpath, root_dir, callpath, outpath):
