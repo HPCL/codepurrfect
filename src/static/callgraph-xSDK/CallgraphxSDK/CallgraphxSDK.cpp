@@ -49,8 +49,6 @@ struct CallgraphxSDK : public PassInfoMixin<CallgraphxSDK> {
 
     outs() << "running callgraph pass to generate: " 
            << filename << "\n"; 
-    csv_file << "CALLER, CALLEE, CALLTYPE\n"; 
-    outs() << "done writing header to file\n"; 
     for (Function &F : M)
     {
       if (!F.isIntrinsic())
@@ -168,6 +166,7 @@ struct CallgraphxSDK : public PassInfoMixin<CallgraphxSDK> {
                           csv_file << F.getName().str() << ","; 
                           std::string callee_name = prev_inst -> getPointerOperand() 
                                                               -> getName().str(); 
+                          csv_file << "!"; 
                           if (callee_name.size() > 0){
                             csv_file << callee_name << " = ("; 
                             txt_file << callee_name << " = "; 
@@ -199,7 +198,7 @@ struct CallgraphxSDK : public PassInfoMixin<CallgraphxSDK> {
                           csv_file << ") :: ";
 
                           op_val -> getType() -> print(csv_file); 
-                          csv_file << ", INDIRECT \n";
+                          csv_file << "!, INDIRECT \n";
                           txt_file << " :: "; 
                           op_val -> getType() -> print(txt_file); 
                           txt_file << "\n"; 

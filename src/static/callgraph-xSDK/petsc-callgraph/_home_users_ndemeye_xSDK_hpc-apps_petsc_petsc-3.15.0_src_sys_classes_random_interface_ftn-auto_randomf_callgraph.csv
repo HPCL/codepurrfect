@@ -1,7 +1,0 @@
-CALLER, CALLEE, CALLTYPE
-petscrandomgetvalue_,PetscRandomGetValue, DIRECT
-petscrandomgetvaluereal_,PetscRandomGetValueReal, DIRECT
-petscrandomgetvalues_,PetscRandomGetValues, DIRECT
-petscrandomgetvaluesreal_,PetscRandomGetValuesReal, DIRECT
-petscrandomgetinterval_,PetscRandomGetInterval, DIRECT
-petscrandomsetinterval_,PetscRandomSetInterval, DIRECT

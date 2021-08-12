@@ -1,5 +1,0 @@
-CALLER, CALLEE, CALLTYPE
-matshellgetcontext_,MatShellGetContext, DIRECT
-matshellsetcontext_,MatShellSetContext, DIRECT
-matshellsetmanagescalingshifts_,MatShellSetManageScalingShifts, DIRECT
-matisshell_,MatIsShell, DIRECT

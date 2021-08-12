@@ -1,3 +1,0 @@
-CALLER, CALLEE, CALLTYPE
-snesfascreatecoarsevec_,SNESFASCreateCoarseVec, DIRECT
-snesfasrestrict_,SNESFASRestrict, DIRECT

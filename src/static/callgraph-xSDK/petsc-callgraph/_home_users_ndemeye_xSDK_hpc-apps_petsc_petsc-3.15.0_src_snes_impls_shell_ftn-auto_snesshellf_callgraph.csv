@@ -1,3 +1,0 @@
-CALLER, CALLEE, CALLTYPE
-snesshellgetcontext_,SNESShellGetContext, DIRECT
-snesshellsetcontext_,SNESShellSetContext, DIRECT

@@ -1,6 +1,0 @@
-CALLER, CALLEE, CALLTYPE
-PetscMemcmp,PetscError, DIRECT
-PetscMemcmp,PetscError, DIRECT
-PetscMemcmp,bcmp, DIRECT
-PetscMemcmp,printf, DIRECT
-PetscMemcmp,printf, DIRECT

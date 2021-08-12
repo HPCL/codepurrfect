@@ -1,3 +1,0 @@
-CALLER, CALLEE, CALLTYPE
-petscsfsetgraphsection_,PetscSFSetGraphSection, DIRECT
-petscsfcreatebymatchingindices_,PetscSFCreateByMatchingIndices, DIRECT

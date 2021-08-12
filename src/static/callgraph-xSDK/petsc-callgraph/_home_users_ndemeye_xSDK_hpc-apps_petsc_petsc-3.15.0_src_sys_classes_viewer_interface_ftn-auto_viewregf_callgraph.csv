@@ -1,6 +1,0 @@
-CALLER, CALLEE, CALLTYPE
-petscoptionspushgetvieweroff_,PetscOptionsPushGetViewerOff, DIRECT
-petscoptionspopgetvieweroff_,PetscOptionsPopGetViewerOff, DIRECT
-petscoptionsgetvieweroff_,PetscOptionsGetViewerOff, DIRECT
-petscviewercreate_,MPI_Comm_f2c, DIRECT
-petscviewercreate_,PetscViewerCreate, DIRECT

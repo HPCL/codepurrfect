@@ -1,9 +1,0 @@
-CALLER, CALLEE, CALLTYPE
-snesshellsetsolve_,PetscObjectComposeFunction_Private, DIRECT
-snesshellsetsolve_,SNESShellSetSolve, DIRECT
-oursnesshellsolve,PetscObjectQueryFunction_Private, DIRECT
-oursnesshellsolve,PetscError, DIRECT
-oursnesshellsolve,PetscObjectComm, DIRECT
-oursnesshellsolve,PetscError, DIRECT
-oursnesshellsolve,EMPTYNAME = (any pointer->any pointer@i64 0) :: void (%struct._p_SNES**, %struct._p_Vec**, i32*)*, INDIRECT 
-oursnesshellsolve,PetscError, DIRECT

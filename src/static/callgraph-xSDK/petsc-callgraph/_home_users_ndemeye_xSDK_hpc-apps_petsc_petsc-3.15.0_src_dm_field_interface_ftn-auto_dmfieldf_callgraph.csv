@@ -1,9 +1,0 @@
-CALLER, CALLEE, CALLTYPE
-dmfielddestroy_,DMFieldDestroy, DIRECT
-dmfieldgetnumcomponents_,DMFieldGetNumComponents, DIRECT
-dmfieldgetdm_,DMFieldGetDM, DIRECT
-dmfieldevaluate_,DMFieldEvaluate, DIRECT
-dmfieldevaluatefe_,DMFieldEvaluateFE, DIRECT
-dmfieldevaluatefv_,DMFieldEvaluateFV, DIRECT
-dmfieldgetdegree_,DMFieldGetDegree, DIRECT
-dmfieldcreatedefaultquadrature_,DMFieldCreateDefaultQuadrature, DIRECT

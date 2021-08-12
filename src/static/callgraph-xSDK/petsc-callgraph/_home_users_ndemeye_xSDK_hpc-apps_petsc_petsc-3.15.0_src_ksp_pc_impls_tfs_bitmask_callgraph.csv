@@ -1,9 +1,0 @@
-CALLER, CALLEE, CALLTYPE
-PCTFS_bm_to_proc,printf, DIRECT
-PCTFS_bm_to_proc,printf, DIRECT
-PCTFS_div_ceil,PetscError, DIRECT
-PCTFS_len_bit_mask,PetscError, DIRECT
-PCTFS_set_bit_mask,PetscError, DIRECT
-PCTFS_set_bit_mask,PetscError, DIRECT
-PCTFS_set_bit_mask,printf, DIRECT
-PCTFS_set_bit_mask,printf, DIRECT

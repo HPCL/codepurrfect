@@ -1,9 +1,0 @@
-CALLER, CALLEE, CALLTYPE
-dmplexfindvertices_,DMPlexFindVertices, DIRECT
-dmplexcomputeprojection3dto2d_,DMPlexComputeProjection3Dto2D, DIRECT
-dmplexcomputegeometryfem_,DMPlexComputeGeometryFEM, DIRECT
-dmplexcomputegeometryfvm_,DMPlexComputeGeometryFVM, DIRECT
-dmplexcomputegradientfvm_,DMPlexComputeGradientFVM, DIRECT
-dmplexgetdatafvm_,DMPlexGetDataFVM, DIRECT
-dmplexcoordinatestoreference_,DMPlexCoordinatesToReference, DIRECT
-dmplexreferencetocoordinates_,DMPlexReferenceToCoordinates, DIRECT

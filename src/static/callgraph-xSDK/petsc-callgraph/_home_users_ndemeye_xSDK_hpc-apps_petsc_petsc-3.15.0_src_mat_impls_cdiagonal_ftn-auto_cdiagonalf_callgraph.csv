@@ -1,3 +1,0 @@
-CALLER, CALLEE, CALLTYPE
-matcreateconstantdiagonal_,MPI_Comm_f2c, DIRECT
-matcreateconstantdiagonal_,MatCreateConstantDiagonal, DIRECT

@@ -1,2 +1,0 @@
-EMPTYNAME = _PetscRandomOps->any pointer@i64 40 :: i32 (%struct._p_PetscRandom*)*
-EMPTYNAME = any pointer->any pointer@i64 0 :: i32 (%struct._p_PetscRandom*)*

@@ -1,4 +1,0 @@
-CALLER, CALLEE, CALLTYPE
-petscdrawmarker_,PetscDrawMarker, DIRECT
-petscdrawsetmarkertype_,PetscDrawSetMarkerType, DIRECT
-petscdrawgetmarkertype_,PetscDrawGetMarkerType, DIRECT

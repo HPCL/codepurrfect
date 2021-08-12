@@ -1,5 +1,0 @@
-CALLER, CALLEE, CALLTYPE
-PetscDemangleSymbol,PetscStrallocpy, DIRECT
-PetscDemangleSymbol,PetscError, DIRECT
-PetscDemangleSymbol,printf, DIRECT
-PetscDemangleSymbol,printf, DIRECT

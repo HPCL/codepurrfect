@@ -1,4 +1,0 @@
-CALLER, CALLEE, CALLTYPE
-petscfunctionlistdestroy_,PetscFunctionListDestroy, DIRECT
-petscfunctionlistview_,PetscFunctionListView, DIRECT
-petscfunctionlistduplicate_,PetscFunctionListDuplicate, DIRECT

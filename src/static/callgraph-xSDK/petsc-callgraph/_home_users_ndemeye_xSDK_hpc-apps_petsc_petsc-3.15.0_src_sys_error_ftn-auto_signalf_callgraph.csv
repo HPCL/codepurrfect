@@ -1,3 +1,0 @@
-CALLER, CALLEE, CALLTYPE
-petscsignalhandlerdefault_,PetscSignalHandlerDefault, DIRECT
-petscpopsignalhandler_,PetscPopSignalHandler, DIRECT

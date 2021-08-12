@@ -1,8 +1,0 @@
-CALLER, CALLEE, CALLTYPE
-petscsubcommsetfromoptions_,PetscSubcommSetFromOptions, DIRECT
-petscsubcommsetnumber_,PetscSubcommSetNumber, DIRECT
-petscsubcommsettype_,PetscSubcommSetType, DIRECT
-petscsubcommsettypegeneral_,PetscSubcommSetTypeGeneral, DIRECT
-petscsubcommdestroy_,PetscSubcommDestroy, DIRECT
-petscsubcommcreate_,MPI_Comm_f2c, DIRECT
-petscsubcommcreate_,PetscSubcommCreate, DIRECT

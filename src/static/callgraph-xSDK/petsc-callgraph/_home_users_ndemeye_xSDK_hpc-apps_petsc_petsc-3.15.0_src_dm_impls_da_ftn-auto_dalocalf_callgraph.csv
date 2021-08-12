@@ -1,3 +1,0 @@
-CALLER, CALLEE, CALLTYPE
-dmdagetnumcells_,DMDAGetNumCells, DIRECT
-dmdagetcellpoint_,DMDAGetCellPoint, DIRECT

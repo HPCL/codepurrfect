@@ -1,5 +1,0 @@
-CALLER, CALLEE, CALLTYPE
-kspbcgslsetxres_,KSPBCGSLSetXRes, DIRECT
-kspbcgslsetusepseudoinverse_,KSPBCGSLSetUsePseudoinverse, DIRECT
-kspbcgslsetpol_,KSPBCGSLSetPol, DIRECT
-kspbcgslsetell_,KSPBCGSLSetEll, DIRECT

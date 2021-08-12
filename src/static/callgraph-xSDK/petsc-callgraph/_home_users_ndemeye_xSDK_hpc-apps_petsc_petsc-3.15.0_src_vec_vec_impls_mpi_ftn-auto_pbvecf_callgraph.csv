@@ -1,6 +1,0 @@
-CALLER, CALLEE, CALLTYPE
-veccreateghost_,MPI_Comm_f2c, DIRECT
-veccreateghost_,VecCreateGhost, DIRECT
-vecmpisetghost_,VecMPISetGhost, DIRECT
-veccreateghostblock_,MPI_Comm_f2c, DIRECT
-veccreateghostblock_,VecCreateGhostBlock, DIRECT

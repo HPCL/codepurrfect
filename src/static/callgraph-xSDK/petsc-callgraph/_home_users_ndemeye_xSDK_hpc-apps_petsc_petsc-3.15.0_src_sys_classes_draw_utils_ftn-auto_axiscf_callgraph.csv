@@ -1,8 +1,0 @@
-CALLER, CALLEE, CALLTYPE
-petscdrawaxiscreate_,PetscDrawAxisCreate, DIRECT
-petscdrawaxisdestroy_,PetscDrawAxisDestroy, DIRECT
-petscdrawaxissetcolors_,PetscDrawAxisSetColors, DIRECT
-petscdrawaxissetlimits_,PetscDrawAxisSetLimits, DIRECT
-petscdrawaxisgetlimits_,PetscDrawAxisGetLimits, DIRECT
-petscdrawaxissetholdlimits_,PetscDrawAxisSetHoldLimits, DIRECT
-petscdrawaxisdraw_,PetscDrawAxisDraw, DIRECT

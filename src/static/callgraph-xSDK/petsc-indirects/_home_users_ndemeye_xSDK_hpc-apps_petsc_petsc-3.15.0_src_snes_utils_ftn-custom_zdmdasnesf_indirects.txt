@@ -1,6 +1,0 @@
-EMPTYNAME = any pointer->any pointer@i64 0 :: void (%struct.DMDALocalInfo*, double*, %struct._p_Mat**, %struct._p_Mat**, i8*, i32*)*
-EMPTYNAME = any pointer->any pointer@i64 0 :: void (%struct.DMDALocalInfo*, double*, %struct._p_Mat**, %struct._p_Mat**, i8*, i32*)*
-EMPTYNAME = any pointer->any pointer@i64 0 :: void (%struct.DMDALocalInfo*, double*, %struct._p_Mat**, %struct._p_Mat**, i8*, i32*)*
-EMPTYNAME = any pointer->any pointer@i64 0 :: void (%struct.DMDALocalInfo*, double*, double*, i8*, i32*)*
-EMPTYNAME = any pointer->any pointer@i64 0 :: void (%struct.DMDALocalInfo*, double*, double*, i8*, i32*)*
-EMPTYNAME = any pointer->any pointer@i64 0 :: void (%struct.DMDALocalInfo*, double*, double*, i8*, i32*)*

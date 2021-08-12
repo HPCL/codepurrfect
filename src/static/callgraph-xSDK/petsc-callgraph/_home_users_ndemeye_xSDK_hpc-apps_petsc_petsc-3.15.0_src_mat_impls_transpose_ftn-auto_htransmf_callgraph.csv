@@ -1,3 +1,0 @@
-CALLER, CALLEE, CALLTYPE
-mathermitiantransposegetmat_,MatHermitianTransposeGetMat, DIRECT
-matcreatehermitiantranspose_,MatCreateHermitianTranspose, DIRECT

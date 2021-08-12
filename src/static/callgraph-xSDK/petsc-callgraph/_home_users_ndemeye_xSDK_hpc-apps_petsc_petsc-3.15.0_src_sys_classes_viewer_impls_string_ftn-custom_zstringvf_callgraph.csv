@@ -1,3 +1,0 @@
-CALLER, CALLEE, CALLTYPE
-petscviewerstringopen_,MPI_Comm_f2c, DIRECT
-petscviewerstringopen_,PetscViewerStringOpen, DIRECT

@@ -1,8 +1,0 @@
-CALLER, CALLEE, CALLTYPE
-petscweakformcopy_,PetscWeakFormCopy, DIRECT
-petscweakformclear_,PetscWeakFormClear, DIRECT
-petscweakformgetnumfields_,PetscWeakFormGetNumFields, DIRECT
-petscweakformsetnumfields_,PetscWeakFormSetNumFields, DIRECT
-petscweakformdestroy_,PetscWeakFormDestroy, DIRECT
-petscweakformcreate_,MPI_Comm_f2c, DIRECT
-petscweakformcreate_,PetscWeakFormCreate, DIRECT

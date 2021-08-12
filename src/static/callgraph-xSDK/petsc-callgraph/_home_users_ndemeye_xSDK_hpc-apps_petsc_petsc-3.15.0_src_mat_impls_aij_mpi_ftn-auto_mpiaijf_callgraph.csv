@@ -1,8 +1,0 @@
-CALLER, CALLEE, CALLTYPE
-matmpiaijsetusescalableincreaseoverlap_,MatMPIAIJSetUseScalableIncreaseOverlap, DIRECT
-matmpiaijsetpreallocationcsr_,MatMPIAIJSetPreallocationCSR, DIRECT
-matcreatempiaijwitharrays_,MPI_Comm_f2c, DIRECT
-matcreatempiaijwitharrays_,MatCreateMPIAIJWithArrays, DIRECT
-matupdatempiaijwitharrays_,MatUpdateMPIAIJWithArrays, DIRECT
-matmpiaijgetlocalmat_,MatMPIAIJGetLocalMat, DIRECT
-matmpiaijgetlocalmatmerge_,MatMPIAIJGetLocalMatMerge, DIRECT

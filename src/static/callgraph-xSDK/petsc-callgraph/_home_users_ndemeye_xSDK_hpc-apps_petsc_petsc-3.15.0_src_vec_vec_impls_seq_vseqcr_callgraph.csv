@@ -1,9 +1,0 @@
-CALLER, CALLEE, CALLTYPE
-VecCreateSeq,VecCreate, DIRECT
-VecCreateSeq,PetscError, DIRECT
-VecCreateSeq,VecSetSizes, DIRECT
-VecCreateSeq,PetscError, DIRECT
-VecCreateSeq,VecSetType, DIRECT
-VecCreateSeq,PetscError, DIRECT
-VecCreateSeq,printf, DIRECT
-VecCreateSeq,printf, DIRECT

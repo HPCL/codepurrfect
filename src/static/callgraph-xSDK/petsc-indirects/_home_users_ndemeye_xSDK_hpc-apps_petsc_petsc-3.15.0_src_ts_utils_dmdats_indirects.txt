@@ -1,8 +1,0 @@
-EMPTYNAME = ->any pointer@i64 8 :: i32 (%struct.DMDALocalInfo*, double, i8*, i8*, i8*)*
-EMPTYNAME = ->any pointer@i64 8 :: i32 (%struct.DMDALocalInfo*, double, i8*, i8*, i8*)*
-EMPTYNAME = ->any pointer@i64 24 :: i32 (%struct.DMDALocalInfo*, double, i8*, %struct._p_Mat*, %struct._p_Mat*, i8*)*
-EMPTYNAME = ->any pointer@i64 0 :: i32 (%struct.DMDALocalInfo*, double, i8*, i8*, i8*, i8*)*
-EMPTYNAME = ->any pointer@i64 0 :: i32 (%struct.DMDALocalInfo*, double, i8*, i8*, i8*, i8*)*
-EMPTYNAME = ->any pointer@i64 16 :: i32 (%struct.DMDALocalInfo*, double, i8*, i8*, double, %struct._p_Mat*, %struct._p_Mat*, i8*)*
-PetscTrFree = any pointer->any pointer@i64 0 :: i32 (i8*, i32, i8*, i8*)*
-PetscTrFree = any pointer->any pointer@i64 0 :: i32 (i8*, i32, i8*, i8*)*

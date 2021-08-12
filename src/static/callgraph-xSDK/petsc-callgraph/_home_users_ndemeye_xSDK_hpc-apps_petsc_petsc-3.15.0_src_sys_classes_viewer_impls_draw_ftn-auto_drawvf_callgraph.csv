@@ -1,7 +1,0 @@
-CALLER, CALLEE, CALLTYPE
-petscviewerdrawclear_,PetscViewerDrawClear, DIRECT
-petscviewerdrawgetpause_,PetscViewerDrawGetPause, DIRECT
-petscviewerdrawsetpause_,PetscViewerDrawSetPause, DIRECT
-petscviewerdrawsethold_,PetscViewerDrawSetHold, DIRECT
-petscviewerdrawgethold_,PetscViewerDrawGetHold, DIRECT
-petscviewerdrawsetbounds_,PetscViewerDrawSetBounds, DIRECT

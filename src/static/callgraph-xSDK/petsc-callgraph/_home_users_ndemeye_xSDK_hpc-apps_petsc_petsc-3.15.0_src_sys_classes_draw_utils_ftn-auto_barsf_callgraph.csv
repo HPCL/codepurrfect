@@ -1,7 +1,0 @@
-CALLER, CALLEE, CALLTYPE
-petscdrawbardraw_,PetscDrawBarDraw, DIRECT
-petscdrawbarsave_,PetscDrawBarSave, DIRECT
-petscdrawbarsetcolor_,PetscDrawBarSetColor, DIRECT
-petscdrawbarsort_,PetscDrawBarSort, DIRECT
-petscdrawbarsetlimits_,PetscDrawBarSetLimits, DIRECT
-petscdrawbarsetfromoptions_,PetscDrawBarSetFromOptions, DIRECT

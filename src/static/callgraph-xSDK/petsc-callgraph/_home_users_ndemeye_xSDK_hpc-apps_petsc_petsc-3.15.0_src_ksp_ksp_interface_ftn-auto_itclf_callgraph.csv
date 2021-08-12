@@ -1,6 +1,0 @@
-CALLER, CALLEE, CALLTYPE
-kspsetusefischerguess_,KSPSetUseFischerGuess, DIRECT
-kspsetguess_,KSPSetGuess, DIRECT
-kspgetguess_,KSPGetGuess, DIRECT
-kspsetfromoptions_,KSPSetFromOptions, DIRECT
-kspresetfromoptions_,KSPResetFromOptions, DIRECT

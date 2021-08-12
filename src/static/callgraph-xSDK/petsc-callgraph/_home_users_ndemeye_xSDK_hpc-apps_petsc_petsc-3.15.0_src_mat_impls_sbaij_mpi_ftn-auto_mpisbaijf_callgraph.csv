@@ -1,3 +1,0 @@
-CALLER, CALLEE, CALLTYPE
-matcreatempisbaijwitharrays_,MPI_Comm_f2c, DIRECT
-matcreatempisbaijwitharrays_,MatCreateMPISBAIJWithArrays, DIRECT

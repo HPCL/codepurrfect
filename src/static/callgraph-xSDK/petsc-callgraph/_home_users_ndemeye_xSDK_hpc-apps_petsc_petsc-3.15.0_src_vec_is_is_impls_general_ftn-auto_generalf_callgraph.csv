@@ -1,5 +1,0 @@
-CALLER, CALLEE, CALLTYPE
-iscreategeneral_,MPI_Comm_f2c, DIRECT
-iscreategeneral_,ISCreateGeneral, DIRECT
-isgeneralsetindices_,ISGeneralSetIndices, DIRECT
-isgeneralfilter_,ISGeneralFilter, DIRECT

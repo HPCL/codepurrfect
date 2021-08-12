@@ -1,3 +1,0 @@
-CALLER, CALLEE, CALLTYPE
-petscdrawsetcoordinates_,PetscDrawSetCoordinates, DIRECT
-petscdrawgetcoordinates_,PetscDrawGetCoordinates, DIRECT

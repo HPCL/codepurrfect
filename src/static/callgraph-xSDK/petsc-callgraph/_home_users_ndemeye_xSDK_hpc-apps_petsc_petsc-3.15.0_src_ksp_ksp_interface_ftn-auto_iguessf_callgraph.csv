@@ -1,8 +1,0 @@
-CALLER, CALLEE, CALLTYPE
-kspguesssetfromoptions_,KSPGuessSetFromOptions, DIRECT
-kspguessdestroy_,KSPGuessDestroy, DIRECT
-kspguesscreate_,MPI_Comm_f2c, DIRECT
-kspguesscreate_,KSPGuessCreate, DIRECT
-kspguessupdate_,KSPGuessUpdate, DIRECT
-kspguessformguess_,KSPGuessFormGuess, DIRECT
-kspguesssetup_,KSPGuessSetUp, DIRECT

@@ -1,7 +1,0 @@
-CALLER, CALLEE, CALLTYPE
-petscdrawresizewindow_,PetscDrawResizeWindow, DIRECT
-petscdrawgetwindowsize_,PetscDrawGetWindowSize, DIRECT
-petscdrawcheckresizedwindow_,PetscDrawCheckResizedWindow, DIRECT
-petscdrawdestroy_,PetscDrawDestroy, DIRECT
-petscdrawgetpopup_,PetscDrawGetPopup, DIRECT
-petscdrawsetdoublebuffer_,PetscDrawSetDoubleBuffer, DIRECT

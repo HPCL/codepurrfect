@@ -1,9 +1,0 @@
-CALLER, CALLEE, CALLTYPE
-dmgetnamedglobalvector_,PetscMallocA, DIRECT
-dmgetnamedglobalvector_,PetscStrncpy, DIRECT
-dmgetnamedglobalvector_,DMGetNamedGlobalVector, DIRECT
-dmgetnamedglobalvector_,PetscTrFree = (any pointer->any pointer@i64 0) :: i32 (i8*, i32, i8*, i8*)*, INDIRECT 
-dmrestorenamedglobalvector_,PetscMallocA, DIRECT
-dmrestorenamedglobalvector_,PetscStrncpy, DIRECT
-dmrestorenamedglobalvector_,DMRestoreNamedGlobalVector, DIRECT
-dmrestorenamedglobalvector_,PetscTrFree = (any pointer->any pointer@i64 0) :: i32 (i8*, i32, i8*, i8*)*, INDIRECT 

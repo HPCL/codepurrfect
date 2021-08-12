@@ -1,6 +1,0 @@
-CALLER, CALLEE, CALLTYPE
-matcreatefft_,PetscMallocA, DIRECT
-matcreatefft_,PetscStrncpy, DIRECT
-matcreatefft_,MPI_Comm_f2c, DIRECT
-matcreatefft_,MatCreateFFT, DIRECT
-matcreatefft_,PetscTrFree = (any pointer->any pointer@i64 0) :: i32 (i8*, i32, i8*, i8*)*, INDIRECT 

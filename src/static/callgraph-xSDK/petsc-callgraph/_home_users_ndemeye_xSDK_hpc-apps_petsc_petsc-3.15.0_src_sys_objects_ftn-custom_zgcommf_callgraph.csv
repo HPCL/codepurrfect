@@ -1,3 +1,0 @@
-CALLER, CALLEE, CALLTYPE
-petscobjectgetcomm_,PetscObjectGetComm, DIRECT
-petscobjectgetcomm_,MPI_Comm_c2f, DIRECT

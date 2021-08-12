@@ -1,9 +1,0 @@
-CALLER, CALLEE, CALLTYPE
-VecCreateMPI,VecCreate, DIRECT
-VecCreateMPI,PetscError, DIRECT
-VecCreateMPI,VecSetSizes, DIRECT
-VecCreateMPI,PetscError, DIRECT
-VecCreateMPI,VecSetType, DIRECT
-VecCreateMPI,PetscError, DIRECT
-VecCreateMPI,printf, DIRECT
-VecCreateMPI,printf, DIRECT

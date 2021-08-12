@@ -1,5 +1,0 @@
-CALLER, CALLEE, CALLTYPE
-petsccommbuildtwosidedsettype_,MPI_Comm_f2c, DIRECT
-petsccommbuildtwosidedsettype_,PetscCommBuildTwoSidedSetType, DIRECT
-petsccommbuildtwosidedgettype_,MPI_Comm_f2c, DIRECT
-petsccommbuildtwosidedgettype_,PetscCommBuildTwoSidedGetType, DIRECT

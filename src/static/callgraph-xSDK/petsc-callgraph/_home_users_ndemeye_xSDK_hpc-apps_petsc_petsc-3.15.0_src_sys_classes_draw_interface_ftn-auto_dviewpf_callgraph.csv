@@ -1,4 +1,0 @@
-CALLER, CALLEE, CALLTYPE
-petscdrawsetviewport_,PetscDrawSetViewPort, DIRECT
-petscdrawgetviewport_,PetscDrawGetViewPort, DIRECT
-petscdrawsplitviewport_,PetscDrawSplitViewPort, DIRECT

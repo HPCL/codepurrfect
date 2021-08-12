@@ -1,0 +1,1274 @@
+[0KRunning with gitlab-runner 13.8.0 (775dd39d)
+[0;m[0K  on frog KFnbdjNX
+[0;msection_start:1624902009:resolve_secrets[0K[0K[36;1mResolving secrets[0;m
+[0;msection_end:1624902009:resolve_secrets[0Ksection_start:1624902009:prepare_executor[0K[0K[36;1mPreparing the "ssh" executor[0;m
+[0;m[0KUsing SSH executor...
+[0;msection_end:1624902009:prepare_executor[0Ksection_start:1624902009:prepare_script[0K[0K[36;1mPreparing environment[0;m
+[0;mRunning on frog via petsc-c7.mcs.anl.gov...
+section_end:1624902009:prepare_script[0Ksection_start:1624902009:get_sources[0K[0K[36;1mGetting source from Git repository[0;m
+[0;m[32;1mFetching changes with git depth set to 50...[0;m
+warning: templates not found builds/KFnbdjNX/0/petsc/petsc.tmp/git-template
+Reinitialized existing Git repository in /home/petsc/builds/KFnbdjNX/0/petsc/petsc/.git/
+[32;1mChecking out 1b9e4704 as refs/merge-requests/3994/merge...[0;m
+[32;1mSkipping Git submodules setup[0;m
+section_end:1624902011:get_sources[0Ksection_start:1624902011:step_script[0K[0K[36;1mExecuting "step_script" stage of the job script[0;m
+[0;m[32;1m$ date[0;m
+Mon Jun 28 12:40:11 CDT 2021
+[32;1m$ hostname[0;m
+frog
+[32;1m$ grep PRETTY_NAME /etc/os-release[0;m
+PRETTY_NAME="Ubuntu 16.04.7 LTS"
+[32;1m$ nproc[0;m
+8
+[32;1m$ lscpu[0;m
+Architecture:          x86_64
+CPU op-mode(s):        32-bit, 64-bit
+Byte Order:            Little Endian
+CPU(s):                8
+On-line CPU(s) list:   0-7
+Thread(s) per core:    2
+Core(s) per socket:    4
+Socket(s):             1
+NUMA node(s):          1
+Vendor ID:             GenuineIntel
+CPU family:            6
+Model:                 26
+Model name:            Intel(R) Xeon(R) CPU           X5550  @ 2.67GHz
+Stepping:              5
+CPU MHz:               2660.084
+BogoMIPS:              5320.16
+Virtualization:        VT-x
+L1d cache:             32K
+L1i cache:             32K
+L2 cache:              256K
+L3 cache:              8192K
+NUMA node0 CPU(s):     0-7
+Flags:                 fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush dts acpi mmx fxsr sse sse2 ss ht tm pbe syscall nx rdtscp lm constant_tsc arch_perfmon pebs bts rep_good nopl xtopology nonstop_tsc aperfmperf pni dtes64 monitor ds_cpl vmx est tm2 ssse3 cx16 xtpr pdcm dca sse4_1 sse4_2 popcnt lahf_lm ssbd ibrs ibpb stibp kaiser tpr_shadow vnmi flexpriority ept vpid dtherm flush_l1d
+[32;1m$ ccache --zero-stats[0;m
+Statistics cleared
+[32;1m$ if [ ! -z ${LOAD_MODULES+x} ]; then module --trace load ${LOAD_MODULES}; module list; fi[0;m
+[32;1m$ if [ ! -z ${INIT_SCRIPT+x} ]; then echo "sourcing ${INIT_SCRIPT}"; source ${INIT_SCRIPT}; fi[0;m
+[32;1m$ printf "PATH:$PATH\n"[0;m
+PATH:/home/petsc/bin:/home/petsc/.local/bin:/usr/lib/ccache:/home/petsc/soft/mpich-3.3.1/bin:/home/petsc/soft/make-4.2.93/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/opt/rocm/bin
+[32;1m$ printf "PYTHONPATH:$PYTHONPATH\n"[0;m
+PYTHONPATH:
+[32;1m$ printf "PETSC_OPTIONS:$PETSC_OPTIONS\n"[0;m
+PETSC_OPTIONS:-check_pointer_intensity 0 -error_output_stdout -nox -nox_warning -malloc_dump -use_gpu_aware_mpi 0 -checkstack
+[32;1m$ if [ ! -z ${CI_MERGE_REQUEST_SOURCE_BRANCH_NAME+x} ]; then printf "CI_MERGE_REQUEST_SOURCE_BRANCH_NAME:$CI_MERGE_REQUEST_SOURCE_BRANCH_NAME\n" ;fi[0;m
+CI_MERGE_REQUEST_SOURCE_BRANCH_NAME:jacobf/2021-05-18/petscdevice-context
+[32;1m$ printf "./config/examples/${TEST_ARCH}.py\n"[0;m
+./config/examples/arch-ci-linux-c-exodus-dbg.py
+[32;1m$ cat ./config/examples/${TEST_ARCH}.py[0;m
+#!/usr/bin/python
+
+import os
+petsc_hash_pkgs=os.path.join(os.getenv('HOME'),'petsc-hash-pkgs')
+
+if __name__ == '__main__':
+  import sys
+  import os
+  sys.path.insert(0, os.path.abspath('config'))
+  import configure
+  configure_options = [
+    '--package-prefix-hash='+petsc_hash_pkgs,
+    '--with-make-test-np=3',
+    'COPTFLAGS=-g -O',
+    'FOPTFLAGS=-g -O',
+    'CXXOPTFLAGS=-g -O',
+    '--with-gcov=1',
+    '--download-suitesparse',
+    '--download-mumps',
+    '--download-scalapack',
+    '--download-chaco',
+    '--download-ctetgen',
+    '--download-exodusii',
+    '--download-cmake',   # for exodus as it breaks with cmake version 2.8.12.2
+    '--download-pnetcdf',
+    '--download-generator',
+    '--download-hdf5',
+    '--download-zlib=1',
+    '--download-metis',
+    '--download-ml',
+    '--download-netcdf',
+    '--download-parmetis',
+    '--download-triangle',
+    '--download-p4est',
+    '--download-viennacl',
+    '--with-cuda',
+    '--with-shared-libraries',
+    '--download-magma',
+    '--with-magma-fortran-bindings=0',
+  ]
+
+  configure.petsc_configure(configure_options)
+[32;1m$ ./config/examples/${TEST_ARCH}.py[0;m
+=============================================================================================
+                      Configuring PETSc to compile on your system                            
+=============================================================================================
+TESTING: configureExternalPackagesDir from config.framework(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/framework.py:1019)
+TESTING: configureDebuggers from config.utilities.debuggers(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/utilities/debuggers.py:21)
+TESTING: configureDirectories from PETSc.options.petscdir(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/PETSc/options/petscdir.py:23)
+TESTING: getDatafilespath from PETSc.options.dataFilesPath(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/PETSc/options/dataFilesPath.py:29)
+TESTING: configureGit from config.sourceControl(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/sourceControl.py:24)
+TESTING: configureMercurial from config.sourceControl(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/sourceControl.py:35)
+TESTING: configureInstallationMethod from PETSc.options.petscclone(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/PETSc/options/petscclone.py:20)
+TESTING: setNativeArchitecture from PETSc.options.arch(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/PETSc/options/arch.py:31)
+TESTING: configureArchitecture from PETSc.options.arch(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/PETSc/options/arch.py:43)
+TESTING: setInstallDir from PETSc.options.installDir(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/PETSc/options/installDir.py:39)
+TESTING: saveReconfigure from PETSc.options.installDir(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/PETSc/options/installDir.py:85)
+TESTING: cleanConfDir from PETSc.options.installDir(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/PETSc/options/installDir.py:78)
+TESTING: configureInstallDir from PETSc.options.installDir(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/PETSc/options/installDir.py:62)
+TESTING: restoreReconfigure from PETSc.options.installDir(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/PETSc/options/installDir.py:98)
+TESTING: setExternalPackagesDir from PETSc.options.externalpackagesdir(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/PETSc/options/externalpackagesdir.py:15)
+TESTING: cleanExternalpackagesDir from PETSc.options.externalpackagesdir(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/PETSc/options/externalpackagesdir.py:22)
+TESTING: configureCLanguage from PETSc.options.languages(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/PETSc/options/languages.py:27)
+TESTING: resetEnvCompilers from config.setCompilers(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/setCompilers.py:2019)
+TESTING: checkEnvCompilers from config.setCompilers(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/setCompilers.py:2049)
+TESTING: checkMPICompilerOverride from config.setCompilers(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/setCompilers.py:1989)
+TESTING: requireMpiLdPath from config.setCompilers(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/setCompilers.py:2010)
+TESTING: checkInitialFlags from config.setCompilers(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/setCompilers.py:543)
+TESTING: checkCCompiler from config.setCompilers(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/setCompilers.py:718)
+TESTING: checkCPreprocessor from config.setCompilers(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/setCompilers.py:757)
+TESTING: checkCUDACompiler from config.setCompilers(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/setCompilers.py:793)
+TESTING: checkCUDAPreprocessor from config.setCompilers(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/setCompilers.py:833)
+TESTING: checkHIPCompiler from config.setCompilers(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/setCompilers.py:867)
+TESTING: checkHIPPreprocessor from config.setCompilers(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/setCompilers.py:910)
+TESTING: checkSYCLCompiler from config.setCompilers(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/setCompilers.py:941)
+TESTING: checkSYCLPreprocessor from config.setCompilers(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/setCompilers.py:967)
+TESTING: checkCxxCompiler from config.setCompilers(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/setCompilers.py:1054)
+TESTING: checkCxxPreprocessor from config.setCompilers(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/setCompilers.py:1095)
+TESTING: checkFortranCompiler from config.setCompilers(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/setCompilers.py:1194)
+TESTING: checkFortranPreprocessor from config.setCompilers(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/setCompilers.py:1231)
+TESTING: checkFortranComments from config.setCompilers(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/setCompilers.py:1253)
+TESTING: checkLargeFileIO from config.setCompilers(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/setCompilers.py:1427)
+TESTING: checkArchiver from config.setCompilers(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/setCompilers.py:1526)
+TESTING: checkArchiverRecipeArgfile from config.setCompilers(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/setCompilers.py:1590)
+TESTING: checkSharedLinker from config.setCompilers(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/setCompilers.py:1670)
+TESTING: checkPIC from config.setCompilers(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/setCompilers.py:1370)
+TESTING: checkSharedLinkerPaths from config.setCompilers(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/setCompilers.py:1784)
+TESTING: checkLibC from config.setCompilers(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/setCompilers.py:1823)
+TESTING: checkDynamicLinker from config.setCompilers(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/setCompilers.py:1869)
+TESTING: checkPragma from config.setCompilers(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/setCompilers.py:1333)
+TESTING: output from config.setCompilers(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/setCompilers.py:1918)
+TESTING: configureIndexSize from PETSc.options.indexTypes(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/PETSc/options/indexTypes.py:39)
+TESTING: configureCompilerFlags from config.compilerFlags(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/compilerFlags.py:82)
+TESTING: checkIntelHardwareSupport from config.compilerFlags(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/compilerFlags.py:173)
+TESTING: checkCompilerMacros from config.compilerFlags(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/compilerFlags.py:164)
+TESTING: checkC99Flag from config.compilers(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/compilers.py:1459)
+TESTING: checkRestrict from config.compilers(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/compilers.py:158)
+TESTING: checkCFormatting from config.compilers(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/compilers.py:413)
+TESTING: checkCInline from config.compilers(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/compilers.py:128)
+TESTING: checkDynamicLoadFlag from config.compilers(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/compilers.py:424)
+TESTING: checkCLibraries from config.compilers(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/compilers.py:222)
+TESTING: checkDependencyGenerationFlag from config.compilers(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/compilers.py:1410)
+TESTING: checkRestrict from config.compilers(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/compilers.py:158)
+TESTING: checkCxxDialect from config.compilers(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/compilers.py:471)
+TESTING: checkCxxOptionalExtensions from config.compilers(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/compilers.py:443)
+TESTING: checkCxxInline from config.compilers(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/compilers.py:143)
+TESTING: checkCxxComplexFix from config.compilers(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/compilers.py:566)
+TESTING: checkCxxLibraries from config.compilers(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/compilers.py:595)
+TESTING: checkFortranNameMangling from config.compilers(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/compilers.py:902)
+TESTING: checkFortranNameManglingDouble from config.compilers(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/compilers.py:940)
+TESTING: checkFortranLibraries from config.compilers(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/compilers.py:950)
+TESTING: checkFortranLinkingCxx from config.compilers(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/compilers.py:1375)
+TESTING: checkCxxDialect from config.compilers(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/compilers.py:471)
+TESTING: checkCxxDialect from config.compilers(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/compilers.py:471)
+TESTING: setupFrameworkCompilers from config.compilers(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/compilers.py:1537)
+TESTING: configureClosure from config.utilities.closure(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/utilities/closure.py:17)
+TESTING: checkFortranTypeSizes from config.compilersFortran(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/compilersFortran.py:56)
+TESTING: checkFortranPreprocessor from config.compilersFortran(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/compilersFortran.py:73)
+TESTING: checkFortranDefineCompilerOption from config.compilersFortran(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/compilersFortran.py:96)
+TESTING: checkFortran90 from config.compilersFortran(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/compilersFortran.py:146)
+TESTING: checkFortran90FreeForm from config.compilersFortran(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/compilersFortran.py:162)
+TESTING: checkFortran2003 from config.compilersFortran(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/compilersFortran.py:176)
+TESTING: checkFortran90Array from config.compilersFortran(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/compilersFortran.py:211)
+TESTING: checkFortran90AssumedType from config.compilersFortran(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/compilersFortran.py:298)
+TESTING: checkFortranModuleInclude from config.compilersFortran(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/compilersFortran.py:303)
+TESTING: checkFortranModuleOutput from config.compilersFortran(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/compilersFortran.py:369)
+TESTING: checkFortranTypeStar from config.compilersFortran(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/compilersFortran.py:135)
+TESTING: checkFortranTypeInitialize from config.compilersFortran(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/compilersFortran.py:125)
+TESTING: configureFortranFlush from config.compilersFortran(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/compilersFortran.py:116)
+TESTING: checkDependencyGenerationFlag from config.compilersFortran(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/compilersFortran.py:414)
+TESTING: checkStdC from config.headers(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/headers.py:107)
+TESTING: checkStat from config.headers(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/headers.py:140)
+TESTING: checkSysWait from config.headers(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/headers.py:175)
+TESTING: checkTime from config.headers(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/headers.py:197)
+TESTING: checkMath from config.headers(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/headers.py:203)
+TESTING: check from config.headers(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/headers.py:77)
+TESTING: check from config.headers(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/headers.py:77)
+TESTING: check from config.headers(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/headers.py:77)
+TESTING: check from config.headers(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/headers.py:77)
+TESTING: check from config.headers(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/headers.py:77)
+TESTING: check from config.headers(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/headers.py:77)
+TESTING: check from config.headers(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/headers.py:77)
+TESTING: check from config.headers(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/headers.py:77)
+TESTING: check from config.headers(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/headers.py:77)
+TESTING: check from config.headers(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/headers.py:77)
+TESTING: check from config.headers(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/headers.py:77)
+TESTING: check from config.headers(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/headers.py:77)
+TESTING: check from config.headers(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/headers.py:77)
+TESTING: check from config.headers(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/headers.py:77)
+TESTING: check from config.headers(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/headers.py:77)
+TESTING: check from config.headers(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/headers.py:77)
+TESTING: check from config.headers(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/headers.py:77)
+TESTING: check from config.headers(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/headers.py:77)
+TESTING: check from config.headers(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/headers.py:77)
+TESTING: check from config.headers(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/headers.py:77)
+TESTING: check from config.headers(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/headers.py:77)
+TESTING: check from config.headers(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/headers.py:77)
+TESTING: check from config.headers(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/headers.py:77)
+TESTING: check from config.headers(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/headers.py:77)
+TESTING: check from config.headers(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/headers.py:77)
+TESTING: check from config.headers(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/headers.py:77)
+TESTING: check from config.headers(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/headers.py:77)
+TESTING: check from config.headers(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/headers.py:77)
+TESTING: check from config.headers(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/headers.py:77)
+TESTING: check from config.headers(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/headers.py:77)
+TESTING: check from config.headers(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/headers.py:77)
+TESTING: check from config.headers(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/headers.py:77)
+TESTING: check from config.headers(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/headers.py:77)
+TESTING: check from config.headers(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/headers.py:77)
+TESTING: check from config.headers(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/headers.py:77)
+TESTING: check from config.headers(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/headers.py:77)
+TESTING: check from config.headers(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/headers.py:77)
+TESTING: check from config.headers(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/headers.py:77)
+TESTING: check from config.headers(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/headers.py:77)
+TESTING: check from config.headers(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/headers.py:77)
+TESTING: check from config.headers(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/headers.py:77)
+TESTING: check from config.headers(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/headers.py:77)
+TESTING: check from config.headers(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/headers.py:77)
+TESTING: check from config.headers(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/headers.py:77)
+TESTING: check from config.headers(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/headers.py:77)
+TESTING: check from config.headers(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/headers.py:77)
+TESTING: check from config.headers(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/headers.py:77)
+TESTING: check from config.headers(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/headers.py:77)
+TESTING: check from config.headers(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/headers.py:77)
+TESTING: check from config.headers(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/headers.py:77)
+TESTING: check from config.headers(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/headers.py:77)
+TESTING: check from config.headers(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/headers.py:77)
+TESTING: check from config.headers(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/headers.py:77)
+TESTING: check from config.headers(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/headers.py:77)
+TESTING: check from config.headers(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/headers.py:77)
+TESTING: check from config.headers(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/headers.py:77)
+TESTING: check from config.headers(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/headers.py:77)
+TESTING: check from config.headers(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/headers.py:77)
+TESTING: check from config.headers(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/headers.py:77)
+TESTING: check from config.headers(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/headers.py:77)
+TESTING: check from config.headers(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/headers.py:77)
+TESTING: check from config.headers(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/headers.py:77)
+TESTING: check from config.headers(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/headers.py:77)
+TESTING: check from config.headers(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/headers.py:77)
+TESTING: check from config.headers(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/headers.py:77)
+TESTING: check from config.headers(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/headers.py:77)
+TESTING: checkRecursiveMacros from config.headers(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/headers.py:218)
+TESTING: configureCacheDetails from config.utilities.cacheDetails(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/utilities/cacheDetails.py:78)
+TESTING: check_struct_sigaction from config.types(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/types.py:42)
+TESTING: check__int64 from config.types(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/types.py:48)
+TESTING: checkSizeTypes from config.types(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/types.py:54)
+TESTING: checkFileTypes from config.types(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/types.py:64)
+TESTING: checkIntegerTypes from config.types(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/types.py:59)
+TESTING: checkPID from config.types(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/types.py:70)
+TESTING: checkUID from config.types(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/types.py:74)
+TESTING: checkC99Complex from config.types(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/types.py:81)
+TESTING: checkCxxComplex from config.types(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/types.py:92)
+TESTING: checkConst from config.types(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/types.py:103)
+TESTING: checkSizeof from config.types(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/types.py:159)
+TESTING: checkSizeof from config.types(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/types.py:159)
+TESTING: checkSizeof from config.types(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/types.py:159)
+TESTING: checkSizeof from config.types(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/types.py:159)
+TESTING: checkSizeof from config.types(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/types.py:159)
+TESTING: checkSizeof from config.types(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/types.py:159)
+TESTING: checkSizeof from config.types(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/types.py:159)
+TESTING: checkVisibility from config.types(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/types.py:193)
+TESTING: checkMaxPathLen from config.types(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/types.py:215)
+TESTING: configureMemAlign from PETSc.options.memAlign(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/PETSc/options/memAlign.py:29)
+TESTING: check from config.libraries(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/libraries.py:157)
+TESTING: check from config.libraries(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/libraries.py:157)
+TESTING: check from config.libraries(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/libraries.py:157)
+TESTING: check from config.libraries(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/libraries.py:157)
+TESTING: checkMath from config.libraries(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/libraries.py:282)
+TESTING: checkMathErf from config.libraries(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/libraries.py:301)
+TESTING: checkMathTgamma from config.libraries(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/libraries.py:310)
+TESTING: checkMathLgamma from config.libraries(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/libraries.py:319)
+TESTING: checkMathFenv from config.libraries(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/libraries.py:332)
+TESTING: checkMathLog2 from config.libraries(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/libraries.py:340)
+TESTING: checkRealtime from config.libraries(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/libraries.py:349)
+TESTING: checkDynamic from config.libraries(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/libraries.py:365)
+TESTING: configureLibraryOptions from PETSc.options.libraryOptions(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/PETSc/options/libraryOptions.py:38)
+TESTING: configureISColorValueType from PETSc.options.libraryOptions(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/PETSc/options/libraryOptions.py:99)
+TESTING: checkSysinfo from config.functions(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/functions.py:106)
+TESTING: checkVPrintf from config.functions(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/functions.py:125)
+TESTING: checkVFPrintf from config.functions(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/functions.py:131)
+TESTING: checkVSNPrintf from config.functions(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/functions.py:137)
+TESTING: checkNanosleep from config.functions(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/functions.py:167)
+TESTING: checkMemmove from config.functions(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/functions.py:173)
+TESTING: checkSignalHandlerType from config.functions(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/functions.py:143)
+TESTING: checkFreeReturnType from config.functions(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/functions.py:153)
+TESTING: checkVariableArgumentLists from config.functions(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/functions.py:159)
+TESTING: checkClassify from config.functions(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/functions.py:85)
+TESTING: checkMmap from config.functions(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/functions.py:179)
+TESTING: configureMemorySize from config.utilities.getResidentSetSize(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/utilities/getResidentSetSize.py:31)
+TESTING: configureFortranCommandLine from config.utilities.fortranCommandLine(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/utilities/fortranCommandLine.py:27)
+TESTING: configureFPTrap from config.utilities.FPTrap(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/utilities/FPTrap.py:27)
+TESTING: configureFeatureTestMacros from config.utilities.featureTestMacros(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/utilities/featureTestMacros.py:13)
+TESTING: configureMissingUtypeTypedefs from config.utilities.missing(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/utilities/missing.py:55)
+TESTING: configureMissingFunctions from config.utilities.missing(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/utilities/missing.py:61)
+TESTING: configureMissingSignals from config.utilities.missing(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/utilities/missing.py:79)
+TESTING: configureMissingGetdomainnamePrototype from config.utilities.missing(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/utilities/missing.py:96)
+TESTING: configureMissingSrandPrototype from config.utilities.missing(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/utilities/missing.py:121)
+TESTING: checkSharedDynamicPicOptions from PETSc.options.sharedLibraries(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/PETSc/options/sharedLibraries.py:34)
+TESTING: configureSharedLibraries from PETSc.options.sharedLibraries(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/PETSc/options/sharedLibraries.py:49)
+TESTING: configureDynamicLibraries from PETSc.options.sharedLibraries(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/PETSc/options/sharedLibraries.py:94)
+TESTING: configureSerializedFunctions from PETSc.options.sharedLibraries(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/PETSc/options/sharedLibraries.py:100)
+TESTING: checkSymbolResolution from PETSc.options.sharedLibraries(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/PETSc/options/sharedLibraries.py:109)
+TESTING: configureScalarType from PETSc.options.scalarTypes(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/PETSc/options/scalarTypes.py:40)
+TESTING: configurePrecision from PETSc.options.scalarTypes(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/PETSc/options/scalarTypes.py:81)
+TESTING: configureMkdir from config.programs(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/programs.py:22)
+TESTING: configureAutoreconf from config.programs(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/programs.py:44)
+TESTING: configurePrograms from config.programs(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/programs.py:71)
+TESTING: consistencyChecks from config.packages.make(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/package.py:970)
+TESTING: alternateConfigureLibrary from config.packages.make(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/package.py:966)
+TESTING: configureMake from config.packages.make(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/packages/make.py:96)
+TESTING: setupGNUMake from config.packages.make(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/packages/make.py:150)
+TESTING: configureMakeNP from config.packages.make(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/packages/make.py:197)
+TESTING: consistencyChecks from config.packages.hip(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/package.py:970)
+TESTING: alternateConfigureLibrary from config.packages.hip(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/package.py:966)
+TESTING: consistencyChecks from config.packages.X(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/package.py:970)
+TESTING: checkDependencies from config.packages.X(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/package.py:872)
+TESTING: configureLibrary from config.packages.X(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/package.py:897)
+TESTING: check from config.libraries(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/libraries.py:157)
+TESTING: check from config.libraries(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/libraries.py:157)
+TESTING: checkInclude from config.headers(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/headers.py:86)
+TESTING: checkInclude from config.headers(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/headers.py:86)
+TESTING: checkVersion from config.packages.X(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/package.py:1033)
+TESTING: checkSharedLibrary from config.packages.X(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/package.py:962)
+TESTING: consistencyChecks from config.packages.hwloc(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/package.py:970)
+TESTING: alternateConfigureLibrary from config.packages.hwloc(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/package.py:966)
+TESTING: consistencyChecks from config.packages.thrust(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/package.py:970)
+TESTING: alternateConfigureLibrary from config.packages.thrust(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/package.py:966)
+TESTING: consistencyChecks from config.packages.cuda(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/package.py:970)
+TESTING: checkDependencies from config.packages.cuda(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/package.py:872)
+TESTING: configureLibrary from config.packages.cuda(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/packages/cuda.py:141)
+TESTING: check from config.libraries(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/libraries.py:157)
+TESTING: check from config.libraries(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/libraries.py:157)
+TESTING: check from config.libraries(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/libraries.py:157)
+TESTING: check from config.libraries(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/libraries.py:157)
+TESTING: check from config.libraries(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/libraries.py:157)
+TESTING: checkInclude from config.headers(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/headers.py:86)
+TESTING: checkInclude from config.headers(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/headers.py:86)
+TESTING: checkVersion from config.packages.cuda(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/package.py:1033)
+TESTING: checkSharedLibrary from config.packages.cuda(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/package.py:962)
+TESTING: consistencyChecks from config.packages.OpenMPI(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/package.py:970)
+TESTING: alternateConfigureLibrary from config.packages.OpenMPI(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/package.py:966)
+TESTING: consistencyChecks from config.packages.MPICH(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/package.py:970)
+TESTING: alternateConfigureLibrary from config.packages.MPICH(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/package.py:966)
+TESTING: consistencyChecks from config.packages.MPI(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/package.py:970)
+TESTING: checkDependencies from config.packages.MPI(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/package.py:872)
+TESTING: configureLibrary from config.packages.MPI(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/packages/MPI.py:731)
+TESTING: check from config.libraries(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/libraries.py:157)
+TESTING: checkInclude from config.headers(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/headers.py:86)
+TESTING: checkInclude from config.headers(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/headers.py:86)
+TESTING: checkMPIDistro from config.packages.MPI(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/packages/MPI.py:558)
+TESTING: configureMPI2 from config.packages.MPI(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/packages/MPI.py:340)
+TESTING: configureMPI3 from config.packages.MPI(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/packages/MPI.py:387)
+TESTING: configureMPIEXEC from config.packages.MPI(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/packages/MPI.py:185)
+TESTING: configureMPITypes from config.packages.MPI(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/packages/MPI.py:440)
+TESTING: SGIMPICheck from config.packages.MPI(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/packages/MPI.py:486)
+TESTING: CxxMPICheck from config.packages.MPI(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/packages/MPI.py:496)
+TESTING: FortranMPICheck from config.packages.MPI(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/packages/MPI.py:512)
+TESTING: configureIO from config.packages.MPI(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/packages/MPI.py:534)
+TESTING: findMPIIncludeAndLib from config.packages.MPI(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/packages/MPI.py:640)
+TESTING: PetscArchMPICheck from config.packages.MPI(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/packages/MPI.py:706)
+TESTING: checkVersion from config.packages.MPI(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/package.py:1033)
+TESTING: checkSharedLibrary from config.packages.MPI(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/package.py:962)
+TESTING: consistencyChecks from config.packages.zstd(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/package.py:970)
+TESTING: alternateConfigureLibrary from config.packages.zstd(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/package.py:966)
+TESTING: consistencyChecks from config.packages.yaml(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/package.py:970)
+TESTING: alternateConfigureLibrary from config.packages.yaml(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/package.py:966)
+TESTING: consistencyChecks from config.packages.sycl(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/package.py:970)
+TESTING: alternateConfigureLibrary from config.packages.sycl(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/package.py:966)
+TESTING: consistencyChecks from config.packages.ssl(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/packages/ssl.py:31)
+TESTING: alternateConfigureLibrary from config.packages.ssl(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/package.py:966)
+TESTING: consistencyChecks from config.packages.sprng(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/package.py:970)
+TESTING: alternateConfigureLibrary from config.packages.sprng(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/package.py:966)
+TESTING: consistencyChecks from config.packages.sowing(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/package.py:970)
+TESTING: checkDependencies from config.packages.sowing(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/package.py:872)
+TESTING: configureLibrary from config.packages.sowing(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/package.py:897)
+TESTING: check from config.libraries(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/libraries.py:157)
+TESTING: checkInclude from config.headers(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/headers.py:86)
+TESTING: checkVersion from config.packages.sowing(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/package.py:1033)
+TESTING: checkSharedLibrary from config.packages.sowing(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/package.py:962)
+TESTING: consistencyChecks from config.packages.revolve(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/package.py:970)
+TESTING: alternateConfigureLibrary from config.packages.revolve(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/package.py:966)
+TESTING: consistencyChecks from config.packages.radau5(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/package.py:970)
+TESTING: alternateConfigureLibrary from config.packages.radau5(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/package.py:966)
+TESTING: consistencyChecks from config.packages.pami(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/package.py:970)
+TESTING: alternateConfigureLibrary from config.packages.pami(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/package.py:966)
+TESTING: consistencyChecks from config.packages.opengles(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/package.py:970)
+TESTING: alternateConfigureLibrary from config.packages.opengles(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/package.py:966)
+TESTING: consistencyChecks from config.packages.opencl(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/package.py:970)
+TESTING: alternateConfigureLibrary from config.packages.opencl(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/package.py:966)
+TESTING: consistencyChecks from config.packages.muparser(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/package.py:970)
+TESTING: alternateConfigureLibrary from config.packages.muparser(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/package.py:966)
+TESTING: consistencyChecks from config.packages.mpe(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/package.py:970)
+TESTING: alternateConfigureLibrary from config.packages.mpe(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/package.py:966)
+TESTING: consistencyChecks from config.packages.memkind(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/package.py:970)
+TESTING: alternateConfigureLibrary from config.packages.memkind(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/package.py:966)
+TESTING: consistencyChecks from config.packages.libmesh(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/package.py:970)
+TESTING: alternateConfigureLibrary from config.packages.libmesh(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/packages/libmesh.py:76)
+TESTING: consistencyChecks from config.packages.moose(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/package.py:970)
+TESTING: alternateConfigureLibrary from config.packages.moose(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/package.py:966)
+TESTING: consistencyChecks from config.packages.libjpeg(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/package.py:970)
+TESTING: alternateConfigureLibrary from config.packages.libjpeg(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/package.py:966)
+TESTING: consistencyChecks from config.packages.gsl(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/package.py:970)
+TESTING: alternateConfigureLibrary from config.packages.gsl(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/package.py:966)
+TESTING: consistencyChecks from config.packages.gmp(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/package.py:970)
+TESTING: alternateConfigureLibrary from config.packages.gmp(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/package.py:966)
+TESTING: consistencyChecks from config.packages.mpfr(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/package.py:970)
+TESTING: alternateConfigureLibrary from config.packages.mpfr(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/package.py:966)
+TESTING: consistencyChecks from config.packages.giflib(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/package.py:970)
+TESTING: alternateConfigureLibrary from config.packages.giflib(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/package.py:966)
+TESTING: consistencyChecks from config.packages.cub(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/package.py:970)
+TESTING: alternateConfigureLibrary from config.packages.cub(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/package.py:966)
+TESTING: consistencyChecks from config.packages.ctetgen(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/package.py:970)
+TESTING: checkDependencies from config.packages.ctetgen(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/package.py:872)
+TESTING: configureLibrary from config.packages.ctetgen(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/packages/ctetgen.py:24)
+                    =============================================================================================
+                        Trying to download git://https://bitbucket.org/petsc/ctetgen for CTETGEN
+                    =============================================================================================
+                  
+TESTING: checkVersion from config.packages.ctetgen(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/package.py:1033)
+TESTING: checkSharedLibrary from config.packages.ctetgen(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/package.py:962)
+TESTING: consistencyChecks from config.packages.concurrencykit(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/package.py:970)
+TESTING: alternateConfigureLibrary from config.packages.concurrencykit(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/package.py:966)
+TESTING: locateC2html from config.packages.c2html(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/packages/c2html.py:30)
+TESTING: consistencyChecks from config.packages.boost(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/package.py:970)
+TESTING: alternateConfigureLibrary from config.packages.boost(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/package.py:966)
+TESTING: consistencyChecks from config.packages.silo(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/package.py:970)
+TESTING: alternateConfigureLibrary from config.packages.silo(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/package.py:966)
+TESTING: consistencyChecks from config.packages.Random123(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/package.py:970)
+TESTING: alternateConfigureLibrary from config.packages.Random123(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/package.py:966)
+TESTING: consistencyChecks from config.packages.PARTY(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/package.py:970)
+TESTING: alternateConfigureLibrary from config.packages.PARTY(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/package.py:966)
+TESTING: consistencyChecks from config.packages.NVSHMEM(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/package.py:970)
+TESTING: alternateConfigureLibrary from config.packages.NVSHMEM(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/package.py:966)
+TESTING: consistencyChecks from config.packages.Matlab(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/package.py:970)
+TESTING: alternateConfigureLibrary from config.packages.Matlab(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/package.py:966)
+TESTING: consistencyChecks from config.packages.MatlabEngine(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/package.py:970)
+TESTING: alternateConfigureLibrary from config.packages.MatlabEngine(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/package.py:966)
+TESTING: consistencyChecks from config.packages.Mathematica(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/package.py:970)
+TESTING: alternateConfigureLibrary from config.packages.Mathematica(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/package.py:966)
+TESTING: consistencyChecks from config.packages.regex(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/package.py:970)
+TESTING: checkDependencies from config.packages.regex(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/package.py:872)
+TESTING: configureLibrary from config.packages.regex(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/package.py:897)
+TESTING: check from config.libraries(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/libraries.py:157)
+TESTING: checkInclude from config.headers(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/headers.py:86)
+TESTING: checkInclude from config.headers(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/headers.py:86)
+TESTING: checkVersion from config.packages.regex(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/package.py:1033)
+TESTING: checkSharedLibrary from config.packages.regex(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/package.py:962)
+TESTING: consistencyChecks from config.packages.libceed(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/package.py:970)
+TESTING: alternateConfigureLibrary from config.packages.libceed(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/package.py:966)
+TESTING: consistencyChecks from config.packages.petsc4py(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/package.py:970)
+TESTING: alternateConfigureLibrary from config.packages.petsc4py(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/packages/petsc4py.py:131)
+TESTING: consistencyChecks from config.packages.mpi4py(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/package.py:970)
+TESTING: alternateConfigureLibrary from config.packages.mpi4py(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/package.py:966)
+TESTING: consistencyChecks from config.packages.slepc(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/package.py:970)
+TESTING: alternateConfigureLibrary from config.packages.slepc(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/packages/slepc.py:97)
+TESTING: consistencyChecks from config.packages.opengl(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/package.py:970)
+TESTING: alternateConfigureLibrary from config.packages.opengl(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/package.py:966)
+TESTING: consistencyChecks from config.packages.glut(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/package.py:970)
+TESTING: alternateConfigureLibrary from config.packages.glut(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/package.py:966)
+TESTING: consistencyChecks from config.packages.GLVis(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/package.py:970)
+TESTING: alternateConfigureLibrary from config.packages.GLVis(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/package.py:966)
+TESTING: consistencyChecks from config.packages.CoDiPack(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/package.py:970)
+TESTING: alternateConfigureLibrary from config.packages.CoDiPack(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/package.py:966)
+TESTING: consistencyChecks from config.packages.adblaslapack(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/package.py:970)
+TESTING: alternateConfigureLibrary from config.packages.adblaslapack(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/package.py:966)
+TESTING: consistencyChecks from config.packages.cmake(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/package.py:970)
+TESTING: checkDependencies from config.packages.cmake(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/package.py:872)
+TESTING: configureLibrary from config.packages.cmake(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/package.py:897)
+TESTING: check from config.libraries(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/libraries.py:157)
+TESTING: checkInclude from config.headers(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/headers.py:86)
+TESTING: checkVersion from config.packages.cmake(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/package.py:1033)
+TESTING: checkSharedLibrary from config.packages.cmake(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/package.py:962)
+TESTING: consistencyChecks from config.packages.unittestcpp(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/package.py:970)
+TESTING: alternateConfigureLibrary from config.packages.unittestcpp(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/package.py:966)
+TESTING: consistencyChecks from config.packages.googletest(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/package.py:970)
+TESTING: alternateConfigureLibrary from config.packages.googletest(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/package.py:966)
+TESTING: consistencyChecks from config.packages.eigen(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/package.py:970)
+TESTING: alternateConfigureLibrary from config.packages.eigen(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/package.py:966)
+TESTING: consistencyChecks from config.packages.szlib(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/package.py:970)
+TESTING: alternateConfigureLibrary from config.packages.szlib(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/package.py:966)
+TESTING: consistencyChecks from config.packages.zlib(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/package.py:970)
+TESTING: checkDependencies from config.packages.zlib(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/package.py:872)
+TESTING: configureLibrary from config.packages.zlib(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/package.py:897)
+TESTING: check from config.libraries(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/libraries.py:157)
+TESTING: checkInclude from config.headers(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/headers.py:86)
+TESTING: checkInclude from config.headers(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/headers.py:86)
+TESTING: checkVersion from config.packages.zlib(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/package.py:1033)
+TESTING: checkSharedLibrary from config.packages.zlib(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/package.py:962)
+TESTING: consistencyChecks from config.packages.tetgen(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/package.py:970)
+TESTING: alternateConfigureLibrary from config.packages.tetgen(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/package.py:966)
+TESTING: consistencyChecks from config.packages.tchem(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/package.py:970)
+TESTING: alternateConfigureLibrary from config.packages.tchem(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/package.py:966)
+TESTING: consistencyChecks from config.packages.saws(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/package.py:970)
+TESTING: alternateConfigureLibrary from config.packages.saws(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/package.py:966)
+TESTING: consistencyChecks from config.packages.libpng(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/package.py:970)
+TESTING: alternateConfigureLibrary from config.packages.libpng(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/package.py:966)
+TESTING: consistencyChecks from config.packages.combblas(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/package.py:970)
+TESTING: alternateConfigureLibrary from config.packages.combblas(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/package.py:966)
+TESTING: consistencyChecks from config.packages.Triangle(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/package.py:970)
+TESTING: checkDependencies from config.packages.Triangle(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/package.py:872)
+TESTING: configureLibrary from config.packages.Triangle(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/packages/Triangle.py:127)
+TESTING: check from config.libraries(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/libraries.py:157)
+TESTING: checkInclude from config.headers(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/headers.py:86)
+TESTING: checkInclude from config.headers(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/headers.py:86)
+TESTING: checkVersion from config.packages.Triangle(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/package.py:1033)
+TESTING: checkSharedLibrary from config.packages.Triangle(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/package.py:962)
+TESTING: consistencyChecks from config.packages.metis(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/package.py:970)
+TESTING: checkDependencies from config.packages.metis(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/package.py:872)
+TESTING: configureLibrary from config.packages.metis(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/packages/metis.py:46)
+TESTING: check from config.libraries(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/libraries.py:157)
+TESTING: checkInclude from config.headers(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/headers.py:86)
+TESTING: checkInclude from config.headers(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/headers.py:86)
+TESTING: checkVersion from config.packages.metis(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/package.py:1033)
+TESTING: checkSharedLibrary from config.packages.metis(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/package.py:962)
+TESTING: consistencyChecks from config.packages.pragmatic(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/package.py:970)
+TESTING: alternateConfigureLibrary from config.packages.pragmatic(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/package.py:966)
+TESTING: consistencyChecks from config.packages.parmetis(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/package.py:970)
+TESTING: checkDependencies from config.packages.parmetis(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/package.py:872)
+TESTING: configureLibrary from config.packages.parmetis(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/packages/parmetis.py:41)
+TESTING: check from config.libraries(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/libraries.py:157)
+TESTING: checkInclude from config.headers(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/headers.py:86)
+TESTING: checkInclude from config.headers(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/headers.py:86)
+TESTING: checkVersion from config.packages.parmetis(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/package.py:1033)
+TESTING: checkSharedLibrary from config.packages.parmetis(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/package.py:962)
+TESTING: consistencyChecks from config.packages.Chaco(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/package.py:970)
+TESTING: checkDependencies from config.packages.Chaco(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/package.py:872)
+TESTING: configureLibrary from config.packages.Chaco(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/packages/Chaco.py:57)
+TESTING: check from config.libraries(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/libraries.py:157)
+TESTING: checkInclude from config.headers(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/headers.py:86)
+TESTING: checkVersion from config.packages.Chaco(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/package.py:1033)
+TESTING: checkSharedLibrary from config.packages.Chaco(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/package.py:962)
+TESTING: consistencyChecks from config.packages.hdf5(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/package.py:970)
+TESTING: checkDependencies from config.packages.hdf5(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/package.py:872)
+TESTING: configureLibrary from config.packages.hdf5(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/packages/hdf5.py:88)
+TESTING: check from config.libraries(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/libraries.py:157)
+TESTING: checkInclude from config.headers(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/headers.py:86)
+TESTING: checkInclude from config.headers(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/headers.py:86)
+TESTING: checkVersion from config.packages.hdf5(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/package.py:1033)
+TESTING: checkSharedLibrary from config.packages.hdf5(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/package.py:962)
+TESTING: consistencyChecks from config.packages.med(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/package.py:970)
+TESTING: alternateConfigureLibrary from config.packages.med(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/package.py:966)
+TESTING: consistencyChecks from config.packages.cgns(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/package.py:970)
+TESTING: alternateConfigureLibrary from config.packages.cgns(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/package.py:966)
+TESTING: consistencyChecks from config.packages.ascem-io(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/package.py:970)
+TESTING: alternateConfigureLibrary from config.packages.ascem-io(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/package.py:966)
+TESTING: consistencyChecks from config.packages.pflotran(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/package.py:970)
+TESTING: alternateConfigureLibrary from config.packages.pflotran(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/package.py:966)
+TESTING: consistencyChecks from config.packages.alquimia(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/package.py:970)
+TESTING: alternateConfigureLibrary from config.packages.alquimia(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/package.py:966)
+TESTING: consistencyChecks from config.packages.SAMRAI(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/package.py:970)
+TESTING: alternateConfigureLibrary from config.packages.SAMRAI(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/package.py:966)
+TESTING: consistencyChecks from config.packages.pnetcdf(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/package.py:970)
+TESTING: checkDependencies from config.packages.pnetcdf(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/package.py:872)
+TESTING: configureLibrary from config.packages.pnetcdf(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/package.py:897)
+TESTING: check from config.libraries(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/libraries.py:157)
+TESTING: checkInclude from config.headers(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/headers.py:86)
+TESTING: checkInclude from config.headers(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/headers.py:86)
+TESTING: checkVersion from config.packages.pnetcdf(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/package.py:1033)
+TESTING: checkSharedLibrary from config.packages.pnetcdf(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/package.py:962)
+TESTING: consistencyChecks from config.packages.netcdf(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/package.py:970)
+TESTING: checkDependencies from config.packages.netcdf(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/package.py:872)
+TESTING: configureLibrary from config.packages.netcdf(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/package.py:897)
+TESTING: check from config.libraries(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/libraries.py:157)
+TESTING: checkInclude from config.headers(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/headers.py:86)
+TESTING: checkInclude from config.headers(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/headers.py:86)
+TESTING: checkVersion from config.packages.netcdf(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/package.py:1033)
+TESTING: checkSharedLibrary from config.packages.netcdf(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/package.py:962)
+TESTING: consistencyChecks from config.packages.exodusii(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/package.py:970)
+TESTING: checkDependencies from config.packages.exodusii(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/package.py:872)
+TESTING: configureLibrary from config.packages.exodusii(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/package.py:897)
+TESTING: check from config.libraries(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/libraries.py:157)
+TESTING: checkInclude from config.headers(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/headers.py:86)
+TESTING: checkInclude from config.headers(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/headers.py:86)
+TESTING: checkVersion from config.packages.exodusii(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/package.py:1033)
+TESTING: checkSharedLibrary from config.packages.exodusii(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/package.py:962)
+TESTING: consistencyChecks from config.packages.fblaslapack(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/package.py:970)
+TESTING: alternateConfigureLibrary from config.packages.fblaslapack(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/package.py:966)
+TESTING: consistencyChecks from config.packages.pthread(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/package.py:970)
+TESTING: checkDependencies from config.packages.pthread(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/package.py:872)
+TESTING: configureLibrary from config.packages.pthread(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/packages/pthread.py:20)
+TESTING: check from config.libraries(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/libraries.py:157)
+TESTING: check from config.libraries(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/libraries.py:157)
+TESTING: checkInclude from config.headers(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/headers.py:86)
+TESTING: checkInclude from config.headers(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/headers.py:86)
+TESTING: checkVersion from config.packages.pthread(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/package.py:1033)
+TESTING: checkSharedLibrary from config.packages.pthread(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/package.py:962)
+TESTING: consistencyChecks from config.packages.egads(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/package.py:970)
+TESTING: alternateConfigureLibrary from config.packages.egads(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/package.py:966)
+TESTING: consistencyChecks from config.packages.PTScotch(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/package.py:970)
+TESTING: alternateConfigureLibrary from config.packages.PTScotch(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/package.py:966)
+TESTING: consistencyChecks from config.packages.mmg(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/package.py:970)
+TESTING: alternateConfigureLibrary from config.packages.mmg(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/package.py:966)
+TESTING: consistencyChecks from config.packages.parmmg(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/package.py:970)
+TESTING: alternateConfigureLibrary from config.packages.parmmg(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/package.py:966)
+TESTING: consistencyChecks from config.packages.Zoltan(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/package.py:970)
+TESTING: alternateConfigureLibrary from config.packages.Zoltan(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/package.py:966)
+TESTING: consistencyChecks from config.packages.ADIOS(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/package.py:970)
+TESTING: alternateConfigureLibrary from config.packages.ADIOS(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/package.py:966)
+TESTING: consistencyChecks from config.packages.openmp(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/package.py:970)
+TESTING: alternateConfigureLibrary from config.packages.openmp(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/package.py:966)
+TESTING: consistencyChecks from config.packages.viennacl(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/package.py:970)
+TESTING: checkDependencies from config.packages.viennacl(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/package.py:872)
+TESTING: configureLibrary from config.packages.viennacl(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/packages/viennacl.py:46)
+TESTING: check from config.libraries(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/libraries.py:157)
+TESTING: checkInclude from config.headers(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/headers.py:86)
+TESTING: checkInclude from config.headers(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/headers.py:86)
+TESTING: checkVersion from config.packages.viennacl(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/package.py:1033)
+TESTING: checkSharedLibrary from config.packages.viennacl(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/package.py:962)
+TESTING: consistencyChecks from config.packages.ColPack(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/package.py:970)
+TESTING: alternateConfigureLibrary from config.packages.ColPack(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/package.py:966)
+TESTING: consistencyChecks from config.packages.ADOLC(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/package.py:970)
+TESTING: alternateConfigureLibrary from config.packages.ADOLC(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/package.py:966)
+TESTING: consistencyChecks from config.packages.openblas(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/package.py:970)
+TESTING: alternateConfigureLibrary from config.packages.openblas(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/package.py:966)
+TESTING: consistencyChecks from config.packages.blis(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/package.py:970)
+TESTING: alternateConfigureLibrary from config.packages.blis(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/package.py:966)
+TESTING: consistencyChecks from config.packages.f2cblaslapack(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/package.py:970)
+TESTING: alternateConfigureLibrary from config.packages.f2cblaslapack(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/package.py:966)
+TESTING: consistencyChecks from config.packages.BlasLapack(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/package.py:970)
+TESTING: checkDependencies from config.packages.BlasLapack(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/package.py:872)
+TESTING: configureLibrary from config.packages.BlasLapack(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/packages/BlasLapack.py:455)
+TESTING: checkLib from config.packages.BlasLapack(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/packages/BlasLapack.py:110)
+TESTING: checkLib from config.packages.BlasLapack(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/packages/BlasLapack.py:110)
+TESTING: checkLib from config.packages.BlasLapack(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/packages/BlasLapack.py:110)
+TESTING: checkMKL from config.packages.BlasLapack(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/packages/BlasLapack.py:552)
+TESTING: checkESSL from config.packages.BlasLapack(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/packages/BlasLapack.py:597)
+TESTING: checkPESSL from config.packages.BlasLapack(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/packages/BlasLapack.py:605)
+TESTING: checkMissing from config.packages.BlasLapack(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/packages/BlasLapack.py:630)
+TESTING: checklsame from config.packages.BlasLapack(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/packages/BlasLapack.py:646)
+TESTING: checkRuntimeIssues from config.packages.BlasLapack(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/packages/BlasLapack.py:705)
+TESTING: checkCHeaders from config.packages.BlasLapack(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/packages/BlasLapack.py:530)
+TESTING: checkInclude from config.headers(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/headers.py:86)
+TESTING: checkVersion from config.packages.BlasLapack(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/package.py:1033)
+TESTING: checkSharedLibrary from config.packages.BlasLapack(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/package.py:962)
+TESTING: consistencyChecks from config.packages.sundials2(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/package.py:970)
+TESTING: alternateConfigureLibrary from config.packages.sundials2(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/package.py:966)
+TESTING: consistencyChecks from config.packages.spai(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/packages/spai.py:53)
+TESTING: alternateConfigureLibrary from config.packages.spai(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/package.py:966)
+TESTING: consistencyChecks from config.packages.pARMS(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/package.py:970)
+TESTING: alternateConfigureLibrary from config.packages.pARMS(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/package.py:966)
+TESTING: consistencyChecks from config.packages.p4est(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/package.py:970)
+TESTING: checkDependencies from config.packages.p4est(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/package.py:872)
+TESTING: configureLibrary from config.packages.p4est(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/package.py:897)
+TESTING: check from config.libraries(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/libraries.py:157)
+TESTING: checkInclude from config.headers(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/headers.py:86)
+TESTING: checkInclude from config.headers(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/headers.py:86)
+TESTING: checkVersion from config.packages.p4est(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/package.py:1033)
+TESTING: checkSharedLibrary from config.packages.p4est(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/package.py:962)
+TESTING: consistencyChecks from config.packages.mkl_sparse_optimize(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/package.py:970)
+TESTING: checkDependencies from config.packages.mkl_sparse_optimize(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/package.py:872)
+TESTING: configureLibrary from config.packages.mkl_sparse_optimize(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/packages/mkl_sparse_optimize.py:48)
+TESTING: checkVersion from config.packages.mkl_sparse_optimize(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/package.py:1033)
+TESTING: checkSharedLibrary from config.packages.mkl_sparse_optimize(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/package.py:962)
+TESTING: consistencyChecks from config.packages.mkl_sparse(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/package.py:970)
+TESTING: checkDependencies from config.packages.mkl_sparse(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/package.py:872)
+TESTING: configureLibrary from config.packages.mkl_sparse(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/packages/mkl_sparse.py:21)
+TESTING: checkVersion from config.packages.mkl_sparse(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/package.py:1033)
+TESTING: checkSharedLibrary from config.packages.mkl_sparse(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/package.py:962)
+TESTING: consistencyChecks from config.packages.mkl_cpardiso(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/packages/mkl_cpardiso.py:20)
+TESTING: alternateConfigureLibrary from config.packages.mkl_cpardiso(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/package.py:966)
+TESTING: consistencyChecks from config.packages.kokkos(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/package.py:970)
+TESTING: alternateConfigureLibrary from config.packages.kokkos(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/package.py:966)
+TESTING: consistencyChecks from config.packages.kokkos-kernels(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/package.py:970)
+TESTING: alternateConfigureLibrary from config.packages.kokkos-kernels(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/package.py:966)
+TESTING: consistencyChecks from config.packages.htool(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/package.py:970)
+TESTING: alternateConfigureLibrary from config.packages.htool(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/package.py:966)
+TESTING: consistencyChecks from config.packages.hpddm(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/package.py:970)
+TESTING: alternateConfigureLibrary from config.packages.hpddm(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/packages/hpddm.py:117)
+TESTING: consistencyChecks from config.packages.magma(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/package.py:970)
+TESTING: checkDependencies from config.packages.magma(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/package.py:872)
+TESTING: configureLibrary from config.packages.magma(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/package.py:897)
+TESTING: check from config.libraries(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/libraries.py:157)
+TESTING: checkInclude from config.headers(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/headers.py:86)
+TESTING: checkVersion from config.packages.magma(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/package.py:1033)
+TESTING: checkSharedLibrary from config.packages.magma(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/package.py:962)
+TESTING: consistencyChecks from config.packages.kblas(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/package.py:970)
+TESTING: alternateConfigureLibrary from config.packages.kblas(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/package.py:966)
+TESTING: consistencyChecks from config.packages.hara(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/package.py:970)
+TESTING: alternateConfigureLibrary from config.packages.hara(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/package.py:966)
+TESTING: consistencyChecks from config.packages.fftw(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/package.py:970)
+TESTING: alternateConfigureLibrary from config.packages.fftw(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/package.py:966)
+TESTING: consistencyChecks from config.packages.elemental(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/package.py:970)
+TESTING: alternateConfigureLibrary from config.packages.elemental(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/package.py:966)
+TESTING: consistencyChecks from config.packages.bamg(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/package.py:970)
+TESTING: alternateConfigureLibrary from config.packages.bamg(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/packages/bamg.py:90)
+TESTING: consistencyChecks from config.packages.ml(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/packages/ml.py:62)
+TESTING: checkDependencies from config.packages.ml(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/package.py:872)
+TESTING: configureLibrary from config.packages.ml(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/package.py:897)
+TESTING: check from config.libraries(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/libraries.py:157)
+TESTING: checkInclude from config.headers(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/headers.py:86)
+TESTING: checkInclude from config.headers(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/headers.py:86)
+TESTING: checkVersion from config.packages.ml(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/package.py:1033)
+TESTING: checkSharedLibrary from config.packages.ml(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/package.py:962)
+TESTING: consistencyChecks from config.packages.mkl_pardiso(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/packages/mkl_pardiso.py:21)
+TESTING: alternateConfigureLibrary from config.packages.mkl_pardiso(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/package.py:966)
+TESTING: consistencyChecks from config.packages.SuperLU_DIST(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/package.py:970)
+TESTING: alternateConfigureLibrary from config.packages.SuperLU_DIST(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/package.py:966)
+TESTING: consistencyChecks from config.packages.SuperLU(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/package.py:970)
+TESTING: alternateConfigureLibrary from config.packages.SuperLU(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/package.py:966)
+TESTING: consistencyChecks from config.packages.SuiteSparse(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/packages/SuiteSparse.py:177)
+TESTING: checkDependencies from config.packages.SuiteSparse(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/package.py:872)
+TESTING: configureLibrary from config.packages.SuiteSparse(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/package.py:897)
+TESTING: check from config.libraries(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/libraries.py:157)
+TESTING: checkInclude from config.headers(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/headers.py:86)
+TESTING: checkInclude from config.headers(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/headers.py:86)
+TESTING: checkVersion from config.packages.SuiteSparse(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/package.py:1033)
+TESTING: checkSharedLibrary from config.packages.SuiteSparse(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/package.py:962)
+TESTING: consistencyChecks from config.packages.PaStiX(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/package.py:970)
+TESTING: alternateConfigureLibrary from config.packages.PaStiX(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/package.py:966)
+TESTING: consistencyChecks from config.packages.scalapack(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/package.py:970)
+TESTING: checkDependencies from config.packages.scalapack(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/package.py:872)
+TESTING: configureLibrary from config.packages.scalapack(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/package.py:897)
+TESTING: check from config.libraries(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/libraries.py:157)
+TESTING: checkInclude from config.headers(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/headers.py:86)
+TESTING: checkVersion from config.packages.scalapack(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/package.py:1033)
+TESTING: checkSharedLibrary from config.packages.scalapack(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/package.py:962)
+TESTING: consistencyChecks from config.packages.strumpack(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/packages/strumpack.py:67)
+TESTING: alternateConfigureLibrary from config.packages.strumpack(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/package.py:966)
+TESTING: consistencyChecks from config.packages.MUMPS(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/packages/MUMPS.py:58)
+TESTING: checkDependencies from config.packages.MUMPS(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/package.py:872)
+TESTING: configureLibrary from config.packages.MUMPS(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/packages/MUMPS.py:52)
+TESTING: check from config.libraries(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/libraries.py:157)
+TESTING: check from config.libraries(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/libraries.py:157)
+TESTING: checkInclude from config.headers(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/headers.py:86)
+TESTING: checkInclude from config.headers(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/headers.py:86)
+TESTING: checkVersion from config.packages.MUMPS(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/package.py:1033)
+TESTING: checkSharedLibrary from config.packages.MUMPS(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/package.py:962)
+TESTING: consistencyChecks from config.packages.MOAB(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/package.py:970)
+TESTING: alternateConfigureLibrary from config.packages.MOAB(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/package.py:966)
+TESTING: consistencyChecks from config.packages.Chombo(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/packages/Chombo.py:131)
+TESTING: alternateConfigureLibrary from config.packages.Chombo(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/package.py:966)
+TESTING: consistencyChecks from config.packages.hypre(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/packages/hypre.py:105)
+TESTING: alternateConfigureLibrary from config.packages.hypre(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/package.py:966)
+TESTING: consistencyChecks from config.packages.Trilinos(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/package.py:970)
+TESTING: alternateConfigureLibrary from config.packages.Trilinos(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/package.py:966)
+TESTING: consistencyChecks from config.packages.xSDKTrilinos(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/package.py:970)
+TESTING: alternateConfigureLibrary from config.packages.xSDKTrilinos(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/package.py:966)
+TESTING: consistencyChecks from config.packages.mstk(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/package.py:970)
+TESTING: alternateConfigureLibrary from config.packages.mstk(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/package.py:966)
+TESTING: consistencyChecks from config.packages.MFEM(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/package.py:970)
+TESTING: alternateConfigureLibrary from config.packages.MFEM(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/packages/MFEM.py:224)
+TESTING: consistencyChecks from config.packages.AMReX(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/package.py:970)
+TESTING: alternateConfigureLibrary from config.packages.AMReX(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/BuildSystem/config/packages/AMReX.py:157)
+TESTING: configureRTLDDefault from PETSc.Configure(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/PETSc/Configure.py:714)
+TESTING: configurePrefetch from PETSc.Configure(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/PETSc/Configure.py:532)
+TESTING: configureUnused from PETSc.Configure(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/PETSc/Configure.py:600)
+TESTING: configureDeprecated from PETSc.Configure(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/PETSc/Configure.py:618)
+TESTING: configureIsatty from PETSc.Configure(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/PETSc/Configure.py:612)
+TESTING: configureExpect from PETSc.Configure(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/PETSc/Configure.py:667)
+TESTING: configureAlign from PETSc.Configure(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/PETSc/Configure.py:651)
+TESTING: configureFunctionName from PETSc.Configure(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/PETSc/Configure.py:674)
+TESTING: configureIntptrt from PETSc.Configure(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/PETSc/Configure.py:692)
+TESTING: configureSolaris from PETSc.Configure(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/PETSc/Configure.py:719)
+TESTING: configureLinux from PETSc.Configure(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/PETSc/Configure.py:732)
+TESTING: configureWin32 from PETSc.Configure(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/PETSc/Configure.py:738)
+TESTING: configureCygwinBrokenPipe from PETSc.Configure(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/PETSc/Configure.py:816)
+TESTING: configureDefaultArch from PETSc.Configure(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/PETSc/Configure.py:832)
+TESTING: configureScript from PETSc.Configure(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/PETSc/Configure.py:849)
+TESTING: configureInstall from PETSc.Configure(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/PETSc/Configure.py:888)
+TESTING: configureGCOV from PETSc.Configure(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/PETSc/Configure.py:904)
+TESTING: configureAtoll from PETSc.Configure(/home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/PETSc/Configure.py:595)
+              =============================================================================================
+                  Compiling Ctetgen; this may take several minutes
+              =============================================================================================
+            
+              =============================================================================================
+                  Installing Ctetgen; this may take several minutes
+              =============================================================================================
+            
+Compilers:
+  C Compiler:         mpicc  -Wall -Wwrite-strings -Wno-strict-aliasing -Wno-unknown-pragmas -fstack-protector -fvisibility=hidden -g -O --coverage -Og  
+    Version: gcc (Ubuntu 5.4.0-6ubuntu1~16.04.12) 5.4.0 20160609
+  CUDA Compiler:         /usr/local/cuda/bin/nvcc  -Xcompiler -fPIC -g -O0 -std=c++14 -gencode arch=compute_61,code=sm_61  -Wno-deprecated-gpu-targets -std=c++14
+    Version: nvcc: NVIDIA (R) Cuda compiler driver
+  HIP Compiler:         hipcc  -fPIC -Wall -Wwrite-strings -Wno-strict-aliasing -Wno-unknown-pragmas -fvisibility=hidden -g -O0 -std=c++14
+    Version: HIP version: 3.7.20315-077bcfa0
+  C++ Compiler:         mpicxx  -Wall -Wwrite-strings -Wno-strict-aliasing -Wno-unknown-pragmas -fstack-protector -fvisibility=hidden -g -O --coverage -Og    
+    Version: g++ (Ubuntu 5.4.0-6ubuntu1~16.04.12) 5.4.0 20160609
+  Fortran Compiler:         mpif90  -Wall -ffree-line-length-0 -Wno-unused-dummy-argument -g -O --coverage -Og  
+    Version: GNU Fortran (Ubuntu 5.4.0-6ubuntu1~16.04.12) 5.4.0 20160609
+Linkers:
+  Shared linker:   mpicc  -shared  -Wall -Wwrite-strings -Wno-strict-aliasing -Wno-unknown-pragmas -fstack-protector -fvisibility=hidden -g -O --coverage -Og
+  Dynamic linker:   mpicc  -shared  -Wall -Wwrite-strings -Wno-strict-aliasing -Wno-unknown-pragmas -fstack-protector -fvisibility=hidden -g -O --coverage -Og
+  Libraries linked against:   -lquadmath -lstdc++ -ldl 
+BlasLapack:
+  Library:  -llapack -lblas
+  Unknown if this uses OpenMP (try export OMP_NUM_THREADS=<1-4> yourprogram -log_view) 
+  uses 4 byte integers
+MPI:
+  Version:  3
+  mpiexec: mpiexec
+  Implementation: mpich3
+  MPI C++ include paths: -I/home/petsc/soft/mpich-3.3.1/include 
+  MPI C++ libraries: -L/home/petsc/soft/mpich-3.3.1/lib -Wl,-rpath -Wl,/home/petsc/soft/mpich-3.3.1/lib -Wl,--enable-new-dtags  -lmpicxx -lmpi 
+  MPICH_NUMVERSION: 30301300
+cuda:
+  Version:  10.2
+  Includes: -I/usr/local/cuda/include
+  Library:  -Wl,-rpath,/usr/local/cuda/lib64 -L/usr/local/cuda/lib64 -lcudart -lcufft -lcublas -lcusparse -lcusolver -lcurand
+  CUDA SM 61
+  CUDA underlying compiler: CUDA_CXX gcc
+  CUDA underlying compiler flags: CUDA_CXXFLAGS 
+  CUDA underlying linker libraries: CUDA_CXXLIBS 
+X:
+  Library:  -lX11
+pthread:
+  Library:  -lpthread
+zlib:
+  Version:  1.2.11
+  Includes: -I/home/petsc/petsc-hash-pkgs/361d30/include
+  Library:  -Wl,-rpath,/home/petsc/petsc-hash-pkgs/361d30/lib -L/home/petsc/petsc-hash-pkgs/361d30/lib -lz
+hdf5:
+  Version:  1.12.0
+  Includes: -I/home/petsc/petsc-hash-pkgs/361d30/include
+  Library:  -Wl,-rpath,/home/petsc/petsc-hash-pkgs/361d30/lib -L/home/petsc/petsc-hash-pkgs/361d30/lib -lhdf5_hl -lhdf5
+netcdf:
+  Version:  4.5.0
+  Includes: -I/home/petsc/petsc-hash-pkgs/361d30/include
+  Library:  -Wl,-rpath,/home/petsc/petsc-hash-pkgs/361d30/lib -L/home/petsc/petsc-hash-pkgs/361d30/lib -lnetcdf
+pnetcdf:
+  Version:  1.12.2
+  Includes: -I/home/petsc/petsc-hash-pkgs/361d30/include
+  Library:  -Wl,-rpath,/home/petsc/petsc-hash-pkgs/361d30/lib -L/home/petsc/petsc-hash-pkgs/361d30/lib -lpnetcdf
+cmake:
+  Version:  3.20.1
+  /home/petsc/petsc-hash-pkgs/361d30/bin/cmake
+Chaco:
+  Library:  -Wl,-rpath,/home/petsc/petsc-hash-pkgs/361d30/lib -L/home/petsc/petsc-hash-pkgs/361d30/lib -lchaco
+metis:
+  Version:  5.1.0
+  Includes: -I/home/petsc/petsc-hash-pkgs/361d30/include
+  Library:  -Wl,-rpath,/home/petsc/petsc-hash-pkgs/361d30/lib -L/home/petsc/petsc-hash-pkgs/361d30/lib -lmetis
+parmetis:
+  Version:  4.0.3
+  Includes: -I/home/petsc/petsc-hash-pkgs/361d30/include
+  Library:  -Wl,-rpath,/home/petsc/petsc-hash-pkgs/361d30/lib -L/home/petsc/petsc-hash-pkgs/361d30/lib -lparmetis
+regex:
+MUMPS:
+  Version:  5.4.0
+  Includes: -I/home/petsc/petsc-hash-pkgs/361d30/include
+  Library:  -Wl,-rpath,/home/petsc/petsc-hash-pkgs/361d30/lib -L/home/petsc/petsc-hash-pkgs/361d30/lib -lcmumps -ldmumps -lsmumps -lzmumps -lmumps_common -lpord -lpthread
+scalapack:
+  Library:  -Wl,-rpath,/home/petsc/petsc-hash-pkgs/361d30/lib -L/home/petsc/petsc-hash-pkgs/361d30/lib -lscalapack
+SuiteSparse:
+  Version:  5.8.1
+  Includes: -I/home/petsc/petsc-hash-pkgs/361d30/include
+  Library:  -Wl,-rpath,/home/petsc/petsc-hash-pkgs/361d30/lib -L/home/petsc/petsc-hash-pkgs/361d30/lib -lspqr -lumfpack -lklu -lcholmod -lbtf -lccolamd -lcolamd -lcamd -lamd -lsuitesparseconfig
+Triangle:
+  Includes: -I/home/petsc/petsc-hash-pkgs/361d30/include
+  Library:  -Wl,-rpath,/home/petsc/petsc-hash-pkgs/361d30/lib -L/home/petsc/petsc-hash-pkgs/361d30/lib -ltriangle
+ml:
+  Version:  6.2
+  Includes: -I/home/petsc/petsc-hash-pkgs/361d30/include
+  Library:  -Wl,-rpath,/home/petsc/petsc-hash-pkgs/361d30/lib -L/home/petsc/petsc-hash-pkgs/361d30/lib -lml
+exodusii:
+  Includes: -I/home/petsc/petsc-hash-pkgs/361d30/include
+  Library:  -Wl,-rpath,/home/petsc/petsc-hash-pkgs/361d30/lib -L/home/petsc/petsc-hash-pkgs/361d30/lib -lexoIIv2for32 -lexodus
+ctetgen:
+  Includes: -I/home/petsc/builds/KFnbdjNX/0/petsc/petsc/arch-ci-linux-c-exodus-dbg/include
+  Library:  -Wl,-rpath,/home/petsc/builds/KFnbdjNX/0/petsc/petsc/arch-ci-linux-c-exodus-dbg/lib -L/home/petsc/builds/KFnbdjNX/0/petsc/petsc/arch-ci-linux-c-exodus-dbg/lib -lctetgen
+magma:
+  Library:  -Wl,-rpath,/home/petsc/petsc-hash-pkgs/361d30/lib -L/home/petsc/petsc-hash-pkgs/361d30/lib -lmagma
+p4est:
+  Includes: -I/home/petsc/petsc-hash-pkgs/361d30/include
+  Library:  -Wl,-rpath,/home/petsc/petsc-hash-pkgs/361d30/lib -L/home/petsc/petsc-hash-pkgs/361d30/lib -lp4est -lsc
+sowing:
+  Version:  1.1.26
+  /home/petsc/petsc-hash-pkgs/361d30/bin/bfort
+viennacl:
+  Includes: -I/home/petsc/petsc-hash-pkgs/361d30/include
+  Language used to compile PETSc: C
+PETSc:
+  PETSC_ARCH: arch-ci-linux-c-exodus-dbg
+  PETSC_DIR: /home/petsc/builds/KFnbdjNX/0/petsc/petsc
+  Prefix: /home/petsc/builds/KFnbdjNX/0/petsc/petsc/arch-ci-linux-c-exodus-dbg
+  Scalar type: real
+  Precision: double
+  Support for __float128
+  Integer size: 4 bytes
+  Single library: yes
+  Shared libraries: yes
+  Memory alignment from malloc(): 16 bytes
+  Using GNU make: /home/petsc/soft/make-4.2.93/bin/make
+xxx=========================================================================xxx
+ Configure stage complete. Now build PETSc libraries with:
+   make PETSC_DIR=/home/petsc/builds/KFnbdjNX/0/petsc/petsc PETSC_ARCH=arch-ci-linux-c-exodus-dbg all
+xxx=========================================================================xxx
+[32;1m$ make CFLAGS="${MAKE_CFLAGS}" CXXFLAGS="${MAKE_CXXFLAGS}" FFLAGS="${MAKE_FFLAGS}"[0;m
+==========================================
+ 
+See documentation/faq.html and documentation/bugreporting.html
+for help with installation problems.  Please send EVERYTHING
+printed out below when reporting problems.  Please check the
+mailing list archives and consider subscribing.
+ 
+  http://www.mcs.anl.gov/petsc/miscellaneous/mailing-lists.html
+ 
+==========================================
+Starting make run on frog at Mon, 28 Jun 2021 12:41:38 -0500
+Machine characteristics: Linux frog 4.4.0-201-generic #233-Ubuntu SMP Thu Jan 14 06:10:28 UTC 2021 x86_64 x86_64 x86_64 GNU/Linux
+-----------------------------------------
+Using PETSc directory: /home/petsc/builds/KFnbdjNX/0/petsc/petsc
+Using PETSc arch: arch-ci-linux-c-exodus-dbg
+-----------------------------------------
+PETSC_VERSION_RELEASE    0
+PETSC_VERSION_MAJOR      3
+PETSC_VERSION_MINOR      15
+PETSC_VERSION_SUBMINOR   1
+PETSC_VERSION_PATCH      0
+PETSC_VERSION_DATE       "unknown"
+PETSC_VERSION_GIT        "unknown"
+PETSC_VERSION_DATE_GIT   "unknown"
+PETSC_VERSION_EQ(MAJOR,MINOR,SUBMINOR) \
+PETSC_VERSION_ PETSC_VERSION_EQ
+PETSC_VERSION_LT(MAJOR,MINOR,SUBMINOR)          \
+PETSC_VERSION_LE(MAJOR,MINOR,SUBMINOR) \
+PETSC_VERSION_GT(MAJOR,MINOR,SUBMINOR) \
+PETSC_VERSION_GE(MAJOR,MINOR,SUBMINOR) \
+-----------------------------------------
+Using configure Options: --package-prefix-hash=/home/petsc/petsc-hash-pkgs --with-make-test-np=3 COPTFLAGS="-g -O" FOPTFLAGS="-g -O" CXXOPTFLAGS="-g -O" --with-gcov=1 --download-suitesparse --download-mumps --download-scalapack --download-chaco --download-ctetgen --download-exodusii --download-cmake --download-pnetcdf --download-generator --download-hdf5 --download-zlib=1 --download-metis --download-ml --download-netcdf --download-parmetis --download-triangle --download-p4est --download-viennacl --with-cuda --with-shared-libraries --download-magma --with-magma-fortran-bindings=0 PETSC_ARCH=arch-ci-linux-c-exodus-dbg
+Using configuration flags:
+#define INCLUDED_PETSCCONF_H
+#define PETSC_ARCH ""
+#define PETSC_ATTRIBUTEALIGNED(size) __attribute((aligned(size)))
+#define PETSC_Alignx(a,b)   
+#define PETSC_BLASLAPACK_UNDERSCORE 1
+#define PETSC_CLANGUAGE_C 1
+#define PETSC_CUDA_GENERATION 61
+#define PETSC_CXX_INLINE inline
+#define PETSC_CXX_RESTRICT __restrict
+#define PETSC_C_INLINE inline
+#define PETSC_C_RESTRICT __restrict
+#define PETSC_DEPRECATED_ENUM(why)  
+#define PETSC_DEPRECATED_FUNCTION(why) __attribute((deprecated))
+#define PETSC_DEPRECATED_MACRO(why) _Pragma(why)
+#define PETSC_DEPRECATED_TYPEDEF(why) __attribute((deprecated))
+#define PETSC_DIR "/home/petsc/builds/KFnbdjNX/0/petsc/petsc"
+#define PETSC_DIR_SEPARATOR '/'
+#define PETSC_FORTRAN_CHARLEN_T int
+#define PETSC_FORTRAN_TYPE_INITIALIZE  = -2
+#define PETSC_FUNCTION_NAME_C __func__
+#define PETSC_FUNCTION_NAME_CXX __func__
+#define PETSC_HAVE_ACCESS 1
+#define PETSC_HAVE_ATOLL 1
+#define PETSC_HAVE_ATTRIBUTEALIGNED 1
+#define PETSC_HAVE_BUILTIN_EXPECT 1
+#define PETSC_HAVE_BZERO 1
+#define PETSC_HAVE_C99_COMPLEX 1
+#define PETSC_HAVE_CHACO 1
+#define PETSC_HAVE_CLOCK 1
+#define PETSC_HAVE_CMAKE 1
+#define PETSC_HAVE_CTETGEN 1
+#define PETSC_HAVE_CUDA 1
+#define PETSC_HAVE_CUDA_DIALECT_CXX11 1
+#define PETSC_HAVE_CUDA_DIALECT_CXX14 1
+#define PETSC_HAVE_CUSOLVERDNDPOTRI 1
+#define PETSC_HAVE_CXX 1
+#define PETSC_HAVE_CXX_COMPLEX 1
+#define PETSC_HAVE_CXX_COMPLEX_FIX 1
+#define PETSC_HAVE_CXX_DIALECT_CXX11 1
+#define PETSC_HAVE_CXX_DIALECT_CXX14 1
+#define PETSC_HAVE_DLADDR 1
+#define PETSC_HAVE_DLCLOSE 1
+#define PETSC_HAVE_DLERROR 1
+#define PETSC_HAVE_DLFCN_H 1
+#define PETSC_HAVE_DLOPEN 1
+#define PETSC_HAVE_DLSYM 1
+#define PETSC_HAVE_DOUBLE_ALIGN_MALLOC 1
+#define PETSC_HAVE_DRAND48 1
+#define PETSC_HAVE_DYNAMIC_LIBRARIES 1
+#define PETSC_HAVE_ERF 1
+#define PETSC_HAVE_EXODUSII 1
+#define PETSC_HAVE_FCNTL_H 1
+#define PETSC_HAVE_FENV_H 1
+#define PETSC_HAVE_FLOAT_H 1
+#define PETSC_HAVE_FORK 1
+#define PETSC_HAVE_FORTRAN 1
+#define PETSC_HAVE_FORTRAN_FLUSH 1
+#define PETSC_HAVE_FORTRAN_GET_COMMAND_ARGUMENT 1
+#define PETSC_HAVE_FORTRAN_TYPE_STAR 1
+#define PETSC_HAVE_FORTRAN_UNDERSCORE 1
+#define PETSC_HAVE_GETCWD 1
+#define PETSC_HAVE_GETDOMAINNAME 1
+#define PETSC_HAVE_GETHOSTBYNAME 1
+#define PETSC_HAVE_GETHOSTNAME 1
+#define PETSC_HAVE_GETPAGESIZE 1
+#define PETSC_HAVE_GETRUSAGE 1
+#define PETSC_HAVE_HDF5 1
+#define PETSC_HAVE_HIP_DIALECT_CXX11 1
+#define PETSC_HAVE_HIP_DIALECT_CXX14 1
+#define PETSC_HAVE_IMMINTRIN_H 1
+#define PETSC_HAVE_INTTYPES_H 1
+#define PETSC_HAVE_ISINF 1
+#define PETSC_HAVE_ISNAN 1
+#define PETSC_HAVE_ISNORMAL 1
+#define PETSC_HAVE_LGAMMA 1
+#define PETSC_HAVE_LOG2 1
+#define PETSC_HAVE_LSEEK 1
+#define PETSC_HAVE_MAGMA 1
+#define PETSC_HAVE_MALLOC_H 1
+#define PETSC_HAVE_MEMALIGN 1
+#define PETSC_HAVE_MEMMOVE 1
+#define PETSC_HAVE_METIS 1
+#define PETSC_HAVE_ML 1
+#define PETSC_HAVE_MMAP 1
+#define PETSC_HAVE_MPICH_NUMVERSION 30301300
+#define PETSC_HAVE_MPIEXEC_ENVIRONMENTAL_VARIABLE MPIR_CVAR_CH3
+#define PETSC_HAVE_MPIIO 1
+#define PETSC_HAVE_MPI_COMBINER_CONTIGUOUS 1
+#define PETSC_HAVE_MPI_COMBINER_DUP 1
+#define PETSC_HAVE_MPI_COMBINER_NAMED 1
+#define PETSC_HAVE_MPI_EXSCAN 1
+#define PETSC_HAVE_MPI_F90MODULE 1
+#define PETSC_HAVE_MPI_F90MODULE_VISIBILITY 1
+#define PETSC_HAVE_MPI_FEATURE_DYNAMIC_WINDOW 1
+#define PETSC_HAVE_MPI_FINALIZED 1
+#define PETSC_HAVE_MPI_GET_ACCUMULATE 1
+#define PETSC_HAVE_MPI_GET_LIBRARY_VERSION 1
+#define PETSC_HAVE_MPI_IALLREDUCE 1
+#define PETSC_HAVE_MPI_IBARRIER 1
+#define PETSC_HAVE_MPI_INIT_THREAD 1
+#define PETSC_HAVE_MPI_INT64_T 1
+#define PETSC_HAVE_MPI_IN_PLACE 1
+#define PETSC_HAVE_MPI_LONG_DOUBLE 1
+#define PETSC_HAVE_MPI_NEIGHBORHOOD_COLLECTIVES 1
+#define PETSC_HAVE_MPI_NONBLOCKING_COLLECTIVES 1
+#define PETSC_HAVE_MPI_ONE_SIDED 1
+#define PETSC_HAVE_MPI_PROCESS_SHARED_MEMORY 1
+#define PETSC_HAVE_MPI_REDUCE_LOCAL 1
+#define PETSC_HAVE_MPI_REDUCE_SCATTER 1
+#define PETSC_HAVE_MPI_REDUCE_SCATTER_BLOCK 1
+#define PETSC_HAVE_MPI_RGET 1
+#define PETSC_HAVE_MPI_TYPE_DUP 1
+#define PETSC_HAVE_MPI_TYPE_GET_ENVELOPE 1
+#define PETSC_HAVE_MPI_WIN_CREATE 1
+#define PETSC_HAVE_MUMPS 1
+#define PETSC_HAVE_NANOSLEEP 1
+#define PETSC_HAVE_NETCDF 1
+#define PETSC_HAVE_NETDB_H 1
+#define PETSC_HAVE_NETINET_IN_H 1
+#define PETSC_HAVE_P4EST 1
+#define PETSC_HAVE_PACKAGES ":blaslapack:chaco:cmake:ctetgen:cuda:exodusii:hdf5:magma:mathlib:metis:ml:mpi:mumps:netcdf:p4est:parmetis:pnetcdf:pthread:regex:scalapack:sowing:suitesparse:triangle:viennacl:x11:zlib:"
+#define PETSC_HAVE_PARMETIS 1
+#define PETSC_HAVE_PNETCDF 1
+#define PETSC_HAVE_POPEN 1
+#define PETSC_HAVE_PTHREAD 1
+#define PETSC_HAVE_PTHREAD_BARRIER_T 1
+#define PETSC_HAVE_PTHREAD_H 1
+#define PETSC_HAVE_PWD_H 1
+#define PETSC_HAVE_RAND 1
+#define PETSC_HAVE_READLINK 1
+#define PETSC_HAVE_REALPATH 1
+#define PETSC_HAVE_REAL___FLOAT128 1
+#define PETSC_HAVE_REGEX 1
+#define PETSC_HAVE_RTLD_GLOBAL 1
+#define PETSC_HAVE_RTLD_LAZY 1
+#define PETSC_HAVE_RTLD_LOCAL 1
+#define PETSC_HAVE_RTLD_NOW 1
+#define PETSC_HAVE_SCALAPACK 1
+#define PETSC_HAVE_SCHED_CPU_SET_T 1
+#define PETSC_HAVE_SETJMP_H 1
+#define PETSC_HAVE_SLEEP 1
+#define PETSC_HAVE_SNPRINTF 1
+#define PETSC_HAVE_SOCKET 1
+#define PETSC_HAVE_SOWING 1
+#define PETSC_HAVE_SO_REUSEADDR 1
+#define PETSC_HAVE_STDINT_H 1
+#define PETSC_HAVE_STRCASECMP 1
+#define PETSC_HAVE_STRINGS_H 1
+#define PETSC_HAVE_STRUCT_SIGACTION 1
+#define PETSC_HAVE_SUITESPARSE 1
+#define PETSC_HAVE_SYSINFO 1
+#define PETSC_HAVE_SYS_PARAM_H 1
+#define PETSC_HAVE_SYS_PROCFS_H 1
+#define PETSC_HAVE_SYS_RESOURCE_H 1
+#define PETSC_HAVE_SYS_SOCKET_H 1
+#define PETSC_HAVE_SYS_SYSCTL_H 1
+#define PETSC_HAVE_SYS_SYSINFO_H 1
+#define PETSC_HAVE_SYS_TIMES_H 1
+#define PETSC_HAVE_SYS_TIME_H 1
+#define PETSC_HAVE_SYS_TYPES_H 1
+#define PETSC_HAVE_SYS_UTSNAME_H 1
+#define PETSC_HAVE_SYS_WAIT_H 1
+#define PETSC_HAVE_TGAMMA 1
+#define PETSC_HAVE_TIME 1
+#define PETSC_HAVE_TIME_H 1
+#define PETSC_HAVE_TRIANGLE 1
+#define PETSC_HAVE_UNAME 1
+#define PETSC_HAVE_UNISTD_H 1
+#define PETSC_HAVE_USLEEP 1
+#define PETSC_HAVE_VA_COPY 1
+#define PETSC_HAVE_VIENNACL 1
+#define PETSC_HAVE_VSNPRINTF 1
+#define PETSC_HAVE_X 1
+#define PETSC_HAVE_XMMINTRIN_H 1
+#define PETSC_HDF5_HAVE_PARALLEL 1
+#define PETSC_HDF5_HAVE_ZLIB 1
+#define PETSC_IS_COLORING_MAX USHRT_MAX
+#define PETSC_IS_COLORING_VALUE_TYPE short
+#define PETSC_IS_COLORING_VALUE_TYPE_F integer2
+#define PETSC_LEVEL1_DCACHE_LINESIZE 64
+#define PETSC_LIB_DIR "/home/petsc/builds/KFnbdjNX/0/petsc/petsc/arch-ci-linux-c-exodus-dbg/lib"
+#define PETSC_MAX_PATH_LEN 4096
+#define PETSC_MEMALIGN 16
+#define PETSC_MPICC_SHOW "gcc -fPIC -I/home/petsc/soft/mpich-3.3.1/include -L/home/petsc/soft/mpich-3.3.1/lib -Wl,-rpath -Wl,/home/petsc/soft/mpich-3.3.1/lib -Wl,--enable-new-dtags -lmpi"
+#define PETSC_MPIU_IS_COLORING_VALUE_TYPE MPI_UNSIGNED_SHORT
+#define PETSC_PREFETCH_HINT_NTA _MM_HINT_NTA
+#define PETSC_PREFETCH_HINT_T0 _MM_HINT_T0
+#define PETSC_PREFETCH_HINT_T1 _MM_HINT_T1
+#define PETSC_PREFETCH_HINT_T2 _MM_HINT_T2
+#define PETSC_PYTHON_EXE "/usr/bin/python"
+#define PETSC_Prefetch(a,b,c) _mm_prefetch((const char*)(a),(c))
+#define PETSC_REPLACE_DIR_SEPARATOR '\\'
+#define PETSC_SIGNAL_CAST  
+#define PETSC_SIZEOF_ENUM 4
+#define PETSC_SIZEOF_INT 4
+#define PETSC_SIZEOF_LONG 8
+#define PETSC_SIZEOF_LONG_LONG 8
+#define PETSC_SIZEOF_SHORT 2
+#define PETSC_SIZEOF_SIZE_T 8
+#define PETSC_SIZEOF_VOID_P 8
+#define PETSC_SLSUFFIX "so"
+#define PETSC_UINTPTR_T uintptr_t
+#define PETSC_UNUSED __attribute((unused))
+#define PETSC_USE_AVX512_KERNELS 1
+#define PETSC_USE_BACKWARD_LOOP 1
+#define PETSC_USE_CTABLE 1
+#define PETSC_USE_DEBUG 1
+#define PETSC_USE_DEBUGGER "gdb"
+#define PETSC_USE_GCOV 1
+#define PETSC_USE_INFO 1
+#define PETSC_USE_ISATTY 1
+#define PETSC_USE_LOG 1
+#define PETSC_USE_PROC_FOR_SIZE 1
+#define PETSC_USE_REAL_DOUBLE 1
+#define PETSC_USE_SHARED_LIBRARIES 1
+#define PETSC_USE_SINGLE_LIBRARY 1
+#define PETSC_USE_SOCKET_VIEWER 1
+#define PETSC_USE_VISIBILITY_C 1
+#define PETSC_USE_VISIBILITY_CXX 1
+#define PETSC_USING_64BIT_PTR 1
+#define PETSC_USING_F2003 1
+#define PETSC_USING_F90FREEFORM 1
+#define PETSC_VERSION_BRANCH_GIT "HEAD"
+#define PETSC_VERSION_DATE_GIT "2021-06-28 15:59:52 +0000"
+#define PETSC_VERSION_GIT "v3.15.1-497-g1b9e470"
+#define PETSC__BSD_SOURCE 1
+#define PETSC__DEFAULT_SOURCE 1
+#define PETSC__GNU_SOURCE 1
+#define USE_GCOV 1
+-----------------------------------------
+Using C compile: mpicc -o .o -c -Wall -Wwrite-strings -Wno-strict-aliasing -Wno-unknown-pragmas -fstack-protector -fvisibility=hidden -g -O --coverage -Og    
+mpicc -show: gcc -fPIC -I/home/petsc/soft/mpich-3.3.1/include -L/home/petsc/soft/mpich-3.3.1/lib -Wl,-rpath -Wl,/home/petsc/soft/mpich-3.3.1/lib -Wl,--enable-new-dtags -lmpi
+C compiler version: gcc (Ubuntu 5.4.0-6ubuntu1~16.04.12) 5.4.0 20160609
+Using C++ compile: mpicxx -o .o -c -Wall -Wwrite-strings -Wno-strict-aliasing -Wno-unknown-pragmas -fstack-protector -fvisibility=hidden -g -O --coverage -Og     -Werror -I/home/petsc/builds/KFnbdjNX/0/petsc/petsc/include -I/home/petsc/builds/KFnbdjNX/0/petsc/petsc/arch-ci-linux-c-exodus-dbg/include -I/home/petsc/petsc-hash-pkgs/361d30/include -I/usr/local/cuda/include   
+mpicxx -show: Unavailable
+C++ compiler version: g++ (Ubuntu 5.4.0-6ubuntu1~16.04.12) 5.4.0 20160609
+Using Fortran compile: mpif90 -o .o -c -Wall -ffree-line-length-0 -Wno-unused-dummy-argument -g -O --coverage -Og   -Werror -I/home/petsc/builds/KFnbdjNX/0/petsc/petsc/include -I/home/petsc/builds/KFnbdjNX/0/petsc/petsc/arch-ci-linux-c-exodus-dbg/include -I/home/petsc/petsc-hash-pkgs/361d30/include -I/usr/local/cuda/include   
+mpif90 -show: gfortran -fPIC -I/home/petsc/soft/mpich-3.3.1/include -I/home/petsc/soft/mpich-3.3.1/include -L/home/petsc/soft/mpich-3.3.1/lib -lmpifort -Wl,-rpath -Wl,/home/petsc/soft/mpich-3.3.1/lib -Wl,--enable-new-dtags -lmpi
+Fortran compiler version: GNU Fortran (Ubuntu 5.4.0-6ubuntu1~16.04.12) 5.4.0 20160609
+Using CUDA compile: /usr/local/cuda/bin/nvcc -o .o -Xcompiler -fPIC -g -O0 -std=c++14 -gencode arch=compute_61,code=sm_61  -Wno-deprecated-gpu-targets -std=c++14  -c --compiler-options=-I/home/petsc/builds/KFnbdjNX/0/petsc/petsc/include -I/home/petsc/builds/KFnbdjNX/0/petsc/petsc/arch-ci-linux-c-exodus-dbg/include -I/home/petsc/petsc-hash-pkgs/361d30/include -I/usr/local/cuda/include -I/home/petsc/builds/KFnbdjNX/0/petsc/petsc/include -I/home/petsc/builds/KFnbdjNX/0/petsc/petsc/arch-ci-linux-c-exodus-dbg/include -I/home/petsc/petsc-hash-pkgs/361d30/include -I/usr/local/cuda/include 
+-----------------------------------------
+Using C/C++ linker: mpicc
+Using C/C++ flags: -Wall -Wwrite-strings -Wno-strict-aliasing -Wno-unknown-pragmas -fstack-protector -fvisibility=hidden -g -O --coverage -Og
+Using Fortran linker: mpif90
+Using Fortran flags: -Wall -ffree-line-length-0 -Wno-unused-dummy-argument -g -O --coverage -Og 
+-----------------------------------------
+Using system modules: 
+Using mpi.h: # 1 "/home/petsc/soft/mpich-3.3.1/include/mpi.h" 1
+-----------------------------------------
+Using libraries: -Wl,-rpath,/home/petsc/builds/KFnbdjNX/0/petsc/petsc/arch-ci-linux-c-exodus-dbg/lib -L/home/petsc/builds/KFnbdjNX/0/petsc/petsc/arch-ci-linux-c-exodus-dbg/lib -Wl,-rpath,/home/petsc/petsc-hash-pkgs/361d30/lib -L/home/petsc/petsc-hash-pkgs/361d30/lib -Wl,-rpath,/home/petsc/builds/KFnbdjNX/0/petsc/petsc/arch-ci-linux-c-exodus-dbg/lib -L/home/petsc/builds/KFnbdjNX/0/petsc/petsc/arch-ci-linux-c-exodus-dbg/lib -Wl,-rpath,/usr/local/cuda/lib64 -L/usr/local/cuda/lib64 -Wl,-rpath,/home/petsc/soft/mpich-3.3.1/lib -L/home/petsc/soft/mpich-3.3.1/lib -Wl,-rpath,/usr/lib/gcc/x86_64-linux-gnu/5 -L/usr/lib/gcc/x86_64-linux-gnu/5 -Wl,-rpath,/usr/lib/x86_64-linux-gnu -L/usr/lib/x86_64-linux-gnu -Wl,-rpath,/lib/x86_64-linux-gnu -L/lib/x86_64-linux-gnu -lpetsc -lcmumps -ldmumps -lsmumps -lzmumps -lmumps_common -lpord -lpthread -lscalapack -lspqr -lumfpack -lklu -lcholmod -lbtf -lccolamd -lcolamd -lcamd -lamd -lsuitesparseconfig -lml -lmagma -lp4est -lsc -llapack -lblas -lpthread -lexoIIv2for32 -lexodus -lnetcdf -lpnetcdf -lhdf5_hl -lhdf5 -lchaco -lparmetis -lmetis -ltriangle -lm -lz -lctetgen -lcudart -lcufft -lcublas -lcusparse -lcusolver -lcurand -lX11 -lstdc++ -ldl -lmpifort -lmpi -lgfortran -lm -lgfortran -lm -lgcov -lgcc_s -lquadmath -lstdc++ -ldl
+------------------------------------------
+Using mpiexec: mpiexec
+------------------------------------------
+Using MAKE: /home/petsc/soft/make-4.2.93/bin/make
+Using MAKEFLAGS: -j7 -l12.0  --no-print-directory -- PETSC_DIR=/home/petsc/builds/KFnbdjNX/0/petsc/petsc PETSC_ARCH=arch-ci-linux-c-exodus-dbg FFLAGS=-Werror CXXFLAGS=-Werror CFLAGS=-Werror
+==========================================
+/usr/bin/python ./config/gmakegen.py --petsc-arch=arch-ci-linux-c-exodus-dbg
+/usr/bin/python /home/petsc/builds/KFnbdjNX/0/petsc/petsc/config/gmakegentest.py --petsc-dir=/home/petsc/builds/KFnbdjNX/0/petsc/petsc --petsc-arch=arch-ci-linux-c-exodus-dbg --testdir=./arch-ci-linux-c-exodus-dbg/tests
+          CC arch-ci-linux-c-exodus-dbg/obj/sys/objects/device/interface/devicereg.o
+          FC arch-ci-linux-c-exodus-dbg/obj/sys/fsrc/somefort.o
+         CXX arch-ci-linux-c-exodus-dbg/obj/sys/dll/cxx/demangle.o
+          FC arch-ci-linux-c-exodus-dbg/obj/sys/f90-src/fsrc/f90_fwrap.o
+          FC arch-ci-linux-c-exodus-dbg/obj/sys/f90-mod/petscsysmod.o
+          CC arch-ci-linux-c-exodus-dbg/obj/sys/info/ftn-auto/verboseinfof.o
+          CC arch-ci-linux-c-exodus-dbg/obj/sys/ftn-custom/zsys.o
+          CC arch-ci-linux-c-exodus-dbg/obj/sys/info/ftn-custom/zverboseinfof.o
+          CC arch-ci-linux-c-exodus-dbg/obj/sys/info/verboseinfo.o
+          CC arch-ci-linux-c-exodus-dbg/obj/sys/ftn-custom/zutils.o
+          CC arch-ci-linux-c-exodus-dbg/obj/sys/logging/xmlviewer.o
+          CC arch-ci-linux-c-exodus-dbg/obj/sys/logging/ftn-auto/xmllogeventf.o
+         CXX arch-ci-linux-c-exodus-dbg/obj/sys/objects/device/interface/dcontext.o
+/home/petsc/builds/KFnbdjNX/0/petsc/petsc/src/sys/objects/device/interface/dcontext.cxx:42:98: error: specialization of ‘template<class T, class _Allocator> static PetscErrorCode Petsc::objectPool<T, _Allocator>::finalize()’ in different namespace [-fpermissive]
+ PetscErrorCode Petsc::objectPool<PetscDeviceContext,PetscDeviceContextAllocator>::finalize(void) PETSC_NOEXCEPT
+                                                                                                  ^
+In file included from /home/petsc/builds/KFnbdjNX/0/petsc/petsc/src/sys/objects/device/interface/dcontext.cxx:2:0:
+/home/petsc/builds/KFnbdjNX/0/petsc/petsc/src/sys/objects/device/interface/objpool.hpp:43:25: error:   from definition of ‘template<class T, class _Allocator> static PetscErrorCode Petsc::objectPool<T, _Allocator>::finalize()’ [-fpermissive]
+   static PETSC_NODISCARD PetscErrorCode finalize(void) PETSC_NOEXCEPT;
+                         ^
+make[3]: *** [gmakefile:191: arch-ci-linux-c-exodus-dbg/obj/sys/objects/device/interface/dcontext.o] Error 1
+make[3]: *** Waiting for unfinished jobs....
+          CC arch-ci-linux-c-exodus-dbg/obj/sys/logging/ftn-auto/plogf.o
+          CC arch-ci-linux-c-exodus-dbg/obj/sys/logging/ftn-custom/zplogf.o
+          CC arch-ci-linux-c-exodus-dbg/obj/sys/logging/xmllogevent.o
+          CC arch-ci-linux-c-exodus-dbg/obj/sys/logging/plog.o
+       CUDAC arch-ci-linux-c-exodus-dbg/obj/sys/classes/random/impls/curand/curand2.o
+   CUDAC.dep arch-ci-linux-c-exodus-dbg/obj/sys/classes/random/impls/curand/curand2.o
+       CUDAC arch-ci-linux-c-exodus-dbg/obj/vec/vec/impls/seq/seqcuda/veccuda2.o
+   CUDAC.dep arch-ci-linux-c-exodus-dbg/obj/vec/vec/impls/seq/seqcuda/veccuda2.o
+make[2]: *** [/home/petsc/builds/KFnbdjNX/0/petsc/petsc/lib/petsc/conf/rules:50: libs] Error 2
+[1;31m**************************ERROR*************************************
+  Error during compile, check arch-ci-linux-c-exodus-dbg/lib/petsc/conf/make.log
+  Send it and arch-ci-linux-c-exodus-dbg/lib/petsc/conf/configure.log to petsc-maint@mcs.anl.gov
+********************************************************************[0;39m[0;49m
+make[1]: *** [makefile:40: all] Error 1
+make: *** [GNUmakefile:9: all] Error 2
+section_end:1624902118:step_script[0Ksection_start:1624902118:after_script[0K[0K[36;1mRunning after_script[0;m
+[0;m[32;1mRunning after script...[0;m
+[32;1m$ date[0;m
+Mon Jun 28 12:41:58 CDT 2021
+[32;1m$ ccache --show-stats[0;m
+cache directory                     /home/petsc/.ccache
+primary config                      /home/petsc/.ccache/ccache.conf
+secondary config      (readonly)    /etc/ccache.conf
+cache hit (direct)                     1
+cache hit (preprocessed)              43
+cache miss                           265
+called for link                        4
+called for preprocessing             180
+compile failed                         9
+preprocessor error                    14
+autoconf compile/link                160
+no input file                         27
+files in cache                    138100
+cache size                           9.0 GB
+max cache size                      10.0 GB
+section_end:1624902118:after_script[0Ksection_start:1624902118:upload_artifacts_on_failure[0K[0K[36;1mUploading artifacts for failed job[0;m
+[0;m[32;1mUploading artifacts...[0;m
+Runtime platform                                  [0;m  arch[0;m=amd64 os[0;m=linux pid[0;m=17310 revision[0;m=775dd39d version[0;m=13.8.0
+arch-ci-linux-c-exodus-dbg/lib/petsc/conf/*.log: found 5 matching files and directories[0;m 
+arch-ci-linux-c-exodus-dbg/lib/pkgconfig/PETSc.pc: found 1 matching files and directories[0;m 
+[0;33mWARNING: arch-ci-linux-c-exodus-dbg/tests/testresults.xml: no matching files[0;m 
+[0;33mWARNING: arch-ci-linux-c-exodus-dbg/tests/test_arch-ci-linux-c-exodus-dbg_tap.log: no matching files[0;m 
+[0;33mWARNING: arch-ci-linux-c-exodus-dbg/tests/test_arch-ci-linux-c-exodus-dbg_err.log: no matching files[0;m 
+[0;33mWARNING: arch-ci-linux-c-exodus-dbg/gcov.tar.gz: no matching files[0;m 
+Uploading artifacts as "archive" to coordinator... ok[0;m  id[0;m=1383068881 responseStatus[0;m=201 Created token[0;m=YNPyKuAF
+[32;1mUploading artifacts...[0;m
+Runtime platform                                  [0;m  arch[0;m=amd64 os[0;m=linux pid[0;m=17334 revision[0;m=775dd39d version[0;m=13.8.0
+[0;33mWARNING: arch-ci-linux-c-exodus-dbg/tests/testresults.xml: no matching files[0;m 
+[31;1mERROR: No files to upload                         [0;m 
+section_end:1624902120:upload_artifacts_on_failure[0Ksection_start:1624902120:cleanup_file_variables[0K[0K[36;1mCleaning up file based variables[0;m
+[0;msection_end:1624902120:cleanup_file_variables[0K[31;1mERROR: Job failed: Process exited with status 1
+[0;m

@@ -1,2 +1,0 @@
-EMPTYNAME = any pointer->any pointer@i64 0 :: i32 (%struct._p_PetscViewer*, i32, i8*, %struct.PetscViewerAndFormat**)*
-EMPTYNAME = _KSPOps->any pointer@i64 40 :: i32 (%struct._p_PetscOptionItems*, %struct._p_KSP*)*

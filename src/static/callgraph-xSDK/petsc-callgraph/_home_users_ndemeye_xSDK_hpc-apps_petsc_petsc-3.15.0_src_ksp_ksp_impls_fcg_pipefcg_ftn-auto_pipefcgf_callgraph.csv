@@ -1,7 +1,0 @@
-CALLER, CALLEE, CALLTYPE
-ksppipefcgsetmmax_,KSPPIPEFCGSetMmax, DIRECT
-ksppipefcggetmmax_,KSPPIPEFCGGetMmax, DIRECT
-ksppipefcgsetnprealloc_,KSPPIPEFCGSetNprealloc, DIRECT
-ksppipefcggetnprealloc_,KSPPIPEFCGGetNprealloc, DIRECT
-ksppipefcgsettruncationtype_,KSPPIPEFCGSetTruncationType, DIRECT
-ksppipefcggettruncationtype_,KSPPIPEFCGGetTruncationType, DIRECT

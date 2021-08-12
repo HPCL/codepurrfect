@@ -1,7 +1,0 @@
-CALLER, CALLEE, CALLTYPE
-pcsettype_,PetscMallocA, DIRECT
-pcsettype_,PetscStrncpy, DIRECT
-pcsettype_,PCSetType, DIRECT
-pcsettype_,PetscTrFree = (any pointer->any pointer@i64 0) :: i32 (i8*, i32, i8*, i8*)*, INDIRECT 
-pcgettype_,PCGetType, DIRECT
-pcgettype_,PetscStrncpy, DIRECT

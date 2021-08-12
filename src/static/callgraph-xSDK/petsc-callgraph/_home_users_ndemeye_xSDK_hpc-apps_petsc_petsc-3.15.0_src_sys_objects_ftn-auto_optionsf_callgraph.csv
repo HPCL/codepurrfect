@@ -1,7 +1,0 @@
-CALLER, CALLEE, CALLTYPE
-petscoptionscreate_,PetscOptionsCreate, DIRECT
-petscoptionsdestroy_,PetscOptionsDestroy, DIRECT
-petscoptionspush_,PetscOptionsPush, DIRECT
-petscoptionspop_,PetscOptionsPop, DIRECT
-petscoptionsallused_,PetscOptionsAllUsed, DIRECT
-petscoptionsleft_,PetscOptionsLeft, DIRECT

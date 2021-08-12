@@ -1,7 +1,0 @@
-CALLER, CALLEE, CALLTYPE
-PetscInitializeFortran,MPI_Comm_c2f, DIRECT
-PetscInitializeFortran,MPI_Comm_c2f, DIRECT
-PetscInitializeFortran,petscsetmoduleblock_, DIRECT
-PetscInitializeFortran,petscsetcomm_, DIRECT
-PetscInitializeFortran,petscsetmoduleblocknumeric_, DIRECT
-petscinitializefortran_,PetscInitializeFortran, DIRECT

@@ -1,8 +1,0 @@
-CALLER, CALLEE, CALLTYPE
-vecscattersetup_,VecScatterSetUp, DIRECT
-vecscattergetmerged_,VecScatterGetMerged, DIRECT
-vecscattercopy_,VecScatterCopy, DIRECT
-vecscattersetfromoptions_,VecScatterSetFromOptions, DIRECT
-vecscattercreate_,VecScatterCreate, DIRECT
-vecscatterbegin_,VecScatterBegin, DIRECT
-vecscatterend_,VecScatterEnd, DIRECT

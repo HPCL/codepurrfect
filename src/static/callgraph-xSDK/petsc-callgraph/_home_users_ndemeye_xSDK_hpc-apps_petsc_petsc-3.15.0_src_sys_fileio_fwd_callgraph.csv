@@ -1,5 +1,0 @@
-CALLER, CALLEE, CALLTYPE
-PetscGetWorkingDirectory,getcwd, DIRECT
-PetscGetWorkingDirectory,PetscError, DIRECT
-PetscGetWorkingDirectory,printf, DIRECT
-PetscGetWorkingDirectory,printf, DIRECT

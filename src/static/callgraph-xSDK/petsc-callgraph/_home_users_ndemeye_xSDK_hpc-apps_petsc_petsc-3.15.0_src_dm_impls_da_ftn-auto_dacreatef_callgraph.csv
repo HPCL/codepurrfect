@@ -1,3 +1,0 @@
-CALLER, CALLEE, CALLTYPE
-dmdacreate_,MPI_Comm_f2c, DIRECT
-dmdacreate_,DMDACreate, DIRECT

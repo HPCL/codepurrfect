@@ -1,7 +1,0 @@
-CALLER, CALLEE, CALLTYPE
-isblockgetindicesf90_,ISBlockGetIndices, DIRECT
-isblockgetindicesf90_,ISBlockGetLocalSize, DIRECT
-isblockgetindicesf90_,F90Array1dCreate, DIRECT
-isblockrestoreindicesf90_,F90Array1dAccess, DIRECT
-isblockrestoreindicesf90_,F90Array1dDestroy, DIRECT
-isblockrestoreindicesf90_,ISBlockRestoreIndices, DIRECT

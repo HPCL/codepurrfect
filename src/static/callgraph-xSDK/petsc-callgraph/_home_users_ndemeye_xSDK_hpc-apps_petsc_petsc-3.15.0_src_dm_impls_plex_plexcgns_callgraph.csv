@@ -1,9 +1,0 @@
-CALLER, CALLEE, CALLTYPE
-DMPlexCreateCGNSFromFile,PetscError, DIRECT
-DMPlexCreateCGNSFromFile,PetscCheckPointer, DIRECT
-DMPlexCreateCGNSFromFile,PetscError, DIRECT
-DMPlexCreateCGNSFromFile,MPI_Comm_rank, DIRECT
-DMPlexCreateCGNSFromFile,MPI_Error_string, DIRECT
-DMPlexCreateCGNSFromFile,PetscError, DIRECT
-DMPlexCreateCGNSFromFile,PetscError, DIRECT
-DMPlexCreateCGNS,PetscError, DIRECT

@@ -1,9 +1,0 @@
-CALLER, CALLEE, CALLTYPE
-dmdagetghostcorners_,PetscError, DIRECT
-dmdagetghostcorners_,PetscError, DIRECT
-dmdagetghostcorners_,PetscError, DIRECT
-dmdagetghostcorners_,PetscError, DIRECT
-dmdagetghostcorners_,DMDAGetGhostCorners, DIRECT
-dmdagetghostcorners000000_,dmdagetghostcorners_, DIRECT
-dmdagetghostcorners001001_,dmdagetghostcorners_, DIRECT
-dmdagetghostcorners011011_,dmdagetghostcorners_, DIRECT

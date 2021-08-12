@@ -1,9 +1,0 @@
-CALLER, CALLEE, CALLTYPE
-MatCoarsenRegisterAll,printf, DIRECT
-MatCoarsenRegisterAll,printf, DIRECT
-MatCoarsenRegisterAll,MatCoarsenRegister, DIRECT
-MatCoarsenRegisterAll,PetscError, DIRECT
-MatCoarsenRegisterAll,MatCoarsenRegister, DIRECT
-MatCoarsenRegisterAll,PetscError, DIRECT
-MatCoarsenRegisterAll,printf, DIRECT
-MatCoarsenRegisterAll,printf, DIRECT

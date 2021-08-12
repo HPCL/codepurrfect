@@ -1,9 +1,0 @@
-CALLER, CALLEE, CALLTYPE
-matproductnumeric_,MatProductNumeric, DIRECT
-matproductsymbolic_,MatProductSymbolic, DIRECT
-matproductsetfill_,MatProductSetFill, DIRECT
-matproductsetalgorithm_,MatProductSetAlgorithm, DIRECT
-matproductsettype_,MatProductSetType, DIRECT
-matproductclear_,MatProductClear, DIRECT
-matproductcreatewithmat_,MatProductCreateWithMat, DIRECT
-matproductcreate_,MatProductCreate, DIRECT

@@ -1,7 +1,0 @@
-CALLER, CALLEE, CALLTYPE
-pcjacobisetuseabs_,PCJacobiSetUseAbs, DIRECT
-pcjacobigetuseabs_,PCJacobiGetUseAbs, DIRECT
-pcjacobisetfixdiagonal_,PCJacobiSetFixDiagonal, DIRECT
-pcjacobigetfixdiagonal_,PCJacobiGetFixDiagonal, DIRECT
-pcjacobisettype_,PCJacobiSetType, DIRECT
-pcjacobigettype_,PCJacobiGetType, DIRECT

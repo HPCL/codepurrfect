@@ -1,6 +1,0 @@
-CALLER, CALLEE, CALLTYPE
-KSPGMRESSetPreAllocateVectors,PetscObjectQueryFunction_Private, DIRECT
-KSPGMRESSetPreAllocateVectors,EMPTYNAME = (any pointer->any pointer@i64 0) :: i32 (%struct._p_KSP*)*, INDIRECT 
-KSPGMRESSetPreAllocateVectors,PetscError, DIRECT
-KSPGMRESSetPreAllocateVectors,printf, DIRECT
-KSPGMRESSetPreAllocateVectors,printf, DIRECT

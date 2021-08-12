@@ -1,7 +1,0 @@
-CALLER, CALLEE, CALLTYPE
-kspgmressetcgsrefinementtype_,KSPGMRESSetCGSRefinementType, DIRECT
-kspgmresgetcgsrefinementtype_,KSPGMRESGetCGSRefinementType, DIRECT
-kspgmressetrestart_,KSPGMRESSetRestart, DIRECT
-kspgmresgetrestart_,KSPGMRESGetRestart, DIRECT
-kspgmressethaptol_,KSPGMRESSetHapTol, DIRECT
-kspgmressetbreakdowntolerance_,KSPGMRESSetBreakdownTolerance, DIRECT

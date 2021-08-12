@@ -1,9 +1,0 @@
-CALLER, CALLEE, CALLTYPE
-dmcompositegetaccessvpvp_,DMCompositeGetEntries, DIRECT
-dmcompositegetaccessvpvp_,DMCompositeGetAccess, DIRECT
-dmcompositegetaccessvpvp_,F90Array1dCreate, DIRECT
-dmcompositegetaccessvpvp_,F90Array1dCreate, DIRECT
-dmcompositerestoreaccessvpvp_,DMCompositeRestoreAccess, DIRECT
-dmcompositerestoreaccessvpvp_,F90Array1dDestroy, DIRECT
-dmcompositerestoreaccessvpvp_,F90Array1dDestroy, DIRECT
-dmcompositegetentriesarray_,DMCompositeGetEntriesArray, DIRECT

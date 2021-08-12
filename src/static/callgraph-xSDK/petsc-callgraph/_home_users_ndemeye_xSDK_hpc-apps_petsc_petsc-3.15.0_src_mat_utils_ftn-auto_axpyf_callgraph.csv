@@ -1,8 +1,0 @@
-CALLER, CALLEE, CALLTYPE
-mataxpy_,MatAXPY, DIRECT
-matshift_,MatShift, DIRECT
-matdiagonalset_,MatDiagonalSet, DIRECT
-mataypx_,MatAYPX, DIRECT
-matcomputeoperator_,MatComputeOperator, DIRECT
-matcomputeoperatortranspose_,MatComputeOperatorTranspose, DIRECT
-matchop_,MatChop, DIRECT

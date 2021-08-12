@@ -1,6 +1,0 @@
-CALLER, CALLEE, CALLTYPE
-vecfischer_,VecFischer, DIRECT
-vecsfischer_,VecSFischer, DIRECT
-matdfischer_,MatDFischer, DIRECT
-matdsfischer_,MatDSFischer, DIRECT
-taosoftthreshold_,TaoSoftThreshold, DIRECT

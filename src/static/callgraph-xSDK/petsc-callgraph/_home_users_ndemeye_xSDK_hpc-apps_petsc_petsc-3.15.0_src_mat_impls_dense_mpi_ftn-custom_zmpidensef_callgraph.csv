@@ -1,6 +1,0 @@
-CALLER, CALLEE, CALLTYPE
-matcreatedense_,PetscError, DIRECT
-matcreatedense_,MPI_Comm_f2c, DIRECT
-matcreatedense_,MatCreateDense, DIRECT
-matmpidensesetpreallocation_,PetscError, DIRECT
-matmpidensesetpreallocation_,MatMPIDenseSetPreallocation, DIRECT

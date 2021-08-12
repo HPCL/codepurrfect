@@ -1,7 +1,0 @@
-CALLER, CALLEE, CALLTYPE
-CharacteristicRegisterAll,printf, DIRECT
-CharacteristicRegisterAll,printf, DIRECT
-CharacteristicRegisterAll,CharacteristicRegister, DIRECT
-CharacteristicRegisterAll,PetscError, DIRECT
-CharacteristicRegisterAll,printf, DIRECT
-CharacteristicRegisterAll,printf, DIRECT

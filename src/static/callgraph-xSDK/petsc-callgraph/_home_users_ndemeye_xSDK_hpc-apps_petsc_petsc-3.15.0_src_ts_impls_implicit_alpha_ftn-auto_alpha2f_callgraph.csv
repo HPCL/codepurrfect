@@ -1,4 +1,0 @@
-CALLER, CALLEE, CALLTYPE
-tsalpha2setradius_,TSAlpha2SetRadius, DIRECT
-tsalpha2setparams_,TSAlpha2SetParams, DIRECT
-tsalpha2getparams_,TSAlpha2GetParams, DIRECT

@@ -1,7 +1,0 @@
-CALLER, CALLEE, CALLTYPE
-DMPlexGenerateRegisterAll,printf, DIRECT
-DMPlexGenerateRegisterAll,printf, DIRECT
-DMPlexGenerateRegisterAll,DMPlexGenerateRegister, DIRECT
-DMPlexGenerateRegisterAll,PetscError, DIRECT
-DMPlexGenerateRegisterAll,printf, DIRECT
-DMPlexGenerateRegisterAll,printf, DIRECT

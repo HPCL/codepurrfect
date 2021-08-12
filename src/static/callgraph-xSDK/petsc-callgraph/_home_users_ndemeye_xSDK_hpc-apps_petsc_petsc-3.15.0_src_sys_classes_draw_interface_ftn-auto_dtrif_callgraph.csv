@@ -1,4 +1,0 @@
-CALLER, CALLEE, CALLTYPE
-petscdrawtriangle_,PetscDrawTriangle, DIRECT
-petscdrawscalepopup_,PetscDrawScalePopup, DIRECT
-petscdrawtensorcontourpatch_,PetscDrawTensorContourPatch, DIRECT

@@ -1,3 +1,0 @@
-CALLER, CALLEE, CALLTYPE
-veccreateshared_,MPI_Comm_f2c, DIRECT
-veccreateshared_,VecCreateShared, DIRECT

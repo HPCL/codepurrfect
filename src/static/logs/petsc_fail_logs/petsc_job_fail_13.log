@@ -1,0 +1,1796 @@
+[0KRunning with gitlab-runner 13.8.0 (775dd39d)
+[0;m[0K  on pj02 6tPtAx36
+[0;msection_start:1625059087:resolve_secrets[0K[0K[36;1mResolving secrets[0;m
+[0;msection_end:1625059087:resolve_secrets[0Ksection_start:1625059087:prepare_executor[0K[0K[36;1mPreparing the "ssh" executor[0;m
+[0;m[0KUsing SSH executor...
+[0;msection_end:1625059087:prepare_executor[0Ksection_start:1625059087:prepare_script[0K[0K[36;1mPreparing environment[0;m
+[0;mRunning on pj02 via petsc-c7.mcs.anl.gov...
+section_end:1625059087:prepare_script[0Ksection_start:1625059088:get_sources[0K[0K[36;1mGetting source from Git repository[0;m
+[0;m[32;1mFetching changes with git depth set to 50...[0;m
+warning: templates not found builds/6tPtAx36/1/petsc/petsc.tmp/git-template
+Reinitialized existing Git repository in /home/glci/builds/6tPtAx36/1/petsc/petsc/.git/
+[32;1mChecking out 379ed4d2 as refs/merge-requests/3994/merge...[0;m
+[32;1mSkipping Git submodules setup[0;m
+section_end:1625059092:get_sources[0Ksection_start:1625059092:step_script[0K[0K[36;1mExecuting "step_script" stage of the job script[0;m
+[0;m[32;1m$ date[0;m
+Wed Jun 30 08:18:12 CDT 2021
+[32;1m$ hostname[0;m
+pj02
+[32;1m$ grep PRETTY_NAME /etc/os-release[0;m
+PRETTY_NAME="Ubuntu 18.04.5 LTS"
+[32;1m$ nproc[0;m
+12
+[32;1m$ lscpu[0;m
+Architecture:        x86_64
+CPU op-mode(s):      32-bit, 64-bit
+Byte Order:          Little Endian
+CPU(s):              12
+On-line CPU(s) list: 0-11
+Thread(s) per core:  2
+Core(s) per socket:  6
+Socket(s):           1
+NUMA node(s):        1
+Vendor ID:           GenuineIntel
+CPU family:          6
+Model:               158
+Model name:          Intel(R) Core(TM) i7-8700 CPU @ 3.20GHz
+Stepping:            10
+CPU MHz:             4298.045
+CPU max MHz:         4600.0000
+CPU min MHz:         800.0000
+BogoMIPS:            6399.96
+Virtualization:      VT-x
+L1d cache:           32K
+L1i cache:           32K
+L2 cache:            256K
+L3 cache:            12288K
+NUMA node0 CPU(s):   0-11
+Flags:               fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush dts acpi mmx fxsr sse sse2 ss ht tm pbe syscall nx pdpe1gb rdtscp lm constant_tsc art arch_perfmon pebs bts rep_good nopl xtopology nonstop_tsc cpuid aperfmperf pni pclmulqdq dtes64 monitor ds_cpl vmx smx est tm2 ssse3 sdbg fma cx16 xtpr pdcm pcid sse4_1 sse4_2 x2apic movbe popcnt tsc_deadline_timer aes xsave avx f16c rdrand lahf_lm abm 3dnowprefetch cpuid_fault epb invpcid_single pti ssbd ibrs ibpb stibp tpr_shadow vnmi flexpriority ept vpid fsgsbase tsc_adjust bmi1 hle avx2 smep bmi2 erms invpcid rtm mpx rdseed adx smap clflushopt intel_pt xsaveopt xsavec xgetbv1 xsaves dtherm ida arat pln pts hwp hwp_notify hwp_act_window hwp_epp md_clear flush_l1d
+[32;1m$ ccache --zero-stats[0;m
+Statistics cleared
+[32;1m$ if [ ! -z ${LOAD_MODULES+x} ]; then module --trace load ${LOAD_MODULES}; module list; fi[0;m
+[32;1m$ if [ ! -z ${INIT_SCRIPT+x} ]; then echo "sourcing ${INIT_SCRIPT}"; source ${INIT_SCRIPT}; fi[0;m
+[32;1m$ printf "PATH:$PATH\n"[0;m
+PATH:/home/glci/bin:/home/glci/bin:/usr/lib/ccache:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin
+[32;1m$ printf "PYTHONPATH:$PYTHONPATH\n"[0;m
+PYTHONPATH:
+[32;1m$ printf "PETSC_OPTIONS:$PETSC_OPTIONS\n"[0;m
+PETSC_OPTIONS:-check_pointer_intensity 0 -error_output_stdout -nox -nox_warning -malloc_dump -checkstack
+[32;1m$ if [ ! -z ${CI_MERGE_REQUEST_SOURCE_BRANCH_NAME+x} ]; then printf "CI_MERGE_REQUEST_SOURCE_BRANCH_NAME:$CI_MERGE_REQUEST_SOURCE_BRANCH_NAME\n" ;fi[0;m
+CI_MERGE_REQUEST_SOURCE_BRANCH_NAME:jacobf/2021-05-18/petscdevice-context
+[32;1m$ printf "./config/examples/${TEST_ARCH}.py\n"[0;m
+./config/examples/arch-ci-linux-gcc-complex-opt-32bit.py
+[32;1m$ cat ./config/examples/${TEST_ARCH}.py[0;m
+#!/usr/bin/env python
+
+import os
+petsc_hash_pkgs=os.path.join(os.getenv('HOME'),'petsc-hash-pkgs')
+
+configure_options = [
+  '--package-prefix-hash='+petsc_hash_pkgs,
+  'CFLAGS=-m32 -fPIC -Wall -Wwrite-strings -Wno-strict-aliasing -Wno-unknown-pragmas',
+  'CXXFLAGS=-m32 -fPIC -Wall -Wwrite-strings -Wno-strict-aliasing -Wno-unknown-pragmas',
+  'FFLAGS=-m32 -fPIC -Wall -ffree-line-length-0 -Wno-unused-dummy-argument',
+  '--with-clanguage=c',
+  '--with-shared-libraries=yes',
+  '--with-debugging=no',
+  '--with-scalar-type=complex',
+  '--with-64-bit-indices=no',
+  '--with-precision=double',
+  '--download-mpich',
+  '--download-fblaslapack',
+]
+
+if __name__ == '__main__':
+  import sys,os
+  sys.path.insert(0,os.path.abspath('config'))
+  import configure
+  configure.petsc_configure(configure_options)
+[32;1m$ ./config/examples/${TEST_ARCH}.py[0;m
+=============================================================================================
+                      Configuring PETSc to compile on your system                            
+=============================================================================================
+TESTING: configureExternalPackagesDir from config.framework(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/framework.py:1019)
+TESTING: configureDebuggers from config.utilities.debuggers(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/utilities/debuggers.py:21)
+TESTING: configureDirectories from PETSc.options.petscdir(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/PETSc/options/petscdir.py:23)
+TESTING: getDatafilespath from PETSc.options.dataFilesPath(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/PETSc/options/dataFilesPath.py:29)
+TESTING: configureGit from config.sourceControl(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/sourceControl.py:24)
+TESTING: configureMercurial from config.sourceControl(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/sourceControl.py:35)
+TESTING: configureInstallationMethod from PETSc.options.petscclone(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/PETSc/options/petscclone.py:20)
+TESTING: setNativeArchitecture from PETSc.options.arch(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/PETSc/options/arch.py:31)
+TESTING: configureArchitecture from PETSc.options.arch(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/PETSc/options/arch.py:43)
+TESTING: setInstallDir from PETSc.options.installDir(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/PETSc/options/installDir.py:39)
+TESTING: saveReconfigure from PETSc.options.installDir(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/PETSc/options/installDir.py:85)
+TESTING: cleanConfDir from PETSc.options.installDir(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/PETSc/options/installDir.py:78)
+TESTING: configureInstallDir from PETSc.options.installDir(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/PETSc/options/installDir.py:62)
+TESTING: restoreReconfigure from PETSc.options.installDir(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/PETSc/options/installDir.py:98)
+TESTING: setExternalPackagesDir from PETSc.options.externalpackagesdir(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/PETSc/options/externalpackagesdir.py:15)
+TESTING: cleanExternalpackagesDir from PETSc.options.externalpackagesdir(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/PETSc/options/externalpackagesdir.py:22)
+TESTING: configureCLanguage from PETSc.options.languages(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/PETSc/options/languages.py:27)
+TESTING: resetEnvCompilers from config.setCompilers(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/setCompilers.py:2031)
+TESTING: checkEnvCompilers from config.setCompilers(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/setCompilers.py:2061)
+TESTING: checkMPICompilerOverride from config.setCompilers(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/setCompilers.py:2001)
+TESTING: requireMpiLdPath from config.setCompilers(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/setCompilers.py:2022)
+TESTING: checkInitialFlags from config.setCompilers(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/setCompilers.py:555)
+TESTING: checkCCompiler from config.setCompilers(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/setCompilers.py:730)
+TESTING: checkCPreprocessor from config.setCompilers(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/setCompilers.py:769)
+TESTING: checkCUDACompiler from config.setCompilers(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/setCompilers.py:805)
+TESTING: checkCUDAPreprocessor from config.setCompilers(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/setCompilers.py:845)
+TESTING: checkHIPCompiler from config.setCompilers(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/setCompilers.py:879)
+TESTING: checkHIPPreprocessor from config.setCompilers(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/setCompilers.py:922)
+TESTING: checkSYCLCompiler from config.setCompilers(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/setCompilers.py:953)
+TESTING: checkSYCLPreprocessor from config.setCompilers(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/setCompilers.py:979)
+TESTING: checkCxxCompiler from config.setCompilers(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/setCompilers.py:1066)
+TESTING: checkFortranCompiler from config.setCompilers(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/setCompilers.py:1206)
+TESTING: checkFortranPreprocessor from config.setCompilers(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/setCompilers.py:1243)
+TESTING: checkFortranComments from config.setCompilers(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/setCompilers.py:1265)
+TESTING: checkLargeFileIO from config.setCompilers(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/setCompilers.py:1439)
+TESTING: checkArchiver from config.setCompilers(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/setCompilers.py:1538)
+TESTING: checkArchiverRecipeArgfile from config.setCompilers(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/setCompilers.py:1602)
+TESTING: checkSharedLinker from config.setCompilers(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/setCompilers.py:1682)
+TESTING: checkPIC from config.setCompilers(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/setCompilers.py:1382)
+TESTING: checkSharedLinkerPaths from config.setCompilers(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/setCompilers.py:1796)
+TESTING: checkLibC from config.setCompilers(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/setCompilers.py:1835)
+TESTING: checkDynamicLinker from config.setCompilers(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/setCompilers.py:1881)
+TESTING: checkPragma from config.setCompilers(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/setCompilers.py:1345)
+TESTING: output from config.setCompilers(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/setCompilers.py:1930)
+TESTING: configureIndexSize from PETSc.options.indexTypes(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/PETSc/options/indexTypes.py:39)
+TESTING: configureCompilerFlags from config.compilerFlags(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/compilerFlags.py:82)
+                  =============================================================================================
+                      ***** WARNING: Using default optimization C flags -g -O
+                      You might consider manually setting optimal optimization flags for your system with
+                       COPTFLAGS="optimization flags" see config/examples/arch-*-opt.py for examples
+                  =============================================================================================
+                
+                  =============================================================================================
+                      ***** WARNING: Using default FORTRAN optimization flags -g -O
+                      You might consider manually setting optimal optimization flags for your system with
+                       FOPTFLAGS="optimization flags" see config/examples/arch-*-opt.py for examples
+                  =============================================================================================
+                
+TESTING: checkIntelHardwareSupport from config.compilerFlags(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/compilerFlags.py:173)
+TESTING: checkCompilerMacros from config.compilerFlags(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/compilerFlags.py:164)
+TESTING: checkC99Flag from config.compilers(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/compilers.py:1459)
+TESTING: checkRestrict from config.compilers(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/compilers.py:158)
+TESTING: checkCFormatting from config.compilers(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/compilers.py:413)
+TESTING: checkCInline from config.compilers(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/compilers.py:128)
+TESTING: checkDynamicLoadFlag from config.compilers(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/compilers.py:424)
+TESTING: checkCLibraries from config.compilers(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/compilers.py:222)
+TESTING: checkDependencyGenerationFlag from config.compilers(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/compilers.py:1410)
+TESTING: checkFortranNameMangling from config.compilers(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/compilers.py:902)
+TESTING: checkFortranNameManglingDouble from config.compilers(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/compilers.py:940)
+TESTING: checkFortranLibraries from config.compilers(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/compilers.py:950)
+TESTING: setupFrameworkCompilers from config.compilers(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/compilers.py:1537)
+TESTING: configureClosure from config.utilities.closure(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/utilities/closure.py:17)
+TESTING: checkFortranTypeSizes from config.compilersFortran(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/compilersFortran.py:56)
+TESTING: checkFortranPreprocessor from config.compilersFortran(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/compilersFortran.py:73)
+TESTING: checkFortranDefineCompilerOption from config.compilersFortran(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/compilersFortran.py:96)
+TESTING: checkFortran90 from config.compilersFortran(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/compilersFortran.py:146)
+TESTING: checkFortran90FreeForm from config.compilersFortran(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/compilersFortran.py:162)
+TESTING: checkFortran2003 from config.compilersFortran(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/compilersFortran.py:176)
+TESTING: checkFortran90Array from config.compilersFortran(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/compilersFortran.py:211)
+TESTING: checkFortran90AssumedType from config.compilersFortran(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/compilersFortran.py:298)
+TESTING: checkFortranModuleInclude from config.compilersFortran(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/compilersFortran.py:303)
+TESTING: checkFortranModuleOutput from config.compilersFortran(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/compilersFortran.py:369)
+TESTING: checkFortranTypeStar from config.compilersFortran(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/compilersFortran.py:135)
+TESTING: checkFortranTypeInitialize from config.compilersFortran(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/compilersFortran.py:125)
+TESTING: configureFortranFlush from config.compilersFortran(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/compilersFortran.py:116)
+TESTING: checkDependencyGenerationFlag from config.compilersFortran(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/compilersFortran.py:414)
+TESTING: checkStdC from config.headers(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/headers.py:107)
+TESTING: checkStat from config.headers(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/headers.py:140)
+TESTING: checkSysWait from config.headers(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/headers.py:175)
+TESTING: checkTime from config.headers(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/headers.py:197)
+TESTING: checkMath from config.headers(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/headers.py:203)
+TESTING: check from config.headers(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/headers.py:77)
+TESTING: check from config.headers(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/headers.py:77)
+TESTING: check from config.headers(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/headers.py:77)
+TESTING: check from config.headers(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/headers.py:77)
+TESTING: check from config.headers(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/headers.py:77)
+TESTING: check from config.headers(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/headers.py:77)
+TESTING: check from config.headers(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/headers.py:77)
+TESTING: check from config.headers(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/headers.py:77)
+TESTING: check from config.headers(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/headers.py:77)
+TESTING: check from config.headers(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/headers.py:77)
+TESTING: check from config.headers(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/headers.py:77)
+TESTING: check from config.headers(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/headers.py:77)
+TESTING: check from config.headers(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/headers.py:77)
+TESTING: check from config.headers(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/headers.py:77)
+TESTING: check from config.headers(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/headers.py:77)
+TESTING: check from config.headers(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/headers.py:77)
+TESTING: check from config.headers(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/headers.py:77)
+TESTING: check from config.headers(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/headers.py:77)
+TESTING: check from config.headers(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/headers.py:77)
+TESTING: check from config.headers(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/headers.py:77)
+TESTING: check from config.headers(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/headers.py:77)
+TESTING: check from config.headers(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/headers.py:77)
+TESTING: check from config.headers(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/headers.py:77)
+TESTING: check from config.headers(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/headers.py:77)
+TESTING: check from config.headers(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/headers.py:77)
+TESTING: check from config.headers(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/headers.py:77)
+TESTING: check from config.headers(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/headers.py:77)
+TESTING: check from config.headers(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/headers.py:77)
+TESTING: check from config.headers(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/headers.py:77)
+TESTING: check from config.headers(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/headers.py:77)
+TESTING: check from config.headers(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/headers.py:77)
+TESTING: check from config.headers(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/headers.py:77)
+TESTING: check from config.headers(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/headers.py:77)
+TESTING: check from config.headers(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/headers.py:77)
+TESTING: check from config.headers(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/headers.py:77)
+TESTING: check from config.headers(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/headers.py:77)
+TESTING: check from config.headers(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/headers.py:77)
+TESTING: check from config.headers(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/headers.py:77)
+TESTING: check from config.headers(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/headers.py:77)
+TESTING: check from config.headers(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/headers.py:77)
+TESTING: check from config.headers(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/headers.py:77)
+TESTING: check from config.headers(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/headers.py:77)
+TESTING: check from config.headers(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/headers.py:77)
+TESTING: check from config.headers(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/headers.py:77)
+TESTING: check from config.headers(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/headers.py:77)
+TESTING: check from config.headers(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/headers.py:77)
+TESTING: check from config.headers(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/headers.py:77)
+TESTING: check from config.headers(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/headers.py:77)
+TESTING: check from config.headers(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/headers.py:77)
+TESTING: check from config.headers(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/headers.py:77)
+TESTING: check from config.headers(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/headers.py:77)
+TESTING: check from config.headers(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/headers.py:77)
+TESTING: check from config.headers(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/headers.py:77)
+TESTING: check from config.headers(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/headers.py:77)
+TESTING: check from config.headers(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/headers.py:77)
+TESTING: check from config.headers(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/headers.py:77)
+TESTING: check from config.headers(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/headers.py:77)
+TESTING: check from config.headers(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/headers.py:77)
+TESTING: check from config.headers(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/headers.py:77)
+TESTING: check from config.headers(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/headers.py:77)
+TESTING: check from config.headers(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/headers.py:77)
+TESTING: check from config.headers(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/headers.py:77)
+TESTING: check from config.headers(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/headers.py:77)
+TESTING: check from config.headers(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/headers.py:77)
+TESTING: check from config.headers(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/headers.py:77)
+TESTING: check from config.headers(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/headers.py:77)
+TESTING: checkRecursiveMacros from config.headers(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/headers.py:218)
+TESTING: configureCacheDetails from config.utilities.cacheDetails(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/utilities/cacheDetails.py:78)
+TESTING: check_struct_sigaction from config.types(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/types.py:42)
+TESTING: check__int64 from config.types(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/types.py:48)
+TESTING: checkSizeTypes from config.types(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/types.py:54)
+TESTING: checkFileTypes from config.types(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/types.py:64)
+TESTING: checkIntegerTypes from config.types(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/types.py:59)
+TESTING: checkPID from config.types(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/types.py:70)
+TESTING: checkUID from config.types(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/types.py:74)
+TESTING: checkC99Complex from config.types(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/types.py:81)
+TESTING: checkConst from config.types(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/types.py:103)
+TESTING: checkSizeof from config.types(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/types.py:159)
+TESTING: checkSizeof from config.types(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/types.py:159)
+TESTING: checkSizeof from config.types(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/types.py:159)
+TESTING: checkSizeof from config.types(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/types.py:159)
+TESTING: checkSizeof from config.types(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/types.py:159)
+TESTING: checkSizeof from config.types(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/types.py:159)
+TESTING: checkSizeof from config.types(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/types.py:159)
+TESTING: checkVisibility from config.types(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/types.py:193)
+TESTING: checkMaxPathLen from config.types(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/types.py:215)
+TESTING: configureMemAlign from PETSc.options.memAlign(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/PETSc/options/memAlign.py:29)
+TESTING: check from config.libraries(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/libraries.py:157)
+TESTING: check from config.libraries(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/libraries.py:157)
+TESTING: check from config.libraries(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/libraries.py:157)
+TESTING: check from config.libraries(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/libraries.py:157)
+TESTING: checkMath from config.libraries(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/libraries.py:282)
+TESTING: checkMathErf from config.libraries(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/libraries.py:301)
+TESTING: checkMathTgamma from config.libraries(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/libraries.py:310)
+TESTING: checkMathLgamma from config.libraries(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/libraries.py:319)
+TESTING: checkMathFenv from config.libraries(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/libraries.py:332)
+TESTING: checkMathLog2 from config.libraries(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/libraries.py:340)
+TESTING: checkRealtime from config.libraries(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/libraries.py:349)
+TESTING: checkDynamic from config.libraries(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/libraries.py:365)
+TESTING: configureLibraryOptions from PETSc.options.libraryOptions(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/PETSc/options/libraryOptions.py:38)
+TESTING: configureISColorValueType from PETSc.options.libraryOptions(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/PETSc/options/libraryOptions.py:99)
+TESTING: checkSysinfo from config.functions(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/functions.py:106)
+TESTING: checkVPrintf from config.functions(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/functions.py:125)
+TESTING: checkVFPrintf from config.functions(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/functions.py:131)
+TESTING: checkVSNPrintf from config.functions(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/functions.py:137)
+TESTING: checkNanosleep from config.functions(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/functions.py:167)
+TESTING: checkMemmove from config.functions(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/functions.py:173)
+TESTING: checkFreeReturnType from config.functions(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/functions.py:153)
+TESTING: checkVariableArgumentLists from config.functions(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/functions.py:159)
+TESTING: checkClassify from config.functions(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/functions.py:85)
+TESTING: checkMmap from config.functions(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/functions.py:179)
+TESTING: configureMemorySize from config.utilities.getResidentSetSize(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/utilities/getResidentSetSize.py:31)
+TESTING: configureFortranCommandLine from config.utilities.fortranCommandLine(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/utilities/fortranCommandLine.py:27)
+TESTING: configureFPTrap from config.utilities.FPTrap(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/utilities/FPTrap.py:27)
+TESTING: configureFeatureTestMacros from config.utilities.featureTestMacros(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/utilities/featureTestMacros.py:13)
+TESTING: configureMissingUtypeTypedefs from config.utilities.missing(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/utilities/missing.py:55)
+TESTING: configureMissingFunctions from config.utilities.missing(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/utilities/missing.py:61)
+TESTING: configureMissingSignals from config.utilities.missing(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/utilities/missing.py:79)
+TESTING: configureMissingGetdomainnamePrototype from config.utilities.missing(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/utilities/missing.py:96)
+TESTING: configureMissingSrandPrototype from config.utilities.missing(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/utilities/missing.py:121)
+TESTING: checkSharedDynamicPicOptions from PETSc.options.sharedLibraries(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/PETSc/options/sharedLibraries.py:34)
+TESTING: configureSharedLibraries from PETSc.options.sharedLibraries(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/PETSc/options/sharedLibraries.py:49)
+TESTING: configureDynamicLibraries from PETSc.options.sharedLibraries(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/PETSc/options/sharedLibraries.py:94)
+TESTING: configureSerializedFunctions from PETSc.options.sharedLibraries(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/PETSc/options/sharedLibraries.py:100)
+TESTING: checkSymbolResolution from PETSc.options.sharedLibraries(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/PETSc/options/sharedLibraries.py:109)
+TESTING: configureScalarType from PETSc.options.scalarTypes(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/PETSc/options/scalarTypes.py:40)
+TESTING: configurePrecision from PETSc.options.scalarTypes(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/PETSc/options/scalarTypes.py:81)
+TESTING: configureMkdir from config.programs(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/programs.py:22)
+TESTING: configureAutoreconf from config.programs(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/programs.py:44)
+TESTING: configurePrograms from config.programs(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/programs.py:71)
+TESTING: consistencyChecks from config.packages.make(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/package.py:970)
+TESTING: alternateConfigureLibrary from config.packages.make(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/package.py:966)
+TESTING: configureMake from config.packages.make(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/packages/make.py:96)
+TESTING: setupGNUMake from config.packages.make(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/packages/make.py:150)
+TESTING: configureMakeNP from config.packages.make(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/packages/make.py:197)
+TESTING: consistencyChecks from config.packages.hip(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/package.py:970)
+TESTING: alternateConfigureLibrary from config.packages.hip(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/package.py:966)
+TESTING: consistencyChecks from config.packages.X(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/package.py:970)
+TESTING: checkDependencies from config.packages.X(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/package.py:872)
+TESTING: configureLibrary from config.packages.X(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/package.py:897)
+TESTING: check from config.libraries(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/libraries.py:157)
+TESTING: check from config.libraries(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/libraries.py:157)
+TESTING: check from config.libraries(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/libraries.py:157)
+TESTING: checkVersion from config.packages.X(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/package.py:1033)
+TESTING: checkSharedLibrary from config.packages.X(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/package.py:962)
+TESTING: consistencyChecks from config.packages.hwloc(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/package.py:970)
+TESTING: alternateConfigureLibrary from config.packages.hwloc(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/package.py:966)
+TESTING: consistencyChecks from config.packages.thrust(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/package.py:970)
+TESTING: alternateConfigureLibrary from config.packages.thrust(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/package.py:966)
+TESTING: consistencyChecks from config.packages.cuda(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/package.py:970)
+TESTING: alternateConfigureLibrary from config.packages.cuda(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/package.py:966)
+TESTING: consistencyChecks from config.packages.OpenMPI(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/package.py:970)
+TESTING: alternateConfigureLibrary from config.packages.OpenMPI(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/package.py:966)
+TESTING: consistencyChecks from config.packages.MPICH(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/package.py:970)
+TESTING: checkDependencies from config.packages.MPICH(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/package.py:872)
+TESTING: configureLibrary from config.packages.MPICH(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/package.py:897)
+                        =============================================================================================
+                            Trying to download https://www.mpich.org/static/downloads/3.4.2/mpich-3.4.2.tar.gz for MPICH
+                        =============================================================================================
+                      
+                          =============================================================================================
+                              Running configure on MPICH; this may take several minutes
+                          =============================================================================================
+                        
+                          =============================================================================================
+                              Running make on MPICH; this may take several minutes
+                          =============================================================================================
+                        
+                          =============================================================================================
+                              Running make install on MPICH; this may take several minutes
+                          =============================================================================================
+                        
+TESTING: resetEnvCompilers from config.setCompilers(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/setCompilers.py:2031)
+TESTING: checkEnvCompilers from config.setCompilers(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/setCompilers.py:2061)
+TESTING: checkMPICompilerOverride from config.setCompilers(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/setCompilers.py:2001)
+TESTING: requireMpiLdPath from config.setCompilers(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/setCompilers.py:2022)
+TESTING: checkInitialFlags from config.setCompilers(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/setCompilers.py:555)
+TESTING: checkCCompiler from config.setCompilers(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/setCompilers.py:730)
+TESTING: checkCPreprocessor from config.setCompilers(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/setCompilers.py:769)
+TESTING: checkCUDACompiler from config.setCompilers(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/setCompilers.py:805)
+TESTING: checkCUDAPreprocessor from config.setCompilers(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/setCompilers.py:845)
+TESTING: checkHIPCompiler from config.setCompilers(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/setCompilers.py:879)
+TESTING: checkHIPPreprocessor from config.setCompilers(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/setCompilers.py:922)
+TESTING: checkSYCLCompiler from config.setCompilers(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/setCompilers.py:953)
+TESTING: checkSYCLPreprocessor from config.setCompilers(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/setCompilers.py:979)
+TESTING: checkCxxCompiler from config.setCompilers(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/setCompilers.py:1066)
+TESTING: checkFortranCompiler from config.setCompilers(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/setCompilers.py:1206)
+TESTING: checkFortranPreprocessor from config.setCompilers(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/setCompilers.py:1243)
+TESTING: checkFortranComments from config.setCompilers(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/setCompilers.py:1265)
+TESTING: checkLargeFileIO from config.setCompilers(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/setCompilers.py:1439)
+TESTING: checkArchiver from config.setCompilers(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/setCompilers.py:1538)
+TESTING: checkArchiverRecipeArgfile from config.setCompilers(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/setCompilers.py:1602)
+TESTING: checkSharedLinker from config.setCompilers(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/setCompilers.py:1682)
+TESTING: checkPIC from config.setCompilers(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/setCompilers.py:1382)
+TESTING: checkSharedLinkerPaths from config.setCompilers(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/setCompilers.py:1796)
+TESTING: checkLibC from config.setCompilers(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/setCompilers.py:1835)
+TESTING: checkDynamicLinker from config.setCompilers(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/setCompilers.py:1881)
+TESTING: checkPragma from config.setCompilers(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/setCompilers.py:1345)
+TESTING: output from config.setCompilers(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/setCompilers.py:1930)
+TESTING: configureCompilerFlags from config.compilerFlags(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/compilerFlags.py:82)
+                                    =============================================================================================
+                                        ***** WARNING: Using default optimization C flags -g -O
+                                        You might consider manually setting optimal optimization flags for your system with
+                                         COPTFLAGS="optimization flags" see config/examples/arch-*-opt.py for examples
+                                    =============================================================================================
+                                  
+                                    =============================================================================================
+                                        ***** WARNING: Using default FORTRAN optimization flags -g -O
+                                        You might consider manually setting optimal optimization flags for your system with
+                                         FOPTFLAGS="optimization flags" see config/examples/arch-*-opt.py for examples
+                                    =============================================================================================
+                                  
+TESTING: checkIntelHardwareSupport from config.compilerFlags(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/compilerFlags.py:173)
+TESTING: checkCompilerMacros from config.compilerFlags(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/compilerFlags.py:164)
+TESTING: checkC99Flag from config.compilers(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/compilers.py:1459)
+TESTING: checkRestrict from config.compilers(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/compilers.py:158)
+TESTING: checkCFormatting from config.compilers(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/compilers.py:413)
+TESTING: checkCInline from config.compilers(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/compilers.py:128)
+TESTING: checkDynamicLoadFlag from config.compilers(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/compilers.py:424)
+TESTING: checkCLibraries from config.compilers(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/compilers.py:222)
+TESTING: checkDependencyGenerationFlag from config.compilers(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/compilers.py:1410)
+TESTING: checkFortranNameMangling from config.compilers(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/compilers.py:902)
+TESTING: checkFortranNameManglingDouble from config.compilers(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/compilers.py:940)
+TESTING: checkFortranLibraries from config.compilers(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/compilers.py:950)
+TESTING: setupFrameworkCompilers from config.compilers(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/compilers.py:1537)
+TESTING: check from config.libraries(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/libraries.py:157)
+TESTING: checkInclude from config.headers(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/headers.py:86)
+TESTING: checkVersion from config.packages.MPICH(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/package.py:1033)
+TESTING: checkSharedLibrary from config.packages.MPICH(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/package.py:962)
+TESTING: consistencyChecks from config.packages.MPI(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/package.py:970)
+TESTING: checkDependencies from config.packages.MPI(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/package.py:872)
+TESTING: configureLibrary from config.packages.MPI(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/packages/MPI.py:731)
+TESTING: check from config.libraries(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/libraries.py:157)
+TESTING: checkInclude from config.headers(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/headers.py:86)
+TESTING: checkInclude from config.headers(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/headers.py:86)
+TESTING: checkMPIDistro from config.packages.MPI(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/packages/MPI.py:558)
+TESTING: configureMPI2 from config.packages.MPI(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/packages/MPI.py:340)
+TESTING: configureMPI3 from config.packages.MPI(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/packages/MPI.py:387)
+TESTING: configureMPIEXEC from config.packages.MPI(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/packages/MPI.py:185)
+TESTING: configureMPITypes from config.packages.MPI(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/packages/MPI.py:440)
+TESTING: SGIMPICheck from config.packages.MPI(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/packages/MPI.py:486)
+TESTING: CxxMPICheck from config.packages.MPI(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/packages/MPI.py:496)
+TESTING: FortranMPICheck from config.packages.MPI(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/packages/MPI.py:512)
+TESTING: configureIO from config.packages.MPI(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/packages/MPI.py:534)
+TESTING: findMPIIncludeAndLib from config.packages.MPI(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/packages/MPI.py:640)
+TESTING: PetscArchMPICheck from config.packages.MPI(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/packages/MPI.py:706)
+TESTING: checkVersion from config.packages.MPI(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/package.py:1033)
+TESTING: checkSharedLibrary from config.packages.MPI(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/package.py:962)
+TESTING: consistencyChecks from config.packages.zstd(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/package.py:970)
+TESTING: alternateConfigureLibrary from config.packages.zstd(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/package.py:966)
+TESTING: consistencyChecks from config.packages.yaml(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/package.py:970)
+TESTING: alternateConfigureLibrary from config.packages.yaml(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/package.py:966)
+TESTING: consistencyChecks from config.packages.sycl(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/package.py:970)
+TESTING: alternateConfigureLibrary from config.packages.sycl(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/package.py:966)
+TESTING: consistencyChecks from config.packages.ssl(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/packages/ssl.py:31)
+TESTING: alternateConfigureLibrary from config.packages.ssl(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/package.py:966)
+TESTING: consistencyChecks from config.packages.sprng(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/package.py:970)
+TESTING: alternateConfigureLibrary from config.packages.sprng(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/package.py:966)
+TESTING: consistencyChecks from config.packages.sowing(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/package.py:970)
+TESTING: checkDependencies from config.packages.sowing(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/package.py:872)
+TESTING: configureLibrary from config.packages.sowing(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/package.py:897)
+                        =============================================================================================
+                            Trying to download git://https://bitbucket.org/petsc/pkg-sowing.git for SOWING
+                        =============================================================================================
+                      
+                        =============================================================================================
+                            Running configure on SOWING; this may take several minutes
+                        =============================================================================================
+                      
+                        =============================================================================================
+                            Running make on SOWING; this may take several minutes
+                        =============================================================================================
+                      
+                        =============================================================================================
+                            Running make install on SOWING; this may take several minutes
+                        =============================================================================================
+                      
+TESTING: check from config.libraries(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/libraries.py:157)
+TESTING: checkInclude from config.headers(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/headers.py:86)
+TESTING: checkVersion from config.packages.sowing(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/package.py:1033)
+TESTING: checkSharedLibrary from config.packages.sowing(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/package.py:962)
+TESTING: consistencyChecks from config.packages.revolve(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/package.py:970)
+TESTING: alternateConfigureLibrary from config.packages.revolve(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/package.py:966)
+TESTING: consistencyChecks from config.packages.radau5(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/package.py:970)
+TESTING: alternateConfigureLibrary from config.packages.radau5(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/package.py:966)
+TESTING: consistencyChecks from config.packages.pami(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/package.py:970)
+TESTING: alternateConfigureLibrary from config.packages.pami(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/package.py:966)
+TESTING: consistencyChecks from config.packages.opengles(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/package.py:970)
+TESTING: alternateConfigureLibrary from config.packages.opengles(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/package.py:966)
+TESTING: consistencyChecks from config.packages.opencl(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/package.py:970)
+TESTING: alternateConfigureLibrary from config.packages.opencl(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/package.py:966)
+TESTING: consistencyChecks from config.packages.muparser(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/package.py:970)
+TESTING: alternateConfigureLibrary from config.packages.muparser(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/package.py:966)
+TESTING: consistencyChecks from config.packages.mpe(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/package.py:970)
+TESTING: alternateConfigureLibrary from config.packages.mpe(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/package.py:966)
+TESTING: consistencyChecks from config.packages.memkind(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/package.py:970)
+TESTING: alternateConfigureLibrary from config.packages.memkind(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/package.py:966)
+TESTING: consistencyChecks from config.packages.libmesh(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/package.py:970)
+TESTING: alternateConfigureLibrary from config.packages.libmesh(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/packages/libmesh.py:76)
+TESTING: consistencyChecks from config.packages.moose(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/package.py:970)
+TESTING: alternateConfigureLibrary from config.packages.moose(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/package.py:966)
+TESTING: consistencyChecks from config.packages.libjpeg(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/package.py:970)
+TESTING: alternateConfigureLibrary from config.packages.libjpeg(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/package.py:966)
+TESTING: consistencyChecks from config.packages.gsl(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/package.py:970)
+TESTING: alternateConfigureLibrary from config.packages.gsl(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/package.py:966)
+TESTING: consistencyChecks from config.packages.gmp(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/package.py:970)
+TESTING: alternateConfigureLibrary from config.packages.gmp(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/package.py:966)
+TESTING: consistencyChecks from config.packages.mpfr(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/package.py:970)
+TESTING: alternateConfigureLibrary from config.packages.mpfr(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/package.py:966)
+TESTING: consistencyChecks from config.packages.giflib(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/package.py:970)
+TESTING: alternateConfigureLibrary from config.packages.giflib(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/package.py:966)
+TESTING: consistencyChecks from config.packages.cub(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/package.py:970)
+TESTING: alternateConfigureLibrary from config.packages.cub(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/package.py:966)
+TESTING: consistencyChecks from config.packages.ctetgen(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/package.py:970)
+TESTING: alternateConfigureLibrary from config.packages.ctetgen(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/package.py:966)
+TESTING: consistencyChecks from config.packages.concurrencykit(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/package.py:970)
+TESTING: alternateConfigureLibrary from config.packages.concurrencykit(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/package.py:966)
+TESTING: locateC2html from config.packages.c2html(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/packages/c2html.py:30)
+TESTING: consistencyChecks from config.packages.boost(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/package.py:970)
+TESTING: alternateConfigureLibrary from config.packages.boost(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/package.py:966)
+TESTING: consistencyChecks from config.packages.silo(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/package.py:970)
+TESTING: alternateConfigureLibrary from config.packages.silo(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/package.py:966)
+TESTING: consistencyChecks from config.packages.Random123(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/package.py:970)
+TESTING: alternateConfigureLibrary from config.packages.Random123(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/package.py:966)
+TESTING: consistencyChecks from config.packages.PARTY(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/package.py:970)
+TESTING: alternateConfigureLibrary from config.packages.PARTY(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/package.py:966)
+TESTING: consistencyChecks from config.packages.NVSHMEM(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/package.py:970)
+TESTING: alternateConfigureLibrary from config.packages.NVSHMEM(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/package.py:966)
+TESTING: consistencyChecks from config.packages.Matlab(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/package.py:970)
+TESTING: alternateConfigureLibrary from config.packages.Matlab(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/package.py:966)
+TESTING: consistencyChecks from config.packages.MatlabEngine(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/package.py:970)
+TESTING: alternateConfigureLibrary from config.packages.MatlabEngine(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/package.py:966)
+TESTING: consistencyChecks from config.packages.Mathematica(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/package.py:970)
+TESTING: alternateConfigureLibrary from config.packages.Mathematica(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/package.py:966)
+TESTING: consistencyChecks from config.packages.regex(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/package.py:970)
+TESTING: checkDependencies from config.packages.regex(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/package.py:872)
+TESTING: configureLibrary from config.packages.regex(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/package.py:897)
+TESTING: check from config.libraries(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/libraries.py:157)
+TESTING: checkInclude from config.headers(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/headers.py:86)
+TESTING: checkInclude from config.headers(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/headers.py:86)
+TESTING: checkVersion from config.packages.regex(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/package.py:1033)
+TESTING: checkSharedLibrary from config.packages.regex(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/package.py:962)
+TESTING: consistencyChecks from config.packages.libceed(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/package.py:970)
+TESTING: alternateConfigureLibrary from config.packages.libceed(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/package.py:966)
+TESTING: consistencyChecks from config.packages.petsc4py(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/package.py:970)
+TESTING: alternateConfigureLibrary from config.packages.petsc4py(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/packages/petsc4py.py:131)
+TESTING: consistencyChecks from config.packages.mpi4py(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/package.py:970)
+TESTING: alternateConfigureLibrary from config.packages.mpi4py(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/package.py:966)
+TESTING: consistencyChecks from config.packages.slepc(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/package.py:970)
+TESTING: alternateConfigureLibrary from config.packages.slepc(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/packages/slepc.py:97)
+TESTING: consistencyChecks from config.packages.opengl(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/package.py:970)
+TESTING: alternateConfigureLibrary from config.packages.opengl(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/package.py:966)
+TESTING: consistencyChecks from config.packages.glut(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/package.py:970)
+TESTING: alternateConfigureLibrary from config.packages.glut(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/package.py:966)
+TESTING: consistencyChecks from config.packages.GLVis(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/package.py:970)
+TESTING: alternateConfigureLibrary from config.packages.GLVis(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/package.py:966)
+TESTING: consistencyChecks from config.packages.CoDiPack(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/package.py:970)
+TESTING: alternateConfigureLibrary from config.packages.CoDiPack(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/package.py:966)
+TESTING: consistencyChecks from config.packages.adblaslapack(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/package.py:970)
+TESTING: alternateConfigureLibrary from config.packages.adblaslapack(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/package.py:966)
+TESTING: locateCMake from config.packages.cmake(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/packages/cmake.py:51)
+TESTING: consistencyChecks from config.packages.unittestcpp(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/package.py:970)
+TESTING: alternateConfigureLibrary from config.packages.unittestcpp(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/package.py:966)
+TESTING: consistencyChecks from config.packages.googletest(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/package.py:970)
+TESTING: alternateConfigureLibrary from config.packages.googletest(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/package.py:966)
+TESTING: consistencyChecks from config.packages.eigen(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/package.py:970)
+TESTING: alternateConfigureLibrary from config.packages.eigen(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/package.py:966)
+TESTING: consistencyChecks from config.packages.szlib(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/package.py:970)
+TESTING: alternateConfigureLibrary from config.packages.szlib(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/package.py:966)
+TESTING: consistencyChecks from config.packages.zlib(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/package.py:970)
+TESTING: alternateConfigureLibrary from config.packages.zlib(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/package.py:966)
+TESTING: consistencyChecks from config.packages.tetgen(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/package.py:970)
+TESTING: alternateConfigureLibrary from config.packages.tetgen(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/package.py:966)
+TESTING: consistencyChecks from config.packages.tchem(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/package.py:970)
+TESTING: alternateConfigureLibrary from config.packages.tchem(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/package.py:966)
+TESTING: consistencyChecks from config.packages.saws(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/package.py:970)
+TESTING: alternateConfigureLibrary from config.packages.saws(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/package.py:966)
+TESTING: consistencyChecks from config.packages.libpng(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/package.py:970)
+TESTING: alternateConfigureLibrary from config.packages.libpng(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/package.py:966)
+TESTING: consistencyChecks from config.packages.combblas(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/package.py:970)
+TESTING: alternateConfigureLibrary from config.packages.combblas(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/package.py:966)
+TESTING: consistencyChecks from config.packages.Triangle(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/package.py:970)
+TESTING: alternateConfigureLibrary from config.packages.Triangle(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/package.py:966)
+TESTING: consistencyChecks from config.packages.metis(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/package.py:970)
+TESTING: alternateConfigureLibrary from config.packages.metis(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/package.py:966)
+TESTING: consistencyChecks from config.packages.pragmatic(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/package.py:970)
+TESTING: alternateConfigureLibrary from config.packages.pragmatic(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/package.py:966)
+TESTING: consistencyChecks from config.packages.parmetis(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/package.py:970)
+TESTING: alternateConfigureLibrary from config.packages.parmetis(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/package.py:966)
+TESTING: consistencyChecks from config.packages.Chaco(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/package.py:970)
+TESTING: alternateConfigureLibrary from config.packages.Chaco(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/package.py:966)
+TESTING: consistencyChecks from config.packages.hdf5(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/package.py:970)
+TESTING: alternateConfigureLibrary from config.packages.hdf5(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/package.py:966)
+TESTING: consistencyChecks from config.packages.med(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/package.py:970)
+TESTING: alternateConfigureLibrary from config.packages.med(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/package.py:966)
+TESTING: consistencyChecks from config.packages.cgns(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/package.py:970)
+TESTING: alternateConfigureLibrary from config.packages.cgns(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/package.py:966)
+TESTING: consistencyChecks from config.packages.ascem-io(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/package.py:970)
+TESTING: alternateConfigureLibrary from config.packages.ascem-io(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/package.py:966)
+TESTING: consistencyChecks from config.packages.pflotran(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/package.py:970)
+TESTING: alternateConfigureLibrary from config.packages.pflotran(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/package.py:966)
+TESTING: consistencyChecks from config.packages.alquimia(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/package.py:970)
+TESTING: alternateConfigureLibrary from config.packages.alquimia(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/package.py:966)
+TESTING: consistencyChecks from config.packages.SAMRAI(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/package.py:970)
+TESTING: alternateConfigureLibrary from config.packages.SAMRAI(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/package.py:966)
+TESTING: consistencyChecks from config.packages.pnetcdf(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/package.py:970)
+TESTING: alternateConfigureLibrary from config.packages.pnetcdf(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/package.py:966)
+TESTING: consistencyChecks from config.packages.netcdf(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/package.py:970)
+TESTING: alternateConfigureLibrary from config.packages.netcdf(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/package.py:966)
+TESTING: consistencyChecks from config.packages.exodusii(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/package.py:970)
+TESTING: alternateConfigureLibrary from config.packages.exodusii(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/package.py:966)
+TESTING: consistencyChecks from config.packages.fblaslapack(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/package.py:970)
+TESTING: checkDependencies from config.packages.fblaslapack(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/package.py:872)
+TESTING: configureLibrary from config.packages.fblaslapack(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/packages/fblaslapack.py:19)
+                        =============================================================================================
+                            Trying to download git://https://bitbucket.org/petsc/pkg-fblaslapack for FBLASLAPACK
+                        =============================================================================================
+                      
+                        =============================================================================================
+                            Compiling FBLASLAPACK; this may take several minutes
+                        =============================================================================================
+                      
+TESTING: check from config.libraries(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/libraries.py:157)
+TESTING: checkInclude from config.headers(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/headers.py:86)
+TESTING: checkVersion from config.packages.fblaslapack(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/package.py:1033)
+TESTING: checkSharedLibrary from config.packages.fblaslapack(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/package.py:962)
+TESTING: consistencyChecks from config.packages.pthread(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/package.py:970)
+TESTING: checkDependencies from config.packages.pthread(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/package.py:872)
+TESTING: configureLibrary from config.packages.pthread(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/packages/pthread.py:20)
+TESTING: check from config.libraries(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/libraries.py:157)
+TESTING: check from config.libraries(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/libraries.py:157)
+TESTING: checkInclude from config.headers(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/headers.py:86)
+TESTING: checkInclude from config.headers(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/headers.py:86)
+TESTING: checkVersion from config.packages.pthread(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/package.py:1033)
+TESTING: checkSharedLibrary from config.packages.pthread(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/package.py:962)
+TESTING: consistencyChecks from config.packages.egads(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/package.py:970)
+TESTING: alternateConfigureLibrary from config.packages.egads(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/package.py:966)
+TESTING: consistencyChecks from config.packages.PTScotch(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/package.py:970)
+TESTING: alternateConfigureLibrary from config.packages.PTScotch(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/package.py:966)
+TESTING: consistencyChecks from config.packages.mmg(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/package.py:970)
+TESTING: alternateConfigureLibrary from config.packages.mmg(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/package.py:966)
+TESTING: consistencyChecks from config.packages.parmmg(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/package.py:970)
+TESTING: alternateConfigureLibrary from config.packages.parmmg(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/package.py:966)
+TESTING: consistencyChecks from config.packages.Zoltan(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/package.py:970)
+TESTING: alternateConfigureLibrary from config.packages.Zoltan(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/package.py:966)
+TESTING: consistencyChecks from config.packages.ADIOS(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/package.py:970)
+TESTING: alternateConfigureLibrary from config.packages.ADIOS(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/package.py:966)
+TESTING: consistencyChecks from config.packages.openmp(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/package.py:970)
+TESTING: alternateConfigureLibrary from config.packages.openmp(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/package.py:966)
+TESTING: consistencyChecks from config.packages.viennacl(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/package.py:970)
+TESTING: alternateConfigureLibrary from config.packages.viennacl(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/package.py:966)
+TESTING: consistencyChecks from config.packages.ColPack(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/package.py:970)
+TESTING: alternateConfigureLibrary from config.packages.ColPack(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/package.py:966)
+TESTING: consistencyChecks from config.packages.ADOLC(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/package.py:970)
+TESTING: alternateConfigureLibrary from config.packages.ADOLC(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/package.py:966)
+TESTING: consistencyChecks from config.packages.openblas(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/package.py:970)
+TESTING: alternateConfigureLibrary from config.packages.openblas(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/package.py:966)
+TESTING: consistencyChecks from config.packages.blis(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/package.py:970)
+TESTING: alternateConfigureLibrary from config.packages.blis(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/package.py:966)
+TESTING: consistencyChecks from config.packages.f2cblaslapack(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/package.py:970)
+TESTING: alternateConfigureLibrary from config.packages.f2cblaslapack(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/package.py:966)
+TESTING: consistencyChecks from config.packages.BlasLapack(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/package.py:970)
+TESTING: checkDependencies from config.packages.BlasLapack(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/package.py:872)
+TESTING: configureLibrary from config.packages.BlasLapack(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/packages/BlasLapack.py:460)
+TESTING: checkLib from config.packages.BlasLapack(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/packages/BlasLapack.py:110)
+TESTING: checklsame from config.packages.BlasLapack(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/packages/BlasLapack.py:657)
+TESTING: checkRuntimeIssues from config.packages.BlasLapack(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/packages/BlasLapack.py:716)
+TESTING: checkCHeaders from config.packages.BlasLapack(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/packages/BlasLapack.py:535)
+TESTING: checkInclude from config.headers(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/headers.py:86)
+TESTING: checkVersion from config.packages.BlasLapack(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/package.py:1033)
+TESTING: checkSharedLibrary from config.packages.BlasLapack(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/package.py:962)
+TESTING: consistencyChecks from config.packages.sundials2(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/package.py:970)
+TESTING: alternateConfigureLibrary from config.packages.sundials2(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/package.py:966)
+TESTING: consistencyChecks from config.packages.spai(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/packages/spai.py:53)
+TESTING: alternateConfigureLibrary from config.packages.spai(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/package.py:966)
+TESTING: consistencyChecks from config.packages.pARMS(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/package.py:970)
+TESTING: alternateConfigureLibrary from config.packages.pARMS(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/package.py:966)
+TESTING: consistencyChecks from config.packages.p4est(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/package.py:970)
+TESTING: alternateConfigureLibrary from config.packages.p4est(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/package.py:966)
+TESTING: consistencyChecks from config.packages.mkl_sparse_optimize(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/package.py:970)
+TESTING: checkDependencies from config.packages.mkl_sparse_optimize(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/package.py:872)
+TESTING: configureLibrary from config.packages.mkl_sparse_optimize(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/packages/mkl_sparse_optimize.py:48)
+TESTING: checkVersion from config.packages.mkl_sparse_optimize(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/package.py:1033)
+TESTING: checkSharedLibrary from config.packages.mkl_sparse_optimize(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/package.py:962)
+TESTING: consistencyChecks from config.packages.mkl_sparse(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/package.py:970)
+TESTING: checkDependencies from config.packages.mkl_sparse(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/package.py:872)
+TESTING: configureLibrary from config.packages.mkl_sparse(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/packages/mkl_sparse.py:21)
+TESTING: checkVersion from config.packages.mkl_sparse(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/package.py:1033)
+TESTING: checkSharedLibrary from config.packages.mkl_sparse(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/package.py:962)
+TESTING: consistencyChecks from config.packages.mkl_cpardiso(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/packages/mkl_cpardiso.py:20)
+TESTING: alternateConfigureLibrary from config.packages.mkl_cpardiso(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/package.py:966)
+TESTING: consistencyChecks from config.packages.kokkos(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/package.py:970)
+TESTING: alternateConfigureLibrary from config.packages.kokkos(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/package.py:966)
+TESTING: consistencyChecks from config.packages.kokkos-kernels(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/package.py:970)
+TESTING: alternateConfigureLibrary from config.packages.kokkos-kernels(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/package.py:966)
+TESTING: consistencyChecks from config.packages.htool(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/package.py:970)
+TESTING: alternateConfigureLibrary from config.packages.htool(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/package.py:966)
+TESTING: consistencyChecks from config.packages.hpddm(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/package.py:970)
+TESTING: alternateConfigureLibrary from config.packages.hpddm(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/packages/hpddm.py:117)
+TESTING: consistencyChecks from config.packages.magma(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/package.py:970)
+TESTING: alternateConfigureLibrary from config.packages.magma(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/package.py:966)
+TESTING: consistencyChecks from config.packages.kblas(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/package.py:970)
+TESTING: alternateConfigureLibrary from config.packages.kblas(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/package.py:966)
+TESTING: consistencyChecks from config.packages.hara(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/package.py:970)
+TESTING: alternateConfigureLibrary from config.packages.hara(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/package.py:966)
+TESTING: consistencyChecks from config.packages.fftw(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/package.py:970)
+TESTING: alternateConfigureLibrary from config.packages.fftw(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/package.py:966)
+TESTING: consistencyChecks from config.packages.elemental(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/package.py:970)
+TESTING: alternateConfigureLibrary from config.packages.elemental(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/package.py:966)
+TESTING: consistencyChecks from config.packages.bamg(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/package.py:970)
+TESTING: alternateConfigureLibrary from config.packages.bamg(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/packages/bamg.py:90)
+TESTING: consistencyChecks from config.packages.ml(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/packages/ml.py:62)
+TESTING: alternateConfigureLibrary from config.packages.ml(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/package.py:966)
+TESTING: consistencyChecks from config.packages.mkl_pardiso(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/packages/mkl_pardiso.py:21)
+TESTING: alternateConfigureLibrary from config.packages.mkl_pardiso(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/package.py:966)
+TESTING: consistencyChecks from config.packages.SuperLU_DIST(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/package.py:970)
+TESTING: alternateConfigureLibrary from config.packages.SuperLU_DIST(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/package.py:966)
+TESTING: consistencyChecks from config.packages.SuperLU(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/package.py:970)
+TESTING: alternateConfigureLibrary from config.packages.SuperLU(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/package.py:966)
+TESTING: consistencyChecks from config.packages.SuiteSparse(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/packages/SuiteSparse.py:177)
+TESTING: alternateConfigureLibrary from config.packages.SuiteSparse(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/package.py:966)
+TESTING: consistencyChecks from config.packages.PaStiX(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/package.py:970)
+TESTING: alternateConfigureLibrary from config.packages.PaStiX(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/package.py:966)
+TESTING: consistencyChecks from config.packages.scalapack(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/package.py:970)
+TESTING: alternateConfigureLibrary from config.packages.scalapack(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/package.py:966)
+TESTING: consistencyChecks from config.packages.strumpack(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/packages/strumpack.py:67)
+TESTING: alternateConfigureLibrary from config.packages.strumpack(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/package.py:966)
+TESTING: consistencyChecks from config.packages.MUMPS(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/packages/MUMPS.py:58)
+TESTING: alternateConfigureLibrary from config.packages.MUMPS(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/package.py:966)
+TESTING: consistencyChecks from config.packages.MOAB(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/package.py:970)
+TESTING: alternateConfigureLibrary from config.packages.MOAB(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/package.py:966)
+TESTING: consistencyChecks from config.packages.Chombo(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/packages/Chombo.py:131)
+TESTING: alternateConfigureLibrary from config.packages.Chombo(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/package.py:966)
+TESTING: consistencyChecks from config.packages.hypre(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/packages/hypre.py:105)
+TESTING: alternateConfigureLibrary from config.packages.hypre(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/package.py:966)
+TESTING: consistencyChecks from config.packages.Trilinos(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/package.py:970)
+TESTING: alternateConfigureLibrary from config.packages.Trilinos(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/package.py:966)
+TESTING: consistencyChecks from config.packages.xSDKTrilinos(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/package.py:970)
+TESTING: alternateConfigureLibrary from config.packages.xSDKTrilinos(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/package.py:966)
+TESTING: consistencyChecks from config.packages.mstk(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/package.py:970)
+TESTING: alternateConfigureLibrary from config.packages.mstk(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/package.py:966)
+TESTING: consistencyChecks from config.packages.MFEM(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/package.py:970)
+TESTING: alternateConfigureLibrary from config.packages.MFEM(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/packages/MFEM.py:224)
+TESTING: consistencyChecks from config.packages.AMReX(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/package.py:970)
+TESTING: alternateConfigureLibrary from config.packages.AMReX(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/BuildSystem/config/packages/AMReX.py:157)
+TESTING: configureRTLDDefault from PETSc.Configure(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/PETSc/Configure.py:714)
+TESTING: configurePrefetch from PETSc.Configure(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/PETSc/Configure.py:532)
+TESTING: configureUnused from PETSc.Configure(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/PETSc/Configure.py:600)
+TESTING: configureDeprecated from PETSc.Configure(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/PETSc/Configure.py:618)
+TESTING: configureIsatty from PETSc.Configure(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/PETSc/Configure.py:612)
+TESTING: configureExpect from PETSc.Configure(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/PETSc/Configure.py:667)
+TESTING: configureAlign from PETSc.Configure(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/PETSc/Configure.py:651)
+TESTING: configureFunctionName from PETSc.Configure(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/PETSc/Configure.py:674)
+TESTING: configureIntptrt from PETSc.Configure(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/PETSc/Configure.py:692)
+TESTING: configureSolaris from PETSc.Configure(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/PETSc/Configure.py:719)
+TESTING: configureLinux from PETSc.Configure(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/PETSc/Configure.py:732)
+TESTING: configureWin32 from PETSc.Configure(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/PETSc/Configure.py:738)
+TESTING: configureCygwinBrokenPipe from PETSc.Configure(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/PETSc/Configure.py:816)
+TESTING: configureDefaultArch from PETSc.Configure(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/PETSc/Configure.py:832)
+TESTING: configureScript from PETSc.Configure(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/PETSc/Configure.py:849)
+TESTING: configureInstall from PETSc.Configure(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/PETSc/Configure.py:888)
+TESTING: configureGCOV from PETSc.Configure(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/PETSc/Configure.py:904)
+TESTING: configureAtoll from PETSc.Configure(/home/glci/builds/6tPtAx36/1/petsc/petsc/config/PETSc/Configure.py:595)
+Compilers:
+  C Compiler:         /home/glci/petsc-hash-pkgs/8258ac/bin/mpicc -m32 -fPIC -Wall -Wwrite-strings -Wno-strict-aliasing -Wno-unknown-pragmas -g -O  
+    Version: gcc (Ubuntu 7.5.0-3ubuntu1~18.04) 7.5.0
+  Fortran Compiler:         /home/glci/petsc-hash-pkgs/8258ac/bin/mpif90 -m32 -fPIC -Wall -ffree-line-length-0 -Wno-unused-dummy-argument -g -O 
+    Version: GNU Fortran (Ubuntu 7.5.0-3ubuntu1~18.04) 7.5.0
+Linkers:
+  Shared linker:   /home/glci/petsc-hash-pkgs/8258ac/bin/mpicc  -shared -m32 -fPIC -Wall -Wwrite-strings -Wno-strict-aliasing -Wno-unknown-pragmas -g -O
+  Dynamic linker:   /home/glci/petsc-hash-pkgs/8258ac/bin/mpicc  -shared -m32 -fPIC -Wall -Wwrite-strings -Wno-strict-aliasing -Wno-unknown-pragmas -g -O
+  Libraries linked against:   -ldl 
+BlasLapack:
+  Library:  -Wl,-rpath,/home/glci/petsc-hash-pkgs/8258ac/lib -L/home/glci/petsc-hash-pkgs/8258ac/lib -lflapack -lfblas
+  uses 4 byte integers
+MPI:
+  Version:  3
+  Includes: -I/home/glci/petsc-hash-pkgs/8258ac/include
+  mpiexec: /home/glci/petsc-hash-pkgs/8258ac/bin/mpiexec
+  Implementation: mpich3
+  MPICH_NUMVERSION: 30402300
+MPICH:
+pthread:
+  Library:  -lpthread
+fblaslapack:
+cmake:
+  Version:  3.10.2
+  /usr/bin/cmake
+regex:
+sowing:
+  Version:  1.1.26
+  /home/glci/petsc-hash-pkgs/8258ac/bin/bfort
+  Language used to compile PETSc: C
+PETSc:
+  PETSC_ARCH: arch-ci-linux-gcc-complex-opt-32bit
+  PETSC_DIR: /home/glci/builds/6tPtAx36/1/petsc/petsc
+  Prefix: /home/glci/builds/6tPtAx36/1/petsc/petsc/arch-ci-linux-gcc-complex-opt-32bit
+  Scalar type: complex
+  Precision: double
+  Support for __float128
+  Integer size: 4 bytes
+  Single library: yes
+  Shared libraries: yes
+  Memory alignment from malloc(): 16 bytes
+  Using GNU make: /usr/bin/make
+xxx=========================================================================xxx
+ Configure stage complete. Now build PETSc libraries with:
+   make PETSC_DIR=/home/glci/builds/6tPtAx36/1/petsc/petsc PETSC_ARCH=arch-ci-linux-gcc-complex-opt-32bit all
+xxx=========================================================================xxx
+[32;1m$ make CFLAGS="${MAKE_CFLAGS}" CXXFLAGS="${MAKE_CXXFLAGS}" FFLAGS="${MAKE_FFLAGS}"[0;m
+==========================================
+ 
+See documentation/faq.html and documentation/bugreporting.html
+for help with installation problems.  Please send EVERYTHING
+printed out below when reporting problems.  Please check the
+mailing list archives and consider subscribing.
+ 
+  http://www.mcs.anl.gov/petsc/miscellaneous/mailing-lists.html
+ 
+==========================================
+Starting make run on pj02 at Wed, 30 Jun 2021 08:21:18 -0500
+Machine characteristics: Linux pj02 4.15.0-135-generic #139-Ubuntu SMP Mon Jan 18 17:38:24 UTC 2021 x86_64 x86_64 x86_64 GNU/Linux
+-----------------------------------------
+Using PETSc directory: /home/glci/builds/6tPtAx36/1/petsc/petsc
+Using PETSc arch: arch-ci-linux-gcc-complex-opt-32bit
+-----------------------------------------
+PETSC_VERSION_RELEASE    0
+PETSC_VERSION_MAJOR      3
+PETSC_VERSION_MINOR      15
+PETSC_VERSION_SUBMINOR   1
+PETSC_VERSION_PATCH      0
+PETSC_VERSION_DATE       "unknown"
+PETSC_VERSION_GIT        "unknown"
+PETSC_VERSION_DATE_GIT   "unknown"
+PETSC_VERSION_EQ(MAJOR,MINOR,SUBMINOR) \
+PETSC_VERSION_ PETSC_VERSION_EQ
+PETSC_VERSION_LT(MAJOR,MINOR,SUBMINOR)          \
+PETSC_VERSION_LE(MAJOR,MINOR,SUBMINOR) \
+PETSC_VERSION_GT(MAJOR,MINOR,SUBMINOR) \
+PETSC_VERSION_GE(MAJOR,MINOR,SUBMINOR) \
+-----------------------------------------
+Using configure Options: --package-prefix-hash=/home/glci/petsc-hash-pkgs CFLAGS="-m32 -fPIC -Wall -Wwrite-strings -Wno-strict-aliasing -Wno-unknown-pragmas" CXXFLAGS="-m32 -fPIC -Wall -Wwrite-strings -Wno-strict-aliasing -Wno-unknown-pragmas" FFLAGS="-m32 -fPIC -Wall -ffree-line-length-0 -Wno-unused-dummy-argument" --with-clanguage=c --with-shared-libraries=yes --with-debugging=no --with-scalar-type=complex --with-64-bit-indices=no --with-precision=double --download-mpich --download-fblaslapack PETSC_ARCH=arch-ci-linux-gcc-complex-opt-32bit
+Using configuration flags:
+#define INCLUDED_PETSCCONF_H
+#define PETSC_ARCH ""
+#define PETSC_ATTRIBUTEALIGNED(size) __attribute((aligned(size)))
+#define PETSC_Alignx(a,b)   
+#define PETSC_BLASLAPACK_UNDERSCORE 1
+#define PETSC_CLANGUAGE_C 1
+#define PETSC_C_INLINE inline
+#define PETSC_C_RESTRICT __restrict
+#define PETSC_DEPRECATED_ENUM(why) __attribute((deprecated))
+#define PETSC_DEPRECATED_FUNCTION(why) __attribute((deprecated))
+#define PETSC_DEPRECATED_MACRO(why) _Pragma(why)
+#define PETSC_DEPRECATED_TYPEDEF(why) __attribute((deprecated))
+#define PETSC_DIR "/home/glci/builds/6tPtAx36/1/petsc/petsc"
+#define PETSC_DIR_SEPARATOR '/'
+#define PETSC_FORTRAN_CHARLEN_T int
+#define PETSC_FORTRAN_TYPE_INITIALIZE  = -2
+#define PETSC_FUNCTION_NAME_C __func__
+#define PETSC_HAVE_ACCESS 1
+#define PETSC_HAVE_ATOLL 1
+#define PETSC_HAVE_ATTRIBUTEALIGNED 1
+#define PETSC_HAVE_BUILTIN_EXPECT 1
+#define PETSC_HAVE_BZERO 1
+#define PETSC_HAVE_C99_COMPLEX 1
+#define PETSC_HAVE_CLOCK 1
+#define PETSC_HAVE_DLADDR 1
+#define PETSC_HAVE_DLCLOSE 1
+#define PETSC_HAVE_DLERROR 1
+#define PETSC_HAVE_DLFCN_H 1
+#define PETSC_HAVE_DLOPEN 1
+#define PETSC_HAVE_DLSYM 1
+#define PETSC_HAVE_DOUBLE_ALIGN_MALLOC 1
+#define PETSC_HAVE_DRAND48 1
+#define PETSC_HAVE_DYNAMIC_LIBRARIES 1
+#define PETSC_HAVE_ERF 1
+#define PETSC_HAVE_FBLASLAPACK 1
+#define PETSC_HAVE_FCNTL_H 1
+#define PETSC_HAVE_FENV_H 1
+#define PETSC_HAVE_FLOAT_H 1
+#define PETSC_HAVE_FORK 1
+#define PETSC_HAVE_FORTRAN 1
+#define PETSC_HAVE_FORTRAN_FLUSH 1
+#define PETSC_HAVE_FORTRAN_GET_COMMAND_ARGUMENT 1
+#define PETSC_HAVE_FORTRAN_TYPE_STAR 1
+#define PETSC_HAVE_FORTRAN_UNDERSCORE 1
+#define PETSC_HAVE_GETCWD 1
+#define PETSC_HAVE_GETDOMAINNAME 1
+#define PETSC_HAVE_GETHOSTBYNAME 1
+#define PETSC_HAVE_GETHOSTNAME 1
+#define PETSC_HAVE_GETPAGESIZE 1
+#define PETSC_HAVE_GETRUSAGE 1
+#define PETSC_HAVE_IMMINTRIN_H 1
+#define PETSC_HAVE_INTTYPES_H 1
+#define PETSC_HAVE_ISINF 1
+#define PETSC_HAVE_ISNAN 1
+#define PETSC_HAVE_ISNORMAL 1
+#define PETSC_HAVE_LGAMMA 1
+#define PETSC_HAVE_LOG2 1
+#define PETSC_HAVE_LSEEK 1
+#define PETSC_HAVE_MALLOC_H 1
+#define PETSC_HAVE_MEMALIGN 1
+#define PETSC_HAVE_MEMMOVE 1
+#define PETSC_HAVE_MMAP 1
+#define PETSC_HAVE_MPICH 1
+#define PETSC_HAVE_MPICH_NUMVERSION 30402300
+#define PETSC_HAVE_MPIEXEC_ENVIRONMENTAL_VARIABLE MPIR_CVAR_CH3
+#define PETSC_HAVE_MPIIO 1
+#define PETSC_HAVE_MPI_COMBINER_CONTIGUOUS 1
+#define PETSC_HAVE_MPI_COMBINER_DUP 1
+#define PETSC_HAVE_MPI_COMBINER_NAMED 1
+#define PETSC_HAVE_MPI_EXSCAN 1
+#define PETSC_HAVE_MPI_F90MODULE 1
+#define PETSC_HAVE_MPI_F90MODULE_VISIBILITY 1
+#define PETSC_HAVE_MPI_FEATURE_DYNAMIC_WINDOW 1
+#define PETSC_HAVE_MPI_FINALIZED 1
+#define PETSC_HAVE_MPI_GET_ACCUMULATE 1
+#define PETSC_HAVE_MPI_GET_LIBRARY_VERSION 1
+#define PETSC_HAVE_MPI_IALLREDUCE 1
+#define PETSC_HAVE_MPI_IBARRIER 1
+#define PETSC_HAVE_MPI_INIT_THREAD 1
+#define PETSC_HAVE_MPI_INT64_T 1
+#define PETSC_HAVE_MPI_IN_PLACE 1
+#define PETSC_HAVE_MPI_LONG_DOUBLE 1
+#define PETSC_HAVE_MPI_NEIGHBORHOOD_COLLECTIVES 1
+#define PETSC_HAVE_MPI_NONBLOCKING_COLLECTIVES 1
+#define PETSC_HAVE_MPI_ONE_SIDED 1
+#define PETSC_HAVE_MPI_PROCESS_SHARED_MEMORY 1
+#define PETSC_HAVE_MPI_REDUCE_LOCAL 1
+#define PETSC_HAVE_MPI_REDUCE_SCATTER 1
+#define PETSC_HAVE_MPI_REDUCE_SCATTER_BLOCK 1
+#define PETSC_HAVE_MPI_RGET 1
+#define PETSC_HAVE_MPI_TYPE_DUP 1
+#define PETSC_HAVE_MPI_TYPE_GET_ENVELOPE 1
+#define PETSC_HAVE_MPI_WIN_CREATE 1
+#define PETSC_HAVE_NANOSLEEP 1
+#define PETSC_HAVE_NETDB_H 1
+#define PETSC_HAVE_NETINET_IN_H 1
+#define PETSC_HAVE_PACKAGES ":blaslapack:fblaslapack:mathlib:mpi:mpich:pthread:regex:sowing:"
+#define PETSC_HAVE_POPEN 1
+#define PETSC_HAVE_PTHREAD 1
+#define PETSC_HAVE_PTHREAD_BARRIER_T 1
+#define PETSC_HAVE_PTHREAD_H 1
+#define PETSC_HAVE_PWD_H 1
+#define PETSC_HAVE_RAND 1
+#define PETSC_HAVE_READLINK 1
+#define PETSC_HAVE_REALPATH 1
+#define PETSC_HAVE_REAL___FLOAT128 1
+#define PETSC_HAVE_REGEX 1
+#define PETSC_HAVE_RTLD_GLOBAL 1
+#define PETSC_HAVE_RTLD_LAZY 1
+#define PETSC_HAVE_RTLD_LOCAL 1
+#define PETSC_HAVE_RTLD_NOW 1
+#define PETSC_HAVE_SCHED_CPU_SET_T 1
+#define PETSC_HAVE_SETJMP_H 1
+#define PETSC_HAVE_SLEEP 1
+#define PETSC_HAVE_SNPRINTF 1
+#define PETSC_HAVE_SOCKET 1
+#define PETSC_HAVE_SOWING 1
+#define PETSC_HAVE_SO_REUSEADDR 1
+#define PETSC_HAVE_STDINT_H 1
+#define PETSC_HAVE_STRCASECMP 1
+#define PETSC_HAVE_STRINGS_H 1
+#define PETSC_HAVE_STRUCT_SIGACTION 1
+#define PETSC_HAVE_SYSINFO 1
+#define PETSC_HAVE_SYS_PARAM_H 1
+#define PETSC_HAVE_SYS_PROCFS_H 1
+#define PETSC_HAVE_SYS_RESOURCE_H 1
+#define PETSC_HAVE_SYS_SOCKET_H 1
+#define PETSC_HAVE_SYS_SYSCTL_H 1
+#define PETSC_HAVE_SYS_SYSINFO_H 1
+#define PETSC_HAVE_SYS_TIMES_H 1
+#define PETSC_HAVE_SYS_TIME_H 1
+#define PETSC_HAVE_SYS_TYPES_H 1
+#define PETSC_HAVE_SYS_UTSNAME_H 1
+#define PETSC_HAVE_SYS_WAIT_H 1
+#define PETSC_HAVE_TGAMMA 1
+#define PETSC_HAVE_TIME 1
+#define PETSC_HAVE_TIME_H 1
+#define PETSC_HAVE_UNAME 1
+#define PETSC_HAVE_UNISTD_H 1
+#define PETSC_HAVE_USLEEP 1
+#define PETSC_HAVE_VA_COPY 1
+#define PETSC_HAVE_VSNPRINTF 1
+#define PETSC_HAVE_XMMINTRIN_H 1
+#define PETSC_IS_COLORING_MAX USHRT_MAX
+#define PETSC_IS_COLORING_VALUE_TYPE short
+#define PETSC_IS_COLORING_VALUE_TYPE_F integer2
+#define PETSC_LEVEL1_DCACHE_LINESIZE 64
+#define PETSC_LIB_DIR "/home/glci/builds/6tPtAx36/1/petsc/petsc/arch-ci-linux-gcc-complex-opt-32bit/lib"
+#define PETSC_MAX_PATH_LEN 4096
+#define PETSC_MEMALIGN 16
+#define PETSC_MPICC_SHOW "gcc -m32 -fPIC -g -O -I/home/glci/petsc-hash-pkgs/8258ac/include -L/home/glci/petsc-hash-pkgs/8258ac/lib -Wl,-rpath -Wl,/home/glci/petsc-hash-pkgs/8258ac/lib -Wl,--enable-new-dtags -lmpi"
+#define PETSC_MPIU_IS_COLORING_VALUE_TYPE MPI_UNSIGNED_SHORT
+#define PETSC_PREFETCH_HINT_NTA _MM_HINT_NTA
+#define PETSC_PREFETCH_HINT_T0 _MM_HINT_T0
+#define PETSC_PREFETCH_HINT_T1 _MM_HINT_T1
+#define PETSC_PREFETCH_HINT_T2 _MM_HINT_T2
+#define PETSC_PYTHON_EXE "/usr/bin/python"
+#define PETSC_Prefetch(a,b,c) _mm_prefetch((const char*)(a),(c))
+#define PETSC_REPLACE_DIR_SEPARATOR '\\'
+#define PETSC_SIZEOF_ENUM 4
+#define PETSC_SIZEOF_INT 4
+#define PETSC_SIZEOF_LONG 4
+#define PETSC_SIZEOF_LONG_LONG 8
+#define PETSC_SIZEOF_SHORT 2
+#define PETSC_SIZEOF_SIZE_T 4
+#define PETSC_SIZEOF_VOID_P 4
+#define PETSC_SLSUFFIX "so"
+#define PETSC_UINTPTR_T uintptr_t
+#define PETSC_UNUSED __attribute((unused))
+#define PETSC_USE_AVX512_KERNELS 1
+#define PETSC_USE_BACKWARD_LOOP 1
+#define PETSC_USE_COMPLEX 1
+#define PETSC_USE_CTABLE 1
+#define PETSC_USE_DEBUGGER "gdb"
+#define PETSC_USE_INFO 1
+#define PETSC_USE_ISATTY 1
+#define PETSC_USE_LOG 1
+#define PETSC_USE_MALLOC_COALESCED 1
+#define PETSC_USE_PROC_FOR_SIZE 1
+#define PETSC_USE_REAL_DOUBLE 1
+#define PETSC_USE_SHARED_LIBRARIES 1
+#define PETSC_USE_SINGLE_LIBRARY 1
+#define PETSC_USE_SOCKET_VIEWER 1
+#define PETSC_USE_VISIBILITY_C 1
+#define PETSC_USING_F2003 1
+#define PETSC_USING_F90FREEFORM 1
+#define PETSC_VERSION_BRANCH_GIT "HEAD"
+#define PETSC_VERSION_DATE_GIT "2021-06-30 00:02:29 +0000"
+#define PETSC_VERSION_GIT "v3.15.1-502-g379ed4d2"
+#define PETSC__BSD_SOURCE 1
+#define PETSC__DEFAULT_SOURCE 1
+#define PETSC__GNU_SOURCE 1
+-----------------------------------------
+Using C compile: /home/glci/petsc-hash-pkgs/8258ac/bin/mpicc -o .o -c -m32 -fPIC -Wall -Wwrite-strings -Wno-strict-aliasing -Wno-unknown-pragmas -g -O    
+mpicc -show: gcc -m32 -fPIC -g -O -I/home/glci/petsc-hash-pkgs/8258ac/include -L/home/glci/petsc-hash-pkgs/8258ac/lib -Wl,-rpath -Wl,/home/glci/petsc-hash-pkgs/8258ac/lib -Wl,--enable-new-dtags -lmpi
+C compiler version: gcc (Ubuntu 7.5.0-3ubuntu1~18.04) 7.5.0
+Using C++ compile: g++ -o .o -c  -Werror -I/home/glci/builds/6tPtAx36/1/petsc/petsc/include -I/home/glci/builds/6tPtAx36/1/petsc/petsc/arch-ci-linux-gcc-complex-opt-32bit/include -I/home/glci/petsc-hash-pkgs/8258ac/include   
+C++ compiler version: 
+Using Fortran compile: /home/glci/petsc-hash-pkgs/8258ac/bin/mpif90 -o .o -c -m32 -fPIC -Wall -ffree-line-length-0 -Wno-unused-dummy-argument -g -O  -Werror -I/home/glci/builds/6tPtAx36/1/petsc/petsc/include -I/home/glci/builds/6tPtAx36/1/petsc/petsc/arch-ci-linux-gcc-complex-opt-32bit/include -I/home/glci/petsc-hash-pkgs/8258ac/include   
+mpif90 -show: gfortran -m32 -fPIC -ffree-line-length-0 -g -O -I/home/glci/petsc-hash-pkgs/8258ac/include -I/home/glci/petsc-hash-pkgs/8258ac/include -L/home/glci/petsc-hash-pkgs/8258ac/lib -lmpifort -Wl,-rpath -Wl,/home/glci/petsc-hash-pkgs/8258ac/lib -Wl,--enable-new-dtags -lmpi
+Fortran compiler version: GNU Fortran (Ubuntu 7.5.0-3ubuntu1~18.04) 7.5.0
+-----------------------------------------
+Using C/C++ linker: /home/glci/petsc-hash-pkgs/8258ac/bin/mpicc
+Using C/C++ flags: -m32 -fPIC -Wall -Wwrite-strings -Wno-strict-aliasing -Wno-unknown-pragmas -g -O
+Using Fortran linker: /home/glci/petsc-hash-pkgs/8258ac/bin/mpif90
+Using Fortran flags: -m32 -fPIC -Wall -ffree-line-length-0 -Wno-unused-dummy-argument -g -O
+-----------------------------------------
+Using system modules: 
+Using mpi.h: # 1 "/home/glci/petsc-hash-pkgs/8258ac/include/mpi.h" 1
+-----------------------------------------
+Using libraries: -Wl,-rpath,/home/glci/builds/6tPtAx36/1/petsc/petsc/arch-ci-linux-gcc-complex-opt-32bit/lib -L/home/glci/builds/6tPtAx36/1/petsc/petsc/arch-ci-linux-gcc-complex-opt-32bit/lib -Wl,-rpath,/home/glci/petsc-hash-pkgs/8258ac/lib -L/home/glci/petsc-hash-pkgs/8258ac/lib -Wl,-rpath,/usr/lib/gcc/x86_64-linux-gnu/7/32 -L/usr/lib/gcc/x86_64-linux-gnu/7/32 -Wl,-rpath,/usr/lib32 -L/usr/lib32 -Wl,-rpath,/lib32 -L/lib32 -Wl,-rpath,/usr/lib/gcc/x86_64-linux-gnu/7 -L/usr/lib/gcc/x86_64-linux-gnu/7 -lpetsc -lflapack -lfblas -lpthread -lm -ldl -lmpifort -lmpi -lgfortran -lm -lgfortran -lm -lgcc_s -lquadmath -ldl
+------------------------------------------
+Using mpiexec: /home/glci/petsc-hash-pkgs/8258ac/bin/mpiexec
+------------------------------------------
+Using MAKE: /usr/bin/make
+Using MAKEFLAGS: -j10 -l18.0  --no-print-directory -- PETSC_DIR=/home/glci/builds/6tPtAx36/1/petsc/petsc PETSC_ARCH=arch-ci-linux-gcc-complex-opt-32bit FFLAGS=-Werror CXXFLAGS=-Werror CFLAGS=-Werror
+==========================================
+/usr/bin/python ./config/gmakegen.py --petsc-arch=arch-ci-linux-gcc-complex-opt-32bit
+/usr/bin/python /home/glci/builds/6tPtAx36/1/petsc/petsc/config/gmakegentest.py --petsc-dir=/home/glci/builds/6tPtAx36/1/petsc/petsc --petsc-arch=arch-ci-linux-gcc-complex-opt-32bit --testdir=./arch-ci-linux-gcc-complex-opt-32bit/tests
+          FC arch-ci-linux-gcc-complex-opt-32bit/obj/sys/fsrc/somefort.o
+          CC arch-ci-linux-gcc-complex-opt-32bit/obj/sys/ftn-custom/zsys.o
+          CC arch-ci-linux-gcc-complex-opt-32bit/obj/sys/info/ftn-auto/verboseinfof.o
+          FC arch-ci-linux-gcc-complex-opt-32bit/obj/sys/f90-src/fsrc/f90_fwrap.o
+          CC arch-ci-linux-gcc-complex-opt-32bit/obj/sys/ftn-custom/zutils.o
+          CC arch-ci-linux-gcc-complex-opt-32bit/obj/sys/info/ftn-custom/zverboseinfof.o
+          CC arch-ci-linux-gcc-complex-opt-32bit/obj/sys/info/verboseinfo.o
+          FC arch-ci-linux-gcc-complex-opt-32bit/obj/sys/f90-mod/petscsysmod.o
+         CXX arch-ci-linux-gcc-complex-opt-32bit/obj/sys/objects/device/impls/cupm/contextcupm.o
+In file included from /home/glci/builds/6tPtAx36/1/petsc/petsc/src/sys/objects/device/impls/cupm/contextcupm.cxx:1:0:
+/home/glci/builds/6tPtAx36/1/petsc/petsc/src/sys/objects/device/impls/cupm/contextcupm.hpp:7:2: error: #error PetscDeviceContext backends for CUDA and HIP requires C++11
+ #error PetscDeviceContext backends for CUDA and HIP requires C++11
+  ^~~~~
+In file included from /home/glci/builds/6tPtAx36/1/petsc/petsc/include/petsc/private/petscimpl.h:8:0,
+                 from /home/glci/builds/6tPtAx36/1/petsc/petsc/include/petsc/private/deviceimpl.h:4,
+                 from /home/glci/builds/6tPtAx36/1/petsc/petsc/src/sys/objects/device/impls/cupm/contextcupm.hpp:4,
+                 from /home/glci/builds/6tPtAx36/1/petsc/petsc/src/sys/objects/device/impls/cupm/contextcupm.cxx:1:
+/home/glci/builds/6tPtAx36/1/petsc/petsc/include/petscsys.h:71:24: error: ‘PETSC_CXX_INLINE’ does not name a type; did you mean ‘PETSC_C_INLINE’?
+ #  define PETSC_INLINE PETSC_CXX_INLINE
+                        ^
+/home/glci/builds/6tPtAx36/1/petsc/petsc/include/petscsys.h:76:36: note: in expansion of macro ‘PETSC_INLINE’
+ #define PETSC_STATIC_INLINE static PETSC_INLINE
+                                    ^~~~~~~~~~~~
+/home/glci/builds/6tPtAx36/1/petsc/petsc/include/petscmath.h:157:1: note: in expansion of macro ‘PETSC_STATIC_INLINE’
+ PETSC_STATIC_INLINE PetscReal PetscSignReal(PetscReal a)
+ ^~~~~~~~~~~~~~~~~~~
+/home/glci/builds/6tPtAx36/1/petsc/petsc/include/petscsys.h:71:24: error: ‘PETSC_CXX_INLINE’ does not name a type; did you mean ‘PETSC_C_INLINE’?
+ #  define PETSC_INLINE PETSC_CXX_INLINE
+                        ^
+/home/glci/builds/6tPtAx36/1/petsc/petsc/include/petscsys.h:76:36: note: in expansion of macro ‘PETSC_INLINE’
+ #define PETSC_STATIC_INLINE static PETSC_INLINE
+                                    ^~~~~~~~~~~~
+/home/glci/builds/6tPtAx36/1/petsc/petsc/include/petscmath.h:784:1: note: in expansion of macro ‘PETSC_STATIC_INLINE’
+ PETSC_STATIC_INLINE PetscBool PetscIsInfOrNanReal(PetscReal v) {return PetscIsInfReal(v) || PetscIsNanReal(v) ? PETSC_TRUE : PETSC_FALSE;}
+ ^~~~~~~~~~~~~~~~~~~
+/home/glci/builds/6tPtAx36/1/petsc/petsc/include/petscsys.h:71:24: error: ‘PETSC_CXX_INLINE’ does not name a type; did you mean ‘PETSC_C_INLINE’?
+ #  define PETSC_INLINE PETSC_CXX_INLINE
+                        ^
+/home/glci/builds/6tPtAx36/1/petsc/petsc/include/petscsys.h:76:36: note: in expansion of macro ‘PETSC_INLINE’
+ #define PETSC_STATIC_INLINE static PETSC_INLINE
+                                    ^~~~~~~~~~~~
+/home/glci/builds/6tPtAx36/1/petsc/petsc/include/petscmath.h:785:1: note: in expansion of macro ‘PETSC_STATIC_INLINE’
+ PETSC_STATIC_INLINE PetscBool PetscIsInfScalar(PetscScalar v) {return PetscIsInfReal(PetscAbsScalar(v));}
+ ^~~~~~~~~~~~~~~~~~~
+/home/glci/builds/6tPtAx36/1/petsc/petsc/include/petscsys.h:71:24: error: ‘PETSC_CXX_INLINE’ does not name a type; did you mean ‘PETSC_C_INLINE’?
+ #  define PETSC_INLINE PETSC_CXX_INLINE
+                        ^
+/home/glci/builds/6tPtAx36/1/petsc/petsc/include/petscsys.h:76:36: note: in expansion of macro ‘PETSC_INLINE’
+ #define PETSC_STATIC_INLINE static PETSC_INLINE
+                                    ^~~~~~~~~~~~
+/home/glci/builds/6tPtAx36/1/petsc/petsc/include/petscmath.h:786:1: note: in expansion of macro ‘PETSC_STATIC_INLINE’
+ PETSC_STATIC_INLINE PetscBool PetscIsNanScalar(PetscScalar v) {return PetscIsNanReal(PetscAbsScalar(v));}
+ ^~~~~~~~~~~~~~~~~~~
+/home/glci/builds/6tPtAx36/1/petsc/petsc/include/petscsys.h:71:24: error: ‘PETSC_CXX_INLINE’ does not name a type; did you mean ‘PETSC_C_INLINE’?
+ #  define PETSC_INLINE PETSC_CXX_INLINE
+                        ^
+/home/glci/builds/6tPtAx36/1/petsc/petsc/include/petscsys.h:76:36: note: in expansion of macro ‘PETSC_INLINE’
+ #define PETSC_STATIC_INLINE static PETSC_INLINE
+                                    ^~~~~~~~~~~~
+/home/glci/builds/6tPtAx36/1/petsc/petsc/include/petscmath.h:787:1: note: in expansion of macro ‘PETSC_STATIC_INLINE’
+ PETSC_STATIC_INLINE PetscBool PetscIsInfOrNanScalar(PetscScalar v) {return PetscIsInfOrNanReal(PetscAbsScalar(v));}
+ ^~~~~~~~~~~~~~~~~~~
+/home/glci/builds/6tPtAx36/1/petsc/petsc/include/petscsys.h:71:24: error: ‘PETSC_CXX_INLINE’ does not name a type; did you mean ‘PETSC_C_INLINE’?
+ #  define PETSC_INLINE PETSC_CXX_INLINE
+                        ^
+/home/glci/builds/6tPtAx36/1/petsc/petsc/include/petscsys.h:76:36: note: in expansion of macro ‘PETSC_INLINE’
+ #define PETSC_STATIC_INLINE static PETSC_INLINE
+                                    ^~~~~~~~~~~~
+/home/glci/builds/6tPtAx36/1/petsc/petsc/include/petscmath.h:788:1: note: in expansion of macro ‘PETSC_STATIC_INLINE’
+ PETSC_STATIC_INLINE PetscBool PetscIsNormalScalar(PetscScalar v) {return PetscIsNormalReal(PetscAbsScalar(v));}
+ ^~~~~~~~~~~~~~~~~~~
+/home/glci/builds/6tPtAx36/1/petsc/petsc/include/petscsys.h:71:24: error: ‘PETSC_CXX_INLINE’ does not name a type; did you mean ‘PETSC_C_INLINE’?
+ #  define PETSC_INLINE PETSC_CXX_INLINE
+                        ^
+/home/glci/builds/6tPtAx36/1/petsc/petsc/include/petscsys.h:76:36: note: in expansion of macro ‘PETSC_INLINE’
+ #define PETSC_STATIC_INLINE static PETSC_INLINE
+                                    ^~~~~~~~~~~~
+/home/glci/builds/6tPtAx36/1/petsc/petsc/include/petscmath.h:820:1: note: in expansion of macro ‘PETSC_STATIC_INLINE’
+ PETSC_STATIC_INLINE PetscInt PetscPowInt(PetscInt base,PetscInt power)
+ ^~~~~~~~~~~~~~~~~~~
+/home/glci/builds/6tPtAx36/1/petsc/petsc/include/petscsys.h:71:24: error: ‘PETSC_CXX_INLINE’ does not name a type; did you mean ‘PETSC_C_INLINE’?
+ #  define PETSC_INLINE PETSC_CXX_INLINE
+                        ^
+/home/glci/builds/6tPtAx36/1/petsc/petsc/include/petscsys.h:76:36: note: in expansion of macro ‘PETSC_INLINE’
+ #define PETSC_STATIC_INLINE static PETSC_INLINE
+                                    ^~~~~~~~~~~~
+/home/glci/builds/6tPtAx36/1/petsc/petsc/include/petscmath.h:831:1: note: in expansion of macro ‘PETSC_STATIC_INLINE’
+ PETSC_STATIC_INLINE PetscInt64 PetscPowInt64(PetscInt base,PetscInt power)
+ ^~~~~~~~~~~~~~~~~~~
+/home/glci/builds/6tPtAx36/1/petsc/petsc/include/petscsys.h:71:24: error: ‘PETSC_CXX_INLINE’ does not name a type; did you mean ‘PETSC_C_INLINE’?
+ #  define PETSC_INLINE PETSC_CXX_INLINE
+                        ^
+/home/glci/builds/6tPtAx36/1/petsc/petsc/include/petscsys.h:76:36: note: in expansion of macro ‘PETSC_INLINE’
+ #define PETSC_STATIC_INLINE static PETSC_INLINE
+                                    ^~~~~~~~~~~~
+/home/glci/builds/6tPtAx36/1/petsc/petsc/include/petscmath.h:842:1: note: in expansion of macro ‘PETSC_STATIC_INLINE’
+ PETSC_STATIC_INLINE PetscReal PetscPowRealInt(PetscReal base,PetscInt power)
+ ^~~~~~~~~~~~~~~~~~~
+/home/glci/builds/6tPtAx36/1/petsc/petsc/include/petscsys.h:71:24: error: ‘PETSC_CXX_INLINE’ does not name a type; did you mean ‘PETSC_C_INLINE’?
+ #  define PETSC_INLINE PETSC_CXX_INLINE
+                        ^
+/home/glci/builds/6tPtAx36/1/petsc/petsc/include/petscsys.h:76:36: note: in expansion of macro ‘PETSC_INLINE’
+ #define PETSC_STATIC_INLINE static PETSC_INLINE
+                                    ^~~~~~~~~~~~
+/home/glci/builds/6tPtAx36/1/petsc/petsc/include/petscmath.h:857:1: note: in expansion of macro ‘PETSC_STATIC_INLINE’
+ PETSC_STATIC_INLINE PetscScalar PetscPowScalarInt(PetscScalar base,PetscInt power)
+ ^~~~~~~~~~~~~~~~~~~
+/home/glci/builds/6tPtAx36/1/petsc/petsc/include/petscsys.h:71:24: error: ‘PETSC_CXX_INLINE’ does not name a type; did you mean ‘PETSC_C_INLINE’?
+ #  define PETSC_INLINE PETSC_CXX_INLINE
+                        ^
+/home/glci/builds/6tPtAx36/1/petsc/petsc/include/petscsys.h:76:36: note: in expansion of macro ‘PETSC_INLINE’
+ #define PETSC_STATIC_INLINE static PETSC_INLINE
+                                    ^~~~~~~~~~~~
+/home/glci/builds/6tPtAx36/1/petsc/petsc/include/petscmath.h:872:1: note: in expansion of macro ‘PETSC_STATIC_INLINE’
+ PETSC_STATIC_INLINE PetscScalar PetscPowScalarReal(PetscScalar base,PetscReal power)
+ ^~~~~~~~~~~~~~~~~~~
+/home/glci/builds/6tPtAx36/1/petsc/petsc/include/petscsys.h:71:24: error: ‘PETSC_CXX_INLINE’ does not name a type; did you mean ‘PETSC_C_INLINE’?
+ #  define PETSC_INLINE PETSC_CXX_INLINE
+                        ^
+/home/glci/builds/6tPtAx36/1/petsc/petsc/include/petscsys.h:76:36: note: in expansion of macro ‘PETSC_INLINE’
+ #define PETSC_STATIC_INLINE static PETSC_INLINE
+                                    ^~~~~~~~~~~~
+/home/glci/builds/6tPtAx36/1/petsc/petsc/include/petscerror.h:681:90: note: in expansion of macro ‘PETSC_STATIC_INLINE’
+ PETSC_DEPRECATED_FUNCTION("Use PetscSignalSegvCheckPointerOrMpi() (since version 3.13)") PETSC_STATIC_INLINE void PetscSignalSegvCheckPointer(void) {PetscSignalSegvCheckPointerOrMpi();}
+                                                                                          ^~~~~~~~~~~~~~~~~~~
+/home/glci/builds/6tPtAx36/1/petsc/petsc/include/petscsys.h:71:24: error: ‘PETSC_CXX_INLINE’ does not name a type; did you mean ‘PETSC_C_INLINE’?
+ #  define PETSC_INLINE PETSC_CXX_INLINE
+                        ^
+/home/glci/builds/6tPtAx36/1/petsc/petsc/include/petscsys.h:76:36: note: in expansion of macro ‘PETSC_INLINE’
+ #define PETSC_STATIC_INLINE static PETSC_INLINE
+                                    ^~~~~~~~~~~~
+/home/glci/builds/6tPtAx36/1/petsc/petsc/include/petscerror.h:980:1: note: in expansion of macro ‘PETSC_STATIC_INLINE’
+ PETSC_STATIC_INLINE PetscBool PetscStackActive(void) {return PETSC_FALSE;}
+ ^~~~~~~~~~~~~~~~~~~
+/home/glci/builds/6tPtAx36/1/petsc/petsc/include/petscsys.h:71:24: error: ‘PETSC_CXX_INLINE’ does not name a type; did you mean ‘PETSC_C_INLINE’?
+ #  define PETSC_INLINE PETSC_CXX_INLINE
+                        ^
+/home/glci/builds/6tPtAx36/1/petsc/petsc/include/petscsys.h:76:36: note: in expansion of macro ‘PETSC_INLINE’
+ #define PETSC_STATIC_INLINE static PETSC_INLINE
+                                    ^~~~~~~~~~~~
+/home/glci/builds/6tPtAx36/1/petsc/petsc/include/petsctime.h:102:1: note: in expansion of macro ‘PETSC_STATIC_INLINE’
+ PETSC_STATIC_INLINE PetscErrorCode PetscTime(PetscLogDouble *v)
+ ^~~~~~~~~~~~~~~~~~~
+/home/glci/builds/6tPtAx36/1/petsc/petsc/include/petscsys.h:71:24: error: ‘PETSC_CXX_INLINE’ does not name a type; did you mean ‘PETSC_C_INLINE’?
+ #  define PETSC_INLINE PETSC_CXX_INLINE
+                        ^
+/home/glci/builds/6tPtAx36/1/petsc/petsc/include/petscsys.h:76:36: note: in expansion of macro ‘PETSC_INLINE’
+ #define PETSC_STATIC_INLINE static PETSC_INLINE
+                                    ^~~~~~~~~~~~
+/home/glci/builds/6tPtAx36/1/petsc/petsc/include/petsctime.h:108:1: note: in expansion of macro ‘PETSC_STATIC_INLINE’
+ PETSC_STATIC_INLINE PetscErrorCode PetscTimeSubtract(PetscLogDouble *v)
+ ^~~~~~~~~~~~~~~~~~~
+/home/glci/builds/6tPtAx36/1/petsc/petsc/include/petscsys.h:71:24: error: ‘PETSC_CXX_INLINE’ does not name a type; did you mean ‘PETSC_C_INLINE’?
+ #  define PETSC_INLINE PETSC_CXX_INLINE
+                        ^
+/home/glci/builds/6tPtAx36/1/petsc/petsc/include/petscsys.h:76:36: note: in expansion of macro ‘PETSC_INLINE’
+ #define PETSC_STATIC_INLINE static PETSC_INLINE
+                                    ^~~~~~~~~~~~
+/home/glci/builds/6tPtAx36/1/petsc/petsc/include/petsctime.h:114:1: note: in expansion of macro ‘PETSC_STATIC_INLINE’
+ PETSC_STATIC_INLINE PetscErrorCode PetscTimeAdd(PetscLogDouble *v)
+ ^~~~~~~~~~~~~~~~~~~
+/home/glci/builds/6tPtAx36/1/petsc/petsc/include/petscsys.h:71:24: error: ‘PETSC_CXX_INLINE’ does not name a type; did you mean ‘PETSC_C_INLINE’?
+ #  define PETSC_INLINE PETSC_CXX_INLINE
+                        ^
+/home/glci/builds/6tPtAx36/1/petsc/petsc/include/petscsys.h:76:36: note: in expansion of macro ‘PETSC_INLINE’
+ #define PETSC_STATIC_INLINE static PETSC_INLINE
+                                    ^~~~~~~~~~~~
+/home/glci/builds/6tPtAx36/1/petsc/petsc/include/petsclog.h:270:1: note: in expansion of macro ‘PETSC_STATIC_INLINE’
+ PETSC_STATIC_INLINE PetscErrorCode PetscLogFlops(PetscLogDouble n)
+ ^~~~~~~~~~~~~~~~~~~
+/home/glci/builds/6tPtAx36/1/petsc/petsc/include/petscsys.h:71:24: error: ‘PETSC_CXX_INLINE’ does not name a type; did you mean ‘PETSC_C_INLINE’?
+ #  define PETSC_INLINE PETSC_CXX_INLINE
+                        ^
+/home/glci/builds/6tPtAx36/1/petsc/petsc/include/petscsys.h:76:36: note: in expansion of macro ‘PETSC_INLINE’
+ #define PETSC_STATIC_INLINE static PETSC_INLINE
+                                    ^~~~~~~~~~~~
+/home/glci/builds/6tPtAx36/1/petsc/petsc/include/petsclog.h:458:1: note: in expansion of macro ‘PETSC_STATIC_INLINE’
+ PETSC_STATIC_INLINE PetscErrorCode PetscMPITypeSize(PetscInt count,MPI_Datatype type,PetscLogDouble *length)
+ ^~~~~~~~~~~~~~~~~~~
+/home/glci/builds/6tPtAx36/1/petsc/petsc/include/petscsys.h:71:24: error: ‘PETSC_CXX_INLINE’ does not name a type; did you mean ‘PETSC_C_INLINE’?
+ #  define PETSC_INLINE PETSC_CXX_INLINE
+                        ^
+/home/glci/builds/6tPtAx36/1/petsc/petsc/include/petscsys.h:76:36: note: in expansion of macro ‘PETSC_INLINE’
+ #define PETSC_STATIC_INLINE static PETSC_INLINE
+                                    ^~~~~~~~~~~~
+/home/glci/builds/6tPtAx36/1/petsc/petsc/include/petsclog.h:468:1: note: in expansion of macro ‘PETSC_STATIC_INLINE’
+ PETSC_STATIC_INLINE PetscErrorCode PetscMPITypeSizeComm(MPI_Comm comm,const PetscMPIInt *counts,MPI_Datatype type,PetscLogDouble *length)
+ ^~~~~~~~~~~~~~~~~~~
+/home/glci/builds/6tPtAx36/1/petsc/petsc/include/petscsys.h:71:24: error: ‘PETSC_CXX_INLINE’ does not name a type; did you mean ‘PETSC_C_INLINE’?
+ #  define PETSC_INLINE PETSC_CXX_INLINE
+                        ^
+/home/glci/builds/6tPtAx36/1/petsc/petsc/include/petscsys.h:76:36: note: in expansion of macro ‘PETSC_INLINE’
+ #define PETSC_STATIC_INLINE static PETSC_INLINE
+                                    ^~~~~~~~~~~~
+/home/glci/builds/6tPtAx36/1/petsc/petsc/include/petsclog.h:482:1: note: in expansion of macro ‘PETSC_STATIC_INLINE’
+ PETSC_STATIC_INLINE PetscErrorCode PetscMPITypeSizeCount(PetscInt n,const PetscMPIInt *counts,MPI_Datatype type,PetscLogDouble *length)
+ ^~~~~~~~~~~~~~~~~~~
+/home/glci/builds/6tPtAx36/1/petsc/petsc/include/petscsys.h:71:24: error: ‘PETSC_CXX_INLINE’ does not name a type; did you mean ‘PETSC_C_INLINE’?
+ #  define PETSC_INLINE PETSC_CXX_INLINE
+                        ^
+/home/glci/builds/6tPtAx36/1/petsc/petsc/include/petscsys.h:76:36: note: in expansion of macro ‘PETSC_INLINE’
+ #define PETSC_STATIC_INLINE static PETSC_INLINE
+                                    ^~~~~~~~~~~~
+/home/glci/builds/6tPtAx36/1/petsc/petsc/include/petsclog.h:498:1: note: in expansion of macro ‘PETSC_STATIC_INLINE’
+ PETSC_STATIC_INLINE int PetscMPIParallelComm(MPI_Comm comm)
+ ^~~~~~~~~~~~~~~~~~~
+/home/glci/builds/6tPtAx36/1/petsc/petsc/include/petscsys.h:71:24: error: ‘PETSC_CXX_INLINE’ does not name a type; did you mean ‘PETSC_C_INLINE’?
+ #  define PETSC_INLINE PETSC_CXX_INLINE
+                        ^
+/home/glci/builds/6tPtAx36/1/petsc/petsc/include/petscsys.h:76:36: note: in expansion of macro ‘PETSC_INLINE’
+ #define PETSC_STATIC_INLINE static PETSC_INLINE
+                                    ^~~~~~~~~~~~
+/home/glci/builds/6tPtAx36/1/petsc/petsc/include/petscsys.h:1747:1: note: in expansion of macro ‘PETSC_STATIC_INLINE’
+ PETSC_STATIC_INLINE PetscErrorCode PetscMemmove(void *a,const void *b,size_t n)
+ ^~~~~~~~~~~~~~~~~~~
+/home/glci/builds/6tPtAx36/1/petsc/petsc/include/petscsys.h:71:24: error: ‘PETSC_CXX_INLINE’ does not name a type; did you mean ‘PETSC_C_INLINE’?
+ #  define PETSC_INLINE PETSC_CXX_INLINE
+                        ^
+/home/glci/builds/6tPtAx36/1/petsc/petsc/include/petscsys.h:76:36: note: in expansion of macro ‘PETSC_INLINE’
+ #define PETSC_STATIC_INLINE static PETSC_INLINE
+                                    ^~~~~~~~~~~~
+/home/glci/builds/6tPtAx36/1/petsc/petsc/include/petscsys.h:1806:1: note: in expansion of macro ‘PETSC_STATIC_INLINE’
+ PETSC_STATIC_INLINE PetscErrorCode PetscMemcpy(void *a,const void *b,size_t n)
+ ^~~~~~~~~~~~~~~~~~~
+/home/glci/builds/6tPtAx36/1/petsc/petsc/include/petscsys.h:71:24: error: ‘PETSC_CXX_INLINE’ does not name a type; did you mean ‘PETSC_C_INLINE’?
+ #  define PETSC_INLINE PETSC_CXX_INLINE
+                        ^
+/home/glci/builds/6tPtAx36/1/petsc/petsc/include/petscsys.h:76:36: note: in expansion of macro ‘PETSC_INLINE’
+ #define PETSC_STATIC_INLINE static PETSC_INLINE
+                                    ^~~~~~~~~~~~
+/home/glci/builds/6tPtAx36/1/petsc/petsc/include/petscsys.h:1870:1: note: in expansion of macro ‘PETSC_STATIC_INLINE’
+ PETSC_STATIC_INLINE PetscErrorCode PetscMemzero(void *a,size_t n)
+ ^~~~~~~~~~~~~~~~~~~
+/home/glci/builds/6tPtAx36/1/petsc/petsc/include/petscsys.h:71:24: error: ‘PETSC_CXX_INLINE’ does not name a type; did you mean ‘PETSC_C_INLINE’?
+ #  define PETSC_INLINE PETSC_CXX_INLINE
+                        ^
+/home/glci/builds/6tPtAx36/1/petsc/petsc/include/petscsys.h:76:36: note: in expansion of macro ‘PETSC_INLINE’
+ #define PETSC_STATIC_INLINE static PETSC_INLINE
+                                    ^~~~~~~~~~~~
+/home/glci/builds/6tPtAx36/1/petsc/petsc/include/petscsys.h:2169:1: note: in expansion of macro ‘PETSC_STATIC_INLINE’
+ PETSC_STATIC_INLINE PetscErrorCode PetscIntCast(PetscInt64 a,PetscInt *b)
+ ^~~~~~~~~~~~~~~~~~~
+/home/glci/builds/6tPtAx36/1/petsc/petsc/include/petscsys.h:71:24: error: ‘PETSC_CXX_INLINE’ does not name a type; did you mean ‘PETSC_C_INLINE’?
+ #  define PETSC_INLINE PETSC_CXX_INLINE
+                        ^
+/home/glci/builds/6tPtAx36/1/petsc/petsc/include/petscsys.h:76:36: note: in expansion of macro ‘PETSC_INLINE’
+ #define PETSC_STATIC_INLINE static PETSC_INLINE
+                                    ^~~~~~~~~~~~
+/home/glci/builds/6tPtAx36/1/petsc/petsc/include/petscsys.h:2199:1: note: in expansion of macro ‘PETSC_STATIC_INLINE’
+ PETSC_STATIC_INLINE PetscErrorCode PetscBLASIntCast(PetscInt a,PetscBLASInt *b)
+ ^~~~~~~~~~~~~~~~~~~
+/home/glci/builds/6tPtAx36/1/petsc/petsc/include/petscsys.h:71:24: error: ‘PETSC_CXX_INLINE’ does not name a type; did you mean ‘PETSC_C_INLINE’?
+ #  define PETSC_INLINE PETSC_CXX_INLINE
+                        ^
+/home/glci/builds/6tPtAx36/1/petsc/petsc/include/petscsys.h:76:36: note: in expansion of macro ‘PETSC_INLINE’
+ #define PETSC_STATIC_INLINE static PETSC_INLINE
+                                    ^~~~~~~~~~~~
+/home/glci/builds/6tPtAx36/1/petsc/petsc/include/petscsys.h:2229:1: note: in expansion of macro ‘PETSC_STATIC_INLINE’
+ PETSC_STATIC_INLINE PetscErrorCode PetscCuBLASIntCast(PetscInt a,PetscBLASInt *b)
+ ^~~~~~~~~~~~~~~~~~~
+/home/glci/builds/6tPtAx36/1/petsc/petsc/include/petscsys.h:71:24: error: ‘PETSC_CXX_INLINE’ does not name a type; did you mean ‘PETSC_C_INLINE’?
+ #  define PETSC_INLINE PETSC_CXX_INLINE
+                        ^
+/home/glci/builds/6tPtAx36/1/petsc/petsc/include/petscsys.h:76:36: note: in expansion of macro ‘PETSC_INLINE’
+ #define PETSC_STATIC_INLINE static PETSC_INLINE
+                                    ^~~~~~~~~~~~
+/home/glci/builds/6tPtAx36/1/petsc/petsc/include/petscsys.h:2259:1: note: in expansion of macro ‘PETSC_STATIC_INLINE’
+ PETSC_STATIC_INLINE PetscErrorCode PetscMPIIntCast(PetscInt a,PetscMPIInt *b)
+ ^~~~~~~~~~~~~~~~~~~
+/home/glci/builds/6tPtAx36/1/petsc/petsc/include/petscsys.h:71:24: error: ‘PETSC_CXX_INLINE’ does not name a type; did you mean ‘PETSC_C_INLINE’?
+ #  define PETSC_INLINE PETSC_CXX_INLINE
+                        ^
+/home/glci/builds/6tPtAx36/1/petsc/petsc/include/petscsys.h:76:36: note: in expansion of macro ‘PETSC_INLINE’
+ #define PETSC_STATIC_INLINE static PETSC_INLINE
+                                    ^~~~~~~~~~~~
+/home/glci/builds/6tPtAx36/1/petsc/petsc/include/petscsys.h:2300:1: note: in expansion of macro ‘PETSC_STATIC_INLINE’
+ PETSC_STATIC_INLINE PetscInt PetscRealIntMultTruncate(PetscReal a,PetscInt b)
+ ^~~~~~~~~~~~~~~~~~~
+/home/glci/builds/6tPtAx36/1/petsc/petsc/include/petscsys.h:71:24: error: ‘PETSC_CXX_INLINE’ does not name a type; did you mean ‘PETSC_C_INLINE’?
+ #  define PETSC_INLINE PETSC_CXX_INLINE
+                        ^
+/home/glci/builds/6tPtAx36/1/petsc/petsc/include/petscsys.h:76:36: note: in expansion of macro ‘PETSC_INLINE’
+ #define PETSC_STATIC_INLINE static PETSC_INLINE
+                                    ^~~~~~~~~~~~
+/home/glci/builds/6tPtAx36/1/petsc/petsc/include/petscsys.h:2336:1: note: in expansion of macro ‘PETSC_STATIC_INLINE’
+ PETSC_STATIC_INLINE PetscInt PetscIntMultTruncate(PetscInt a,PetscInt b)
+ ^~~~~~~~~~~~~~~~~~~
+/home/glci/builds/6tPtAx36/1/petsc/petsc/include/petscsys.h:71:24: error: ‘PETSC_CXX_INLINE’ does not name a type; did you mean ‘PETSC_C_INLINE’?
+ #  define PETSC_INLINE PETSC_CXX_INLINE
+                        ^
+/home/glci/builds/6tPtAx36/1/petsc/petsc/include/petscsys.h:76:36: note: in expansion of macro ‘PETSC_INLINE’
+ #define PETSC_STATIC_INLINE static PETSC_INLINE
+                                    ^~~~~~~~~~~~
+/home/glci/builds/6tPtAx36/1/petsc/petsc/include/petscsys.h:2370:1: note: in expansion of macro ‘PETSC_STATIC_INLINE’
+ PETSC_STATIC_INLINE PetscInt PetscIntSumTruncate(PetscInt a,PetscInt b)
+ ^~~~~~~~~~~~~~~~~~~
+/home/glci/builds/6tPtAx36/1/petsc/petsc/include/petscsys.h:71:24: error: ‘PETSC_CXX_INLINE’ does not name a type; did you mean ‘PETSC_C_INLINE’?
+ #  define PETSC_INLINE PETSC_CXX_INLINE
+                        ^
+/home/glci/builds/6tPtAx36/1/petsc/petsc/include/petscsys.h:76:36: note: in expansion of macro ‘PETSC_INLINE’
+ #define PETSC_STATIC_INLINE static PETSC_INLINE
+                                    ^~~~~~~~~~~~
+/home/glci/builds/6tPtAx36/1/petsc/petsc/include/petscsys.h:2403:1: note: in expansion of macro ‘PETSC_STATIC_INLINE’
+ PETSC_STATIC_INLINE PetscErrorCode PetscIntMultError(PetscInt a,PetscInt b,PetscInt *result)
+ ^~~~~~~~~~~~~~~~~~~
+/home/glci/builds/6tPtAx36/1/petsc/petsc/include/petscsys.h:71:24: error: ‘PETSC_CXX_INLINE’ does not name a type; did you mean ‘PETSC_C_INLINE’?
+ #  define PETSC_INLINE PETSC_CXX_INLINE
+                        ^
+/home/glci/builds/6tPtAx36/1/petsc/petsc/include/petscsys.h:76:36: note: in expansion of macro ‘PETSC_INLINE’
+ #define PETSC_STATIC_INLINE static PETSC_INLINE
+                                    ^~~~~~~~~~~~
+/home/glci/builds/6tPtAx36/1/petsc/petsc/include/petscsys.h:2438:1: note: in expansion of macro ‘PETSC_STATIC_INLINE’
+ PETSC_STATIC_INLINE PetscErrorCode PetscIntSumError(PetscInt a,PetscInt b,PetscInt *result)
+ ^~~~~~~~~~~~~~~~~~~
+/home/glci/builds/6tPtAx36/1/petsc/petsc/include/petscsys.h:71:24: error: ‘PETSC_CXX_INLINE’ does not name a type; did you mean ‘PETSC_C_INLINE’?
+ #  define PETSC_INLINE PETSC_CXX_INLINE
+                        ^
+/home/glci/builds/6tPtAx36/1/petsc/petsc/include/petscsys.h:76:36: note: in expansion of macro ‘PETSC_INLINE’
+ #define PETSC_STATIC_INLINE static PETSC_INLINE
+                                    ^~~~~~~~~~~~
+/home/glci/builds/6tPtAx36/1/petsc/petsc/include/petscsys.h:2611:1: note: in expansion of macro ‘PETSC_STATIC_INLINE’
+ PETSC_STATIC_INLINE PetscBool PetscBinaryBigEndian(void) {long _petsc_v = 1; return ((char*)&_petsc_v)[0] ? PETSC_FALSE : PETSC_TRUE;}
+ ^~~~~~~~~~~~~~~~~~~
+/home/glci/builds/6tPtAx36/1/petsc/petsc/include/petscsys.h:71:24: error: ‘PETSC_CXX_INLINE’ does not name a type; did you mean ‘PETSC_C_INLINE’?
+ #  define PETSC_INLINE PETSC_CXX_INLINE
+                        ^
+/home/glci/builds/6tPtAx36/1/petsc/petsc/include/petscsys.h:76:36: note: in expansion of macro ‘PETSC_INLINE’
+ #define PETSC_STATIC_INLINE static PETSC_INLINE
+                                    ^~~~~~~~~~~~
+/home/glci/builds/6tPtAx36/1/petsc/petsc/include/petscsys.h:2678:1: note: in expansion of macro ‘PETSC_STATIC_INLINE’
+ PETSC_STATIC_INLINE MPI_Comm PetscSubcommParent(PetscSubcomm scomm) {return scomm->parent;}
+ ^~~~~~~~~~~~~~~~~~~
+/home/glci/builds/6tPtAx36/1/petsc/petsc/include/petscsys.h:71:24: error: ‘PETSC_CXX_INLINE’ does not name a type; did you mean ‘PETSC_C_INLINE’?
+ #  define PETSC_INLINE PETSC_CXX_INLINE
+                        ^
+/home/glci/builds/6tPtAx36/1/petsc/petsc/include/petscsys.h:76:36: note: in expansion of macro ‘PETSC_INLINE’
+ #define PETSC_STATIC_INLINE static PETSC_INLINE
+                                    ^~~~~~~~~~~~
+/home/glci/builds/6tPtAx36/1/petsc/petsc/include/petscsys.h:2679:1: note: in expansion of macro ‘PETSC_STATIC_INLINE’
+ PETSC_STATIC_INLINE MPI_Comm PetscSubcommChild(PetscSubcomm scomm) {return scomm->child;}
+ ^~~~~~~~~~~~~~~~~~~
+/home/glci/builds/6tPtAx36/1/petsc/petsc/include/petscsys.h:71:24: error: ‘PETSC_CXX_INLINE’ does not name a type; did you mean ‘PETSC_C_INLINE’?
+ #  define PETSC_INLINE PETSC_CXX_INLINE
+                        ^
+/home/glci/builds/6tPtAx36/1/petsc/petsc/include/petscsys.h:76:36: note: in expansion of macro ‘PETSC_INLINE’
+ #define PETSC_STATIC_INLINE static PETSC_INLINE
+                                    ^~~~~~~~~~~~
+/home/glci/builds/6tPtAx36/1/petsc/petsc/include/petscsys.h:2680:1: note: in expansion of macro ‘PETSC_STATIC_INLINE’
+ PETSC_STATIC_INLINE MPI_Comm PetscSubcommContiguousParent(PetscSubcomm scomm) {return scomm->dupparent;}
+ ^~~~~~~~~~~~~~~~~~~
+/home/glci/builds/6tPtAx36/1/petsc/petsc/include/petscsys.h:71:24: error: ‘PETSC_CXX_INLINE’ does not name a type; did you mean ‘PETSC_C_INLINE’?
+ #  define PETSC_INLINE PETSC_CXX_INLINE
+                        ^
+/home/glci/builds/6tPtAx36/1/petsc/petsc/include/petscsys.h:76:36: note: in expansion of macro ‘PETSC_INLINE’
+ #define PETSC_STATIC_INLINE static PETSC_INLINE
+                                    ^~~~~~~~~~~~
+/home/glci/builds/6tPtAx36/1/petsc/petsc/include/petscsys.h:2728:1: note: in expansion of macro ‘PETSC_STATIC_INLINE’
+ PETSC_STATIC_INLINE PetscErrorCode PetscSegBufferGetInts(PetscSegBuffer seg,size_t count,PetscInt *PETSC_RESTRICT *slot) {return PetscSegBufferGet(seg,count,(void**)slot);}
+ ^~~~~~~~~~~~~~~~~~~
+/home/glci/builds/6tPtAx36/1/petsc/petsc/include/petscsys.h:71:24: error: ‘PETSC_CXX_INLINE’ does not name a type; did you mean ‘PETSC_C_INLINE’?
+ #  define PETSC_INLINE PETSC_CXX_INLINE
+                        ^
+/home/glci/builds/6tPtAx36/1/petsc/petsc/include/petscsys.h:76:36: note: in expansion of macro ‘PETSC_INLINE’
+ #define PETSC_STATIC_INLINE static PETSC_INLINE
+                                    ^~~~~~~~~~~~
+/home/glci/builds/6tPtAx36/1/petsc/petsc/include/petscsys.h:2757:1: note: in expansion of macro ‘PETSC_STATIC_INLINE’
+ PETSC_STATIC_INLINE PetscErrorCode PetscCitationsRegister(const char cit[],PetscBool *set)
+ ^~~~~~~~~~~~~~~~~~~
+/home/glci/builds/6tPtAx36/1/petsc/petsc/include/petscsys.h:71:24: error: ‘PETSC_CXX_INLINE’ does not name a type; did you mean ‘PETSC_C_INLINE’?
+ #  define PETSC_INLINE PETSC_CXX_INLINE
+                        ^
+/home/glci/builds/6tPtAx36/1/petsc/petsc/include/petscsys.h:76:36: note: in expansion of macro ‘PETSC_INLINE’
+ #define PETSC_STATIC_INLINE static PETSC_INLINE
+                                    ^~~~~~~~~~~~
+/home/glci/builds/6tPtAx36/1/petsc/petsc/include/petsc/private/deviceimpl.h:9:1: note: in expansion of macro ‘PETSC_STATIC_INLINE’
+ PETSC_STATIC_INLINE PetscErrorCode PetscDeviceContextTypeCompare(const char type_ref[], const char type_name[], PetscBool *same)
+ ^~~~~~~~~~~~~~~~~~~
+/home/glci/builds/6tPtAx36/1/petsc/petsc/include/petscsys.h:71:24: error: ‘PETSC_CXX_INLINE’ does not name a type; did you mean ‘PETSC_C_INLINE’?
+ #  define PETSC_INLINE PETSC_CXX_INLINE
+                        ^
+/home/glci/builds/6tPtAx36/1/petsc/petsc/include/petscsys.h:76:36: note: in expansion of macro ‘PETSC_INLINE’
+ #define PETSC_STATIC_INLINE static PETSC_INLINE
+                                    ^~~~~~~~~~~~
+/home/glci/builds/6tPtAx36/1/petsc/petsc/include/petsc/private/deviceimpl.h:72:1: note: in expansion of macro ‘PETSC_STATIC_INLINE’
+ PETSC_STATIC_INLINE PetscErrorCode PetscDeviceContextValidateIdle_Internal(PetscDeviceContext dctx)
+ ^~~~~~~~~~~~~~~~~~~
+/home/glci/builds/6tPtAx36/1/petsc/petsc/include/petscsys.h:71:24: error: ‘PETSC_CXX_INLINE’ does not name a type; did you mean ‘PETSC_C_INLINE’?
+ #  define PETSC_INLINE PETSC_CXX_INLINE
+                        ^
+/home/glci/builds/6tPtAx36/1/petsc/petsc/include/petscsys.h:76:36: note: in expansion of macro ‘PETSC_INLINE’
+ #define PETSC_STATIC_INLINE static PETSC_INLINE
+                                    ^~~~~~~~~~~~
+/home/glci/builds/6tPtAx36/1/petsc/petsc/src/sys/objects/device/impls/cupm/contextcupm.hpp:362:3: note: in expansion of macro ‘PETSC_STATIC_INLINE’
+   PETSC_STATIC_INLINE PETSC_NODISCARD PetscErrorCode FinalizeBLASHandle(void) PETSC_NOEXCEPT
+   ^~~~~~~~~~~~~~~~~~~
+/home/glci/builds/6tPtAx36/1/petsc/petsc/include/petscsys.h:71:24: error: ‘PETSC_CXX_INLINE’ does not name a type; did you mean ‘PETSC_C_INLINE’?
+ #  define PETSC_INLINE PETSC_CXX_INLINE
+                        ^
+/home/glci/builds/6tPtAx36/1/petsc/petsc/include/petscsys.h:76:36: note: in expansion of macro ‘PETSC_INLINE’
+ #define PETSC_STATIC_INLINE static PETSC_INLINE
+                                    ^~~~~~~~~~~~
+/home/glci/builds/6tPtAx36/1/petsc/petsc/src/sys/objects/device/impls/cupm/contextcupm.hpp:365:3: note: in expansion of macro ‘PETSC_STATIC_INLINE’
+   PETSC_STATIC_INLINE PETSC_NODISCARD PetscErrorCode FinalizeSOLVERHandle(void) PETSC_NOEXCEPT
+   ^~~~~~~~~~~~~~~~~~~
+/home/glci/builds/6tPtAx36/1/petsc/petsc/include/petscsys.h:71:24: error: ‘PETSC_CXX_INLINE’ does not name a type; did you mean ‘PETSC_C_INLINE’?
+ #  define PETSC_INLINE PETSC_CXX_INLINE
+                        ^
+/home/glci/builds/6tPtAx36/1/petsc/petsc/include/petscsys.h:76:36: note: in expansion of macro ‘PETSC_INLINE’
+ #define PETSC_STATIC_INLINE static PETSC_INLINE
+                                    ^~~~~~~~~~~~
+/home/glci/builds/6tPtAx36/1/petsc/petsc/src/sys/objects/device/impls/cupm/contextcupm.hpp:368:3: note: in expansion of macro ‘PETSC_STATIC_INLINE’
+   PETSC_STATIC_INLINE PETSC_NODISCARD PetscErrorCode GetHandles(PetscDeviceContext_IMPLS *dci) PETSC_NOEXCEPT
+   ^~~~~~~~~~~~~~~~~~~
+/home/glci/builds/6tPtAx36/1/petsc/petsc/src/sys/objects/device/impls/cupm/contextcupm.hpp: In static member function ‘static PetscErrorCode Petsc::cupmContext<T>::destroy(PetscDeviceContext)’:
+/home/glci/builds/6tPtAx36/1/petsc/petsc/include/petscsys.h:49:31: error: ‘PETSC_FUNCTION_NAME_CXX’ was not declared in this scope
+ #  define PETSC_FUNCTION_NAME PETSC_FUNCTION_NAME_CXX
+                               ^
+/home/glci/builds/6tPtAx36/1/petsc/petsc/include/petscerror.h:246:75: note: in expansion of macro ‘PETSC_FUNCTION_NAME’
+ #define SETERRQ4(comm,ierr,s,a1,a2,a3,a4) return PetscError(comm,__LINE__,PETSC_FUNCTION_NAME,__FILE__,ierr,PETSC_ERROR_INITIAL,s,a1,a2,a3,a4)
+                                                                           ^~~~~~~~~~~~~~~~~~~
+/home/glci/builds/6tPtAx36/1/petsc/petsc/src/sys/objects/device/impls/cupm/contextcupm.hpp:52:7: note: in expansion of macro ‘SETERRQ4’
+       SETERRQ4(PETSC_COMM_SELF,PETSC_ERR_GPU,"%s error %d (%s) : %s",backend,static_cast<int>(cerr),name,descr); \
+       ^~~~~~~~
+/home/glci/builds/6tPtAx36/1/petsc/petsc/src/sys/objects/device/impls/cupm/contextcupm.hpp:410:59: note: in expansion of macro ‘CHKERRCUPM’
+   if (dci->stream) {cerr = cupmStreamDestroy(dci->stream);CHKERRCUPM(cerr);}
+                                                           ^~~~~~~~~~
+/home/glci/builds/6tPtAx36/1/petsc/petsc/include/petscsys.h:49:31: note: suggested alternative: ‘PETSC_FUNCTION_NAME_C’
+ #  define PETSC_FUNCTION_NAME PETSC_FUNCTION_NAME_CXX
+                               ^
+/home/glci/builds/6tPtAx36/1/petsc/petsc/include/petscerror.h:246:75: note: in expansion of macro ‘PETSC_FUNCTION_NAME’
+ #define SETERRQ4(comm,ierr,s,a1,a2,a3,a4) return PetscError(comm,__LINE__,PETSC_FUNCTION_NAME,__FILE__,ierr,PETSC_ERROR_INITIAL,s,a1,a2,a3,a4)
+                                                                           ^~~~~~~~~~~~~~~~~~~
+/home/glci/builds/6tPtAx36/1/petsc/petsc/src/sys/objects/device/impls/cupm/contextcupm.hpp:52:7: note: in expansion of macro ‘SETERRQ4’
+       SETERRQ4(PETSC_COMM_SELF,PETSC_ERR_GPU,"%s error %d (%s) : %s",backend,static_cast<int>(cerr),name,descr); \
+       ^~~~~~~~
+/home/glci/builds/6tPtAx36/1/petsc/petsc/src/sys/objects/device/impls/cupm/contextcupm.hpp:410:59: note: in expansion of macro ‘CHKERRCUPM’
+   if (dci->stream) {cerr = cupmStreamDestroy(dci->stream);CHKERRCUPM(cerr);}
+                                                           ^~~~~~~~~~
+/home/glci/builds/6tPtAx36/1/petsc/petsc/include/petscsys.h:49:31: error: ‘PETSC_FUNCTION_NAME_CXX’ was not declared in this scope
+ #  define PETSC_FUNCTION_NAME PETSC_FUNCTION_NAME_CXX
+                               ^
+/home/glci/builds/6tPtAx36/1/petsc/petsc/include/petscerror.h:246:75: note: in expansion of macro ‘PETSC_FUNCTION_NAME’
+ #define SETERRQ4(comm,ierr,s,a1,a2,a3,a4) return PetscError(comm,__LINE__,PETSC_FUNCTION_NAME,__FILE__,ierr,PETSC_ERROR_INITIAL,s,a1,a2,a3,a4)
+                                                                           ^~~~~~~~~~~~~~~~~~~
+/home/glci/builds/6tPtAx36/1/petsc/petsc/src/sys/objects/device/impls/cupm/contextcupm.hpp:52:7: note: in expansion of macro ‘SETERRQ4’
+       SETERRQ4(PETSC_COMM_SELF,PETSC_ERR_GPU,"%s error %d (%s) : %s",backend,static_cast<int>(cerr),name,descr); \
+       ^~~~~~~~
+/home/glci/builds/6tPtAx36/1/petsc/petsc/src/sys/objects/device/impls/cupm/contextcupm.hpp:411:57: note: in expansion of macro ‘CHKERRCUPM’
+   if (dci->event)  {cerr = cupmEventDestroy(dci->event);CHKERRCUPM(cerr);}
+                                                         ^~~~~~~~~~
+/home/glci/builds/6tPtAx36/1/petsc/petsc/include/petscsys.h:49:31: note: suggested alternative: ‘PETSC_FUNCTION_NAME_C’
+ #  define PETSC_FUNCTION_NAME PETSC_FUNCTION_NAME_CXX
+                               ^
+/home/glci/builds/6tPtAx36/1/petsc/petsc/include/petscerror.h:246:75: note: in expansion of macro ‘PETSC_FUNCTION_NAME’
+ #define SETERRQ4(comm,ierr,s,a1,a2,a3,a4) return PetscError(comm,__LINE__,PETSC_FUNCTION_NAME,__FILE__,ierr,PETSC_ERROR_INITIAL,s,a1,a2,a3,a4)
+                                                                           ^~~~~~~~~~~~~~~~~~~
+/home/glci/builds/6tPtAx36/1/petsc/petsc/src/sys/objects/device/impls/cupm/contextcupm.hpp:52:7: note: in expansion of macro ‘SETERRQ4’
+       SETERRQ4(PETSC_COMM_SELF,PETSC_ERR_GPU,"%s error %d (%s) : %s",backend,static_cast<int>(cerr),name,descr); \
+       ^~~~~~~~
+/home/glci/builds/6tPtAx36/1/petsc/petsc/src/sys/objects/device/impls/cupm/contextcupm.hpp:411:57: note: in expansion of macro ‘CHKERRCUPM’
+   if (dci->event)  {cerr = cupmEventDestroy(dci->event);CHKERRCUPM(cerr);}
+                                                         ^~~~~~~~~~
+/home/glci/builds/6tPtAx36/1/petsc/petsc/include/petscsys.h:49:31: error: ‘PETSC_FUNCTION_NAME_CXX’ was not declared in this scope
+ #  define PETSC_FUNCTION_NAME PETSC_FUNCTION_NAME_CXX
+                               ^
+/home/glci/builds/6tPtAx36/1/petsc/petsc/include/petscsys.h:1146:60: note: in expansion of macro ‘PETSC_FUNCTION_NAME’
+ #define PetscFree(a)   ((*PetscTrFree)((void*)(a),__LINE__,PETSC_FUNCTION_NAME,__FILE__) || ((a) = NULL,0))
+                                                            ^~~~~~~~~~~~~~~~~~~
+/home/glci/builds/6tPtAx36/1/petsc/petsc/src/sys/objects/device/impls/cupm/contextcupm.hpp:412:10: note: in expansion of macro ‘PetscFree’
+   ierr = PetscFree(dctx->data);CHKERRQ(ierr);
+          ^~~~~~~~~
+/home/glci/builds/6tPtAx36/1/petsc/petsc/include/petscsys.h:49:31: note: suggested alternative: ‘PETSC_FUNCTION_NAME_C’
+ #  define PETSC_FUNCTION_NAME PETSC_FUNCTION_NAME_CXX
+                               ^
+/home/glci/builds/6tPtAx36/1/petsc/petsc/include/petscsys.h:1146:60: note: in expansion of macro ‘PETSC_FUNCTION_NAME’
+ #define PetscFree(a)   ((*PetscTrFree)((void*)(a),__LINE__,PETSC_FUNCTION_NAME,__FILE__) || ((a) = NULL,0))
+                                                            ^~~~~~~~~~~~~~~~~~~
+/home/glci/builds/6tPtAx36/1/petsc/petsc/src/sys/objects/device/impls/cupm/contextcupm.hpp:412:10: note: in expansion of macro ‘PetscFree’
+   ierr = PetscFree(dctx->data);CHKERRQ(ierr);
+          ^~~~~~~~~
+/home/glci/builds/6tPtAx36/1/petsc/petsc/src/sys/objects/device/impls/cupm/contextcupm.hpp: In static member function ‘static PetscErrorCode Petsc::cupmContext<T>::setUp(PetscDeviceContext)’:
+/home/glci/builds/6tPtAx36/1/petsc/petsc/include/petscsys.h:49:31: error: ‘PETSC_FUNCTION_NAME_CXX’ was not declared in this scope
+ #  define PETSC_FUNCTION_NAME PETSC_FUNCTION_NAME_CXX
+                               ^
+/home/glci/builds/6tPtAx36/1/petsc/petsc/include/petscerror.h:246:75: note: in expansion of macro ‘PETSC_FUNCTION_NAME’
+ #define SETERRQ4(comm,ierr,s,a1,a2,a3,a4) return PetscError(comm,__LINE__,PETSC_FUNCTION_NAME,__FILE__,ierr,PETSC_ERROR_INITIAL,s,a1,a2,a3,a4)
+                                                                           ^~~~~~~~~~~~~~~~~~~
+/home/glci/builds/6tPtAx36/1/petsc/petsc/src/sys/objects/device/impls/cupm/contextcupm.hpp:52:7: note: in expansion of macro ‘SETERRQ4’
+       SETERRQ4(PETSC_COMM_SELF,PETSC_ERR_GPU,"%s error %d (%s) : %s",backend,static_cast<int>(cerr),name,descr); \
+       ^~~~~~~~
+/home/glci/builds/6tPtAx36/1/petsc/petsc/src/sys/objects/device/impls/cupm/contextcupm.hpp:430:43: note: in expansion of macro ‘CHKERRCUPM’
+     cerr = cupmStreamCreate(&dci->stream);CHKERRCUPM(cerr);
+                                           ^~~~~~~~~~
+/home/glci/builds/6tPtAx36/1/petsc/petsc/include/petscsys.h:49:31: note: suggested alternative: ‘PETSC_FUNCTION_NAME_C’
+ #  define PETSC_FUNCTION_NAME PETSC_FUNCTION_NAME_CXX
+                               ^
+/home/glci/builds/6tPtAx36/1/petsc/petsc/include/petscerror.h:246:75: note: in expansion of macro ‘PETSC_FUNCTION_NAME’
+ #define SETERRQ4(comm,ierr,s,a1,a2,a3,a4) return PetscError(comm,__LINE__,PETSC_FUNCTION_NAME,__FILE__,ierr,PETSC_ERROR_INITIAL,s,a1,a2,a3,a4)
+                                                                           ^~~~~~~~~~~~~~~~~~~
+/home/glci/builds/6tPtAx36/1/petsc/petsc/src/sys/objects/device/impls/cupm/contextcupm.hpp:52:7: note: in expansion of macro ‘SETERRQ4’
+       SETERRQ4(PETSC_COMM_SELF,PETSC_ERR_GPU,"%s error %d (%s) : %s",backend,static_cast<int>(cerr),name,descr); \
+       ^~~~~~~~
+/home/glci/builds/6tPtAx36/1/petsc/petsc/src/sys/objects/device/impls/cupm/contextcupm.hpp:430:43: note: in expansion of macro ‘CHKERRCUPM’
+     cerr = cupmStreamCreate(&dci->stream);CHKERRCUPM(cerr);
+                                           ^~~~~~~~~~
+/home/glci/builds/6tPtAx36/1/petsc/petsc/include/petscsys.h:49:31: error: ‘PETSC_FUNCTION_NAME_CXX’ was not declared in this scope
+ #  define PETSC_FUNCTION_NAME PETSC_FUNCTION_NAME_CXX
+                               ^
+/home/glci/builds/6tPtAx36/1/petsc/petsc/include/petscerror.h:246:75: note: in expansion of macro ‘PETSC_FUNCTION_NAME’
+ #define SETERRQ4(comm,ierr,s,a1,a2,a3,a4) return PetscError(comm,__LINE__,PETSC_FUNCTION_NAME,__FILE__,ierr,PETSC_ERROR_INITIAL,s,a1,a2,a3,a4)
+                                                                           ^~~~~~~~~~~~~~~~~~~
+/home/glci/builds/6tPtAx36/1/petsc/petsc/src/sys/objects/device/impls/cupm/contextcupm.hpp:52:7: note: in expansion of macro ‘SETERRQ4’
+       SETERRQ4(PETSC_COMM_SELF,PETSC_ERR_GPU,"%s error %d (%s) : %s",backend,static_cast<int>(cerr),name,descr); \
+       ^~~~~~~~
+/home/glci/builds/6tPtAx36/1/petsc/petsc/src/sys/objects/device/impls/cupm/contextcupm.hpp:433:74: note: in expansion of macro ‘CHKERRCUPM’
+     cerr = cupmStreamCreateWithFlags(&dci->stream,cupmStreamNonBlocking);CHKERRCUPM(cerr);
+                                                                          ^~~~~~~~~~
+/home/glci/builds/6tPtAx36/1/petsc/petsc/include/petscsys.h:49:31: note: suggested alternative: ‘PETSC_FUNCTION_NAME_C’
+ #  define PETSC_FUNCTION_NAME PETSC_FUNCTION_NAME_CXX
+                               ^
+/home/glci/builds/6tPtAx36/1/petsc/petsc/include/petscerror.h:246:75: note: in expansion of macro ‘PETSC_FUNCTION_NAME’
+ #define SETERRQ4(comm,ierr,s,a1,a2,a3,a4) return PetscError(comm,__LINE__,PETSC_FUNCTION_NAME,__FILE__,ierr,PETSC_ERROR_INITIAL,s,a1,a2,a3,a4)
+                                                                           ^~~~~~~~~~~~~~~~~~~
+/home/glci/builds/6tPtAx36/1/petsc/petsc/src/sys/objects/device/impls/cupm/contextcupm.hpp:52:7: note: in expansion of macro ‘SETERRQ4’
+       SETERRQ4(PETSC_COMM_SELF,PETSC_ERR_GPU,"%s error %d (%s) : %s",backend,static_cast<int>(cerr),name,descr); \
+       ^~~~~~~~
+/home/glci/builds/6tPtAx36/1/petsc/petsc/src/sys/objects/device/impls/cupm/contextcupm.hpp:433:74: note: in expansion of macro ‘CHKERRCUPM’
+     cerr = cupmStreamCreateWithFlags(&dci->stream,cupmStreamNonBlocking);CHKERRCUPM(cerr);
+                                                                          ^~~~~~~~~~
+/home/glci/builds/6tPtAx36/1/petsc/petsc/include/petscsys.h:49:31: error: ‘PETSC_FUNCTION_NAME_CXX’ was not declared in this scope
+ #  define PETSC_FUNCTION_NAME PETSC_FUNCTION_NAME_CXX
+                               ^
+/home/glci/builds/6tPtAx36/1/petsc/petsc/include/petscerror.h:158:66: note: in expansion of macro ‘PETSC_FUNCTION_NAME’
+ #define SETERRQ1(comm,ierr,s,a1) return PetscError(comm,__LINE__,PETSC_FUNCTION_NAME,__FILE__,ierr,PETSC_ERROR_INITIAL,s,a1)
+                                                                  ^~~~~~~~~~~~~~~~~~~
+/home/glci/builds/6tPtAx36/1/petsc/petsc/src/sys/objects/device/impls/cupm/contextcupm.hpp:436:5: note: in expansion of macro ‘SETERRQ1’
+     SETERRQ1(PETSC_COMM_SELF,PETSC_ERR_ARG_CORRUPT,"Invalid PetscStreamType %D",(PetscInt)dctx->streamType);
+     ^~~~~~~~
+/home/glci/builds/6tPtAx36/1/petsc/petsc/include/petscsys.h:49:31: note: suggested alternative: ‘PETSC_FUNCTION_NAME_C’
+ #  define PETSC_FUNCTION_NAME PETSC_FUNCTION_NAME_CXX
+                               ^
+/home/glci/builds/6tPtAx36/1/petsc/petsc/include/petscerror.h:158:66: note: in expansion of macro ‘PETSC_FUNCTION_NAME’
+ #define SETERRQ1(comm,ierr,s,a1) return PetscError(comm,__LINE__,PETSC_FUNCTION_NAME,__FILE__,ierr,PETSC_ERROR_INITIAL,s,a1)
+                                                                  ^~~~~~~~~~~~~~~~~~~
+/home/glci/builds/6tPtAx36/1/petsc/petsc/src/sys/objects/device/impls/cupm/contextcupm.hpp:436:5: note: in expansion of macro ‘SETERRQ1’
+     SETERRQ1(PETSC_COMM_SELF,PETSC_ERR_ARG_CORRUPT,"Invalid PetscStreamType %D",(PetscInt)dctx->streamType);
+     ^~~~~~~~
+/home/glci/builds/6tPtAx36/1/petsc/petsc/include/petscsys.h:49:31: error: ‘PETSC_FUNCTION_NAME_CXX’ was not declared in this scope
+ #  define PETSC_FUNCTION_NAME PETSC_FUNCTION_NAME_CXX
+                               ^
+/home/glci/builds/6tPtAx36/1/petsc/petsc/include/petscerror.h:246:75: note: in expansion of macro ‘PETSC_FUNCTION_NAME’
+ #define SETERRQ4(comm,ierr,s,a1,a2,a3,a4) return PetscError(comm,__LINE__,PETSC_FUNCTION_NAME,__FILE__,ierr,PETSC_ERROR_INITIAL,s,a1,a2,a3,a4)
+                                                                           ^~~~~~~~~~~~~~~~~~~
+/home/glci/builds/6tPtAx36/1/petsc/petsc/src/sys/objects/device/impls/cupm/contextcupm.hpp:52:7: note: in expansion of macro ‘SETERRQ4’
+       SETERRQ4(PETSC_COMM_SELF,PETSC_ERR_GPU,"%s error %d (%s) : %s",backend,static_cast<int>(cerr),name,descr); \
+       ^~~~~~~~
+/home/glci/builds/6tPtAx36/1/petsc/petsc/src/sys/objects/device/impls/cupm/contextcupm.hpp:439:39: note: in expansion of macro ‘CHKERRCUPM’
+   cerr = cupmEventCreate(&dci->event);CHKERRCUPM(cerr);
+                                       ^~~~~~~~~~
+/home/glci/builds/6tPtAx36/1/petsc/petsc/include/petscsys.h:49:31: note: suggested alternative: ‘PETSC_FUNCTION_NAME_C’
+ #  define PETSC_FUNCTION_NAME PETSC_FUNCTION_NAME_CXX
+                               ^
+/home/glci/builds/6tPtAx36/1/petsc/petsc/include/petscerror.h:246:75: note: in expansion of macro ‘PETSC_FUNCTION_NAME’
+ #define SETERRQ4(comm,ierr,s,a1,a2,a3,a4) return PetscError(comm,__LINE__,PETSC_FUNCTION_NAME,__FILE__,ierr,PETSC_ERROR_INITIAL,s,a1,a2,a3,a4)
+                                                                           ^~~~~~~~~~~~~~~~~~~
+/home/glci/builds/6tPtAx36/1/petsc/petsc/src/sys/objects/device/impls/cupm/contextcupm.hpp:52:7: note: in expansion of macro ‘SETERRQ4’
+       SETERRQ4(PETSC_COMM_SELF,PETSC_ERR_GPU,"%s error %d (%s) : %s",backend,static_cast<int>(cerr),name,descr); \
+       ^~~~~~~~
+/home/glci/builds/6tPtAx36/1/petsc/petsc/src/sys/objects/device/impls/cupm/contextcupm.hpp:439:39: note: in expansion of macro ‘CHKERRCUPM’
+   cerr = cupmEventCreate(&dci->event);CHKERRCUPM(cerr);
+                                       ^~~~~~~~~~
+/home/glci/builds/6tPtAx36/1/petsc/petsc/include/petscsys.h:49:31: error: ‘PETSC_FUNCTION_NAME_CXX’ was not declared in this scope
+ #  define PETSC_FUNCTION_NAME PETSC_FUNCTION_NAME_CXX
+                               ^
+/home/glci/builds/6tPtAx36/1/petsc/petsc/include/petscerror.h:478:138: note: in expansion of macro ‘PETSC_FUNCTION_NAME’
+ #define CHKERRQ(ierr)          do {PetscErrorCode ierr__ = (ierr); if (PetscUnlikely(ierr__)) return PetscError(PETSC_COMM_SELF,__LINE__,PETSC_FUNCTION_NAME,__FILE__,ierr__,PETSC_ERROR_REPEAT," ");} while (0)
+                                                                                                                                          ^~~~~~~~~~~~~~~~~~~
+/home/glci/builds/6tPtAx36/1/petsc/petsc/src/sys/objects/device/impls/cupm/contextcupm.hpp:440:26: note: in expansion of macro ‘CHKERRQ’
+   ierr = GetHandles(dci);CHKERRQ(ierr);
+                          ^~~~~~~
+/home/glci/builds/6tPtAx36/1/petsc/petsc/include/petscsys.h:49:31: note: suggested alternative: ‘PETSC_FUNCTION_NAME_C’
+ #  define PETSC_FUNCTION_NAME PETSC_FUNCTION_NAME_CXX
+                               ^
+/home/glci/builds/6tPtAx36/1/petsc/petsc/include/petscerror.h:478:138: note: in expansion of macro ‘PETSC_FUNCTION_NAME’
+ #define CHKERRQ(ierr)          do {PetscErrorCode ierr__ = (ierr); if (PetscUnlikely(ierr__)) return PetscError(PETSC_COMM_SELF,__LINE__,PETSC_FUNCTION_NAME,__FILE__,ierr__,PETSC_ERROR_REPEAT," ");} while (0)
+                                                                                                                                          ^~~~~~~~~~~~~~~~~~~
+/home/glci/builds/6tPtAx36/1/petsc/petsc/src/sys/objects/device/impls/cupm/contextcupm.hpp:440:26: note: in expansion of macro ‘CHKERRQ’
+   ierr = GetHandles(dci);CHKERRQ(ierr);
+                          ^~~~~~~
+/home/glci/builds/6tPtAx36/1/petsc/petsc/src/sys/objects/device/impls/cupm/contextcupm.hpp: In static member function ‘static PetscErrorCode Petsc::cupmContext<T>::waitForContext(PetscDeviceContext, PetscDeviceContext)’:
+/home/glci/builds/6tPtAx36/1/petsc/petsc/include/petscsys.h:49:31: error: ‘PETSC_FUNCTION_NAME_CXX’ was not declared in this scope
+ #  define PETSC_FUNCTION_NAME PETSC_FUNCTION_NAME_CXX
+                               ^
+/home/glci/builds/6tPtAx36/1/petsc/petsc/include/petscerror.h:246:75: note: in expansion of macro ‘PETSC_FUNCTION_NAME’
+ #define SETERRQ4(comm,ierr,s,a1,a2,a3,a4) return PetscError(comm,__LINE__,PETSC_FUNCTION_NAME,__FILE__,ierr,PETSC_ERROR_INITIAL,s,a1,a2,a3,a4)
+                                                                           ^~~~~~~~~~~~~~~~~~~
+/home/glci/builds/6tPtAx36/1/petsc/petsc/src/sys/objects/device/impls/cupm/contextcupm.hpp:52:7: note: in expansion of macro ‘SETERRQ4’
+       SETERRQ4(PETSC_COMM_SELF,PETSC_ERR_GPU,"%s error %d (%s) : %s",backend,static_cast<int>(cerr),name,descr); \
+       ^~~~~~~~
+/home/glci/builds/6tPtAx36/1/petsc/petsc/src/sys/objects/device/impls/cupm/contextcupm.hpp:460:52: note: in expansion of macro ‘CHKERRCUPM’
+   cerr = cupmEventRecord(dcib->event,dcib->stream);CHKERRCUPM(cerr);
+                                                    ^~~~~~~~~~
+/home/glci/builds/6tPtAx36/1/petsc/petsc/include/petscsys.h:49:31: note: suggested alternative: ‘PETSC_FUNCTION_NAME_C’
+ #  define PETSC_FUNCTION_NAME PETSC_FUNCTION_NAME_CXX
+                               ^
+/home/glci/builds/6tPtAx36/1/petsc/petsc/include/petscerror.h:246:75: note: in expansion of macro ‘PETSC_FUNCTION_NAME’
+ #define SETERRQ4(comm,ierr,s,a1,a2,a3,a4) return PetscError(comm,__LINE__,PETSC_FUNCTION_NAME,__FILE__,ierr,PETSC_ERROR_INITIAL,s,a1,a2,a3,a4)
+                                                                           ^~~~~~~~~~~~~~~~~~~
+/home/glci/builds/6tPtAx36/1/petsc/petsc/src/sys/objects/device/impls/cupm/contextcupm.hpp:52:7: note: in expansion of macro ‘SETERRQ4’
+       SETERRQ4(PETSC_COMM_SELF,PETSC_ERR_GPU,"%s error %d (%s) : %s",backend,static_cast<int>(cerr),name,descr); \
+       ^~~~~~~~
+/home/glci/builds/6tPtAx36/1/petsc/petsc/src/sys/objects/device/impls/cupm/contextcupm.hpp:460:52: note: in expansion of macro ‘CHKERRCUPM’
+   cerr = cupmEventRecord(dcib->event,dcib->stream);CHKERRCUPM(cerr);
+                                                    ^~~~~~~~~~
+/home/glci/builds/6tPtAx36/1/petsc/petsc/include/petscsys.h:49:31: error: ‘PETSC_FUNCTION_NAME_CXX’ was not declared in this scope
+ #  define PETSC_FUNCTION_NAME PETSC_FUNCTION_NAME_CXX
+                               ^
+/home/glci/builds/6tPtAx36/1/petsc/petsc/include/petscerror.h:246:75: note: in expansion of macro ‘PETSC_FUNCTION_NAME’
+ #define SETERRQ4(comm,ierr,s,a1,a2,a3,a4) return PetscError(comm,__LINE__,PETSC_FUNCTION_NAME,__FILE__,ierr,PETSC_ERROR_INITIAL,s,a1,a2,a3,a4)
+                                                                           ^~~~~~~~~~~~~~~~~~~
+/home/glci/builds/6tPtAx36/1/petsc/petsc/src/sys/objects/device/impls/cupm/contextcupm.hpp:52:7: note: in expansion of macro ‘SETERRQ4’
+       SETERRQ4(PETSC_COMM_SELF,PETSC_ERR_GPU,"%s error %d (%s) : %s",backend,static_cast<int>(cerr),name,descr); \
+       ^~~~~~~~
+/home/glci/builds/6tPtAx36/1/petsc/petsc/src/sys/objects/device/impls/cupm/contextcupm.hpp:461:58: note: in expansion of macro ‘CHKERRCUPM’
+   cerr = cupmStreamWaitEvent(dcia->stream,dcib->event,0);CHKERRCUPM(cerr);
+                                                          ^~~~~~~~~~
+/home/glci/builds/6tPtAx36/1/petsc/petsc/include/petscsys.h:49:31: note: suggested alternative: ‘PETSC_FUNCTION_NAME_C’
+ #  define PETSC_FUNCTION_NAME PETSC_FUNCTION_NAME_CXX
+                               ^
+/home/glci/builds/6tPtAx36/1/petsc/petsc/include/petscerror.h:246:75: note: in expansion of macro ‘PETSC_FUNCTION_NAME’
+ #define SETERRQ4(comm,ierr,s,a1,a2,a3,a4) return PetscError(comm,__LINE__,PETSC_FUNCTION_NAME,__FILE__,ierr,PETSC_ERROR_INITIAL,s,a1,a2,a3,a4)
+                                                                           ^~~~~~~~~~~~~~~~~~~
+/home/glci/builds/6tPtAx36/1/petsc/petsc/src/sys/objects/device/impls/cupm/contextcupm.hpp:52:7: note: in expansion of macro ‘SETERRQ4’
+       SETERRQ4(PETSC_COMM_SELF,PETSC_ERR_GPU,"%s error %d (%s) : %s",backend,static_cast<int>(cerr),name,descr); \
+       ^~~~~~~~
+/home/glci/builds/6tPtAx36/1/petsc/petsc/src/sys/objects/device/impls/cupm/contextcupm.hpp:461:58: note: in expansion of macro ‘CHKERRCUPM’
+   cerr = cupmStreamWaitEvent(dcia->stream,dcib->event,0);CHKERRCUPM(cerr);
+                                                          ^~~~~~~~~~
+/home/glci/builds/6tPtAx36/1/petsc/petsc/src/sys/objects/device/impls/cupm/contextcupm.hpp: In static member function ‘static PetscErrorCode Petsc::cupmContext<T>::synchronize(PetscDeviceContext)’:
+/home/glci/builds/6tPtAx36/1/petsc/petsc/include/petscsys.h:49:31: error: ‘PETSC_FUNCTION_NAME_CXX’ was not declared in this scope
+ #  define PETSC_FUNCTION_NAME PETSC_FUNCTION_NAME_CXX
+                               ^
+/home/glci/builds/6tPtAx36/1/petsc/petsc/include/petscerror.h:246:75: note: in expansion of macro ‘PETSC_FUNCTION_NAME’
+ #define SETERRQ4(comm,ierr,s,a1,a2,a3,a4) return PetscError(comm,__LINE__,PETSC_FUNCTION_NAME,__FILE__,ierr,PETSC_ERROR_INITIAL,s,a1,a2,a3,a4)
+                                                                           ^~~~~~~~~~~~~~~~~~~
+/home/glci/builds/6tPtAx36/1/petsc/petsc/src/sys/objects/device/impls/cupm/contextcupm.hpp:52:7: note: in expansion of macro ‘SETERRQ4’
+       SETERRQ4(PETSC_COMM_SELF,PETSC_ERR_GPU,"%s error %d (%s) : %s",backend,static_cast<int>(cerr),name,descr); \
+       ^~~~~~~~
+/home/glci/builds/6tPtAx36/1/petsc/petsc/src/sys/objects/device/impls/cupm/contextcupm.hpp:473:56: note: in expansion of macro ‘CHKERRCUPM’
+   cerr = cupmStreamWaitEvent(dci->stream,dci->event,0);CHKERRCUPM(cerr);
+                                                        ^~~~~~~~~~
+/home/glci/builds/6tPtAx36/1/petsc/petsc/include/petscsys.h:49:31: note: suggested alternative: ‘PETSC_FUNCTION_NAME_C’
+ #  define PETSC_FUNCTION_NAME PETSC_FUNCTION_NAME_CXX
+                               ^
+/home/glci/builds/6tPtAx36/1/petsc/petsc/include/petscerror.h:246:75: note: in expansion of macro ‘PETSC_FUNCTION_NAME’
+ #define SETERRQ4(comm,ierr,s,a1,a2,a3,a4) return PetscError(comm,__LINE__,PETSC_FUNCTION_NAME,__FILE__,ierr,PETSC_ERROR_INITIAL,s,a1,a2,a3,a4)
+                                                                           ^~~~~~~~~~~~~~~~~~~
+/home/glci/builds/6tPtAx36/1/petsc/petsc/src/sys/objects/device/impls/cupm/contextcupm.hpp:52:7: note: in expansion of macro ‘SETERRQ4’
+       SETERRQ4(PETSC_COMM_SELF,PETSC_ERR_GPU,"%s error %d (%s) : %s",backend,static_cast<int>(cerr),name,descr); \
+       ^~~~~~~~
+/home/glci/builds/6tPtAx36/1/petsc/petsc/src/sys/objects/device/impls/cupm/contextcupm.hpp:473:56: note: in expansion of macro ‘CHKERRCUPM’
+   cerr = cupmStreamWaitEvent(dci->stream,dci->event,0);CHKERRCUPM(cerr);
+                                                        ^~~~~~~~~~
+/home/glci/builds/6tPtAx36/1/petsc/petsc/include/petscsys.h:49:31: error: ‘PETSC_FUNCTION_NAME_CXX’ was not declared in this scope
+ #  define PETSC_FUNCTION_NAME PETSC_FUNCTION_NAME_CXX
+                               ^
+/home/glci/builds/6tPtAx36/1/petsc/petsc/include/petscerror.h:246:75: note: in expansion of macro ‘PETSC_FUNCTION_NAME’
+ #define SETERRQ4(comm,ierr,s,a1,a2,a3,a4) return PetscError(comm,__LINE__,PETSC_FUNCTION_NAME,__FILE__,ierr,PETSC_ERROR_INITIAL,s,a1,a2,a3,a4)
+                                                                           ^~~~~~~~~~~~~~~~~~~
+/home/glci/builds/6tPtAx36/1/petsc/petsc/src/sys/objects/device/impls/cupm/contextcupm.hpp:52:7: note: in expansion of macro ‘SETERRQ4’
+       SETERRQ4(PETSC_COMM_SELF,PETSC_ERR_GPU,"%s error %d (%s) : %s",backend,static_cast<int>(cerr),name,descr); \
+       ^~~~~~~~
+/home/glci/builds/6tPtAx36/1/petsc/petsc/src/sys/objects/device/impls/cupm/contextcupm.hpp:474:45: note: in expansion of macro ‘CHKERRCUPM’
+   cerr = cupmStreamSynchronize(dci->stream);CHKERRCUPM(cerr);
+                                             ^~~~~~~~~~
+/home/glci/builds/6tPtAx36/1/petsc/petsc/include/petscsys.h:49:31: note: suggested alternative: ‘PETSC_FUNCTION_NAME_C’
+ #  define PETSC_FUNCTION_NAME PETSC_FUNCTION_NAME_CXX
+                               ^
+/home/glci/builds/6tPtAx36/1/petsc/petsc/include/petscerror.h:246:75: note: in expansion of macro ‘PETSC_FUNCTION_NAME’
+ #define SETERRQ4(comm,ierr,s,a1,a2,a3,a4) return PetscError(comm,__LINE__,PETSC_FUNCTION_NAME,__FILE__,ierr,PETSC_ERROR_INITIAL,s,a1,a2,a3,a4)
+                                                                           ^~~~~~~~~~~~~~~~~~~
+/home/glci/builds/6tPtAx36/1/petsc/petsc/src/sys/objects/device/impls/cupm/contextcupm.hpp:52:7: note: in expansion of macro ‘SETERRQ4’
+       SETERRQ4(PETSC_COMM_SELF,PETSC_ERR_GPU,"%s error %d (%s) : %s",backend,static_cast<int>(cerr),name,descr); \
+       ^~~~~~~~
+/home/glci/builds/6tPtAx36/1/petsc/petsc/src/sys/objects/device/impls/cupm/contextcupm.hpp:474:45: note: in expansion of macro ‘CHKERRCUPM’
+   cerr = cupmStreamSynchronize(dci->stream);CHKERRCUPM(cerr);
+                                             ^~~~~~~~~~
+gmakefile:191: recipe for target 'arch-ci-linux-gcc-complex-opt-32bit/obj/sys/objects/device/impls/cupm/contextcupm.o' failed
+make[3]: *** [arch-ci-linux-gcc-complex-opt-32bit/obj/sys/objects/device/impls/cupm/contextcupm.o] Error 1
+make[3]: *** Waiting for unfinished jobs....
+          CC arch-ci-linux-gcc-complex-opt-32bit/obj/sys/logging/ftn-auto/xmllogeventf.o
+          CC arch-ci-linux-gcc-complex-opt-32bit/obj/sys/logging/ftn-auto/plogf.o
+          CC arch-ci-linux-gcc-complex-opt-32bit/obj/sys/logging/xmlviewer.o
+          CC arch-ci-linux-gcc-complex-opt-32bit/obj/sys/logging/ftn-custom/zplogf.o
+          CC arch-ci-linux-gcc-complex-opt-32bit/obj/sys/logging/utils/classlog.o
+          CC arch-ci-linux-gcc-complex-opt-32bit/obj/sys/logging/utils/stagelog.o
+          CC arch-ci-linux-gcc-complex-opt-32bit/obj/sys/logging/utils/eventlog.o
+          CC arch-ci-linux-gcc-complex-opt-32bit/obj/sys/logging/xmllogevent.o
+          CC arch-ci-linux-gcc-complex-opt-32bit/obj/sys/logging/plog.o
+/home/glci/builds/6tPtAx36/1/petsc/petsc/lib/petsc/conf/rules:50: recipe for target 'libs' failed
+make[2]: *** [libs] Error 2
+[1;31m**************************ERROR*************************************
+  Error during compile, check arch-ci-linux-gcc-complex-opt-32bit/lib/petsc/conf/make.log
+  Send it and arch-ci-linux-gcc-complex-opt-32bit/lib/petsc/conf/configure.log to petsc-maint@mcs.anl.gov
+********************************************************************[0;39m[0;49m
+make[1]: *** [all] Error 1
+makefile:33: recipe for target 'all' failed
+GNUmakefile:9: recipe for target 'all' failed
+make: *** [all] Error 2
+section_end:1625059285:step_script[0Ksection_start:1625059285:after_script[0K[0K[36;1mRunning after_script[0;m
+[0;m[32;1mRunning after script...[0;m
+[32;1m$ date[0;m
+Wed Jun 30 08:21:25 CDT 2021
+[32;1m$ ccache --show-stats[0;m
+cache directory                     /home/glci/.ccache
+primary config                      /home/glci/.ccache/ccache.conf
+secondary config      (readonly)    /etc/ccache.conf
+stats zero time                     Wed Jun 30 08:18:12 2021
+cache hit (direct)                  5615
+cache hit (preprocessed)            3547
+cache miss                           700
+cache hit rate                     92.90 %
+called for link                       61
+called for preprocessing             812
+multiple source files                  1
+compile failed                       191
+preprocessor error                   267
+bad compiler arguments                68
+autoconf compile/link               1388
+no input file                        223
+cleanups performed                     1
+files in cache                    247276
+cache size                           8.8 GB
+max cache size                      10.0 GB
+section_end:1625059285:after_script[0Ksection_start:1625059285:upload_artifacts_on_failure[0K[0K[36;1mUploading artifacts for failed job[0;m
+[0;m[32;1mUploading artifacts...[0;m
+Runtime platform                                  [0;m  arch[0;m=amd64 os[0;m=linux pid[0;m=16695 revision[0;m=775dd39d version[0;m=13.8.0
+arch-ci-linux-gcc-complex-opt-32bit/lib/petsc/conf/*.log: found 5 matching files and directories[0;m 
+arch-ci-linux-gcc-complex-opt-32bit/lib/pkgconfig/PETSc.pc: found 1 matching files and directories[0;m 
+[0;33mWARNING: arch-ci-linux-gcc-complex-opt-32bit/tests/testresults.xml: no matching files[0;m 
+[0;33mWARNING: arch-ci-linux-gcc-complex-opt-32bit/tests/test_arch-ci-linux-gcc-complex-opt-32bit_tap.log: no matching files[0;m 
+[0;33mWARNING: arch-ci-linux-gcc-complex-opt-32bit/tests/test_arch-ci-linux-gcc-complex-opt-32bit_err.log: no matching files[0;m 
+[0;33mWARNING: arch-ci-linux-gcc-complex-opt-32bit/gcov.tar.gz: no matching files[0;m 
+Uploading artifacts as "archive" to coordinator... ok[0;m  id[0;m=1387344089 responseStatus[0;m=201 Created token[0;m=AFFzXpwB
+[32;1mUploading artifacts...[0;m
+Runtime platform                                  [0;m  arch[0;m=amd64 os[0;m=linux pid[0;m=24024 revision[0;m=775dd39d version[0;m=13.8.0
+[0;33mWARNING: arch-ci-linux-gcc-complex-opt-32bit/tests/testresults.xml: no matching files[0;m 
+[31;1mERROR: No files to upload                         [0;m 
+section_end:1625059287:upload_artifacts_on_failure[0Ksection_start:1625059287:cleanup_file_variables[0K[0K[36;1mCleaning up file based variables[0;m
+[0;msection_end:1625059287:cleanup_file_variables[0K[31;1mERROR: Job failed: Process exited with status 1
+[0;m

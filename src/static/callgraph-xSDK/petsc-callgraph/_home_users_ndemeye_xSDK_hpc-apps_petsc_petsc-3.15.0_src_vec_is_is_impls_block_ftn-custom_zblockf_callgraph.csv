@@ -1,5 +1,0 @@
-CALLER, CALLEE, CALLTYPE
-isblockgetindices_,ISBlockGetIndices, DIRECT
-isblockgetindices_,PetscIntAddressToFortran, DIRECT
-isblockrestoreindices_,PetscIntAddressFromFortran, DIRECT
-isblockrestoreindices_,ISBlockRestoreIndices, DIRECT

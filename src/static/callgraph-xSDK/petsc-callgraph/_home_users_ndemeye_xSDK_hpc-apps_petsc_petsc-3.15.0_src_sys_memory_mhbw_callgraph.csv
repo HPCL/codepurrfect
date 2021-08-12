@@ -1,8 +1,0 @@
-CALLER, CALLEE, CALLTYPE
-PetscSetUseHBWMalloc_Private,PetscMallocSet, DIRECT
-PetscSetUseHBWMalloc_Private,PetscError, DIRECT
-PetscSetUseHBWMalloc_Private,printf, DIRECT
-PetscSetUseHBWMalloc_Private,printf, DIRECT
-PetscHBWMalloc,PetscMallocAlign, DIRECT
-PetscHBWFree,PetscFreeAlign, DIRECT
-PetscHBWRealloc,PetscReallocAlign, DIRECT

@@ -1,5 +1,0 @@
-EMPTYNAME = _n_PetscSFLink->any pointer@i64 0 :: i32 (%struct._n_PetscSFLink*, i32, i8*, i32, i8*, i64)*
-EMPTYNAME = _n_PetscSFLink->any pointer@i64 48 :: i32 (%struct._n_PetscSFLink*)*
-PetscTrMalloc = any pointer->any pointer@i64 0 :: i32 (i64, i32, i32, i8*, i8*, i8**)*
-EMPTYNAME = _n_PetscSFLink->any pointer@i64 32 :: i32 (%struct._p_PetscSF*, %struct._n_PetscSFLink*, i32)*
-EMPTYNAME = _n_PetscSFLink->any pointer@i64 0 :: i32 (%struct._n_PetscSFLink*, i32, i8*, i32, i8*, i64)*

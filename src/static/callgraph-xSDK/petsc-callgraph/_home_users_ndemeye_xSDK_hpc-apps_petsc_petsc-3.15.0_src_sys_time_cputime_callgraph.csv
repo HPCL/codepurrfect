@@ -1,4 +1,0 @@
-CALLER, CALLEE, CALLTYPE
-PetscGetCPUTime,times, DIRECT
-PetscGetCPUTime,printf, DIRECT
-PetscGetCPUTime,printf, DIRECT

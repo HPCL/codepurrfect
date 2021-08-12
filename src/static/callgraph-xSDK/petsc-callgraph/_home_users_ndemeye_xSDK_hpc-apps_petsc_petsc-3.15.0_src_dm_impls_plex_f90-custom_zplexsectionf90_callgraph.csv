@@ -1,8 +1,0 @@
-CALLER, CALLEE, CALLTYPE
-dmplexcreatesection_,F90Array1dAccess, DIRECT
-dmplexcreatesection_,F90Array1dAccess, DIRECT
-dmplexcreatesection_,F90Array1dAccess, DIRECT
-dmplexcreatesection_,F90Array1dAccess, DIRECT
-dmplexcreatesection_,F90Array1dAccess, DIRECT
-dmplexcreatesection_,F90Array1dAccess, DIRECT
-dmplexcreatesection_,DMPlexCreateSection, DIRECT

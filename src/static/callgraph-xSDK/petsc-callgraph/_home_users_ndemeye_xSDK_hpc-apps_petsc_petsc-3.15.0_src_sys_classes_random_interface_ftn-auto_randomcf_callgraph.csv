@@ -1,6 +1,0 @@
-CALLER, CALLEE, CALLTYPE
-petscrandomdestroy_,PetscRandomDestroy, DIRECT
-petscrandomsetfromoptions_,PetscRandomSetFromOptions, DIRECT
-petscrandomcreate_,MPI_Comm_f2c, DIRECT
-petscrandomcreate_,PetscRandomCreate, DIRECT
-petscrandomseed_,PetscRandomSeed, DIRECT

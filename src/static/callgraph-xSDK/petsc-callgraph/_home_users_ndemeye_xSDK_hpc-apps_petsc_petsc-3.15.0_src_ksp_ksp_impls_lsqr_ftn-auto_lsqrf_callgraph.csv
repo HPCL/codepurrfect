@@ -1,5 +1,0 @@
-CALLER, CALLEE, CALLTYPE
-ksplsqrsetcomputestandarderrorvec_,KSPLSQRSetComputeStandardErrorVec, DIRECT
-ksplsqrsetexactmatnorm_,KSPLSQRSetExactMatNorm, DIRECT
-ksplsqrgetstandarderrorvec_,KSPLSQRGetStandardErrorVec, DIRECT
-ksplsqrgetnorms_,KSPLSQRGetNorms, DIRECT

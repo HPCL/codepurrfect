@@ -1,3 +1,0 @@
-CALLER, CALLEE, CALLTYPE
-petscinitialized_,PetscInitialized, DIRECT
-petscfinalized_,PetscFinalized, DIRECT

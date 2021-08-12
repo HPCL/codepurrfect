@@ -1,5 +1,0 @@
-CALLER, CALLEE, CALLTYPE
-pfapplyvec_,PFApplyVec, DIRECT
-pfapply_,PFApply, DIRECT
-pfview_,PFView, DIRECT
-pfsetfromoptions_,PFSetFromOptions, DIRECT

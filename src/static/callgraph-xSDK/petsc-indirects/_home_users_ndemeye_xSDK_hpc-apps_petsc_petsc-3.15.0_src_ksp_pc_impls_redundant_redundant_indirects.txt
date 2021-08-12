@@ -1,5 +1,0 @@
-EMPTYNAME = any pointer->any pointer@i64 0 :: i32 (%struct._p_PC*, i32)*
-EMPTYNAME = any pointer->any pointer@i64 0 :: i32 (%struct._p_PC*, %struct._p_PetscSF*, %struct._p_PetscSF*)*
-EMPTYNAME = any pointer->any pointer@i64 0 :: i32 (%struct._p_PC*, %struct._p_KSP**)*
-EMPTYNAME = any pointer->any pointer@i64 0 :: i32 (%struct._p_PC*, %struct._p_Mat**, %struct._p_Mat**)*
-PetscTrFree = any pointer->any pointer@i64 0 :: i32 (i8*, i32, i8*, i8*)*

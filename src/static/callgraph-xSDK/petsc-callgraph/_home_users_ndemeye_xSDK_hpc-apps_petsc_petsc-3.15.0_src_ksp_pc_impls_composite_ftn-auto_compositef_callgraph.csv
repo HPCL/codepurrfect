@@ -1,7 +1,0 @@
-CALLER, CALLEE, CALLTYPE
-pccompositesettype_,PCCompositeSetType, DIRECT
-pccompositegettype_,PCCompositeGetType, DIRECT
-pccompositespecialsetalpha_,PCCompositeSpecialSetAlpha, DIRECT
-pccompositeaddpc_,PCCompositeAddPC, DIRECT
-pccompositegetnumberpc_,PCCompositeGetNumberPC, DIRECT
-pccompositegetpc_,PCCompositeGetPC, DIRECT

@@ -1,3 +1,0 @@
-PetscLogPHC = any pointer->any pointer@i64 0 :: i32 (%struct._p_PetscObject*)*
-EMPTYNAME = _ISOps->any pointer@i64 56 :: i32 (%struct._p_IS*)*
-EMPTYNAME = any pointer->any pointer@i64 0 :: i32 (%struct._p_IS*)*

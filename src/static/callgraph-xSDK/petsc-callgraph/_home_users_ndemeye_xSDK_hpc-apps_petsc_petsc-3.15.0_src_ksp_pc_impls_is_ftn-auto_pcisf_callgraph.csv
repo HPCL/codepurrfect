@@ -1,4 +1,0 @@
-CALLER, CALLEE, CALLTYPE
-pcissetusestiffnessscaling_,PCISSetUseStiffnessScaling, DIRECT
-pcissetsubdomaindiagonalscaling_,PCISSetSubdomainDiagonalScaling, DIRECT
-pcissetsubdomainscalingfactor_,PCISSetSubdomainScalingFactor, DIRECT

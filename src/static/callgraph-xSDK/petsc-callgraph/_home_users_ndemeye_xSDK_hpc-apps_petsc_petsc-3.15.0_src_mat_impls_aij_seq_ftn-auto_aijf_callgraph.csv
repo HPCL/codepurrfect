@@ -1,8 +1,0 @@
-CALLER, CALLEE, CALLTYPE
-matseqaijsettotalpreallocation_,MatSeqAIJSetTotalPreallocation, DIRECT
-matseqaijsetcolumnindices_,MatSeqAIJSetColumnIndices, DIRECT
-matstorevalues_,MatStoreValues, DIRECT
-matretrievevalues_,MatRetrieveValues, DIRECT
-matseqaijsetpreallocationcsr_,MatSeqAIJSetPreallocationCSR, DIRECT
-matcreateseqaijwitharrays_,MPI_Comm_f2c, DIRECT
-matcreateseqaijwitharrays_,MatCreateSeqAIJWithArrays, DIRECT

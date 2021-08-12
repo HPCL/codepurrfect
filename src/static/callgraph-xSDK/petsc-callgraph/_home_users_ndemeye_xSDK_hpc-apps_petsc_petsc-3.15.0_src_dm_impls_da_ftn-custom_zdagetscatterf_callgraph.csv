@@ -1,4 +1,0 @@
-CALLER, CALLEE, CALLTYPE
-dmdagetscatter_,PetscError, DIRECT
-dmdagetscatter_,PetscError, DIRECT
-dmdagetscatter_,DMDAGetScatter, DIRECT

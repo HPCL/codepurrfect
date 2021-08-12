@@ -1,6 +1,0 @@
-CALLER, CALLEE, CALLTYPE
-PetscGetUserName,getenv, DIRECT
-PetscGetUserName,PetscStrncpy, DIRECT
-PetscGetUserName,PetscError, DIRECT
-PetscGetUserName,printf, DIRECT
-PetscGetUserName,printf, DIRECT

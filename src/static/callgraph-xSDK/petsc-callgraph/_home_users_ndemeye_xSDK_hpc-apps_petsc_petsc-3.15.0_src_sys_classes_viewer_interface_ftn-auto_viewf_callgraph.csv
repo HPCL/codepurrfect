@@ -1,7 +1,0 @@
-CALLER, CALLEE, CALLTYPE
-petscviewerdestroy_,PetscViewerDestroy, DIRECT
-petscviewersetup_,PetscViewerSetUp, DIRECT
-petscviewerreadable_,PetscViewerReadable, DIRECT
-petscviewerwritable_,PetscViewerWritable, DIRECT
-petscviewercheckreadable_,PetscViewerCheckReadable, DIRECT
-petscviewercheckwritable_,PetscViewerCheckWritable, DIRECT

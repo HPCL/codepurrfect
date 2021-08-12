@@ -1,4 +1,0 @@
-CALLER, CALLEE, CALLTYPE
-matnullspacecreaterigidbody_,MatNullSpaceCreateRigidBody, DIRECT
-matnullspacedestroy_,MatNullSpaceDestroy, DIRECT
-matnullspacetest_,MatNullSpaceTest, DIRECT

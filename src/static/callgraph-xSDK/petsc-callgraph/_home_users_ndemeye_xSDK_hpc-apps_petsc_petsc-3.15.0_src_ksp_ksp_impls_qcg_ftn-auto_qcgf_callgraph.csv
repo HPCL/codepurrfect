@@ -1,4 +1,0 @@
-CALLER, CALLEE, CALLTYPE
-kspqcgsettrustregionradius_,KSPQCGSetTrustRegionRadius, DIRECT
-kspqcggettrialstepnorm_,KSPQCGGetTrialStepNorm, DIRECT
-kspqcggetquadratic_,KSPQCGGetQuadratic, DIRECT

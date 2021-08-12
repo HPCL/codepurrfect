@@ -1,4 +1,0 @@
-CALLER, CALLEE, CALLTYPE
-petscdrawpause_,PetscDrawPause, DIRECT
-petscdrawsetpause_,PetscDrawSetPause, DIRECT
-petscdrawgetpause_,PetscDrawGetPause, DIRECT

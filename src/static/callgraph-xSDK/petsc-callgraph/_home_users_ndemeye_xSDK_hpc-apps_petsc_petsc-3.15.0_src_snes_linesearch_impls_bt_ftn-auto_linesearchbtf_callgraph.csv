@@ -1,3 +1,0 @@
-CALLER, CALLEE, CALLTYPE
-sneslinesearchbtsetalpha_,SNESLineSearchBTSetAlpha, DIRECT
-sneslinesearchbtgetalpha_,SNESLineSearchBTGetAlpha, DIRECT

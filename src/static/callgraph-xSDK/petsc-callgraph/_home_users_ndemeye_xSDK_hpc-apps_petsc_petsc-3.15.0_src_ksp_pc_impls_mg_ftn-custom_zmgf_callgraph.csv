@@ -1,6 +1,0 @@
-CALLER, CALLEE, CALLTYPE
-pcmgsetlevels_,PetscError, DIRECT
-pcmgsetlevels_,PetscMallocA, DIRECT
-pcmgsetlevels_,MPI_Comm_f2c, DIRECT
-pcmgsetlevels_,PCMGSetLevels, DIRECT
-pcmgsetlevels_,PetscTrFree = (any pointer->any pointer@i64 0) :: i32 (i8*, i32, i8*, i8*)*, INDIRECT 

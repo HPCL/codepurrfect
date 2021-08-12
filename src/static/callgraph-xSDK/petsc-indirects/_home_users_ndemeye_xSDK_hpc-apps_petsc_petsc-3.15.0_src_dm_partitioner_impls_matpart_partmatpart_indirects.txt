@@ -1,3 +1,0 @@
-EMPTYNAME = any pointer->any pointer@i64 0 :: i32 (%struct._p_PetscPartitioner*, %struct._p_MatPartitioning**)*
-PetscTrFree = any pointer->any pointer@i64 0 :: i32 (i8*, i32, i8*, i8*)*
-PetscTrFree = any pointer->any pointer@i64 0 :: i32 (i8*, i32, i8*, i8*)*

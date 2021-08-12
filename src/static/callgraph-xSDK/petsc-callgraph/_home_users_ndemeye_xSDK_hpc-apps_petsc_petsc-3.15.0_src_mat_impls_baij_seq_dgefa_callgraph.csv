@@ -1,9 +1,0 @@
-CALLER, CALLEE, CALLTYPE
-PetscLINPACKgefa,PetscInfo_Private, DIRECT
-PetscLINPACKgefa,PetscError, DIRECT
-PetscLINPACKgefa,PetscError, DIRECT
-PetscLINPACKgefa,PetscInfo_Private, DIRECT
-PetscLINPACKgefa,PetscError, DIRECT
-PetscLINPACKgefa,PetscError, DIRECT
-PetscLINPACKgefa,printf, DIRECT
-PetscLINPACKgefa,printf, DIRECT

@@ -1,8 +1,0 @@
-EMPTYNAME = _KSPOps->any pointer@i64 104 :: i32 (%struct._p_KSP*, %struct._p_PetscViewer*)*
-EMPTYNAME = _KSPOps->any pointer@i64 80 :: i32 (%struct._p_KSP*)*
-EMPTYNAME = any pointer->any pointer@i64 0 :: i32 (%struct._p_KSP*)*
-EMPTYNAME = _KSPOps->any pointer@i64 88 :: i32 (%struct._p_KSP*, %struct._p_PetscViewer*)*
-EMPTYNAME = _KSPOps->any pointer@i64 88 :: i32 (%struct._p_KSP*, %struct._p_PetscViewer*)*
-EMPTYNAME = _KSPOps->any pointer@i64 88 :: i32 (%struct._p_KSP*, %struct._p_PetscViewer*)*
-EMPTYNAME = _KSPOps->any pointer@i64 88 :: i32 (%struct._p_KSP*, %struct._p_PetscViewer*)*
-PetscLogPHC = any pointer->any pointer@i64 0 :: i32 (%struct._p_PetscObject*)*

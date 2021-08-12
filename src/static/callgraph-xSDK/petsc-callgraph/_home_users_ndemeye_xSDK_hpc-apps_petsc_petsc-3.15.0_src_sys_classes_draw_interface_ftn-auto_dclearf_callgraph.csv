@@ -1,4 +1,0 @@
-CALLER, CALLEE, CALLTYPE
-petscdrawclear_,PetscDrawClear, DIRECT
-petscdrawbop_,PetscDrawBOP, DIRECT
-petscdraweop_,PetscDrawEOP, DIRECT

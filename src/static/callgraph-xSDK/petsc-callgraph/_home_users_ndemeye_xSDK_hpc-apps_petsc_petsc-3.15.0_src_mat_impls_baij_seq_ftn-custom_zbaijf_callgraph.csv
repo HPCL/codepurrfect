@@ -1,6 +1,0 @@
-CALLER, CALLEE, CALLTYPE
-matcreateseqbaij_,PetscError, DIRECT
-matcreateseqbaij_,MPI_Comm_f2c, DIRECT
-matcreateseqbaij_,MatCreateSeqBAIJ, DIRECT
-matseqbaijsetpreallocation_,PetscError, DIRECT
-matseqbaijsetpreallocation_,MatSeqBAIJSetPreallocation, DIRECT

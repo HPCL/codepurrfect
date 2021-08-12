@@ -1,4 +1,0 @@
-CALLER, CALLEE, CALLTYPE
-petscdrawpoint_,PetscDrawPoint, DIRECT
-petscdrawpointpixel_,PetscDrawPointPixel, DIRECT
-petscdrawpointsetsize_,PetscDrawPointSetSize, DIRECT

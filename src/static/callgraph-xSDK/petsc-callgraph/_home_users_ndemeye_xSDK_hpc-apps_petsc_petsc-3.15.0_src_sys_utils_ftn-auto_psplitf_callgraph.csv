@@ -1,7 +1,0 @@
-CALLER, CALLEE, CALLTYPE
-petscsplitownershipblock_,MPI_Comm_f2c, DIRECT
-petscsplitownershipblock_,PetscSplitOwnershipBlock, DIRECT
-petscsplitownership_,MPI_Comm_f2c, DIRECT
-petscsplitownership_,PetscSplitOwnership, DIRECT
-petscsplitownershipequal_,MPI_Comm_f2c, DIRECT
-petscsplitownershipequal_,PetscSplitOwnershipEqual, DIRECT

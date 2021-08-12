@@ -1,7 +1,0 @@
-CALLER, CALLEE, CALLTYPE
-petscspacesumgetnumsubspaces_,PetscSpaceSumGetNumSubspaces, DIRECT
-petscspacesumsetnumsubspaces_,PetscSpaceSumSetNumSubspaces, DIRECT
-petscspacesumgetconcatenate_,PetscSpaceSumGetConcatenate, DIRECT
-petscspacesumsetconcatenate_,PetscSpaceSumSetConcatenate, DIRECT
-petscspacesumgetsubspace_,PetscSpaceSumGetSubspace, DIRECT
-petscspacesumsetsubspace_,PetscSpaceSumSetSubspace, DIRECT

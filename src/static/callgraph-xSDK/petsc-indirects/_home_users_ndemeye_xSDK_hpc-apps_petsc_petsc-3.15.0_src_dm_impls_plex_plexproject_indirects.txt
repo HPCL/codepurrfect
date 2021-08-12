@@ -1,3 +1,0 @@
-EMPTYNAME = any pointer->any pointer@i64 0 :: i32 (i32, double, double*, i32, double*, i8*)*
-EMPTYNAME = any pointer->any pointer@i64 0 :: void (i32, i32, i32, i32*, i32*, double*, double*, double*, i32*, i32*, double*, double*, double*, double, double*, i32, double*, double*)*
-EMPTYNAME = any pointer->any pointer@i64 0 :: void (i32, i32, i32, i32*, i32*, double*, double*, double*, i32*, i32*, double*, double*, double*, double, double*, double*, i32, double*, double*)*

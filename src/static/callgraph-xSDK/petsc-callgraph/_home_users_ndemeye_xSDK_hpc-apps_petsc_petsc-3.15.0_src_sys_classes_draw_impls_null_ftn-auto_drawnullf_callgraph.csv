@@ -1,4 +1,0 @@
-CALLER, CALLEE, CALLTYPE
-petscdrawopennull_,MPI_Comm_f2c, DIRECT
-petscdrawopennull_,PetscDrawOpenNull, DIRECT
-petscdrawisnull_,PetscDrawIsNull, DIRECT

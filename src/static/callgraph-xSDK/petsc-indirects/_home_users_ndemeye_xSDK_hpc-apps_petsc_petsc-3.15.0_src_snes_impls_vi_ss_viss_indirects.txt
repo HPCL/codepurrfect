@@ -1,4 +1,0 @@
-EMPTYNAME = _SNESOps->any pointer@i64 24 :: i32 (%struct._p_SNES*, i32, double, double, double, i32*, i8*)*
-EMPTYNAME = _SNESOps->any pointer@i64 16 :: i32 (%struct._p_SNES*, i32)*
-EMPTYNAME = _SNESOps->any pointer@i64 24 :: i32 (%struct._p_SNES*, i32, double, double, double, i32*, i8*)*
-EMPTYNAME = ->any pointer@i64 72 :: i32 (%struct._p_SNES*, %struct._p_Vec*, %struct._p_Vec*, i8*)*

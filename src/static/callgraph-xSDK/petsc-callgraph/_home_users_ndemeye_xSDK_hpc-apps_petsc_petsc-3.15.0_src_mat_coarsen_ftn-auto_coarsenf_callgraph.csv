@@ -1,8 +1,0 @@
-CALLER, CALLEE, CALLTYPE
-matcoarsenapply_,MatCoarsenApply, DIRECT
-matcoarsensetadjacency_,MatCoarsenSetAdjacency, DIRECT
-matcoarsensetstrictaggs_,MatCoarsenSetStrictAggs, DIRECT
-matcoarsendestroy_,MatCoarsenDestroy, DIRECT
-matcoarsencreate_,MPI_Comm_f2c, DIRECT
-matcoarsencreate_,MatCoarsenCreate, DIRECT
-matcoarsensetfromoptions_,MatCoarsenSetFromOptions, DIRECT

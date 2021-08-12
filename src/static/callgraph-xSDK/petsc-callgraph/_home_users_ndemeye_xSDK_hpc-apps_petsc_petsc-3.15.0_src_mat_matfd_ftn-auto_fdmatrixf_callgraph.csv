@@ -1,8 +1,0 @@
-CALLER, CALLEE, CALLTYPE
-matfdcoloringsetparameters_,MatFDColoringSetParameters, DIRECT
-matfdcoloringsetblocksize_,MatFDColoringSetBlockSize, DIRECT
-matfdcoloringsetup_,MatFDColoringSetUp, DIRECT
-matfdcoloringsetfromoptions_,MatFDColoringSetFromOptions, DIRECT
-matfdcoloringcreate_,MatFDColoringCreate, DIRECT
-matfdcoloringdestroy_,MatFDColoringDestroy, DIRECT
-matfdcoloringapply_,MatFDColoringApply, DIRECT

@@ -91,7 +91,7 @@ public:
 
     void write_file_header()
     {
-      metrics_file << "function_name, "
+      metrics_file << "Name, "
                       "mu1, mu2, N1, N2, " 
                       "N, mu, mu1', mu2', " 
                       "V, V*, L, D, I, E, T" << "\n"; 

@@ -1,1 +1,0 @@
-EMPTYNAME = any pointer->any pointer@i64 0 :: void (%struct._p_KSP**, i32*, i32*)*

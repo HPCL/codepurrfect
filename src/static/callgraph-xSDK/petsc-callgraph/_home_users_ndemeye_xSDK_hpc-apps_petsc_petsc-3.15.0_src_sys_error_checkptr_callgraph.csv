@@ -1,6 +1,0 @@
-CALLER, CALLEE, CALLTYPE
-PetscCheckPointerSetIntensity,PetscError, DIRECT
-PetscCheckPointerSetIntensity,printf, DIRECT
-PetscCheckPointerSetIntensity,printf, DIRECT
-PetscSignalSegvCheckPointerOrMpi,longjmp, DIRECT
-PetscCheckPointer,_setjmp, DIRECT

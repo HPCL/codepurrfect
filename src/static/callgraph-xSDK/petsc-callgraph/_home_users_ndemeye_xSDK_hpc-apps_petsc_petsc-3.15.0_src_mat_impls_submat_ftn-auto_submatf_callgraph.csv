@@ -1,3 +1,0 @@
-CALLER, CALLEE, CALLTYPE
-matcreatesubmatrixvirtual_,MatCreateSubMatrixVirtual, DIRECT
-matsubmatrixvirtualupdate_,MatSubMatrixVirtualUpdate, DIRECT

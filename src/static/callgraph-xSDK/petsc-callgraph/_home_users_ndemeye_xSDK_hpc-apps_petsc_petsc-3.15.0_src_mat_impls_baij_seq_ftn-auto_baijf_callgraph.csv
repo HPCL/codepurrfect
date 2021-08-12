@@ -1,4 +1,0 @@
-CALLER, CALLEE, CALLTYPE
-matseqbaijsetcolumnindices_,MatSeqBAIJSetColumnIndices, DIRECT
-matcreateseqbaijwitharrays_,MPI_Comm_f2c, DIRECT
-matcreateseqbaijwitharrays_,MatCreateSeqBAIJWithArrays, DIRECT

@@ -1,2 +1,0 @@
-EMPTYNAME = _p_TSTrajectory->any pointer@i64 848 :: i32 (i8*, %struct._p_Vec*, %struct._p_Vec**)*
-EMPTYNAME = _p_TSTrajectory->any pointer@i64 848 :: i32 (i8*, %struct._p_Vec*, %struct._p_Vec**)*

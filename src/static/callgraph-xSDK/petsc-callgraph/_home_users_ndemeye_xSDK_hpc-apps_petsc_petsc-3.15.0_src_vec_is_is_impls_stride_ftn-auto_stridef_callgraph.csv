@@ -1,5 +1,0 @@
-CALLER, CALLEE, CALLTYPE
-isstridegetinfo_,ISStrideGetInfo, DIRECT
-isstridesetstride_,ISStrideSetStride, DIRECT
-iscreatestride_,MPI_Comm_f2c, DIRECT
-iscreatestride_,ISCreateStride, DIRECT

@@ -1,7 +1,0 @@
-CALLER, CALLEE, CALLTYPE
-dmplexsnescomputeresidualfem_,DMPlexSNESComputeResidualFEM, DIRECT
-dmplexsnescomputeboundaryfem_,DMPlexSNESComputeBoundaryFEM, DIRECT
-dmsnescomputejacobianaction_,DMSNESComputeJacobianAction, DIRECT
-dmplexsnescomputejacobianfem_,DMPlexSNESComputeJacobianFEM, DIRECT
-dmsnescreatejacobianmf_,DMSNESCreateJacobianMF, DIRECT
-dmplexsetsneslocalfem_,DMPlexSetSNESLocalFEM, DIRECT

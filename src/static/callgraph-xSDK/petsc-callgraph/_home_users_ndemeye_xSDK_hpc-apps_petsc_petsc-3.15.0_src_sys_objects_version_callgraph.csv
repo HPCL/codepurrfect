@@ -1,5 +1,0 @@
-CALLER, CALLEE, CALLTYPE
-PetscGetVersion,PetscSNPrintf, DIRECT
-PetscGetVersion,PetscError, DIRECT
-PetscGetVersion,printf, DIRECT
-PetscGetVersion,printf, DIRECT

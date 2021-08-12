@@ -1,1 +1,0 @@
-EMPTYNAME = _PetscDrawOps->any pointer@i64 240 :: i32 (%struct._p_PetscDraw*, double, double, double, double)*

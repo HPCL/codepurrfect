@@ -1,5 +1,0 @@
-CALLER, CALLEE, CALLTYPE
-dmplexcompareorientations_,DMPlexCompareOrientations, DIRECT
-dmplexorientcell_,DMPlexOrientCell, DIRECT
-dmplexreversecell_,DMPlexReverseCell, DIRECT
-dmplexorient_,DMPlexOrient, DIRECT

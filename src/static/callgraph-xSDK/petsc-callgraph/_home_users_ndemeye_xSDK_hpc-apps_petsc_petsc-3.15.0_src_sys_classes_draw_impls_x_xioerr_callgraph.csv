@@ -1,3 +1,0 @@
-CALLER, CALLEE, CALLTYPE
-PetscXIOErrorHandlerJump,longjmp, DIRECT
-PetscSetXIOErrorHandler,XSetIOErrorHandler, DIRECT

@@ -1,7 +1,0 @@
-CALLER, CALLEE, CALLTYPE
-petscdrawspsetdimension_,PetscDrawSPSetDimension, DIRECT
-petscdrawspreset_,PetscDrawSPReset, DIRECT
-petscdrawspaddpoint_,PetscDrawSPAddPoint, DIRECT
-petscdrawspdraw_,PetscDrawSPDraw, DIRECT
-petscdrawspsave_,PetscDrawSPSave, DIRECT
-petscdrawspsetlimits_,PetscDrawSPSetLimits, DIRECT

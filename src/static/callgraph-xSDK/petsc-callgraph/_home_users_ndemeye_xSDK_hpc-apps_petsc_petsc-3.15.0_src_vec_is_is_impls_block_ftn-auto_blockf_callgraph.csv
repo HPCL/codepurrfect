@@ -1,6 +1,0 @@
-CALLER, CALLEE, CALLTYPE
-isblocksetindices_,ISBlockSetIndices, DIRECT
-iscreateblock_,MPI_Comm_f2c, DIRECT
-iscreateblock_,ISCreateBlock, DIRECT
-isblockgetlocalsize_,ISBlockGetLocalSize, DIRECT
-isblockgetsize_,ISBlockGetSize, DIRECT

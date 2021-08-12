@@ -1,3 +1,0 @@
-CALLER, CALLEE, CALLTYPE
-petscdrawlgaddcommonpoint_,PetscDrawLGAddCommonPoint, DIRECT
-petscdrawlgaddpoint_,PetscDrawLGAddPoint, DIRECT

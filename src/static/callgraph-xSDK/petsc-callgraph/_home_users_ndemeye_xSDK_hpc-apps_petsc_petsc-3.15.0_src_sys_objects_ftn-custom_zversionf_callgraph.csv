@@ -1,7 +1,0 @@
-CALLER, CALLEE, CALLTYPE
-petscgetversion_,PetscGetVersion, DIRECT
-petscgetversionnumber_,PetscError, DIRECT
-petscgetversionnumber_,PetscError, DIRECT
-petscgetversionnumber_,PetscError, DIRECT
-petscgetversionnumber_,PetscError, DIRECT
-petscgetversionnumber_,PetscGetVersionNumber, DIRECT

@@ -1,1 +1,0 @@
-EMPTYNAME = _SNESOps->any pointer@i64 80 :: i32 (%struct._p_SNES*)*

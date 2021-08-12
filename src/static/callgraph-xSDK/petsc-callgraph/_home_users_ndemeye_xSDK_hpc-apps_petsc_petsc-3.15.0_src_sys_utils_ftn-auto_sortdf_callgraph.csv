@@ -1,8 +1,0 @@
-CALLER, CALLEE, CALLTYPE
-petscsortedreal_,PetscSortedReal, DIRECT
-petscsortreal_,PetscSortReal, DIRECT
-petscsortrealwitharrayint_,PetscSortRealWithArrayInt, DIRECT
-petscfindreal_,PetscFindReal, DIRECT
-petscsortremovedupsreal_,PetscSortRemoveDupsReal, DIRECT
-petscsortsplit_,PetscSortSplit, DIRECT
-petscsortsplitreal_,PetscSortSplitReal, DIRECT

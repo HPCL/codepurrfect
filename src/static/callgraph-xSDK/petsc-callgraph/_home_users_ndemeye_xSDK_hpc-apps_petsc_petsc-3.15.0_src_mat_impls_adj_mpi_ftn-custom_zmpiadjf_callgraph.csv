@@ -1,6 +1,0 @@
-CALLER, CALLEE, CALLTYPE
-matcreatempiadj_,PetscError, DIRECT
-matcreatempiadj_,MPI_Comm_f2c, DIRECT
-matcreatempiadj_,MatCreateMPIAdj, DIRECT
-matmpiadjsetpreallocation_,PetscError, DIRECT
-matmpiadjsetpreallocation_,MatMPIAdjSetPreallocation, DIRECT

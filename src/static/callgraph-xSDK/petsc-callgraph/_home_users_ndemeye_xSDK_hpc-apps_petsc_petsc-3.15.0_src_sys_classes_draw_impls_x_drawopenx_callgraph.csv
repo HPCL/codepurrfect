@@ -1,7 +1,0 @@
-CALLER, CALLEE, CALLTYPE
-PetscDrawOpenX,PetscDrawCreate, DIRECT
-PetscDrawOpenX,PetscError, DIRECT
-PetscDrawOpenX,PetscDrawSetType, DIRECT
-PetscDrawOpenX,PetscError, DIRECT
-PetscDrawOpenX,printf, DIRECT
-PetscDrawOpenX,printf, DIRECT

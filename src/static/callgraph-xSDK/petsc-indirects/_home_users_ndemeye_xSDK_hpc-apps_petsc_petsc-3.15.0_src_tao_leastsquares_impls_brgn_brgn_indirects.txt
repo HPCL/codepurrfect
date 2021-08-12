@@ -1,5 +1,0 @@
-PetscTrFree = any pointer->any pointer@i64 0 :: i32 (i8*, i32, i8*, i8*)*
-EMPTYNAME = _TaoOps->any pointer@i64 120 :: i32 (%struct._p_Tao*, i32, i8*)*
-EMPTYNAME = ->any pointer@i64 0 :: i32 (%struct._p_Tao*, %struct._p_Vec*, double*, %struct._p_Vec*, i8*)*
-EMPTYNAME = ->any pointer@i64 8 :: i32 (%struct._p_Tao*, %struct._p_Vec*, %struct._p_Mat*, i8*)*
-PetscTrFree = any pointer->any pointer@i64 0 :: i32 (i8*, i32, i8*, i8*)*

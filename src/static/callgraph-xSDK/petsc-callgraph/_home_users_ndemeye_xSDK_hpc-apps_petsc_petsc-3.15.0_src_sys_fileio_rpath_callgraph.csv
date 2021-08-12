@@ -1,7 +1,0 @@
-CALLER, CALLEE, CALLTYPE
-PetscGetRelativePath,PetscStrrchr, DIRECT
-PetscGetRelativePath,PetscError, DIRECT
-PetscGetRelativePath,PetscStrncpy, DIRECT
-PetscGetRelativePath,PetscError, DIRECT
-PetscGetRelativePath,printf, DIRECT
-PetscGetRelativePath,printf, DIRECT

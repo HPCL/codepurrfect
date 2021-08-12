@@ -1,3 +1,0 @@
-CALLER, CALLEE, CALLTYPE
-dmdasetpreallocationcenterdimension_,DMDASetPreallocationCenterDimension, DIRECT
-dmdagetpreallocationcenterdimension_,DMDAGetPreallocationCenterDimension, DIRECT

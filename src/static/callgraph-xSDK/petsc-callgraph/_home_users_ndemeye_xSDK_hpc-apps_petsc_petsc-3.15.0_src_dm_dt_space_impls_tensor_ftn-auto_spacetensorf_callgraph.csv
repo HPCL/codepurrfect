@@ -1,5 +1,0 @@
-CALLER, CALLEE, CALLTYPE
-petscspacetensorsetnumsubspaces_,PetscSpaceTensorSetNumSubspaces, DIRECT
-petscspacetensorgetnumsubspaces_,PetscSpaceTensorGetNumSubspaces, DIRECT
-petscspacetensorsetsubspace_,PetscSpaceTensorSetSubspace, DIRECT
-petscspacetensorgetsubspace_,PetscSpaceTensorGetSubspace, DIRECT

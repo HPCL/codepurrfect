@@ -1,4 +1,0 @@
-CALLER, CALLEE, CALLTYPE
-veccreateseqwitharray_,PetscError, DIRECT
-veccreateseqwitharray_,MPI_Comm_f2c, DIRECT
-veccreateseqwitharray_,VecCreateSeqWithArray, DIRECT

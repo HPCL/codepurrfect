@@ -1,2 +1,0 @@
-EMPTYNAME = _PetscViewerOps->any pointer@i64 24 :: i32 (%struct._p_PetscViewer*, %struct.ompi_communicator_t*, %struct._p_PetscViewer**)*
-EMPTYNAME = _PetscViewerOps->any pointer@i64 32 :: i32 (%struct._p_PetscViewer*, %struct.ompi_communicator_t*, %struct._p_PetscViewer**)*

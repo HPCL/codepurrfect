@@ -1,5 +1,0 @@
-CALLER, CALLEE, CALLTYPE
-matlmvmsymbroydensetdelta_,MatLMVMSymBroydenSetDelta, DIRECT
-matlmvmsymbroydensetscaletype_,MatLMVMSymBroydenSetScaleType, DIRECT
-matcreatelmvmsymbroyden_,MPI_Comm_f2c, DIRECT
-matcreatelmvmsymbroyden_,MatCreateLMVMSymBroyden, DIRECT

@@ -1,5 +1,0 @@
-CALLER, CALLEE, CALLTYPE
-petscsequentialphasebegin_,MPI_Comm_f2c, DIRECT
-petscsequentialphasebegin_,PetscSequentialPhaseBegin, DIRECT
-petscsequentialphaseend_,MPI_Comm_f2c, DIRECT
-petscsequentialphaseend_,PetscSequentialPhaseEnd, DIRECT

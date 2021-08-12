@@ -1,4 +1,0 @@
-CALLER, CALLEE, CALLTYPE
-snescompositegetsnes_,SNESCompositeGetSNES, DIRECT
-snescompositegetnumber_,SNESCompositeGetNumber, DIRECT
-snescompositesetdamping_,SNESCompositeSetDamping, DIRECT

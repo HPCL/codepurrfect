@@ -1,9 +1,0 @@
-CALLER, CALLEE, CALLTYPE
-kspmonitorlgcreate_,PetscMallocA, DIRECT
-kspmonitorlgcreate_,PetscStrncpy, DIRECT
-kspmonitorlgcreate_,PetscMallocA, DIRECT
-kspmonitorlgcreate_,PetscStrncpy, DIRECT
-kspmonitorlgcreate_,PetscMallocA, DIRECT
-kspmonitorlgcreate_,PetscStrncpy, DIRECT
-kspmonitorlgcreate_,MPI_Comm_f2c, DIRECT
-kspmonitorlgcreate_,KSPMonitorLGCreate, DIRECT

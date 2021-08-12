@@ -1,6 +1,0 @@
-CALLER, CALLEE, CALLTYPE
-kspcgsettype_,KSPCGSetType, DIRECT
-kspcgusesinglereduction_,KSPCGUseSingleReduction, DIRECT
-kspcgsetradius_,KSPCGSetRadius, DIRECT
-kspcggetnormd_,KSPCGGetNormD, DIRECT
-kspcggetobjfcn_,KSPCGGetObjFcn, DIRECT

@@ -1,3 +1,0 @@
-CALLER, CALLEE, CALLTYPE
-iscreate_,MPI_Comm_f2c, DIRECT
-iscreate_,ISCreate, DIRECT

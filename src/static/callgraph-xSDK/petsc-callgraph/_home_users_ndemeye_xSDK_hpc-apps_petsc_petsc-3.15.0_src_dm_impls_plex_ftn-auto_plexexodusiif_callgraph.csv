@@ -1,6 +1,0 @@
-CALLER, CALLEE, CALLTYPE
-petscviewerexodusiigetid_,PetscViewerExodusIIGetId, DIRECT
-petscviewerexodusiisetorder_,PetscViewerExodusIISetOrder, DIRECT
-petscviewerexodusiigetorder_,PetscViewerExodusIIGetOrder, DIRECT
-dmplexcreateexodus_,MPI_Comm_f2c, DIRECT
-dmplexcreateexodus_,DMPlexCreateExodus, DIRECT

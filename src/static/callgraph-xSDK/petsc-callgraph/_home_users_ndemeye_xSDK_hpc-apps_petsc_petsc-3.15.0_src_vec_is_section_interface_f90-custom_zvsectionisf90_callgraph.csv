@@ -1,7 +1,0 @@
-CALLER, CALLEE, CALLTYPE
-petscsectiongetconstraintindicesf90_,PetscSectionGetConstraintIndices, DIRECT
-petscsectiongetconstraintindicesf90_,PetscSectionGetConstraintDof, DIRECT
-petscsectiongetconstraintindicesf90_,F90Array1dCreate, DIRECT
-petscsectionrestoreconstraintindicesf90_,F90Array1dDestroy, DIRECT
-petscsectionsetconstraintindicesf90_,F90Array1dAccess, DIRECT
-petscsectionsetconstraintindicesf90_,PetscSectionSetConstraintIndices, DIRECT

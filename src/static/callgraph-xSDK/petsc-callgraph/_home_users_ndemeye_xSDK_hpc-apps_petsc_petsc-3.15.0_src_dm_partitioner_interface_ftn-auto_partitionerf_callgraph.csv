@@ -1,9 +1,0 @@
-CALLER, CALLEE, CALLTYPE
-petscpartitionerview_,PetscPartitionerView, DIRECT
-petscpartitionersetfromoptions_,PetscPartitionerSetFromOptions, DIRECT
-petscpartitionersetup_,PetscPartitionerSetUp, DIRECT
-petscpartitionerreset_,PetscPartitionerReset, DIRECT
-petscpartitionerdestroy_,PetscPartitionerDestroy, DIRECT
-petscpartitionerpartition_,PetscPartitionerPartition, DIRECT
-petscpartitionercreate_,MPI_Comm_f2c, DIRECT
-petscpartitionercreate_,PetscPartitionerCreate, DIRECT

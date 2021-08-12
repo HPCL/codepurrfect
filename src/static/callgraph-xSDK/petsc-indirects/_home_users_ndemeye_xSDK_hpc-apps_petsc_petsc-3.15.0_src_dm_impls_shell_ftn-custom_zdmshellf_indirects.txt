@@ -1,9 +1,0 @@
-EMPTYNAME = any pointer->any pointer@i64 0 :: void (%struct._p_DM**, %struct._p_Mat**, i32*)*
-EMPTYNAME = any pointer->any pointer@i64 0 :: void (%struct._p_DM**, %struct._p_Vec**, i32*)*
-EMPTYNAME = any pointer->any pointer@i64 0 :: void (%struct._p_DM**, %struct._p_Vec**, i32*)*
-EMPTYNAME = any pointer->any pointer@i64 0 :: void (%struct._p_DM**, %struct._p_Vec**, i32*, %struct._p_Vec**, i32*)*
-EMPTYNAME = any pointer->any pointer@i64 0 :: void (%struct._p_DM**, %struct._p_Vec**, i32*, %struct._p_Vec**, i32*)*
-EMPTYNAME = any pointer->any pointer@i64 0 :: void (%struct._p_DM**, %struct._p_Vec**, i32*, %struct._p_Vec**, i32*)*
-EMPTYNAME = any pointer->any pointer@i64 0 :: void (%struct._p_DM**, %struct._p_Vec**, i32*, %struct._p_Vec**, i32*)*
-EMPTYNAME = any pointer->any pointer@i64 0 :: void (%struct._p_DM**, %struct._p_Vec**, i32*, %struct._p_Vec**, i32*)*
-EMPTYNAME = any pointer->any pointer@i64 0 :: void (%struct._p_DM**, %struct._p_Vec**, i32*, %struct._p_Vec**, i32*)*

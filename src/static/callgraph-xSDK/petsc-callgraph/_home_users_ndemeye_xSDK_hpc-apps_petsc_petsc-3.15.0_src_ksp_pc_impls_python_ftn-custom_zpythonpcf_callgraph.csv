@@ -1,5 +1,0 @@
-CALLER, CALLEE, CALLTYPE
-pcpythonsettype_,PetscMallocA, DIRECT
-pcpythonsettype_,PetscStrncpy, DIRECT
-pcpythonsettype_,PCPythonSetType, DIRECT
-pcpythonsettype_,PetscTrFree = (any pointer->any pointer@i64 0) :: i32 (i8*, i32, i8*, i8*)*, INDIRECT 

@@ -1,5 +1,0 @@
-CALLER, CALLEE, CALLTYPE
-dmdacreate2d_,PetscError, DIRECT
-dmdacreate2d_,PetscError, DIRECT
-dmdacreate2d_,MPI_Comm_f2c, DIRECT
-dmdacreate2d_,DMDACreate2d, DIRECT

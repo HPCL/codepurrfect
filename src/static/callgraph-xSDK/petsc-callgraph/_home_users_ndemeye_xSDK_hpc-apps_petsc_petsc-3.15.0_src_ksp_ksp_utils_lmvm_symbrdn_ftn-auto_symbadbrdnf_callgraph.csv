@@ -1,3 +1,0 @@
-CALLER, CALLEE, CALLTYPE
-matcreatelmvmsymbadbroyden_,MPI_Comm_f2c, DIRECT
-matcreatelmvmsymbadbroyden_,MatCreateLMVMSymBadBroyden, DIRECT

@@ -1,3 +1,0 @@
-CALLER, CALLEE, CALLTYPE
-dmdagetlogicalcoordinate_,DMDAGetLogicalCoordinate, DIRECT
-dmdagetray_,DMDAGetRay, DIRECT

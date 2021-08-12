@@ -1,4 +1,0 @@
-PetscTrFree = any pointer->any pointer@i64 0 :: i32 (i8*, i32, i8*, i8*)*
-PetscTrFree = any pointer->any pointer@i64 0 :: i32 (i8*, i32, i8*, i8*)*
-EMPTYNAME = yaml_parser_s->any pointer@i64 88 :: i32 (i8*, i8*, i64, i64*)*
-EMPTYNAME = yaml_parser_s->any pointer@i64 88 :: i32 (i8*, i8*, i64, i64*)*

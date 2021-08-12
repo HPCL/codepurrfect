@@ -1,3 +1,0 @@
-EMPTYNAME = any pointer->any pointer@i64 0 :: i32 (%struct._p_PetscViewer*, i32*)*
-EMPTYNAME = any pointer->any pointer@i64 0 :: i32 (%struct._p_PetscViewer*, i32)*
-EMPTYNAME = any pointer->any pointer@i64 0 :: i32 (%struct._p_PetscViewer*, i32*)*

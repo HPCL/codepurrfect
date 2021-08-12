@@ -1,2 +1,0 @@
-EMPTYNAME = _XImage->any pointer@i64 104 :: i64 (%struct._XImage*, i32, i32)*
-EMPTYNAME = _XImage->any pointer@i64 96 :: i32 (%struct._XImage*)*

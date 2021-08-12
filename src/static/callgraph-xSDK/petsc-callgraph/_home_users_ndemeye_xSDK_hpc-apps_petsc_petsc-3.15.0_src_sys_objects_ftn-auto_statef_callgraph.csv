@@ -1,3 +1,0 @@
-CALLER, CALLEE, CALLTYPE
-petscobjectgetid_,PetscObjectGetId, DIRECT
-petscobjectcompareid_,PetscObjectCompareId, DIRECT

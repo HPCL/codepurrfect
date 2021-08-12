@@ -1,3 +1,0 @@
-CALLER, CALLEE, CALLTYPE
-matsetvalue_,MatSetValues, DIRECT
-matsetvaluelocal_,MatSetValuesLocal, DIRECT
