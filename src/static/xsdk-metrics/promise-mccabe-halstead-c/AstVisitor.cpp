@@ -58,8 +58,8 @@ class McCabeMetricsVisitor : public RecursiveASTVisitor<McCabeMetricsVisitor>
 // - T  = time to write program = E / 18 seconds 
 
 public:
-    explicit McCabeMetricsVisitor(ASTContext *p_context, std::string metrics_filename)
-      : context(p_context), metrics_filename(metrics_filename) {} 
+    explicit McCabeMetricsVisitor(ASTContext *p_context, SourceManager *manager, std::string metrics_filename)
+      : context(p_context), src_manager(manager), metrics_filename(metrics_filename) {} 
 
      
     double mu1 = 0.0; 
@@ -80,7 +80,9 @@ public:
     double I = 0.0; 
     double E = 0.0; 
     double T = 0.0; 
+    double CC = 0.0; 
     double binops = 0.0; 
+    unsigned LOC  = 0; 
     ofstream metrics_file; 
 
     void open_metrics_file()
@@ -94,7 +96,7 @@ public:
       metrics_file << "Name, "
                       "mu1, mu2, N1, N2, " 
                       "N, mu, mu1', mu2', " 
-                      "V, V*, L, D, I, E, T" << "\n"; 
+                      "V, V*, L, D, I, E, T, CC, LOC" << "\n"; 
     }
 
     template <class T>
@@ -105,6 +107,12 @@ public:
 
     bool VisitBinaryOperator(BinaryOperator* binop){
       N2                += 2; 
+
+      if (binop -> isLogicalOp())
+      {
+        CC++; 
+      }
+      
 
       if (binop -> refersToBitField())
       {
@@ -167,7 +175,8 @@ public:
         mu1++;
         this -> cond_ops_count++; 
       }
-      N1++;
+      N1++; 
+      CC++; 
       return true; 
     }
 
@@ -200,6 +209,7 @@ public:
         this -> bin_cond_ops_count++; 
       } 
       N1++;
+      CC++; 
       return true; 
     }
 
@@ -241,7 +251,116 @@ public:
        I = 0.0; 
        E = 0.0; 
        T = 0.0; 
+       CC = 0.0; 
+       LOC = 0; 
     }
+
+    // begin cyclomatic complexity calc (see ternary too.) 
+    bool VisitIfStmt(IfStmt* if_stmt)
+    {
+      CC++; 
+      DeclStmt* child_cond_var = if_stmt -> getConditionVariableDeclStmt(); 
+      Stmt* child_then         = if_stmt -> getThen(); 
+      Stmt* child_else         = if_stmt -> getElse(); 
+
+      if (child_cond_var)
+      {
+        this -> TraverseStmt(child_cond_var); 
+      }
+      
+      if (child_then)
+      {
+        this -> TraverseStmt(child_then);
+      } 
+
+      if(child_else)
+      {
+        this -> TraverseStmt(child_else);
+      } 
+
+      return true; 
+    }
+
+    bool VisitWhileStmt(WhileStmt* while_stmt)
+    {
+      CC++; 
+      DeclStmt* child_cond_var = while_stmt -> getConditionVariableDeclStmt(); 
+      Stmt* child_body         = while_stmt -> getBody(); 
+      if (child_cond_var)
+      {
+        this -> TraverseStmt(child_cond_var); 
+      }
+
+      if (child_body)
+      {
+        this -> TraverseStmt(child_body); 
+      }
+      return true; 
+    }
+
+    bool VisitForStmt(ForStmt* for_stmt)
+    {
+      CC++; 
+      const DeclStmt* child_cond = for_stmt -> getConditionVariableDeclStmt(); 
+      const Stmt* child_init     = for_stmt -> getInit(); 
+      const Expr* child_inc      = for_stmt -> getInc(); // not sure what to do with this
+      const Stmt* child_body     = for_stmt -> getBody(); 
+      if (child_cond)
+      { 
+        this -> TraverseStmt(const_cast<DeclStmt*>(child_cond)); 
+      }
+      if (child_init)
+      {
+        this -> TraverseStmt(const_cast<Stmt*>(child_init)); 
+      }
+      if (child_body)
+      {
+        this -> TraverseStmt(const_cast<Stmt*>(child_body)); 
+      }
+      return true; 
+    }
+
+    bool VisitCaseStmt(CaseStmt* case_stmt)
+    {
+      CC++; 
+      Stmt* sub_stmt = case_stmt -> getSubStmt(); 
+      if (sub_stmt)
+      {
+        this -> TraverseStmt(sub_stmt); 
+      }
+      return true; 
+    }
+
+    bool VisitDefaultStmt(DefaultStmt* default_stmt)
+    {
+      CC++; 
+      Stmt* sub_stmt = default_stmt -> getSubStmt(); 
+      if (sub_stmt)
+      {
+        this -> TraverseStmt(sub_stmt); 
+      }
+      return true; 
+    }
+
+    bool VisitContinueStmt(ContinueStmt* continue_stmt)
+    {
+      CC++; 
+      return true; 
+    }
+
+    bool VisitBreakStmt(BreakStmt* break_stmt)
+    {
+      CC++; 
+      return true; 
+    }
+
+    bool VisitGotoStmt(GotoStmt* goto_stmt)
+    {
+      CC++; 
+      return true; 
+    }
+
+    // end cyclomatic complexity calc (see ternary too.)
 
     bool VisitFunctionDecl(FunctionDecl* func_D)
     { 
@@ -251,7 +370,14 @@ public:
          && (func_D -> isThisDeclarationADefinition())
          && (func_D -> getBuiltinID() == 0) 
          ){
-        std::string func_D_name = func_D -> getNameInfo().getName().getAsString();
+        std::string func_D_name  = func_D -> getNameInfo().getName().getAsString();
+        SourceRange func_D_range = func_D -> getSourceRange(); 
+        // const SourceManager manager = this -> src_manager;  
+        SourceLocation begin_func_loc = func_D_range.getBegin(); 
+        SourceLocation end_func_loc   = func_D_range.getEnd(); 
+        unsigned b_func_loc = this -> src_manager -> getFileOffset(begin_func_loc); 
+        unsigned e_func_loc = this -> src_manager -> getFileOffset(end_func_loc); 
+        LOC = e_func_loc - b_func_loc; 
 
         mu1_p++; 
         QualType func_D_decl_retT = func_D -> getDeclaredReturnType(); 
@@ -302,13 +428,16 @@ public:
                     << D           << ", " 
                     << I           << ", " 
                     << E           << ", " 
-                    << T           << "\n";
+                    << T           << ", " 
+                    << CC          << ", "
+                    << LOC         << "\n";
       }  
       return true; 
     }
 
 private:
     ASTContext *context;
+    SourceManager *src_manager; 
     std::string metrics_filename; 
     std::vector<std::string> seen_func_calls; 
     std::vector<std::string> seen_binops;  
@@ -320,8 +449,8 @@ private:
 
 class McCabeMetricsConsumer : public clang::ASTConsumer {
 public:
-  explicit McCabeMetricsConsumer(ASTContext *context, std::string metrics_filename)
-    : visitor(context, metrics_filename) {}
+  explicit McCabeMetricsConsumer(ASTContext *context, SourceManager *src_manager, std::string metrics_filename)
+    : visitor(context, src_manager, metrics_filename) {}
 
   virtual void HandleTranslationUnit(clang::ASTContext &context) {
     visitor.open_metrics_file(); 
@@ -341,7 +470,7 @@ public:
     size_t dot_index = inFile_str.find_last_of(".");
     std::string metrics_filename = inFile_str.substr(0, dot_index) + "_metrics.csv";
     return std::unique_ptr<clang::ASTConsumer>(
-        new McCabeMetricsConsumer(&compiler.getASTContext(), metrics_filename));
+        new McCabeMetricsConsumer(&compiler.getASTContext(), &compiler.getSourceManager(), metrics_filename));
   }
 };
 
