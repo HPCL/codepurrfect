@@ -296,6 +296,9 @@ def main(argv):
 
     # dump to file 
     combined_pd.to_csv(outfile)
+    
+    # clean up 
+    subprocess.run(["rm", "-r", call_res_path, ll_res_path, ind_res_path, halstead_res_path])
     return 
 
 if __name__ == "__main__":  
