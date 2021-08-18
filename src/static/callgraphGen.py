@@ -2,6 +2,8 @@ import json
 import subprocess 
 import os 
 import time 
+from multiprocessing import Pool
+import typing
 
 
 pointer_supported_projs = ['petsc']
@@ -156,6 +158,14 @@ def split_quoted(string, character, quote):
         to_return = string.split(character)
     return to_return
 
+def split_param_poly_typed(string): 
+    # only do this if both < and > are in string
+    # e.g : "func<t2, t2, t3>, a, b, 3"
+    end_char = string.find(">") 
+    rest_str = string[end_char+2:].strip() 
+    return [string[:end_char+1]] + rest_str.split(',')
+
+
 def gen_pntr_rntime_func_name_map(all_f_contents, callpath):
     # for every file content (with header info already found) 
     # for each line of the form: CLASS, FUNCTION_POINTER_NAME, 
@@ -183,7 +193,11 @@ def gen_pntr_rntime_func_name_map(all_f_contents, callpath):
                             call_f_contents = read_call_f.readlines() 
                             count = 0
                             for call_f_line in call_f_contents: 
-                                call_f_line_d = split_quoted(call_f_line, ',', '!') 
+                                call_f_line_d = [] 
+                                if ("<" in call_f_line) and (">" in call_f_line): 
+                                    call_f_line_d = split_param_poly_typed(call_f_line)
+                                else: 
+                                    call_f_line_d = split_quoted(call_f_line, ',', '!') 
                                 call_f_func_name = call_f_line_d[0]
                                 if (func_name.lower() in call_f_func_name.lower()): 
                                     all_f_ptr_dict[func_name]['names'].append(call_f_func_name)
@@ -252,37 +266,84 @@ def make_comp_be_clang(data):
         new_data.append(item)
     return (is_cpp_project, new_data) 
 
-def run_compile_commands(dirpath, outpath, db_data):
-    for item in db_data: 
-        comp_file_name = "" 
-        if os.path.isabs(item["file"]): 
-            comp_file_name = item["file"]
-        elif ("directory" in item.keys()) and os.path.isabs(item["directory"]): 
-            comp_file_name = '/'.join([item["directory"], item["file"]])
-        else: 
-            comp_file_name = '/'.join([dirpath, item["file"]])
-        if "arguments" in item.keys():
-            item["arguments"] = item["arguments"][:-1] 
-            item["arguments"].append(comp_file_name)
-            out_file_name = '/'.join([outpath, item["file"]
-                            .replace('/', '_')])[:-2] + ".ll"
-            item["arguments"].append("-o") 
-            item["arguments"].append(out_file_name)
-            print("compiling: ", comp_file_name, "...")
-            subprocess.run(item["arguments"]) 
-        if "command" in item.keys(): #assume we are dealing with c++ (.cpp) 
-            item["command"] = item["command"][:-1] 
-            item["command"].append(comp_file_name)
-            out_file_name = '/'.join([outpath, item["file"]
-                            .replace('/', '_')])[:-4] + ".ll"
-            item["command"].append("-o") 
-            item["command"].append(out_file_name)
-            print("compiling: ", comp_file_name, "...")
-            print(' '.join(item["command"]))
-            subprocess.run(item["command"])
+def gen_ll_from_file(dirpath, outpath, item):
+    print(dirpath) 
+    print(outpath) 
+    print(item["command"])
+    comp_file_name = "" 
+    if os.path.isabs(item["file"]): 
+        comp_file_name = item["file"]
+    elif ("directory" in item.keys()) and os.path.isabs(item["directory"]): 
+        comp_file_name = '/'.join([item["directory"], item["file"]])
+    else: 
+        comp_file_name = '/'.join([dirpath, item["file"]])
+        print(comp_file_name)
+    if "arguments" in item.keys():
+        item["arguments"] = item["arguments"][:-1] 
+        item["arguments"].append(comp_file_name)
+        out_file_name = '/'.join([outpath, item["file"]
+                        .replace('/', '_')])[:-2] + ".ll"
+        item["arguments"].append("-o") 
+        item["arguments"].append(out_file_name)
+        print("compiling: ", comp_file_name, "...")
+        subprocess.run(item["arguments"]) 
+    if "command" in item.keys(): #assume we are dealing with c++ (.cpp) 
+        print("command in item")
+        item["command"] = item["command"][:-1] 
+        item["command"].append(comp_file_name)
+        out_file_name = '/'.join([outpath, item["file"]
+                        .replace('/', '_')])[:-4] + ".ll"
+        item["command"].append("-o") 
+        item["command"].append(out_file_name)
+        print("compiling: ", comp_file_name, "...")
+        print(' '.join(item["command"]))
+        subprocess.run(item["command"] + ["-std=c++17"])
     return 
 
-def compile_dir(dirpath, outpath): 
+def gen_ll_from_file_helper(x): 
+    gen_ll_from_file(x[0], x[1], x[2])
+
+def run_compile_commands(dirpath, outpath, db_data, pool : Pool):
+    size         = len(db_data)
+    dirpaths     = [dirpath] * size 
+    outpaths     = [outpath] * size 
+    commands_obj = list(zip(dirpaths, outpaths, db_data))
+    print("about to start ll generation")
+    print(len(commands_obj))
+    print(commands_obj[0])
+    async_result = pool.map_async(gen_ll_from_file_helper, commands_obj) 
+    async_result.wait() 
+
+    # for item in db_data: 
+    #     comp_file_name = "" 
+    #     if os.path.isabs(item["file"]): 
+    #         comp_file_name = item["file"]
+    #     elif ("directory" in item.keys()) and os.path.isabs(item["directory"]): 
+    #         comp_file_name = '/'.join([item["directory"], item["file"]])
+    #     else: 
+    #         comp_file_name = '/'.join([dirpath, item["file"]])
+    #     if "arguments" in item.keys():
+    #         item["arguments"] = item["arguments"][:-1] 
+    #         item["arguments"].append(comp_file_name)
+    #         out_file_name = '/'.join([outpath, item["file"]
+    #                         .replace('/', '_')])[:-2] + ".ll"
+    #         item["arguments"].append("-o") 
+    #         item["arguments"].append(out_file_name)
+    #         print("compiling: ", comp_file_name, "...")
+    #         subprocess.run(item["arguments"]) 
+    #     if "command" in item.keys(): #assume we are dealing with c++ (.cpp) 
+    #         item["command"] = item["command"][:-1] 
+    #         item["command"].append(comp_file_name)
+    #         out_file_name = '/'.join([outpath, item["file"]
+    #                         .replace('/', '_')])[:-4] + ".ll"
+    #         item["command"].append("-o") 
+    #         item["command"].append(out_file_name)
+    #         print("compiling: ", comp_file_name, "...")
+    #         print(' '.join(item["command"]))
+    #         subprocess.run(item["command"] + ["-std=c++17"])
+    return 
+
+def compile_dir(dirpath, outpath, pool : Pool): 
     # locate and read compilation db  
     print("running compilation...")
     data = read_compilation_db(dirpath)
@@ -294,7 +355,7 @@ def compile_dir(dirpath, outpath):
     (is_cpp_pro, new_data) = make_comp_be_clang(data)
     print("new data length: ", len(new_data))
     # run command for each file 
-    run_compile_commands(dirpath, outpath, new_data)
+    run_compile_commands(dirpath, outpath, new_data, pool)
     return is_cpp_pro
     
 
@@ -335,7 +396,11 @@ def demangle_cpp_names(filepath, outfilepath):
     # assuming csv file, and mangled name leftmost 
     new_contents = [] 
     for line in contents: 
-        line_l       = split_quoted(line, ",", '!') 
+        line_l = [] 
+        if ("<" in line) and (">" in line): 
+            line_l = split_param_poly_typed(line) 
+        else:
+            line_l       = split_quoted(line, ",", '!') 
         if "callgraph" in filepath: 
             mangled_name_1 = line_l[0] 
             mangled_name_2 = ""
@@ -367,8 +432,10 @@ def demangle_cpp_names(filepath, outfilepath):
                 starter_s = "typeinfo name for "
                 s_index = ptr_strct_nm.find(starter_s) 
                 ptr_strct_nm = ptr_strct_nm[s_index + len(starter_s):]
-                snd_nm = ptr_strct_nm.strip() + "->(" + \
-                           ''.join(ind_call_name_s[1].strip().split("->")[1:])
+                snd_nm = ""
+                if len(ind_call_name_s) > 1:
+                    snd_nm = ptr_strct_nm.strip() + "->(" + \
+                            ''.join(ind_call_name_s[1].strip().split("->")[1:])
                 new_line = [fst_2_demangled[0].strip(), snd_nm.strip()] + line_l[2:]
                 new_contents.append(','.join(new_line))
 
@@ -404,12 +471,12 @@ def demangle_cpp_names(filepath, outfilepath):
 
     return 
 
-def run(dirpath, llpath, callpath, indpath, pluginpath): 
+def run(dirpath, llpath, callpath, indpath, pluginpath, pool : Pool): 
     # for every file in compilation database 
     # generate corresponding .ll file
     print("starting compilation ...")
     start = time.time()
-    is_cpp_project = compile_dir(dirpath, llpath)
+    is_cpp_project = compile_dir(dirpath, llpath, pool)
     print("compilation done.") 
     end = time.time() 
     print("compilation took: ", end - start)
@@ -432,26 +499,28 @@ def run(dirpath, llpath, callpath, indpath, pluginpath):
     end = time.time() 
     print("moving files took: ", end - start)
 
-    if is_cpp_project: 
-        for file in os.listdir(callpath): 
-            outfile = ""
-            if file[-4:] == ".csv":
-                outfile = file[:-4] + "_demangled.csv"
-                demangle_cpp_names('/'.join([callpath, file])
-                                  ,'/'.join([callpath, outfile]))
-        for file in os.listdir(indpath):
-            outfile = ""
-            if file[-4:] == ".txt": 
-                outfile = file[:-4] + "_demangled.txt"
-                demangle_cpp_names('/'.join([indpath, file])
-                                  ,'/'.join([indpath, outfile]))
+    # if is_cpp_project: 
+    #     for file in os.listdir(callpath): 
+    #         outfile = ""
+    #         if file[-4:] == ".csv":
+    #             outfile = file[:-4] + "_demangled.csv"
+    #             print("demangling file: ", '/'.join([callpath, file]))
+    #             demangle_cpp_names('/'.join([callpath, file])
+    #                               ,'/'.join([callpath, outfile]))
+    #     for file in os.listdir(indpath):
+    #         outfile = ""
+    #         if file[-4:] == ".txt": 
+    #             outfile = file[:-4] + "_demangled.txt" 
+    #             print("demangling indirect file: ", file)
+    #             demangle_cpp_names('/'.join([indpath, file])
+    #                               ,'/'.join([indpath, outfile]))
             
     return  
 
 
 
-def gen_callgraphs(dirpath, llpath, callpath, indpath, pluginpath, outpath):  
-    run(dirpath, llpath, callpath, indpath, pluginpath)
+def gen_callgraphs(dirpath, llpath, callpath, indpath, pluginpath, outpath, pool : Pool):  
+    run(dirpath, llpath, callpath, indpath, pluginpath, pool)
     # if dealing with project
     # whose organization is known, petsc for example 
     # generate runtime names for pointers
@@ -465,4 +534,6 @@ def gen_callgraphs(dirpath, llpath, callpath, indpath, pluginpath, outpath):
             end   = time.time()
             print("end generating runtime names for pointers")
             print("Generating runtime names for pointers took: ", end - start)
+
+    
     return 

@@ -12,7 +12,13 @@ def runtool(rootpath, execpath, outpath):
     for item in comp_data: 
         folderpath = item["directory"] 
         filepath   = item["file"] 
-        full_filepath = '/'.join([folderpath, filepath]) 
+        full_filepath = "" 
+        if filepath[0] == "/" or folderpath[-1] == "/":
+            full_filepath = ''.join([folderpath, filepath]) 
+        else: 
+            full_filepath = "/".join([folderpath, filepath])
+        if os.path.isfile(filepath): 
+            full_filepath = filepath 
         # run tool on full_filepath
         command = [execpath, full_filepath]
         subprocess.run(command)
@@ -20,7 +26,14 @@ def runtool(rootpath, execpath, outpath):
     for item in comp_data: 
         folderpath = item["directory"] 
         filepath   = item["file"] 
-        full_filepath = '/'.join([folderpath, filepath])
+        full_filepath = "" 
+        if filepath[0] == "/" or folderpath[-1] == "/":
+            full_filepath = ''.join([folderpath, filepath]) 
+        else: 
+            full_filepath = "/".join([folderpath, filepath])
+
+        if os.path.isfile(filepath): 
+            full_filepath = filepath 
         last_dot_index = full_filepath[::-1].find('.') 
 
         metrics_filepath = full_filepath[:-(last_dot_index + 1)] + "_metrics.csv"
@@ -36,7 +49,7 @@ def runtool(rootpath, execpath, outpath):
         for name in myglobals.proj_class_names[proj_name]["classes"]:
             with open('/'.join([outpath, name]) + ".csv", 'w') as name_w:
                 for file in os.listdir(outpath): 
-                    if ('_'.join(["src", name])) in file:
+                    if ('_' + name + '_') in file:
                         with open('/'.join([outpath, file]), 'r') as file_r: 
                             file_contents = file_r.readlines() 
                             for line in file_contents: 

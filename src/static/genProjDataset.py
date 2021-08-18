@@ -1,5 +1,6 @@
 #!/usr/bin/env python3 
 
+import multiprocessing
 from   callgraphGen       import gen_callgraphs, split_quoted
 from   genHalsteadMetrics import gen_halstead_metrics
 import sys 
@@ -12,6 +13,8 @@ import networkx  as nx
 import math 
 import pandas    as pd 
 import myglobals 
+from multiprocessing import Pool 
+import typing
 
 
 def extract_unique_funcs_frm_graph(graph_df): 
@@ -92,8 +95,8 @@ def group_by_class_name(proj_name, content_path):
     for file in os.listdir(content_path): 
         if os.path.isfile('/'.join([content_path, file])):
             for name, dir_path in zip(myglobals.proj_class_names[proj_name]["classes"], class_dir_pths):
-                if (file == name + ".csv") or \
-                   ("_".join(["src", name]) in file): 
+                if ((file == name + ".csv") or \
+                   ("_" + name + "_") in file): 
                     subprocess.run(["mv", '/'.join([content_path, file])
                                         , dir_path])
 
@@ -103,11 +106,15 @@ def group_by_class_name(proj_name, content_path):
             with open(class_file_path, 'w') as name_w: 
                 for csv_file in os.listdir(namepath): 
                     full_file_path = '/'.join([namepath, csv_file])
+                    print(full_file_path)
                     if os.path.isfile(full_file_path):
                         with open(full_file_path, 'r') as csv_file_r: 
                             csv_contents = csv_file_r.readlines() 
                             for line in csv_contents: 
                                 name_w.write(line)
+        # else: 
+        #     print("directories with names similary to those used to store byproducts exitst. Please delete these") 
+        #     sys.exit(2)
 
 
 def combine_class_metrics(proj_name, call_res_path): 
@@ -190,6 +197,15 @@ def gen_cg_mtrcs_from_graph(graph, node_names):
 
     return to_return_pd
 
+def process_func_name(fname): 
+    to_return = fname 
+    if ("<" in fname) and (">" in fname):
+        fname_l = fname.split(",") 
+        if len(fname_l) > 1: 
+            to_return = ';'.join(fname_l) 
+    return to_return 
+
+
 
 def gen_callgraph_metrics(callgraph_path): 
     G, node_names = make_nk_graph(callgraph_path)
@@ -202,17 +218,27 @@ def merge_cls_halstead_metrics(halstead_path, proj_name):
     for fname in myglobals.proj_class_names[proj_name]["classes"]: 
         fpath         = '/'.join([halstead_path, fname, fname + ".csv"])
         if count == 0: 
-            first_file_pd = pd.read_csv(fpath, quotechar='!') 
+            print("first file is: ", fpath) # debugging 
+            first_file_pd = pd.read_csv(fpath, quotechar='!', names=["Name", "mu1"
+                                                                    , "mu2", "N1", "N2"
+                                                                    , "N", "mu", "mu1'"
+                                                                    , "mu2'", "V", "V*"
+                                                                    , "L", "D", "I", "E"
+                                                                    , "T", "CC", "LOC"]) 
         count     += 1
 
         if count > 0: 
-            fname_pd = pd.read_csv(fpath, quotechar='!')
-            if list(first_file_pd.columns == list(fname_pd.columns)): 
-                first_file_pd = first_file_pd.merge(fname_pd, how="outer"
-                                                            , on=list(first_file_pd.columns)
-                                                            ).groupby(
-                                                                list(first_file_pd.columns)
-                                                            ).sum().reset_index(inplace=False)
+            fname_pd = pd.read_csv(fpath, quotechar='!', names=["Name", "mu1"
+                                                                    , "mu2", "N1", "N2"
+                                                                    , "N", "mu", "mu1'"
+                                                                    , "mu2'", "V", "V*"
+                                                                    , "L", "D", "I", "E"
+                                                                    , "T", "CC", "LOC"])
+            first_file_pd = first_file_pd.merge(fname_pd, how="outer"
+                                                        , on=list(first_file_pd.columns)
+                                                        ).groupby(
+                                                            list(first_file_pd.columns)
+                                                        ).sum().reset_index(inplace=False)
             del(fname_pd)
 
     return first_file_pd
@@ -269,10 +295,15 @@ def main(argv):
     if not os.path.isdir(halstead_res_path): 
         os.mkdir(halstead_res_path)
 
+
     gen_halstead_metrics(proj_root_dir, hlstd_mtrcs_tl_path, halstead_res_path) 
     group_by_class_name(proj_name, halstead_res_path)
 
-    gen_callgraphs(proj_root_dir, ll_res_path, call_res_path, ind_res_path, cl_grph_plugin_path, indirect_call_res__json)
+    count = multiprocessing.cpu_count()
+    pool = Pool(processes=count)
+
+    gen_callgraphs(proj_root_dir, ll_res_path, call_res_path, ind_res_path, cl_grph_plugin_path, indirect_call_res__json, pool)
+
     group_by_class_name(proj_name, call_res_path)
     
     # combine class callgraphs into one giant one 
