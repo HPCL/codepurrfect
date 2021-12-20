@@ -11,7 +11,7 @@ float my_test_add(TestType* testT)
 
 float my_test_add2(TestType* testT)
 {
-    float a = ((testT -> i) + (testT -> j)); 
+    float a = ((testT -> i) - (testT -> j)); 
     return a; 
 }
 

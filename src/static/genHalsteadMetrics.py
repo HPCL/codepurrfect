@@ -9,6 +9,8 @@ def runtool(rootpath, execpath, outpath):
     with open(comp_db_path, 'r') as comp_db_r: 
         comp_data = json.load(comp_db_r)
 
+    comp_data = comp_data[:5]
+
     for item in comp_data: 
         folderpath = item["directory"] 
         filepath   = item["file"] 

@@ -236,7 +236,7 @@ def make_comp_be_clang(data):
                     item["arguments"][i] = "clang++"
                     # item["arguments"].append("-std=c++17")
                 if x == "-O0":
-                    item["arguments"][i] = "-O3"
+                    item["arguments"][i] = "-O2"
                 if x == "-o":
                     item["arguments"][i] = "-S"
                 if x[-2:] == ".o": 
@@ -254,7 +254,7 @@ def make_comp_be_clang(data):
                 if ("cc" in x) and (i == 0): 
                     item["command"][i] = "clang"
                 if x == "-O0":
-                    item["command"][i] = "-O3"
+                    item["command"][i] = "-O1"
                 if x == "-o":
                     item["command"][i] = "-S"
                 if x[-2:] == ".o": 
@@ -269,7 +269,10 @@ def make_comp_be_clang(data):
 def gen_ll_from_file(dirpath, outpath, item):
     print(dirpath) 
     print(outpath) 
-    print(item["command"])
+    if "arguments" in item.keys(): 
+        print(item["arguments"])
+    if "command" in item.keys(): 
+        print(item['command'])
     comp_file_name = "" 
     if os.path.isabs(item["file"]): 
         comp_file_name = item["file"]
@@ -313,34 +316,6 @@ def run_compile_commands(dirpath, outpath, db_data, pool : Pool):
     print(commands_obj[0])
     async_result = pool.map_async(gen_ll_from_file_helper, commands_obj) 
     async_result.wait() 
-
-    # for item in db_data: 
-    #     comp_file_name = "" 
-    #     if os.path.isabs(item["file"]): 
-    #         comp_file_name = item["file"]
-    #     elif ("directory" in item.keys()) and os.path.isabs(item["directory"]): 
-    #         comp_file_name = '/'.join([item["directory"], item["file"]])
-    #     else: 
-    #         comp_file_name = '/'.join([dirpath, item["file"]])
-    #     if "arguments" in item.keys():
-    #         item["arguments"] = item["arguments"][:-1] 
-    #         item["arguments"].append(comp_file_name)
-    #         out_file_name = '/'.join([outpath, item["file"]
-    #                         .replace('/', '_')])[:-2] + ".ll"
-    #         item["arguments"].append("-o") 
-    #         item["arguments"].append(out_file_name)
-    #         print("compiling: ", comp_file_name, "...")
-    #         subprocess.run(item["arguments"]) 
-    #     if "command" in item.keys(): #assume we are dealing with c++ (.cpp) 
-    #         item["command"] = item["command"][:-1] 
-    #         item["command"].append(comp_file_name)
-    #         out_file_name = '/'.join([outpath, item["file"]
-    #                         .replace('/', '_')])[:-4] + ".ll"
-    #         item["command"].append("-o") 
-    #         item["command"].append(out_file_name)
-    #         print("compiling: ", comp_file_name, "...")
-    #         print(' '.join(item["command"]))
-    #         subprocess.run(item["command"] + ["-std=c++17"])
     return 
 
 def compile_dir(dirpath, outpath, pool : Pool): 
@@ -471,7 +446,7 @@ def demangle_cpp_names(filepath, outfilepath):
 
     return 
 
-def run(dirpath, llpath, callpath, indpath, pluginpath, pool : Pool): 
+def run(dirpath, llpath, callpath, qlty_metricspath, indpath, pluginpath, pool : Pool): 
     # for every file in compilation database 
     # generate corresponding .ll file
     print("starting compilation ...")
@@ -493,8 +468,8 @@ def run(dirpath, llpath, callpath, indpath, pluginpath, pool : Pool):
     cwd = os.getcwd() 
     print("moving files graph and indirect files to respective dirs ...") 
     start = time.time() 
-    move_files(cwd, [callpath, indpath]
-                  , extensions=["_callgraph.csv", "_indirects.txt"])
+    move_files(cwd, [callpath, qlty_metricspath, indpath]
+                  , extensions=["_callgraph.csv", "_qmetrics.csv", "_indirects.txt"])
     print("done moving files.")
     end = time.time() 
     print("moving files took: ", end - start)
@@ -519,21 +494,21 @@ def run(dirpath, llpath, callpath, indpath, pluginpath, pool : Pool):
 
 
 
-def gen_callgraphs(dirpath, llpath, callpath, indpath, pluginpath, outpath, pool : Pool):  
-    run(dirpath, llpath, callpath, indpath, pluginpath, pool)
+def gen_callgraphs(dirpath, llpath, callpath, qmetricspath, indpath, pluginpath, outpath, pool : Pool):  
+    run(dirpath, llpath, callpath, qmetricspath, indpath, pluginpath, pool)
     # if dealing with project
     # whose organization is known, petsc for example 
     # generate runtime names for pointers
     # using project specific function 
     # `resolve_unique_ptr_petsc` in this case
-    for name in pointer_supported_projs:
-        if name in dirpath:
-            print("start generating runtime names for pointers in proj: ", name)
-            start = time.time()
-            resolve_unique_ptr_petsc(indpath, dirpath, callpath, outpath)
-            end   = time.time()
-            print("end generating runtime names for pointers")
-            print("Generating runtime names for pointers took: ", end - start)
+    # for name in pointer_supported_projs:
+    #     if name in dirpath:
+    #         print("start generating runtime names for pointers in proj: ", name)
+    #         start = time.time()
+    #         resolve_unique_ptr_petsc(indpath, dirpath, callpath, outpath)
+    #         end   = time.time()
+    #         print("end generating runtime names for pointers")
+    #         print("Generating runtime names for pointers took: ", end - start)
 
     
     return 

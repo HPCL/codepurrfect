@@ -125,6 +125,7 @@ CallgraphxSDK/CMakeFiles/CallgraphxSDK.dir/CallgraphxSDK.cpp.o
  /home/users/norris/soft/pat/include/llvm/IR/Value.h
  /home/users/norris/soft/pat/include/llvm/IR/ValueHandle.h
  /home/users/norris/soft/pat/include/llvm/IR/ValueMap.h
+ /home/users/norris/soft/pat/include/llvm/IR/ValueSymbolTable.h
  /home/users/norris/soft/pat/include/llvm/Pass.h
  /home/users/norris/soft/pat/include/llvm/PassAnalysisSupport.h
  /home/users/norris/soft/pat/include/llvm/PassInfo.h

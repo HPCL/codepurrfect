@@ -8,6 +8,7 @@ import getopt
 import os 
 import subprocess
 import networkit as nk 
+from networkit.graphio import GraphWriter
 from   networkx  import *
 import networkx  as nx 
 import math 
@@ -145,23 +146,25 @@ def make_nk_graph(cg_path):
                                     , create_using=G_type)
     G   = nk.nxadapter.nx2nk(G_p)
     G_node_names = list(G_p.nodes())
-    return G, G_node_names 
+    return G, G_node_names
 
 def gen_cg_mtrcs_from_graph(graph, node_names):  
-    katz_alpha     = 1e-3
-    in_degs        = [] 
-    out_degs       = [] 
+    # katz_alpha     = 1e-3
+    in_degs        = [0] * graph.numberOfNodes() 
+    out_degs       = [0] * graph.numberOfNodes()
     names          = node_names 
     avg_short_path = []
-    is_isolated    = [] 
+    is_isolated    = [0] * graph.numberOfNodes() 
     closeness      = [] 
     betweenness    = [] 
-    eccentricity   = [] 
+    eccentricity_r   = [0] * graph.numberOfNodes()
+    eccentricity_n   = [0] * graph.numberOfNodes()
     for i in graph.iterNodes(): 
-        in_degs.append(graph.degreeIn(i)) 
-        out_degs.append(graph.degreeOut(i)) 
-        is_isolated.append(graph.isIsolated(i)) 
-        eccentricity.append(nk.distance.Eccentricity.getValue(graph, i))
+        in_degs[i]      = graph.degreeIn(i)
+        out_degs[i]     = graph.degreeOut(i)
+        is_isolated[i]  = graph.isIsolated(i) 
+        eccentricity_r[i] = nk.distance.Eccentricity.getValue(graph, i)[1]
+        eccentricity_n[i] = nk.distance.Eccentricity.getValue(graph, i)[0]
 
     closeness_centr = nk.centrality.Closeness(graph, 
                                               False, 
@@ -177,9 +180,9 @@ def gen_cg_mtrcs_from_graph(graph, node_names):
     between           = betweenness_centr.run() 
     betweenness       = between.scores() 
 
-    katz_centr        = nk.centrality.KatzCentrality(graph, katz_alpha) 
-    katz              = katz_centr.run() 
-    katz_centrality   = katz.scores() 
+    # katz_centr        = nk.centrality.KatzCentrality(graph, katz_alpha) 
+    # katz              = katz_centr.run() 
+    # katz_centrality   = katz.scores() 
 
     to_return         = {
         "Name"             : names, 
@@ -189,8 +192,9 @@ def gen_cg_mtrcs_from_graph(graph, node_names):
         "AvgShortestPath"  : avg_short_path,
         "Closeness"        : closeness, 
         "Betweenness"      : betweenness,
-        "Katz"             : katz_centrality,
-        "Eccentricity"     : eccentricity
+        # "Katz"             : katz_centrality,
+        "Eccentricity_R"     : eccentricity_r,
+        "Eccentricity_N"     : eccentricity_n
     } 
 
     to_return_pd = pd.DataFrame(to_return)
@@ -210,7 +214,7 @@ def process_func_name(fname):
 def gen_callgraph_metrics(callgraph_path): 
     G, node_names = make_nk_graph(callgraph_path)
     to_return_pd  = gen_cg_mtrcs_from_graph(G, node_names)
-    return to_return_pd
+    return to_return_pd, G, node_names 
 
 def merge_cls_halstead_metrics(halstead_path, proj_name): 
     first_file_pd = None 
@@ -246,11 +250,14 @@ def merge_cls_halstead_metrics(halstead_path, proj_name):
 
 def main(argv): 
     try: 
-        opts, _ = getopt.getopt(argv, "n:p:o:") 
+        opts, _ = getopt.getopt(argv, "n:p:o:q:g:m:") 
     except getopt.GetoptError: 
         print("usage: ./genProjDataset -n <proj-name> " + 
                                       "-p <proj-root-dir> " + 
-                                      "-o <dataset-output-file>")
+                                      "-o <callgraph-metrics-file>" +
+                                      "-q <quality-metrics-file>" + 
+                                      "-g <callgraph-file>" + 
+                                      "-m <callgraph-node-names>")
         sys.exit(2)
     
     myglobals.init()
@@ -258,6 +265,9 @@ def main(argv):
     proj_name     = "" 
     proj_root_dir = ""
     outfile       = ""
+    qmfile        = ""
+    callfile      = ""
+    nodes_file    = ""
     for opt, arg in opts: 
         if opt == "-n": 
             proj_name     = arg 
@@ -265,6 +275,13 @@ def main(argv):
             proj_root_dir = arg 
         if opt == "-o": 
             outfile       = arg 
+        if opt == "-q": 
+            qmfile        = arg 
+        if opt == "-g": 
+            callfile      = arg 
+        if opt == "-m": 
+            nodes_file    = arg 
+
 
     print(proj_root_dir)
 
@@ -282,12 +299,16 @@ def main(argv):
     ind_res_path            = proj_name + "-indirects" 
     indirect_call_res__json = proj_name + "_indirect_call_res.json"
     halstead_res_path       = proj_name + "-halstead"
+    qmetrics_path           = proj_name + "-qmetrics"
 
     if not os.path.isdir(call_res_path): 
         os.mkdir(call_res_path) 
 
     if not os.path.isdir(ll_res_path): 
         os.mkdir(ll_res_path) 
+
+    if not os.path.isdir(qmetrics_path): 
+        os.mkdir(qmetrics_path)
 
     if not os.path.isdir(ind_res_path): 
         os.mkdir(ind_res_path)
@@ -296,40 +317,52 @@ def main(argv):
         os.mkdir(halstead_res_path)
 
 
-    gen_halstead_metrics(proj_root_dir, hlstd_mtrcs_tl_path, halstead_res_path) 
-    group_by_class_name(proj_name, halstead_res_path)
+    # gen_halstead_metrics(proj_root_dir, hlstd_mtrcs_tl_path, halstead_res_path) 
+    # group_by_class_name(proj_name, halstead_res_path) 
+
 
     count = multiprocessing.cpu_count()
     pool = Pool(processes=count)
 
-    gen_callgraphs(proj_root_dir, ll_res_path, call_res_path, ind_res_path, cl_grph_plugin_path, indirect_call_res__json, pool)
+    gen_callgraphs(proj_root_dir, ll_res_path, call_res_path, qmetrics_path, ind_res_path, cl_grph_plugin_path, indirect_call_res__json, pool)
 
     group_by_class_name(proj_name, call_res_path)
+    group_by_class_name(proj_name, qmetrics_path)
     
     # combine class callgraphs into one giant one 
     combine_class_metrics(proj_name, call_res_path)
+    combine_class_metrics(proj_name, qmetrics_path)
     # follow callgraph_metrics.ipynb and generate callgraph  
     # related metrics 
-    cg_metrics_pd = gen_callgraph_metrics('/'.join([call_res_path, 
+    qmetrics_pd   = pd.read_csv('/'.join([qmetrics_path, (proj_name + '.csv')])
+                                                       , names=["Name", "ArgCount" 
+                                                       , "InstrCount", "UniqVals" 
+                                                       , "UniqOps", "TotalOps" 
+                                                       , "CC"]).groupby(['Name']).sum() 
+    cg_metrics_pd, G, node_names = gen_callgraph_metrics('/'.join([call_res_path, 
                                                      (proj_name + ".csv")
                                                     ]))
+    cg_metrics_pd = cg_metrics_pd.groupby(['Name']).apply(lambda pd : pd)
+    print(qmetrics_pd.head())
     print(cg_metrics_pd.head())
-    # combine class halstead metrics into giant one 
-    hlstd_metrics_pd = merge_cls_halstead_metrics(halstead_res_path, proj_name)
-    # combine callgraph and halstead metrics into one 
-    combined_pd      = hlstd_metrics_pd.append(cg_metrics_pd, sort=True)
-    combined_pd.fillna(0, inplace=True)
-    # if project has log data 
-    if myglobals.proj_class_names[proj_name]["hasTestLogs"]: 
-        # process them into pass/fail column 
-        # append column to dataset 
-        combined_pd = process_fail_logs(combined_pd, myglobals.proj_class_names[proj_name]["logsPath"])
+    print("q metrics size: ", qmetrics_pd.size) 
+    print("cg metrics size: ", cg_metrics_pd.size)
 
-    # dump to file 
-    combined_pd.to_csv(outfile)
+    # # dump to file 
+    cg_metrics_pd.to_csv(outfile)
+    qmetrics_pd.to_csv(qmfile)
+    nk.writeGraph(G, callfile, nk.Format.EdgeListTabOne, directed=True)
+
+    with open(nodes_file, 'w') as nodes_file_w: 
+        count = 0 
+        for name in node_names: 
+            if isinstance(name, str):
+                nodes_file_w.write(name + '\n')
+            else: 
+                nodes_file_w.write(str(name) + '\n')
     
     # clean up 
-    subprocess.run(["rm", "-r", call_res_path, ll_res_path, ind_res_path, halstead_res_path])
+    subprocess.run(["rm", "-r", call_res_path, ll_res_path, qmetrics_path, ind_res_path, halstead_res_path])
     return 
 
 if __name__ == "__main__":  

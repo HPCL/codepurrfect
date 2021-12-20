@@ -14,7 +14,9 @@
 #include "llvm/IR/DerivedTypes.h"
 #include "llvm/IR/Value.h"
 #include "llvm/IR/Type.h"
+#include "llvm/IR/Argument.h"
 #include "llvm/IR/Metadata.h"
+#include "llvm/IR/ValueSymbolTable.h"
 #include <llvm/IR/DebugLoc.h>
 #include <llvm/IR/Attributes.h>
 #include <llvm/IR/DebugInfoMetadata.h>
@@ -24,6 +26,7 @@
 #include <system_error> 
 #include <functional> 
 #include <algorithm>
+#include <unordered_map>
 
 using namespace llvm; 
 
@@ -31,7 +34,11 @@ using namespace llvm;
 namespace {
 struct CallgraphxSDK : public PassInfoMixin<CallgraphxSDK> {
   std::string filename; 
+  std::string quality_metrics_file; 
   std::string indirect_calls_f; 
+  
+
+
   PreservedAnalyses run(Module &M,
                         ModuleAnalysisManager &MAM) {
     std::error_code e = std::error_code(static_cast<int>(2)
@@ -44,21 +51,141 @@ struct CallgraphxSDK : public PassInfoMixin<CallgraphxSDK> {
     std::replace(filename.begin(), filename.end(), '/', '_'); 
     indirect_calls_f = source_file_name + "_indirects.txt"; 
     std::replace(indirect_calls_f.begin(), indirect_calls_f.end(), '/', '_');
+    quality_metrics_file = source_file_name + "_qmetrics.csv";
+    std::replace(quality_metrics_file.begin(), quality_metrics_file.end(), '/', '_');
     raw_fd_ostream csv_file(StringRef(filename), e);
     raw_fd_ostream txt_file(StringRef(indirect_calls_f) ,e);  
+    raw_fd_ostream qms_file(StringRef(quality_metrics_file), e);
 
     outs() << "running callgraph pass to generate: " 
-           << filename << "\n"; 
+           << filename 
+           << " and " 
+           << quality_metrics_file
+           << "\n"; 
+    qms_file << "Name, ArgCount, InstrCount, UniqVals, UniqOps, TotalOps, CC " << "\n";
     for (Function &F : M)
     {
+      
+      int LOC, num_args, CC, uniq_ops, ops; 
+      unsigned instr_count, uniq_vars = 0;
+
+      num_args = 0; 
+      CC       = 0; 
+      LOC      = 0; 
+      uniq_ops = 0; 
+      ops      = 0; 
+
+      instr_count = 0; 
+      uniq_vars   = 0; 
+
+      std::unordered_map<std::string, int> binops; 
+      std::unordered_map<std::string, int> unops; 
+      std::unordered_map<std::string, int> logops;
+      std::unordered_map<std::string, int> callops;
+      std::unordered_map<Value*, int> indirect_call_ops; 
+
       if (!F.isIntrinsic())
       {
       std::vector<LoadInst*> load_stack;
       int count = 0;
+
+      qms_file << F.getName().str() << ", ";
+      
+      if (!F.isVarArg())
+      {
+        size_t f_arg_size = F.arg_size();
+        qms_file << f_arg_size << ", "; 
+      }else{
+        qms_file << "VARGS, ";
+      }
+
+      
+      instr_count = F.getInstructionCount(); 
+      qms_file    << instr_count << ", ";
+
+      
+      // uniq_vars = F.getNumOperands(); 
+
+      // qms_file  << uniq_vars << ", "; 
+
+
+
       for (BasicBlock &BB : F)
       {
         for (Instruction &I : BB)
         {
+          // check if it's a binary op, unary op or ternary op, 
+          // add it to corresponding dict 
+          // do the same for calls. 
+          unsigned opcode = I.getOpcode(); 
+          std::string opcode_name = I.getOpcodeName(opcode); 
+
+          bool is_binop = I.isBinaryOp(opcode); 
+          bool is_unop  = I.isUnaryOp(opcode); 
+          bool is_logop = I.isBitwiseLogicOp(opcode); 
+
+          if (isa<BranchInst>(I))
+          {
+            BranchInst* br = dyn_cast<BranchInst>(&I);
+            if (br -> isConditional())
+            {
+              CC++; 
+            }
+             
+          }
+          
+
+          if (is_binop)
+          {
+            auto search = binops.find(opcode_name); 
+            if (search != binops.end())
+            {
+              ops += 1;
+              binops[opcode_name] += 1;
+            }else
+            {
+              ops += 1;
+              uniq_ops += 1;  
+              binops[opcode_name] = 1; 
+            }
+            
+          }
+
+          if (is_unop)
+          {
+            auto search = unops.find(opcode_name); 
+            if (search != unops.end())
+            {
+              ops += 1;
+              unops[opcode_name] += 1;
+            }else
+            {
+              ops += 1;
+              uniq_ops += 1;
+              unops[opcode_name] = 1;  
+            }
+            
+          }
+
+          if (is_logop)
+          {
+            auto search = logops.find(opcode_name); 
+            if (search != logops.end())
+            {
+              ops += 1;
+              logops[opcode_name] += 1;
+            }else
+            {
+              ops += 1; 
+              uniq_ops += 1; 
+              logops[opcode_name] = 1;
+            }
+            
+          }
+          
+
+
+
           // construct stack of load instructions 
           // to be used while identifying 
           // indirect calls.         
@@ -76,15 +203,37 @@ struct CallgraphxSDK : public PassInfoMixin<CallgraphxSDK> {
               if (Callee)
               {
                   std::string c_name = Callee -> getName().str(); 
-                  std::size_t llvm_present = c_name.find("llvm"); 
-                  if (llvm_present == std::string::npos) // llvm is 
-                                                         //not substring 
-                                                         // of c_name
+                  if (c_name == "llvm.dbg.declare")
                   {
-                    count++;
-                    csv_file << F.getName().str() << "," 
-                             << c_name << ", DIRECT\n"; 
+                      uniq_vars++; 
+                    
                   }
+                  
+
+                if (!(Callee -> isIntrinsic()))
+                {
+                  auto search = callops.find(c_name); 
+                  if (search != callops.end())
+                  {
+                    ops += 1;
+                    callops[c_name] += 1;
+                  }else
+                  {
+                    ops += 1; 
+                    uniq_ops += 1;
+                    callops[c_name] = 1;
+                  }
+                }
+                
+                std::size_t llvm_present = c_name.find("llvm"); 
+                if (llvm_present == std::string::npos) // llvm is 
+                                                        //not substring 
+                                                        // of c_name
+                {
+                  count++;
+                  csv_file << F.getName().str() << "," 
+                            << c_name << ", DIRECT\n"; 
+                }
               }
               
             }
@@ -98,7 +247,48 @@ struct CallgraphxSDK : public PassInfoMixin<CallgraphxSDK> {
                     // which we use to retrieve the name of 
                     // the struct, as well as the offset of the member 
                     // function (pointer) being indirectly called.
-                    Value* op_val = Call -> getCalledOperand(); 
+                    Value* op_val = Call -> getCalledOperand();
+
+                    if (op_val)
+                    {
+                      if (op_val -> hasName())
+                      {
+                        std::string c_name = op_val -> getName().str();
+
+                        auto search = callops.find(c_name); 
+                        if (search != callops.end())
+                        {
+                          ops += 1;
+                          callops[c_name] += 1; 
+                        }else
+                        {
+                          ops      += 1; 
+                          uniq_ops += 1;
+                          callops[c_name] = 1; 
+                        }
+                      }else
+                      {
+                        // not sure how to track that an indirect call has been called 
+                        // before, without doing alias analysis and trying to figure out 
+                        // its name.
+                        auto search = indirect_call_ops.find(op_val); 
+                        if(search != indirect_call_ops.end())
+                        {
+                            ops++; 
+                            indirect_call_ops[op_val] += 1; 
+                        }else 
+                        {
+                            ops += 1;
+                            uniq_ops++;
+                            indirect_call_ops[op_val] = 1;  
+                        }
+                      }
+                    }
+                    
+                    
+                    
+                    
+
                     LoadInst* prev_inst = NULL; 
                     int count = 0; 
                     while (!load_stack.empty())
@@ -203,9 +393,13 @@ struct CallgraphxSDK : public PassInfoMixin<CallgraphxSDK> {
                           op_val -> getType() -> print(txt_file); 
                           txt_file << "\n"; 
                         }else{
+                          // continue popping stack until you find instr
+                          // with tbaa
                           csv_file << "fail, fail, FAILED \n"; 
                         }
                         }else{
+                          // continue popping stack until you find instr 
+                          // with metadata, that is tbaa
                           csv_file << "failed!\n"; 
                         }
                     }
@@ -214,9 +408,16 @@ struct CallgraphxSDK : public PassInfoMixin<CallgraphxSDK> {
         }
         
       }
+
+      qms_file << uniq_vars << ", ";
+      qms_file << uniq_ops  << ", "; 
+      
+      qms_file << ops << ", "; 
+      qms_file << (CC+1) << "\n";
+
+
         
       } 
-      
     }
     outs() << "done writing "
            << filename 

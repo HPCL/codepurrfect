@@ -27,8 +27,12 @@ llvm/IR/Value.h
 /home/users/ndemeye/xSDK/code-analysis/src/static/callgraph-xSDK/CallgraphxSDK/llvm/IR/Value.h
 llvm/IR/Type.h
 /home/users/ndemeye/xSDK/code-analysis/src/static/callgraph-xSDK/CallgraphxSDK/llvm/IR/Type.h
+llvm/IR/Argument.h
+/home/users/ndemeye/xSDK/code-analysis/src/static/callgraph-xSDK/CallgraphxSDK/llvm/IR/Argument.h
 llvm/IR/Metadata.h
 /home/users/ndemeye/xSDK/code-analysis/src/static/callgraph-xSDK/CallgraphxSDK/llvm/IR/Metadata.h
+llvm/IR/ValueSymbolTable.h
+/home/users/ndemeye/xSDK/code-analysis/src/static/callgraph-xSDK/CallgraphxSDK/llvm/IR/ValueSymbolTable.h
 llvm/IR/DebugLoc.h
 -
 llvm/IR/Attributes.h
@@ -46,6 +50,8 @@ system_error
 functional
 -
 algorithm
+-
+unordered_map
 -
 
 /home/users/norris/soft/pat/include/llvm-c/DataTypes.h
@@ -2166,6 +2172,16 @@ mutex
 type_traits
 -
 utility
+-
+
+/home/users/norris/soft/pat/include/llvm/IR/ValueSymbolTable.h
+llvm/ADT/StringMap.h
+/home/users/norris/soft/pat/include/llvm/IR/llvm/ADT/StringMap.h
+llvm/ADT/StringRef.h
+/home/users/norris/soft/pat/include/llvm/IR/llvm/ADT/StringRef.h
+llvm/IR/Value.h
+/home/users/norris/soft/pat/include/llvm/IR/llvm/IR/Value.h
+cstdint
 -
 
 /home/users/norris/soft/pat/include/llvm/Pass.h
