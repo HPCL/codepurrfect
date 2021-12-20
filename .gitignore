@@ -29,4 +29,15 @@
 # Executables
 *.exe
 *.out
-*.app
+*.app 
+
+
+
+# Generated SpreadSheets 
+*.csv 
+
+# Generated Graphs 
+*.TabOne 
+
+# Generated name of functions 
+src/static/data/petsc/*.txt 
