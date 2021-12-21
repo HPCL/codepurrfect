@@ -3,7 +3,7 @@ import subprocess
 import os 
 import time 
 from multiprocessing import Pool
-import typing
+# import typing
 
 
 pointer_supported_projs = ['petsc']
