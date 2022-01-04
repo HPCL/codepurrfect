@@ -8,7 +8,7 @@ import getopt
 import os 
 import subprocess
 import networkit as nk 
-from networkit.graphio import GraphWriter
+# from networkit.graphio import GraphWriter
 from   networkx  import *
 import networkx  as nx 
 import math 
@@ -250,9 +250,10 @@ def merge_cls_halstead_metrics(halstead_path, proj_name):
 
 def main(argv): 
     try: 
-        opts, _ = getopt.getopt(argv, "n:p:o:q:g:m:") 
+        opts, _ = getopt.getopt(argv, "n:d:p:o:q:g:m:") 
     except getopt.GetoptError: 
-        print("usage: ./genProjDataset -n <proj-name> " + 
+        print("usage: ./genProjDataset -n <proj-name> " +
+                                      "-d <current-dir>" 
                                       "-p <proj-root-dir> " + 
                                       "-o <callgraph-metrics-file>" +
                                       "-q <quality-metrics-file>" + 
@@ -268,9 +269,12 @@ def main(argv):
     qmfile        = ""
     callfile      = ""
     nodes_file    = ""
+    curr_dir      = ""
     for opt, arg in opts: 
         if opt == "-n": 
             proj_name     = arg 
+        if opt == "-d": 
+            curr_dir      = arg 
         if opt == "-p": 
             proj_root_dir = arg 
         if opt == "-o": 
@@ -285,7 +289,6 @@ def main(argv):
 
     print(proj_root_dir)
 
-    curr_dir = "."
     hlstd_mtrcs_tl_path = '/'.join([curr_dir, 'xsdk-metrics', 
                                     'promise-mccabe-halstead-c', 
                                     'build', 'promise-mccabe-halstead-c'])

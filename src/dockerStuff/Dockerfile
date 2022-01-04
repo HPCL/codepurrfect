@@ -3,7 +3,7 @@
 
 
 #we are using ubuntu base image
-FROM ubuntu as baseClangLLVM 
+FROM ubuntu 
 # installing requirements to get and extract prebuilt binaries
 RUN apt-get update && apt-get install -y \
  xz-utils \
@@ -12,26 +12,19 @@ RUN apt-get update && apt-get install -y \
 
 RUN apt-get update && \
     apt-get install -y --no-install-recommends ca-certificates cmake python \
-        subversion ninja-build
-
-RUN apt-get -y install python3-pip
-
-
-
-RUN pip3 install pandas && \ 
+        subversion ninja-build && \
+    apt-get -y install python3-pip && \
+    pip3 install pandas && \ 
     pip3 install networkx && \ 
     pip3 install numpy && \ 
     pip3 install Cython && \ 
-    pip3 install networkit
-
-
-RUN apt-get -y install libncurses5
-
-RUN apt-get -y install bear 
-
-RUN apt-get -y install git-all 
-
-RUN apt-get -y install cmake 
+    pip3 install networkit && \
+    pip3 install jupyter && \
+    pip3 install matplotlib && \  
+    apt-get -y install libncurses5 && \ 
+    apt-get -y install bear && \ 
+    apt-get -y install git-all && \
+    apt-get -y install cmake
 
 # add tools code to container
 ADD static /static 
@@ -64,9 +57,11 @@ RUN apt-get -y remove cmake && \
     make 
 
 
-ENTRYPOINT [ "/static/genProjDataset.py", "-n", "petsc", "-d", "/static", "-p", "/petsc", "-o", "petscCG3150.csv", "-q", "petscQM3150.csv", "-g", "petscGR3150.TabOne", "-m", "petscNM3150.txt"]
+RUN /static/genProjDataset.py -n petsc -d /static -p /petsc -o petscCG3150.csv -q petscQM3150.csv -g petscGR3150.TabOne -m petscNM3150.txt  
+    
+    
+CMD /bin/bash
 
-CMD [ “/bin/bash” ]
 
 
 

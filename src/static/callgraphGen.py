@@ -350,6 +350,7 @@ def move_files(frm, destinations, extensions):
 def run_opt_pass(pluginpath, llpath):
     opt_str_args = ["opt",
                     "-disable-output", 
+                    "-enable-new-pm=0",
                     "-load-pass-plugin=" + pluginpath,
                     "-passes=callgraph-xSDK"
                    ]
