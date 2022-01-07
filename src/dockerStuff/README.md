@@ -28,6 +28,12 @@ Thus, by modifying the `git checkout v3.16.0` command to whatever
 commit one is interested in (either in the same container or a new one)
 all of that data will be available afterwards.
 
+The collected data can then be used for various data analyses 
+as for example `logs/PetscContainerExplore.ipynb` presents.
+
+(*N.B* to start a jupyter notebook inside the container, 
+run: `jupyter notebook --no-browser --allow-root --ip 0.0.0.0`)
+
 
 Once you're done, stop the container (by hitting CTRL-D) or 
 by first listing running containers: `docker container ls`, retrieving 
