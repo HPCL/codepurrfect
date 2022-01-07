@@ -24,4 +24,4 @@ The static code analysis tool is implemented in C++ based on clang-llvm,
 and employs clang-tooling AST manipulation capabilities. 
 It can be used and extended to compute various metrics related to code quality.
 
-For more details and examples, refer to this [README](./src/static/README.md)   
+For more details and examples, refer to this [README](./src/dockerStuff/README.md)   
