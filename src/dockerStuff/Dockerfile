@@ -40,15 +40,6 @@ ENV PATH=/tmp/clang_13/bin:$PATH
 ENV LD_LIBRARY_PATH=/tmp/clang_13/lib:$LD_LIBRARY_PATH 
 
 
-# download, and generate Petsc's compilation database 
-RUN git clone https://gitlab.com/petsc/petsc.git && \ 
-    cd petsc && \ 
-    git checkout v3.15.0 && \ 
-    ./configure --with-cc=clang --with-cxx=clang++ --download-mpich --download-f2cblaslapack=1 && \ 
-    bear make PETSC_DIR=/petsc PETSC_ARCH=arch-linux-c-debug all 
-
-# Run tool on petsc
-
 RUN apt-get -y remove cmake && \ 
     pip3 install cmake --upgrade && \ 
     cd /static/callgraph-xSDK/build && \ 
@@ -56,9 +47,10 @@ RUN apt-get -y remove cmake && \
     cd CallgraphxSDK && \ 
     make 
 
+RUN mkdir logs 
+ 
 
-RUN /static/genProjDataset.py -n petsc -d /static -p /petsc -o petscCG3150.csv -q petscQM3150.csv -g petscGR3150.TabOne -m petscNM3150.txt  
-    
+VOLUME /logs    
     
 CMD /bin/bash
 

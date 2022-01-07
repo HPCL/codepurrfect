@@ -1,20 +1,39 @@
-This directory defines a [docker](https://www.docker.com/)
-image to demonstrate how the static analysis tool of `../static` can be used; by extracting data from PETSc-3.15.0
+To build the docker image, run: 
+```
+./build.sh
+```
+This will build the static analysis tool, copy the executable (all of the *static* directory actually) inside the container and then open up a bash terminal. 
 
-To build and run the containers, run `./build.sh`. 
+Inside the terminal, download the application of interest, generate its 
+compilation database, and then run the tool. For example, in the case of 
+*PETSc-3.16.0*: 
+```
+git clone https://gitlab.com/petsc/petsc.git
+cd petsc
+git checkout v3.16.0
+./configure --with-cc=clang --with-cxx=clang++ --download-mpich --download-f2cblaslapack=1
+bear make PETSC_DIR=/petsc PETSC_ARCH=arch-linux-c-debug all
+```
 
-The two 
-commands will build the source code for the tool, download 
-the code for PETSc, and collect metrics data from PETSc. 
-Once everything has run, the current working directory 
-will point to the root of the container. 
+Once the command has finished running, run: 
+``` 
+/static/genProjDataset.py -n petsc -d /static -p /petsc \
+                          -o petscCG3160.csv -q petscQM3160.csv \
+                          -g petscGR3160.TabOne -m petscNM3160.txt
+```
+This will collect data and store it in a `logs` directory created 
+by the image. That directory is persistent in the sense that once 
+the container is stopped, its files will still be stored locally. 
+Thus, by modifying the `git checkout v3.16.0` command to whatever 
+commit one is interested in (either in the same container or a new one)
+all of that data will be available afterwards.
 
-Contained in `build.sh` also (though commented out) is a helpful command for "cleaning up" 
 
-i.e `docker system prune --all --force` 
+Once you're done, stop the container (by hitting CTRL-D) or 
+by first listing running containers: `docker container ls`, retrieving 
+the CONTAINER ID, and then stopping it: `docker stop <container-id>` 
 
-Also included is the command you will need if you want to start a *jupyter* notebook to analyse the data. Typing 
-the jupyter command and following the generated url should 
-point one to the root of the container as well, making them 
-ready to perform the necessary data analysis on the generated 
-data set. 
+Moreover, to clean up all docker related stuff, run: 
+``` 
+docker system prune --all --force
+```
