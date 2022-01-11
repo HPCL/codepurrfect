@@ -306,7 +306,7 @@ def gen_ll_from_file(dirpath, outpath, item):
         item["command"].append(out_file_name)
         print("compiling: ", comp_file_name, "...")
         print(' '.join(item["command"]))
-        subprocess.run(item["command"] + ["-std=c++17"])
+        subprocess.run(item["command"]) #+ ["-std=c++17"])
     return 
 
 def gen_ll_from_file_helper(x): 
