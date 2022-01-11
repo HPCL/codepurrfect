@@ -104,15 +104,13 @@ def group_by_class_name(proj_name, content_path):
     for namepath, name in zip(class_dir_pths, myglobals.proj_class_names[proj_name]["classes"]):
         class_file_path = '/'.join([namepath, name]) + ".csv"
         if not os.path.exists(class_file_path):
-            with open(class_file_path, 'w') as name_w: 
+            with open(class_file_path, 'w+') as name_w: 
                 for csv_file in os.listdir(namepath): 
                     full_file_path = '/'.join([namepath, csv_file])
                     print(full_file_path)
                     if os.path.isfile(full_file_path):
                         with open(full_file_path, 'r') as csv_file_r: 
-                            csv_contents = csv_file_r.readlines() 
-                            for line in csv_contents: 
-                                name_w.write(line)
+                            name_w.write(csv_file_r.read())
         # else: 
         #     print("directories with names similary to those used to store byproducts exitst. Please delete these") 
         #     sys.exit(2)
@@ -121,7 +119,7 @@ def group_by_class_name(proj_name, content_path):
 def combine_class_metrics(proj_name, call_res_path): 
     proj_csv      = proj_name + ".csv"
     proj_csv_path = '/'.join([call_res_path, proj_csv])
-    with open(proj_csv_path, 'w') as proj_g_file: 
+    with open(proj_csv_path, 'w+') as proj_g_file: 
         for file in os.listdir(call_res_path): 
             file_path = '/'.join([call_res_path, file])
             if os.path.isdir(file_path): 
@@ -132,8 +130,10 @@ def combine_class_metrics(proj_name, call_res_path):
                             cls_name_csv = cls_name + ".csv" 
                             if cls_name_csv == g_file: 
                                 with open(g_file_path, 'r') as cls_g_file: 
-                                    for line in cls_g_file: 
-                                        proj_g_file.write(line)
+                                    proj_g_file.write(cls_g_file.read())
+            if os.path.isfile(file_path): 
+                with open(file_path, 'r') as g_file: 
+                    proj_g_file .write(g_file.read())
 
     return 
 

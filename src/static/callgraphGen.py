@@ -230,10 +230,13 @@ def make_comp_be_clang(data):
     for item in data: 
         if "arguments" in item.keys():
             for i, x in enumerate(item["arguments"]): 
-                if x == "cc":
+                if ("cc" in x) and (i == 0):
                     item["arguments"][i] = "clang"
                 if "c++" in x:
-                    item["arguments"][i] = "clang++"
+                    if "-std=" in x:
+                        continue 
+                    else:
+                        item["arguments"][i] = "clang++"
                     # item["arguments"].append("-std=c++17")
                 if x == "-O0":
                     item["arguments"][i] = "-O2"
@@ -249,8 +252,11 @@ def make_comp_be_clang(data):
             item["command"] = item["command"].split()
             for i, x in enumerate(item["command"]): 
                 if "c++" in x:
-                    item["command"][i] = "clang++"
-                    is_cpp_project = is_cpp_project or True 
+                    if "-std=" in x: 
+                        continue 
+                    else:
+                        item["command"][i] = "clang++"
+                        is_cpp_project = is_cpp_project or True 
                 if ("cc" in x) and (i == 0): 
                     item["command"][i] = "clang"
                 if x == "-O0":
