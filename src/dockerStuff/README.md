@@ -27,7 +27,7 @@ compilation database, and then run the tool. For example, in the case of
     /static/genProjDataset.py -n petsc -d /static \
                               -p /petsc \
                               -o logs/petscCG3160.csv \
-                              -q logs/logs/petscQM3160.csv \
+                              -q logs/petscQM3160.csv \
                               -g logs/petscGR3160.TabOne \
                               -m logs/petscNM3160.txt
     ```
@@ -68,6 +68,33 @@ compilation database, and then run the tool. For example, in the case of
     ```
 
     This will collect similar data as above.
+
+- *Trilinos* 
+   ```
+   git clone https://github.com/trilinos/Trilinos.git  
+
+   cd Trilinos; mkdir build; cd build 
+
+   cmake -DCMAKE_C_COMPILER=/tmp/clang_13/bin/clang \ 
+         -DCMAKE_CXX_COMPILER=/tmp/clang_13/bin/clang++ \ 
+         -DCMAKE_Fortran_COMPILER=/usr/bin/gfortran \ 
+         -DTrilinos_ENABLE_ALL_PACKAGES=ON \ 
+         -DCMAKE_INSTALL_PREFIX=/tmp/trilinos/ \ 
+         -DCMAKE_EXPORT_COMPILE_COMMANDS=ON \ 
+         -DTPL_ENABLE_Boost=OFF \ 
+         -DTPL_ENABLE_BLAS=OFF \ 
+         -DTPL_ENABLE_LAPACK=OFF \ 
+         -DTPL_ENABLE_Netcdf=OFF \ 
+         -DTPL_ENABLE_X11=OFF ..
+
+    /static/genProjDataset.py -n trilinos \ 
+                              -d /static \ 
+                              -p /Trilinos/build \ 
+                              -o logs/TrilinosCG.csv \ 
+                              -q logs/TrilinosQM.csv \ 
+                              -g logs/TrilinosGR.TabOne \ 
+                              -m logs/TrilinosNM.txt
+   ```
 
 The collected data can then be used for various data analyses 
 as for example `logs/PetscContainerExplore.ipynb` presents.

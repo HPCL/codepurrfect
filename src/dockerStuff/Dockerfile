@@ -39,6 +39,12 @@ ENV PATH=/tmp/clang_13/bin:$PATH
 
 ENV LD_LIBRARY_PATH=/tmp/clang_13/lib:$LD_LIBRARY_PATH 
 
+RUN apt-get -y install libblas-dev liblapack-dev 
+
+RUN apt-get -y install gfortran 
+
+RUN apt-get -y install fftw3 
+
 
 RUN apt-get -y remove cmake && \ 
     pip3 install cmake --upgrade && \ 
