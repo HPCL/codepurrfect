@@ -167,7 +167,7 @@ def gen_cg_mtrcs_from_graph(graph, node_names):
         eccentricity_n[i] = nk.distance.Eccentricity.getValue(graph, i)[0]
 
     closeness_centr = nk.centrality.Closeness(graph, 
-                                              False, 
+                                              True, 
                                               nk.centrality
                                                 .ClosenessVariant
                                                 .Generalized)
@@ -180,9 +180,6 @@ def gen_cg_mtrcs_from_graph(graph, node_names):
     between           = betweenness_centr.run() 
     betweenness       = between.scores() 
 
-    # katz_centr        = nk.centrality.KatzCentrality(graph, katz_alpha) 
-    # katz              = katz_centr.run() 
-    # katz_centrality   = katz.scores() 
 
     to_return         = {
         "Name"             : names, 
@@ -192,7 +189,6 @@ def gen_cg_mtrcs_from_graph(graph, node_names):
         "AvgShortestPath"  : avg_short_path,
         "Closeness"        : closeness, 
         "Betweenness"      : betweenness,
-        # "Katz"             : katz_centrality,
         "Eccentricity_R"     : eccentricity_r,
         "Eccentricity_N"     : eccentricity_n
     } 
@@ -365,7 +361,7 @@ def main(argv):
                 nodes_file_w.write(str(name) + '\n')
     
     # clean up 
-    subprocess.run(["rm", "-r", call_res_path, ll_res_path, qmetrics_path, ind_res_path, halstead_res_path])
+    # subprocess.run(["rm", "-r", call_res_path, ll_res_path, qmetrics_path, ind_res_path, halstead_res_path])
     return 
 
 if __name__ == "__main__":  
