@@ -23,6 +23,7 @@
 #include "llvm/Support/raw_ostream.h"
 #include <iostream> 
 #include <fstream>
+#include <utility>
 #include <system_error> 
 #include <functional> 
 #include <algorithm>
@@ -104,12 +105,6 @@ struct CallgraphxSDK : public PassInfoMixin<CallgraphxSDK> {
       qms_file    << instr_count << ", ";
 
       
-      // uniq_vars = F.getNumOperands(); 
-
-      // qms_file  << uniq_vars << ", "; 
-
-
-
       for (BasicBlock &BB : F)
       {
         for (Instruction &I : BB)
@@ -135,56 +130,62 @@ struct CallgraphxSDK : public PassInfoMixin<CallgraphxSDK> {
           }
           
 
-          if (is_binop)
+          std::pair<int, int> binOpCntResults = countOps(is_binop
+                                                          , opcode_name
+                                                          , binops 
+                                                          , ops 
+                                                          , uniq_ops
+                                                          ); 
+          ops      = binOpCntResults.first; 
+          uniq_ops = binOpCntResults.second; 
+
+
+          std::pair<int, int> unOpCntResults = countOps(is_unop
+                                                         , opcode_name 
+                                                         , unops
+                                                         , ops
+                                                         , uniq_ops
+                                                         ); 
+          ops      = unOpCntResults.first; 
+          uniq_ops = unOpCntResults.second; 
+
+          std::pair<int, int> logOpCntResults = countOps(is_logop 
+                                                         , opcode_name 
+                                                         , unops 
+                                                         , ops 
+                                                         , uniq_ops
+                                                        );
+          ops      = logOpCntResults.first; 
+          uniq_ops = logOpCntResults.second; 
+
+          auto *Call = dyn_cast<CallBase>(&I); 
+          if(Call)
           {
-            auto search = binops.find(opcode_name); 
-            if (search != binops.end())
+            if(!Call -> isIndirectCall())
             {
-              ops += 1;
-              binops[opcode_name] += 1;
-            }else
-            {
-              ops += 1;
-              uniq_ops += 1;  
-              binops[opcode_name] = 1; 
+              Function *Callee = Call -> getCalledFunction(); 
+              if(Callee)
+              {
+                std::string c_name = Callee -> getName().str(); 
+                if (c_name == "llvm.dbg.declare") // these are local vars 
+                {
+                  uniq_vars++; 
+                }
+                else 
+                {
+                  bool is_not_intrinsic = !(Callee -> isIntrinsic()); 
+                  std::pair<int, int> callOpCntResults = countOps(is_not_intrinsic
+                                                                , c_name  
+                                                                , callops 
+                                                                , ops 
+                                                                , uniq_ops
+                                                                );
+                  ops      = callOpCntResults.first; 
+                  uniq_ops = callOpCntResults.second;
+                }
+              }
             }
-            
           }
-
-          if (is_unop)
-          {
-            auto search = unops.find(opcode_name); 
-            if (search != unops.end())
-            {
-              ops += 1;
-              unops[opcode_name] += 1;
-            }else
-            {
-              ops += 1;
-              uniq_ops += 1;
-              unops[opcode_name] = 1;  
-            }
-            
-          }
-
-          if (is_logop)
-          {
-            auto search = logops.find(opcode_name); 
-            if (search != logops.end())
-            {
-              ops += 1;
-              logops[opcode_name] += 1;
-            }else
-            {
-              ops += 1; 
-              uniq_ops += 1; 
-              logops[opcode_name] = 1;
-            }
-            
-          }
-          
-
-
 
           // construct stack of load instructions 
           // to be used while identifying 
@@ -194,38 +195,19 @@ struct CallgraphxSDK : public PassInfoMixin<CallgraphxSDK> {
             LoadInst* to_push = dyn_cast<LoadInst>(&I); 
             load_stack.push_back(to_push);
           }
-          
-          if (auto *Call = dyn_cast<CallBase>(&I))
-          {
-            if (!Call -> isIndirectCall())
-            {
-              Function *Callee = Call -> getCalledFunction();
-              if (Callee)
-              {
-                  std::string c_name = Callee -> getName().str(); 
-                  if (c_name == "llvm.dbg.declare")
-                  {
-                      uniq_vars++; 
-                    
-                  }
-                  
 
-                if (!(Callee -> isIntrinsic()))
-                {
-                  auto search = callops.find(c_name); 
-                  if (search != callops.end())
-                  {
-                    ops += 1;
-                    callops[c_name] += 1;
-                  }else
-                  {
-                    ops += 1; 
-                    uniq_ops += 1;
-                    callops[c_name] = 1;
-                  }
-                }
-                
-                std::size_t llvm_present = c_name.find("llvm"); 
+
+          // start constructing the callgraph
+
+          if(Call)
+          {
+            if(!Call -> isIndirectCall())
+            {
+              Function *Callee = Call -> getCalledFunction(); 
+              if(Callee)
+              {
+                std::string c_name = Callee -> getName().str(); 
+                                std::size_t llvm_present = c_name.find("llvm"); 
                 if (llvm_present == std::string::npos) // llvm is 
                                                         //not substring 
                                                         // of c_name
@@ -234,176 +216,190 @@ struct CallgraphxSDK : public PassInfoMixin<CallgraphxSDK> {
                   csv_file << F.getName().str() << "," 
                             << c_name << ", DIRECT\n"; 
                 }
+                else 
+                {
+                  // encountered call to llvm.<words>.<words> 
+                }
+                
+              }
+              else
+              {
+                // call to a direct null pointer  
+              }
+            }
+            else 
+            {
+               
+
+              // We assume that the calling instruction*of the 
+              // form: register(params)* 
+              // always follows a load that stores 
+              // information related to the 
+              // indirect call, including type based 
+              // alias analysis (tbaa) metadata 
+              // which we use to retrieve the name of 
+              // the struct, as well as the offset of the member 
+              // function (pointer) being indirectly called.
+              Value* op_val = Call -> getCalledOperand();
+
+              if (op_val)
+              {
+                if (op_val -> hasName())
+                {
+                  std::string c_name = op_val -> getName().str();
+
+                  auto search = callops.find(c_name); 
+                  if (search != callops.end())
+                  {
+                    ops += 1;
+                    callops[c_name] += 1; 
+                  }else
+                  {
+                    ops      += 1; 
+                    uniq_ops += 1;
+                    callops[c_name] = 1; 
+                  }
+                }else
+                {
+                  // not sure how to track that an indirect call has been called 
+                  // before, without doing alias analysis and trying to figure out 
+                  // its name.
+                  // auto search = indirect_call_ops.find(op_val); 
+                  // if(search != indirect_call_ops.end())
+                  // {
+                  //     ops++; 
+                  //     indirect_call_ops[op_val] += 1; 
+                  // }else 
+                  // {
+                  //     ops += 1;
+                  //     uniq_ops++;
+                  //     indirect_call_ops[op_val] = 1;  
+                  // }
+                }
               }
               
-            }
-            else{
-                    // We assume that the calling instruction*of the 
-                    // form: register(params)* 
-                    // always follows a load that stores 
-                    // information related to the 
-                    // indirect call, including type based 
-                    // alias analysis (tbaa) metadata 
-                    // which we use to retrieve the name of 
-                    // the struct, as well as the offset of the member 
-                    // function (pointer) being indirectly called.
-                    Value* op_val = Call -> getCalledOperand();
+              
+              
+              // figure out indirect calls 
+              // this implementation might 
+              // return wrong results 
+              // when control flow is involved.
 
-                    if (op_val)
-                    {
-                      if (op_val -> hasName())
-                      {
-                        std::string c_name = op_val -> getName().str();
-
-                        auto search = callops.find(c_name); 
-                        if (search != callops.end())
-                        {
-                          ops += 1;
-                          callops[c_name] += 1; 
-                        }else
-                        {
-                          ops      += 1; 
-                          uniq_ops += 1;
-                          callops[c_name] = 1; 
-                        }
-                      }else
-                      {
-                        // not sure how to track that an indirect call has been called 
-                        // before, without doing alias analysis and trying to figure out 
-                        // its name.
-                        auto search = indirect_call_ops.find(op_val); 
-                        if(search != indirect_call_ops.end())
-                        {
-                            ops++; 
-                            indirect_call_ops[op_val] += 1; 
-                        }else 
-                        {
-                            ops += 1;
-                            uniq_ops++;
-                            indirect_call_ops[op_val] = 1;  
-                        }
-                      }
-                    }
-                    
-                    
-                    
-                    
-
-                    LoadInst* prev_inst = NULL; 
-                    int count = 0; 
-                    while (!load_stack.empty())
-                    {
-                      LoadInst* prev = load_stack.back(); 
-                      load_stack.pop_back(); 
-                      if (prev)
-                      {
-                        if (prev -> getType() == op_val -> getType())
-                        {
-                            prev_inst = prev; 
-                            break;        
-                        }  
-                      }
-                    } 
-                    if (prev_inst)
-                    {
-                      if (prev_inst -> hasMetadata())
-                      {
-                        MDNode* access_tag = prev_inst 
-                                             -> getMetadata(
-                                                            StringRef("tbaa")
-                                                          );
-                        // the above should have 3 or 4 operands. 
-                        // first operand: mdnode for base type 
-                        // second operand: mdnode for access type 
-                        // third operand: constantint for the offset of access
-                        // if fourth present, either 0 or 1 depending on whether pointstoconstantmemory
-                        if (access_tag)
-                        {
-                          unsigned num_operands  = access_tag 
-                                                   -> getNumOperands(); 
-                          MDNode* baseTy         = dyn_cast<MDNode>(
-                                                   access_tag
-                                                   ->getOperand(0)); 
-                          MDNode* accessTy       = dyn_cast<MDNode>(
-                                                   access_tag
-                                                   ->getOperand(1)); 
-                          Constant* accessOffset = dyn_cast<Constant>(
-                                                   dyn_cast<ConstantAsMetadata>
-                                                   (access_tag->getOperand(2))
-                                                   ->getValue());
-                          // There are two kinds of type descriptors. 
-                          // One for scalars (types that do not contain 
-                          // other types), 
-                          // one for structs (types with a sequence 
-                          // of other type descriptors (offsets)).
-                          // A scalar type descriptor is an mdnode with 
-                          // 2 operands: an mdstring for the name, and 
-                          // mdnode for the parent 
-                          // A struct type descriptor is an mdnode 
-                          // with an odd number of operands n > 1:
-                          // an mdstring for the name of the struct, 
-                          // followed by a seqeunce of (mdnode's and 
-                          // constantint's)
-                          // the (2n - 1)st operand (an mdnode) is a 
-                          // contained field, and the 2n_th operand 
-                          // (a constantint) is its offset 
-
-                          // our task is to construct a string 
-                          // representation of the above metadata 
-                          // that fits on one line and print it to file 
-                          // see `show`. 
-                          
-                          csv_file << F.getName().str() << ","; 
-                          std::string callee_name = prev_inst -> getPointerOperand() 
-                                                              -> getName().str(); 
-                          csv_file << "!"; 
-                          if (callee_name.size() > 0){
-                            csv_file << callee_name << " = ("; 
-                            txt_file << callee_name << " = "; 
-                          }else
-                          {
-                            csv_file << "EMPTYNAME = (";
-                            txt_file << "EMPTYNAME = "; 
-                          }
-                          
-                          
-                          MDString* name_md = dyn_cast<MDString>(
-                                              baseTy -> getOperand(0)); 
-                          std::string name = name_md->getString().str();
-                          csv_file << name << "->"; 
-                          txt_file << name << "->"; 
-                          show(accessTy, csv_file); 
-                          show(accessTy, txt_file); 
-                          csv_file << *accessOffset; 
-                          txt_file << *accessOffset; 
-                          if (num_operands == 4)
-                          {
-                          ConstantInt* is_const_mem = dyn_cast<ConstantInt>
-                                                    (dyn_cast<ValueAsMetadata>
-                                                    (access_tag->getOperand(3))
-                                                    ->getValue());
-                            csv_file << "(is_const = " 
-                                     << *is_const_mem << ")"; 
-                          }
-                          csv_file << ") :: ";
-
-                          op_val -> getType() -> print(csv_file); 
-                          csv_file << "!, INDIRECT \n";
-                          txt_file << " :: "; 
-                          op_val -> getType() -> print(txt_file); 
-                          txt_file << "\n"; 
-                        }else{
-                          // continue popping stack until you find instr
-                          // with tbaa
-                          csv_file << "fail, fail, FAILED \n"; 
-                        }
-                        }else{
-                          // continue popping stack until you find instr 
-                          // with metadata, that is tbaa
-                          csv_file << "failed!\n"; 
-                        }
-                    }
+              LoadInst* prev_inst = NULL; 
+              int count = 0; 
+              while (!load_stack.empty())
+              {
+                LoadInst* prev = load_stack.back(); 
+                load_stack.pop_back(); 
+                if (prev)
+                {
+                  if (prev -> getType() == op_val -> getType())
+                  {
+                      prev_inst = prev; 
+                      break;        
+                  }  
                 }
+              } 
+              if (prev_inst)
+              {
+                if (prev_inst -> hasMetadata())
+                {
+                  MDNode* access_tag = prev_inst 
+                                        -> getMetadata(
+                                                      StringRef("tbaa")
+                                                    );
+                  // the above should have 3 or 4 operands. 
+                  // first operand: mdnode for base type 
+                  // second operand: mdnode for access type 
+                  // third operand: constantint for the offset of access
+                  // if fourth present, either 0 or 1 depending on whether pointstoconstantmemory
+                  if (access_tag)
+                  {
+                    unsigned num_operands  = access_tag 
+                                              -> getNumOperands(); 
+                    MDNode* baseTy         = dyn_cast<MDNode>(
+                                              access_tag
+                                              ->getOperand(0)); 
+                    MDNode* accessTy       = dyn_cast<MDNode>(
+                                              access_tag
+                                              ->getOperand(1)); 
+                    Constant* accessOffset = dyn_cast<Constant>(
+                                              dyn_cast<ConstantAsMetadata>
+                                              (access_tag->getOperand(2))
+                                              ->getValue());
+                    // There are two kinds of type descriptors. 
+                    // One for scalars (types that do not contain 
+                    // other types), 
+                    // one for structs (types with a sequence 
+                    // of other type descriptors (offsets)).
+                    // A scalar type descriptor is an mdnode with 
+                    // 2 operands: an mdstring for the name, and 
+                    // mdnode for the parent 
+                    // A struct type descriptor is an mdnode 
+                    // with an odd number of operands n > 1:
+                    // an mdstring for the name of the struct, 
+                    // followed by a seqeunce of (mdnode's and 
+                    // constantint's)
+                    // the (2n - 1)st operand (an mdnode) is a 
+                    // contained field, and the 2n_th operand 
+                    // (a constantint) is its offset 
+
+                    // our task is to construct a string 
+                    // representation of the above metadata 
+                    // that fits on one line and print it to file 
+                    // see `show`. 
+                    
+                    csv_file << F.getName().str() << ","; 
+                    std::string callee_name = prev_inst -> getPointerOperand() 
+                                                        -> getName().str(); 
+                    csv_file << "!"; 
+                    if (callee_name.size() > 0){
+                      csv_file << callee_name << " = ("; 
+                      txt_file << callee_name << " = "; 
+                    }else
+                    {
+                      csv_file << "EMPTYNAME = (";
+                      txt_file << "EMPTYNAME = "; 
+                    }
+                    
+                    
+                    MDString* name_md = dyn_cast<MDString>(
+                                        baseTy -> getOperand(0)); 
+                    std::string name = name_md->getString().str();
+                    csv_file << name << "->"; 
+                    txt_file << name << "->"; 
+                    show(accessTy, csv_file); 
+                    show(accessTy, txt_file); 
+                    csv_file << *accessOffset; 
+                    txt_file << *accessOffset; 
+                    if (num_operands == 4)
+                    {
+                    ConstantInt* is_const_mem = dyn_cast<ConstantInt>
+                                              (dyn_cast<ValueAsMetadata>
+                                              (access_tag->getOperand(3))
+                                              ->getValue());
+                      csv_file << "(is_const = " 
+                                << *is_const_mem << ")"; 
+                    }
+                    csv_file << ") :: ";
+
+                    op_val -> getType() -> print(csv_file); 
+                    csv_file << "!, INDIRECT \n";
+                    txt_file << " :: "; 
+                    op_val -> getType() -> print(txt_file); 
+                    txt_file << "\n"; 
+                  }else{
+                    // continue popping stack until you find instr
+                    // with tbaa
+                    csv_file << "fail, fail, FAILED \n"; 
+                  }
+                  }else{
+                    // continue popping stack until you find instr 
+                    // with metadata, that is tbaa
+                    csv_file << "failed!\n"; 
+                  }
+              }
+            }
           }
         }
         
@@ -413,10 +409,7 @@ struct CallgraphxSDK : public PassInfoMixin<CallgraphxSDK> {
       qms_file << uniq_ops  << ", "; 
       
       qms_file << ops << ", "; 
-      qms_file << (CC+1) << "\n";
-
-
-        
+      qms_file << (CC+1) << "\n"; 
       } 
     }
     outs() << "done writing "
@@ -426,6 +419,30 @@ struct CallgraphxSDK : public PassInfoMixin<CallgraphxSDK> {
     txt_file.close(); 
     return PreservedAnalyses::all();
   }
+
+  std::pair<int, int> countOps(bool is_what_op, std::string opcode_name
+                 , std::unordered_map<std::string, int> &what_ops_map  
+                 , int ops
+                 , int uniq_ops)
+  {
+    if (is_what_op)
+    {
+      auto search = what_ops_map.find(opcode_name); 
+      if (search != what_ops_map.end())
+      {
+        ops += 1;
+        what_ops_map[opcode_name] += 1;
+      }else
+      {
+        ops += 1;
+        uniq_ops += 1;  
+        what_ops_map[opcode_name] = 1; 
+      }
+      
+    }
+    return std::make_pair(ops, uniq_ops); 
+  }
+
 
   bool isScalarType(MDNode* node){
     unsigned num_ops = node -> getNumOperands(); 
@@ -478,6 +495,4 @@ llvmGetPassPluginInfo() {
   };
 }
 
-
-// see if tracked
 

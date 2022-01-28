@@ -1,10 +1,7 @@
 # comment stuff 
 # comment sectoin 
 
-
-#we are using ubuntu base image
 FROM ubuntu 
-# installing requirements to get and extract prebuilt binaries
 RUN apt-get update && apt-get install -y \
  xz-utils \
  curl \
@@ -24,10 +21,18 @@ RUN apt-get update && \
     apt-get -y install libncurses5 && \ 
     apt-get -y install bear && \ 
     apt-get -y install git-all && \
-    apt-get -y install cmake
+    apt-get -y install cmake && \ 
+    apt-get -y install mpich && \ 
+    apt-get -y install gfortran && \ 
+    apt-get -y install libblas-dev liblapack-dev && \
+    apt-get -y install fftw3 && \ 
+    apt-get -y install vim 
+
+
 
 # add tools code to container
-ADD static /static 
+ADD ../static /static 
+VOLUME /static 
 
 
 #Getting prebuilt binary from llvm 
@@ -39,11 +44,6 @@ ENV PATH=/tmp/clang_13/bin:$PATH
 
 ENV LD_LIBRARY_PATH=/tmp/clang_13/lib:$LD_LIBRARY_PATH 
 
-RUN apt-get -y install libblas-dev liblapack-dev 
-
-RUN apt-get -y install gfortran 
-
-RUN apt-get -y install fftw3 
 
 
 RUN apt-get -y remove cmake && \ 
