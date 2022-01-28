@@ -31,7 +31,8 @@ RUN apt-get update && \
 
 
 # add tools code to container
-ADD static /static 
+ADD ../static /static 
+VOLUME /static 
 
 
 #Getting prebuilt binary from llvm 
