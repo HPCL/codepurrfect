@@ -24,7 +24,7 @@ compilation database, and then run the tool. For example, in the case of
 
     Once the command has finished running, run: 
     ``` 
-    /static/genProjDataset.py -n petsc -d /static \
+    /static/driver/main.py -n petsc -d /static \
                               -p /petsc \
                               -o logs/petscCG3160.csv \
                               -q logs/petscQM3160.csv \
@@ -59,8 +59,8 @@ compilation database, and then run the tool. For example, in the case of
 
     cd /
 
-    /static/genProjDataset.py -n lammps -d /static \
-                            -p /lammps/ cmake/build \
+    /static/driver/main.py -n lammps -d /static \
+                            -p /lammps/cmake/build \
                             -o logs/lammpsCG.csv \ 
                             -q logs/lammpsQM.csv \
                             -g logs/lammpsGR.TabOne \ 
@@ -87,7 +87,7 @@ compilation database, and then run the tool. For example, in the case of
          -DTPL_ENABLE_Netcdf=OFF \ 
          -DTPL_ENABLE_X11=OFF ..
 
-    /static/genProjDataset.py -n trilinos \ 
+    /static/driver/main.py -n trilinos \ 
                               -d /static \ 
                               -p /Trilinos/build \ 
                               -o logs/TrilinosCG.csv \ 
