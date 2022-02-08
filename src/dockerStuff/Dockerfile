@@ -17,7 +17,8 @@ RUN apt-get update && \
     pip3 install Cython && \ 
     pip3 install networkit && \
     pip3 install jupyter && \
-    pip3 install matplotlib && \  
+    pip3 install matplotlib && \ 
+    pip3 install distfit && \ 
     apt-get -y install libncurses5 && \ 
     apt-get -y install bear && \ 
     apt-get -y install git-all && \
