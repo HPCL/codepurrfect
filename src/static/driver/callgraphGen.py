@@ -2,6 +2,7 @@ import json
 import subprocess 
 import os 
 import time 
+import myglobals 
 from multiprocessing import Pool
 from typing import List 
 
@@ -47,15 +48,14 @@ def gen_ll_from_file_helper(x):
 
 
 class CGenRunner(): 
-    def __init__(self, dirpath : str, llpath : str, callpath : str, qmetricspath : str
-                     , indpath : str, cgpluginpath : str
+    def __init__(self, dirpath : str, llpath : str, callpath : str = None, qmetricspath : str = None 
+                     , cgpluginpath : str   = None 
                      , funcpluginpath : str = None 
                      , fltrd_filepath : str = None, fltrd_outpath : str = None) -> None:
         self.dirpath        = dirpath 
         self.llpath         = llpath 
         self.callpath       = callpath 
         self.qmetricspath   = qmetricspath 
-        self.indpath        = indpath 
         self.cgpluginpath   = cgpluginpath 
         self.funcpluginpath = funcpluginpath 
 
@@ -87,7 +87,7 @@ class CGenRunner():
     def read_compilation_db(self) -> None: 
         comp_json_path = ""
         print("dirpath: ", self.dirpath)
-        comp_json_path = '/'.join([self.dirpath, "compile_commands.json"])
+        comp_json_path = myglobals.config_vars['comp_db_path']
         print(comp_json_path)
         with open(comp_json_path, "r") as read_f: 
             self.data = json.load(read_f)
@@ -236,7 +236,7 @@ class CGenRunner():
         cwd = os.getcwd() 
         print("moving files graph and indirect files to respective dirs ...") 
         start = time.time() 
-        self.move_files(cwd, [self.callpath, self.qmetricspath, self.indpath]
+        self.move_files(cwd, [self.callpath, self.qmetricspath]
                     , extensions=["_callgraph.csv", "_qmetrics.csv", "_indirects.txt"])
         print("done moving files.")
         end = time.time() 

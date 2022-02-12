@@ -1,4 +1,4 @@
-import json 
+import os 
 
 # would be nice if this table 
 # could be populated automatically 
@@ -39,4 +39,11 @@ def init():
                 "logsPath" : ""
             }
         }
+    global config_vars 
+    cwd = os.getcwd()
+    config_vars = {
+        "cl_grph_plugin_path" : "/static/callgraph-xSDK/build/CallgraphxSDK/libCallgraphxSDK.so" ,
+        "func_only_plugin_path" : "/static/function-gen/build/FunctionGen/libFunctionGen.so",
+        "comp_db_path" : cwd + "/compile_commands.json"
+    }
     return 
