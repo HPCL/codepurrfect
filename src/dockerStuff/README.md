@@ -21,33 +21,6 @@ compilation database, and then run the tool. For example, in the case of
 
     bear make PETSC_DIR=/petsc PETSC_ARCH=arch-linux-c-debug all
     ```
-
-    Once the command has finished running, run: 
-    ``` 
-    /static/driver/main.py -n petsc -d /static \
-                              -p /petsc \
-                              -o logs/petscCG3160.csv \
-                              -q logs/petscQM3160.csv \
-                              -g logs/petscGR3160.TabOne \
-                              -m logs/petscNM3160.txt
-    ```
-    This will collect data and store it in a `logs` directory created 
-    by the image. That directory is persistent in the sense that once 
-    the container is stopped, its files will still be stored locally. 
-    Thus, by modifying the `git checkout v3.16.0` command to whatever 
-    commit one is interested in (either in the same container or a new one)
-    all of that data will be available afterwards.
-
-    The collected data is as follows: 
-
-        -   `<projectName>CG[<version>].csv` contains callgraph-extracted metrics 
-        -   `<projectName>QM[<version>].csv` contains 
-        code-quality-related metrics 
-        -   `<projectName>GR[<version>].csv` contains 
-        the callgraph in edge-list form 
-        -   `<projectName>NM[<version>].csv` contains 
-        callgraph node names (mangled in the case of c++ project, but this can be fixed by running `llvm-cxxfilt` on the mangled name to recover the source code name.)
-
      
 - *LAMMPS*
     ```
@@ -56,15 +29,6 @@ compilation database, and then run the tool. For example, in the case of
     cd lammps/cmake; mkdir build; cd build 
 
     cmake -DCMAKE_EXPORT_COMPILE_COMMANDS=ON .. 
-
-    cd /
-
-    /static/driver/main.py -n lammps -d /static \
-                            -p /lammps/cmake/build \
-                            -o logs/lammpsCG.csv \ 
-                            -q logs/lammpsQM.csv \
-                            -g logs/lammpsGR.TabOne \ 
-                            -m logs/lammpsNM.txt
     ```
 
     This will collect similar data as above.
@@ -86,15 +50,29 @@ compilation database, and then run the tool. For example, in the case of
          -DTPL_ENABLE_LAPACK=OFF \ 
          -DTPL_ENABLE_Netcdf=OFF \ 
          -DTPL_ENABLE_X11=OFF ..
-
-    /static/driver/main.py -n trilinos \ 
-                              -d /static \ 
-                              -p /Trilinos/build \ 
-                              -o logs/TrilinosCG.csv \ 
-                              -q logs/TrilinosQM.csv \ 
-                              -g logs/TrilinosGR.TabOne \ 
-                              -m logs/TrilinosNM.txt
    ```
+
+Once the command has finished running, running: 
+``` 
+/static/driver/main.py --help
+```
+Will print all flags and associated help messages. 
+
+For example, running 
+```
+/static/driver/main.py --init 
+```
+
+Will ready the directory for processing and create a `.ideas-uo` directory with the following subdirectories and files: 
+    * <projectname>-callgraph 
+    * <projectname>-halstead 
+    * <projectname>-qmetrics 
+    * <projectname>-callgraph.TabOne 
+    * <projectname>-cgmetrics.csv 
+    * <projectname>-qmetrics.csv 
+    * <projectname>-funcnames.txt 
+
+Each of these will then be used by the tool to "report" and "trace" function-level metrics.
 
 The collected data can then be used for various data analyses 
 as for example `logs/PetscContainerExplore.ipynb` presents.
