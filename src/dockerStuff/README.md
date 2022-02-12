@@ -64,6 +64,7 @@ For example, running
 ```
 
 Will ready the directory for processing and create a `.ideas-uo` directory with the following subdirectories and files: 
+
     * <projectname>-callgraph 
     * <projectname>-halstead 
     * <projectname>-qmetrics 
