@@ -14,7 +14,8 @@ import pandas    as pd
 import myglobals 
 import argparse 
 from multiprocessing import Pool 
-from typing import List 
+from typing import List, Union, Tuple, Optional
+from adt import adt, Case 
 
 
 def group_by_class_name(proj_name, content_path): 
@@ -138,24 +139,155 @@ def gen_callgraph_metrics(callgraph_path):
     return to_return_pd, G, node_names 
 
 
-def parseCmdArgs():
-    parser = argparse.ArgumentParser() 
-    parser.add_argument("-n", "--projname", help="name of project to be analyzed") 
-    parser.add_argument("-p", "--projroot", help="path to directory containing project's compilation database file (i.e compile_commands.json)")
-    parser.add_argument("-d", "--plugin", help="path to parent of opt plugins")
-    group    = parser.add_mutually_exclusive_group()
-    subgroup = group.add_argument_group('callgraphs') 
-    subgroup.add_argument("-o", "--gmetrics", help="path to file where callgraph metrics are dumped") 
-    subgroup.add_argument("-q", "--qltymtrcs", help="path to file where quality metrics are dumped") 
-    subgroup.add_argument("-g", "--callgraph", help="path to .TabOne file where edge list rep of callgraph is dumped")
-    subgroup.add_argument("-m", "--cgnodes", help="path to file where names of nodes in callgraph are dumped")
-    filtgroup = group.add_argument_group('diff-functions') 
-    filtgroup.add_argument("-f", "--diff_files", help="path to list of filenames from which function names are extracted.")
-    filtgroup.add_argument("-ff", "--funcfile", help="path to file where functions in diff-files are dumped.") 
-    return parser  
+@adt 
+class CmdArgsTy:
+    INIT   : Case[List[str]] 
+    FRESH  : Case 
+    REPORT : Case[Union[str, Tuple[str, str]]]  
+    TRACE  : Case[str]  
 
-def post_process_callgraphs(proj_root_dir, fltrd_filepath, fltrd_outpath
-                                         , proj_name, call_res_path
+def parseCmdArgs() -> CmdArgsTy:
+    parser = argparse.ArgumentParser() 
+    parser.add_argument("-i", "--init", help="Initialize directory to work with quality-tool.", action="store_true")
+    parser.add_argument("-d", "--diff_funcs_only", help="Declare to only generate function-level diff, and no callgraphs." 
+                                                       +  "Provide file with list of files resulting of git's diff")
+    parser.add_argument("-f", "--freshen", help="Recompute quality data. Should be run after new commit.", action="store_true") 
+    parser.add_argument("-r", "--report", type=str, help="Report funtion's metrics. Should be run in combination"  
+                                                         + " with --commit *sha*, to return metrics in that commit.")
+    parser.add_argument("-c", "--commit", type=str, help="Commit sha in which to report function's metrics.")
+    parser.add_argument("-t", "--trace", help="Return list of commits that modified argument function.")
+
+    args = None 
+    try:
+        args = parser.parse_args() 
+    except argparse.ArgumentError: 
+        print('There was an argument error. Try running program with --help')
+        sys.exit(2)
+
+    if args.init: 
+        if args.diff_funcs_only: 
+            return CmdArgsTy.INIT([args.diff_funcs_only])
+        else: 
+            return CmdArgsTy.INIT([])  
+    if args.freshen: 
+        return CmdArgsTy.FRESH 
+    if args.report: 
+        if args.commit: 
+            return CmdArgsTy.REPORT((args.report, args.commit))
+        else: 
+            return CmdArgsTy.REPORT(args.report) 
+    if args.trace: 
+        return CmdArgsTy.TRACE(args.trace) 
+
+def handleReport(report : Union[str, Tuple[str, str]]): 
+    if isinstance(report, str): 
+        # TODO 
+        return 
+    if isinstance(report, tuple): 
+        # TODO 
+        return 
+
+def handleTrace(funcname : str): 
+    # TODO 
+    return 
+
+def handleFreshen(): 
+    # TODO 
+    return 
+
+def handleInit(initL : List[str]) -> None: 
+    count = multiprocessing.cpu_count() 
+    pool  = Pool(processes=count)
+    if len(initL) == 0: # normal init case 
+        # create necessary dirs 
+        proj_root_dir, callfile, cgmetrics_file, qmfile, nodes_file, \
+                      ll_res_path, call_res_path, \
+                      halstead_res_path, qmetrics_path = create_tool_dirs() 
+        cgGenerator = CGenRunner(dirpath=proj_root_dir, llpath=ll_res_path
+                                          , callpath=call_res_path
+                                          , qmetricspath=qmetrics_path
+                                          , cgpluginpath=myglobals.config_vars["cl_grph_plugin_path"])
+        cgGenerator.gen_callgraphs(pool) 
+        post_process_callgraphs(proj_name=proj_root_dir, 
+                                call_res_path=call_res_path, 
+                                qmetrics_path=qmetrics_path, 
+                                callfile=callfile, 
+                                outfile=cgmetrics_file, 
+                                qmfile=qmfile,
+                                nodes_file=nodes_file)
+    if len(initL) == 1: # func_only init case 
+        proj_root_dir, ll_res_path, func_only_res_path = create_tool_dirs(func_only=True)
+        fltrd_filepath = initL[0] 
+        cgGenerator    = CGenRunner(dirpath=proj_root_dir, llpath=ll_res_path
+                                            , fltrd_filepath=fltrd_filepath
+                                            , fltrd_outpath=func_only_res_path
+                                            , funcpluginpath=myglobals.config_vars["func_only_plugin_path"])
+        cgGenerator.gen_only_func_decls(pool) 
+        currdir = os.getcwd() 
+        post_func_files(frm=currdir, to=func_only_res_path)
+
+def interpCmdArgsTy(cmds : CmdArgsTy): 
+    return cmds.match(
+        init   = lambda initL : handleInit(initL),  
+        fresh  = handleFreshen(), 
+        report = lambda sha : handleReport(sha), 
+        trace  = lambda funcname : handleTrace(funcname)    
+    )  
+
+def create_tool_dirs(func_only=False): 
+    pwd   = os.getcwd() 
+    pname = ''
+    if pwd[-1] == '/':
+        pname = pwd.split('/')[-2] 
+    else: 
+        pname = pwd.split('/')[-1]
+
+    hide_prefix = '.'
+    tool_dir    = hide_prefix + "ideas-uo" 
+    if not os.path.isdir(tool_dir): 
+        os.mkdir(tool_dir) 
+
+    ll_res_path                 = tool_dir + "/" + pname + "-ll"
+
+    if not func_only:
+        call_res_path           = tool_dir + "/" + pname + "-callgraph"  
+        halstead_res_path       = tool_dir + "/" + pname + "-halstead"
+        qmetrics_path           = tool_dir + "/" + pname + "-qmetrics"
+
+        callfile                = tool_dir + "/" + pname + "-callgraph.TabOne" 
+        cgmetrics_file          = tool_dir + "/" + pname + "-cgmetrics.csv"
+        qmfile                  = tool_dir + "/" + pname + "-qmetrics.csv" 
+        nodes_file              = tool_dir + "/" + pname + "-funcnames.txt"
+
+        if not os.path.isdir(call_res_path): 
+            os.mkdir(call_res_path)  
+
+        if not os.path.isdir(qmetrics_path): 
+            os.mkdir(qmetrics_path)
+        
+        if not os.path.isdir(halstead_res_path): 
+            os.mkdir(halstead_res_path)
+    else: 
+        func_only_res_path = tool_dir + "/" + pname + "-functions.txt"
+    
+    if not os.path.isdir(ll_res_path): 
+        os.mkdir(ll_res_path) 
+
+
+    if not func_only: 
+        return (pname, callfile, cgmetrics_file, qmfile, nodes_file, 
+                       ll_res_path, call_res_path, 
+                       halstead_res_path, qmetrics_path)
+    else: 
+        return (pname, ll_res_path, func_only_res_path) 
+        
+
+    
+
+
+
+
+def post_process_callgraphs(proj_name, call_res_path
                                          , qmetrics_path, callfile, outfile, qmfile 
                                          , nodes_file): 
 
@@ -207,88 +339,15 @@ def post_func_files(frm, to):
 
 
 def main():
-    parser = None 
-    try: 
-        parser = parseCmdArgs()
-    except argparse.ArgumentError: 
-        print('There was an argument error. Try running program with --help!') 
+    try:
+        typed_args = parseCmdArgs() 
+    except (RuntimeError, TypeError, NameError): 
+        print("Problem parsing and returning typed arguments")
         sys.exit(2)
-    args = parser.parse_args() 
 
     myglobals.init()
 
-    proj_name     = args.projname 
-    proj_root_dir = args.projroot
-    outfile       = args.gmetrics
-    qmfile        = args.qltymtrcs
-    callfile      = args.callgraph 
-    nodes_file    = args.cgnodes 
-    curr_dir      = args.plugin 
-    fltrd_filepath = args.diff_files 
-    fltrd_outpath  = args.funcfile 
-
-
-    hlstd_mtrcs_tl_path = '/'.join([curr_dir, 'xsdk-metrics', 
-                                    'promise-mccabe-halstead-c', 
-                                    'build', 'promise-mccabe-halstead-c'])
-
-    cl_grph_plugin_path = '/'.join([curr_dir, 'callgraph-xSDK', 
-                                    'build', 'CallgraphxSDK',
-                                    'libCallgraphxSDK.so'])
-
-    func_only_plugin_path = '/'.join([curr_dir, 'function-gen', 
-                                    'build', 'FunctionGen',
-                                    'libFunctionGen.so'])
-
-    call_res_path           = proj_name + "-callgraph" 
-    ll_res_path             = proj_name + "-ll" 
-    ind_res_path            = proj_name + "-indirects" 
-    indirect_call_res__json = proj_name + "_indirect_call_res.json"
-    halstead_res_path       = proj_name + "-halstead"
-    qmetrics_path           = proj_name + "-qmetrics"
-
-    if not os.path.isdir(ll_res_path): 
-        os.mkdir(ll_res_path)
-
-    if args.gmetrics and args.qltymtrcs and args.callgraph and args.cgnodes: 
-        if not os.path.isdir(call_res_path): 
-            os.mkdir(call_res_path)  
-
-        if not os.path.isdir(qmetrics_path): 
-            os.mkdir(qmetrics_path)
-
-        if not os.path.isdir(ind_res_path): 
-            os.mkdir(ind_res_path)
-        
-        if not os.path.isdir(halstead_res_path): 
-            os.mkdir(halstead_res_path)
-
-
-    # gen_halstead_metrics(proj_root_dir, hlstd_mtrcs_tl_path, halstead_res_path) 
-    # group_by_class_name(proj_name, halstead_res_path) 
-
-
-    count = multiprocessing.cpu_count()
-    pool = Pool(processes=count)
-
-    cgGenerator = CGenRunner(dirpath=proj_root_dir, llpath=ll_res_path
-                                          , callpath=call_res_path
-                                          , qmetricspath=qmetrics_path
-                                          , indpath=ind_res_path
-                                          , cgpluginpath=cl_grph_plugin_path
-                                          , fltrd_filepath=fltrd_filepath, fltrd_outpath=fltrd_outpath
-                                          , funcpluginpath=func_only_plugin_path)
-    if args.gmetrics and args.qltymtrcs and args.callgraph and args.cgnodes:
-        cgGenerator.gen_callgraphs(pool) 
-        post_process_callgraphs(proj_root_dir, fltrd_filepath, fltrd_outpath 
-                                             , proj_name, call_res_path 
-                                             , qmetrics_path, callfile, outfile 
-                                             , qmfile, nodes_file)
-
-    if args.diff_files and args.funcfile:
-        cgGenerator.gen_only_func_decls(pool) 
-        post_func_files(frm=proj_root_dir, to=args.funcfile)
-
+    interpCmdArgsTy(cmds=typed_args)
 
 if __name__ == "__main__":  
     main()
