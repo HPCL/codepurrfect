@@ -146,8 +146,7 @@ class CGenRunner():
                         item["command"].remove(x) 
 
 
-    def run_compile_commands(self, pool):
-        print("what is going on!")
+    def run_compile_commands(self, pool : Pool):
         size         = len(self.data)
         dirpaths     = [self.dirpath] * size 
         outpaths     = [self.llpath] * size 
@@ -207,14 +206,7 @@ class CGenRunner():
         return
 
 
-    def run_cg_pass(self) -> None:
-        self.run_opt_pass(self.cgpluginpath, "callgraph-xSDK")
-
-
-    def run_func_decl_only_pass(self) -> None: 
-        self.run_opt_pass(self.funcpluginpath, "function-gen") 
-
-    def run(self, pool): 
+    def run(self, pool : Pool, pluginpath : str, passname : str): 
         # for every file in compilation database 
         # generate corresponding .ll file
         print("starting compilation ...")
@@ -227,7 +219,7 @@ class CGenRunner():
         # indirects.txt given .ll file 
         print("start running opt pass") 
         start = time.time()
-        self.run_cg_pass()  
+        self.run_opt_pass(pluginpath=pluginpath, passname=passname) 
         print("running opt pass done.") 
         end = time.time() 
         print("running opt pass took: ", end - start)
@@ -243,41 +235,12 @@ class CGenRunner():
         print("moving files took: ", end - start)      
         return  
 
-    def run_on_filtered(self, pool): 
-        # for every file in compilation database 
-        # generate corresponding .ll file
-        print("starting compilation ...")
-        start = time.time()
-        self.compile_dir(pool, on_filtered=True)
-        print("compilation done.") 
-        end = time.time() 
-        print("compilation took: ", end - start)
-        # run pass to generate callgraph.csv and 
-        # indirects.txt given .ll file 
-        print("start running opt pass") 
-        start = time.time()
-        self.run_func_decl_only_pass()  
-        print("running opt pass done.") 
-        end = time.time() 
-        print("running opt pass took: ", end - start)
-        # store callgraph.csv in callgraph dir 
-        # store indirects.txt in indirect_calls dir
-        # cwd = os.getcwd() 
-        # print("moving files graph and indirect files to respective dirs ...") 
-        # start = time.time() 
-        # self.move_files(cwd, [self.fltrd_outpath]
-        #             , extensions=["_functions.csv"])
-        # print("done moving files.")
-        # end = time.time() 
-        # print("moving files took: ", end - start)      
+
+
+    def gen_callgraphs(self, pool : Pool):  
+        self.run(pool=pool, pluginpath=self.cgpluginpath, passname="callgraph-xSDK")
         return 
 
-
-
-    def gen_callgraphs(self, pool):  
-        self.run(pool)
-        return 
-
-    def gen_only_func_decls(self, pool):  
-        self.run_on_filtered(pool)
+    def gen_only_func_decls(self, pool : Pool):  
+        self.run(pool=pool, pluginpath=self.funcpluginpath, passname="function-gen")
         return

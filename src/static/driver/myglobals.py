@@ -42,8 +42,8 @@ def init():
     global config_vars 
     cwd = os.getcwd()
     config_vars = {
-        "cl_grph_plugin_path" : "/static/callgraph-xSDK/build/CallgraphxSDK/libCallgraphxSDK.so" ,
-        "func_only_plugin_path" : "/static/function-gen/build/FunctionGen/libFunctionGen.so",
+        "cl_grph_plugin_path" : "/static/passes-ir/callgraph-xSDK/build/CallgraphxSDK/libCallgraphxSDK.so" ,
+        "func_only_plugin_path" : "/static/passes-ir/function-gen/build/FunctionGen/libFunctionGen.so",
         "comp_db_path" : cwd + "/compile_commands.json"
     }
     return 

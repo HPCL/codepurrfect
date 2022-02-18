@@ -1,0 +1,8 @@
+/static/function-gen/build/CMakeFiles/intrinsics_gen.dir
+/static/function-gen/build/CMakeFiles/omp_gen.dir
+/static/function-gen/build/CMakeFiles/acc_gen.dir
+/static/function-gen/build/CMakeFiles/edit_cache.dir
+/static/function-gen/build/CMakeFiles/rebuild_cache.dir
+/static/function-gen/build/FunctionGen/CMakeFiles/FunctionGen.dir
+/static/function-gen/build/FunctionGen/CMakeFiles/edit_cache.dir
+/static/function-gen/build/FunctionGen/CMakeFiles/rebuild_cache.dir
