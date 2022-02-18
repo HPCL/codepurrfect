@@ -17,6 +17,7 @@ from multiprocessing import Pool
 from typing import List, Union, Tuple, Dict
 from adt import adt, Case 
 from initializer import handleInitWithPasses
+from metricThresholds import Reporter, match_metric_type
 
 
 @adt 
@@ -32,8 +33,9 @@ def parseCmdArgs() -> Tuple[CmdArgsTy, Dict[str, str]]:
     parser.add_argument("-d", "--diff_funcs_only", help="Declare to only generate function-level diff, and no callgraphs." 
                                                        +  "Provide file with list of files resulting of git's diff", action='store_true')
     parser.add_argument("-f", "--freshen", help="Recompute quality data. Should be run after new commit.", action="store_true") 
-    parser.add_argument("-r", "--report", type=str, help="Report funtion's metrics. Should be run in combination"  
-                                                         + " with --commit *sha*, to return metrics in that commit.")
+    parser.add_argument("-r", "--report", help="Report funtion's metrics. Should be run in combination"  
+                                                         + " with --commit *sha*, to return metrics in that commit.", action='store_true')
+    parser.add_argument("-m", "--metric", type=str, help="Name of metric whose stats to report. To be used in combination with --report. e.g --report -m 'CC' ")
     parser.add_argument("-c", "--commit", type=str, help="Commit sha in which to report function's metrics.")
     parser.add_argument("-t", "--trace", help="Return list of commits that modified argument function.")
 
@@ -56,17 +58,34 @@ def parseCmdArgs() -> Tuple[CmdArgsTy, Dict[str, str]]:
     if args.report: 
         if args.commit: 
             return (CmdArgsTy.REPORT((args.report, args.commit)), v_args)
+        elif args.metric: 
+            return (CmdArgsTy.REPORT((args.report, args.metric)), v_args)
         else: 
             return (CmdArgsTy.REPORT(args.report), v_args)
     if args.trace: 
         return (CmdArgsTy.TRACE(args.trace), v_args) 
 
-def handleReport(report : Union[str, Tuple[str, str]]): 
+def handleReport(report : Union[str, Tuple[str, str]], v_args): 
+    pwd   = os.getcwd() 
+    pname = ''
+    if pwd[-1] == '/':
+        pname = pwd.split('/')[-2] 
+    else: 
+        pname = pwd.split('/')[-1]
+
+    reporter = Reporter(pname)
+
     if isinstance(report, str): 
         # TODO 
         return 
     if isinstance(report, tuple): 
-        # TODO 
+        if v_args['metric']: 
+            metric = report[1] 
+            metric_col_name, metric_type = match_metric_type(metric)
+            reporter.calc_metric_threshols(metric_type, metric_col_name)
+            reporter.report_metric_thresholds()
+            # reporter.sort_data(metric_type, metric_col_name) 
+            # reporter.report_sorted(region='high')
         return 
 
 def handleTrace(funcname : str): 
@@ -83,7 +102,7 @@ def interpCmdArgsTy(cmds : CmdArgsTy, args):
     return cmds.match(
         init   = lambda initL : handleInitWithPasses(initL, args),  
         fresh  = handleFreshen(), 
-        report = lambda sha : handleReport(sha), 
+        report = lambda rep_flags : handleReport(rep_flags, args), 
         trace  = lambda funcname : handleTrace(funcname)    
     )  
 

@@ -17,8 +17,9 @@ RUN apt-get update && \
     pip3 install Cython && \ 
     pip3 install networkit && \
     pip3 install jupyter && \
-    pip3 install matplotlib && \ 
+    pip3 install matplotlib && \  
     pip3 install distfit && \ 
+    pip3 install algebraic-data-types && \
     apt-get -y install libncurses5 && \ 
     apt-get -y install bear && \ 
     apt-get -y install git-all && \
@@ -49,9 +50,16 @@ ENV LD_LIBRARY_PATH=/tmp/clang_13/lib:$LD_LIBRARY_PATH
 
 RUN apt-get -y remove cmake && \ 
     pip3 install cmake --upgrade && \ 
-    cd /static/callgraph-xSDK/build && \ 
+    mkdir -p /static/passes-ir/callgraph-xSDK/build && \ 
+    cd /static/passes-ir/callgraph-xSDK/build && \ 
     cmake .. && \  
     cd CallgraphxSDK && \ 
+    make 
+
+RUN mkdir -p /static/passes-ir/function-gen/build && \ 
+    cd /static/passes-ir/function-gen/build && \ 
+    cmake .. && \  
+    cd FunctionGen && \ 
     make 
 
 RUN mkdir logs 
