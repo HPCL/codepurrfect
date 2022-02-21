@@ -23,6 +23,11 @@ def init():
                 "hasTestLogs" : False, 
                 "logsPath" : ""
             }, 
+            "hypre" : {
+                "classes" : [],
+                "hasTestLogs" : False,
+                "logsPath"    : ""
+            },
             "trilinos" : {
                 "classes" : ["PyTrilinos", "TriKota", "adelus", "amesos", "amesos2", 
                             "anasazi", "aztecoo", "belos", "common", "compadre", "domi",

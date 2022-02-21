@@ -24,7 +24,7 @@ from metricThresholds import Reporter, match_metric_type
 class CmdArgsTy:
     INIT   : Case[List[str]] 
     FRESH  : Case 
-    REPORT : Case[Union[str, Tuple[str, str]]]  
+    REPORT : Case[Union[str, Tuple[str, str], Tuple[str, str, str]]]  
     TRACE  : Case[str]  
 
 def parseCmdArgs() -> Tuple[CmdArgsTy, Dict[str, str]]:
@@ -36,6 +36,7 @@ def parseCmdArgs() -> Tuple[CmdArgsTy, Dict[str, str]]:
     parser.add_argument("-r", "--report", help="Report funtion's metrics. Should be run in combination"  
                                                          + " with --commit *sha*, to return metrics in that commit.", action='store_true')
     parser.add_argument("-m", "--metric", type=str, help="Name of metric whose stats to report. To be used in combination with --report. e.g --report -m 'CC' ")
+    parser.add_argument("-e", "--excess", action="store_true", help="Report software components (e.g functions) with excess value for metric. e.g --report -m 'CC' --excess")
     parser.add_argument("-c", "--commit", type=str, help="Commit sha in which to report function's metrics.")
     parser.add_argument("-t", "--trace", help="Return list of commits that modified argument function.")
 
@@ -59,13 +60,16 @@ def parseCmdArgs() -> Tuple[CmdArgsTy, Dict[str, str]]:
         if args.commit: 
             return (CmdArgsTy.REPORT((args.report, args.commit)), v_args)
         elif args.metric: 
-            return (CmdArgsTy.REPORT((args.report, args.metric)), v_args)
+            if args.excess:
+                return (CmdArgsTy.REPORT((args.report, args.metric, args.excess)), v_args)
+            else: 
+                (CmdArgsTy.REPORT((args.report, args.metric)), v_args)
         else: 
             return (CmdArgsTy.REPORT(args.report), v_args)
     if args.trace: 
         return (CmdArgsTy.TRACE(args.trace), v_args) 
 
-def handleReport(report : Union[str, Tuple[str, str]], v_args): 
+def handleReport(report : Union[str, Tuple[str, str], Tuple[str, str, str]], v_args): 
     pwd   = os.getcwd() 
     pname = ''
     if pwd[-1] == '/':
@@ -80,12 +84,15 @@ def handleReport(report : Union[str, Tuple[str, str]], v_args):
         return 
     if isinstance(report, tuple): 
         if v_args['metric']: 
-            metric = report[1] 
+            metric                       = report[1] 
             metric_col_name, metric_type = match_metric_type(metric)
             reporter.calc_metric_threshols(metric_type, metric_col_name)
+            print() 
             reporter.report_metric_thresholds()
-            # reporter.sort_data(metric_type, metric_col_name) 
-            # reporter.report_sorted(region='high')
+            if v_args['excess']:
+                reporter.sort_data(metric_type, metric_col_name) 
+                print() 
+                reporter.report_sorted(region='high')
         return 
 
 def handleTrace(funcname : str): 

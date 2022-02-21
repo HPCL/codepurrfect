@@ -52,6 +52,14 @@ compilation database, and then run the tool. For example, in the case of
          -DTPL_ENABLE_X11=OFF ..
    ```
 
+- *HYPRE*
+  ```
+  git clone https://github.com/hypre-space/hypre.git  
+  cd src/cmbuild 
+  cmake -DCMAKE_EXPORT_COMPILE_COMMANDS=ON 
+  mv compile_commands ../../
+  ```
+
 Once the command has finished running, running: 
 ``` 
 /static/driver/main.py --help
