@@ -23,6 +23,11 @@ def init():
                 "hasTestLogs" : False, 
                 "logsPath" : ""
             }, 
+            "hypre" : {
+                "classes" : [],
+                "hasTestLogs" : False,
+                "logsPath"    : ""
+            },
             "trilinos" : {
                 "classes" : ["PyTrilinos", "TriKota", "adelus", "amesos", "amesos2", 
                             "anasazi", "aztecoo", "belos", "common", "compadre", "domi",
@@ -41,9 +46,19 @@ def init():
         }
     global config_vars 
     cwd = os.getcwd()
+    calc_ast_path = lambda passname : '/'.join(['/static/passes-ast', passname, 'build', passname])
     config_vars = {
-        "cl_grph_plugin_path" : "/static/callgraph-xSDK/build/CallgraphxSDK/libCallgraphxSDK.so" ,
-        "func_only_plugin_path" : "/static/function-gen/build/FunctionGen/libFunctionGen.so",
-        "comp_db_path" : cwd + "/compile_commands.json"
+        "cl_grph_plugin_path" : "/static/passes-ir/callgraph-xSDK/build/CallgraphxSDK/libCallgraphxSDK.so" ,
+        "func_only_plugin_path" : "/static/passes-ir/function-gen/build/FunctionGen/libFunctionGen.so",
+        "comp_db_path" : cwd + "/compile_commands.json", 
+        "store"        : cwd + "/.ideas-uo",
+        "ast"          : {
+            "visit-switch" : calc_ast_path("visit-switch")
+        },
+        "clang-includes" : "/tmp/clang_13/lib/clang/13.0.0/include",
+        "build-loc" : {
+            "hypre" : "/hypre/src/cmbuild"
+        }
+
     }
     return 
