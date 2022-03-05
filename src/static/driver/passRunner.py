@@ -24,7 +24,7 @@ def create_tool_dirs(func_only=False):
 
     if not func_only:
         call_res_path           = tool_dir + "/" + pname + "-callgraph"  
-        halstead_res_path       = tool_dir + "/" + pname + "-halstead"
+        ast_res_path       = tool_dir + "/" + pname + "-ast-metrics"
         qmetrics_path           = tool_dir + "/" + pname + "-qmetrics"
 
         callfile                = tool_dir + "/" + pname + "-callgraph.TabOne" 
@@ -38,8 +38,8 @@ def create_tool_dirs(func_only=False):
         if not os.path.isdir(qmetrics_path): 
             os.mkdir(qmetrics_path)
         
-        if not os.path.isdir(halstead_res_path): 
-            os.mkdir(halstead_res_path)
+        if not os.path.isdir(ast_res_path): 
+            os.mkdir(ast_res_path)
     else: 
         func_only_res_path = tool_dir + "/" + pname + "-functions.txt"
     
@@ -50,22 +50,26 @@ def create_tool_dirs(func_only=False):
     if not func_only: 
         return (pname, callfile, cgmetrics_file, qmfile, nodes_file, 
                        ll_res_path, call_res_path, 
-                       halstead_res_path, qmetrics_path)
+                       ast_res_path, qmetrics_path)
     else: 
         return (pname, ll_res_path, func_only_res_path) 
 
 
 class PassRunner: 
     def __init__(self, initL : List[str], cg_pass : bool = True
-                                        , func_pass : bool = False) -> None:
+                                        , func_pass : bool = False
+                                        , ast_passes : List[str] = []) -> None:
         self.generator     = None 
         self.has_cg_pass   = cg_pass 
         self.has_func_pass = func_pass
+        self.ast_passes    = ast_passes
 
-        self.proj_name     = None 
+        self.proj_name       = None 
+        self.ast_output_dirs = None 
         
         if self.has_cg_pass: 
-            self.call_res_path = None 
+            self.call_res_path = None
+            self.ast_res_path  = None  
             self.qmetrics_path = None 
             self.callfile      = None 
             self.outfile       = None 
@@ -75,15 +79,17 @@ class PassRunner:
         if self.has_func_pass: 
             self.func_only_res_path = None  
 
+
         if cg_pass: 
             proj_root_dir, callfile, cgmetrics_file, \
                         qmfile, nodes_file, \
                         ll_res_path, call_res_path, \
-                        halstead_res_path, qmetrics_path = create_tool_dirs()
+                        ast_res_path, qmetrics_path = create_tool_dirs()
             cgGenerator = CGenRunner(
                 dirpath=proj_root_dir,
                 llpath=ll_res_path,
                 callpath=call_res_path,
+                astpath=ast_res_path,
                 qmetricspath=qmetrics_path,
                 cgpluginpath=myglobals.config_vars['cl_grph_plugin_path']
             )
@@ -91,6 +97,7 @@ class PassRunner:
 
             self.proj_name     = proj_root_dir 
             self.call_res_path = call_res_path 
+            self.ast_res_path  = ast_res_path
             self.qmetrics_path = qmetrics_path 
             self.callfile      = callfile 
             self.outfile       = cgmetrics_file 
@@ -117,9 +124,11 @@ class PassRunner:
 
 
 
-    def run(self, pool : Pool): 
+    def run(self, pool : Pool, ast_passes : List[str] = []) -> None: 
         if self.has_cg_pass: 
-            self.generator.gen_callgraphs(pool) 
+            self.generator.gen_callgraphs(pool)
+            ast_pass_output_dirs = self.generator.gen_ast_metrics(project_name=self.proj_name, passes=ast_passes)
+            self.ast_output_dirs = ast_pass_output_dirs  
         if self.has_func_pass: 
             self.generator.gen_only_func_decls(pool)
 
@@ -128,11 +137,14 @@ class PassRunner:
             post_process_callgraphs(
                 proj_name=self.proj_name, 
                 call_res_path=self.call_res_path,
+                ast_res_path=self.ast_res_path,
                 qmetrics_path=self.qmetrics_path,
                 callfile=self.callfile, 
                 outfile=self.outfile, 
                 qmfile=self.qmfile, 
-                nodes_file=self.nodes_file
+                nodes_file=self.nodes_file, 
+                ast_pass_names=self.ast_passes,
+                ast_output_dirs=self.ast_output_dirs
             )
 
         if self.has_func_pass: 

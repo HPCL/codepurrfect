@@ -19,8 +19,9 @@ RUN apt-get update && \
     pip3 install jupyter && \
     pip3 install matplotlib && \  
     pip3 install distfit && \ 
+    pip3 install numba && \ 
     pip3 install algebraic-data-types && \
-    apt-get -y install libncurses5 && \ 
+    apt-get -y install libncurses-dev libncurses5 && \ 
     apt-get -y install bear && \ 
     apt-get -y install git-all && \
     apt-get -y install cmake && \ 

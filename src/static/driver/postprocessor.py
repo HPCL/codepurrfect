@@ -8,36 +8,56 @@ import math
 
 
 
-def group_by_class_name(proj_name, content_path): 
-    class_dir_pths = ['/'.join([content_path, name]) for name in myglobals.proj_class_names[proj_name]["classes"]]
+def group_by_class_name(proj_name, content_path, ast_metric_name='', ast_output_dir=''): 
+    if myglobals.proj_class_names[proj_name]["classes"] != []: 
+        class_dir_pths = ['/'.join([content_path, name]) for name in myglobals.proj_class_names[proj_name]["classes"]]
 
-    print(content_path)
+        print(content_path)
 
-    for cls_name in class_dir_pths: 
-        if not os.path.exists(cls_name): 
-            os.mkdir(cls_name)
+        for cls_name in class_dir_pths: 
+            if not os.path.exists(cls_name): 
+                os.mkdir(cls_name)
 
-    for file in os.listdir(content_path): 
-        if os.path.isfile('/'.join([content_path, file])):
-            for name, dir_path in zip(myglobals.proj_class_names[proj_name]["classes"], class_dir_pths):
-                if ((file == name + ".csv") or \
-                   ("_" + name + "_") in file): 
-                    subprocess.run(["mv", '/'.join([content_path, file])
-                                        , dir_path])
+        for file in os.listdir(content_path): 
+            if os.path.isfile('/'.join([content_path, file])):
+                for name, dir_path in zip(myglobals.proj_class_names[proj_name]["classes"], class_dir_pths):
+                    if ((file == name + ".csv") or \
+                    ("_" + name + "_") in file): 
+                        subprocess.run(["mv", '/'.join([content_path, file])
+                                            , dir_path])
 
-    for namepath, name in zip(class_dir_pths, myglobals.proj_class_names[proj_name]["classes"]):
-        class_file_path = '/'.join([namepath, name]) + ".csv"
-        if not os.path.exists(class_file_path):
-            with open(class_file_path, 'w+') as name_w: 
-                for csv_file in os.listdir(namepath): 
-                    full_file_path = '/'.join([namepath, csv_file])
-                    print(full_file_path)
-                    if os.path.isfile(full_file_path):
-                        with open(full_file_path, 'r') as csv_file_r: 
-                            name_w.write(csv_file_r.read())
-        # else: 
-        #     print("directories with names similary to those used to store byproducts exitst. Please delete these") 
-        #     sys.exit(2)
+        for namepath, name in zip(class_dir_pths, myglobals.proj_class_names[proj_name]["classes"]):
+            class_file_path = '/'.join([namepath, name]) + ".csv"
+            if not os.path.exists(class_file_path):
+                with open(class_file_path, 'w+') as name_w: 
+                    for csv_file in os.listdir(namepath): 
+                        full_file_path = '/'.join([namepath, csv_file])
+                        print(full_file_path)
+                        if os.path.isfile(full_file_path):
+                            with open(full_file_path, 'r') as csv_file_r: 
+                                name_w.write(csv_file_r.read())
+    else:
+        metric_name_str = ('-' + ast_metric_name) if ast_metric_name != '' else '' 
+        output_container = ast_output_dir if ast_output_dir != '' else content_path
+
+        proj_file_path = '/'.join([output_container, proj_name]) + metric_name_str + '.csv' 
+
+        print("PROJECT FILEPATH: ", proj_file_path)
+
+        for file in os.listdir(output_container): 
+            filepath = '/'.join([output_container, file]) 
+            if os.path.isfile(filepath): 
+                if os.stat(filepath).st_size == 0:
+                    os.remove(filepath)
+
+        with open(proj_file_path, 'w+') as proj_file_h: 
+            for file in os.listdir(output_container): 
+                filepath = '/'.join([output_container, file]) 
+                if os.path.isfile(filepath): 
+                    with open(filepath, 'r') as filepath_h: 
+                            proj_file_h.write(filepath_h.read())
+
+                        
 
 def combine_class_metrics(proj_name, call_res_path): 
     proj_csv      = proj_name + ".csv"
@@ -130,14 +150,25 @@ def gen_callgraph_metrics(callgraph_path):
 
 
 def post_process_callgraphs(proj_name, call_res_path
-                                         , qmetrics_path, callfile, outfile, qmfile 
-                                         , nodes_file): 
+                                     , ast_res_path 
+                                     , qmetrics_path
+                                     , callfile
+                                     , outfile
+                                     , qmfile 
+                                     , nodes_file, 
+                                     ast_pass_names=[], 
+                                     ast_output_dirs=[]): 
 
     group_by_class_name(proj_name, call_res_path)
     print('done grouping callgraphs')
 
+    
     group_by_class_name(proj_name, qmetrics_path)
     print('done grouping qmetrics files.')
+
+    for passname, output_dir in zip(ast_pass_names, ast_output_dirs):
+        group_by_class_name(proj_name, ast_res_path, ast_metric_name=passname, ast_output_dir=output_dir)
+        print('done grouping ast metrics. Passname: ', passname)
     
     # combine class callgraphs into one giant one 
     combine_class_metrics(proj_name, call_res_path)

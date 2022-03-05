@@ -1,0 +1,11 @@
+/static/passes-ast/visit-switch/build/CMakeFiles/intrinsics_gen.dir
+/static/passes-ast/visit-switch/build/CMakeFiles/omp_gen.dir
+/static/passes-ast/visit-switch/build/CMakeFiles/acc_gen.dir
+/static/passes-ast/visit-switch/build/CMakeFiles/clang-tablegen-targets.dir
+/static/passes-ast/visit-switch/build/CMakeFiles/visit-switch.dir
+/static/passes-ast/visit-switch/build/CMakeFiles/edit_cache.dir
+/static/passes-ast/visit-switch/build/CMakeFiles/rebuild_cache.dir
+/static/passes-ast/visit-switch/build/CMakeFiles/list_install_components.dir
+/static/passes-ast/visit-switch/build/CMakeFiles/install.dir
+/static/passes-ast/visit-switch/build/CMakeFiles/install/local.dir
+/static/passes-ast/visit-switch/build/CMakeFiles/install/strip.dir

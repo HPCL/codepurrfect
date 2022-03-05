@@ -55,9 +55,9 @@ compilation database, and then run the tool. For example, in the case of
 - *HYPRE*
   ```
   git clone https://github.com/hypre-space/hypre.git  
-  cd src/cmbuild 
-  cmake -DCMAKE_EXPORT_COMPILE_COMMANDS=ON 
-  mv compile_commands ../../
+  cd hypre/src/cmbuild 
+  cmake -DCMAKE_EXPORT_COMPILE_COMMANDS=ON ..
+  mv compile_commands.json ../../ && cd ../../
   ```
 
 Once the command has finished running, running: 

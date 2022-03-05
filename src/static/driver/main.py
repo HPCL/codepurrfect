@@ -2,7 +2,7 @@
 
 import multiprocessing
 from   callgraphGen       import CGenRunner
-# from   genHalsteadMetrics import gen_halstead_metrics // driver for AST pass, no longer supported. Everything is now collected at IR level.
+from   genASTmetrics import gen_ast_metrics 
 import sys 
 import os 
 import subprocess
@@ -22,7 +22,7 @@ from metricThresholds import Reporter, match_metric_type
 
 @adt 
 class CmdArgsTy:
-    INIT   : Case[List[str]] 
+    INIT   : Case[Union[List[str], str]] 
     FRESH  : Case 
     REPORT : Case[Union[str, Tuple[str, str], Tuple[str, str, str]]]  
     TRACE  : Case[str]  
@@ -32,11 +32,13 @@ def parseCmdArgs() -> Tuple[CmdArgsTy, Dict[str, str]]:
     parser.add_argument("-i", "--init", help="Initialize directory to work with quality-tool.", action="store_true")
     parser.add_argument("-d", "--diff_funcs_only", help="Declare to only generate function-level diff, and no callgraphs." 
                                                        +  "Provide file with list of files resulting of git's diff", action='store_true')
+    parser.add_argument("-a", "--ast_pass", type=str, help="AST passes to run to collect metrics. To be run in combination with --init." 
+                                                       + "e.g --init --ast_pass='visit-switch' ")
     parser.add_argument("-f", "--freshen", help="Recompute quality data. Should be run after new commit.", action="store_true") 
     parser.add_argument("-r", "--report", help="Report funtion's metrics. Should be run in combination"  
                                                          + " with --commit *sha*, to return metrics in that commit.", action='store_true')
     parser.add_argument("-m", "--metric", type=str, help="Name of metric whose stats to report. To be used in combination with --report. e.g --report -m 'CC' ")
-    parser.add_argument("-e", "--excess", action="store_true", help="Report software components (e.g functions) with excess value for metric. e.g --report -m 'CC' --excess")
+    parser.add_argument("-I", "--interval", action="store_true", help="Report software components (e.g functions) with excess value for metric. e.g --report -m 'CC' --excess")
     parser.add_argument("-c", "--commit", type=str, help="Commit sha in which to report function's metrics.")
     parser.add_argument("-t", "--trace", help="Return list of commits that modified argument function.")
 
@@ -53,17 +55,21 @@ def parseCmdArgs() -> Tuple[CmdArgsTy, Dict[str, str]]:
         if args.diff_funcs_only: 
             return (CmdArgsTy.INIT([args.diff_funcs_only]), v_args)
         else: 
+            if args.ast_pass: 
+                return (CmdArgsTy.INIT(args.ast_pass), v_args)
             return (CmdArgsTy.INIT([]), v_args)
     if args.freshen: 
         return (CmdArgsTy.FRESH, v_args) 
     if args.report: 
+        print('REPORT PARSED')
         if args.commit: 
             return (CmdArgsTy.REPORT((args.report, args.commit)), v_args)
         elif args.metric: 
-            if args.excess:
+            if args.interval:
                 return (CmdArgsTy.REPORT((args.report, args.metric, args.excess)), v_args)
             else: 
-                (CmdArgsTy.REPORT((args.report, args.metric)), v_args)
+                print('I GET HERE ')
+                return (CmdArgsTy.REPORT((args.report, args.metric)), v_args)
         else: 
             return (CmdArgsTy.REPORT(args.report), v_args)
     if args.trace: 
@@ -77,22 +83,25 @@ def handleReport(report : Union[str, Tuple[str, str], Tuple[str, str, str]], v_a
     else: 
         pname = pwd.split('/')[-1]
 
-    reporter = Reporter(pname)
-
     if isinstance(report, str): 
         # TODO 
         return 
-    if isinstance(report, tuple): 
+    if isinstance(report, tuple):
+        ast_passes = v_args['ast_pass'].split(',') 
+        reporter = Reporter(pname, ast_passes=ast_passes)
         if v_args['metric']: 
             metric                       = report[1] 
             metric_col_name, metric_type = match_metric_type(metric)
-            reporter.calc_metric_threshols(metric_type, metric_col_name)
+            reporter.calc_metric_thresholds(metric_type, metric_col_name)
             print() 
             reporter.report_metric_thresholds()
-            if v_args['excess']:
+            if v_args['interval']:
                 reporter.sort_data(metric_type, metric_col_name) 
                 print() 
-                reporter.report_sorted(region='high')
+                reporter.report_sorted(region=v_args['interval'], ast_metric=v_args['metric'])
+            else: 
+                reporter.report_sorted(ast_metric=v_args['metric'])
+
         return 
 
 def handleTrace(funcname : str): 

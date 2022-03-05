@@ -1,9 +1,11 @@
+from ast import Str
 import json
 import subprocess 
 import os 
 import time 
 import myglobals 
 from multiprocessing import Pool
+from genASTmetrics import gen_ast_metrics
 from typing import List 
 
 
@@ -48,13 +50,17 @@ def gen_ll_from_file_helper(x):
 
 
 class CGenRunner(): 
-    def __init__(self, dirpath : str, llpath : str, callpath : str = None, qmetricspath : str = None 
-                     , cgpluginpath : str   = None 
+    def __init__(self, dirpath : str, llpath : str, callpath : str = None
+                     , astpath : str = None
+                     , qmetricspath : str = None 
+                     , cgpluginpath : str   = None  
                      , funcpluginpath : str = None 
-                     , fltrd_filepath : str = None, fltrd_outpath : str = None) -> None:
+                     , fltrd_filepath : str = None
+                     , fltrd_outpath : str = None) -> None:
         self.dirpath        = dirpath 
         self.llpath         = llpath 
         self.callpath       = callpath 
+        self.astpath        = astpath 
         self.qmetricspath   = qmetricspath 
         self.cgpluginpath   = cgpluginpath 
         self.funcpluginpath = funcpluginpath 
@@ -206,6 +212,15 @@ class CGenRunner():
         return
 
 
+    def run_ast_pass(self, project_name : str, passname : str) -> str: 
+        execpath = myglobals.config_vars['ast'][passname]
+        passpath = '/'.join([self.astpath, passname]) 
+        if not os.path.isdir(passpath): 
+            os.mkdir(passpath) 
+        gen_ast_metrics(project_name, execpath, passpath)
+        return passpath 
+
+
     def run(self, pool : Pool, pluginpath : str, passname : str): 
         # for every file in compilation database 
         # generate corresponding .ll file
@@ -244,3 +259,10 @@ class CGenRunner():
     def gen_only_func_decls(self, pool : Pool):  
         self.run(pool=pool, pluginpath=self.funcpluginpath, passname="function-gen")
         return
+
+    def gen_ast_metrics(self, project_name : str, passes : List[Str]) -> List[str]: 
+        pass_output_dirs = [] 
+        for passname in passes:
+            output_dir = self.run_ast_pass(project_name, passname)
+            pass_output_dirs.append(output_dir) 
+        return pass_output_dirs

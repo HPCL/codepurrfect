@@ -4,26 +4,43 @@ import numpy as np
 import matplotlib.pyplot as plt 
 import networkx as nx 
 from distfit import distfit 
+import math 
+from typing import List 
 
 import myglobals 
+
+
+def qmetrics_column_func(x, frame): 
+    if isinstance(x, int): 
+        return x 
+    else: 
+        return max([int(s) if (s != 'VARGS') 
+                           and not (s in frame.columns)
+                        else 0 for s in x.strip().split()
+                 ])
+
 
 
 def prep_qmetrics(frame): 
     for c in frame.columns: 
         if c != 'Name': 
-            frame[c] = frame[c].apply(lambda x : 
-            max([int(s) if (s != 'VARGS') 
-                           and not (s in frame.columns)
-                        else 0 for s in x.strip().split()
-                 ]))
+            frame[c] = frame[c].apply(lambda x : qmetrics_column_func(x, frame))
     return frame 
 
 
 
 
 
-def import_data(project_name : str): 
-    to_return_data = {'cgmetrics' : None, 'qmetrics' : None, 'graph' : None}
+def import_data(project_name : str, ast_passes : List[str] =[]): 
+    to_return_data = {
+                         'cgmetrics' : None
+                       , 'qmetrics' : None
+                       , 'graph' : None
+                       , 'astmetrics' : {}
+                       }
+
+    for passname in ast_passes: 
+        to_return_data['astmetrics'][passname] = None 
 
 
     file_name_prep = lambda post_fix : '/'.join([myglobals.config_vars['store'], project_name + post_fix]) 
@@ -31,12 +48,33 @@ def import_data(project_name : str):
     qmetrics_file  = file_name_prep('-qmetrics.csv') 
     graph_file     = file_name_prep('-callgraph.TabOne')
 
+    for passname in ast_passes: 
+        pass_metric_file = '/'.join([myglobals.config_vars['store']
+                                    , project_name + '-ast-metrics'
+                                    , passname 
+                                    , project_name + '-' + passname + '.csv'])
+        if passname == 'visit-switch': 
+            pass_metric_pd   = pd.read_csv(pass_metric_file, names=['pass-type', 'location']) 
+            to_return_data['astmetrics'][passname] = pass_metric_pd
 
-    cgmetrics_pd = pd.read_csv(cgmetrics_file)
-    to_return_data['cgmetrics'] = cgmetrics_pd 
 
-    qmetrics_pd = pd.read_csv(qmetrics_file) 
-    to_return_data['qmetrics'] = prep_qmetrics(qmetrics_pd)
+    cgmetrics_pd       = pd.read_csv(cgmetrics_file)
+    cgmetrics_pd.index = cgmetrics_pd.Name 
+
+    to_return_data['cgmetrics'] = cgmetrics_pd.drop(
+                                        cgmetrics_pd[
+                                            (cgmetrics_pd.AvgShortestPath == math.inf) & 
+                                            (cgmetrics_pd.FanOut == 0)
+                                        ].index 
+                                  ) 
+
+    qmetrics_pd       = pd.read_csv(qmetrics_file) 
+    qmetrics_pd.index = qmetrics_pd.Name 
+
+
+    i1 = to_return_data['cgmetrics'].index 
+    i2 = prep_qmetrics(qmetrics_pd).index 
+    to_return_data['qmetrics'] = prep_qmetrics(qmetrics_pd)[i2.isin(i1)]
 
     graph_nx  = nx.read_edgelist(graph_file, create_using=nx.DiGraph())
     graph_nk  = nk.nxadapter.nx2nk(graph_nx) 
@@ -53,10 +91,14 @@ def match_metric_type(metric):
     cgmetrics = ['FanIn', 'FanOut', 'Closeness', 'Betweenness', 'Eccentricity_R', 'Eccentricity_N'] 
     qmetrics = ['ArgCount', 'InstrCount', 'UniqVals', 'UniqOps', 'TotalOps', 'CC'] 
 
+    astmetrics = ['case-no-break', 'switch-no-default']
+
     print('REQUESTED METRIC:', metric)
 
     low_cgmetrics = [x.lower() for x in cgmetrics] 
     low_qmetrics  = [x.lower() for x in qmetrics]
+
+    low_astmetrics = [x.lower() for x in astmetrics]
 
     l_metric = metric.lower().strip()
 
@@ -65,14 +107,17 @@ def match_metric_type(metric):
     if l_metric in low_qmetrics:
         return (qmetrics[low_qmetrics.index(l_metric)], 'qmetrics')
 
+    if l_metric in low_astmetrics: 
+        return (astmetrics[low_astmetrics.index(l_metric)], 'astmetrics')
+
 
 
 
 
 class Reporter: 
-    def __init__(self, project_name : str) -> None:
+    def __init__(self, project_name : str, ast_passes : List[str] = []) -> None:
         self.project_name = project_name 
-        self.data         = import_data(project_name) 
+        self.data         = import_data(project_name, ast_passes=ast_passes) 
 
         self.thresholds   = None 
         self.low          = None 
@@ -80,32 +125,63 @@ class Reporter:
         self.high         = None 
 
 
-    def calc_metric_threshols(self, metric_type, metric): 
+    def calc_metric_thresholds(self, metric_type, metric): 
         data       = self.data[metric_type] 
-        thresholds = fit_get_thresholds(data, metric)
-        self.thresholds = thresholds 
+
+        if metric_type != 'astmetrics': 
+            thresholds = fit_get_thresholds(data, metric)
+            self.thresholds = thresholds 
+        else: 
+            if metric == 'case-no-break': 
+                # TODO 
+                todo = 0 
+                pass 
+            if metric == 'switch-no-default': 
+                # TODO 
+                todo = 0 
+                pass 
+        return 
 
     def report_metric_thresholds(self): 
         print(self.thresholds)
 
 
     def sort_data(self, metric_type, metric): 
-        data     = self.data[metric_type]
-        low      = data[self.data[metric_type][metric] <= self.thresholds['low']]
-        in_range = data[(self.data[metric_type][metric] > self.thresholds['low']) & (self.data[metric_type][metric] <= self.thresholds['high'])] 
-        high     = data[self.data[metric_type][metric] > self.thresholds['high']] 
+        if metric_type != 'astmetrics':
+            data     = self.data[metric_type]
+            low      = data[self.data[metric_type][metric] <= self.thresholds['low']]
+            in_range = data[(self.data[metric_type][metric] > self.thresholds['low']) & (self.data[metric_type][metric] <= self.thresholds['high'])] 
+            high     = data[self.data[metric_type][metric] > self.thresholds['high']] 
 
-        self.low   = low 
-        self.range = in_range 
-        self.high  = high 
+            self.low   = low 
+            self.range = in_range 
+            self.high  = high 
+        else: 
+            if metric == 'case-no-break': 
+                # TODO 
+                pass 
+            if metric == 'switch-no-default': 
+                # TODO 
+                pass 
+        return 
 
-    def report_sorted(self, region='range', head=5): 
-        if region == 'low': 
-            print(self.low.head(head))
-        if region == 'range': 
-            print(self.range.head(head))
-        if region == 'high': 
-            print(self.high.head(head)) 
+    def report_sorted(self, region='range', head=5, ast_metric=''):
+        if ast_metric == '': 
+            if region == 'low': 
+                print(self.low.head(head))
+            if region == 'range': 
+                print(self.range.head(head))
+            if region == 'high': 
+                print(self.high.head(head)) 
+        else: 
+            if ast_metric == 'case-no-break': 
+                temp_data = self.data['astmetrics']['visit-switch']
+                metric_data = temp_data.loc[temp_data['pass-type'] == 'CASE MISSING BREAK'] 
+                print(metric_data.head(head)) 
+            if ast_metric == 'switch-no-default': 
+                temp_data = self.data['astmetrics']['visit-switch']
+                metric_data = temp_data.loc[temp_data['pass-type'] == 'SWITCH MISSING DEFAULT']
+                print(metric_data.head(head)) 
 
 
     
