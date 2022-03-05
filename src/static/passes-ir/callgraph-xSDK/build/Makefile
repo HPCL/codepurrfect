@@ -57,10 +57,10 @@ RM = /usr/local/lib/python3.8/dist-packages/cmake/data/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /static/callgraph-xSDK
+CMAKE_SOURCE_DIR = /static/passes-ir/callgraph-xSDK
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /static/callgraph-xSDK/build
+CMAKE_BINARY_DIR = /static/passes-ir/callgraph-xSDK/build
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -87,9 +87,9 @@ rebuild_cache/fast: rebuild_cache
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /static/callgraph-xSDK/build/CMakeFiles /static/callgraph-xSDK/build//CMakeFiles/progress.marks
+	$(CMAKE_COMMAND) -E cmake_progress_start /static/passes-ir/callgraph-xSDK/build/CMakeFiles /static/passes-ir/callgraph-xSDK/build//CMakeFiles/progress.marks
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start /static/callgraph-xSDK/build/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /static/passes-ir/callgraph-xSDK/build/CMakeFiles 0
 .PHONY : all
 
 # The main clean target

@@ -53,10 +53,10 @@ RM = /usr/local/lib/python3.8/dist-packages/cmake/data/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /static/function-gen
+CMAKE_SOURCE_DIR = /static/passes-ir/function-gen
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /static/function-gen/build
+CMAKE_BINARY_DIR = /static/passes-ir/function-gen/build
 
 # Utility rule file for acc_gen.
 
@@ -78,6 +78,6 @@ CMakeFiles/acc_gen.dir/clean:
 .PHONY : CMakeFiles/acc_gen.dir/clean
 
 CMakeFiles/acc_gen.dir/depend:
-	cd /static/function-gen/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /static/function-gen /static/function-gen /static/function-gen/build /static/function-gen/build /static/function-gen/build/CMakeFiles/acc_gen.dir/DependInfo.cmake --color=$(COLOR)
+	cd /static/passes-ir/function-gen/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /static/passes-ir/function-gen /static/passes-ir/function-gen /static/passes-ir/function-gen/build /static/passes-ir/function-gen/build /static/passes-ir/function-gen/build/CMakeFiles/acc_gen.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : CMakeFiles/acc_gen.dir/depend
 

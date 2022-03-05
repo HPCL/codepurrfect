@@ -57,10 +57,10 @@ RM = /usr/local/lib/python3.8/dist-packages/cmake/data/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /static/function-gen
+CMAKE_SOURCE_DIR = /static/passes-ir/function-gen
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /static/function-gen/build
+CMAKE_BINARY_DIR = /static/passes-ir/function-gen/build
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -87,14 +87,14 @@ rebuild_cache/fast: rebuild_cache
 
 # The main all target
 all: cmake_check_build_system
-	cd /static/function-gen/build && $(CMAKE_COMMAND) -E cmake_progress_start /static/function-gen/build/CMakeFiles /static/function-gen/build/FunctionGen//CMakeFiles/progress.marks
-	cd /static/function-gen/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 FunctionGen/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /static/function-gen/build/CMakeFiles 0
+	cd /static/passes-ir/function-gen/build && $(CMAKE_COMMAND) -E cmake_progress_start /static/passes-ir/function-gen/build/CMakeFiles /static/passes-ir/function-gen/build/FunctionGen//CMakeFiles/progress.marks
+	cd /static/passes-ir/function-gen/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 FunctionGen/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /static/passes-ir/function-gen/build/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
 clean:
-	cd /static/function-gen/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 FunctionGen/clean
+	cd /static/passes-ir/function-gen/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 FunctionGen/clean
 .PHONY : clean
 
 # The main clean target
@@ -103,22 +103,22 @@ clean/fast: clean
 
 # Prepare targets for installation.
 preinstall: all
-	cd /static/function-gen/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 FunctionGen/preinstall
+	cd /static/passes-ir/function-gen/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 FunctionGen/preinstall
 .PHONY : preinstall
 
 # Prepare targets for installation.
 preinstall/fast:
-	cd /static/function-gen/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 FunctionGen/preinstall
+	cd /static/passes-ir/function-gen/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 FunctionGen/preinstall
 .PHONY : preinstall/fast
 
 # clear depends
 depend:
-	cd /static/function-gen/build && $(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 1
+	cd /static/passes-ir/function-gen/build && $(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 1
 .PHONY : depend
 
 # Convenience name for target.
 FunctionGen/CMakeFiles/FunctionGen.dir/rule:
-	cd /static/function-gen/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 FunctionGen/CMakeFiles/FunctionGen.dir/rule
+	cd /static/passes-ir/function-gen/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 FunctionGen/CMakeFiles/FunctionGen.dir/rule
 .PHONY : FunctionGen/CMakeFiles/FunctionGen.dir/rule
 
 # Convenience name for target.
@@ -127,7 +127,7 @@ FunctionGen: FunctionGen/CMakeFiles/FunctionGen.dir/rule
 
 # fast build rule for target.
 FunctionGen/fast:
-	cd /static/function-gen/build && $(MAKE) $(MAKESILENT) -f FunctionGen/CMakeFiles/FunctionGen.dir/build.make FunctionGen/CMakeFiles/FunctionGen.dir/build
+	cd /static/passes-ir/function-gen/build && $(MAKE) $(MAKESILENT) -f FunctionGen/CMakeFiles/FunctionGen.dir/build.make FunctionGen/CMakeFiles/FunctionGen.dir/build
 .PHONY : FunctionGen/fast
 
 FunctionGen.o: FunctionGen.cpp.o
@@ -135,7 +135,7 @@ FunctionGen.o: FunctionGen.cpp.o
 
 # target to build an object file
 FunctionGen.cpp.o:
-	cd /static/function-gen/build && $(MAKE) $(MAKESILENT) -f FunctionGen/CMakeFiles/FunctionGen.dir/build.make FunctionGen/CMakeFiles/FunctionGen.dir/FunctionGen.cpp.o
+	cd /static/passes-ir/function-gen/build && $(MAKE) $(MAKESILENT) -f FunctionGen/CMakeFiles/FunctionGen.dir/build.make FunctionGen/CMakeFiles/FunctionGen.dir/FunctionGen.cpp.o
 .PHONY : FunctionGen.cpp.o
 
 FunctionGen.i: FunctionGen.cpp.i
@@ -143,7 +143,7 @@ FunctionGen.i: FunctionGen.cpp.i
 
 # target to preprocess a source file
 FunctionGen.cpp.i:
-	cd /static/function-gen/build && $(MAKE) $(MAKESILENT) -f FunctionGen/CMakeFiles/FunctionGen.dir/build.make FunctionGen/CMakeFiles/FunctionGen.dir/FunctionGen.cpp.i
+	cd /static/passes-ir/function-gen/build && $(MAKE) $(MAKESILENT) -f FunctionGen/CMakeFiles/FunctionGen.dir/build.make FunctionGen/CMakeFiles/FunctionGen.dir/FunctionGen.cpp.i
 .PHONY : FunctionGen.cpp.i
 
 FunctionGen.s: FunctionGen.cpp.s
@@ -151,7 +151,7 @@ FunctionGen.s: FunctionGen.cpp.s
 
 # target to generate assembly for a file
 FunctionGen.cpp.s:
-	cd /static/function-gen/build && $(MAKE) $(MAKESILENT) -f FunctionGen/CMakeFiles/FunctionGen.dir/build.make FunctionGen/CMakeFiles/FunctionGen.dir/FunctionGen.cpp.s
+	cd /static/passes-ir/function-gen/build && $(MAKE) $(MAKESILENT) -f FunctionGen/CMakeFiles/FunctionGen.dir/build.make FunctionGen/CMakeFiles/FunctionGen.dir/FunctionGen.cpp.s
 .PHONY : FunctionGen.cpp.s
 
 # Help Target
@@ -177,6 +177,6 @@ help:
 # No rule that depends on this can have commands that come from listfiles
 # because they might be regenerated.
 cmake_check_build_system:
-	cd /static/function-gen/build && $(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 0
+	cd /static/passes-ir/function-gen/build && $(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 0
 .PHONY : cmake_check_build_system
 

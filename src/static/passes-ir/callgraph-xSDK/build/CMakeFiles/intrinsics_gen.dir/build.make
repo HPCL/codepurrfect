@@ -53,10 +53,10 @@ RM = /usr/local/lib/python3.8/dist-packages/cmake/data/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /static/callgraph-xSDK
+CMAKE_SOURCE_DIR = /static/passes-ir/callgraph-xSDK
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /static/callgraph-xSDK/build
+CMAKE_BINARY_DIR = /static/passes-ir/callgraph-xSDK/build
 
 # Utility rule file for intrinsics_gen.
 
@@ -78,6 +78,6 @@ CMakeFiles/intrinsics_gen.dir/clean:
 .PHONY : CMakeFiles/intrinsics_gen.dir/clean
 
 CMakeFiles/intrinsics_gen.dir/depend:
-	cd /static/callgraph-xSDK/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /static/callgraph-xSDK /static/callgraph-xSDK /static/callgraph-xSDK/build /static/callgraph-xSDK/build /static/callgraph-xSDK/build/CMakeFiles/intrinsics_gen.dir/DependInfo.cmake --color=$(COLOR)
+	cd /static/passes-ir/callgraph-xSDK/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /static/passes-ir/callgraph-xSDK /static/passes-ir/callgraph-xSDK /static/passes-ir/callgraph-xSDK/build /static/passes-ir/callgraph-xSDK/build /static/passes-ir/callgraph-xSDK/build/CMakeFiles/intrinsics_gen.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : CMakeFiles/intrinsics_gen.dir/depend
 

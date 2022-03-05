@@ -1,4 +1,4 @@
-# Install script for directory: /static/function-gen/FunctionGen
+# Install script for directory: /static/passes-ir/function-gen/FunctionGen
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)

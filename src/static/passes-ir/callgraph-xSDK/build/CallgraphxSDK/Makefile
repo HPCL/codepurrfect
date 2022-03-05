@@ -57,10 +57,10 @@ RM = /usr/local/lib/python3.8/dist-packages/cmake/data/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /static/callgraph-xSDK
+CMAKE_SOURCE_DIR = /static/passes-ir/callgraph-xSDK
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /static/callgraph-xSDK/build
+CMAKE_BINARY_DIR = /static/passes-ir/callgraph-xSDK/build
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -87,14 +87,14 @@ rebuild_cache/fast: rebuild_cache
 
 # The main all target
 all: cmake_check_build_system
-	cd /static/callgraph-xSDK/build && $(CMAKE_COMMAND) -E cmake_progress_start /static/callgraph-xSDK/build/CMakeFiles /static/callgraph-xSDK/build/CallgraphxSDK//CMakeFiles/progress.marks
-	cd /static/callgraph-xSDK/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CallgraphxSDK/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /static/callgraph-xSDK/build/CMakeFiles 0
+	cd /static/passes-ir/callgraph-xSDK/build && $(CMAKE_COMMAND) -E cmake_progress_start /static/passes-ir/callgraph-xSDK/build/CMakeFiles /static/passes-ir/callgraph-xSDK/build/CallgraphxSDK//CMakeFiles/progress.marks
+	cd /static/passes-ir/callgraph-xSDK/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CallgraphxSDK/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /static/passes-ir/callgraph-xSDK/build/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
 clean:
-	cd /static/callgraph-xSDK/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CallgraphxSDK/clean
+	cd /static/passes-ir/callgraph-xSDK/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CallgraphxSDK/clean
 .PHONY : clean
 
 # The main clean target
@@ -103,22 +103,22 @@ clean/fast: clean
 
 # Prepare targets for installation.
 preinstall: all
-	cd /static/callgraph-xSDK/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CallgraphxSDK/preinstall
+	cd /static/passes-ir/callgraph-xSDK/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CallgraphxSDK/preinstall
 .PHONY : preinstall
 
 # Prepare targets for installation.
 preinstall/fast:
-	cd /static/callgraph-xSDK/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CallgraphxSDK/preinstall
+	cd /static/passes-ir/callgraph-xSDK/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CallgraphxSDK/preinstall
 .PHONY : preinstall/fast
 
 # clear depends
 depend:
-	cd /static/callgraph-xSDK/build && $(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 1
+	cd /static/passes-ir/callgraph-xSDK/build && $(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 1
 .PHONY : depend
 
 # Convenience name for target.
 CallgraphxSDK/CMakeFiles/CallgraphxSDK.dir/rule:
-	cd /static/callgraph-xSDK/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CallgraphxSDK/CMakeFiles/CallgraphxSDK.dir/rule
+	cd /static/passes-ir/callgraph-xSDK/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CallgraphxSDK/CMakeFiles/CallgraphxSDK.dir/rule
 .PHONY : CallgraphxSDK/CMakeFiles/CallgraphxSDK.dir/rule
 
 # Convenience name for target.
@@ -127,7 +127,7 @@ CallgraphxSDK: CallgraphxSDK/CMakeFiles/CallgraphxSDK.dir/rule
 
 # fast build rule for target.
 CallgraphxSDK/fast:
-	cd /static/callgraph-xSDK/build && $(MAKE) $(MAKESILENT) -f CallgraphxSDK/CMakeFiles/CallgraphxSDK.dir/build.make CallgraphxSDK/CMakeFiles/CallgraphxSDK.dir/build
+	cd /static/passes-ir/callgraph-xSDK/build && $(MAKE) $(MAKESILENT) -f CallgraphxSDK/CMakeFiles/CallgraphxSDK.dir/build.make CallgraphxSDK/CMakeFiles/CallgraphxSDK.dir/build
 .PHONY : CallgraphxSDK/fast
 
 CallgraphxSDK.o: CallgraphxSDK.cpp.o
@@ -135,7 +135,7 @@ CallgraphxSDK.o: CallgraphxSDK.cpp.o
 
 # target to build an object file
 CallgraphxSDK.cpp.o:
-	cd /static/callgraph-xSDK/build && $(MAKE) $(MAKESILENT) -f CallgraphxSDK/CMakeFiles/CallgraphxSDK.dir/build.make CallgraphxSDK/CMakeFiles/CallgraphxSDK.dir/CallgraphxSDK.cpp.o
+	cd /static/passes-ir/callgraph-xSDK/build && $(MAKE) $(MAKESILENT) -f CallgraphxSDK/CMakeFiles/CallgraphxSDK.dir/build.make CallgraphxSDK/CMakeFiles/CallgraphxSDK.dir/CallgraphxSDK.cpp.o
 .PHONY : CallgraphxSDK.cpp.o
 
 CallgraphxSDK.i: CallgraphxSDK.cpp.i
@@ -143,7 +143,7 @@ CallgraphxSDK.i: CallgraphxSDK.cpp.i
 
 # target to preprocess a source file
 CallgraphxSDK.cpp.i:
-	cd /static/callgraph-xSDK/build && $(MAKE) $(MAKESILENT) -f CallgraphxSDK/CMakeFiles/CallgraphxSDK.dir/build.make CallgraphxSDK/CMakeFiles/CallgraphxSDK.dir/CallgraphxSDK.cpp.i
+	cd /static/passes-ir/callgraph-xSDK/build && $(MAKE) $(MAKESILENT) -f CallgraphxSDK/CMakeFiles/CallgraphxSDK.dir/build.make CallgraphxSDK/CMakeFiles/CallgraphxSDK.dir/CallgraphxSDK.cpp.i
 .PHONY : CallgraphxSDK.cpp.i
 
 CallgraphxSDK.s: CallgraphxSDK.cpp.s
@@ -151,7 +151,7 @@ CallgraphxSDK.s: CallgraphxSDK.cpp.s
 
 # target to generate assembly for a file
 CallgraphxSDK.cpp.s:
-	cd /static/callgraph-xSDK/build && $(MAKE) $(MAKESILENT) -f CallgraphxSDK/CMakeFiles/CallgraphxSDK.dir/build.make CallgraphxSDK/CMakeFiles/CallgraphxSDK.dir/CallgraphxSDK.cpp.s
+	cd /static/passes-ir/callgraph-xSDK/build && $(MAKE) $(MAKESILENT) -f CallgraphxSDK/CMakeFiles/CallgraphxSDK.dir/build.make CallgraphxSDK/CMakeFiles/CallgraphxSDK.dir/CallgraphxSDK.cpp.s
 .PHONY : CallgraphxSDK.cpp.s
 
 # Help Target
@@ -177,6 +177,6 @@ help:
 # No rule that depends on this can have commands that come from listfiles
 # because they might be regenerated.
 cmake_check_build_system:
-	cd /static/callgraph-xSDK/build && $(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 0
+	cd /static/passes-ir/callgraph-xSDK/build && $(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 0
 .PHONY : cmake_check_build_system
 

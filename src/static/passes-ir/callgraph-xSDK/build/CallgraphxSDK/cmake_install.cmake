@@ -1,4 +1,4 @@
-# Install script for directory: /static/callgraph-xSDK/CallgraphxSDK
+# Install script for directory: /static/passes-ir/callgraph-xSDK/CallgraphxSDK
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)

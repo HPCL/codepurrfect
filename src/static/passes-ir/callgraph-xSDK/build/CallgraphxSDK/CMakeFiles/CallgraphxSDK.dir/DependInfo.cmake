@@ -8,7 +8,7 @@ set(CMAKE_DEPENDS_LANGUAGES
 
 # The set of dependency files which are needed:
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
-  "/static/callgraph-xSDK/CallgraphxSDK/CallgraphxSDK.cpp" "CallgraphxSDK/CMakeFiles/CallgraphxSDK.dir/CallgraphxSDK.cpp.o" "gcc" "CallgraphxSDK/CMakeFiles/CallgraphxSDK.dir/CallgraphxSDK.cpp.o.d"
+  "/static/passes-ir/callgraph-xSDK/CallgraphxSDK/CallgraphxSDK.cpp" "CallgraphxSDK/CMakeFiles/CallgraphxSDK.dir/CallgraphxSDK.cpp.o" "gcc" "CallgraphxSDK/CMakeFiles/CallgraphxSDK.dir/CallgraphxSDK.cpp.o.d"
   )
 
 # Targets to which this target links.

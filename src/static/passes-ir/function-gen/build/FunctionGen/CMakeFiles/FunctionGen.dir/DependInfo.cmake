@@ -8,7 +8,7 @@ set(CMAKE_DEPENDS_LANGUAGES
 
 # The set of dependency files which are needed:
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
-  "/static/function-gen/FunctionGen/FunctionGen.cpp" "FunctionGen/CMakeFiles/FunctionGen.dir/FunctionGen.cpp.o" "gcc" "FunctionGen/CMakeFiles/FunctionGen.dir/FunctionGen.cpp.o.d"
+  "/static/passes-ir/function-gen/FunctionGen/FunctionGen.cpp" "FunctionGen/CMakeFiles/FunctionGen.dir/FunctionGen.cpp.o" "gcc" "FunctionGen/CMakeFiles/FunctionGen.dir/FunctionGen.cpp.o.d"
   )
 
 # Targets to which this target links.

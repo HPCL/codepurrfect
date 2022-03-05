@@ -1,8 +1,8 @@
-/static/callgraph-xSDK/build/CMakeFiles/intrinsics_gen.dir
-/static/callgraph-xSDK/build/CMakeFiles/omp_gen.dir
-/static/callgraph-xSDK/build/CMakeFiles/acc_gen.dir
-/static/callgraph-xSDK/build/CMakeFiles/edit_cache.dir
-/static/callgraph-xSDK/build/CMakeFiles/rebuild_cache.dir
-/static/callgraph-xSDK/build/CallgraphxSDK/CMakeFiles/CallgraphxSDK.dir
-/static/callgraph-xSDK/build/CallgraphxSDK/CMakeFiles/edit_cache.dir
-/static/callgraph-xSDK/build/CallgraphxSDK/CMakeFiles/rebuild_cache.dir
+/static/passes-ir/callgraph-xSDK/build/CMakeFiles/intrinsics_gen.dir
+/static/passes-ir/callgraph-xSDK/build/CMakeFiles/omp_gen.dir
+/static/passes-ir/callgraph-xSDK/build/CMakeFiles/acc_gen.dir
+/static/passes-ir/callgraph-xSDK/build/CMakeFiles/edit_cache.dir
+/static/passes-ir/callgraph-xSDK/build/CMakeFiles/rebuild_cache.dir
+/static/passes-ir/callgraph-xSDK/build/CallgraphxSDK/CMakeFiles/CallgraphxSDK.dir
+/static/passes-ir/callgraph-xSDK/build/CallgraphxSDK/CMakeFiles/edit_cache.dir
+/static/passes-ir/callgraph-xSDK/build/CallgraphxSDK/CMakeFiles/rebuild_cache.dir
