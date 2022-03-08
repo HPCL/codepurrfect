@@ -20,6 +20,7 @@ from initializer import handleInitWithPasses
 from metricThresholds import Reporter, match_metric_type
 
 
+# Sum type for all the supported command line options. 
 @adt 
 class CmdArgsTy:
     INIT   : Case[Union[List[str], str]] 
@@ -28,6 +29,12 @@ class CmdArgsTy:
     TRACE  : Case[str]  
 
 def parseCmdArgs() -> Tuple[CmdArgsTy, Dict[str, str]]:
+    '''
+    Parse command line options and return them as 
+    values of type *CmdArgsTy*
+
+    Return the dictionary of (option, value) pairs as well.
+    '''
     parser = argparse.ArgumentParser() 
     parser.add_argument("-i", "--init", help="Initialize directory to work with quality-tool.", action="store_true")
     parser.add_argument("-d", "--diff_funcs_only", help="Declare to only generate function-level diff, and no callgraphs." 
@@ -61,14 +68,12 @@ def parseCmdArgs() -> Tuple[CmdArgsTy, Dict[str, str]]:
     if args.freshen: 
         return (CmdArgsTy.FRESH, v_args) 
     if args.report: 
-        print('REPORT PARSED')
         if args.commit: 
             return (CmdArgsTy.REPORT((args.report, args.commit)), v_args)
         elif args.metric: 
             if args.interval:
                 return (CmdArgsTy.REPORT((args.report, args.metric, args.excess)), v_args)
             else: 
-                print('I GET HERE ')
                 return (CmdArgsTy.REPORT((args.report, args.metric)), v_args)
         else: 
             return (CmdArgsTy.REPORT(args.report), v_args)
@@ -76,6 +81,9 @@ def parseCmdArgs() -> Tuple[CmdArgsTy, Dict[str, str]]:
         return (CmdArgsTy.TRACE(args.trace), v_args) 
 
 def handleReport(report : Union[str, Tuple[str, str], Tuple[str, str, str]], v_args): 
+    '''
+    Interpret arguments of the --report flag. 
+    '''
     pwd   = os.getcwd() 
     pname = ''
     if pwd[-1] == '/':
@@ -114,7 +122,12 @@ def handleFreshen():
 
 
 
-def interpCmdArgsTy(cmds : CmdArgsTy, args): 
+def interpCmdArgsTy(cmds : CmdArgsTy, args):
+    '''
+    pattern match on the result of parsing 
+    and call the appropriate function to 
+    handle each flag.
+    ''' 
     return cmds.match(
         init   = lambda initL : handleInitWithPasses(initL, args),  
         fresh  = handleFreshen(), 

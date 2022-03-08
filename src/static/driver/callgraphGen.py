@@ -11,6 +11,15 @@ from typing import List
 
 
 def gen_ll_from_file(item : dict, dirpath : str, outpath : str) -> None:
+    '''
+    Generate human readable LLVM IR file (.ll) 
+
+    Keyword arguments: 
+
+    item    -- Entry in compilation databaes file (compile_commands.json) 
+    dirpath -- Directory path to location of compile_commands.json 
+    outpath -- Directory where generated .ll file will be stored.
+    '''
     if "arguments" in item.keys(): 
         print(item["arguments"])
     if "command" in item.keys(): 
@@ -46,6 +55,9 @@ def gen_ll_from_file(item : dict, dirpath : str, outpath : str) -> None:
     return
 
 def gen_ll_from_file_helper(x): 
+    '''
+    See gen_ll_from_file.
+    '''
     gen_ll_from_file(x[0], x[1], x[2])
 
 
@@ -71,6 +83,10 @@ class CGenRunner():
         self.data         = None 
 
     def read_fltrd(self) -> List[str]: 
+        '''
+        Read text file containing files 
+        changed in between commits.
+        '''
         to_return = [] 
         with open(self.fltrd_filepath, 'r') as read_f: 
             to_return = read_f.readlines() 
@@ -78,6 +94,10 @@ class CGenRunner():
 
 
     def filter_data_with_diff(self) -> None: 
+        '''
+        Only retain compilation database data for 
+        files that changed in between diffs. 
+        '''
         # assuming self.data is already populated 
         to_retain = [x.strip() for x in self.read_fltrd()] 
         print("length to be retained: ", len(to_retain))
@@ -91,6 +111,9 @@ class CGenRunner():
 
 
     def read_compilation_db(self) -> None: 
+        '''
+        Assign self.data to contents of compilation database (compile_commands.json)
+        '''
         comp_json_path = ""
         print("dirpath: ", self.dirpath)
         comp_json_path = myglobals.config_vars['comp_db_path']
@@ -99,6 +122,11 @@ class CGenRunner():
             self.data = json.load(read_f)
 
     def make_comp_be_clang(self) -> None: 
+        '''
+        Replace the compiler in each entry of 
+        the compilation database (compile_commands.json) to 
+        clang or clang++
+        '''
         # replace cc flags with clang's for emitting IR  
         for item in self.data: 
             if "arguments" in item.keys():
@@ -153,6 +181,11 @@ class CGenRunner():
 
 
     def run_compile_commands(self, pool : Pool):
+        '''
+        Generate human readable LLVM IR files 
+        for each entry of the compilation database
+        in parallel. 
+        '''
         size         = len(self.data)
         dirpaths     = [self.dirpath] * size 
         outpaths     = [self.llpath] * size 
@@ -163,6 +196,18 @@ class CGenRunner():
         return 
 
     def compile_dir(self, pool, on_filtered=False) -> None: 
+        '''
+        Read the compilation database, 
+        filter it with diff file, 
+        replace compiler in each entry with clang, 
+        and generate human readable LLVM IR files 
+        in parallel. 
+
+        Keyword arguments: 
+
+        pool        -- multiprocessing team of threads 
+        on_filtered -- whether to attempt and filter data with diff (default = False)
+        '''
         # locate and read compilation db  
         print("running compilation...")
         self.read_compilation_db()
@@ -181,6 +226,10 @@ class CGenRunner():
     
 
     def move_files(self, frm : List[str], destinations : List[str], extensions : List[str]) -> None: 
+        ''' 
+        Move files with extensions *extensions* from the *frm* directories 
+        to the *destinations* directories. 
+        '''
         for f in os.listdir(frm):
             command = []
             if os.path.isfile(f): 
@@ -193,6 +242,11 @@ class CGenRunner():
         return
 
     def run_opt_pass(self, pluginpath : str, passname : str) -> None: 
+        '''
+        Run clang's optimizer *opt* using a custom build pass called 
+        *passname* and stored in *pluginpath* on all generated 
+        human readable LLVM IR files. 
+        '''
         opt_str_args = ["opt",
                         "-disable-output", 
                         "-enable-new-pm=0",
@@ -213,6 +267,14 @@ class CGenRunner():
 
 
     def run_ast_pass(self, project_name : str, passname : str) -> str: 
+        '''
+        Run a custom developed Clang libtooling AST pass  
+
+
+        Keyword arguments: 
+        project_name    -- The name of the project 
+        passname        -- The name of the AST pass as stored in myglobals.py 
+        '''
         execpath = myglobals.config_vars['ast'][passname]
         passpath = '/'.join([self.astpath, passname]) 
         if not os.path.isdir(passpath): 
@@ -222,6 +284,14 @@ class CGenRunner():
 
 
     def run(self, pool : Pool, pluginpath : str, passname : str): 
+        '''
+        Generate human readable LLVM IR files, 
+        run the clang optimizer (opt) on the 
+        generated files with a custom developed 
+        pass stored in *pluginpath*, and with name 
+        *passname* and move the results in their 
+        respective directories. 
+        '''
         # for every file in compilation database 
         # generate corresponding .ll file
         print("starting compilation ...")
@@ -252,15 +322,27 @@ class CGenRunner():
 
 
 
-    def gen_callgraphs(self, pool : Pool):  
+    def gen_callgraphs(self, pool : Pool): 
+        '''
+        Generat callgraphs with custom developed callgraph-xSDK pass. 
+        See *run*. 
+        ''' 
         self.run(pool=pool, pluginpath=self.cgpluginpath, passname="callgraph-xSDK")
         return 
 
     def gen_only_func_decls(self, pool : Pool):  
+        '''
+        Generate functions only. 
+        See *run*. 
+        '''
         self.run(pool=pool, pluginpath=self.funcpluginpath, passname="function-gen")
         return
 
     def gen_ast_metrics(self, project_name : str, passes : List[Str]) -> List[str]: 
+        '''
+        Generate AST based metrics. 
+        See *run_ast_pass*
+        '''
         pass_output_dirs = [] 
         for passname in passes:
             output_dir = self.run_ast_pass(project_name, passname)

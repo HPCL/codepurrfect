@@ -5,6 +5,11 @@ import myglobals
 import typing  
 
 def runtool(proj_name : str, execpath : str, outpath : str) -> None:
+    '''
+    Run clang libtooling tool stored in *execpath* on 
+    all entries in the compilation database *compile_commands.json* 
+    and store the results in *outpath*. 
+    '''
     comp_db_path = myglobals.config_vars['comp_db_path']
     build_path   = myglobals.config_vars["build-loc"][proj_name] 
     sys_includes = myglobals.config_vars["clang-includes"]
@@ -49,6 +54,9 @@ def runtool(proj_name : str, execpath : str, outpath : str) -> None:
     return 
 
 
-def gen_ast_metrics(proj_name, execpath, outpath):
+def gen_ast_metrics(proj_name : str, execpath : str, outpath : str):
+    '''
+    See *runtool*
+    '''
     runtool(proj_name, execpath, outpath)
     return 
