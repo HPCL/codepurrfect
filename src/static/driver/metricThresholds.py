@@ -11,6 +11,22 @@ import myglobals
 
 
 def qmetrics_column_func(x, frame): 
+    '''
+    Given row entry *x* of dataframe *frame*, 
+    return *x* if it's an 'int', otherwise 
+    make sure it's a space separated string 
+    of concatenated ints, and return the largest 
+    of these. 
+
+    (i.e since *frame* is grouped by function name, 
+    metrics for the same function occuring in multiple 
+    files may be grouped together, creating these 
+    strings.)
+
+    Keyword arguments: 
+    x     -- row entry of pandas dataframe 
+    frame -- pandas dataframe to process.
+    '''
     if isinstance(x, int): 
         return x 
     else: 
@@ -22,6 +38,14 @@ def qmetrics_column_func(x, frame):
 
 
 def prep_qmetrics(frame): 
+    '''
+    Prepare quality metrics dataframe *fname* for processing 
+    and return it. 
+
+    Keyword arguments: 
+
+    frame    -- Pandas dataframe containing structural code quality metrics. 
+    '''
     for c in frame.columns: 
         if c != 'Name': 
             frame[c] = frame[c].apply(lambda x : qmetrics_column_func(x, frame))
@@ -32,6 +56,15 @@ def prep_qmetrics(frame):
 
 
 def import_data(project_name : str, ast_passes : List[str] =[]): 
+    '''
+    Return dictionary of pandas dataframes containing 
+    data read from system-generated '.csv' files. 
+
+    Keyword arguments:
+
+    project_name    -- name of supported project (updated myglobals.py for new project)
+    ast_passes      -- list of ast_pass data to import (default = []).
+    '''
     to_return_data = {
                          'cgmetrics' : None
                        , 'qmetrics' : None
@@ -88,6 +121,13 @@ def import_data(project_name : str, ast_passes : List[str] =[]):
     return to_return_data 
 
 def match_metric_type(metric): 
+    '''
+    Return system name of *metric*, and its type if *metric* is known to system
+
+    Keyword arguments: 
+
+    metric   -- upper, lower, or mixed-letter name of metric.
+    '''
     cgmetrics = ['FanIn', 'FanOut', 'Closeness', 'Betweenness', 'Eccentricity_R', 'Eccentricity_N'] 
     qmetrics = ['ArgCount', 'InstrCount', 'UniqVals', 'UniqOps', 'TotalOps', 'CC'] 
 
@@ -116,6 +156,15 @@ def match_metric_type(metric):
 
 class Reporter: 
     def __init__(self, project_name : str, ast_passes : List[str] = []) -> None:
+        '''
+        Import metric data and create Reporter object with 
+        *thresholds*, *low*m, *range*, *high* all set to None 
+
+        Keyword arguments: 
+
+        project_name   -- The name of a supported project (update myglobals.py for a new project)
+        ast_passes     -- List of ast_passes to report about (default = [])
+        '''
         self.project_name = project_name 
         self.data         = import_data(project_name, ast_passes=ast_passes) 
 
@@ -126,6 +175,16 @@ class Reporter:
 
 
     def calc_metric_thresholds(self, metric_type, metric): 
+        '''
+        Fit metric to distribution and calculate thresholds
+
+        Keyword arguments: 
+
+        metric_type:   -- Type of metric (e.g: 'cgmetric': callgraphs
+                                             , 'qmetric' : quality
+                                             , 'astmetric' : calculated at ast level)
+        metric     :   -- Actual name of metric (e.g: 'CC' : cyclomatic complexity)
+        '''
         data       = self.data[metric_type] 
 
         if metric_type != 'astmetrics': 
@@ -143,10 +202,22 @@ class Reporter:
         return 
 
     def report_metric_thresholds(self): 
+        '''
+        Print metric thresholds.
+        '''
         print(self.thresholds)
 
 
     def sort_data(self, metric_type, metric): 
+        '''
+        Group observations into metric "ranges" (low, range, high)
+
+        Keyword arguments: 
+        metric_type:   -- Type of metric (e.g: 'cgmetric': callgraphs
+                                             , 'qmetric' : quality
+                                             , 'astmetric' : calculated at ast level)
+        metric     :   -- Actual name of metric (e.g: 'CC' : cyclomatic complexity)
+        '''
         if metric_type != 'astmetrics':
             data     = self.data[metric_type]
             low      = data[self.data[metric_type][metric] <= self.thresholds['low']]
@@ -166,6 +237,15 @@ class Reporter:
         return 
 
     def report_sorted(self, region='range', head=5, ast_metric=''):
+        '''
+        Print metric values for all components (e.g functions) 
+        that fall in a given region of the metric's distribution.
+
+        Keyword arguments:
+        region     -- region to report (one of "low", "range", "high") 
+        head       -- number of observations to report (default = 5) 
+        ast_metric -- name of the ast metric to report (default = '')
+        '''
         if ast_metric == '': 
             if region == 'low': 
                 print(self.low.head(head))
@@ -187,6 +267,13 @@ class Reporter:
     
 
 def fit_get_thresholds(data, column): 
+    '''
+    fit a distribution and return thresholds for a metric 
+
+    Keword arguments: 
+    data   -- pandas dataframe containing the metric observations 
+    column -- name of the metric (should correspond to a column in "data")
+    '''
     thresholds = {'low' : 0, 'high' : 0, 'distr_type' : None, 'params' : None, 'error_procedure' : None, 'score' : 0}
     dist = distfit() 
     X    = data[column] 

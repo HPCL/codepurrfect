@@ -7,7 +7,15 @@ from multiprocessing import Pool
 
 
 
-def handleInit(initL : Union[List[str], str], args : Dict[str, str]) -> Tuple[str]: 
+def handleInit(initL : Union[List[str], str], args : Dict[str, str]) -> Tuple[str]:
+    '''
+    Create temporary directories used to hold code quality data 
+
+    Keyword arguments 
+
+    initL   -- Value of union type representing arguments to the --init flag 
+    args    -- Dictionary whose keys are the provided flags, and values are their assigned values. 
+    ''' 
     if isinstance(initL, list):
         if len(initL) == 0: # normal init case 
             return create_tool_dirs() 
@@ -20,6 +28,16 @@ def handleInit(initL : Union[List[str], str], args : Dict[str, str]) -> Tuple[st
 
 
 def handleInitWithPasses(initL : Union[List[str], str], args : Dict[str, str]): 
+    '''
+    Create temporary directories used to hold code quality data 
+    and run the declared passes, and delete files that were unnecessarily 
+    created.
+
+    Keyword arguments 
+
+    initL   -- Value of union type representing arguments to the --init flag 
+    args    -- Dictionary whose keys are the provided flags, and values are their assigned values. 
+    '''
     runner = None 
     count  = multiprocessing.cpu_count() 
     pool   = Pool(processes=count)
