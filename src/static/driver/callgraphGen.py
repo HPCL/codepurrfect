@@ -9,6 +9,29 @@ from genASTmetrics import gen_ast_metrics
 from typing import List 
 
 
+def replace_extension(arg_str, new=''): 
+    dot_index = arg_str.find('.') 
+    to_return = arg_str[:dot_index] + new 
+    return to_return 
+
+
+def calc_file_loc(item : dict, outpath : str) -> None: 
+    '''
+    Calculate lines of code in file and store results 
+    in outpath
+
+    item    -- Entry in compilation databaes file (compile_commands.json) 
+    dirpath -- Directory path to location of compile_commands.json 
+    outpath -- Directory where generated files will be stored.
+    '''
+    if os.path.isabs(item["file"]): 
+        outfile = replace_extension(item["file"], "_cloc.csv")
+        outfile = '/'.join([outpath, outfile.replace('/', '_')])
+        command = ["cloc", item["file"], "--csv", "--out=" + outfile]
+        subprocess.run(command)
+    return 
+
+
 
 def gen_ll_from_file(item : dict, dirpath : str, outpath : str) -> None:
     '''
@@ -54,9 +77,16 @@ def gen_ll_from_file(item : dict, dirpath : str, outpath : str) -> None:
         subprocess.run(item["command"]) #+ ["-std=c++17"])
     return
 
+def calc_file_loc_helper(x): 
+    '''
+    See *calc_file_loc*
+    '''
+    calc_file_loc(x[0], x[1])
+    return 
+
 def gen_ll_from_file_helper(x): 
     '''
-    See gen_ll_from_file.
+    See *gen_ll_from_file*.
     '''
     gen_ll_from_file(x[0], x[1], x[2])
 
@@ -81,6 +111,8 @@ class CGenRunner():
         self.fltrd_outpath   = fltrd_outpath 
 
         self.data         = None 
+
+        self.locs_path    = '/'.join([self.qmetricspath, 'lines-of-code'])
 
     def read_fltrd(self) -> List[str]: 
         '''
@@ -193,6 +225,17 @@ class CGenRunner():
         print("about to start ll generation")
         async_result = pool.map(gen_ll_from_file_helper, commands_obj) 
         # async_result.wait() 
+        return 
+
+    def calculate_locs(self, pool : Pool): 
+        '''
+        Calculate lines of code in each file in the compilation database 
+        in parallel.
+        '''
+        size     = len(self.data) 
+        outpaths = [self.locs_path] * size 
+        commands_obj = list(zip(self.data, outpaths)) 
+        async_result = pool.map(calc_file_loc_helper, commands_obj)
         return 
 
     def compile_dir(self, pool, on_filtered=False) -> None: 

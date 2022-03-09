@@ -45,7 +45,7 @@ def parseCmdArgs() -> Tuple[CmdArgsTy, Dict[str, str]]:
     parser.add_argument("-r", "--report", help="Report funtion's metrics. Should be run in combination"  
                                                          + " with --commit *sha*, to return metrics in that commit.", action='store_true')
     parser.add_argument("-m", "--metric", type=str, help="Name of metric whose stats to report. To be used in combination with --report. e.g --report -m 'CC' ")
-    parser.add_argument("-I", "--interval", action="store_true", help="Report software components (e.g functions) with excess value for metric. e.g --report -m 'CC' --excess")
+    parser.add_argument("-e", "--excess", type=str, help="Report software components (e.g functions) with excess value for metric. e.g --report -m 'CC' --excess")
     parser.add_argument("-c", "--commit", type=str, help="Commit sha in which to report function's metrics.")
     parser.add_argument("-t", "--trace", help="Return list of commits that modified argument function.")
 
@@ -71,7 +71,7 @@ def parseCmdArgs() -> Tuple[CmdArgsTy, Dict[str, str]]:
         if args.commit: 
             return (CmdArgsTy.REPORT((args.report, args.commit)), v_args)
         elif args.metric: 
-            if args.interval:
+            if args.excess:
                 return (CmdArgsTy.REPORT((args.report, args.metric, args.excess)), v_args)
             else: 
                 return (CmdArgsTy.REPORT((args.report, args.metric)), v_args)
@@ -95,18 +95,20 @@ def handleReport(report : Union[str, Tuple[str, str], Tuple[str, str, str]], v_a
         # TODO 
         return 
     if isinstance(report, tuple):
-        ast_passes = v_args['ast_pass'].split(',') 
+        ast_passes = v_args['ast_pass'].split(',') if v_args['ast_pass'] else []
         reporter = Reporter(pname, ast_passes=ast_passes)
         if v_args['metric']: 
             metric                       = report[1] 
             metric_col_name, metric_type = match_metric_type(metric)
-            reporter.calc_metric_thresholds(metric_type, metric_col_name)
+            reporter.calc_metric_thresholds(metric_type=metric_type, metric=metric_col_name)
             print() 
             reporter.report_metric_thresholds()
-            if v_args['interval']:
+            if v_args['excess']:
+                print("TYPE: ", metric_type)
+                print("NAME: ", metric_col_name)
                 reporter.sort_data(metric_type, metric_col_name) 
                 print() 
-                reporter.report_sorted(region=v_args['interval'], ast_metric=v_args['metric'])
+                reporter.report_sorted(region=v_args['excess'], ast_metric=v_args['metric'])
             else: 
                 reporter.report_sorted(ast_metric=v_args['metric'])
 

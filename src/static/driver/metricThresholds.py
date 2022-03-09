@@ -5,6 +5,7 @@ import matplotlib.pyplot as plt
 import networkx as nx 
 from distfit import distfit 
 import math 
+import os 
 from typing import List 
 
 import myglobals 
@@ -55,6 +56,26 @@ def prep_qmetrics(frame):
 
 
 
+def process_loc_data(project_name : str): 
+    data_dir = '/'.join([myglobals.config_vars['store']
+                 , project_name + '-qmetrics'
+                 , 'lines-of-code'])
+    to_return = {}
+    for f in os.listdir(data_dir): 
+        frame_f = pd.read_csv('/'.join([data_dir, f]), names=['files', 'language'
+                                                                   , 'blank'
+                                                                   , 'comment'
+                                                                   , 'code'
+                                                                   , 'other']
+                                                   , header=0)
+        to_return[f] = frame_f
+    return to_return
+
+
+
+
+        
+
 def import_data(project_name : str, ast_passes : List[str] =[]): 
     '''
     Return dictionary of pandas dataframes containing 
@@ -67,7 +88,10 @@ def import_data(project_name : str, ast_passes : List[str] =[]):
     '''
     to_return_data = {
                          'cgmetrics' : None
-                       , 'qmetrics' : None
+                       , 'qmetrics' : {
+                           'functions' : None, 
+                           'files'     : None 
+                       }
                        , 'graph' : None
                        , 'astmetrics' : {}
                        }
@@ -107,7 +131,9 @@ def import_data(project_name : str, ast_passes : List[str] =[]):
 
     i1 = to_return_data['cgmetrics'].index 
     i2 = prep_qmetrics(qmetrics_pd).index 
-    to_return_data['qmetrics'] = prep_qmetrics(qmetrics_pd)[i2.isin(i1)]
+    to_return_data['qmetrics']['functions'] = prep_qmetrics(qmetrics_pd)[i2.isin(i1)]
+
+    to_return_data['qmetrics']['files']    = process_loc_data(project_name=project_name)
 
     graph_nx  = nx.read_edgelist(graph_file, create_using=nx.DiGraph())
     graph_nk  = nk.nxadapter.nx2nk(graph_nx) 
@@ -129,11 +155,10 @@ def match_metric_type(metric):
     metric   -- upper, lower, or mixed-letter name of metric.
     '''
     cgmetrics = ['FanIn', 'FanOut', 'Closeness', 'Betweenness', 'Eccentricity_R', 'Eccentricity_N'] 
-    qmetrics = ['ArgCount', 'InstrCount', 'UniqVals', 'UniqOps', 'TotalOps', 'CC'] 
+    qmetrics = ['ArgCount', 'InstrCount', 'UniqVals', 'UniqOps', 'TotalOps', 'CC', 'LOC'] 
 
     astmetrics = ['case-no-break', 'switch-no-default']
 
-    print('REQUESTED METRIC:', metric)
 
     low_cgmetrics = [x.lower() for x in cgmetrics] 
     low_qmetrics  = [x.lower() for x in qmetrics]
@@ -174,7 +199,7 @@ class Reporter:
         self.high         = None 
 
 
-    def calc_metric_thresholds(self, metric_type, metric): 
+    def calc_metric_thresholds(self, metric_type, metric, file_level=False): 
         '''
         Fit metric to distribution and calculate thresholds
 
@@ -185,7 +210,16 @@ class Reporter:
                                              , 'astmetric' : calculated at ast level)
         metric     :   -- Actual name of metric (e.g: 'CC' : cyclomatic complexity)
         '''
-        data       = self.data[metric_type] 
+
+        data = None 
+
+        if metric_type != 'qmetrics' : 
+            data       = self.data[metric_type] 
+        else: 
+            if not file_level: 
+                data = self.data[metric_type]['functions'] 
+            else: 
+                data = self.data[metric_type]['files']
 
         if metric_type != 'astmetrics': 
             thresholds = fit_get_thresholds(data, metric)
@@ -219,14 +253,41 @@ class Reporter:
         metric     :   -- Actual name of metric (e.g: 'CC' : cyclomatic complexity)
         '''
         if metric_type != 'astmetrics':
-            data     = self.data[metric_type]
-            low      = data[self.data[metric_type][metric] <= self.thresholds['low']]
-            in_range = data[(self.data[metric_type][metric] > self.thresholds['low']) & (self.data[metric_type][metric] <= self.thresholds['high'])] 
-            high     = data[self.data[metric_type][metric] > self.thresholds['high']] 
+            if metric != 'LOC':
+                if metric_type != 'qmetrics':
+                    data     = self.data[metric_type]
+                    low      = data[self.data[metric_type][metric] <= self.thresholds['low']]
+                    in_range = data[(self.data[metric_type][metric] > self.thresholds['low']) & (self.data[metric_type][metric] <= self.thresholds['high'])] 
+                    high     = data[self.data[metric_type][metric] > self.thresholds['high']] 
 
-            self.low   = low 
-            self.range = in_range 
-            self.high  = high 
+                    self.low   = low 
+                    self.range = in_range 
+                    self.high  = high 
+                else: 
+                    data     = self.data[metric_type]['functions']
+                    low      = data[self.data[metric_type]['functions'][metric] <= self.thresholds['low']]
+                    in_range = data[(self.data[metric_type]['functions'][metric] > self.thresholds['low']) & (self.data[metric_type]['functions'][metric] <= self.thresholds['high'])] 
+                    high     = data[self.data[metric_type]['functions'][metric] > self.thresholds['high']] 
+
+                    self.low   = low 
+                    self.range = in_range 
+                    self.high  = high
+            else: 
+                low   = [] 
+                range_r = []
+                high  = []
+                for file, frame_f in self.data[metric_type]['files'].items(): 
+                    if frame_f['code'].max() >= self.thresholds['LOC']: 
+                        high.append(file) 
+                    else: 
+                        if frame_f['code'].max() < (self.thresholds['LOC'] * 0.1):
+                            low.append(file)
+                        else: 
+                            range_r.append(file)
+                self.low   = pd.DataFrame(low)
+                self.range = pd.DataFrame(range_r)
+                self.high  = pd.DataFrame(high)
+
         else: 
             if metric == 'case-no-break': 
                 # TODO 
@@ -236,7 +297,7 @@ class Reporter:
                 pass 
         return 
 
-    def report_sorted(self, region='range', head=5, ast_metric=''):
+    def report_sorted(self, region='range', head=5, ast_metric=None):
         '''
         Print metric values for all components (e.g functions) 
         that fall in a given region of the metric's distribution.
@@ -246,22 +307,22 @@ class Reporter:
         head       -- number of observations to report (default = 5) 
         ast_metric -- name of the ast metric to report (default = '')
         '''
-        if ast_metric == '': 
-            if region == 'low': 
-                print(self.low.head(head))
-            if region == 'range': 
-                print(self.range.head(head))
-            if region == 'high': 
-                print(self.high.head(head)) 
-        else: 
-            if ast_metric == 'case-no-break': 
-                temp_data = self.data['astmetrics']['visit-switch']
-                metric_data = temp_data.loc[temp_data['pass-type'] == 'CASE MISSING BREAK'] 
-                print(metric_data.head(head)) 
-            if ast_metric == 'switch-no-default': 
-                temp_data = self.data['astmetrics']['visit-switch']
-                metric_data = temp_data.loc[temp_data['pass-type'] == 'SWITCH MISSING DEFAULT']
-                print(metric_data.head(head)) 
+
+        if region == 'low': 
+            print(self.low.head(head))
+        if (region == 'range'): 
+            print(self.range.head(head))
+        if region == 'high': 
+            print(self.high.head(head)) 
+
+        if ast_metric == 'case-no-break': 
+            temp_data = self.data['astmetrics']['visit-switch']
+            metric_data = temp_data.loc[temp_data['pass-type'] == 'CASE MISSING BREAK'] 
+            print(metric_data.head(head)) 
+        if ast_metric == 'switch-no-default': 
+            temp_data = self.data['astmetrics']['visit-switch']
+            metric_data = temp_data.loc[temp_data['pass-type'] == 'SWITCH MISSING DEFAULT']
+            print(metric_data.head(head)) 
 
 
     
@@ -274,18 +335,26 @@ def fit_get_thresholds(data, column):
     data   -- pandas dataframe containing the metric observations 
     column -- name of the metric (should correspond to a column in "data")
     '''
-    thresholds = {'low' : 0, 'high' : 0, 'distr_type' : None, 'params' : None, 'error_procedure' : None, 'score' : 0}
-    dist = distfit() 
-    X    = data[column] 
-    dist.fit_transform(X)
 
-    thresholds['low']             = dist.model['CII_min_alpha'] 
-    thresholds['high']            = dist.model['CII_max_alpha'] 
-    thresholds['distr_type']      = dist.model['name'] 
-    thresholds['params']          = dist.model['params']
-    thresholds['error_procedure'] = dist.model['stats']
-    thresholds['score']           = dist.model['score'] 
-    return thresholds
+    to_return = None 
+
+    if column != 'LOC':
+        thresholds = {'low' : 0, 'high' : 0, 'distr_type' : None, 'params' : None, 'error_procedure' : None, 'score' : 0}
+        dist = distfit() 
+
+        X    = data[column] 
+        dist.fit_transform(X)
+
+        thresholds['low']             = dist.model['CII_min_alpha'] 
+        thresholds['high']            = dist.model['CII_max_alpha'] 
+        thresholds['distr_type']      = dist.model['name'] 
+        thresholds['params']          = dist.model['params']
+        thresholds['error_procedure'] = dist.model['stats']
+        thresholds['score']           = dist.model['score'] 
+        to_return = thresholds
+    else: 
+        to_return = {'LOC' : 1000} # current default for LOC might change later.
+    return to_return 
 
 
 
