@@ -29,7 +29,8 @@ RUN apt-get update && \
     apt-get -y install gfortran && \ 
     apt-get -y install libblas-dev liblapack-dev && \
     apt-get -y install fftw3 && \ 
-    apt-get -y install vim 
+    apt-get -y install vim && \ 
+    apt-get -y install cloc 
 
 
 

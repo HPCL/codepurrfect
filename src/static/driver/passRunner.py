@@ -32,8 +32,9 @@ def create_tool_dirs(func_only=False):
 
     if not func_only:
         call_res_path           = tool_dir + "/" + pname + "-callgraph"  
-        ast_res_path       = tool_dir + "/" + pname + "-ast-metrics"
+        ast_res_path            = tool_dir + "/" + pname + "-ast-metrics"
         qmetrics_path           = tool_dir + "/" + pname + "-qmetrics"
+
 
         callfile                = tool_dir + "/" + pname + "-callgraph.TabOne" 
         cgmetrics_file          = tool_dir + "/" + pname + "-cgmetrics.csv"
@@ -156,7 +157,8 @@ class PassRunner:
         if self.has_cg_pass: 
             self.generator.gen_callgraphs(pool)
             ast_pass_output_dirs = self.generator.gen_ast_metrics(project_name=self.proj_name, passes=ast_passes)
-            self.ast_output_dirs = ast_pass_output_dirs  
+            self.ast_output_dirs = ast_pass_output_dirs 
+            self.generator.calculate_locs(pool) 
         if self.has_func_pass: 
             self.generator.gen_only_func_decls(pool)
 
