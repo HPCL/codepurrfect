@@ -13,6 +13,12 @@ intermediate representation. Inside the directory
   - passes-ast 
   - passes-ir 
 
+
+
+
+
+
+
 respectively. Consequently, to add a check, first decide 
 which type of pass it is based on. 
 
