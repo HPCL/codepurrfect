@@ -7,6 +7,7 @@ from distfit import distfit
 import math 
 import os 
 from typing import List 
+import networkx as nx 
 
 import myglobals 
 
@@ -76,7 +77,7 @@ def process_loc_data(project_name : str):
 
         
 
-def import_data(project_name : str, ast_passes : List[str] =[]): 
+def import_data(project_name : str, ast_passes : List[str] =[], pp_passes : List[str] = []): 
     '''
     Return dictionary of pandas dataframes containing 
     data read from system-generated '.csv' files. 
@@ -94,10 +95,14 @@ def import_data(project_name : str, ast_passes : List[str] =[]):
                        }
                        , 'graph' : None
                        , 'astmetrics' : {}
+                       , 'ppmetrics'  : {}
                        }
 
     for passname in ast_passes: 
         to_return_data['astmetrics'][passname] = None 
+
+    for passname in pp_passes: 
+        to_return_data['ppmetrics'][passname]  = None 
 
 
     file_name_prep = lambda post_fix : '/'.join([myglobals.config_vars['store'], project_name + post_fix]) 
@@ -113,6 +118,35 @@ def import_data(project_name : str, ast_passes : List[str] =[]):
         if passname == 'visit-switch': 
             pass_metric_pd   = pd.read_csv(pass_metric_file, names=['pass-type', 'location']) 
             to_return_data['astmetrics'][passname] = pass_metric_pd
+
+        if passname == "goto-out-of-switch": 
+            pass_metric_pd  = pd.read_csv(pass_metric_file, names=['GOTO', 'LABEL']) 
+            to_return_data['astmetrics'][passname] = pass_metric_pd 
+
+        if passname == "cwe-1079-parcls-no-vrt-dstrctr": 
+            pass_metric_pd = pd.read_csv(pass_metric_file, names=["CLASS", "PARENT", "HAS_DESTRUCTOR"]) 
+            to_return_data['astmetrics'][passname] = pass_metric_pd
+
+
+    for passname in pp_passes: 
+        pass_metric_file = '/'.join([
+                                    myglobals.config_vars['store'] 
+                                    , project_name + '-pp-metrics' 
+                                    , passname 
+                                    , project_name + '-' + passname + '.csv'
+                                    ]) 
+
+        if passname == 'includes-cycles':
+            pass_metric_pd = pd.read_csv(pass_metric_file, names=['SourceFile', 'IncludedFile', 'SearchPath', 'RelativePath']) 
+            # construct networkx graph 
+            # find all nodes with self-loops 
+            metric_gr          = nx.from_pandas_edgelist(df=pass_metric_pd, source='SourceFile', target='IncludedFile', create_using=nx.DiGraph) 
+            metric_cycle_basis = nx.simple_cycles(metric_gr)
+            # TODO : add actual implementation of finding nodes involved in cycles.
+            # for e in metric_cycle_basis: 
+            #     print(e)
+            to_return_data['ppmetrics'][passname] = metric_cycle_basis 
+
 
 
     cgmetrics_pd       = pd.read_csv(cgmetrics_file)
@@ -133,7 +167,17 @@ def import_data(project_name : str, ast_passes : List[str] =[]):
     i2 = prep_qmetrics(qmetrics_pd).index 
     to_return_data['qmetrics']['functions'] = prep_qmetrics(qmetrics_pd)[i2.isin(i1)]
 
-    to_return_data['qmetrics']['files']    = process_loc_data(project_name=project_name)
+    is_loc_data_present = False 
+    data_dir = '/'.join([myglobals.config_vars['store']
+                 , project_name + '-qmetrics'
+                 , 'lines-of-code'])
+
+    if os.path.isdir(data_dir): 
+        is_loc_data_present = True 
+
+
+    if is_loc_data_present:
+        to_return_data['qmetrics']['files']    = process_loc_data(project_name=project_name)
 
     graph_nx  = nx.read_edgelist(graph_file, create_using=nx.DiGraph())
     graph_nk  = nk.nxadapter.nx2nk(graph_nx) 
@@ -157,13 +201,15 @@ def match_metric_type(metric):
     cgmetrics = ['FanIn', 'FanOut', 'Closeness', 'Betweenness', 'Eccentricity_R', 'Eccentricity_N'] 
     qmetrics = ['ArgCount', 'InstrCount', 'UniqVals', 'UniqOps', 'TotalOps', 'CC', 'LOC'] 
 
-    astmetrics = ['case-no-break', 'switch-no-default']
+    astmetrics = ['case-no-break', 'switch-no-default', 'goto-out-of-switch', 'cwe-1079-parcls-no-vrt-dstrctr']
+    ppmetrics  = ['includes-cycles']
 
 
     low_cgmetrics = [x.lower() for x in cgmetrics] 
     low_qmetrics  = [x.lower() for x in qmetrics]
 
     low_astmetrics = [x.lower() for x in astmetrics]
+    low_ppmetrics  = [x.lower() for x in ppmetrics]
 
     l_metric = metric.lower().strip()
 
@@ -175,12 +221,15 @@ def match_metric_type(metric):
     if l_metric in low_astmetrics: 
         return (astmetrics[low_astmetrics.index(l_metric)], 'astmetrics')
 
+    if l_metric in low_ppmetrics: 
+        return (ppmetrics[low_ppmetrics.index(l_metric)], 'ppmetrics')
+
 
 
 
 
 class Reporter: 
-    def __init__(self, project_name : str, ast_passes : List[str] = []) -> None:
+    def __init__(self, project_name : str, ast_passes : List[str] = [], pp_passes : List[str] = []) -> None:
         '''
         Import metric data and create Reporter object with 
         *thresholds*, *low*m, *range*, *high* all set to None 
@@ -191,7 +240,7 @@ class Reporter:
         ast_passes     -- List of ast_passes to report about (default = [])
         '''
         self.project_name = project_name 
-        self.data         = import_data(project_name, ast_passes=ast_passes) 
+        self.data         = import_data(project_name, ast_passes=ast_passes, pp_passes=pp_passes) 
 
         self.thresholds   = None 
         self.low          = None 
@@ -222,8 +271,13 @@ class Reporter:
                 data = self.data[metric_type]['files']
 
         if metric_type != 'astmetrics': 
-            thresholds = fit_get_thresholds(data, metric)
-            self.thresholds = thresholds 
+            if metric_type != 'ppmetrics':
+                thresholds = fit_get_thresholds(data, metric)
+                self.thresholds = thresholds 
+            else: 
+                if metric == 'includes-cycles': 
+                    # TODO 
+                    todo = 0 
         else: 
             if metric == 'case-no-break': 
                 # TODO 
@@ -233,6 +287,13 @@ class Reporter:
                 # TODO 
                 todo = 0 
                 pass 
+            if metric == 'goto-out-of-switch': 
+                # TODO 
+                todo = 0 
+                pass 
+            if metric == 'cwe-1079-parcls-no-vrt-dstrctr': 
+                # TODO 
+                todo = 0 
         return 
 
     def report_metric_thresholds(self): 
@@ -253,40 +314,45 @@ class Reporter:
         metric     :   -- Actual name of metric (e.g: 'CC' : cyclomatic complexity)
         '''
         if metric_type != 'astmetrics':
-            if metric != 'LOC':
-                if metric_type != 'qmetrics':
-                    data     = self.data[metric_type]
-                    low      = data[self.data[metric_type][metric] <= self.thresholds['low']]
-                    in_range = data[(self.data[metric_type][metric] > self.thresholds['low']) & (self.data[metric_type][metric] <= self.thresholds['high'])] 
-                    high     = data[self.data[metric_type][metric] > self.thresholds['high']] 
+            if metric_type != 'ppmetrics':
+                if metric != 'LOC':
+                    if metric_type != 'qmetrics':
+                        data     = self.data[metric_type]
+                        low      = data[self.data[metric_type][metric] <= self.thresholds['low']]
+                        in_range = data[(self.data[metric_type][metric] > self.thresholds['low']) & (self.data[metric_type][metric] <= self.thresholds['high'])] 
+                        high     = data[self.data[metric_type][metric] > self.thresholds['high']] 
 
-                    self.low   = low 
-                    self.range = in_range 
-                    self.high  = high 
-                else: 
-                    data     = self.data[metric_type]['functions']
-                    low      = data[self.data[metric_type]['functions'][metric] <= self.thresholds['low']]
-                    in_range = data[(self.data[metric_type]['functions'][metric] > self.thresholds['low']) & (self.data[metric_type]['functions'][metric] <= self.thresholds['high'])] 
-                    high     = data[self.data[metric_type]['functions'][metric] > self.thresholds['high']] 
-
-                    self.low   = low 
-                    self.range = in_range 
-                    self.high  = high
-            else: 
-                low   = [] 
-                range_r = []
-                high  = []
-                for file, frame_f in self.data[metric_type]['files'].items(): 
-                    if frame_f['code'].max() >= self.thresholds['LOC']: 
-                        high.append(file) 
+                        self.low   = low 
+                        self.range = in_range 
+                        self.high  = high 
                     else: 
-                        if frame_f['code'].max() < (self.thresholds['LOC'] * 0.1):
-                            low.append(file)
+                        data     = self.data[metric_type]['functions']
+                        low      = data[self.data[metric_type]['functions'][metric] <= self.thresholds['low']]
+                        in_range = data[(self.data[metric_type]['functions'][metric] > self.thresholds['low']) & (self.data[metric_type]['functions'][metric] <= self.thresholds['high'])] 
+                        high     = data[self.data[metric_type]['functions'][metric] > self.thresholds['high']] 
+
+                        self.low   = low 
+                        self.range = in_range 
+                        self.high  = high
+                else: 
+                    low   = [] 
+                    range_r = []
+                    high  = []
+                    for file, frame_f in self.data[metric_type]['files'].items(): 
+                        if frame_f['code'].max() >= self.thresholds['LOC']: 
+                            high.append(file) 
                         else: 
-                            range_r.append(file)
-                self.low   = pd.DataFrame(low)
-                self.range = pd.DataFrame(range_r)
-                self.high  = pd.DataFrame(high)
+                            if frame_f['code'].max() < (self.thresholds['LOC'] * 0.1):
+                                low.append(file)
+                            else: 
+                                range_r.append(file)
+                    self.low   = pd.DataFrame(low)
+                    self.range = pd.DataFrame(range_r)
+                    self.high  = pd.DataFrame(high)
+            else: 
+                if metric == 'includes-cycles': 
+                    # TODO 
+                    pass 
 
         else: 
             if metric == 'case-no-break': 
@@ -295,9 +361,15 @@ class Reporter:
             if metric == 'switch-no-default': 
                 # TODO 
                 pass 
+            if metric == 'goto-out-of-switch': 
+                # TODO 
+                pass 
+            if metric == 'cwe-1079-parcls-no-vrt-dstrctr': 
+                # TODO 
+                pass 
         return 
 
-    def report_sorted(self, region='range', head=5, ast_metric=None):
+    def report_sorted(self, region='range', head=5, ast_metric=None, pp_metric=None):
         '''
         Print metric values for all components (e.g functions) 
         that fall in a given region of the metric's distribution.
@@ -308,21 +380,51 @@ class Reporter:
         ast_metric -- name of the ast metric to report (default = '')
         '''
 
-        if region == 'low': 
-            print(self.low.head(head))
-        if (region == 'range'): 
-            print(self.range.head(head))
-        if region == 'high': 
-            print(self.high.head(head)) 
+        if self.low != None:
+            if region == 'low': 
+                print(self.low.head(head))
 
-        if ast_metric == 'case-no-break': 
-            temp_data = self.data['astmetrics']['visit-switch']
-            metric_data = temp_data.loc[temp_data['pass-type'] == 'CASE MISSING BREAK'] 
-            print(metric_data.head(head)) 
-        if ast_metric == 'switch-no-default': 
-            temp_data = self.data['astmetrics']['visit-switch']
-            metric_data = temp_data.loc[temp_data['pass-type'] == 'SWITCH MISSING DEFAULT']
-            print(metric_data.head(head)) 
+        if self.range != None: 
+            if (region == 'range'): 
+                print(self.range.head(head))
+
+        if self.high != None:
+            if region == 'high': 
+                print(self.high.head(head)) 
+
+        if ast_metric != None:
+            if ast_metric == 'case-no-break': 
+                temp_data = self.data['astmetrics']['visit-switch']
+                metric_data = temp_data.loc[temp_data['pass-type'] == 'CASE MISSING BREAK'] 
+                print(metric_data.head(head)) 
+            if ast_metric == 'switch-no-default': 
+                temp_data = self.data['astmetrics']['visit-switch']
+                metric_data = temp_data.loc[temp_data['pass-type'] == 'SWITCH MISSING DEFAULT']
+                print(metric_data.head(head)) 
+
+            if ast_metric == 'goto-out-of-switch': 
+                temp_data = self.data['astmetrics']['goto-out-of-switch'] 
+                print(temp_data.head(head))
+
+            if ast_metric == 'cwe-1079-parcls-no-vrt-dstrctr': 
+                temp_data = self.data['astmetrics']['cwe-1079-parcls-no-vrt-dstrctr'] 
+                print(temp_data.tail(head))
+
+        if pp_metric != None:
+            if pp_metric == 'includes-cycles': 
+                temp_data = self.data['ppmetrics']['includes-cycles'] 
+                temp_data = list(temp_data)
+                if len(temp_data) == 0: 
+                    print('NO CYCLES FOUND!')
+                else:
+                    count = 0
+                    for e in temp_data: 
+                        while count <= head:
+                            print("CYCLE: ")
+                            print(e)
+                            print() 
+                # report data points that are self-loops
+
 
 
     

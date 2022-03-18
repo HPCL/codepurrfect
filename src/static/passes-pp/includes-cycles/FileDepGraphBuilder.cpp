@@ -9,6 +9,10 @@
 
 #include "utils.hpp"
 
+#include <vector> 
+#include <algorithm>
+#include <unordered_set>
+
 using namespace std;
 using namespace llvm;
 using namespace clang;
@@ -133,7 +137,25 @@ int main(int argc, const char **argv)
 
        
        std::vector<std::string> compileArgs = utils::getCompileArgs(compileCommands);
-       //compileArgs.push_back("-I" + utils::getClangBuiltInIncludePath(argv[0]));
+       compileArgs.push_back("-I" + utils::getClangBuiltInIncludePath(argv[0]));
+       auto it = std::find(compileArgs.begin(), compileArgs.end(), "clang");
+       if (it != compileArgs.end())
+       {
+           int index = it - compileArgs.begin(); 
+           compileArgs.erase(compileArgs.begin() + index); 
+       }
+
+
+        std::unordered_set<std::string> helper; 
+        auto end = std::remove_copy_if(compileArgs.begin(), compileArgs.end() 
+                                        , compileArgs.begin() 
+                                        , [&helper](std::string const &s){
+                                            return !helper.insert(s).second; 
+                                        });
+
+        compileArgs.erase(end, compileArgs.end()); 
+       
+
        for(auto &s : compileArgs)
           llvm::outs() << s << "\n";
 

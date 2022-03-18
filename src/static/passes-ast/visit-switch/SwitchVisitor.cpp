@@ -26,10 +26,10 @@ using namespace llvm;
 using namespace clang;
 using namespace clang::tooling;
 
-class McCabeMetricsVisitor : public RecursiveASTVisitor<McCabeMetricsVisitor> 
+class SwitchVisitor : public RecursiveASTVisitor<SwitchVisitor> 
 {
 public:
-    explicit McCabeMetricsVisitor(ASTContext *p_context, SourceManager *manager, std::string metrics_filename)
+    explicit SwitchVisitor(ASTContext *p_context, SourceManager *manager, std::string metrics_filename)
       : context(p_context), src_manager(manager), metrics_filename(metrics_filename) {} 
 
     ofstream report_file;
@@ -48,17 +48,61 @@ public:
       return this -> missing_breaks;
     }
 
-    bool VisitCaseStmt(CaseStmt* case_stmt)
+    bool isBreakRightMostChildOf(CaseStmt* case_stmt)
     {
-      for (auto it = case_stmt -> child_begin(); it != case_stmt -> child_end(); ++it)
-      {
-        // TODO 
+        bool to_return = false; 
+        for (auto it = case_stmt -> child_begin(); 
+                  it != case_stmt -> child_end(); 
+                  ++it)
+        {
+            Stmt* child = *it; 
+            if (isa<BreakStmt>(child))
+            {
+              to_return = true; 
+            }else 
+            if (isa<CaseStmt>(child))
+            {
+              // TODO : SHOULD BE DISALLOWED?!  
+            }else
+            {
+              continue; 
+            } 
+        }
         
-      }
+        return to_return; 
+    }
 
-      return true; 
-      
-      
+    bool isBreakNextRightSiblingOf(CaseStmt* case_stmt)
+    {
+        bool to_return = false; 
+        auto parent = this -> context -> getParents(*case_stmt)[0].get<Stmt>(); 
+
+
+        for (auto it  = parent -> child_begin(); 
+                  it != parent -> child_end(); 
+                  ++it)
+        {
+          const Stmt* cur_stmt     = *it; 
+
+          auto next_it = std::next(it, 1); 
+          const Stmt* next_stmt    = *next_it; 
+    
+          if (cur_stmt == case_stmt)
+          {
+            if (next_stmt)
+            {
+              if (isa<BreakStmt>(next_stmt))
+              {
+                to_return = true; 
+              }
+              
+            }
+            
+          }
+          
+        }
+        
+        return to_return; 
     }
 
     bool VisitSwitchStmt(SwitchStmt* switch_stmt)
@@ -77,27 +121,20 @@ public:
 
                 cur_stmt  = *c_it; 
                 next_stmt = *(next_it);
+
                 if (isa<CaseStmt>(cur_stmt))
                 {
-                  this -> VisitCaseStmt((CaseStmt*) cur_stmt); 
-
-                  if (next_stmt)
+                  bool is_break_right_most_child_of_case = this -> isBreakRightMostChildOf((CaseStmt*) cur_stmt); 
+                  bool is_break_next_right_sibling_of_case = this -> isBreakNextRightSiblingOf((CaseStmt*) cur_stmt); 
+                  if (!is_break_right_most_child_of_case 
+                     && !is_break_next_right_sibling_of_case)
                   {
-
-                    if (isa<DefaultStmt>(next_stmt))
-                    {
-                      has_default = true; 
-                    }
-                    else
-                    {
-                      if (!isa<BreakStmt>(next_stmt))
-                      {
-                        this -> missing_breaks++;
-                        report_file << "CASE MISSING BREAK, " << cur_stmt -> getBeginLoc().printToString(*(this -> src_manager)) << "\n";  
-                      }
-                      
-                    }
+                    this -> missing_breaks++; 
+                    report_file << "CASE MISSING BREAK, " 
+                           << cur_stmt -> getBeginLoc().printToString(*(this -> src_manager)) 
+                           << "\n"; 
                   }
+                  
                 }
 
                 if (isa<DefaultStmt>(cur_stmt))
@@ -131,9 +168,9 @@ private:
 };
 
 
-class McCabeMetricsConsumer : public clang::ASTConsumer {
+class SwitchConsumer : public clang::ASTConsumer {
 public:
-  explicit McCabeMetricsConsumer(ASTContext *context, SourceManager *src_manager, std::string metrics_filename)
+  explicit SwitchConsumer(ASTContext *context, SourceManager *src_manager, std::string metrics_filename)
     : visitor(context, src_manager, metrics_filename) {}
 
   virtual void HandleTranslationUnit(clang::ASTContext &context) {
@@ -143,11 +180,11 @@ public:
     llvm::outs() << "TOTAL MISSING BREAKS: " << visitor.getMissingBreaks() << "\n";
   }
 private:
-  McCabeMetricsVisitor visitor; 
+  SwitchVisitor visitor; 
 
 };
 
-class McCabeMetricsAction : public clang::ASTFrontendAction {
+class SwitchAction : public clang::ASTFrontendAction {
 public:
   virtual std::unique_ptr<clang::ASTConsumer> CreateASTConsumer(
     clang::CompilerInstance &compiler, llvm::StringRef inFile) {
@@ -155,7 +192,7 @@ public:
     size_t dot_index = inFile_str.find_last_of(".");
     std::string metrics_filename = inFile_str.substr(0, dot_index) + "_metrics.csv";
     return std::unique_ptr<clang::ASTConsumer>(
-        new McCabeMetricsConsumer(&compiler.getASTContext(), &compiler.getSourceManager(), metrics_filename)
+        new SwitchConsumer(&compiler.getASTContext(), &compiler.getSourceManager(), metrics_filename)
         );
   }
 };
@@ -190,7 +227,7 @@ int main(int argc, const char **argv)
        for(auto &s : compileArgs)
           llvm::outs() << s << "\n";
 
-       auto xfrontendAction = std::make_unique<McCabeMetricsAction>();
+       auto xfrontendAction = std::make_unique<SwitchAction>();
        utils::customRunToolOnCodeWithArgs(move(xfrontendAction), compileArgs, sourceFile);
    }
    return 0;

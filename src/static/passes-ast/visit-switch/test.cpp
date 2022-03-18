@@ -11,8 +11,8 @@ int main () {
          e = 1 + 2; 
          break;
       case 'B' :
-      case 'C' :
-         e = 1 + 2;
+         case 'C' :
+            e = 1 + 2;
       case 'D' :
          break;
       case 'F' :
@@ -29,9 +29,9 @@ int main () {
          e = 1 + 2; 
          break;
       case 'B' :
-      case 'C' :
-         e = 1 + 2;
-         break;
+         case 'C' :
+            e = 1 + 2;
+      break;
       case 'D' :
          e = 1 + 2;
       case 'F' :

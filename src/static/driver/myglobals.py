@@ -47,17 +47,25 @@ def init():
     global config_vars 
     cwd = os.getcwd()
     calc_ast_path = lambda passname : '/'.join(['/static/passes-ast', passname, 'build', passname])
+    calc_pp_path  = lambda passname : '/'.join(['/static/passes-pp', passname, 'build', passname])
     config_vars = {
         "cl_grph_plugin_path" : "/static/passes-ir/callgraph-xSDK/build/CallgraphxSDK/libCallgraphxSDK.so" ,
         "func_only_plugin_path" : "/static/passes-ir/function-gen/build/FunctionGen/libFunctionGen.so",
         "comp_db_path" : cwd + "/compile_commands.json", 
         "store"        : cwd + "/.ideas-uo",
         "ast"          : {
-            "visit-switch" : calc_ast_path("visit-switch")
+            "visit-switch" : calc_ast_path("visit-switch"), 
+            "goto-out-of-switch" : calc_ast_path("goto-out-of-switch"), 
+            "cwe-1079-parcls-no-vrt-dstrctr" : calc_ast_path("cwe-1079-parcls-no-vrt-dstrctr")
+        },
+        "pp"           : {
+            "includes-cycles"        : calc_pp_path("includes-cycles")
         },
         "clang-includes" : "/tmp/clang_13/lib/clang/13.0.0/include",
         "build-loc" : {
-            "hypre" : "/hypre/src/cmbuild"
+            "petsc"  : "/petsc/arch-linux-c-debug/include",
+            "hypre"  : "/hypre/src/cmbuild", 
+            "lammps" : "lammps/src/cmake/build"
         }
 
     }

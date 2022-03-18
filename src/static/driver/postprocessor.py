@@ -8,7 +8,12 @@ import math
 
 
 
-def group_by_class_name(proj_name : str, content_path : str, ast_metric_name : str ='', ast_output_dir : str =''): 
+def group_by_class_name(proj_name : str
+                      , content_path : str
+                      , ast_metric_name : str =''
+                      , ast_output_dir : str =''
+                      , pp_metric_name : str = ''
+                      , pp_output_dir : str = ''): 
     '''
     Group generated files by the class names provided in myglobals.py 
     and if the list was empty, write everything in one giant project-level 
@@ -47,26 +52,63 @@ def group_by_class_name(proj_name : str, content_path : str, ast_metric_name : s
                         if os.path.isfile(full_file_path):
                             with open(full_file_path, 'r') as csv_file_r: 
                                 name_w.write(csv_file_r.read())
+
+        if (ast_output_dir, ast_metric_name) != ('', ''):
+            if ast_metric_name == 'goto-out-of-switch':
+                mv_front_pass_files(ast_metric_name, ast_output_dir, content_path, proj_name, fpost_fix=['_goto_metrics.csv'])
+            elif ast_metric_name == 'cwe-1079-parcls-no-vrt-dstrctr':
+                mv_front_pass_files(ast_metric_name, ast_output_dir, content_path, proj_name, fpost_fix=['_cwe1079_metrics.csv'])
+            else: 
+                mv_front_pass_files(ast_metric_name, ast_output_dir, content_path, proj_name)
+
+
+        if pp_metric_name == 'includes-cycles':
+            mv_front_pass_files(pp_metric_name, pp_output_dir, content_path, proj_name, fpost_fix=['filedep_graph.csv'])
     else:
-        metric_name_str = ('-' + ast_metric_name) if ast_metric_name != '' else '' 
-        output_container = ast_output_dir if ast_output_dir != '' else content_path
 
-        proj_file_path = '/'.join([output_container, proj_name]) + metric_name_str + '.csv' 
+        if (ast_output_dir, ast_metric_name) != ('', ''):
+            if ast_metric_name == 'goto-out-of-switch':
+                mv_front_pass_files(ast_metric_name, ast_output_dir, content_path, proj_name, fpost_fix=['_goto_metrics.csv'])
+            elif ast_metric_name == 'cwe-1079-parcls-no-vrt-dstrctr':
+                mv_front_pass_files(ast_metric_name, ast_output_dir, content_path, proj_name, fpost_fix=['_cwe1079_metrics.csv'])
+            else: 
+                mv_front_pass_files(ast_metric_name, ast_output_dir, content_path, proj_name)
 
-        print("PROJECT FILEPATH: ", proj_file_path)
+        if pp_metric_name == 'includes-cycles':
+            mv_front_pass_files(pp_metric_name, pp_output_dir, content_path, proj_name, fpost_fix=['filedep_graph.csv'])
 
+
+def mv_front_pass_files(metric_name, output_dir, content_path, proj_name, fpost_fix=[]):
+    metric_name_str = ('-' + metric_name) if metric_name != '' else '' 
+    output_container = output_dir if output_dir != '' else content_path
+
+    proj_file_path = '/'.join([output_container, proj_name]) + metric_name_str + '.csv' 
+    proj_dir_path  = '/'.join([output_container])
+
+    print("PROJECT FILEPATH: ", proj_file_path)
+    print("MOVING FROM DIR: ", content_path)
+    print("PROJECT DIRECTORY: ", proj_dir_path)
+
+    cwd = os.getcwd()
+    for file in os.listdir(cwd): 
+        if os.path.isfile('/'.join([cwd, file])):
+            for postfix in fpost_fix:
+                if postfix in file:
+                    subprocess.run(["mv", '/'.join([cwd, file])
+                                        , proj_dir_path])
+
+    for file in os.listdir(output_container): 
+        filepath = '/'.join([output_container, file]) 
+        if os.path.isfile(filepath): 
+            if os.stat(filepath).st_size == 0:
+                os.remove(filepath)
+
+    with open(proj_file_path, 'w+') as proj_file_h: 
         for file in os.listdir(output_container): 
             filepath = '/'.join([output_container, file]) 
             if os.path.isfile(filepath): 
-                if os.stat(filepath).st_size == 0:
-                    os.remove(filepath)
-
-        with open(proj_file_path, 'w+') as proj_file_h: 
-            for file in os.listdir(output_container): 
-                filepath = '/'.join([output_container, file]) 
-                if os.path.isfile(filepath): 
-                    with open(filepath, 'r') as filepath_h: 
-                            proj_file_h.write(filepath_h.read())
+                with open(filepath, 'r') as filepath_h: 
+                        proj_file_h.write(filepath_h.read())
 
                         
 
@@ -198,13 +240,16 @@ def gen_callgraph_metrics(callgraph_path):
 
 def post_process_callgraphs(proj_name, call_res_path
                                      , ast_res_path 
+                                     , pp_res_path 
                                      , qmetrics_path
                                      , callfile
                                      , outfile
                                      , qmfile 
                                      , nodes_file, 
                                      ast_pass_names=[], 
-                                     ast_output_dirs=[]): 
+                                     ast_output_dirs=[], 
+                                     pp_pass_names=[],
+                                     pp_output_dirs=[]): 
 
     '''
     Group generate files, and combine metrics data by classname, 
@@ -232,9 +277,15 @@ def post_process_callgraphs(proj_name, call_res_path
     group_by_class_name(proj_name, qmetrics_path)
     print('done grouping qmetrics files.')
 
-    for passname, output_dir in zip(ast_pass_names, ast_output_dirs):
-        group_by_class_name(proj_name, ast_res_path, ast_metric_name=passname, ast_output_dir=output_dir)
-        print('done grouping ast metrics. Passname: ', passname)
+    if (ast_output_dirs, ast_pass_names) != ([], []):
+        for passname, output_dir in zip(ast_pass_names, ast_output_dirs):
+            group_by_class_name(proj_name, ast_res_path, ast_metric_name=passname, ast_output_dir=output_dir)
+            print('done grouping ast metrics. Passname: ', passname)
+
+    if (pp_output_dirs, pp_pass_names) != ([], []):
+        for passname, output_dir in zip(pp_pass_names, pp_output_dirs): 
+            group_by_class_name(proj_name, pp_res_path, pp_metric_name=passname, pp_output_dir=output_dir)
+            print("Done grouping preprocessor metrics. Passname: ", passname)
     
     # combine class callgraphs into one giant one 
     combine_class_metrics(proj_name, call_res_path)

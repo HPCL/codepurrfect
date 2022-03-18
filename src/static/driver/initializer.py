@@ -44,6 +44,7 @@ def handleInitWithPasses(initL : Union[List[str], str], args : Dict[str, str]):
     handleInit(initL, args)
 
     ast_passes = [] 
+    pp_passes = []
 
     if isinstance(initL, list):
         if len(initL) == 0: 
@@ -54,13 +55,22 @@ def handleInitWithPasses(initL : Union[List[str], str], args : Dict[str, str]):
                 runner = PassRunner(initL, func_pass=True, cg_pass=False)
 
     if isinstance(initL, str):  
-        ast_passes_str = args['ast_pass']
-        ast_passes     = ast_passes_str.split(',') 
+        if 'ast_pass' in args.keys():
+            if args['ast_pass'] != None:
+                ast_passes_str = args['ast_pass']
+                ast_passes     = ast_passes_str.split(',') 
 
-        runner = PassRunner(initL, cg_pass=True, ast_passes=ast_passes)
+                runner = PassRunner(initL, cg_pass=True, ast_passes=ast_passes)
+
+        if 'pp_pass' in args.keys(): 
+            if args['pp_pass'] != None:
+                pp_passes_str = args['pp_pass'] 
+                pp_passes     = pp_passes_str.split(',') 
+
+                runner = PassRunner(initL, cg_pass=True, pp_passes=pp_passes)
 
         
-    runner.run(pool, ast_passes=ast_passes) 
+    runner.run(pool, ast_passes=ast_passes, pp_passes=pp_passes) 
     runner.post_process_pass() 
 
     

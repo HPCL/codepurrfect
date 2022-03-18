@@ -94,6 +94,7 @@ def gen_ll_from_file_helper(x):
 class CGenRunner(): 
     def __init__(self, dirpath : str, llpath : str, callpath : str = None
                      , astpath : str = None
+                     , pp_path : str = None 
                      , qmetricspath : str = None 
                      , cgpluginpath : str   = None  
                      , funcpluginpath : str = None 
@@ -103,6 +104,7 @@ class CGenRunner():
         self.llpath         = llpath 
         self.callpath       = callpath 
         self.astpath        = astpath 
+        self.pp_path        = pp_path 
         self.qmetricspath   = qmetricspath 
         self.cgpluginpath   = cgpluginpath 
         self.funcpluginpath = funcpluginpath 
@@ -193,7 +195,6 @@ class CGenRunner():
                             continue 
                         else:
                             item["command"][i] = "clang++"
-                            is_cpp_project = is_cpp_project or True 
                     if ("cc" in x) and (i == 0): 
                         item["command"][i] = "clang"
                     if x == "-O0":
@@ -309,21 +310,32 @@ class CGenRunner():
         return
 
 
-    def run_ast_pass(self, project_name : str, passname : str) -> str: 
+    def run_front_pass(self, project_name : str, passname : str, front_type : str) -> str: 
         '''
-        Run a custom developed Clang libtooling AST pass  
+        Run a custom developed Clang libtooling AST or PP pass  
 
 
         Keyword arguments: 
         project_name    -- The name of the project 
-        passname        -- The name of the AST pass as stored in myglobals.py 
+        passname        -- The name of the AST or PP pass as stored in myglobals.py 
         '''
-        execpath = myglobals.config_vars['ast'][passname]
-        passpath = '/'.join([self.astpath, passname]) 
+        execpath = myglobals.config_vars[front_type][passname]
+        passpath = ''
+        if front_type == 'ast':
+            passpath = '/'.join([self.astpath, passname]) 
+        if front_type == 'pp': 
+            passpath = '/'.join([self.pp_path, passname])
         if not os.path.isdir(passpath): 
             os.mkdir(passpath) 
         gen_ast_metrics(project_name, execpath, passpath)
         return passpath 
+
+    def run_ast_pass(self, project_name : str, passname : str) -> str: 
+        return self.run_front_pass(project_name, passname, 'ast') 
+
+    def run_pp_pass(self, project_name : str, passname : str) -> str: 
+        print("RUNNING PREPROCESSOR PASS: ", passname)
+        return self.run_front_pass(project_name, passname, 'pp')
 
 
     def run(self, pool : Pool, pluginpath : str, passname : str): 
@@ -381,13 +393,28 @@ class CGenRunner():
         self.run(pool=pool, pluginpath=self.funcpluginpath, passname="function-gen")
         return
 
+    def gen_front_metrics(self, project_name : str, passes : List[Str], pass_func) -> List[str]: 
+        pass_output_dirs = [] 
+        for passname in passes:
+            output_dir = pass_func(project_name, passname)
+            pass_output_dirs.append(output_dir) 
+        return pass_output_dirs
+
     def gen_ast_metrics(self, project_name : str, passes : List[Str]) -> List[str]: 
         '''
         Generate AST based metrics. 
         See *run_ast_pass*
         '''
-        pass_output_dirs = [] 
-        for passname in passes:
-            output_dir = self.run_ast_pass(project_name, passname)
-            pass_output_dirs.append(output_dir) 
-        return pass_output_dirs
+        return self.gen_front_metrics(project_name
+                                     , passes
+                                     , lambda project_name, passname : self.run_ast_pass(project_name, passname))
+
+
+    def gen_pp_metrics(self, project_name : str, passes : List[Str]) -> List[str]: 
+        '''
+        Generate PP based metrics. 
+        See *run_pp_pass*
+        '''
+        return self.gen_front_metrics(project_name
+                                    , passes
+                                    , lambda project_name, passname : self.run_pp_pass(project_name, passname)) 
