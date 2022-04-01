@@ -46,17 +46,18 @@ def init():
         }
     global config_vars 
     cwd = os.getcwd()
-    calc_ast_path = lambda passname : '/'.join(['/static/passes-ast', passname, 'build', passname])
-    calc_pp_path  = lambda passname : '/'.join(['/static/passes-pp', passname, 'build', passname])
+    calc_ast_path = lambda passname : '/'.join(['/static/build/passes-ast', passname, passname])
+    calc_pp_path  = lambda passname : '/'.join(['/static/build/passes-pp/build', passname, passname])
     config_vars = {
-        "cl_grph_plugin_path" : "/static/passes-ir/callgraph-xSDK/build/CallgraphxSDK/libCallgraphxSDK.so" ,
-        "func_only_plugin_path" : "/static/passes-ir/function-gen/build/FunctionGen/libFunctionGen.so",
+        "cl_grph_plugin_path" : "/static/build/passes-ir/callgraph-xSDK/CallgraphxSDK/libCallgraphxSDK.so" ,
+        "func_only_plugin_path" : "/static/build/passes-ir/function-gen/FunctionGen/libFunctionGen.so",
         "comp_db_path" : cwd + "/compile_commands.json", 
-        "store"        : cwd + "/.ideas-uo",
+        "store"        : cwd + "/.quality-uo",
         "ast"          : {
             "visit-switch" : calc_ast_path("visit-switch"), 
             "goto-out-of-switch" : calc_ast_path("goto-out-of-switch"), 
-            "cwe-1079-parcls-no-vrt-dstrctr" : calc_ast_path("cwe-1079-parcls-no-vrt-dstrctr")
+            "cwe-1079-parcls-no-vrt-dstrctr" : calc_ast_path("cwe-1079-parcls-no-vrt-dstrctr"), 
+            "cwe-1087-cls-vrt-no-vrt-dstrctr" : calc_ast_path("cwe-1087-cls-vrt-no-vrt-dstrctr")
         },
         "pp"           : {
             "includes-cycles"        : calc_pp_path("includes-cycles")

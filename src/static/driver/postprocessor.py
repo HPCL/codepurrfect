@@ -58,6 +58,8 @@ def group_by_class_name(proj_name : str
                 mv_front_pass_files(ast_metric_name, ast_output_dir, content_path, proj_name, fpost_fix=['_goto_metrics.csv'])
             elif ast_metric_name == 'cwe-1079-parcls-no-vrt-dstrctr':
                 mv_front_pass_files(ast_metric_name, ast_output_dir, content_path, proj_name, fpost_fix=['_cwe1079_metrics.csv'])
+            elif ast_metric_name == 'cwe-1087-cls-vrt-no-vrt-dstrctr': 
+                mv_front_pass_files(ast_metric_name, ast_output_dir, content_path, proj_name, fpost_fix=['_cwe1087_metrics.csv'])
             else: 
                 mv_front_pass_files(ast_metric_name, ast_output_dir, content_path, proj_name)
 
@@ -71,6 +73,8 @@ def group_by_class_name(proj_name : str
                 mv_front_pass_files(ast_metric_name, ast_output_dir, content_path, proj_name, fpost_fix=['_goto_metrics.csv'])
             elif ast_metric_name == 'cwe-1079-parcls-no-vrt-dstrctr':
                 mv_front_pass_files(ast_metric_name, ast_output_dir, content_path, proj_name, fpost_fix=['_cwe1079_metrics.csv'])
+            elif ast_metric_name == 'cwe-1087-cls-vrt-no-vrt-dstrctr': 
+                mv_front_pass_files(ast_metric_name, ast_output_dir, content_path, proj_name, fpost_fix=['_cwe1087_metrics.csv'])
             else: 
                 mv_front_pass_files(ast_metric_name, ast_output_dir, content_path, proj_name)
 

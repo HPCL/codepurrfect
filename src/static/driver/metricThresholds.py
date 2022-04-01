@@ -127,6 +127,10 @@ def import_data(project_name : str, ast_passes : List[str] =[], pp_passes : List
             pass_metric_pd = pd.read_csv(pass_metric_file, names=["CLASS", "PARENT", "HAS_DESTRUCTOR"]) 
             to_return_data['astmetrics'][passname] = pass_metric_pd
 
+        if passname == "cwe-1087-cls-vrt-no-vrt-dstrctr": 
+            pass_metric_pd = pd.read_csv(pass_metric_file, names=["Location", "Message"]) 
+            to_return_data['astmetrics'][passname] = pass_metric_pd
+
 
     for passname in pp_passes: 
         pass_metric_file = '/'.join([
@@ -201,7 +205,12 @@ def match_metric_type(metric):
     cgmetrics = ['FanIn', 'FanOut', 'Closeness', 'Betweenness', 'Eccentricity_R', 'Eccentricity_N'] 
     qmetrics = ['ArgCount', 'InstrCount', 'UniqVals', 'UniqOps', 'TotalOps', 'CC', 'LOC'] 
 
-    astmetrics = ['case-no-break', 'switch-no-default', 'goto-out-of-switch', 'cwe-1079-parcls-no-vrt-dstrctr']
+    astmetrics = ['case-no-break', 
+                  'switch-no-default', 
+                  'goto-out-of-switch', 
+                  'cwe-1079-parcls-no-vrt-dstrctr',
+                  'cwe-1087-cls-vrt-no-vrt-dstrctr']
+
     ppmetrics  = ['includes-cycles']
 
 
@@ -294,6 +303,9 @@ class Reporter:
             if metric == 'cwe-1079-parcls-no-vrt-dstrctr': 
                 # TODO 
                 todo = 0 
+            if metric == 'cwe-1087-cls-vrt-no-vrt-dstrctr': 
+                # TODO 
+                todo = 0
         return 
 
     def report_metric_thresholds(self): 
@@ -366,6 +378,9 @@ class Reporter:
                 pass 
             if metric == 'cwe-1079-parcls-no-vrt-dstrctr': 
                 # TODO 
+                pass
+            if metric == 'cwe-1087-cls-vrt-no-vrt-dstrctr': 
+                # TODO 
                 pass 
         return 
 
@@ -409,6 +424,11 @@ class Reporter:
             if ast_metric == 'cwe-1079-parcls-no-vrt-dstrctr': 
                 temp_data = self.data['astmetrics']['cwe-1079-parcls-no-vrt-dstrctr'] 
                 print(temp_data.tail(head))
+            
+            if ast_metric == 'cwe-1087-cls-vrt-no-vrt-dstrctr': 
+                temp_data = self.data['astmetrics']['cwe-1087-cls-vrt-no-vrt-dstrctr'] 
+                temp_data = temp_data.loc[temp_data['Location'].str.contains(self.project_name, case=False)]
+                print(temp_data.head(head))
 
         if pp_metric != None:
             if pp_metric == 'includes-cycles': 

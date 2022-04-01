@@ -24,7 +24,7 @@ def create_tool_dirs(func_only=False, ast=False, pp=False):
         pname = pwd.split('/')[-1]
 
     hide_prefix = '.'
-    tool_dir    = hide_prefix + "ideas-uo" 
+    tool_dir    = hide_prefix + "quality-uo" 
     if not os.path.isdir(tool_dir): 
         os.mkdir(tool_dir) 
 
