@@ -3,7 +3,7 @@ Assume you want to add a new check to the tool.
 This document gives an example of how one might go by doing so. 
 
 Consider the pass that corresponds to PETSC's [C formatting rule number 15](https://petsc.org/release/developers/style/) regarding if statements: 
-    - Never have: 
+- Never have: 
   
 
       if () 
@@ -22,10 +22,10 @@ or
       }
 
 
-Since this deals with a node in the abstract syntax tree (i.e *if* or *for*), we need to write an AST pass for it. 
+Since this deals with a node in the abstract syntax tree (i.e *if*), we need to write an AST pass for it. 
 
 To do so,
-- first create a directory for the pass under `static/passes-ast`. For example: ```mkdir static/passes-ast/petsc-15```.  
+- First create a directory for the pass under `static/passes-ast`. For example: ```mkdir static/passes-ast/petsc-15```.  
 - Next, copy `utils.cpp` and `utils.hpp` into the newly created directory. (The two files can be found in any of the passes-ast subdirectories)
 - Next, create a `static/passes-ast/petsc-15/CheckPetsc15.cpp` file, in which you will write the logic for your check.
 - Next, create a `static/passes-ast/petsc-15/CMakeLists.txt` file and populate it with the following: 
@@ -70,7 +70,9 @@ cmake.
 
 After the building process is finished, update the `ast` field 
 of the `config_vars` dictionary in `driver/myglobals.py` to point 
-to executable for the pass, and you're good to go. 
+to executable for the pass, and you're good to go, as far as data 
+collection is concerned. For example, data corresponding to our 
+example pass will be stored in `<project-dir>/.quality-uo/<projectname>-ast-metrics/petsc-15`.  
 
 If more reporting, beyond printing the contents of the overall 
 project metric file, is needed, update the `Reporter` object 
