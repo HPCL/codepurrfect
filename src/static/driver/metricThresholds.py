@@ -131,6 +131,10 @@ def import_data(project_name : str, ast_passes : List[str] =[], pp_passes : List
             pass_metric_pd = pd.read_csv(pass_metric_file, names=["Location", "Message"]) 
             to_return_data['astmetrics'][passname] = pass_metric_pd
 
+        if passname == "cwe-1055": 
+            pass_metric_pd = pd.read_csv(pass_metric_file, names=["Location", "Message"]) 
+            to_return_data['astmetrics'][passname] = pass_metric_pd
+
 
     for passname in pp_passes: 
         pass_metric_file = '/'.join([
@@ -209,7 +213,8 @@ def match_metric_type(metric):
                   'switch-no-default', 
                   'goto-out-of-switch', 
                   'cwe-1079-parcls-no-vrt-dstrctr',
-                  'cwe-1087-cls-vrt-no-vrt-dstrctr']
+                  'cwe-1087-cls-vrt-no-vrt-dstrctr', 
+                  'cwe-1055']
 
     ppmetrics  = ['includes-cycles']
 
@@ -306,6 +311,9 @@ class Reporter:
             if metric == 'cwe-1087-cls-vrt-no-vrt-dstrctr': 
                 # TODO 
                 todo = 0
+            if metric == 'cwe-1055': 
+                # TODO 
+                todo = 0
         return 
 
     def report_metric_thresholds(self): 
@@ -382,6 +390,9 @@ class Reporter:
             if metric == 'cwe-1087-cls-vrt-no-vrt-dstrctr': 
                 # TODO 
                 pass 
+            if metric == 'cwe-1055': 
+                # TODO 
+                pass
         return 
 
     def report_sorted(self, region='range', head=5, ast_metric=None, pp_metric=None):
@@ -427,6 +438,11 @@ class Reporter:
             
             if ast_metric == 'cwe-1087-cls-vrt-no-vrt-dstrctr': 
                 temp_data = self.data['astmetrics']['cwe-1087-cls-vrt-no-vrt-dstrctr'] 
+                temp_data = temp_data.loc[temp_data['Location'].str.contains(self.project_name, case=False)]
+                print(temp_data.head(head))
+
+            if ast_metric == 'cwe-1055': 
+                temp_data = self.data['astmetrics']['cwe-1055'] 
                 temp_data = temp_data.loc[temp_data['Location'].str.contains(self.project_name, case=False)]
                 print(temp_data.head(head))
 

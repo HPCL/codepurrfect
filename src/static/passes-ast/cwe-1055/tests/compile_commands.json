@@ -1,0 +1,17 @@
+[
+	{
+  		"directory": "/static/passes-ast/cwe-1087-cls-vrt-no-vrt-dstrctr/tests",
+  		"command": "clang++ -std=c++20 /static/passes-ast/cwe-1087-cls-no-vrt-dstrctr/tests/test.cpp",
+  		"file": "/static/passes-ast/cwe-1087-cls-no-vrt-dstrctr/tests/test.cpp"
+	},
+	{
+		"directory": "/static/passes-ast/cwe-1087-cls-vrt-no-vrt-dstrctr/tests",
+		"command": "clang++ -std=c++20 /static/passes-ast/cwe-1087-cls-no-vrt-dstrctr/tests/test1.cpp",
+		"file": "/static/passes-ast/cwe-1087-cls-no-vrt-dstrctr/tests/test1.cpp"
+  	},
+	{
+		"directory": "/static/passes-ast/cwe-1087-cls-vrt-no-vrt-dstrctr/tests",
+		"command": "clang++ -std=c++20 /static/passes-ast/cwe-1087-cls-no-vrt-dstrctr/tests/test2.cpp",
+		"file": "/static/passes-ast/cwe-1087-cls-no-vrt-dstrctr/tests/test2.cpp"
+  	}
+]

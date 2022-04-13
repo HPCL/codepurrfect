@@ -51,18 +51,8 @@ ENV LD_LIBRARY_PATH=/tmp/clang_13/lib:$LD_LIBRARY_PATH
 
 
 RUN apt-get -y remove cmake && \ 
-    pip3 install cmake --upgrade && \ 
-    mkdir -p /static/passes-ir/callgraph-xSDK/build && \ 
-    cd /static/passes-ir/callgraph-xSDK/build && \ 
-    cmake .. && \  
-    cd CallgraphxSDK && \ 
-    make 
+    pip3 install cmake --upgrade 
 
-RUN mkdir -p /static/passes-ir/function-gen/build && \ 
-    cd /static/passes-ir/function-gen/build && \ 
-    cmake .. && \  
-    cd FunctionGen && \ 
-    make 
 
 RUN mkdir logs 
  

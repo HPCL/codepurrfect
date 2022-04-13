@@ -41,6 +41,9 @@ def parseCmdArgs() -> Tuple[CmdArgsTy, Dict[str, str]]:
                                                        +  "Provide file with list of files resulting of git's diff", action='store_true')
     parser.add_argument("-a", "--ast_pass", type=str, help="AST passes to run to collect metrics. To be run in combination with --init." 
                                                        + "e.g --init --ast_pass='visit-switch' ")
+    parser.add_argument("-I", "--ir_pass", type=str, help="IR passes to run to collect metrics. To be run in combination with --init." 
+                                                       + "e.g --init --ir_pass='Callgraph-xSDK' ")
+    parser.add_argument("-A", "--all", help="Run all available passes. To be run in combination with --init. e.g: --init --all", action="store_true")
     parser.add_argument("-p", "--pp_pass", type=str, help="Preprocessor passes to run to collect metrics. To be run in combination with --init." 
                                                     + "e.g --init --pp_pass='includes-pass' ")
     parser.add_argument("-f", "--freshen", help="Recompute quality data. Should be run after new commit.", action="store_true") 
@@ -61,14 +64,17 @@ def parseCmdArgs() -> Tuple[CmdArgsTy, Dict[str, str]]:
 
     v_args = vars(args)
     if args.init: 
-        if args.diff_funcs_only: 
-            return (CmdArgsTy.INIT([args.diff_funcs_only]), v_args)
-        else: 
-            if args.ast_pass: 
-                return (CmdArgsTy.INIT(args.ast_pass), v_args)
-            if args.pp_pass: 
-                return (CmdArgsTy.INIT(args.pp_pass), v_args)
-            return (CmdArgsTy.INIT([]), v_args)
+        if args.all:
+            return (CmdArgsTy.INIT("all"), v_args)
+        else:
+            if args.diff_funcs_only: 
+                return (CmdArgsTy.INIT([args.diff_funcs_only]), v_args)
+            else: 
+                if args.ast_pass: 
+                    return (CmdArgsTy.INIT(args.ast_pass), v_args)
+                if args.pp_pass: 
+                    return (CmdArgsTy.INIT(args.pp_pass), v_args)
+                return (CmdArgsTy.INIT([]), v_args)
     if args.freshen: 
         return (CmdArgsTy.FRESH, v_args) 
     if args.report: 

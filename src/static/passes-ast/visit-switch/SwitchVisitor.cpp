@@ -190,7 +190,7 @@ public:
     clang::CompilerInstance &compiler, llvm::StringRef inFile) {
     std::string inFile_str = inFile.str(); 
     size_t dot_index = inFile_str.find_last_of(".");
-    std::string metrics_filename = inFile_str.substr(0, dot_index) + "_metrics.csv";
+    std::string metrics_filename = inFile_str.substr(0, dot_index) + "_switchvis_metrics.csv";
     return std::unique_ptr<clang::ASTConsumer>(
         new SwitchConsumer(&compiler.getASTContext(), &compiler.getSourceManager(), metrics_filename)
         );

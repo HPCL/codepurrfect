@@ -92,29 +92,34 @@ def gen_ll_from_file_helper(x):
 
 
 class CGenRunner(): 
-    def __init__(self, dirpath : str, llpath : str, callpath : str = None
+    def __init__(self, dirpath : str
                      , astpath : str = None
-                     , pp_path : str = None 
-                     , qmetricspath : str = None 
-                     , cgpluginpath : str   = None  
-                     , funcpluginpath : str = None 
-                     , fltrd_filepath : str = None
-                     , fltrd_outpath : str = None) -> None:
+                     , pppath : str = None 
+                     , irpath : str = None 
+                     ) -> None:
         self.dirpath        = dirpath 
-        self.llpath         = llpath 
-        self.callpath       = callpath 
+        # self.llpath         = llpath 
+        # self.callpath       = callpath 
+        self.irpath         = irpath 
         self.astpath        = astpath 
-        self.pp_path        = pp_path 
-        self.qmetricspath   = qmetricspath 
-        self.cgpluginpath   = cgpluginpath 
-        self.funcpluginpath = funcpluginpath 
+        self.pp_path        = pppath 
 
-        self.fltrd_filepath  = fltrd_filepath 
-        self.fltrd_outpath   = fltrd_outpath 
+        # self.qmetricspath   = qmetricspath 
+        # self.cgpluginpath   = cgpluginpath 
+        # self.funcpluginpath = funcpluginpath 
+
+        # self.fltrd_filepath  = fltrd_filepath 
+        # self.fltrd_outpath   = fltrd_outpath 
 
         self.data         = None 
 
-        self.locs_path    = '/'.join([self.qmetricspath, 'lines-of-code'])
+        self.locs_path    = '/'.join([self.astpath, 'lines-of-code'])
+        self.llpath       = '/'.join([self.irpath, "ll"])
+
+        new_paths = [self.locs_path, self.llpath]
+        for p in new_paths: 
+            if not os.path.isdir(p): 
+                os.mkdir(p)
 
     def read_fltrd(self) -> List[str]: 
         '''
@@ -239,7 +244,7 @@ class CGenRunner():
         async_result = pool.map(calc_file_loc_helper, commands_obj)
         return 
 
-    def compile_dir(self, pool, on_filtered=False) -> None: 
+    def compile_dir(self, pool) -> None: 
         '''
         Read the compilation database, 
         filter it with diff file, 
@@ -256,11 +261,11 @@ class CGenRunner():
         print("running compilation...")
         self.read_compilation_db()
         print("original data length: ", len(self.data))
-        retained = [] 
-        if on_filtered:
-            self.filter_data_with_diff() 
-            print("length of retained after filter: ", len(self.data))
-        print("data length", len(self.data))
+        # retained = [] 
+        # if on_filtered:
+        #     self.filter_data_with_diff() 
+        #     print("length of retained after filter: ", len(self.data))
+        # print("data length", len(self.data))
 
         # replace cc flags with clang's for emitting IR  
         self.make_comp_be_clang()
@@ -319,7 +324,7 @@ class CGenRunner():
         project_name    -- The name of the project 
         passname        -- The name of the AST or PP pass as stored in myglobals.py 
         '''
-        execpath = myglobals.config_vars[front_type][passname]
+        execpath = myglobals.config_vars[front_type][passname]["exe"]
         passpath = ''
         if front_type == 'ast':
             passpath = '/'.join([self.astpath, passname]) 
@@ -368,14 +373,32 @@ class CGenRunner():
         cwd = os.getcwd() 
         print("moving files graph and indirect files to respective dirs ...") 
         start = time.time() 
-        self.move_files(cwd, [self.callpath, self.qmetricspath]
-                    , extensions=["_callgraph.csv", "_qmetrics.csv", "_indirects.txt"])
-        print("done moving files.")
-        end = time.time() 
-        print("moving files took: ", end - start)      
+
+        # if passname == "CallgraphxSDK":
+        #     callpath     = '/'.join([self.irpath, "callgraph"])
+        #     qmetricspath = '/'.join([self.irpath, "callgraph"])
+        #     cg_paths = [callpath, qmetricspath]
+        #     for p in cg_paths: 
+        #         if not os.path.isdir(p): 
+        #             os.mkdir(p)
+        #     self.move_files(cwd, [callpath, qmetricspath]
+        #                 , extensions=["_callgraph.csv", "_qmetrics.csv", "_indirects.txt"])
+        # print("done moving files.")
+        # end = time.time() 
+        # print("moving files took: ", end - start)      
         return  
 
 
+    def gen_ir_metrics(self, pool : Pool, ir_passes : List[str]): 
+        output_dirs = [] 
+        for passname in ir_passes: 
+            pluginpath = myglobals.config_vars["ir"][passname]["exe"]
+            passpath_out = '/'.join([self.irpath, passname])
+            if not os.path.isdir(passpath_out): 
+                os.mkdir(passpath_out)
+            self.run(pool=pool, pluginpath=pluginpath, passname=passname)
+            output_dirs.append(passpath_out)
+        return output_dirs
 
     def gen_callgraphs(self, pool : Pool): 
         '''
@@ -399,6 +422,8 @@ class CGenRunner():
             output_dir = pass_func(project_name, passname)
             pass_output_dirs.append(output_dir) 
         return pass_output_dirs
+
+    
 
     def gen_ast_metrics(self, project_name : str, passes : List[Str]) -> List[str]: 
         '''
