@@ -1,57 +1,15 @@
 import os 
 
-# would be nice if this table 
-# could be populated automatically 
-# e.g: in C++ a pass to recognize all classes 
-#      and in C, a pass to find all structs
-
 def init(): 
-    global proj_class_names 
-    proj_class_names = {
-            "petsc" : {
-                "classes"     : ["mat", "vec", "ts", "ksp", "snes", "dm", "tao", "sys"],
-                "hasTestLogs" : False,
-                "logsPath"    : "logs/petsc_fail_logs" 
-            }, 
-            "slepc" : {
-                "classes"     : [], 
-                "hasTestLogs" : False, 
-                "logsPath"    : ""
-            }, 
-            "lammps" : {
-                "classes" : [], 
-                "hasTestLogs" : False, 
-                "logsPath" : ""
-            }, 
-            "hypre" : {
-                "classes" : [],
-                "hasTestLogs" : False,
-                "logsPath"    : ""
-            },
-            "trilinos" : {
-                "classes" : ["PyTrilinos", "TriKota", "adelus", "amesos", "amesos2", 
-                            "anasazi", "aztecoo", "belos", "common", "compadre", "domi",
-                            "epetra", "eptraext", "fei", "galeri", "ifpack", "ifpack2",
-                            "intrepid", "intrepid2", "isorropia", "kokkos-kernels", 
-                            "kokkos", "komplex", "minitensor", "ml", "moertel", "muelu",
-                            "new_package", "nox", "pamgen", "panzer", "percept", "phalanx", 
-                            "pike", "pike", "piro", "pliris", "rol", "rtop", "rythmos", 
-                            "sacado", "seacas", "shards", "shylu", "stk", "stokhos", 
-                            "stratimikos", "teko", "tempus", "teuchos", "thyra", 
-                            "tpetra", "trilinoscouplings", "triutils", "xpetra", 
-                            "zoltan", "zoltan2"],
-                "hasTestLogs" : False, 
-                "logsPath" : ""
-            }
-        }
     global config_vars 
     cwd = os.getcwd()
     calc_ast_path = lambda passname : '/'.join(['/static/build/passes-ast', passname, passname])
     calc_pp_path  = lambda passname : '/'.join(['/static/build/passes-pp', passname, passname])
     calc_ir_path  = lambda passname : '/'.join(['/static/build/passes-ir', passname, passname, "lib" + passname + ".so"])
-    config_vars = {
-        "comp_db_path" : cwd + "/compile_commands.json", 
-        "store"        : cwd + "/.quality-uo",
+    config_vars   = {
+        "comp_db_path"   : cwd + "/compile_commands.json", 
+        "store"          : cwd + "/.quality-uo",
+        "clang-includes" : "/tmp/clang_13/lib/clang/13.0.0/include", # assumes this is running in the provided docker container 
         "ir"           : {
             "CallgraphxSDK" : {
                                 "exe" :calc_ir_path("CallgraphxSDK"), 
@@ -112,13 +70,12 @@ def init():
                             }
         },
         "pp"           : {
-            "includes-cycles"        : calc_pp_path("includes-cycles")
-        },
-        "clang-includes" : "/tmp/clang_13/lib/clang/13.0.0/include",
-        "build-loc" : {
-            "petsc"  : "/petsc/arch-linux-c-debug/include",
-            "hypre"  : "/hypre/src/cmbuild", 
-            "lammps" : "lammps/src/cmake/build"
+            "includes-cycles"   : { 
+                "exe"        : calc_pp_path("includes-cycles"), 
+                "extensions" : [
+                    "filedep_graph.csv"
+                ]
+            }
         }
 
     }

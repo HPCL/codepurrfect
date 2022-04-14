@@ -11,7 +11,6 @@ def runtool(proj_name : str, execpath : str, outpath : str) -> None:
     and store the results in *outpath*. 
     '''
     comp_db_path = myglobals.config_vars['comp_db_path']
-    build_path   = myglobals.config_vars["build-loc"][proj_name] 
     sys_includes = myglobals.config_vars["clang-includes"]
 
     comp_data = None 

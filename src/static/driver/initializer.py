@@ -58,11 +58,8 @@ def handleInitWithPasses(initL : Union[List[str], str], args : Dict[str, str]):
                     ir_passes = ir_passes_str.split(',')
 
     create_tool_dirs(ast=ast, pp=pp, ir=ir)
+    
     runner = PassRunner([initL], ast_passes=ast_passes, pp_passes=pp_passes, ir_passes=ir_passes)
-
-    print('I get here')
-    print('IR PASSES: ', ir_passes)
-    print('INITL: ', initL)
     runner.run(pool, ast_passes=ast_passes, pp_passes=pp_passes, ir_passes=ir_passes) 
     
 
