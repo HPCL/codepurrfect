@@ -26,10 +26,10 @@ using namespace llvm;
 using namespace clang;
 using namespace clang::tooling;
 
-class GoToVisitor : public RecursiveASTVisitor<GoToVisitor> 
+class SwitchVisitor : public RecursiveASTVisitor<SwitchVisitor> 
 {
 public:
-    explicit GoToVisitor(ASTContext *p_context, SourceManager *manager, std::string metrics_filename)
+    explicit SwitchVisitor(ASTContext *p_context, SourceManager *manager, std::string metrics_filename)
       : context(p_context), src_manager(manager), metrics_filename(metrics_filename) {} 
 
     ofstream report_file;
@@ -37,44 +37,55 @@ public:
     void open_report_file() 
     {
       report_file.open(this -> metrics_filename); 
-      report_file << "GOTO, LABEL \n"; 
+      report_file << "Message, Location \n"; 
     }
 
-    bool VisitGotoStmt(GotoStmt* goto_stmt)
-    {
-      auto parent = this -> context -> getParents(*goto_stmt)[0].get<Stmt>(); 
-      if(isa<CompoundStmt>(parent))
+    bool VisitSwitchStmt(SwitchStmt* switch_stmt)
+    { 
+      auto parents = this -> context -> getParents(*switch_stmt); 
+      for (auto parent : parents)
       {
-        auto grand_parent = this -> context -> getParents(*parent)[0].get<Stmt>(); 
-        if (!isa<SwitchStmt>(grand_parent))
+        auto p = parent.get<Stmt>(); 
+        while (!isa<SwitchStmt>(p))
         {
-          SourceLocation goto_loc  = goto_stmt -> getGotoLoc(); 
-          SourceLocation label_loc = goto_stmt -> getLabel() -> getStmt() -> getBeginLoc(); 
-          report_file << goto_loc.printToString(*(this -> src_manager));  
-          report_file << ", "; 
-          report_file << label_loc.printToString(*(this -> src_manager));  
-          report_file << "\n"; 
+          p = this -> context -> getParents(*p)[0].get<Stmt>();  
+          if (p == NULL)
+          {
+            break; 
+          }
+          
+        }
+
+        if (p)
+        {
+          if (isa<SwitchStmt>(p))
+          {
+            report_file << "SWITCH INSIDE SWITCH AT, "; 
+            SourceLocation b = switch_stmt -> getBeginLoc(); 
+            report_file << b.printToString(*(this -> src_manager)); 
+            report_file << "\n";
+          }
         }
         
+        
+        
+        
       }
-
-      return true; 
       
-    }
+      return true; 
 
+    }
 
 private:
     ASTContext *context;
     SourceManager *src_manager; 
     std::string metrics_filename; 
-    int no_defaults    = 0; 
-    int missing_breaks = 0; 
 };
 
 
-class GoToConsumer : public clang::ASTConsumer {
+class SwitchConsumer : public clang::ASTConsumer {
 public:
-  explicit GoToConsumer(ASTContext *context, SourceManager *src_manager, std::string metrics_filename)
+  explicit SwitchConsumer(ASTContext *context, SourceManager *src_manager, std::string metrics_filename)
     : visitor(context, src_manager, metrics_filename) {}
 
   virtual void HandleTranslationUnit(clang::ASTContext &context) {
@@ -82,20 +93,19 @@ public:
     visitor.TraverseDecl(context.getTranslationUnitDecl());
   }
 private:
-  GoToVisitor visitor; 
+  SwitchVisitor visitor; 
 
 };
 
-class GoToAction : public clang::ASTFrontendAction {
+class SwitchAction : public clang::ASTFrontendAction {
 public:
   virtual std::unique_ptr<clang::ASTConsumer> CreateASTConsumer(
     clang::CompilerInstance &compiler, llvm::StringRef inFile) {
     std::string inFile_str = inFile.str(); 
     size_t dot_index = inFile_str.find_last_of(".");
-    std::string metrics_filename = inFile_str.substr(0, dot_index) + "_goto_metrics.csv";
-    std::replace(metrics_filename.begin(), metrics_filename.end(), '/', '_');
+    std::string metrics_filename = inFile_str.substr(0, dot_index) + "_cwe407_metrics.csv";
     return std::unique_ptr<clang::ASTConsumer>(
-        new GoToConsumer(&compiler.getASTContext(), &compiler.getSourceManager(), metrics_filename)
+        new SwitchConsumer(&compiler.getASTContext(), &compiler.getSourceManager(), metrics_filename)
         );
   }
 };
@@ -130,7 +140,7 @@ int main(int argc, const char **argv)
        for(auto &s : compileArgs)
           llvm::outs() << s << "\n";
 
-       auto xfrontendAction = std::make_unique<GoToAction>();
+       auto xfrontendAction = std::make_unique<SwitchAction>();
        utils::customRunToolOnCodeWithArgs(move(xfrontendAction), compileArgs, sourceFile);
    }
    return 0;

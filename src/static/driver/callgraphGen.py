@@ -261,11 +261,6 @@ class CGenRunner():
         print("running compilation...")
         self.read_compilation_db()
         print("original data length: ", len(self.data))
-        # retained = [] 
-        # if on_filtered:
-        #     self.filter_data_with_diff() 
-        #     print("length of retained after filter: ", len(self.data))
-        # print("data length", len(self.data))
 
         # replace cc flags with clang's for emitting IR  
         self.make_comp_be_clang()
@@ -371,20 +366,7 @@ class CGenRunner():
         # store indirects.txt in indirect_calls dir
         cwd = os.getcwd() 
         print("moving files graph and indirect files to respective dirs ...") 
-        start = time.time() 
-
-        # if passname == "CallgraphxSDK":
-        #     callpath     = '/'.join([self.irpath, "callgraph"])
-        #     qmetricspath = '/'.join([self.irpath, "callgraph"])
-        #     cg_paths = [callpath, qmetricspath]
-        #     for p in cg_paths: 
-        #         if not os.path.isdir(p): 
-        #             os.mkdir(p)
-        #     self.move_files(cwd, [callpath, qmetricspath]
-        #                 , extensions=["_callgraph.csv", "_qmetrics.csv", "_indirects.txt"])
-        # print("done moving files.")
-        # end = time.time() 
-        # print("moving files took: ", end - start)      
+        start = time.time()    
         return  
 
 
