@@ -71,23 +71,7 @@ For example, running
 /static/driver/main.py --init 
 ```
 
-Will ready the directory for processing and create a `.ideas-uo` directory with the following subdirectories and files: 
-
-    * <projectname>-callgraph 
-    * <projectname>-halstead 
-    * <projectname>-qmetrics 
-    * <projectname>-callgraph.TabOne 
-    * <projectname>-cgmetrics.csv 
-    * <projectname>-qmetrics.csv 
-    * <projectname>-funcnames.txt 
-
-Each of these will then be used by the tool to "report" and "trace" function-level metrics.
-
-The collected data can then be used for various data analyses 
-as for example `logs/PetscContainerExplore.ipynb` presents.
-
-(*N.B* to start a jupyter notebook inside the container, 
-run: `jupyter notebook --no-browser --allow-root --ip 0.0.0.0`)
+For more information on how to write a new check or run existing ones, see [AddNewPass.md](AddNewPass.md)
 
 
 Once you're done, stop the container (by hitting CTRL-D) or 

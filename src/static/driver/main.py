@@ -41,6 +41,11 @@ def parseCmdArgs() -> Tuple[CmdArgsTy, Dict[str, str]]:
                                                        +  "Provide file with list of files resulting of git's diff", action='store_true')
     parser.add_argument("-a", "--ast_pass", type=str, help="AST passes to run to collect metrics. To be run in combination with --init." 
                                                        + "e.g --init --ast_pass='visit-switch' ")
+    parser.add_argument("-I", "--ir_pass", type=str, help="IR passes to run to collect metrics. To be run in combination with --init." 
+                                                       + "e.g --init --ir_pass='Callgraph-xSDK' ")
+    parser.add_argument("-A", "--all", help="Run all available passes. To be run in combination with --init. e.g: --init --all", action="store_true")
+    parser.add_argument("-p", "--pp_pass", type=str, help="Preprocessor passes to run to collect metrics. To be run in combination with --init." 
+                                                    + "e.g --init --pp_pass='includes-pass' ")
     parser.add_argument("-f", "--freshen", help="Recompute quality data. Should be run after new commit.", action="store_true") 
     parser.add_argument("-r", "--report", help="Report funtion's metrics. Should be run in combination"  
                                                          + " with --commit *sha*, to return metrics in that commit.", action='store_true')
@@ -59,12 +64,19 @@ def parseCmdArgs() -> Tuple[CmdArgsTy, Dict[str, str]]:
 
     v_args = vars(args)
     if args.init: 
-        if args.diff_funcs_only: 
-            return (CmdArgsTy.INIT([args.diff_funcs_only]), v_args)
-        else: 
-            if args.ast_pass: 
-                return (CmdArgsTy.INIT(args.ast_pass), v_args)
-            return (CmdArgsTy.INIT([]), v_args)
+        if args.all:
+            return (CmdArgsTy.INIT("all"), v_args)
+        else:
+            if args.diff_funcs_only: 
+                return (CmdArgsTy.INIT([args.diff_funcs_only]), v_args)
+            else: 
+                if args.ast_pass: 
+                    return (CmdArgsTy.INIT(args.ast_pass), v_args)
+                if args.pp_pass: 
+                    return (CmdArgsTy.INIT(args.pp_pass), v_args)
+                if args.ir_pass: 
+                    return (CmdArgsTy.INIT(args.ir_pass), v_args)
+                return (CmdArgsTy.INIT([]), v_args)
     if args.freshen: 
         return (CmdArgsTy.FRESH, v_args) 
     if args.report: 
@@ -95,14 +107,19 @@ def handleReport(report : Union[str, Tuple[str, str], Tuple[str, str, str]], v_a
         # TODO 
         return 
     if isinstance(report, tuple):
-        ast_passes = v_args['ast_pass'].split(',') if v_args['ast_pass'] else []
-        reporter = Reporter(pname, ast_passes=ast_passes)
+        ast_passes, pp_passes = [], []
+        if v_args['ast_pass'] != None:
+            ast_passes = v_args['ast_pass'].split(',') if v_args['ast_pass'] else []
+        if v_args['pp_pass'] != None:
+            pp_passes  = v_args['pp_pass'].split(',') if v_args['pp_pass'] else []
+            print(pp_passes)
+        reporter = Reporter(pname, ast_passes=ast_passes, pp_passes=pp_passes)
         if v_args['metric']: 
             metric                       = report[1] 
             metric_col_name, metric_type = match_metric_type(metric)
             reporter.calc_metric_thresholds(metric_type=metric_type, metric=metric_col_name)
-            print() 
-            reporter.report_metric_thresholds()
+            # print() 
+            # reporter.report_metric_thresholds()
             if v_args['excess']:
                 print("TYPE: ", metric_type)
                 print("NAME: ", metric_col_name)
@@ -110,8 +127,8 @@ def handleReport(report : Union[str, Tuple[str, str], Tuple[str, str, str]], v_a
                 print() 
                 reporter.report_sorted(region=v_args['excess'], ast_metric=v_args['metric'])
             else: 
-                reporter.report_sorted(ast_metric=v_args['metric'])
-
+                reporter.sort_data(metric_type, metric_col_name)
+                reporter.report_sorted(pp_metric=v_args['metric'])
         return 
 
 def handleTrace(funcname : str): 

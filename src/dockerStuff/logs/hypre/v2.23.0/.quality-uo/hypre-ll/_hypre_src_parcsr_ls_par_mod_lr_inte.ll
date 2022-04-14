@@ -1,0 +1,4280 @@
+; ModuleID = '/hypre/src/parcsr_ls/par_mod_lr_interp.c'
+source_filename = "/hypre/src/parcsr_ls/par_mod_lr_interp.c"
+target datalayout = "e-m:e-p270:32:32-p271:32:32-p272:64:64-i64:64-f80:128-n8:16:32:64-S128"
+target triple = "x86_64-unknown-linux-gnu"
+
+%struct.hypre_ParCSRMatrix_struct = type { i32, i32, i32, i32, i32, i32, i32, i32, %struct.hypre_CSRMatrix*, %struct.hypre_CSRMatrix*, %struct.hypre_CSRMatrix*, %struct.hypre_CSRMatrix*, i32*, i32*, [2 x i32], [2 x i32], %struct._hypre_ParCSRCommPkg*, %struct._hypre_ParCSRCommPkg*, i32, i32, double, i32*, double*, i32, %struct.hypre_IJAssumedPart*, i32, i32*, i32, double*, %struct._hypre_ParCSRCommPkg* }
+%struct.hypre_CSRMatrix = type { i32*, i32*, i32*, i32, i32, i32, i32*, i32*, i32, double*, i32*, i32, i32 }
+%struct.hypre_IJAssumedPart = type { i32, i32, i32, i32, i32*, i32*, i32*, i32* }
+%struct._hypre_ParCSRCommPkg = type { i32, i32, i32*, i32*, i32*, i32*, i32, i32*, i32*, i32*, i32* }
+%struct.hypre_ParCSRCommHandle = type { %struct._hypre_ParCSRCommPkg*, i32, i32, i32, i32, i8*, i8*, i8*, i8*, i32, i32* }
+
+@hypre__global_error = external dso_local local_unnamed_addr global i32, align 4
+@.str = private unnamed_addr constant [62 x i8] c"Warning: ParCSRMatrix Memory Location Diag (%d) != Offd (%d)\0A\00", align 1
+
+; Function Attrs: nounwind uwtable
+define dso_local i32 @hypre_BoomerAMGBuildModExtInterpHost(%struct.hypre_ParCSRMatrix_struct* %0, i32* %1, %struct.hypre_ParCSRMatrix_struct* %2, i32* %3, i32 %4, i32* nocapture readonly %5, i32 %6, double %7, i32 %8, %struct.hypre_ParCSRMatrix_struct** nocapture %9) local_unnamed_addr #0 {
+  %11 = alloca i32, align 4
+  %12 = alloca i32, align 4
+  %13 = alloca i32, align 4
+  %14 = alloca %struct.hypre_ParCSRMatrix_struct*, align 8
+  %15 = alloca %struct.hypre_ParCSRMatrix_struct*, align 8
+  %16 = getelementptr inbounds %struct.hypre_ParCSRMatrix_struct, %struct.hypre_ParCSRMatrix_struct* %0, i64 0, i32 0
+  %17 = load i32, i32* %16, align 8, !tbaa !3
+  %18 = getelementptr inbounds %struct.hypre_ParCSRMatrix_struct, %struct.hypre_ParCSRMatrix_struct* %0, i64 0, i32 8
+  %19 = load %struct.hypre_CSRMatrix*, %struct.hypre_CSRMatrix** %18, align 8, !tbaa !10
+  %20 = getelementptr inbounds %struct.hypre_CSRMatrix, %struct.hypre_CSRMatrix* %19, i64 0, i32 12
+  %21 = load i32, i32* %20, align 4, !tbaa !11
+  %22 = getelementptr inbounds %struct.hypre_ParCSRMatrix_struct, %struct.hypre_ParCSRMatrix_struct* %0, i64 0, i32 9
+  %23 = load %struct.hypre_CSRMatrix*, %struct.hypre_CSRMatrix** %22, align 8, !tbaa !13
+  %24 = getelementptr inbounds %struct.hypre_CSRMatrix, %struct.hypre_CSRMatrix* %23, i64 0, i32 12
+  %25 = load i32, i32* %24, align 4, !tbaa !11
+  %26 = icmp eq i32 %21, %25
+  br i1 %26, label %29, label %27
+
+27:                                               ; preds = %10
+  %28 = call i32 (i8*, ...) @hypre_printf(i8* getelementptr inbounds ([62 x i8], [62 x i8]* @.str, i64 0, i64 0), i32 %21, i32 %25) #3
+  br label %29
+
+29:                                               ; preds = %10, %27
+  %30 = getelementptr inbounds %struct.hypre_ParCSRMatrix_struct, %struct.hypre_ParCSRMatrix_struct* %0, i64 0, i32 16
+  %31 = load %struct._hypre_ParCSRCommPkg*, %struct._hypre_ParCSRCommPkg** %30, align 8, !tbaa !14
+  %32 = bitcast i32* %11 to i8*
+  call void @llvm.lifetime.start.p0i8(i64 4, i8* nonnull %32) #3
+  %33 = bitcast i32* %12 to i8*
+  call void @llvm.lifetime.start.p0i8(i64 4, i8* nonnull %33) #3
+  %34 = load %struct.hypre_CSRMatrix*, %struct.hypre_CSRMatrix** %18, align 8, !tbaa !10
+  %35 = getelementptr inbounds %struct.hypre_CSRMatrix, %struct.hypre_CSRMatrix* %34, i64 0, i32 9
+  %36 = load double*, double** %35, align 8, !tbaa !15
+  %37 = getelementptr inbounds %struct.hypre_CSRMatrix, %struct.hypre_CSRMatrix* %34, i64 0, i32 1
+  %38 = load i32*, i32** %37, align 8, !tbaa !16
+  %39 = getelementptr inbounds %struct.hypre_CSRMatrix, %struct.hypre_CSRMatrix* %34, i64 0, i32 0
+  %40 = load i32*, i32** %39, align 8, !tbaa !17
+  %41 = load %struct.hypre_CSRMatrix*, %struct.hypre_CSRMatrix** %22, align 8, !tbaa !13
+  %42 = getelementptr inbounds %struct.hypre_CSRMatrix, %struct.hypre_CSRMatrix* %41, i64 0, i32 9
+  %43 = load double*, double** %42, align 8, !tbaa !15
+  %44 = getelementptr inbounds %struct.hypre_CSRMatrix, %struct.hypre_CSRMatrix* %41, i64 0, i32 1
+  %45 = load i32*, i32** %44, align 8, !tbaa !16
+  %46 = getelementptr inbounds %struct.hypre_CSRMatrix, %struct.hypre_CSRMatrix* %41, i64 0, i32 0
+  %47 = load i32*, i32** %46, align 8, !tbaa !17
+  %48 = getelementptr inbounds %struct.hypre_ParCSRMatrix_struct, %struct.hypre_ParCSRMatrix_struct* %2, i64 0, i32 8
+  %49 = load %struct.hypre_CSRMatrix*, %struct.hypre_CSRMatrix** %48, align 8, !tbaa !10
+  %50 = getelementptr inbounds %struct.hypre_CSRMatrix, %struct.hypre_CSRMatrix* %49, i64 0, i32 1
+  %51 = load i32*, i32** %50, align 8, !tbaa !16
+  %52 = getelementptr inbounds %struct.hypre_CSRMatrix, %struct.hypre_CSRMatrix* %49, i64 0, i32 0
+  %53 = load i32*, i32** %52, align 8, !tbaa !17
+  %54 = getelementptr inbounds %struct.hypre_ParCSRMatrix_struct, %struct.hypre_ParCSRMatrix_struct* %2, i64 0, i32 9
+  %55 = load %struct.hypre_CSRMatrix*, %struct.hypre_CSRMatrix** %54, align 8, !tbaa !13
+  %56 = getelementptr inbounds %struct.hypre_CSRMatrix, %struct.hypre_CSRMatrix* %55, i64 0, i32 1
+  %57 = load i32*, i32** %56, align 8, !tbaa !16
+  %58 = getelementptr inbounds %struct.hypre_CSRMatrix, %struct.hypre_CSRMatrix* %55, i64 0, i32 0
+  %59 = load i32*, i32** %58, align 8, !tbaa !17
+  %60 = getelementptr inbounds %struct.hypre_CSRMatrix, %struct.hypre_CSRMatrix* %34, i64 0, i32 3
+  %61 = load i32, i32* %60, align 8, !tbaa !18
+  %62 = bitcast i32* %13 to i8*
+  call void @llvm.lifetime.start.p0i8(i64 4, i8* nonnull %62) #3
+  %63 = bitcast %struct.hypre_ParCSRMatrix_struct** %14 to i8*
+  call void @llvm.lifetime.start.p0i8(i64 8, i8* nonnull %63) #3
+  %64 = bitcast %struct.hypre_ParCSRMatrix_struct** %15 to i8*
+  call void @llvm.lifetime.start.p0i8(i64 8, i8* nonnull %64) #3
+  %65 = call i32 @hypre_MPI_Comm_size(i32 %17, i32* nonnull %12) #3
+  %66 = call i32 @hypre_MPI_Comm_rank(i32 %17, i32* nonnull %11) #3
+  %67 = load i32, i32* %11, align 4, !tbaa !19
+  %68 = load i32, i32* %12, align 4, !tbaa !19
+  %69 = add nsw i32 %68, -1
+  %70 = icmp eq i32 %67, %69
+  br i1 %70, label %71, label %74
+
+71:                                               ; preds = %29
+  %72 = getelementptr inbounds i32, i32* %3, i64 1
+  %73 = load i32, i32* %72, align 4, !tbaa !19
+  store i32 %73, i32* %13, align 4, !tbaa !19
+  br label %74
+
+74:                                               ; preds = %71, %29
+  %75 = call i32 @hypre_MPI_Bcast(i8* nonnull %62, i32 1, i32 1275069445, i32 %69, i32 %17) #3
+  %76 = getelementptr inbounds i32, i32* %3, i64 1
+  %77 = load i32, i32* %76, align 4, !tbaa !19
+  %78 = load i32, i32* %3, align 4, !tbaa !19
+  %79 = sub nsw i32 %77, %78
+  %80 = call i32 @hypre_ParCSRMatrixGenerateFFFC(%struct.hypre_ParCSRMatrix_struct* %0, i32* %1, i32* nonnull %3, %struct.hypre_ParCSRMatrix_struct* %2, %struct.hypre_ParCSRMatrix_struct** nonnull %15, %struct.hypre_ParCSRMatrix_struct** nonnull %14) #3
+  %81 = load %struct.hypre_ParCSRMatrix_struct*, %struct.hypre_ParCSRMatrix_struct** %15, align 8, !tbaa !20
+  %82 = getelementptr inbounds %struct.hypre_ParCSRMatrix_struct, %struct.hypre_ParCSRMatrix_struct* %81, i64 0, i32 8
+  %83 = load %struct.hypre_CSRMatrix*, %struct.hypre_CSRMatrix** %82, align 8, !tbaa !10
+  %84 = getelementptr inbounds %struct.hypre_CSRMatrix, %struct.hypre_CSRMatrix* %83, i64 0, i32 0
+  %85 = load i32*, i32** %84, align 8, !tbaa !17
+  %86 = getelementptr inbounds %struct.hypre_CSRMatrix, %struct.hypre_CSRMatrix* %83, i64 0, i32 9
+  %87 = load double*, double** %86, align 8, !tbaa !15
+  %88 = getelementptr inbounds %struct.hypre_ParCSRMatrix_struct, %struct.hypre_ParCSRMatrix_struct* %81, i64 0, i32 9
+  %89 = load %struct.hypre_CSRMatrix*, %struct.hypre_CSRMatrix** %88, align 8, !tbaa !13
+  %90 = getelementptr inbounds %struct.hypre_CSRMatrix, %struct.hypre_CSRMatrix* %89, i64 0, i32 0
+  %91 = load i32*, i32** %90, align 8, !tbaa !17
+  %92 = getelementptr inbounds %struct.hypre_CSRMatrix, %struct.hypre_CSRMatrix* %89, i64 0, i32 9
+  %93 = load double*, double** %92, align 8, !tbaa !15
+  %94 = load %struct.hypre_ParCSRMatrix_struct*, %struct.hypre_ParCSRMatrix_struct** %14, align 8, !tbaa !20
+  %95 = getelementptr inbounds %struct.hypre_ParCSRMatrix_struct, %struct.hypre_ParCSRMatrix_struct* %94, i64 0, i32 8
+  %96 = load %struct.hypre_CSRMatrix*, %struct.hypre_CSRMatrix** %95, align 8, !tbaa !10
+  %97 = getelementptr inbounds %struct.hypre_CSRMatrix, %struct.hypre_CSRMatrix* %96, i64 0, i32 0
+  %98 = load i32*, i32** %97, align 8, !tbaa !17
+  %99 = getelementptr inbounds %struct.hypre_CSRMatrix, %struct.hypre_CSRMatrix* %96, i64 0, i32 9
+  %100 = load double*, double** %99, align 8, !tbaa !15
+  %101 = getelementptr inbounds %struct.hypre_ParCSRMatrix_struct, %struct.hypre_ParCSRMatrix_struct* %94, i64 0, i32 9
+  %102 = load %struct.hypre_CSRMatrix*, %struct.hypre_CSRMatrix** %101, align 8, !tbaa !13
+  %103 = getelementptr inbounds %struct.hypre_CSRMatrix, %struct.hypre_CSRMatrix* %102, i64 0, i32 0
+  %104 = load i32*, i32** %103, align 8, !tbaa !17
+  %105 = getelementptr inbounds %struct.hypre_CSRMatrix, %struct.hypre_CSRMatrix* %102, i64 0, i32 9
+  %106 = load double*, double** %105, align 8, !tbaa !15
+  %107 = getelementptr inbounds %struct.hypre_CSRMatrix, %struct.hypre_CSRMatrix* %96, i64 0, i32 3
+  %108 = load i32, i32* %107, align 8, !tbaa !18
+  %109 = sext i32 %108 to i64
+  %110 = call i8* @hypre_CAlloc(i64 %109, i64 8, i32 0) #3
+  %111 = bitcast i8* %110 to double*
+  %112 = call i8* @hypre_CAlloc(i64 %109, i64 8, i32 0) #3
+  %113 = bitcast i8* %112 to double*
+  %114 = call i8* @hypre_CAlloc(i64 1, i64 4, i32 0) #3
+  %115 = bitcast i8* %114 to i32*
+  %116 = call i8* @hypre_CAlloc(i64 2, i64 4, i32 0) #3
+  %117 = bitcast i8* %116 to i32*
+  %118 = call i8* @hypre_CAlloc(i64 2, i64 4, i32 0) #3
+  %119 = bitcast i8* %118 to i32*
+  %120 = getelementptr inbounds i8, i8* %116, i64 4
+  %121 = bitcast i8* %120 to i32*
+  store i32 %61, i32* %121, align 4, !tbaa !19
+  %122 = icmp sgt i32 %61, 0
+  br i1 %122, label %123, label %136
+
+123:                                              ; preds = %74
+  %124 = zext i32 %61 to i64
+  br label %125
+
+125:                                              ; preds = %123, %133
+  %126 = phi i64 [ 0, %123 ], [ %134, %133 ]
+  %127 = getelementptr inbounds i32, i32* %1, i64 %126
+  %128 = load i32, i32* %127, align 4, !tbaa !19
+  %129 = icmp sgt i32 %128, 0
+  br i1 %129, label %130, label %133
+
+130:                                              ; preds = %125
+  %131 = load i32, i32* %115, align 4, !tbaa !19
+  %132 = add nsw i32 %131, 1
+  store i32 %132, i32* %115, align 4, !tbaa !19
+  br label %133
+
+133:                                              ; preds = %125, %130
+  %134 = add nuw nsw i64 %126, 1
+  %135 = icmp eq i64 %134, %124
+  br i1 %135, label %136, label %125, !llvm.loop !21
+
+136:                                              ; preds = %133, %74
+  %137 = icmp sgt i32 %4, 1
+  br i1 %137, label %138, label %194
+
+138:                                              ; preds = %136
+  %139 = getelementptr inbounds %struct.hypre_CSRMatrix, %struct.hypre_CSRMatrix* %41, i64 0, i32 4
+  %140 = load i32, i32* %139, align 4, !tbaa !24
+  %141 = sext i32 %140 to i64
+  %142 = call i8* @hypre_CAlloc(i64 %141, i64 4, i32 0) #3
+  %143 = bitcast i8* %142 to i32*
+  %144 = getelementptr inbounds %struct._hypre_ParCSRCommPkg, %struct._hypre_ParCSRCommPkg* %31, i64 0, i32 1
+  %145 = load i32, i32* %144, align 4, !tbaa !25
+  %146 = getelementptr inbounds %struct._hypre_ParCSRCommPkg, %struct._hypre_ParCSRCommPkg* %31, i64 0, i32 3
+  %147 = load i32*, i32** %146, align 8, !tbaa !27
+  %148 = sext i32 %145 to i64
+  %149 = getelementptr inbounds i32, i32* %147, i64 %148
+  %150 = load i32, i32* %149, align 4, !tbaa !19
+  %151 = sext i32 %150 to i64
+  %152 = call i8* @hypre_CAlloc(i64 %151, i64 4, i32 0) #3
+  %153 = bitcast i8* %152 to i32*
+  %154 = getelementptr inbounds %struct._hypre_ParCSRCommPkg, %struct._hypre_ParCSRCommPkg* %31, i64 0, i32 4
+  %155 = icmp sgt i32 %145, 0
+  br i1 %155, label %156, label %191
+
+156:                                              ; preds = %138
+  %157 = load i32*, i32** %146, align 8, !tbaa !27
+  %158 = zext i32 %145 to i64
+  br label %164
+
+159:                                              ; preds = %177
+  %160 = trunc i64 %185 to i32
+  br label %161
+
+161:                                              ; preds = %159, %164
+  %162 = phi i32 [ %166, %164 ], [ %160, %159 ]
+  %163 = icmp eq i64 %169, %158
+  br i1 %163, label %191, label %164, !llvm.loop !28
+
+164:                                              ; preds = %156, %161
+  %165 = phi i64 [ 0, %156 ], [ %169, %161 ]
+  %166 = phi i32 [ 0, %156 ], [ %162, %161 ]
+  %167 = getelementptr inbounds i32, i32* %157, i64 %165
+  %168 = load i32, i32* %167, align 4, !tbaa !19
+  %169 = add nuw nsw i64 %165, 1
+  %170 = getelementptr inbounds i32, i32* %157, i64 %169
+  %171 = load i32, i32* %170, align 4, !tbaa !19
+  %172 = icmp slt i32 %168, %171
+  br i1 %172, label %173, label %161
+
+173:                                              ; preds = %164
+  %174 = load i32*, i32** %154, align 8, !tbaa !29
+  %175 = sext i32 %168 to i64
+  %176 = sext i32 %166 to i64
+  br label %177
+
+177:                                              ; preds = %173, %177
+  %178 = phi i64 [ %176, %173 ], [ %185, %177 ]
+  %179 = phi i64 [ %175, %173 ], [ %187, %177 ]
+  %180 = getelementptr inbounds i32, i32* %174, i64 %179
+  %181 = load i32, i32* %180, align 4, !tbaa !19
+  %182 = sext i32 %181 to i64
+  %183 = getelementptr inbounds i32, i32* %5, i64 %182
+  %184 = load i32, i32* %183, align 4, !tbaa !19
+  %185 = add nsw i64 %178, 1
+  %186 = getelementptr inbounds i32, i32* %153, i64 %178
+  store i32 %184, i32* %186, align 4, !tbaa !19
+  %187 = add nsw i64 %179, 1
+  %188 = load i32, i32* %170, align 4, !tbaa !19
+  %189 = sext i32 %188 to i64
+  %190 = icmp slt i64 %187, %189
+  br i1 %190, label %177, label %159, !llvm.loop !30
+
+191:                                              ; preds = %161, %138
+  %192 = call %struct.hypre_ParCSRCommHandle* @hypre_ParCSRCommHandleCreate(i32 11, %struct._hypre_ParCSRCommPkg* %31, i8* %152, i8* %142) #3
+  %193 = call i32 @hypre_ParCSRCommHandleDestroy(%struct.hypre_ParCSRCommHandle* %192) #3
+  call void @hypre_Free(i8* %152, i32 0) #3
+  br label %194
+
+194:                                              ; preds = %136, %191
+  %195 = phi i32* [ %143, %191 ], [ null, %136 ]
+  %196 = getelementptr inbounds i8, i8* %118, i64 4
+  %197 = bitcast i8* %196 to i32*
+  store i32 %108, i32* %197, align 4, !tbaa !19
+  %198 = icmp sgt i32 %108, 0
+  br i1 %198, label %199, label %203
+
+199:                                              ; preds = %194
+  %200 = zext i32 %108 to i64
+  br label %207
+
+201:                                              ; preds = %237, %227
+  %202 = icmp eq i64 %211, %200
+  br i1 %202, label %203, label %207, !llvm.loop !31
+
+203:                                              ; preds = %201, %194
+  %204 = icmp sgt i32 %61, 0
+  br i1 %204, label %205, label %245
+
+205:                                              ; preds = %203
+  %206 = zext i32 %61 to i64
+  br label %249
+
+207:                                              ; preds = %199, %201
+  %208 = phi i64 [ 0, %199 ], [ %211, %201 ]
+  %209 = getelementptr inbounds i32, i32* %85, i64 %208
+  %210 = load i32, i32* %209, align 4, !tbaa !19
+  %211 = add nuw nsw i64 %208, 1
+  %212 = getelementptr inbounds i32, i32* %85, i64 %211
+  %213 = load i32, i32* %212, align 4, !tbaa !19
+  %214 = getelementptr inbounds double, double* %111, i64 %208
+  %215 = icmp slt i32 %210, %213
+  br i1 %215, label %216, label %227
+
+216:                                              ; preds = %207
+  %217 = sext i32 %210 to i64
+  %218 = sext i32 %213 to i64
+  br label %219
+
+219:                                              ; preds = %216, %219
+  %220 = phi i64 [ %217, %216 ], [ %225, %219 ]
+  %221 = getelementptr inbounds double, double* %87, i64 %220
+  %222 = load double, double* %221, align 8, !tbaa !32
+  %223 = load double, double* %214, align 8, !tbaa !32
+  %224 = fadd double %222, %223
+  store double %224, double* %214, align 8, !tbaa !32
+  %225 = add nsw i64 %220, 1
+  %226 = icmp eq i64 %225, %218
+  br i1 %226, label %227, label %219, !llvm.loop !33
+
+227:                                              ; preds = %219, %207
+  %228 = getelementptr inbounds i32, i32* %91, i64 %208
+  %229 = load i32, i32* %228, align 4, !tbaa !19
+  %230 = getelementptr inbounds i32, i32* %91, i64 %211
+  %231 = load i32, i32* %230, align 4, !tbaa !19
+  %232 = getelementptr inbounds double, double* %111, i64 %208
+  %233 = icmp slt i32 %229, %231
+  br i1 %233, label %234, label %201
+
+234:                                              ; preds = %227
+  %235 = sext i32 %229 to i64
+  %236 = sext i32 %231 to i64
+  br label %237
+
+237:                                              ; preds = %234, %237
+  %238 = phi i64 [ %235, %234 ], [ %243, %237 ]
+  %239 = getelementptr inbounds double, double* %93, i64 %238
+  %240 = load double, double* %239, align 8, !tbaa !32
+  %241 = load double, double* %232, align 8, !tbaa !32
+  %242 = fadd double %240, %241
+  store double %242, double* %232, align 8, !tbaa !32
+  %243 = add nsw i64 %238, 1
+  %244 = icmp eq i64 %243, %236
+  br i1 %244, label %201, label %237, !llvm.loop !34
+
+245:                                              ; preds = %497, %203
+  %246 = icmp sgt i32 %108, 0
+  br i1 %246, label %247, label %585
+
+247:                                              ; preds = %245
+  %248 = zext i32 %108 to i64
+  br label %503
+
+249:                                              ; preds = %205, %497
+  %250 = phi i64 [ 0, %205 ], [ %499, %497 ]
+  %251 = phi i32 [ 0, %205 ], [ %498, %497 ]
+  %252 = getelementptr inbounds i32, i32* %1, i64 %250
+  %253 = load i32, i32* %252, align 4, !tbaa !19
+  %254 = icmp slt i32 %253, 0
+  br i1 %254, label %255, label %497
+
+255:                                              ; preds = %249
+  %256 = getelementptr inbounds i32, i32* %40, i64 %250
+  %257 = load i32, i32* %256, align 4, !tbaa !19
+  br i1 %137, label %258, label %413
+
+258:                                              ; preds = %255
+  %259 = getelementptr inbounds i32, i32* %53, i64 %250
+  %260 = load i32, i32* %259, align 4, !tbaa !19
+  %261 = add nuw nsw i64 %250, 1
+  %262 = getelementptr inbounds i32, i32* %53, i64 %261
+  %263 = load i32, i32* %262, align 4, !tbaa !19
+  %264 = getelementptr inbounds i32, i32* %5, i64 %250
+  %265 = sext i32 %251 to i64
+  %266 = getelementptr inbounds double, double* %113, i64 %265
+  %267 = icmp slt i32 %260, %263
+  br i1 %267, label %268, label %271
+
+268:                                              ; preds = %258
+  %269 = sext i32 %260 to i64
+  %270 = sext i32 %263 to i64
+  br label %283
+
+271:                                              ; preds = %313, %258
+  %272 = phi i32 [ %257, %258 ], [ %315, %313 ]
+  %273 = getelementptr inbounds i32, i32* %40, i64 %261
+  %274 = load i32, i32* %273, align 4, !tbaa !19
+  %275 = sext i32 %251 to i64
+  %276 = getelementptr inbounds double, double* %113, i64 %275
+  %277 = icmp slt i32 %272, %274
+  br i1 %277, label %278, label %334
+
+278:                                              ; preds = %271
+  %279 = getelementptr inbounds i32, i32* %5, i64 %250
+  %280 = load i32, i32* %279, align 4, !tbaa !19
+  %281 = sext i32 %272 to i64
+  %282 = sext i32 %274 to i64
+  br label %318
+
+283:                                              ; preds = %268, %313
+  %284 = phi i64 [ %269, %268 ], [ %316, %313 ]
+  %285 = phi i32 [ %257, %268 ], [ %315, %313 ]
+  %286 = getelementptr inbounds i32, i32* %51, i64 %284
+  %287 = load i32, i32* %286, align 4, !tbaa !19
+  %288 = sext i32 %285 to i64
+  %289 = getelementptr inbounds i32, i32* %38, i64 %288
+  %290 = load i32, i32* %289, align 4, !tbaa !19
+  %291 = icmp eq i32 %290, %287
+  br i1 %291, label %313, label %292
+
+292:                                              ; preds = %283
+  %293 = load i32, i32* %264, align 4, !tbaa !19
+  br label %294
+
+294:                                              ; preds = %292, %306
+  %295 = phi i64 [ %288, %292 ], [ %307, %306 ]
+  %296 = phi i32 [ %290, %292 ], [ %309, %306 ]
+  %297 = sext i32 %296 to i64
+  %298 = getelementptr inbounds i32, i32* %5, i64 %297
+  %299 = load i32, i32* %298, align 4, !tbaa !19
+  %300 = icmp eq i32 %293, %299
+  br i1 %300, label %301, label %306
+
+301:                                              ; preds = %294
+  %302 = getelementptr inbounds double, double* %36, i64 %295
+  %303 = load double, double* %302, align 8, !tbaa !32
+  %304 = load double, double* %266, align 8, !tbaa !32
+  %305 = fadd double %303, %304
+  store double %305, double* %266, align 8, !tbaa !32
+  br label %306
+
+306:                                              ; preds = %294, %301
+  %307 = add i64 %295, 1
+  %308 = getelementptr inbounds i32, i32* %38, i64 %307
+  %309 = load i32, i32* %308, align 4, !tbaa !19
+  %310 = icmp eq i32 %309, %287
+  br i1 %310, label %311, label %294, !llvm.loop !35
+
+311:                                              ; preds = %306
+  %312 = trunc i64 %307 to i32
+  br label %313
+
+313:                                              ; preds = %311, %283
+  %314 = phi i32 [ %285, %283 ], [ %312, %311 ]
+  %315 = add nsw i32 %314, 1
+  %316 = add nsw i64 %284, 1
+  %317 = icmp eq i64 %316, %270
+  br i1 %317, label %271, label %283, !llvm.loop !36
+
+318:                                              ; preds = %278, %331
+  %319 = phi i64 [ %281, %278 ], [ %332, %331 ]
+  %320 = getelementptr inbounds i32, i32* %38, i64 %319
+  %321 = load i32, i32* %320, align 4, !tbaa !19
+  %322 = sext i32 %321 to i64
+  %323 = getelementptr inbounds i32, i32* %5, i64 %322
+  %324 = load i32, i32* %323, align 4, !tbaa !19
+  %325 = icmp eq i32 %280, %324
+  br i1 %325, label %326, label %331
+
+326:                                              ; preds = %318
+  %327 = getelementptr inbounds double, double* %36, i64 %319
+  %328 = load double, double* %327, align 8, !tbaa !32
+  %329 = load double, double* %276, align 8, !tbaa !32
+  %330 = fadd double %328, %329
+  store double %330, double* %276, align 8, !tbaa !32
+  br label %331
+
+331:                                              ; preds = %318, %326
+  %332 = add nsw i64 %319, 1
+  %333 = icmp eq i64 %332, %282
+  br i1 %333, label %334, label %318, !llvm.loop !37
+
+334:                                              ; preds = %331, %271
+  %335 = getelementptr inbounds i32, i32* %47, i64 %250
+  %336 = load i32, i32* %335, align 4, !tbaa !19
+  %337 = getelementptr inbounds i32, i32* %59, i64 %250
+  %338 = load i32, i32* %337, align 4, !tbaa !19
+  %339 = getelementptr inbounds i32, i32* %59, i64 %261
+  %340 = load i32, i32* %339, align 4, !tbaa !19
+  %341 = getelementptr inbounds i32, i32* %5, i64 %250
+  %342 = sext i32 %251 to i64
+  %343 = getelementptr inbounds double, double* %113, i64 %342
+  %344 = icmp slt i32 %338, %340
+  br i1 %344, label %345, label %348
+
+345:                                              ; preds = %334
+  %346 = sext i32 %338 to i64
+  %347 = sext i32 %340 to i64
+  br label %360
+
+348:                                              ; preds = %390, %334
+  %349 = phi i32 [ %336, %334 ], [ %392, %390 ]
+  %350 = getelementptr inbounds i32, i32* %47, i64 %261
+  %351 = load i32, i32* %350, align 4, !tbaa !19
+  %352 = sext i32 %251 to i64
+  %353 = getelementptr inbounds double, double* %113, i64 %352
+  %354 = icmp slt i32 %349, %351
+  br i1 %354, label %355, label %411
+
+355:                                              ; preds = %348
+  %356 = getelementptr inbounds i32, i32* %5, i64 %250
+  %357 = load i32, i32* %356, align 4, !tbaa !19
+  %358 = sext i32 %349 to i64
+  %359 = sext i32 %351 to i64
+  br label %395
+
+360:                                              ; preds = %345, %390
+  %361 = phi i64 [ %346, %345 ], [ %393, %390 ]
+  %362 = phi i32 [ %336, %345 ], [ %392, %390 ]
+  %363 = getelementptr inbounds i32, i32* %57, i64 %361
+  %364 = load i32, i32* %363, align 4, !tbaa !19
+  %365 = sext i32 %362 to i64
+  %366 = getelementptr inbounds i32, i32* %45, i64 %365
+  %367 = load i32, i32* %366, align 4, !tbaa !19
+  %368 = icmp eq i32 %367, %364
+  br i1 %368, label %390, label %369
+
+369:                                              ; preds = %360
+  %370 = load i32, i32* %341, align 4, !tbaa !19
+  br label %371
+
+371:                                              ; preds = %369, %383
+  %372 = phi i64 [ %365, %369 ], [ %384, %383 ]
+  %373 = phi i32 [ %367, %369 ], [ %386, %383 ]
+  %374 = sext i32 %373 to i64
+  %375 = getelementptr inbounds i32, i32* %195, i64 %374
+  %376 = load i32, i32* %375, align 4, !tbaa !19
+  %377 = icmp eq i32 %370, %376
+  br i1 %377, label %378, label %383
+
+378:                                              ; preds = %371
+  %379 = getelementptr inbounds double, double* %43, i64 %372
+  %380 = load double, double* %379, align 8, !tbaa !32
+  %381 = load double, double* %343, align 8, !tbaa !32
+  %382 = fadd double %380, %381
+  store double %382, double* %343, align 8, !tbaa !32
+  br label %383
+
+383:                                              ; preds = %371, %378
+  %384 = add i64 %372, 1
+  %385 = getelementptr inbounds i32, i32* %45, i64 %384
+  %386 = load i32, i32* %385, align 4, !tbaa !19
+  %387 = icmp eq i32 %386, %364
+  br i1 %387, label %388, label %371, !llvm.loop !38
+
+388:                                              ; preds = %383
+  %389 = trunc i64 %384 to i32
+  br label %390
+
+390:                                              ; preds = %388, %360
+  %391 = phi i32 [ %362, %360 ], [ %389, %388 ]
+  %392 = add nsw i32 %391, 1
+  %393 = add nsw i64 %361, 1
+  %394 = icmp eq i64 %393, %347
+  br i1 %394, label %348, label %360, !llvm.loop !39
+
+395:                                              ; preds = %355, %408
+  %396 = phi i64 [ %358, %355 ], [ %409, %408 ]
+  %397 = getelementptr inbounds i32, i32* %45, i64 %396
+  %398 = load i32, i32* %397, align 4, !tbaa !19
+  %399 = sext i32 %398 to i64
+  %400 = getelementptr inbounds i32, i32* %195, i64 %399
+  %401 = load i32, i32* %400, align 4, !tbaa !19
+  %402 = icmp eq i32 %357, %401
+  br i1 %402, label %403, label %408
+
+403:                                              ; preds = %395
+  %404 = getelementptr inbounds double, double* %43, i64 %396
+  %405 = load double, double* %404, align 8, !tbaa !32
+  %406 = load double, double* %353, align 8, !tbaa !32
+  %407 = fadd double %405, %406
+  store double %407, double* %353, align 8, !tbaa !32
+  br label %408
+
+408:                                              ; preds = %395, %403
+  %409 = add nsw i64 %396, 1
+  %410 = icmp eq i64 %409, %359
+  br i1 %410, label %411, label %395, !llvm.loop !40
+
+411:                                              ; preds = %408, %348
+  %412 = add nsw i32 %251, 1
+  br label %497
+
+413:                                              ; preds = %255
+  %414 = add nuw nsw i64 %250, 1
+  %415 = getelementptr inbounds i32, i32* %40, i64 %414
+  %416 = load i32, i32* %415, align 4, !tbaa !19
+  %417 = sext i32 %251 to i64
+  %418 = getelementptr inbounds double, double* %113, i64 %417
+  %419 = icmp slt i32 %257, %416
+  br i1 %419, label %420, label %431
+
+420:                                              ; preds = %413
+  %421 = sext i32 %257 to i64
+  %422 = sext i32 %416 to i64
+  br label %423
+
+423:                                              ; preds = %420, %423
+  %424 = phi i64 [ %421, %420 ], [ %429, %423 ]
+  %425 = getelementptr inbounds double, double* %36, i64 %424
+  %426 = load double, double* %425, align 8, !tbaa !32
+  %427 = load double, double* %418, align 8, !tbaa !32
+  %428 = fadd double %426, %427
+  store double %428, double* %418, align 8, !tbaa !32
+  %429 = add nsw i64 %424, 1
+  %430 = icmp eq i64 %429, %422
+  br i1 %430, label %431, label %423, !llvm.loop !41
+
+431:                                              ; preds = %423, %413
+  %432 = getelementptr inbounds i32, i32* %47, i64 %250
+  %433 = load i32, i32* %432, align 4, !tbaa !19
+  %434 = getelementptr inbounds i32, i32* %47, i64 %414
+  %435 = load i32, i32* %434, align 4, !tbaa !19
+  %436 = sext i32 %251 to i64
+  %437 = getelementptr inbounds double, double* %113, i64 %436
+  %438 = icmp slt i32 %433, %435
+  br i1 %438, label %439, label %450
+
+439:                                              ; preds = %431
+  %440 = sext i32 %433 to i64
+  %441 = sext i32 %435 to i64
+  br label %442
+
+442:                                              ; preds = %439, %442
+  %443 = phi i64 [ %440, %439 ], [ %448, %442 ]
+  %444 = getelementptr inbounds double, double* %43, i64 %443
+  %445 = load double, double* %444, align 8, !tbaa !32
+  %446 = load double, double* %437, align 8, !tbaa !32
+  %447 = fadd double %445, %446
+  store double %447, double* %437, align 8, !tbaa !32
+  %448 = add nsw i64 %443, 1
+  %449 = icmp eq i64 %448, %441
+  br i1 %449, label %450, label %442, !llvm.loop !42
+
+450:                                              ; preds = %442, %431
+  %451 = sext i32 %251 to i64
+  %452 = getelementptr inbounds i32, i32* %98, i64 %451
+  %453 = load i32, i32* %452, align 4, !tbaa !19
+  %454 = add nsw i32 %251, 1
+  %455 = sext i32 %454 to i64
+  %456 = getelementptr inbounds i32, i32* %98, i64 %455
+  %457 = load i32, i32* %456, align 4, !tbaa !19
+  %458 = getelementptr inbounds double, double* %113, i64 %451
+  %459 = add nsw i32 %453, 1
+  %460 = icmp slt i32 %459, %457
+  br i1 %460, label %461, label %473
+
+461:                                              ; preds = %450
+  %462 = add i32 %453, 1
+  %463 = sext i32 %462 to i64
+  br label %464
+
+464:                                              ; preds = %461, %464
+  %465 = phi i64 [ %463, %461 ], [ %470, %464 ]
+  %466 = getelementptr inbounds double, double* %100, i64 %465
+  %467 = load double, double* %466, align 8, !tbaa !32
+  %468 = load double, double* %458, align 8, !tbaa !32
+  %469 = fsub double %468, %467
+  store double %469, double* %458, align 8, !tbaa !32
+  %470 = add nsw i64 %465, 1
+  %471 = trunc i64 %470 to i32
+  %472 = icmp eq i32 %457, %471
+  br i1 %472, label %473, label %464, !llvm.loop !43
+
+473:                                              ; preds = %464, %450
+  %474 = getelementptr inbounds i32, i32* %104, i64 %451
+  %475 = load i32, i32* %474, align 4, !tbaa !19
+  %476 = getelementptr inbounds i32, i32* %104, i64 %455
+  %477 = load i32, i32* %476, align 4, !tbaa !19
+  %478 = getelementptr inbounds double, double* %113, i64 %451
+  %479 = icmp slt i32 %475, %477
+  br i1 %479, label %480, label %491
+
+480:                                              ; preds = %473
+  %481 = sext i32 %475 to i64
+  %482 = sext i32 %477 to i64
+  br label %483
+
+483:                                              ; preds = %480, %483
+  %484 = phi i64 [ %481, %480 ], [ %489, %483 ]
+  %485 = getelementptr inbounds double, double* %106, i64 %484
+  %486 = load double, double* %485, align 8, !tbaa !32
+  %487 = load double, double* %478, align 8, !tbaa !32
+  %488 = fsub double %487, %486
+  store double %488, double* %478, align 8, !tbaa !32
+  %489 = add nsw i64 %484, 1
+  %490 = icmp eq i64 %489, %482
+  br i1 %490, label %491, label %483, !llvm.loop !44
+
+491:                                              ; preds = %483, %473
+  %492 = getelementptr inbounds double, double* %111, i64 %451
+  %493 = load double, double* %492, align 8, !tbaa !32
+  %494 = getelementptr inbounds double, double* %113, i64 %451
+  %495 = load double, double* %494, align 8, !tbaa !32
+  %496 = fsub double %495, %493
+  store double %496, double* %494, align 8, !tbaa !32
+  br label %497
+
+497:                                              ; preds = %249, %491, %411
+  %498 = phi i32 [ %412, %411 ], [ %454, %491 ], [ %251, %249 ]
+  %499 = add nuw nsw i64 %250, 1
+  %500 = icmp eq i64 %499, %206
+  br i1 %500, label %245, label %249, !llvm.loop !45
+
+501:                                              ; preds = %578, %569
+  %502 = icmp eq i64 %521, %248
+  br i1 %502, label %585, label %503, !llvm.loop !46
+
+503:                                              ; preds = %247, %501
+  %504 = phi i64 [ 0, %247 ], [ %521, %501 ]
+  %505 = getelementptr inbounds i32, i32* %98, i64 %504
+  %506 = load i32, i32* %505, align 4, !tbaa !19
+  %507 = getelementptr inbounds double, double* %113, i64 %504
+  %508 = load double, double* %507, align 8, !tbaa !32
+  %509 = fcmp une double %508, 0.000000e+00
+  %510 = fdiv double 1.000000e+00, %508
+  %511 = select i1 %509, double %510, double 1.000000e+00
+  %512 = getelementptr inbounds double, double* %111, i64 %504
+  %513 = load double, double* %512, align 8, !tbaa !32
+  %514 = fmul double %513, %511
+  %515 = sext i32 %506 to i64
+  %516 = getelementptr inbounds double, double* %100, i64 %515
+  store double %514, double* %516, align 8, !tbaa !32
+  %517 = load double, double* %512, align 8, !tbaa !32
+  %518 = fcmp une double %517, 0.000000e+00
+  %519 = fdiv double -1.000000e+00, %517
+  %520 = select i1 %518, double %519, double 1.000000e+00
+  %521 = add nuw nsw i64 %504, 1
+  %522 = getelementptr inbounds i32, i32* %98, i64 %521
+  %523 = load i32, i32* %522, align 4, !tbaa !19
+  %524 = add nsw i32 %506, 1
+  %525 = icmp slt i32 %524, %523
+  br i1 %525, label %526, label %537
+
+526:                                              ; preds = %503
+  %527 = add i32 %506, 1
+  %528 = sext i32 %527 to i64
+  br label %529
+
+529:                                              ; preds = %526, %529
+  %530 = phi i64 [ %528, %526 ], [ %534, %529 ]
+  %531 = getelementptr inbounds double, double* %100, i64 %530
+  %532 = load double, double* %531, align 8, !tbaa !32
+  %533 = fmul double %511, %532
+  store double %533, double* %531, align 8, !tbaa !32
+  %534 = add nsw i64 %530, 1
+  %535 = trunc i64 %534 to i32
+  %536 = icmp eq i32 %523, %535
+  br i1 %536, label %537, label %529, !llvm.loop !47
+
+537:                                              ; preds = %529, %503
+  %538 = getelementptr inbounds i32, i32* %104, i64 %504
+  %539 = load i32, i32* %538, align 4, !tbaa !19
+  %540 = getelementptr inbounds i32, i32* %104, i64 %521
+  %541 = load i32, i32* %540, align 4, !tbaa !19
+  %542 = icmp slt i32 %539, %541
+  br i1 %542, label %543, label %553
+
+543:                                              ; preds = %537
+  %544 = sext i32 %539 to i64
+  %545 = sext i32 %541 to i64
+  br label %546
+
+546:                                              ; preds = %543, %546
+  %547 = phi i64 [ %544, %543 ], [ %551, %546 ]
+  %548 = getelementptr inbounds double, double* %106, i64 %547
+  %549 = load double, double* %548, align 8, !tbaa !32
+  %550 = fmul double %511, %549
+  store double %550, double* %548, align 8, !tbaa !32
+  %551 = add nsw i64 %547, 1
+  %552 = icmp eq i64 %551, %545
+  br i1 %552, label %553, label %546, !llvm.loop !48
+
+553:                                              ; preds = %546, %537
+  %554 = getelementptr inbounds i32, i32* %85, i64 %504
+  %555 = load i32, i32* %554, align 4, !tbaa !19
+  %556 = getelementptr inbounds i32, i32* %85, i64 %521
+  %557 = load i32, i32* %556, align 4, !tbaa !19
+  %558 = icmp slt i32 %555, %557
+  br i1 %558, label %559, label %569
+
+559:                                              ; preds = %553
+  %560 = sext i32 %555 to i64
+  %561 = sext i32 %557 to i64
+  br label %562
+
+562:                                              ; preds = %559, %562
+  %563 = phi i64 [ %560, %559 ], [ %567, %562 ]
+  %564 = getelementptr inbounds double, double* %87, i64 %563
+  %565 = load double, double* %564, align 8, !tbaa !32
+  %566 = fmul double %520, %565
+  store double %566, double* %564, align 8, !tbaa !32
+  %567 = add nsw i64 %563, 1
+  %568 = icmp eq i64 %567, %561
+  br i1 %568, label %569, label %562, !llvm.loop !49
+
+569:                                              ; preds = %562, %553
+  %570 = getelementptr inbounds i32, i32* %91, i64 %504
+  %571 = load i32, i32* %570, align 4, !tbaa !19
+  %572 = getelementptr inbounds i32, i32* %91, i64 %521
+  %573 = load i32, i32* %572, align 4, !tbaa !19
+  %574 = icmp slt i32 %571, %573
+  br i1 %574, label %575, label %501
+
+575:                                              ; preds = %569
+  %576 = sext i32 %571 to i64
+  %577 = sext i32 %573 to i64
+  br label %578
+
+578:                                              ; preds = %575, %578
+  %579 = phi i64 [ %576, %575 ], [ %583, %578 ]
+  %580 = getelementptr inbounds double, double* %93, i64 %579
+  %581 = load double, double* %580, align 8, !tbaa !32
+  %582 = fmul double %520, %581
+  store double %582, double* %580, align 8, !tbaa !32
+  %583 = add nsw i64 %579, 1
+  %584 = icmp eq i64 %583, %577
+  br i1 %584, label %501, label %578, !llvm.loop !50
+
+585:                                              ; preds = %501, %245
+  %586 = load %struct.hypre_ParCSRMatrix_struct*, %struct.hypre_ParCSRMatrix_struct** %14, align 8, !tbaa !20
+  %587 = load %struct.hypre_ParCSRMatrix_struct*, %struct.hypre_ParCSRMatrix_struct** %15, align 8, !tbaa !20
+  %588 = call %struct.hypre_ParCSRMatrix_struct* @hypre_ParMatmul(%struct.hypre_ParCSRMatrix_struct* %586, %struct.hypre_ParCSRMatrix_struct* %587) #3
+  %589 = getelementptr inbounds %struct.hypre_ParCSRMatrix_struct, %struct.hypre_ParCSRMatrix_struct* %588, i64 0, i32 8
+  %590 = load %struct.hypre_CSRMatrix*, %struct.hypre_CSRMatrix** %589, align 8, !tbaa !10
+  %591 = getelementptr inbounds %struct.hypre_ParCSRMatrix_struct, %struct.hypre_ParCSRMatrix_struct* %588, i64 0, i32 9
+  %592 = load %struct.hypre_CSRMatrix*, %struct.hypre_CSRMatrix** %591, align 8, !tbaa !13
+  %593 = getelementptr inbounds %struct.hypre_CSRMatrix, %struct.hypre_CSRMatrix* %590, i64 0, i32 0
+  %594 = load i32*, i32** %593, align 8, !tbaa !17
+  %595 = getelementptr inbounds %struct.hypre_CSRMatrix, %struct.hypre_CSRMatrix* %590, i64 0, i32 1
+  %596 = load i32*, i32** %595, align 8, !tbaa !16
+  %597 = getelementptr inbounds %struct.hypre_CSRMatrix, %struct.hypre_CSRMatrix* %590, i64 0, i32 9
+  %598 = load double*, double** %597, align 8, !tbaa !15
+  %599 = getelementptr inbounds %struct.hypre_CSRMatrix, %struct.hypre_CSRMatrix* %592, i64 0, i32 0
+  %600 = load i32*, i32** %599, align 8, !tbaa !17
+  %601 = getelementptr inbounds %struct.hypre_CSRMatrix, %struct.hypre_CSRMatrix* %592, i64 0, i32 1
+  %602 = load i32*, i32** %601, align 8, !tbaa !16
+  %603 = getelementptr inbounds %struct.hypre_CSRMatrix, %struct.hypre_CSRMatrix* %592, i64 0, i32 9
+  %604 = load double*, double** %603, align 8, !tbaa !15
+  %605 = getelementptr inbounds %struct.hypre_CSRMatrix, %struct.hypre_CSRMatrix* %592, i64 0, i32 4
+  %606 = load i32, i32* %605, align 4, !tbaa !24
+  %607 = add nsw i32 %61, 1
+  %608 = sext i32 %607 to i64
+  %609 = call i8* @hypre_CAlloc(i64 %608, i64 4, i32 %21) #3
+  %610 = bitcast i8* %609 to i32*
+  %611 = call i8* @hypre_CAlloc(i64 %608, i64 4, i32 %21) #3
+  %612 = bitcast i8* %611 to i32*
+  %613 = load i32*, i32** %593, align 8, !tbaa !17
+  %614 = getelementptr inbounds i32, i32* %613, i64 %109
+  %615 = load i32, i32* %614, align 4, !tbaa !19
+  %616 = add nsw i32 %615, %79
+  %617 = load i32*, i32** %599, align 8, !tbaa !17
+  %618 = getelementptr inbounds i32, i32* %617, i64 %109
+  %619 = load i32, i32* %618, align 4, !tbaa !19
+  %620 = icmp eq i32 %616, 0
+  br i1 %620, label %627, label %621
+
+621:                                              ; preds = %585
+  %622 = sext i32 %616 to i64
+  %623 = call i8* @hypre_CAlloc(i64 %622, i64 4, i32 %21) #3
+  %624 = bitcast i8* %623 to i32*
+  %625 = call i8* @hypre_CAlloc(i64 %622, i64 8, i32 %21) #3
+  %626 = bitcast i8* %625 to double*
+  br label %627
+
+627:                                              ; preds = %621, %585
+  %628 = phi i32* [ %624, %621 ], [ null, %585 ]
+  %629 = phi double* [ %626, %621 ], [ null, %585 ]
+  %630 = icmp eq i32 %619, 0
+  br i1 %630, label %637, label %631
+
+631:                                              ; preds = %627
+  %632 = sext i32 %619 to i64
+  %633 = call i8* @hypre_CAlloc(i64 %632, i64 4, i32 %21) #3
+  %634 = bitcast i8* %633 to i32*
+  %635 = call i8* @hypre_CAlloc(i64 %632, i64 8, i32 %21) #3
+  %636 = bitcast i8* %635 to double*
+  br label %637
+
+637:                                              ; preds = %631, %627
+  %638 = phi i32* [ %634, %631 ], [ null, %627 ]
+  %639 = phi double* [ %636, %631 ], [ null, %627 ]
+  %640 = load i32, i32* %119, align 4, !tbaa !19
+  %641 = load i32, i32* %117, align 4, !tbaa !19
+  %642 = load i32, i32* %121, align 4, !tbaa !19
+  %643 = sext i32 %640 to i64
+  %644 = icmp slt i32 %641, %642
+  br i1 %644, label %645, label %730
+
+645:                                              ; preds = %637
+  %646 = getelementptr inbounds i32, i32* %600, i64 %643
+  %647 = load i32, i32* %646, align 4, !tbaa !19
+  %648 = getelementptr inbounds i32, i32* %594, i64 %643
+  %649 = load i32, i32* %648, align 4, !tbaa !19
+  %650 = sext i32 %641 to i64
+  %651 = sext i32 %642 to i64
+  br label %652
+
+652:                                              ; preds = %645, %721
+  %653 = phi i64 [ %650, %645 ], [ %726, %721 ]
+  %654 = phi i32 [ 0, %645 ], [ %725, %721 ]
+  %655 = phi i32 [ %640, %645 ], [ %724, %721 ]
+  %656 = phi i32 [ %647, %645 ], [ %723, %721 ]
+  %657 = phi i32 [ %649, %645 ], [ %722, %721 ]
+  %658 = getelementptr inbounds i32, i32* %1, i64 %653
+  %659 = load i32, i32* %658, align 4, !tbaa !19
+  %660 = icmp sgt i32 %659, 0
+  br i1 %660, label %661, label %667
+
+661:                                              ; preds = %652
+  %662 = add nsw i32 %654, 1
+  %663 = sext i32 %657 to i64
+  %664 = getelementptr inbounds i32, i32* %628, i64 %663
+  store i32 %654, i32* %664, align 4, !tbaa !19
+  %665 = add nsw i32 %657, 1
+  %666 = getelementptr inbounds double, double* %629, i64 %663
+  store double 1.000000e+00, double* %666, align 8, !tbaa !32
+  br label %721
+
+667:                                              ; preds = %652
+  %668 = sext i32 %655 to i64
+  %669 = getelementptr inbounds i32, i32* %594, i64 %668
+  %670 = load i32, i32* %669, align 4, !tbaa !19
+  %671 = add nsw i32 %655, 1
+  %672 = sext i32 %671 to i64
+  %673 = getelementptr inbounds i32, i32* %594, i64 %672
+  %674 = load i32, i32* %673, align 4, !tbaa !19
+  %675 = icmp slt i32 %670, %674
+  br i1 %675, label %676, label %695
+
+676:                                              ; preds = %667
+  %677 = sext i32 %657 to i64
+  %678 = sext i32 %670 to i64
+  br label %679
+
+679:                                              ; preds = %676, %679
+  %680 = phi i64 [ %678, %676 ], [ %689, %679 ]
+  %681 = phi i64 [ %677, %676 ], [ %687, %679 ]
+  %682 = getelementptr inbounds i32, i32* %596, i64 %680
+  %683 = load i32, i32* %682, align 4, !tbaa !19
+  %684 = getelementptr inbounds i32, i32* %628, i64 %681
+  store i32 %683, i32* %684, align 4, !tbaa !19
+  %685 = getelementptr inbounds double, double* %598, i64 %680
+  %686 = load double, double* %685, align 8, !tbaa !32
+  %687 = add nsw i64 %681, 1
+  %688 = getelementptr inbounds double, double* %629, i64 %681
+  store double %686, double* %688, align 8, !tbaa !32
+  %689 = add nsw i64 %680, 1
+  %690 = load i32, i32* %673, align 4, !tbaa !19
+  %691 = sext i32 %690 to i64
+  %692 = icmp slt i64 %689, %691
+  br i1 %692, label %679, label %693, !llvm.loop !51
+
+693:                                              ; preds = %679
+  %694 = trunc i64 %687 to i32
+  br label %695
+
+695:                                              ; preds = %693, %667
+  %696 = phi i32 [ %657, %667 ], [ %694, %693 ]
+  %697 = getelementptr inbounds i32, i32* %600, i64 %668
+  %698 = load i32, i32* %697, align 4, !tbaa !19
+  %699 = getelementptr inbounds i32, i32* %600, i64 %672
+  %700 = load i32, i32* %699, align 4, !tbaa !19
+  %701 = icmp slt i32 %698, %700
+  br i1 %701, label %702, label %721
+
+702:                                              ; preds = %695
+  %703 = sext i32 %656 to i64
+  %704 = sext i32 %698 to i64
+  br label %705
+
+705:                                              ; preds = %702, %705
+  %706 = phi i64 [ %704, %702 ], [ %715, %705 ]
+  %707 = phi i64 [ %703, %702 ], [ %713, %705 ]
+  %708 = getelementptr inbounds i32, i32* %602, i64 %706
+  %709 = load i32, i32* %708, align 4, !tbaa !19
+  %710 = getelementptr inbounds i32, i32* %638, i64 %707
+  store i32 %709, i32* %710, align 4, !tbaa !19
+  %711 = getelementptr inbounds double, double* %604, i64 %706
+  %712 = load double, double* %711, align 8, !tbaa !32
+  %713 = add nsw i64 %707, 1
+  %714 = getelementptr inbounds double, double* %639, i64 %707
+  store double %712, double* %714, align 8, !tbaa !32
+  %715 = add nsw i64 %706, 1
+  %716 = load i32, i32* %699, align 4, !tbaa !19
+  %717 = sext i32 %716 to i64
+  %718 = icmp slt i64 %715, %717
+  br i1 %718, label %705, label %719, !llvm.loop !52
+
+719:                                              ; preds = %705
+  %720 = trunc i64 %713 to i32
+  br label %721
+
+721:                                              ; preds = %719, %695, %661
+  %722 = phi i32 [ %665, %661 ], [ %696, %695 ], [ %696, %719 ]
+  %723 = phi i32 [ %656, %661 ], [ %656, %695 ], [ %720, %719 ]
+  %724 = phi i32 [ %655, %661 ], [ %671, %695 ], [ %671, %719 ]
+  %725 = phi i32 [ %662, %661 ], [ %654, %695 ], [ %654, %719 ]
+  %726 = add nsw i64 %653, 1
+  %727 = getelementptr inbounds i32, i32* %610, i64 %726
+  store i32 %722, i32* %727, align 4, !tbaa !19
+  %728 = getelementptr inbounds i32, i32* %612, i64 %726
+  store i32 %723, i32* %728, align 4, !tbaa !19
+  %729 = icmp eq i64 %726, %651
+  br i1 %729, label %730, label %652, !llvm.loop !53
+
+730:                                              ; preds = %721, %637
+  %731 = getelementptr inbounds %struct.hypre_ParCSRMatrix_struct, %struct.hypre_ParCSRMatrix_struct* %0, i64 0, i32 1
+  %732 = load i32, i32* %731, align 4, !tbaa !54
+  %733 = load i32, i32* %13, align 4, !tbaa !19
+  %734 = getelementptr inbounds %struct.hypre_ParCSRMatrix_struct, %struct.hypre_ParCSRMatrix_struct* %0, i64 0, i32 15, i64 0
+  %735 = sext i32 %61 to i64
+  %736 = getelementptr inbounds i32, i32* %610, i64 %735
+  %737 = load i32, i32* %736, align 4, !tbaa !19
+  %738 = getelementptr inbounds i32, i32* %612, i64 %735
+  %739 = load i32, i32* %738, align 4, !tbaa !19
+  %740 = call %struct.hypre_ParCSRMatrix_struct* @hypre_ParCSRMatrixCreate(i32 %17, i32 %732, i32 %733, i32* nonnull %734, i32* nonnull %3, i32 %606, i32 %737, i32 %739) #3
+  %741 = getelementptr inbounds %struct.hypre_ParCSRMatrix_struct, %struct.hypre_ParCSRMatrix_struct* %740, i64 0, i32 8
+  %742 = load %struct.hypre_CSRMatrix*, %struct.hypre_CSRMatrix** %741, align 8, !tbaa !10
+  %743 = getelementptr inbounds %struct.hypre_CSRMatrix, %struct.hypre_CSRMatrix* %742, i64 0, i32 9
+  store double* %629, double** %743, align 8, !tbaa !15
+  %744 = bitcast %struct.hypre_CSRMatrix* %742 to i8**
+  store i8* %609, i8** %744, align 8, !tbaa !17
+  %745 = getelementptr inbounds %struct.hypre_CSRMatrix, %struct.hypre_CSRMatrix* %742, i64 0, i32 1
+  store i32* %628, i32** %745, align 8, !tbaa !16
+  %746 = getelementptr inbounds %struct.hypre_ParCSRMatrix_struct, %struct.hypre_ParCSRMatrix_struct* %740, i64 0, i32 9
+  %747 = load %struct.hypre_CSRMatrix*, %struct.hypre_CSRMatrix** %746, align 8, !tbaa !13
+  %748 = getelementptr inbounds %struct.hypre_CSRMatrix, %struct.hypre_CSRMatrix* %747, i64 0, i32 9
+  store double* %639, double** %748, align 8, !tbaa !15
+  %749 = bitcast %struct.hypre_CSRMatrix* %747 to i8**
+  store i8* %611, i8** %749, align 8, !tbaa !17
+  %750 = getelementptr inbounds %struct.hypre_CSRMatrix, %struct.hypre_CSRMatrix* %747, i64 0, i32 1
+  store i32* %638, i32** %750, align 8, !tbaa !16
+  %751 = getelementptr inbounds %struct.hypre_ParCSRMatrix_struct, %struct.hypre_ParCSRMatrix_struct* %588, i64 0, i32 12
+  %752 = load i32*, i32** %751, align 8, !tbaa !55
+  %753 = getelementptr inbounds %struct.hypre_ParCSRMatrix_struct, %struct.hypre_ParCSRMatrix_struct* %740, i64 0, i32 12
+  store i32* %752, i32** %753, align 8, !tbaa !55
+  store i32* null, i32** %751, align 8, !tbaa !55
+  %754 = getelementptr inbounds %struct.hypre_CSRMatrix, %struct.hypre_CSRMatrix* %742, i64 0, i32 12
+  store i32 %21, i32* %754, align 4, !tbaa !11
+  %755 = getelementptr inbounds %struct.hypre_CSRMatrix, %struct.hypre_CSRMatrix* %747, i64 0, i32 12
+  store i32 %21, i32* %755, align 4, !tbaa !11
+  %756 = fcmp une double %7, 0.000000e+00
+  %757 = icmp sgt i32 %8, 0
+  %758 = select i1 %756, i1 true, i1 %757
+  br i1 %758, label %759, label %840
+
+759:                                              ; preds = %730
+  %760 = getelementptr inbounds %struct.hypre_CSRMatrix, %struct.hypre_CSRMatrix* %747, i64 0, i32 0
+  %761 = call i32 @hypre_BoomerAMGInterpTruncation(%struct.hypre_ParCSRMatrix_struct* %740, double %7, i32 %8) #3
+  %762 = load i32*, i32** %760, align 8, !tbaa !17
+  %763 = load i32*, i32** %750, align 8, !tbaa !16
+  %764 = getelementptr inbounds i32, i32* %762, i64 %735
+  %765 = load i32, i32* %764, align 4, !tbaa !19
+  %766 = load i32*, i32** %753, align 8, !tbaa !55
+  %767 = icmp eq i32 %606, 0
+  br i1 %767, label %840, label %768
+
+768:                                              ; preds = %759
+  %769 = sext i32 %606 to i64
+  %770 = call i8* @hypre_CAlloc(i64 %769, i64 4, i32 0) #3
+  %771 = bitcast i8* %770 to i32*
+  %772 = icmp sgt i32 %765, 0
+  br i1 %772, label %773, label %775
+
+773:                                              ; preds = %768
+  %774 = zext i32 %765 to i64
+  br label %779
+
+775:                                              ; preds = %779, %768
+  %776 = icmp sgt i32 %606, 0
+  br i1 %776, label %777, label %797
+
+777:                                              ; preds = %775
+  %778 = zext i32 %606 to i64
+  br label %787
+
+779:                                              ; preds = %773, %779
+  %780 = phi i64 [ 0, %773 ], [ %785, %779 ]
+  %781 = getelementptr inbounds i32, i32* %763, i64 %780
+  %782 = load i32, i32* %781, align 4, !tbaa !19
+  %783 = sext i32 %782 to i64
+  %784 = getelementptr inbounds i32, i32* %771, i64 %783
+  store i32 1, i32* %784, align 4, !tbaa !19
+  %785 = add nuw nsw i64 %780, 1
+  %786 = icmp eq i64 %785, %774
+  br i1 %786, label %775, label %779, !llvm.loop !56
+
+787:                                              ; preds = %777, %787
+  %788 = phi i64 [ 0, %777 ], [ %795, %787 ]
+  %789 = phi i32 [ 0, %777 ], [ %794, %787 ]
+  %790 = getelementptr inbounds i32, i32* %771, i64 %788
+  %791 = load i32, i32* %790, align 4, !tbaa !19
+  %792 = icmp ne i32 %791, 0
+  %793 = zext i1 %792 to i32
+  %794 = add nuw nsw i32 %789, %793
+  %795 = add nuw nsw i64 %788, 1
+  %796 = icmp eq i64 %795, %778
+  br i1 %796, label %797, label %787, !llvm.loop !57
+
+797:                                              ; preds = %787, %775
+  %798 = phi i32 [ 0, %775 ], [ %794, %787 ]
+  %799 = zext i32 %798 to i64
+  %800 = call i8* @hypre_CAlloc(i64 %799, i64 4, i32 0) #3
+  %801 = bitcast i8* %800 to i32*
+  %802 = call i8* @hypre_CAlloc(i64 %799, i64 4, i32 0) #3
+  %803 = bitcast i8* %802 to i32*
+  %804 = icmp sgt i32 %606, 0
+  br i1 %804, label %805, label %825
+
+805:                                              ; preds = %797
+  %806 = zext i32 %606 to i64
+  br label %807
+
+807:                                              ; preds = %805, %821
+  %808 = phi i64 [ 0, %805 ], [ %823, %821 ]
+  %809 = phi i32 [ 0, %805 ], [ %822, %821 ]
+  %810 = getelementptr inbounds i32, i32* %771, i64 %808
+  %811 = load i32, i32* %810, align 4, !tbaa !19
+  %812 = icmp eq i32 %811, 0
+  br i1 %812, label %821, label %813
+
+813:                                              ; preds = %807
+  %814 = getelementptr inbounds i32, i32* %766, i64 %808
+  %815 = load i32, i32* %814, align 4, !tbaa !19
+  %816 = sext i32 %809 to i64
+  %817 = getelementptr inbounds i32, i32* %801, i64 %816
+  store i32 %815, i32* %817, align 4, !tbaa !19
+  %818 = add nsw i32 %809, 1
+  %819 = getelementptr inbounds i32, i32* %803, i64 %816
+  %820 = trunc i64 %808 to i32
+  store i32 %820, i32* %819, align 4, !tbaa !19
+  br label %821
+
+821:                                              ; preds = %807, %813
+  %822 = phi i32 [ %818, %813 ], [ %809, %807 ]
+  %823 = add nuw nsw i64 %808, 1
+  %824 = icmp eq i64 %823, %806
+  br i1 %824, label %825, label %807, !llvm.loop !58
+
+825:                                              ; preds = %821, %797
+  call void @hypre_Free(i8* %770, i32 0) #3
+  %826 = icmp sgt i32 %765, 0
+  br i1 %826, label %827, label %836
+
+827:                                              ; preds = %825
+  %828 = zext i32 %765 to i64
+  br label %829
+
+829:                                              ; preds = %827, %829
+  %830 = phi i64 [ 0, %827 ], [ %834, %829 ]
+  %831 = getelementptr inbounds i32, i32* %763, i64 %830
+  %832 = load i32, i32* %831, align 4, !tbaa !19
+  %833 = call i32 @hypre_BinarySearch(i32* %803, i32 %832, i32 %798) #3
+  store i32 %833, i32* %831, align 4, !tbaa !19
+  %834 = add nuw nsw i64 %830, 1
+  %835 = icmp eq i64 %834, %828
+  br i1 %835, label %836, label %829, !llvm.loop !59
+
+836:                                              ; preds = %829, %825
+  %837 = bitcast i32* %766 to i8*
+  call void @hypre_Free(i8* %837, i32 0) #3
+  %838 = bitcast i32** %753 to i8**
+  store i8* %800, i8** %838, align 8, !tbaa !55
+  %839 = getelementptr inbounds %struct.hypre_CSRMatrix, %struct.hypre_CSRMatrix* %747, i64 0, i32 4
+  store i32 %798, i32* %839, align 4, !tbaa !24
+  call void @hypre_Free(i8* %802, i32 0) #3
+  br label %840
+
+840:                                              ; preds = %759, %836, %730
+  %841 = call i32 @hypre_MatvecCommPkgCreate(%struct.hypre_ParCSRMatrix_struct* %740) #3
+  store %struct.hypre_ParCSRMatrix_struct* %740, %struct.hypre_ParCSRMatrix_struct** %9, align 8, !tbaa !20
+  call void @hypre_Free(i8* %110, i32 0) #3
+  call void @hypre_Free(i8* %112, i32 0) #3
+  call void @hypre_Free(i8* %114, i32 0) #3
+  call void @hypre_Free(i8* %116, i32 0) #3
+  call void @hypre_Free(i8* %118, i32 0) #3
+  %842 = bitcast i32* %195 to i8*
+  call void @hypre_Free(i8* %842, i32 0) #3
+  %843 = load %struct.hypre_ParCSRMatrix_struct*, %struct.hypre_ParCSRMatrix_struct** %14, align 8, !tbaa !20
+  %844 = call i32 @hypre_ParCSRMatrixDestroy(%struct.hypre_ParCSRMatrix_struct* %843) #3
+  %845 = load %struct.hypre_ParCSRMatrix_struct*, %struct.hypre_ParCSRMatrix_struct** %15, align 8, !tbaa !20
+  %846 = call i32 @hypre_ParCSRMatrixDestroy(%struct.hypre_ParCSRMatrix_struct* %845) #3
+  %847 = call i32 @hypre_ParCSRMatrixDestroy(%struct.hypre_ParCSRMatrix_struct* %588) #3
+  %848 = load i32, i32* @hypre__global_error, align 4, !tbaa !19
+  call void @llvm.lifetime.end.p0i8(i64 8, i8* nonnull %64) #3
+  call void @llvm.lifetime.end.p0i8(i64 8, i8* nonnull %63) #3
+  call void @llvm.lifetime.end.p0i8(i64 4, i8* nonnull %62) #3
+  call void @llvm.lifetime.end.p0i8(i64 4, i8* nonnull %33) #3
+  call void @llvm.lifetime.end.p0i8(i64 4, i8* nonnull %32) #3
+  ret i32 %848
+}
+
+; Function Attrs: argmemonly mustprogress nofree nosync nounwind willreturn
+declare void @llvm.lifetime.start.p0i8(i64 immarg, i8* nocapture) #1
+
+declare dso_local i32 @hypre_MPI_Comm_size(i32, i32*) local_unnamed_addr #2
+
+declare dso_local i32 @hypre_MPI_Comm_rank(i32, i32*) local_unnamed_addr #2
+
+declare dso_local i32 @hypre_MPI_Bcast(i8*, i32, i32, i32, i32) local_unnamed_addr #2
+
+declare dso_local i32 @hypre_ParCSRMatrixGenerateFFFC(%struct.hypre_ParCSRMatrix_struct*, i32*, i32*, %struct.hypre_ParCSRMatrix_struct*, %struct.hypre_ParCSRMatrix_struct**, %struct.hypre_ParCSRMatrix_struct**) local_unnamed_addr #2
+
+declare dso_local i8* @hypre_CAlloc(i64, i64, i32) local_unnamed_addr #2
+
+declare dso_local %struct.hypre_ParCSRCommHandle* @hypre_ParCSRCommHandleCreate(i32, %struct._hypre_ParCSRCommPkg*, i8*, i8*) local_unnamed_addr #2
+
+declare dso_local i32 @hypre_ParCSRCommHandleDestroy(%struct.hypre_ParCSRCommHandle*) local_unnamed_addr #2
+
+declare dso_local void @hypre_Free(i8*, i32) local_unnamed_addr #2
+
+; Function Attrs: argmemonly mustprogress nofree nosync nounwind willreturn
+declare void @llvm.lifetime.end.p0i8(i64 immarg, i8* nocapture) #1
+
+declare dso_local %struct.hypre_ParCSRMatrix_struct* @hypre_ParMatmul(%struct.hypre_ParCSRMatrix_struct*, %struct.hypre_ParCSRMatrix_struct*) local_unnamed_addr #2
+
+declare dso_local %struct.hypre_ParCSRMatrix_struct* @hypre_ParCSRMatrixCreate(i32, i32, i32, i32*, i32*, i32, i32, i32) local_unnamed_addr #2
+
+declare dso_local i32 @hypre_BoomerAMGInterpTruncation(%struct.hypre_ParCSRMatrix_struct*, double, i32) local_unnamed_addr #2
+
+declare dso_local i32 @hypre_BinarySearch(i32*, i32, i32) local_unnamed_addr #2
+
+declare dso_local i32 @hypre_MatvecCommPkgCreate(%struct.hypre_ParCSRMatrix_struct*) local_unnamed_addr #2
+
+declare dso_local i32 @hypre_ParCSRMatrixDestroy(%struct.hypre_ParCSRMatrix_struct*) local_unnamed_addr #2
+
+; Function Attrs: nounwind uwtable
+define dso_local i32 @hypre_BoomerAMGBuildModExtInterp(%struct.hypre_ParCSRMatrix_struct* %0, i32* %1, %struct.hypre_ParCSRMatrix_struct* %2, i32* %3, i32 %4, i32* nocapture readonly %5, i32 %6, double %7, i32 %8, %struct.hypre_ParCSRMatrix_struct** nocapture %9) local_unnamed_addr #0 {
+  %11 = getelementptr inbounds %struct.hypre_ParCSRMatrix_struct, %struct.hypre_ParCSRMatrix_struct* %0, i64 0, i32 8
+  %12 = load %struct.hypre_CSRMatrix*, %struct.hypre_CSRMatrix** %11, align 8, !tbaa !10
+  %13 = getelementptr inbounds %struct.hypre_CSRMatrix, %struct.hypre_CSRMatrix* %12, i64 0, i32 12
+  %14 = load i32, i32* %13, align 4, !tbaa !11
+  %15 = getelementptr inbounds %struct.hypre_ParCSRMatrix_struct, %struct.hypre_ParCSRMatrix_struct* %0, i64 0, i32 9
+  %16 = load %struct.hypre_CSRMatrix*, %struct.hypre_CSRMatrix** %15, align 8, !tbaa !13
+  %17 = getelementptr inbounds %struct.hypre_CSRMatrix, %struct.hypre_CSRMatrix* %16, i64 0, i32 12
+  %18 = load i32, i32* %17, align 4, !tbaa !11
+  %19 = icmp eq i32 %14, %18
+  br i1 %19, label %22, label %20
+
+20:                                               ; preds = %10
+  %21 = call i32 (i8*, ...) @hypre_printf(i8* getelementptr inbounds ([62 x i8], [62 x i8]* @.str, i64 0, i64 0), i32 %14, i32 %18) #3
+  br label %22
+
+22:                                               ; preds = %10, %20
+  %23 = call i32 @hypre_GetExecPolicy1(i32 %14) #3
+  %24 = icmp eq i32 %23, 0
+  br i1 %24, label %25, label %27
+
+25:                                               ; preds = %22
+  %26 = call i32 @hypre_BoomerAMGBuildModExtInterpHost(%struct.hypre_ParCSRMatrix_struct* %0, i32* %1, %struct.hypre_ParCSRMatrix_struct* %2, i32* %3, i32 %4, i32* %5, i32 undef, double %7, i32 %8, %struct.hypre_ParCSRMatrix_struct** %9)
+  br label %27
+
+27:                                               ; preds = %25, %22
+  %28 = phi i32 [ %26, %25 ], [ 0, %22 ]
+  ret i32 %28
+}
+
+declare dso_local i32 @hypre_GetExecPolicy1(i32) local_unnamed_addr #2
+
+; Function Attrs: nounwind uwtable
+define dso_local i32 @hypre_BoomerAMGBuildModExtPIInterpHost(%struct.hypre_ParCSRMatrix_struct* %0, i32* %1, %struct.hypre_ParCSRMatrix_struct* %2, i32* %3, i32 %4, i32 %5, i32* nocapture readonly %6, double %7, i32 %8, %struct.hypre_ParCSRMatrix_struct** nocapture %9) local_unnamed_addr #0 {
+  %11 = alloca i32, align 4
+  %12 = alloca i32, align 4
+  %13 = alloca i32, align 4
+  %14 = alloca %struct.hypre_ParCSRMatrix_struct*, align 8
+  %15 = alloca %struct.hypre_ParCSRMatrix_struct*, align 8
+  %16 = getelementptr inbounds %struct.hypre_ParCSRMatrix_struct, %struct.hypre_ParCSRMatrix_struct* %0, i64 0, i32 0
+  %17 = load i32, i32* %16, align 8, !tbaa !3
+  %18 = getelementptr inbounds %struct.hypre_ParCSRMatrix_struct, %struct.hypre_ParCSRMatrix_struct* %0, i64 0, i32 8
+  %19 = load %struct.hypre_CSRMatrix*, %struct.hypre_CSRMatrix** %18, align 8, !tbaa !10
+  %20 = getelementptr inbounds %struct.hypre_CSRMatrix, %struct.hypre_CSRMatrix* %19, i64 0, i32 12
+  %21 = load i32, i32* %20, align 4, !tbaa !11
+  %22 = getelementptr inbounds %struct.hypre_ParCSRMatrix_struct, %struct.hypre_ParCSRMatrix_struct* %0, i64 0, i32 9
+  %23 = load %struct.hypre_CSRMatrix*, %struct.hypre_CSRMatrix** %22, align 8, !tbaa !13
+  %24 = getelementptr inbounds %struct.hypre_CSRMatrix, %struct.hypre_CSRMatrix* %23, i64 0, i32 12
+  %25 = load i32, i32* %24, align 4, !tbaa !11
+  %26 = icmp eq i32 %21, %25
+  br i1 %26, label %29, label %27
+
+27:                                               ; preds = %10
+  %28 = call i32 (i8*, ...) @hypre_printf(i8* getelementptr inbounds ([62 x i8], [62 x i8]* @.str, i64 0, i64 0), i32 %21, i32 %25) #3
+  br label %29
+
+29:                                               ; preds = %10, %27
+  %30 = bitcast i32* %11 to i8*
+  call void @llvm.lifetime.start.p0i8(i64 4, i8* nonnull %30) #3
+  %31 = bitcast i32* %12 to i8*
+  call void @llvm.lifetime.start.p0i8(i64 4, i8* nonnull %31) #3
+  %32 = load %struct.hypre_CSRMatrix*, %struct.hypre_CSRMatrix** %18, align 8, !tbaa !10
+  %33 = getelementptr inbounds %struct.hypre_CSRMatrix, %struct.hypre_CSRMatrix* %32, i64 0, i32 9
+  %34 = load double*, double** %33, align 8, !tbaa !15
+  %35 = getelementptr inbounds %struct.hypre_CSRMatrix, %struct.hypre_CSRMatrix* %32, i64 0, i32 0
+  %36 = load i32*, i32** %35, align 8, !tbaa !17
+  %37 = getelementptr inbounds %struct.hypre_CSRMatrix, %struct.hypre_CSRMatrix* %32, i64 0, i32 1
+  %38 = load i32*, i32** %37, align 8, !tbaa !16
+  %39 = load %struct.hypre_CSRMatrix*, %struct.hypre_CSRMatrix** %22, align 8, !tbaa !13
+  %40 = getelementptr inbounds %struct.hypre_CSRMatrix, %struct.hypre_CSRMatrix* %39, i64 0, i32 9
+  %41 = load double*, double** %40, align 8, !tbaa !15
+  %42 = getelementptr inbounds %struct.hypre_CSRMatrix, %struct.hypre_CSRMatrix* %39, i64 0, i32 0
+  %43 = load i32*, i32** %42, align 8, !tbaa !17
+  %44 = getelementptr inbounds %struct.hypre_CSRMatrix, %struct.hypre_CSRMatrix* %39, i64 0, i32 1
+  %45 = load i32*, i32** %44, align 8, !tbaa !16
+  %46 = getelementptr inbounds %struct.hypre_ParCSRMatrix_struct, %struct.hypre_ParCSRMatrix_struct* %2, i64 0, i32 8
+  %47 = load %struct.hypre_CSRMatrix*, %struct.hypre_CSRMatrix** %46, align 8, !tbaa !10
+  %48 = getelementptr inbounds %struct.hypre_CSRMatrix, %struct.hypre_CSRMatrix* %47, i64 0, i32 1
+  %49 = load i32*, i32** %48, align 8, !tbaa !16
+  %50 = getelementptr inbounds %struct.hypre_CSRMatrix, %struct.hypre_CSRMatrix* %47, i64 0, i32 0
+  %51 = load i32*, i32** %50, align 8, !tbaa !17
+  %52 = getelementptr inbounds %struct.hypre_ParCSRMatrix_struct, %struct.hypre_ParCSRMatrix_struct* %2, i64 0, i32 9
+  %53 = load %struct.hypre_CSRMatrix*, %struct.hypre_CSRMatrix** %52, align 8, !tbaa !13
+  %54 = getelementptr inbounds %struct.hypre_CSRMatrix, %struct.hypre_CSRMatrix* %53, i64 0, i32 1
+  %55 = load i32*, i32** %54, align 8, !tbaa !16
+  %56 = getelementptr inbounds %struct.hypre_CSRMatrix, %struct.hypre_CSRMatrix* %53, i64 0, i32 0
+  %57 = load i32*, i32** %56, align 8, !tbaa !17
+  %58 = getelementptr inbounds %struct.hypre_CSRMatrix, %struct.hypre_CSRMatrix* %32, i64 0, i32 3
+  %59 = load i32, i32* %58, align 8, !tbaa !18
+  %60 = bitcast i32* %13 to i8*
+  call void @llvm.lifetime.start.p0i8(i64 4, i8* nonnull %60) #3
+  %61 = bitcast %struct.hypre_ParCSRMatrix_struct** %14 to i8*
+  call void @llvm.lifetime.start.p0i8(i64 8, i8* nonnull %61) #3
+  %62 = bitcast %struct.hypre_ParCSRMatrix_struct** %15 to i8*
+  call void @llvm.lifetime.start.p0i8(i64 8, i8* nonnull %62) #3
+  %63 = call i32 @hypre_MPI_Comm_size(i32 %17, i32* nonnull %12) #3
+  %64 = call i32 @hypre_MPI_Comm_rank(i32 %17, i32* nonnull %11) #3
+  %65 = load i32, i32* %11, align 4, !tbaa !19
+  %66 = load i32, i32* %12, align 4, !tbaa !19
+  %67 = add nsw i32 %66, -1
+  %68 = icmp eq i32 %65, %67
+  br i1 %68, label %69, label %72
+
+69:                                               ; preds = %29
+  %70 = getelementptr inbounds i32, i32* %3, i64 1
+  %71 = load i32, i32* %70, align 4, !tbaa !19
+  store i32 %71, i32* %13, align 4, !tbaa !19
+  br label %72
+
+72:                                               ; preds = %69, %29
+  %73 = call i32 @hypre_MPI_Bcast(i8* nonnull %60, i32 1, i32 1275069445, i32 %67, i32 %17) #3
+  %74 = getelementptr inbounds i32, i32* %3, i64 1
+  %75 = load i32, i32* %74, align 4, !tbaa !19
+  %76 = load i32, i32* %3, align 4, !tbaa !19
+  %77 = sub nsw i32 %75, %76
+  %78 = call i32 @hypre_ParCSRMatrixGenerateFFFC(%struct.hypre_ParCSRMatrix_struct* %0, i32* %1, i32* nonnull %3, %struct.hypre_ParCSRMatrix_struct* %2, %struct.hypre_ParCSRMatrix_struct** nonnull %15, %struct.hypre_ParCSRMatrix_struct** nonnull %14) #3
+  %79 = load i32, i32* %12, align 4, !tbaa !19
+  %80 = icmp sgt i32 %79, 1
+  br i1 %80, label %81, label %90
+
+81:                                               ; preds = %72
+  %82 = load %struct.hypre_ParCSRMatrix_struct*, %struct.hypre_ParCSRMatrix_struct** %14, align 8, !tbaa !20
+  %83 = call %struct.hypre_CSRMatrix* @hypre_ParCSRMatrixExtractBExt(%struct.hypre_ParCSRMatrix_struct* %82, %struct.hypre_ParCSRMatrix_struct* %82, i32 1) #3
+  %84 = getelementptr inbounds %struct.hypre_CSRMatrix, %struct.hypre_CSRMatrix* %83, i64 0, i32 0
+  %85 = load i32*, i32** %84, align 8, !tbaa !17
+  %86 = getelementptr inbounds %struct.hypre_CSRMatrix, %struct.hypre_CSRMatrix* %83, i64 0, i32 2
+  %87 = load i32*, i32** %86, align 8, !tbaa !60
+  %88 = getelementptr inbounds %struct.hypre_CSRMatrix, %struct.hypre_CSRMatrix* %83, i64 0, i32 9
+  %89 = load double*, double** %88, align 8, !tbaa !15
+  br label %90
+
+90:                                               ; preds = %81, %72
+  %91 = phi i32* [ %87, %81 ], [ null, %72 ]
+  %92 = phi i32* [ %85, %81 ], [ null, %72 ]
+  %93 = phi double* [ %89, %81 ], [ null, %72 ]
+  %94 = phi %struct.hypre_CSRMatrix* [ %83, %81 ], [ null, %72 ]
+  %95 = load %struct.hypre_ParCSRMatrix_struct*, %struct.hypre_ParCSRMatrix_struct** %15, align 8, !tbaa !20
+  %96 = getelementptr inbounds %struct.hypre_ParCSRMatrix_struct, %struct.hypre_ParCSRMatrix_struct* %95, i64 0, i32 8
+  %97 = load %struct.hypre_CSRMatrix*, %struct.hypre_CSRMatrix** %96, align 8, !tbaa !10
+  %98 = getelementptr inbounds %struct.hypre_CSRMatrix, %struct.hypre_CSRMatrix* %97, i64 0, i32 0
+  %99 = load i32*, i32** %98, align 8, !tbaa !17
+  %100 = getelementptr inbounds %struct.hypre_CSRMatrix, %struct.hypre_CSRMatrix* %97, i64 0, i32 9
+  %101 = load double*, double** %100, align 8, !tbaa !15
+  %102 = getelementptr inbounds %struct.hypre_ParCSRMatrix_struct, %struct.hypre_ParCSRMatrix_struct* %95, i64 0, i32 9
+  %103 = load %struct.hypre_CSRMatrix*, %struct.hypre_CSRMatrix** %102, align 8, !tbaa !13
+  %104 = getelementptr inbounds %struct.hypre_CSRMatrix, %struct.hypre_CSRMatrix* %103, i64 0, i32 0
+  %105 = load i32*, i32** %104, align 8, !tbaa !17
+  %106 = getelementptr inbounds %struct.hypre_CSRMatrix, %struct.hypre_CSRMatrix* %103, i64 0, i32 9
+  %107 = load double*, double** %106, align 8, !tbaa !15
+  %108 = load %struct.hypre_ParCSRMatrix_struct*, %struct.hypre_ParCSRMatrix_struct** %14, align 8, !tbaa !20
+  %109 = getelementptr inbounds %struct.hypre_ParCSRMatrix_struct, %struct.hypre_ParCSRMatrix_struct* %108, i64 0, i32 8
+  %110 = load %struct.hypre_CSRMatrix*, %struct.hypre_CSRMatrix** %109, align 8, !tbaa !10
+  %111 = getelementptr inbounds %struct.hypre_CSRMatrix, %struct.hypre_CSRMatrix* %110, i64 0, i32 0
+  %112 = load i32*, i32** %111, align 8, !tbaa !17
+  %113 = getelementptr inbounds %struct.hypre_CSRMatrix, %struct.hypre_CSRMatrix* %110, i64 0, i32 1
+  %114 = load i32*, i32** %113, align 8, !tbaa !16
+  %115 = getelementptr inbounds %struct.hypre_CSRMatrix, %struct.hypre_CSRMatrix* %110, i64 0, i32 9
+  %116 = load double*, double** %115, align 8, !tbaa !15
+  %117 = getelementptr inbounds %struct.hypre_ParCSRMatrix_struct, %struct.hypre_ParCSRMatrix_struct* %108, i64 0, i32 9
+  %118 = load %struct.hypre_CSRMatrix*, %struct.hypre_CSRMatrix** %117, align 8, !tbaa !13
+  %119 = getelementptr inbounds %struct.hypre_CSRMatrix, %struct.hypre_CSRMatrix* %118, i64 0, i32 0
+  %120 = load i32*, i32** %119, align 8, !tbaa !17
+  %121 = getelementptr inbounds %struct.hypre_CSRMatrix, %struct.hypre_CSRMatrix* %118, i64 0, i32 1
+  %122 = load i32*, i32** %121, align 8, !tbaa !16
+  %123 = getelementptr inbounds %struct.hypre_CSRMatrix, %struct.hypre_CSRMatrix* %118, i64 0, i32 9
+  %124 = load double*, double** %123, align 8, !tbaa !15
+  %125 = getelementptr inbounds %struct.hypre_CSRMatrix, %struct.hypre_CSRMatrix* %110, i64 0, i32 3
+  %126 = load i32, i32* %125, align 8, !tbaa !18
+  %127 = getelementptr inbounds %struct.hypre_CSRMatrix, %struct.hypre_CSRMatrix* %118, i64 0, i32 4
+  %128 = load i32, i32* %127, align 4, !tbaa !24
+  %129 = getelementptr inbounds %struct.hypre_ParCSRMatrix_struct, %struct.hypre_ParCSRMatrix_struct* %108, i64 0, i32 14, i64 0
+  %130 = load i32, i32* %129, align 8, !tbaa !19
+  %131 = sext i32 %126 to i64
+  %132 = getelementptr inbounds i32, i32* %112, i64 %131
+  %133 = load i32, i32* %132, align 4, !tbaa !19
+  %134 = sext i32 %133 to i64
+  %135 = call i8* @hypre_CAlloc(i64 %134, i64 8, i32 0) #3
+  %136 = bitcast i8* %135 to double*
+  %137 = call i8* @hypre_CAlloc(i64 %131, i64 8, i32 0) #3
+  %138 = bitcast i8* %137 to double*
+  %139 = call i8* @hypre_CAlloc(i64 %131, i64 8, i32 0) #3
+  %140 = bitcast i8* %139 to double*
+  %141 = call i8* @hypre_CAlloc(i64 %131, i64 8, i32 0) #3
+  %142 = bitcast i8* %141 to double*
+  %143 = call i8* @hypre_CAlloc(i64 1, i64 4, i32 0) #3
+  %144 = bitcast i8* %143 to i32*
+  %145 = call i8* @hypre_CAlloc(i64 2, i64 4, i32 0) #3
+  %146 = bitcast i8* %145 to i32*
+  %147 = call i8* @hypre_CAlloc(i64 2, i64 4, i32 0) #3
+  %148 = bitcast i8* %147 to i32*
+  %149 = getelementptr inbounds i8, i8* %145, i64 4
+  %150 = bitcast i8* %149 to i32*
+  store i32 %59, i32* %150, align 4, !tbaa !19
+  %151 = icmp sgt i32 %59, 0
+  br i1 %151, label %152, label %165
+
+152:                                              ; preds = %90
+  %153 = zext i32 %59 to i64
+  br label %154
+
+154:                                              ; preds = %152, %162
+  %155 = phi i64 [ 0, %152 ], [ %163, %162 ]
+  %156 = getelementptr inbounds i32, i32* %1, i64 %155
+  %157 = load i32, i32* %156, align 4, !tbaa !19
+  %158 = icmp sgt i32 %157, 0
+  br i1 %158, label %159, label %162
+
+159:                                              ; preds = %154
+  %160 = load i32, i32* %144, align 4, !tbaa !19
+  %161 = add nsw i32 %160, 1
+  store i32 %161, i32* %144, align 4, !tbaa !19
+  br label %162
+
+162:                                              ; preds = %154, %159
+  %163 = add nuw nsw i64 %155, 1
+  %164 = icmp eq i64 %163, %153
+  br i1 %164, label %165, label %154, !llvm.loop !61
+
+165:                                              ; preds = %162, %90
+  %166 = getelementptr inbounds i8, i8* %147, i64 4
+  %167 = bitcast i8* %166 to i32*
+  store i32 %126, i32* %167, align 4, !tbaa !19
+  %168 = icmp sgt i32 %126, 0
+  br i1 %168, label %169, label %211
+
+169:                                              ; preds = %165
+  %170 = zext i32 %126 to i64
+  br label %173
+
+171:                                              ; preds = %203, %193
+  %172 = icmp eq i64 %177, %170
+  br i1 %172, label %211, label %173, !llvm.loop !62
+
+173:                                              ; preds = %169, %171
+  %174 = phi i64 [ 0, %169 ], [ %177, %171 ]
+  %175 = getelementptr inbounds i32, i32* %99, i64 %174
+  %176 = load i32, i32* %175, align 4, !tbaa !19
+  %177 = add nuw nsw i64 %174, 1
+  %178 = getelementptr inbounds i32, i32* %99, i64 %177
+  %179 = load i32, i32* %178, align 4, !tbaa !19
+  %180 = getelementptr inbounds double, double* %138, i64 %174
+  %181 = icmp slt i32 %176, %179
+  br i1 %181, label %182, label %193
+
+182:                                              ; preds = %173
+  %183 = sext i32 %176 to i64
+  %184 = sext i32 %179 to i64
+  br label %185
+
+185:                                              ; preds = %182, %185
+  %186 = phi i64 [ %183, %182 ], [ %191, %185 ]
+  %187 = getelementptr inbounds double, double* %101, i64 %186
+  %188 = load double, double* %187, align 8, !tbaa !32
+  %189 = load double, double* %180, align 8, !tbaa !32
+  %190 = fadd double %188, %189
+  store double %190, double* %180, align 8, !tbaa !32
+  %191 = add nsw i64 %186, 1
+  %192 = icmp eq i64 %191, %184
+  br i1 %192, label %193, label %185, !llvm.loop !63
+
+193:                                              ; preds = %185, %173
+  %194 = getelementptr inbounds i32, i32* %105, i64 %174
+  %195 = load i32, i32* %194, align 4, !tbaa !19
+  %196 = getelementptr inbounds i32, i32* %105, i64 %177
+  %197 = load i32, i32* %196, align 4, !tbaa !19
+  %198 = getelementptr inbounds double, double* %138, i64 %174
+  %199 = icmp slt i32 %195, %197
+  br i1 %199, label %200, label %171
+
+200:                                              ; preds = %193
+  %201 = sext i32 %195 to i64
+  %202 = sext i32 %197 to i64
+  br label %203
+
+203:                                              ; preds = %200, %203
+  %204 = phi i64 [ %201, %200 ], [ %209, %203 ]
+  %205 = getelementptr inbounds double, double* %107, i64 %204
+  %206 = load double, double* %205, align 8, !tbaa !32
+  %207 = load double, double* %198, align 8, !tbaa !32
+  %208 = fadd double %206, %207
+  store double %208, double* %198, align 8, !tbaa !32
+  %209 = add nsw i64 %204, 1
+  %210 = icmp eq i64 %209, %202
+  br i1 %210, label %171, label %203, !llvm.loop !64
+
+211:                                              ; preds = %171, %165
+  %212 = load i32, i32* %112, align 4, !tbaa !19
+  %213 = load i32, i32* %132, align 4, !tbaa !19
+  %214 = icmp slt i32 %212, %213
+  br i1 %214, label %215, label %225
+
+215:                                              ; preds = %211
+  %216 = sext i32 %212 to i64
+  %217 = sext i32 %213 to i64
+  br label %218
+
+218:                                              ; preds = %215, %218
+  %219 = phi i64 [ %216, %215 ], [ %223, %218 ]
+  %220 = getelementptr inbounds double, double* %116, i64 %219
+  %221 = load double, double* %220, align 8, !tbaa !32
+  %222 = getelementptr inbounds double, double* %136, i64 %219
+  store double %221, double* %222, align 8, !tbaa !32
+  %223 = add nsw i64 %219, 1
+  %224 = icmp eq i64 %223, %217
+  br i1 %224, label %225, label %218, !llvm.loop !65
+
+225:                                              ; preds = %218, %211
+  %226 = icmp eq i32 %128, 0
+  br i1 %226, label %231, label %227
+
+227:                                              ; preds = %225
+  %228 = sext i32 %128 to i64
+  %229 = call i8* @hypre_CAlloc(i64 %228, i64 8, i32 0) #3
+  %230 = bitcast i8* %229 to double*
+  br label %231
+
+231:                                              ; preds = %227, %225
+  %232 = phi double* [ %230, %227 ], [ null, %225 ]
+  %233 = load %struct.hypre_ParCSRMatrix_struct*, %struct.hypre_ParCSRMatrix_struct** %14, align 8, !tbaa !20
+  %234 = getelementptr inbounds %struct.hypre_ParCSRMatrix_struct, %struct.hypre_ParCSRMatrix_struct* %233, i64 0, i32 16
+  %235 = load %struct._hypre_ParCSRCommPkg*, %struct._hypre_ParCSRCommPkg** %234, align 8, !tbaa !14
+  %236 = icmp eq %struct._hypre_ParCSRCommPkg* %235, null
+  br i1 %236, label %237, label %242
+
+237:                                              ; preds = %231
+  %238 = call i32 @hypre_MatvecCommPkgCreate(%struct.hypre_ParCSRMatrix_struct* %233) #3
+  %239 = load %struct.hypre_ParCSRMatrix_struct*, %struct.hypre_ParCSRMatrix_struct** %14, align 8, !tbaa !20
+  %240 = getelementptr inbounds %struct.hypre_ParCSRMatrix_struct, %struct.hypre_ParCSRMatrix_struct* %239, i64 0, i32 16
+  %241 = load %struct._hypre_ParCSRCommPkg*, %struct._hypre_ParCSRCommPkg** %240, align 8, !tbaa !14
+  br label %242
+
+242:                                              ; preds = %237, %231
+  %243 = phi %struct._hypre_ParCSRCommPkg* [ %235, %231 ], [ %241, %237 ]
+  %244 = getelementptr inbounds %struct._hypre_ParCSRCommPkg, %struct._hypre_ParCSRCommPkg* %243, i64 0, i32 1
+  %245 = load i32, i32* %244, align 4, !tbaa !25
+  %246 = getelementptr inbounds %struct._hypre_ParCSRCommPkg, %struct._hypre_ParCSRCommPkg* %243, i64 0, i32 3
+  %247 = load i32*, i32** %246, align 8, !tbaa !27
+  %248 = sext i32 %245 to i64
+  %249 = getelementptr inbounds i32, i32* %247, i64 %248
+  %250 = load i32, i32* %249, align 4, !tbaa !19
+  %251 = sext i32 %250 to i64
+  %252 = call i8* @hypre_CAlloc(i64 %251, i64 8, i32 0) #3
+  %253 = bitcast i8* %252 to double*
+  %254 = getelementptr inbounds %struct._hypre_ParCSRCommPkg, %struct._hypre_ParCSRCommPkg* %243, i64 0, i32 4
+  %255 = icmp sgt i32 %245, 0
+  br i1 %255, label %256, label %290
+
+256:                                              ; preds = %242
+  %257 = load i32*, i32** %246, align 8, !tbaa !27
+  %258 = zext i32 %245 to i64
+  br label %264
+
+259:                                              ; preds = %278
+  %260 = trunc i64 %286 to i32
+  br label %261
+
+261:                                              ; preds = %259, %264
+  %262 = phi i32 [ %266, %264 ], [ %260, %259 ]
+  %263 = icmp eq i64 %269, %258
+  br i1 %263, label %290, label %264, !llvm.loop !66
+
+264:                                              ; preds = %256, %261
+  %265 = phi i64 [ 0, %256 ], [ %269, %261 ]
+  %266 = phi i32 [ 0, %256 ], [ %262, %261 ]
+  %267 = getelementptr inbounds i32, i32* %257, i64 %265
+  %268 = load i32, i32* %267, align 4, !tbaa !19
+  %269 = add nuw nsw i64 %265, 1
+  %270 = getelementptr inbounds i32, i32* %257, i64 %269
+  %271 = load i32, i32* %270, align 4, !tbaa !19
+  %272 = icmp slt i32 %268, %271
+  br i1 %272, label %273, label %261
+
+273:                                              ; preds = %264
+  %274 = load i32*, i32** %254, align 8, !tbaa !29
+  %275 = sext i32 %268 to i64
+  %276 = sext i32 %266 to i64
+  %277 = sext i32 %271 to i64
+  br label %278
+
+278:                                              ; preds = %273, %278
+  %279 = phi i64 [ %276, %273 ], [ %286, %278 ]
+  %280 = phi i64 [ %275, %273 ], [ %288, %278 ]
+  %281 = getelementptr inbounds i32, i32* %274, i64 %280
+  %282 = load i32, i32* %281, align 4, !tbaa !19
+  %283 = sext i32 %282 to i64
+  %284 = getelementptr inbounds double, double* %138, i64 %283
+  %285 = load double, double* %284, align 8, !tbaa !32
+  %286 = add nsw i64 %279, 1
+  %287 = getelementptr inbounds double, double* %253, i64 %279
+  store double %285, double* %287, align 8, !tbaa !32
+  %288 = add nsw i64 %280, 1
+  %289 = icmp eq i64 %288, %277
+  br i1 %289, label %259, label %278, !llvm.loop !67
+
+290:                                              ; preds = %261, %242
+  %291 = bitcast double* %232 to i8*
+  %292 = call %struct.hypre_ParCSRCommHandle* @hypre_ParCSRCommHandleCreate(i32 1, %struct._hypre_ParCSRCommPkg* %243, i8* %252, i8* %291) #3
+  %293 = call i32 @hypre_ParCSRCommHandleDestroy(%struct.hypre_ParCSRCommHandle* %292) #3
+  %294 = icmp sgt i32 %5, 1
+  br i1 %294, label %295, label %349
+
+295:                                              ; preds = %290
+  %296 = getelementptr inbounds %struct.hypre_CSRMatrix, %struct.hypre_CSRMatrix* %39, i64 0, i32 4
+  %297 = load i32, i32* %296, align 4, !tbaa !24
+  %298 = sext i32 %297 to i64
+  %299 = call i8* @hypre_CAlloc(i64 %298, i64 4, i32 0) #3
+  %300 = bitcast i8* %299 to i32*
+  %301 = load i32, i32* %244, align 4, !tbaa !25
+  %302 = load i32*, i32** %246, align 8, !tbaa !27
+  %303 = sext i32 %301 to i64
+  %304 = getelementptr inbounds i32, i32* %302, i64 %303
+  %305 = load i32, i32* %304, align 4, !tbaa !19
+  %306 = sext i32 %305 to i64
+  %307 = call i8* @hypre_CAlloc(i64 %306, i64 4, i32 0) #3
+  %308 = bitcast i8* %307 to i32*
+  %309 = getelementptr inbounds %struct._hypre_ParCSRCommPkg, %struct._hypre_ParCSRCommPkg* %243, i64 0, i32 4
+  %310 = icmp sgt i32 %301, 0
+  br i1 %310, label %311, label %346
+
+311:                                              ; preds = %295
+  %312 = load i32*, i32** %246, align 8, !tbaa !27
+  %313 = zext i32 %301 to i64
+  br label %319
+
+314:                                              ; preds = %332
+  %315 = trunc i64 %340 to i32
+  br label %316
+
+316:                                              ; preds = %314, %319
+  %317 = phi i32 [ %321, %319 ], [ %315, %314 ]
+  %318 = icmp eq i64 %324, %313
+  br i1 %318, label %346, label %319, !llvm.loop !68
+
+319:                                              ; preds = %311, %316
+  %320 = phi i64 [ 0, %311 ], [ %324, %316 ]
+  %321 = phi i32 [ 0, %311 ], [ %317, %316 ]
+  %322 = getelementptr inbounds i32, i32* %312, i64 %320
+  %323 = load i32, i32* %322, align 4, !tbaa !19
+  %324 = add nuw nsw i64 %320, 1
+  %325 = getelementptr inbounds i32, i32* %312, i64 %324
+  %326 = load i32, i32* %325, align 4, !tbaa !19
+  %327 = icmp slt i32 %323, %326
+  br i1 %327, label %328, label %316
+
+328:                                              ; preds = %319
+  %329 = load i32*, i32** %309, align 8, !tbaa !29
+  %330 = sext i32 %323 to i64
+  %331 = sext i32 %321 to i64
+  br label %332
+
+332:                                              ; preds = %328, %332
+  %333 = phi i64 [ %331, %328 ], [ %340, %332 ]
+  %334 = phi i64 [ %330, %328 ], [ %342, %332 ]
+  %335 = getelementptr inbounds i32, i32* %329, i64 %334
+  %336 = load i32, i32* %335, align 4, !tbaa !19
+  %337 = sext i32 %336 to i64
+  %338 = getelementptr inbounds i32, i32* %6, i64 %337
+  %339 = load i32, i32* %338, align 4, !tbaa !19
+  %340 = add nsw i64 %333, 1
+  %341 = getelementptr inbounds i32, i32* %308, i64 %333
+  store i32 %339, i32* %341, align 4, !tbaa !19
+  %342 = add nsw i64 %334, 1
+  %343 = load i32, i32* %325, align 4, !tbaa !19
+  %344 = sext i32 %343 to i64
+  %345 = icmp slt i64 %342, %344
+  br i1 %345, label %332, label %314, !llvm.loop !69
+
+346:                                              ; preds = %316, %295
+  %347 = call %struct.hypre_ParCSRCommHandle* @hypre_ParCSRCommHandleCreate(i32 11, %struct._hypre_ParCSRCommPkg* %243, i8* %307, i8* %299) #3
+  %348 = call i32 @hypre_ParCSRCommHandleDestroy(%struct.hypre_ParCSRCommHandle* %347) #3
+  call void @hypre_Free(i8* %307, i32 0) #3
+  br label %349
+
+349:                                              ; preds = %290, %346
+  %350 = phi i32* [ %300, %346 ], [ null, %290 ]
+  %351 = icmp sgt i32 %59, 0
+  br i1 %351, label %352, label %354
+
+352:                                              ; preds = %349
+  %353 = zext i32 %59 to i64
+  br label %358
+
+354:                                              ; preds = %606, %349
+  %355 = icmp sgt i32 %126, 0
+  br i1 %355, label %356, label %610
+
+356:                                              ; preds = %354
+  %357 = zext i32 %126 to i64
+  br label %614
+
+358:                                              ; preds = %352, %606
+  %359 = phi i64 [ 0, %352 ], [ %608, %606 ]
+  %360 = phi i32 [ 0, %352 ], [ %607, %606 ]
+  %361 = getelementptr inbounds i32, i32* %1, i64 %359
+  %362 = load i32, i32* %361, align 4, !tbaa !19
+  %363 = icmp slt i32 %362, 0
+  br i1 %363, label %364, label %606
+
+364:                                              ; preds = %358
+  %365 = getelementptr inbounds i32, i32* %36, i64 %359
+  %366 = load i32, i32* %365, align 4, !tbaa !19
+  br i1 %294, label %367, label %522
+
+367:                                              ; preds = %364
+  %368 = getelementptr inbounds i32, i32* %51, i64 %359
+  %369 = load i32, i32* %368, align 4, !tbaa !19
+  %370 = add nuw nsw i64 %359, 1
+  %371 = getelementptr inbounds i32, i32* %51, i64 %370
+  %372 = load i32, i32* %371, align 4, !tbaa !19
+  %373 = getelementptr inbounds i32, i32* %6, i64 %359
+  %374 = sext i32 %360 to i64
+  %375 = getelementptr inbounds double, double* %142, i64 %374
+  %376 = icmp slt i32 %369, %372
+  br i1 %376, label %377, label %380
+
+377:                                              ; preds = %367
+  %378 = sext i32 %369 to i64
+  %379 = sext i32 %372 to i64
+  br label %392
+
+380:                                              ; preds = %422, %367
+  %381 = phi i32 [ %366, %367 ], [ %424, %422 ]
+  %382 = getelementptr inbounds i32, i32* %36, i64 %370
+  %383 = load i32, i32* %382, align 4, !tbaa !19
+  %384 = sext i32 %360 to i64
+  %385 = getelementptr inbounds double, double* %142, i64 %384
+  %386 = icmp slt i32 %381, %383
+  br i1 %386, label %387, label %443
+
+387:                                              ; preds = %380
+  %388 = getelementptr inbounds i32, i32* %6, i64 %359
+  %389 = load i32, i32* %388, align 4, !tbaa !19
+  %390 = sext i32 %381 to i64
+  %391 = sext i32 %383 to i64
+  br label %427
+
+392:                                              ; preds = %377, %422
+  %393 = phi i64 [ %378, %377 ], [ %425, %422 ]
+  %394 = phi i32 [ %366, %377 ], [ %424, %422 ]
+  %395 = getelementptr inbounds i32, i32* %49, i64 %393
+  %396 = load i32, i32* %395, align 4, !tbaa !19
+  %397 = sext i32 %394 to i64
+  %398 = getelementptr inbounds i32, i32* %38, i64 %397
+  %399 = load i32, i32* %398, align 4, !tbaa !19
+  %400 = icmp eq i32 %399, %396
+  br i1 %400, label %422, label %401
+
+401:                                              ; preds = %392
+  %402 = load i32, i32* %373, align 4, !tbaa !19
+  br label %403
+
+403:                                              ; preds = %401, %415
+  %404 = phi i64 [ %397, %401 ], [ %416, %415 ]
+  %405 = phi i32 [ %399, %401 ], [ %418, %415 ]
+  %406 = sext i32 %405 to i64
+  %407 = getelementptr inbounds i32, i32* %6, i64 %406
+  %408 = load i32, i32* %407, align 4, !tbaa !19
+  %409 = icmp eq i32 %402, %408
+  br i1 %409, label %410, label %415
+
+410:                                              ; preds = %403
+  %411 = getelementptr inbounds double, double* %34, i64 %404
+  %412 = load double, double* %411, align 8, !tbaa !32
+  %413 = load double, double* %375, align 8, !tbaa !32
+  %414 = fadd double %412, %413
+  store double %414, double* %375, align 8, !tbaa !32
+  br label %415
+
+415:                                              ; preds = %403, %410
+  %416 = add i64 %404, 1
+  %417 = getelementptr inbounds i32, i32* %38, i64 %416
+  %418 = load i32, i32* %417, align 4, !tbaa !19
+  %419 = icmp eq i32 %418, %396
+  br i1 %419, label %420, label %403, !llvm.loop !70
+
+420:                                              ; preds = %415
+  %421 = trunc i64 %416 to i32
+  br label %422
+
+422:                                              ; preds = %420, %392
+  %423 = phi i32 [ %394, %392 ], [ %421, %420 ]
+  %424 = add nsw i32 %423, 1
+  %425 = add nsw i64 %393, 1
+  %426 = icmp eq i64 %425, %379
+  br i1 %426, label %380, label %392, !llvm.loop !71
+
+427:                                              ; preds = %387, %440
+  %428 = phi i64 [ %390, %387 ], [ %441, %440 ]
+  %429 = getelementptr inbounds i32, i32* %38, i64 %428
+  %430 = load i32, i32* %429, align 4, !tbaa !19
+  %431 = sext i32 %430 to i64
+  %432 = getelementptr inbounds i32, i32* %6, i64 %431
+  %433 = load i32, i32* %432, align 4, !tbaa !19
+  %434 = icmp eq i32 %389, %433
+  br i1 %434, label %435, label %440
+
+435:                                              ; preds = %427
+  %436 = getelementptr inbounds double, double* %34, i64 %428
+  %437 = load double, double* %436, align 8, !tbaa !32
+  %438 = load double, double* %385, align 8, !tbaa !32
+  %439 = fadd double %437, %438
+  store double %439, double* %385, align 8, !tbaa !32
+  br label %440
+
+440:                                              ; preds = %427, %435
+  %441 = add nsw i64 %428, 1
+  %442 = icmp eq i64 %441, %391
+  br i1 %442, label %443, label %427, !llvm.loop !72
+
+443:                                              ; preds = %440, %380
+  %444 = getelementptr inbounds i32, i32* %43, i64 %359
+  %445 = load i32, i32* %444, align 4, !tbaa !19
+  %446 = getelementptr inbounds i32, i32* %57, i64 %359
+  %447 = load i32, i32* %446, align 4, !tbaa !19
+  %448 = getelementptr inbounds i32, i32* %57, i64 %370
+  %449 = load i32, i32* %448, align 4, !tbaa !19
+  %450 = getelementptr inbounds i32, i32* %6, i64 %359
+  %451 = sext i32 %360 to i64
+  %452 = getelementptr inbounds double, double* %142, i64 %451
+  %453 = icmp slt i32 %447, %449
+  br i1 %453, label %454, label %457
+
+454:                                              ; preds = %443
+  %455 = sext i32 %447 to i64
+  %456 = sext i32 %449 to i64
+  br label %469
+
+457:                                              ; preds = %499, %443
+  %458 = phi i32 [ %445, %443 ], [ %501, %499 ]
+  %459 = getelementptr inbounds i32, i32* %43, i64 %370
+  %460 = load i32, i32* %459, align 4, !tbaa !19
+  %461 = sext i32 %360 to i64
+  %462 = getelementptr inbounds double, double* %142, i64 %461
+  %463 = icmp slt i32 %458, %460
+  br i1 %463, label %464, label %520
+
+464:                                              ; preds = %457
+  %465 = getelementptr inbounds i32, i32* %6, i64 %359
+  %466 = load i32, i32* %465, align 4, !tbaa !19
+  %467 = sext i32 %458 to i64
+  %468 = sext i32 %460 to i64
+  br label %504
+
+469:                                              ; preds = %454, %499
+  %470 = phi i64 [ %455, %454 ], [ %502, %499 ]
+  %471 = phi i32 [ %445, %454 ], [ %501, %499 ]
+  %472 = getelementptr inbounds i32, i32* %55, i64 %470
+  %473 = load i32, i32* %472, align 4, !tbaa !19
+  %474 = sext i32 %471 to i64
+  %475 = getelementptr inbounds i32, i32* %45, i64 %474
+  %476 = load i32, i32* %475, align 4, !tbaa !19
+  %477 = icmp eq i32 %476, %473
+  br i1 %477, label %499, label %478
+
+478:                                              ; preds = %469
+  %479 = load i32, i32* %450, align 4, !tbaa !19
+  br label %480
+
+480:                                              ; preds = %478, %492
+  %481 = phi i64 [ %474, %478 ], [ %493, %492 ]
+  %482 = phi i32 [ %476, %478 ], [ %495, %492 ]
+  %483 = sext i32 %482 to i64
+  %484 = getelementptr inbounds i32, i32* %350, i64 %483
+  %485 = load i32, i32* %484, align 4, !tbaa !19
+  %486 = icmp eq i32 %479, %485
+  br i1 %486, label %487, label %492
+
+487:                                              ; preds = %480
+  %488 = getelementptr inbounds double, double* %41, i64 %481
+  %489 = load double, double* %488, align 8, !tbaa !32
+  %490 = load double, double* %452, align 8, !tbaa !32
+  %491 = fadd double %489, %490
+  store double %491, double* %452, align 8, !tbaa !32
+  br label %492
+
+492:                                              ; preds = %480, %487
+  %493 = add i64 %481, 1
+  %494 = getelementptr inbounds i32, i32* %45, i64 %493
+  %495 = load i32, i32* %494, align 4, !tbaa !19
+  %496 = icmp eq i32 %495, %473
+  br i1 %496, label %497, label %480, !llvm.loop !73
+
+497:                                              ; preds = %492
+  %498 = trunc i64 %493 to i32
+  br label %499
+
+499:                                              ; preds = %497, %469
+  %500 = phi i32 [ %471, %469 ], [ %498, %497 ]
+  %501 = add nsw i32 %500, 1
+  %502 = add nsw i64 %470, 1
+  %503 = icmp eq i64 %502, %456
+  br i1 %503, label %457, label %469, !llvm.loop !74
+
+504:                                              ; preds = %464, %517
+  %505 = phi i64 [ %467, %464 ], [ %518, %517 ]
+  %506 = getelementptr inbounds i32, i32* %45, i64 %505
+  %507 = load i32, i32* %506, align 4, !tbaa !19
+  %508 = sext i32 %507 to i64
+  %509 = getelementptr inbounds i32, i32* %350, i64 %508
+  %510 = load i32, i32* %509, align 4, !tbaa !19
+  %511 = icmp eq i32 %466, %510
+  br i1 %511, label %512, label %517
+
+512:                                              ; preds = %504
+  %513 = getelementptr inbounds double, double* %41, i64 %505
+  %514 = load double, double* %513, align 8, !tbaa !32
+  %515 = load double, double* %462, align 8, !tbaa !32
+  %516 = fadd double %514, %515
+  store double %516, double* %462, align 8, !tbaa !32
+  br label %517
+
+517:                                              ; preds = %504, %512
+  %518 = add nsw i64 %505, 1
+  %519 = icmp eq i64 %518, %468
+  br i1 %519, label %520, label %504, !llvm.loop !75
+
+520:                                              ; preds = %517, %457
+  %521 = add nsw i32 %360, 1
+  br label %606
+
+522:                                              ; preds = %364
+  %523 = add nuw nsw i64 %359, 1
+  %524 = getelementptr inbounds i32, i32* %36, i64 %523
+  %525 = load i32, i32* %524, align 4, !tbaa !19
+  %526 = sext i32 %360 to i64
+  %527 = getelementptr inbounds double, double* %142, i64 %526
+  %528 = icmp slt i32 %366, %525
+  br i1 %528, label %529, label %540
+
+529:                                              ; preds = %522
+  %530 = sext i32 %366 to i64
+  %531 = sext i32 %525 to i64
+  br label %532
+
+532:                                              ; preds = %529, %532
+  %533 = phi i64 [ %530, %529 ], [ %538, %532 ]
+  %534 = getelementptr inbounds double, double* %34, i64 %533
+  %535 = load double, double* %534, align 8, !tbaa !32
+  %536 = load double, double* %527, align 8, !tbaa !32
+  %537 = fadd double %535, %536
+  store double %537, double* %527, align 8, !tbaa !32
+  %538 = add nsw i64 %533, 1
+  %539 = icmp eq i64 %538, %531
+  br i1 %539, label %540, label %532, !llvm.loop !76
+
+540:                                              ; preds = %532, %522
+  %541 = getelementptr inbounds i32, i32* %43, i64 %359
+  %542 = load i32, i32* %541, align 4, !tbaa !19
+  %543 = getelementptr inbounds i32, i32* %43, i64 %523
+  %544 = load i32, i32* %543, align 4, !tbaa !19
+  %545 = sext i32 %360 to i64
+  %546 = getelementptr inbounds double, double* %142, i64 %545
+  %547 = icmp slt i32 %542, %544
+  br i1 %547, label %548, label %559
+
+548:                                              ; preds = %540
+  %549 = sext i32 %542 to i64
+  %550 = sext i32 %544 to i64
+  br label %551
+
+551:                                              ; preds = %548, %551
+  %552 = phi i64 [ %549, %548 ], [ %557, %551 ]
+  %553 = getelementptr inbounds double, double* %41, i64 %552
+  %554 = load double, double* %553, align 8, !tbaa !32
+  %555 = load double, double* %546, align 8, !tbaa !32
+  %556 = fadd double %554, %555
+  store double %556, double* %546, align 8, !tbaa !32
+  %557 = add nsw i64 %552, 1
+  %558 = icmp eq i64 %557, %550
+  br i1 %558, label %559, label %551, !llvm.loop !77
+
+559:                                              ; preds = %551, %540
+  %560 = sext i32 %360 to i64
+  %561 = getelementptr inbounds i32, i32* %112, i64 %560
+  %562 = load i32, i32* %561, align 4, !tbaa !19
+  %563 = add nsw i32 %360, 1
+  %564 = sext i32 %563 to i64
+  %565 = getelementptr inbounds i32, i32* %112, i64 %564
+  %566 = load i32, i32* %565, align 4, !tbaa !19
+  %567 = getelementptr inbounds double, double* %142, i64 %560
+  %568 = add nsw i32 %562, 1
+  %569 = icmp slt i32 %568, %566
+  br i1 %569, label %570, label %582
+
+570:                                              ; preds = %559
+  %571 = add i32 %562, 1
+  %572 = sext i32 %571 to i64
+  br label %573
+
+573:                                              ; preds = %570, %573
+  %574 = phi i64 [ %572, %570 ], [ %579, %573 ]
+  %575 = getelementptr inbounds double, double* %116, i64 %574
+  %576 = load double, double* %575, align 8, !tbaa !32
+  %577 = load double, double* %567, align 8, !tbaa !32
+  %578 = fsub double %577, %576
+  store double %578, double* %567, align 8, !tbaa !32
+  %579 = add nsw i64 %574, 1
+  %580 = trunc i64 %579 to i32
+  %581 = icmp eq i32 %566, %580
+  br i1 %581, label %582, label %573, !llvm.loop !78
+
+582:                                              ; preds = %573, %559
+  %583 = getelementptr inbounds i32, i32* %120, i64 %560
+  %584 = load i32, i32* %583, align 4, !tbaa !19
+  %585 = getelementptr inbounds i32, i32* %120, i64 %564
+  %586 = load i32, i32* %585, align 4, !tbaa !19
+  %587 = getelementptr inbounds double, double* %142, i64 %560
+  %588 = icmp slt i32 %584, %586
+  br i1 %588, label %589, label %600
+
+589:                                              ; preds = %582
+  %590 = sext i32 %584 to i64
+  %591 = sext i32 %586 to i64
+  br label %592
+
+592:                                              ; preds = %589, %592
+  %593 = phi i64 [ %590, %589 ], [ %598, %592 ]
+  %594 = getelementptr inbounds double, double* %124, i64 %593
+  %595 = load double, double* %594, align 8, !tbaa !32
+  %596 = load double, double* %587, align 8, !tbaa !32
+  %597 = fsub double %596, %595
+  store double %597, double* %587, align 8, !tbaa !32
+  %598 = add nsw i64 %593, 1
+  %599 = icmp eq i64 %598, %591
+  br i1 %599, label %600, label %592, !llvm.loop !79
+
+600:                                              ; preds = %592, %582
+  %601 = getelementptr inbounds double, double* %138, i64 %560
+  %602 = load double, double* %601, align 8, !tbaa !32
+  %603 = getelementptr inbounds double, double* %142, i64 %560
+  %604 = load double, double* %603, align 8, !tbaa !32
+  %605 = fsub double %604, %602
+  store double %605, double* %603, align 8, !tbaa !32
+  br label %606
+
+606:                                              ; preds = %520, %600, %358
+  %607 = phi i32 [ %521, %520 ], [ %563, %600 ], [ %360, %358 ]
+  %608 = add nuw nsw i64 %359, 1
+  %609 = icmp eq i64 %608, %353
+  br i1 %609, label %354, label %358, !llvm.loop !80
+
+610:                                              ; preds = %723, %354
+  %611 = icmp sgt i32 %126, 0
+  br i1 %611, label %612, label %772
+
+612:                                              ; preds = %610
+  %613 = zext i32 %126 to i64
+  br label %727
+
+614:                                              ; preds = %356, %723
+  %615 = phi i64 [ 0, %356 ], [ %618, %723 ]
+  %616 = getelementptr inbounds i32, i32* %112, i64 %615
+  %617 = load i32, i32* %616, align 4, !tbaa !19
+  %618 = add nuw nsw i64 %615, 1
+  %619 = getelementptr inbounds i32, i32* %112, i64 %618
+  %620 = load i32, i32* %619, align 4, !tbaa !19
+  %621 = getelementptr inbounds double, double* %140, i64 %615
+  %622 = add nsw i32 %617, 1
+  %623 = icmp slt i32 %622, %620
+  br i1 %623, label %624, label %669
+
+624:                                              ; preds = %614
+  %625 = add i32 %617, 1
+  %626 = sext i32 %625 to i64
+  br label %627
+
+627:                                              ; preds = %624, %661
+  %628 = phi i64 [ %626, %624 ], [ %666, %661 ]
+  %629 = getelementptr inbounds i32, i32* %114, i64 %628
+  %630 = load i32, i32* %629, align 4, !tbaa !19
+  %631 = sext i32 %630 to i64
+  %632 = getelementptr inbounds double, double* %138, i64 %631
+  %633 = load double, double* %632, align 8, !tbaa !32
+  %634 = getelementptr inbounds i32, i32* %112, i64 %631
+  %635 = load i32, i32* %634, align 4, !tbaa !19
+  %636 = add nsw i32 %630, 1
+  %637 = sext i32 %636 to i64
+  %638 = getelementptr inbounds i32, i32* %112, i64 %637
+  %639 = load i32, i32* %638, align 4, !tbaa !19
+  %640 = sext i32 %635 to i64
+  %641 = sext i32 %639 to i64
+  br label %642
+
+642:                                              ; preds = %646, %627
+  %643 = phi i64 [ %644, %646 ], [ %640, %627 ]
+  %644 = add nsw i64 %643, 1
+  %645 = icmp slt i64 %644, %641
+  br i1 %645, label %646, label %661
+
+646:                                              ; preds = %642
+  %647 = getelementptr inbounds i32, i32* %114, i64 %644
+  %648 = load i32, i32* %647, align 4, !tbaa !19
+  %649 = zext i32 %648 to i64
+  %650 = icmp eq i64 %615, %649
+  br i1 %650, label %651, label %642, !llvm.loop !81
+
+651:                                              ; preds = %646
+  %652 = getelementptr inbounds double, double* %136, i64 %644
+  %653 = load double, double* %652, align 8, !tbaa !32
+  %654 = fadd double %633, %653
+  %655 = getelementptr inbounds double, double* %116, i64 %628
+  %656 = load double, double* %655, align 8, !tbaa !32
+  %657 = fmul double %653, %656
+  %658 = fdiv double %657, %654
+  %659 = load double, double* %621, align 8, !tbaa !32
+  %660 = fadd double %659, %658
+  store double %660, double* %621, align 8, !tbaa !32
+  br label %661
+
+661:                                              ; preds = %642, %651
+  %662 = phi double [ %654, %651 ], [ %633, %642 ]
+  %663 = getelementptr inbounds double, double* %116, i64 %628
+  %664 = load double, double* %663, align 8, !tbaa !32
+  %665 = fdiv double %664, %662
+  store double %665, double* %663, align 8, !tbaa !32
+  %666 = add nsw i64 %628, 1
+  %667 = trunc i64 %666 to i32
+  %668 = icmp eq i32 %620, %667
+  br i1 %668, label %669, label %627, !llvm.loop !82
+
+669:                                              ; preds = %661, %614
+  %670 = getelementptr inbounds i32, i32* %120, i64 %615
+  %671 = load i32, i32* %670, align 4, !tbaa !19
+  %672 = getelementptr inbounds i32, i32* %120, i64 %618
+  %673 = load i32, i32* %672, align 4, !tbaa !19
+  %674 = getelementptr inbounds double, double* %140, i64 %615
+  %675 = icmp slt i32 %671, %673
+  br i1 %675, label %676, label %723
+
+676:                                              ; preds = %669
+  %677 = sext i32 %671 to i64
+  %678 = sext i32 %673 to i64
+  br label %679
+
+679:                                              ; preds = %676, %716
+  %680 = phi i64 [ %677, %676 ], [ %721, %716 ]
+  %681 = getelementptr inbounds i32, i32* %122, i64 %680
+  %682 = load i32, i32* %681, align 4, !tbaa !19
+  %683 = sext i32 %682 to i64
+  %684 = getelementptr inbounds double, double* %232, i64 %683
+  %685 = load double, double* %684, align 8, !tbaa !32
+  %686 = getelementptr inbounds i32, i32* %92, i64 %683
+  %687 = load i32, i32* %686, align 4, !tbaa !19
+  %688 = add nsw i32 %682, 1
+  %689 = sext i32 %688 to i64
+  %690 = getelementptr inbounds i32, i32* %92, i64 %689
+  %691 = load i32, i32* %690, align 4, !tbaa !19
+  %692 = icmp slt i32 %687, %691
+  br i1 %692, label %693, label %716
+
+693:                                              ; preds = %679
+  %694 = sext i32 %687 to i64
+  br label %698
+
+695:                                              ; preds = %698
+  %696 = trunc i64 %705 to i32
+  %697 = icmp eq i32 %691, %696
+  br i1 %697, label %716, label %698, !llvm.loop !83
+
+698:                                              ; preds = %693, %695
+  %699 = phi i64 [ %694, %693 ], [ %705, %695 ]
+  %700 = getelementptr inbounds i32, i32* %91, i64 %699
+  %701 = load i32, i32* %700, align 4, !tbaa !19
+  %702 = sub nsw i32 %701, %130
+  %703 = zext i32 %702 to i64
+  %704 = icmp eq i64 %615, %703
+  %705 = add nsw i64 %699, 1
+  br i1 %704, label %706, label %695
+
+706:                                              ; preds = %698
+  %707 = getelementptr inbounds double, double* %93, i64 %699
+  %708 = load double, double* %707, align 8, !tbaa !32
+  %709 = fadd double %685, %708
+  %710 = getelementptr inbounds double, double* %124, i64 %680
+  %711 = load double, double* %710, align 8, !tbaa !32
+  %712 = fmul double %708, %711
+  %713 = fdiv double %712, %709
+  %714 = load double, double* %674, align 8, !tbaa !32
+  %715 = fadd double %714, %713
+  store double %715, double* %674, align 8, !tbaa !32
+  br label %716
+
+716:                                              ; preds = %695, %679, %706
+  %717 = phi double [ %709, %706 ], [ %685, %679 ], [ %685, %695 ]
+  %718 = getelementptr inbounds double, double* %124, i64 %680
+  %719 = load double, double* %718, align 8, !tbaa !32
+  %720 = fdiv double %719, %717
+  store double %720, double* %718, align 8, !tbaa !32
+  %721 = add nsw i64 %680, 1
+  %722 = icmp eq i64 %721, %678
+  br i1 %722, label %723, label %679, !llvm.loop !84
+
+723:                                              ; preds = %716, %669
+  %724 = sext i32 %617 to i64
+  %725 = getelementptr inbounds double, double* %116, i64 %724
+  store double 1.000000e+00, double* %725, align 8, !tbaa !32
+  %726 = icmp eq i64 %618, %357
+  br i1 %726, label %610, label %614, !llvm.loop !85
+
+727:                                              ; preds = %612, %769
+  %728 = phi i64 [ 0, %612 ], [ %770, %769 ]
+  %729 = getelementptr inbounds double, double* %140, i64 %728
+  %730 = load double, double* %729, align 8, !tbaa !32
+  %731 = getelementptr inbounds double, double* %142, i64 %728
+  %732 = load double, double* %731, align 8, !tbaa !32
+  %733 = fadd double %730, %732
+  %734 = fcmp une double %733, 0.000000e+00
+  br i1 %734, label %735, label %769
+
+735:                                              ; preds = %727
+  %736 = fdiv double -1.000000e+00, %733
+  %737 = getelementptr inbounds i32, i32* %112, i64 %728
+  %738 = load i32, i32* %737, align 4, !tbaa !19
+  %739 = add nuw nsw i64 %728, 1
+  %740 = getelementptr inbounds i32, i32* %112, i64 %739
+  %741 = load i32, i32* %740, align 4, !tbaa !19
+  %742 = icmp slt i32 %738, %741
+  br i1 %742, label %743, label %753
+
+743:                                              ; preds = %735
+  %744 = sext i32 %738 to i64
+  %745 = sext i32 %741 to i64
+  br label %746
+
+746:                                              ; preds = %743, %746
+  %747 = phi i64 [ %744, %743 ], [ %751, %746 ]
+  %748 = getelementptr inbounds double, double* %116, i64 %747
+  %749 = load double, double* %748, align 8, !tbaa !32
+  %750 = fmul double %736, %749
+  store double %750, double* %748, align 8, !tbaa !32
+  %751 = add nsw i64 %747, 1
+  %752 = icmp eq i64 %751, %745
+  br i1 %752, label %753, label %746, !llvm.loop !86
+
+753:                                              ; preds = %746, %735
+  %754 = getelementptr inbounds i32, i32* %120, i64 %728
+  %755 = load i32, i32* %754, align 4, !tbaa !19
+  %756 = getelementptr inbounds i32, i32* %120, i64 %739
+  %757 = load i32, i32* %756, align 4, !tbaa !19
+  %758 = icmp slt i32 %755, %757
+  br i1 %758, label %759, label %769
+
+759:                                              ; preds = %753
+  %760 = sext i32 %755 to i64
+  %761 = sext i32 %757 to i64
+  br label %762
+
+762:                                              ; preds = %759, %762
+  %763 = phi i64 [ %760, %759 ], [ %767, %762 ]
+  %764 = getelementptr inbounds double, double* %124, i64 %763
+  %765 = load double, double* %764, align 8, !tbaa !32
+  %766 = fmul double %736, %765
+  store double %766, double* %764, align 8, !tbaa !32
+  %767 = add nsw i64 %763, 1
+  %768 = icmp eq i64 %767, %761
+  br i1 %768, label %769, label %762, !llvm.loop !87
+
+769:                                              ; preds = %762, %753, %727
+  %770 = add nuw nsw i64 %728, 1
+  %771 = icmp eq i64 %770, %613
+  br i1 %771, label %772, label %727, !llvm.loop !88
+
+772:                                              ; preds = %769, %610
+  %773 = load %struct.hypre_ParCSRMatrix_struct*, %struct.hypre_ParCSRMatrix_struct** %14, align 8, !tbaa !20
+  %774 = load %struct.hypre_ParCSRMatrix_struct*, %struct.hypre_ParCSRMatrix_struct** %15, align 8, !tbaa !20
+  %775 = call %struct.hypre_ParCSRMatrix_struct* @hypre_ParMatmul(%struct.hypre_ParCSRMatrix_struct* %773, %struct.hypre_ParCSRMatrix_struct* %774) #3
+  %776 = getelementptr inbounds %struct.hypre_ParCSRMatrix_struct, %struct.hypre_ParCSRMatrix_struct* %775, i64 0, i32 8
+  %777 = load %struct.hypre_CSRMatrix*, %struct.hypre_CSRMatrix** %776, align 8, !tbaa !10
+  %778 = getelementptr inbounds %struct.hypre_ParCSRMatrix_struct, %struct.hypre_ParCSRMatrix_struct* %775, i64 0, i32 9
+  %779 = load %struct.hypre_CSRMatrix*, %struct.hypre_CSRMatrix** %778, align 8, !tbaa !13
+  %780 = getelementptr inbounds %struct.hypre_CSRMatrix, %struct.hypre_CSRMatrix* %777, i64 0, i32 0
+  %781 = load i32*, i32** %780, align 8, !tbaa !17
+  %782 = getelementptr inbounds %struct.hypre_CSRMatrix, %struct.hypre_CSRMatrix* %777, i64 0, i32 1
+  %783 = load i32*, i32** %782, align 8, !tbaa !16
+  %784 = getelementptr inbounds %struct.hypre_CSRMatrix, %struct.hypre_CSRMatrix* %777, i64 0, i32 9
+  %785 = load double*, double** %784, align 8, !tbaa !15
+  %786 = getelementptr inbounds %struct.hypre_CSRMatrix, %struct.hypre_CSRMatrix* %779, i64 0, i32 0
+  %787 = load i32*, i32** %786, align 8, !tbaa !17
+  %788 = getelementptr inbounds %struct.hypre_CSRMatrix, %struct.hypre_CSRMatrix* %779, i64 0, i32 1
+  %789 = load i32*, i32** %788, align 8, !tbaa !16
+  %790 = getelementptr inbounds %struct.hypre_CSRMatrix, %struct.hypre_CSRMatrix* %779, i64 0, i32 9
+  %791 = load double*, double** %790, align 8, !tbaa !15
+  %792 = getelementptr inbounds %struct.hypre_CSRMatrix, %struct.hypre_CSRMatrix* %779, i64 0, i32 4
+  %793 = load i32, i32* %792, align 4, !tbaa !24
+  %794 = add nsw i32 %59, 1
+  %795 = sext i32 %794 to i64
+  %796 = call i8* @hypre_CAlloc(i64 %795, i64 4, i32 %21) #3
+  %797 = bitcast i8* %796 to i32*
+  %798 = call i8* @hypre_CAlloc(i64 %795, i64 4, i32 %21) #3
+  %799 = bitcast i8* %798 to i32*
+  %800 = load i32*, i32** %780, align 8, !tbaa !17
+  %801 = getelementptr inbounds i32, i32* %800, i64 %131
+  %802 = load i32, i32* %801, align 4, !tbaa !19
+  %803 = add nsw i32 %802, %77
+  %804 = load i32*, i32** %786, align 8, !tbaa !17
+  %805 = getelementptr inbounds i32, i32* %804, i64 %131
+  %806 = load i32, i32* %805, align 4, !tbaa !19
+  %807 = icmp eq i32 %803, 0
+  br i1 %807, label %814, label %808
+
+808:                                              ; preds = %772
+  %809 = sext i32 %803 to i64
+  %810 = call i8* @hypre_CAlloc(i64 %809, i64 4, i32 %21) #3
+  %811 = bitcast i8* %810 to i32*
+  %812 = call i8* @hypre_CAlloc(i64 %809, i64 8, i32 %21) #3
+  %813 = bitcast i8* %812 to double*
+  br label %814
+
+814:                                              ; preds = %808, %772
+  %815 = phi i32* [ %811, %808 ], [ null, %772 ]
+  %816 = phi double* [ %813, %808 ], [ null, %772 ]
+  %817 = icmp eq i32 %806, 0
+  br i1 %817, label %824, label %818
+
+818:                                              ; preds = %814
+  %819 = sext i32 %806 to i64
+  %820 = call i8* @hypre_CAlloc(i64 %819, i64 4, i32 %21) #3
+  %821 = bitcast i8* %820 to i32*
+  %822 = call i8* @hypre_CAlloc(i64 %819, i64 8, i32 %21) #3
+  %823 = bitcast i8* %822 to double*
+  br label %824
+
+824:                                              ; preds = %818, %814
+  %825 = phi i32* [ %821, %818 ], [ null, %814 ]
+  %826 = phi double* [ %823, %818 ], [ null, %814 ]
+  %827 = load i32, i32* %148, align 4, !tbaa !19
+  %828 = load i32, i32* %146, align 4, !tbaa !19
+  %829 = load i32, i32* %150, align 4, !tbaa !19
+  %830 = sext i32 %827 to i64
+  %831 = icmp slt i32 %828, %829
+  br i1 %831, label %832, label %917
+
+832:                                              ; preds = %824
+  %833 = getelementptr inbounds i32, i32* %787, i64 %830
+  %834 = load i32, i32* %833, align 4, !tbaa !19
+  %835 = getelementptr inbounds i32, i32* %781, i64 %830
+  %836 = load i32, i32* %835, align 4, !tbaa !19
+  %837 = sext i32 %828 to i64
+  %838 = sext i32 %829 to i64
+  br label %839
+
+839:                                              ; preds = %832, %908
+  %840 = phi i64 [ %837, %832 ], [ %913, %908 ]
+  %841 = phi i32 [ 0, %832 ], [ %912, %908 ]
+  %842 = phi i32 [ %827, %832 ], [ %911, %908 ]
+  %843 = phi i32 [ %834, %832 ], [ %910, %908 ]
+  %844 = phi i32 [ %836, %832 ], [ %909, %908 ]
+  %845 = getelementptr inbounds i32, i32* %1, i64 %840
+  %846 = load i32, i32* %845, align 4, !tbaa !19
+  %847 = icmp sgt i32 %846, 0
+  br i1 %847, label %848, label %854
+
+848:                                              ; preds = %839
+  %849 = add nsw i32 %841, 1
+  %850 = sext i32 %844 to i64
+  %851 = getelementptr inbounds i32, i32* %815, i64 %850
+  store i32 %841, i32* %851, align 4, !tbaa !19
+  %852 = add nsw i32 %844, 1
+  %853 = getelementptr inbounds double, double* %816, i64 %850
+  store double 1.000000e+00, double* %853, align 8, !tbaa !32
+  br label %908
+
+854:                                              ; preds = %839
+  %855 = sext i32 %842 to i64
+  %856 = getelementptr inbounds i32, i32* %781, i64 %855
+  %857 = load i32, i32* %856, align 4, !tbaa !19
+  %858 = add nsw i32 %842, 1
+  %859 = sext i32 %858 to i64
+  %860 = getelementptr inbounds i32, i32* %781, i64 %859
+  %861 = load i32, i32* %860, align 4, !tbaa !19
+  %862 = icmp slt i32 %857, %861
+  br i1 %862, label %863, label %882
+
+863:                                              ; preds = %854
+  %864 = sext i32 %844 to i64
+  %865 = sext i32 %857 to i64
+  br label %866
+
+866:                                              ; preds = %863, %866
+  %867 = phi i64 [ %865, %863 ], [ %876, %866 ]
+  %868 = phi i64 [ %864, %863 ], [ %874, %866 ]
+  %869 = getelementptr inbounds i32, i32* %783, i64 %867
+  %870 = load i32, i32* %869, align 4, !tbaa !19
+  %871 = getelementptr inbounds i32, i32* %815, i64 %868
+  store i32 %870, i32* %871, align 4, !tbaa !19
+  %872 = getelementptr inbounds double, double* %785, i64 %867
+  %873 = load double, double* %872, align 8, !tbaa !32
+  %874 = add nsw i64 %868, 1
+  %875 = getelementptr inbounds double, double* %816, i64 %868
+  store double %873, double* %875, align 8, !tbaa !32
+  %876 = add nsw i64 %867, 1
+  %877 = load i32, i32* %860, align 4, !tbaa !19
+  %878 = sext i32 %877 to i64
+  %879 = icmp slt i64 %876, %878
+  br i1 %879, label %866, label %880, !llvm.loop !89
+
+880:                                              ; preds = %866
+  %881 = trunc i64 %874 to i32
+  br label %882
+
+882:                                              ; preds = %880, %854
+  %883 = phi i32 [ %844, %854 ], [ %881, %880 ]
+  %884 = getelementptr inbounds i32, i32* %787, i64 %855
+  %885 = load i32, i32* %884, align 4, !tbaa !19
+  %886 = getelementptr inbounds i32, i32* %787, i64 %859
+  %887 = load i32, i32* %886, align 4, !tbaa !19
+  %888 = icmp slt i32 %885, %887
+  br i1 %888, label %889, label %908
+
+889:                                              ; preds = %882
+  %890 = sext i32 %843 to i64
+  %891 = sext i32 %885 to i64
+  br label %892
+
+892:                                              ; preds = %889, %892
+  %893 = phi i64 [ %891, %889 ], [ %902, %892 ]
+  %894 = phi i64 [ %890, %889 ], [ %900, %892 ]
+  %895 = getelementptr inbounds i32, i32* %789, i64 %893
+  %896 = load i32, i32* %895, align 4, !tbaa !19
+  %897 = getelementptr inbounds i32, i32* %825, i64 %894
+  store i32 %896, i32* %897, align 4, !tbaa !19
+  %898 = getelementptr inbounds double, double* %791, i64 %893
+  %899 = load double, double* %898, align 8, !tbaa !32
+  %900 = add nsw i64 %894, 1
+  %901 = getelementptr inbounds double, double* %826, i64 %894
+  store double %899, double* %901, align 8, !tbaa !32
+  %902 = add nsw i64 %893, 1
+  %903 = load i32, i32* %886, align 4, !tbaa !19
+  %904 = sext i32 %903 to i64
+  %905 = icmp slt i64 %902, %904
+  br i1 %905, label %892, label %906, !llvm.loop !90
+
+906:                                              ; preds = %892
+  %907 = trunc i64 %900 to i32
+  br label %908
+
+908:                                              ; preds = %906, %882, %848
+  %909 = phi i32 [ %852, %848 ], [ %883, %882 ], [ %883, %906 ]
+  %910 = phi i32 [ %843, %848 ], [ %843, %882 ], [ %907, %906 ]
+  %911 = phi i32 [ %842, %848 ], [ %858, %882 ], [ %858, %906 ]
+  %912 = phi i32 [ %849, %848 ], [ %841, %882 ], [ %841, %906 ]
+  %913 = add nsw i64 %840, 1
+  %914 = getelementptr inbounds i32, i32* %797, i64 %913
+  store i32 %909, i32* %914, align 4, !tbaa !19
+  %915 = getelementptr inbounds i32, i32* %799, i64 %913
+  store i32 %910, i32* %915, align 4, !tbaa !19
+  %916 = icmp eq i64 %913, %838
+  br i1 %916, label %917, label %839, !llvm.loop !91
+
+917:                                              ; preds = %908, %824
+  %918 = getelementptr inbounds %struct.hypre_ParCSRMatrix_struct, %struct.hypre_ParCSRMatrix_struct* %0, i64 0, i32 1
+  %919 = load i32, i32* %918, align 4, !tbaa !54
+  %920 = load i32, i32* %13, align 4, !tbaa !19
+  %921 = getelementptr inbounds %struct.hypre_ParCSRMatrix_struct, %struct.hypre_ParCSRMatrix_struct* %0, i64 0, i32 15, i64 0
+  %922 = sext i32 %59 to i64
+  %923 = getelementptr inbounds i32, i32* %797, i64 %922
+  %924 = load i32, i32* %923, align 4, !tbaa !19
+  %925 = getelementptr inbounds i32, i32* %799, i64 %922
+  %926 = load i32, i32* %925, align 4, !tbaa !19
+  %927 = call %struct.hypre_ParCSRMatrix_struct* @hypre_ParCSRMatrixCreate(i32 %17, i32 %919, i32 %920, i32* nonnull %921, i32* nonnull %3, i32 %793, i32 %924, i32 %926) #3
+  %928 = getelementptr inbounds %struct.hypre_ParCSRMatrix_struct, %struct.hypre_ParCSRMatrix_struct* %927, i64 0, i32 8
+  %929 = load %struct.hypre_CSRMatrix*, %struct.hypre_CSRMatrix** %928, align 8, !tbaa !10
+  %930 = getelementptr inbounds %struct.hypre_CSRMatrix, %struct.hypre_CSRMatrix* %929, i64 0, i32 9
+  store double* %816, double** %930, align 8, !tbaa !15
+  %931 = bitcast %struct.hypre_CSRMatrix* %929 to i8**
+  store i8* %796, i8** %931, align 8, !tbaa !17
+  %932 = getelementptr inbounds %struct.hypre_CSRMatrix, %struct.hypre_CSRMatrix* %929, i64 0, i32 1
+  store i32* %815, i32** %932, align 8, !tbaa !16
+  %933 = getelementptr inbounds %struct.hypre_ParCSRMatrix_struct, %struct.hypre_ParCSRMatrix_struct* %927, i64 0, i32 9
+  %934 = load %struct.hypre_CSRMatrix*, %struct.hypre_CSRMatrix** %933, align 8, !tbaa !13
+  %935 = getelementptr inbounds %struct.hypre_CSRMatrix, %struct.hypre_CSRMatrix* %934, i64 0, i32 9
+  store double* %826, double** %935, align 8, !tbaa !15
+  %936 = bitcast %struct.hypre_CSRMatrix* %934 to i8**
+  store i8* %798, i8** %936, align 8, !tbaa !17
+  %937 = getelementptr inbounds %struct.hypre_CSRMatrix, %struct.hypre_CSRMatrix* %934, i64 0, i32 1
+  store i32* %825, i32** %937, align 8, !tbaa !16
+  %938 = getelementptr inbounds %struct.hypre_ParCSRMatrix_struct, %struct.hypre_ParCSRMatrix_struct* %775, i64 0, i32 12
+  %939 = load i32*, i32** %938, align 8, !tbaa !55
+  %940 = getelementptr inbounds %struct.hypre_ParCSRMatrix_struct, %struct.hypre_ParCSRMatrix_struct* %927, i64 0, i32 12
+  store i32* %939, i32** %940, align 8, !tbaa !55
+  store i32* null, i32** %938, align 8, !tbaa !55
+  %941 = getelementptr inbounds %struct.hypre_CSRMatrix, %struct.hypre_CSRMatrix* %929, i64 0, i32 12
+  store i32 %21, i32* %941, align 4, !tbaa !11
+  %942 = getelementptr inbounds %struct.hypre_CSRMatrix, %struct.hypre_CSRMatrix* %934, i64 0, i32 12
+  store i32 %21, i32* %942, align 4, !tbaa !11
+  %943 = fcmp une double %7, 0.000000e+00
+  %944 = icmp sgt i32 %8, 0
+  %945 = select i1 %943, i1 true, i1 %944
+  br i1 %945, label %946, label %1027
+
+946:                                              ; preds = %917
+  %947 = getelementptr inbounds %struct.hypre_CSRMatrix, %struct.hypre_CSRMatrix* %934, i64 0, i32 0
+  %948 = call i32 @hypre_BoomerAMGInterpTruncation(%struct.hypre_ParCSRMatrix_struct* %927, double %7, i32 %8) #3
+  %949 = load i32*, i32** %947, align 8, !tbaa !17
+  %950 = load i32*, i32** %937, align 8, !tbaa !16
+  %951 = getelementptr inbounds i32, i32* %949, i64 %922
+  %952 = load i32, i32* %951, align 4, !tbaa !19
+  %953 = load i32*, i32** %940, align 8, !tbaa !55
+  %954 = icmp eq i32 %793, 0
+  br i1 %954, label %1027, label %955
+
+955:                                              ; preds = %946
+  %956 = sext i32 %793 to i64
+  %957 = call i8* @hypre_CAlloc(i64 %956, i64 4, i32 0) #3
+  %958 = bitcast i8* %957 to i32*
+  %959 = icmp sgt i32 %952, 0
+  br i1 %959, label %960, label %962
+
+960:                                              ; preds = %955
+  %961 = zext i32 %952 to i64
+  br label %966
+
+962:                                              ; preds = %966, %955
+  %963 = icmp sgt i32 %793, 0
+  br i1 %963, label %964, label %984
+
+964:                                              ; preds = %962
+  %965 = zext i32 %793 to i64
+  br label %974
+
+966:                                              ; preds = %960, %966
+  %967 = phi i64 [ 0, %960 ], [ %972, %966 ]
+  %968 = getelementptr inbounds i32, i32* %950, i64 %967
+  %969 = load i32, i32* %968, align 4, !tbaa !19
+  %970 = sext i32 %969 to i64
+  %971 = getelementptr inbounds i32, i32* %958, i64 %970
+  store i32 1, i32* %971, align 4, !tbaa !19
+  %972 = add nuw nsw i64 %967, 1
+  %973 = icmp eq i64 %972, %961
+  br i1 %973, label %962, label %966, !llvm.loop !92
+
+974:                                              ; preds = %964, %974
+  %975 = phi i64 [ 0, %964 ], [ %982, %974 ]
+  %976 = phi i32 [ 0, %964 ], [ %981, %974 ]
+  %977 = getelementptr inbounds i32, i32* %958, i64 %975
+  %978 = load i32, i32* %977, align 4, !tbaa !19
+  %979 = icmp ne i32 %978, 0
+  %980 = zext i1 %979 to i32
+  %981 = add nuw nsw i32 %976, %980
+  %982 = add nuw nsw i64 %975, 1
+  %983 = icmp eq i64 %982, %965
+  br i1 %983, label %984, label %974, !llvm.loop !93
+
+984:                                              ; preds = %974, %962
+  %985 = phi i32 [ 0, %962 ], [ %981, %974 ]
+  %986 = zext i32 %985 to i64
+  %987 = call i8* @hypre_CAlloc(i64 %986, i64 4, i32 0) #3
+  %988 = bitcast i8* %987 to i32*
+  %989 = call i8* @hypre_CAlloc(i64 %986, i64 4, i32 0) #3
+  %990 = bitcast i8* %989 to i32*
+  %991 = icmp sgt i32 %793, 0
+  br i1 %991, label %992, label %1012
+
+992:                                              ; preds = %984
+  %993 = zext i32 %793 to i64
+  br label %994
+
+994:                                              ; preds = %992, %1008
+  %995 = phi i64 [ 0, %992 ], [ %1010, %1008 ]
+  %996 = phi i32 [ 0, %992 ], [ %1009, %1008 ]
+  %997 = getelementptr inbounds i32, i32* %958, i64 %995
+  %998 = load i32, i32* %997, align 4, !tbaa !19
+  %999 = icmp eq i32 %998, 0
+  br i1 %999, label %1008, label %1000
+
+1000:                                             ; preds = %994
+  %1001 = getelementptr inbounds i32, i32* %953, i64 %995
+  %1002 = load i32, i32* %1001, align 4, !tbaa !19
+  %1003 = sext i32 %996 to i64
+  %1004 = getelementptr inbounds i32, i32* %988, i64 %1003
+  store i32 %1002, i32* %1004, align 4, !tbaa !19
+  %1005 = add nsw i32 %996, 1
+  %1006 = getelementptr inbounds i32, i32* %990, i64 %1003
+  %1007 = trunc i64 %995 to i32
+  store i32 %1007, i32* %1006, align 4, !tbaa !19
+  br label %1008
+
+1008:                                             ; preds = %994, %1000
+  %1009 = phi i32 [ %1005, %1000 ], [ %996, %994 ]
+  %1010 = add nuw nsw i64 %995, 1
+  %1011 = icmp eq i64 %1010, %993
+  br i1 %1011, label %1012, label %994, !llvm.loop !94
+
+1012:                                             ; preds = %1008, %984
+  call void @hypre_Free(i8* %957, i32 0) #3
+  %1013 = icmp sgt i32 %952, 0
+  br i1 %1013, label %1014, label %1023
+
+1014:                                             ; preds = %1012
+  %1015 = zext i32 %952 to i64
+  br label %1016
+
+1016:                                             ; preds = %1014, %1016
+  %1017 = phi i64 [ 0, %1014 ], [ %1021, %1016 ]
+  %1018 = getelementptr inbounds i32, i32* %950, i64 %1017
+  %1019 = load i32, i32* %1018, align 4, !tbaa !19
+  %1020 = call i32 @hypre_BinarySearch(i32* %990, i32 %1019, i32 %985) #3
+  store i32 %1020, i32* %1018, align 4, !tbaa !19
+  %1021 = add nuw nsw i64 %1017, 1
+  %1022 = icmp eq i64 %1021, %1015
+  br i1 %1022, label %1023, label %1016, !llvm.loop !95
+
+1023:                                             ; preds = %1016, %1012
+  %1024 = bitcast i32* %953 to i8*
+  call void @hypre_Free(i8* %1024, i32 0) #3
+  %1025 = bitcast i32** %940 to i8**
+  store i8* %987, i8** %1025, align 8, !tbaa !55
+  %1026 = getelementptr inbounds %struct.hypre_CSRMatrix, %struct.hypre_CSRMatrix* %934, i64 0, i32 4
+  store i32 %985, i32* %1026, align 4, !tbaa !24
+  call void @hypre_Free(i8* %989, i32 0) #3
+  br label %1027
+
+1027:                                             ; preds = %946, %1023, %917
+  %1028 = call i32 @hypre_MatvecCommPkgCreate(%struct.hypre_ParCSRMatrix_struct* %927) #3
+  store %struct.hypre_ParCSRMatrix_struct* %927, %struct.hypre_ParCSRMatrix_struct** %9, align 8, !tbaa !20
+  call void @hypre_Free(i8* %137, i32 0) #3
+  call void @hypre_Free(i8* %291, i32 0) #3
+  call void @hypre_Free(i8* %141, i32 0) #3
+  call void @hypre_Free(i8* %139, i32 0) #3
+  %1029 = bitcast i32* %350 to i8*
+  call void @hypre_Free(i8* %1029, i32 0) #3
+  call void @hypre_Free(i8* %143, i32 0) #3
+  call void @hypre_Free(i8* %145, i32 0) #3
+  call void @hypre_Free(i8* %147, i32 0) #3
+  call void @hypre_Free(i8* %252, i32 0) #3
+  call void @hypre_Free(i8* %135, i32 0) #3
+  %1030 = load %struct.hypre_ParCSRMatrix_struct*, %struct.hypre_ParCSRMatrix_struct** %14, align 8, !tbaa !20
+  %1031 = call i32 @hypre_ParCSRMatrixDestroy(%struct.hypre_ParCSRMatrix_struct* %1030) #3
+  %1032 = load %struct.hypre_ParCSRMatrix_struct*, %struct.hypre_ParCSRMatrix_struct** %15, align 8, !tbaa !20
+  %1033 = call i32 @hypre_ParCSRMatrixDestroy(%struct.hypre_ParCSRMatrix_struct* %1032) #3
+  %1034 = call i32 @hypre_ParCSRMatrixDestroy(%struct.hypre_ParCSRMatrix_struct* %775) #3
+  %1035 = call i32 @hypre_CSRMatrixDestroy(%struct.hypre_CSRMatrix* %94) #3
+  %1036 = load i32, i32* @hypre__global_error, align 4, !tbaa !19
+  call void @llvm.lifetime.end.p0i8(i64 8, i8* nonnull %62) #3
+  call void @llvm.lifetime.end.p0i8(i64 8, i8* nonnull %61) #3
+  call void @llvm.lifetime.end.p0i8(i64 4, i8* nonnull %60) #3
+  call void @llvm.lifetime.end.p0i8(i64 4, i8* nonnull %31) #3
+  call void @llvm.lifetime.end.p0i8(i64 4, i8* nonnull %30) #3
+  ret i32 %1036
+}
+
+declare dso_local %struct.hypre_CSRMatrix* @hypre_ParCSRMatrixExtractBExt(%struct.hypre_ParCSRMatrix_struct*, %struct.hypre_ParCSRMatrix_struct*, i32) local_unnamed_addr #2
+
+declare dso_local i32 @hypre_CSRMatrixDestroy(%struct.hypre_CSRMatrix*) local_unnamed_addr #2
+
+; Function Attrs: nounwind uwtable
+define dso_local i32 @hypre_BoomerAMGBuildModExtPIInterp(%struct.hypre_ParCSRMatrix_struct* %0, i32* %1, %struct.hypre_ParCSRMatrix_struct* %2, i32* %3, i32 %4, i32* nocapture readonly %5, i32 %6, double %7, i32 %8, %struct.hypre_ParCSRMatrix_struct** nocapture %9) local_unnamed_addr #0 {
+  %11 = getelementptr inbounds %struct.hypre_ParCSRMatrix_struct, %struct.hypre_ParCSRMatrix_struct* %0, i64 0, i32 8
+  %12 = load %struct.hypre_CSRMatrix*, %struct.hypre_CSRMatrix** %11, align 8, !tbaa !10
+  %13 = getelementptr inbounds %struct.hypre_CSRMatrix, %struct.hypre_CSRMatrix* %12, i64 0, i32 12
+  %14 = load i32, i32* %13, align 4, !tbaa !11
+  %15 = getelementptr inbounds %struct.hypre_ParCSRMatrix_struct, %struct.hypre_ParCSRMatrix_struct* %0, i64 0, i32 9
+  %16 = load %struct.hypre_CSRMatrix*, %struct.hypre_CSRMatrix** %15, align 8, !tbaa !13
+  %17 = getelementptr inbounds %struct.hypre_CSRMatrix, %struct.hypre_CSRMatrix* %16, i64 0, i32 12
+  %18 = load i32, i32* %17, align 4, !tbaa !11
+  %19 = icmp eq i32 %14, %18
+  br i1 %19, label %22, label %20
+
+20:                                               ; preds = %10
+  %21 = call i32 (i8*, ...) @hypre_printf(i8* getelementptr inbounds ([62 x i8], [62 x i8]* @.str, i64 0, i64 0), i32 %14, i32 %18) #3
+  br label %22
+
+22:                                               ; preds = %10, %20
+  %23 = call i32 @hypre_GetExecPolicy1(i32 %14) #3
+  %24 = icmp eq i32 %23, 0
+  br i1 %24, label %25, label %27
+
+25:                                               ; preds = %22
+  %26 = call i32 @hypre_BoomerAMGBuildModExtPIInterpHost(%struct.hypre_ParCSRMatrix_struct* %0, i32* %1, %struct.hypre_ParCSRMatrix_struct* %2, i32* %3, i32 undef, i32 %4, i32* %5, double %7, i32 %8, %struct.hypre_ParCSRMatrix_struct** %9)
+  br label %27
+
+27:                                               ; preds = %25, %22
+  %28 = phi i32 [ %26, %25 ], [ 0, %22 ]
+  ret i32 %28
+}
+
+; Function Attrs: nounwind uwtable
+define dso_local i32 @hypre_BoomerAMGBuildModExtPEInterpHost(%struct.hypre_ParCSRMatrix_struct* %0, i32* %1, %struct.hypre_ParCSRMatrix_struct* %2, i32* %3, i32 %4, i32* nocapture readonly %5, i32 %6, double %7, i32 %8, %struct.hypre_ParCSRMatrix_struct** nocapture %9) local_unnamed_addr #0 {
+  %11 = alloca i32, align 4
+  %12 = alloca i32, align 4
+  %13 = alloca i32, align 4
+  %14 = alloca %struct.hypre_ParCSRMatrix_struct*, align 8
+  %15 = alloca %struct.hypre_ParCSRMatrix_struct*, align 8
+  %16 = getelementptr inbounds %struct.hypre_ParCSRMatrix_struct, %struct.hypre_ParCSRMatrix_struct* %0, i64 0, i32 0
+  %17 = load i32, i32* %16, align 8, !tbaa !3
+  %18 = getelementptr inbounds %struct.hypre_ParCSRMatrix_struct, %struct.hypre_ParCSRMatrix_struct* %0, i64 0, i32 8
+  %19 = load %struct.hypre_CSRMatrix*, %struct.hypre_CSRMatrix** %18, align 8, !tbaa !10
+  %20 = getelementptr inbounds %struct.hypre_CSRMatrix, %struct.hypre_CSRMatrix* %19, i64 0, i32 12
+  %21 = load i32, i32* %20, align 4, !tbaa !11
+  %22 = getelementptr inbounds %struct.hypre_ParCSRMatrix_struct, %struct.hypre_ParCSRMatrix_struct* %0, i64 0, i32 9
+  %23 = load %struct.hypre_CSRMatrix*, %struct.hypre_CSRMatrix** %22, align 8, !tbaa !13
+  %24 = getelementptr inbounds %struct.hypre_CSRMatrix, %struct.hypre_CSRMatrix* %23, i64 0, i32 12
+  %25 = load i32, i32* %24, align 4, !tbaa !11
+  %26 = icmp eq i32 %21, %25
+  br i1 %26, label %29, label %27
+
+27:                                               ; preds = %10
+  %28 = call i32 (i8*, ...) @hypre_printf(i8* getelementptr inbounds ([62 x i8], [62 x i8]* @.str, i64 0, i64 0), i32 %21, i32 %25) #3
+  br label %29
+
+29:                                               ; preds = %10, %27
+  %30 = getelementptr inbounds %struct.hypre_ParCSRMatrix_struct, %struct.hypre_ParCSRMatrix_struct* %0, i64 0, i32 16
+  %31 = load %struct._hypre_ParCSRCommPkg*, %struct._hypre_ParCSRCommPkg** %30, align 8, !tbaa !14
+  %32 = bitcast i32* %11 to i8*
+  call void @llvm.lifetime.start.p0i8(i64 4, i8* nonnull %32) #3
+  %33 = bitcast i32* %12 to i8*
+  call void @llvm.lifetime.start.p0i8(i64 4, i8* nonnull %33) #3
+  %34 = load %struct.hypre_CSRMatrix*, %struct.hypre_CSRMatrix** %18, align 8, !tbaa !10
+  %35 = getelementptr inbounds %struct.hypre_CSRMatrix, %struct.hypre_CSRMatrix* %34, i64 0, i32 9
+  %36 = load double*, double** %35, align 8, !tbaa !15
+  %37 = getelementptr inbounds %struct.hypre_CSRMatrix, %struct.hypre_CSRMatrix* %34, i64 0, i32 0
+  %38 = load i32*, i32** %37, align 8, !tbaa !17
+  %39 = getelementptr inbounds %struct.hypre_CSRMatrix, %struct.hypre_CSRMatrix* %34, i64 0, i32 1
+  %40 = load i32*, i32** %39, align 8, !tbaa !16
+  %41 = load %struct.hypre_CSRMatrix*, %struct.hypre_CSRMatrix** %22, align 8, !tbaa !13
+  %42 = getelementptr inbounds %struct.hypre_CSRMatrix, %struct.hypre_CSRMatrix* %41, i64 0, i32 9
+  %43 = load double*, double** %42, align 8, !tbaa !15
+  %44 = getelementptr inbounds %struct.hypre_CSRMatrix, %struct.hypre_CSRMatrix* %41, i64 0, i32 0
+  %45 = load i32*, i32** %44, align 8, !tbaa !17
+  %46 = getelementptr inbounds %struct.hypre_CSRMatrix, %struct.hypre_CSRMatrix* %41, i64 0, i32 1
+  %47 = load i32*, i32** %46, align 8, !tbaa !16
+  %48 = getelementptr inbounds %struct.hypre_ParCSRMatrix_struct, %struct.hypre_ParCSRMatrix_struct* %2, i64 0, i32 8
+  %49 = load %struct.hypre_CSRMatrix*, %struct.hypre_CSRMatrix** %48, align 8, !tbaa !10
+  %50 = getelementptr inbounds %struct.hypre_CSRMatrix, %struct.hypre_CSRMatrix* %49, i64 0, i32 1
+  %51 = load i32*, i32** %50, align 8, !tbaa !16
+  %52 = getelementptr inbounds %struct.hypre_CSRMatrix, %struct.hypre_CSRMatrix* %49, i64 0, i32 0
+  %53 = load i32*, i32** %52, align 8, !tbaa !17
+  %54 = getelementptr inbounds %struct.hypre_ParCSRMatrix_struct, %struct.hypre_ParCSRMatrix_struct* %2, i64 0, i32 9
+  %55 = load %struct.hypre_CSRMatrix*, %struct.hypre_CSRMatrix** %54, align 8, !tbaa !13
+  %56 = getelementptr inbounds %struct.hypre_CSRMatrix, %struct.hypre_CSRMatrix* %55, i64 0, i32 1
+  %57 = load i32*, i32** %56, align 8, !tbaa !16
+  %58 = getelementptr inbounds %struct.hypre_CSRMatrix, %struct.hypre_CSRMatrix* %55, i64 0, i32 0
+  %59 = load i32*, i32** %58, align 8, !tbaa !17
+  %60 = getelementptr inbounds %struct.hypre_CSRMatrix, %struct.hypre_CSRMatrix* %34, i64 0, i32 3
+  %61 = load i32, i32* %60, align 8, !tbaa !18
+  %62 = bitcast i32* %13 to i8*
+  call void @llvm.lifetime.start.p0i8(i64 4, i8* nonnull %62) #3
+  %63 = bitcast %struct.hypre_ParCSRMatrix_struct** %14 to i8*
+  call void @llvm.lifetime.start.p0i8(i64 8, i8* nonnull %63) #3
+  %64 = bitcast %struct.hypre_ParCSRMatrix_struct** %15 to i8*
+  call void @llvm.lifetime.start.p0i8(i64 8, i8* nonnull %64) #3
+  %65 = call i32 @hypre_MPI_Comm_size(i32 %17, i32* nonnull %12) #3
+  %66 = call i32 @hypre_MPI_Comm_rank(i32 %17, i32* nonnull %11) #3
+  %67 = load i32, i32* %11, align 4, !tbaa !19
+  %68 = load i32, i32* %12, align 4, !tbaa !19
+  %69 = add nsw i32 %68, -1
+  %70 = icmp eq i32 %67, %69
+  br i1 %70, label %71, label %74
+
+71:                                               ; preds = %29
+  %72 = getelementptr inbounds i32, i32* %3, i64 1
+  %73 = load i32, i32* %72, align 4, !tbaa !19
+  store i32 %73, i32* %13, align 4, !tbaa !19
+  br label %74
+
+74:                                               ; preds = %71, %29
+  %75 = call i32 @hypre_MPI_Bcast(i8* nonnull %62, i32 1, i32 1275069445, i32 %69, i32 %17) #3
+  %76 = getelementptr inbounds i32, i32* %3, i64 1
+  %77 = load i32, i32* %76, align 4, !tbaa !19
+  %78 = load i32, i32* %3, align 4, !tbaa !19
+  %79 = sub nsw i32 %77, %78
+  %80 = call i32 @hypre_ParCSRMatrixGenerateFFFC(%struct.hypre_ParCSRMatrix_struct* %0, i32* %1, i32* nonnull %3, %struct.hypre_ParCSRMatrix_struct* %2, %struct.hypre_ParCSRMatrix_struct** nonnull %15, %struct.hypre_ParCSRMatrix_struct** nonnull %14) #3
+  %81 = load %struct.hypre_ParCSRMatrix_struct*, %struct.hypre_ParCSRMatrix_struct** %15, align 8, !tbaa !20
+  %82 = getelementptr inbounds %struct.hypre_ParCSRMatrix_struct, %struct.hypre_ParCSRMatrix_struct* %81, i64 0, i32 8
+  %83 = load %struct.hypre_CSRMatrix*, %struct.hypre_CSRMatrix** %82, align 8, !tbaa !10
+  %84 = getelementptr inbounds %struct.hypre_CSRMatrix, %struct.hypre_CSRMatrix* %83, i64 0, i32 0
+  %85 = load i32*, i32** %84, align 8, !tbaa !17
+  %86 = getelementptr inbounds %struct.hypre_CSRMatrix, %struct.hypre_CSRMatrix* %83, i64 0, i32 9
+  %87 = load double*, double** %86, align 8, !tbaa !15
+  %88 = getelementptr inbounds %struct.hypre_ParCSRMatrix_struct, %struct.hypre_ParCSRMatrix_struct* %81, i64 0, i32 9
+  %89 = load %struct.hypre_CSRMatrix*, %struct.hypre_CSRMatrix** %88, align 8, !tbaa !13
+  %90 = getelementptr inbounds %struct.hypre_CSRMatrix, %struct.hypre_CSRMatrix* %89, i64 0, i32 0
+  %91 = load i32*, i32** %90, align 8, !tbaa !17
+  %92 = getelementptr inbounds %struct.hypre_CSRMatrix, %struct.hypre_CSRMatrix* %89, i64 0, i32 9
+  %93 = load double*, double** %92, align 8, !tbaa !15
+  %94 = load %struct.hypre_ParCSRMatrix_struct*, %struct.hypre_ParCSRMatrix_struct** %14, align 8, !tbaa !20
+  %95 = getelementptr inbounds %struct.hypre_ParCSRMatrix_struct, %struct.hypre_ParCSRMatrix_struct* %94, i64 0, i32 8
+  %96 = load %struct.hypre_CSRMatrix*, %struct.hypre_CSRMatrix** %95, align 8, !tbaa !10
+  %97 = getelementptr inbounds %struct.hypre_CSRMatrix, %struct.hypre_CSRMatrix* %96, i64 0, i32 0
+  %98 = load i32*, i32** %97, align 8, !tbaa !17
+  %99 = getelementptr inbounds %struct.hypre_CSRMatrix, %struct.hypre_CSRMatrix* %96, i64 0, i32 1
+  %100 = load i32*, i32** %99, align 8, !tbaa !16
+  %101 = getelementptr inbounds %struct.hypre_CSRMatrix, %struct.hypre_CSRMatrix* %96, i64 0, i32 9
+  %102 = load double*, double** %101, align 8, !tbaa !15
+  %103 = getelementptr inbounds %struct.hypre_ParCSRMatrix_struct, %struct.hypre_ParCSRMatrix_struct* %94, i64 0, i32 9
+  %104 = load %struct.hypre_CSRMatrix*, %struct.hypre_CSRMatrix** %103, align 8, !tbaa !13
+  %105 = getelementptr inbounds %struct.hypre_CSRMatrix, %struct.hypre_CSRMatrix* %104, i64 0, i32 0
+  %106 = load i32*, i32** %105, align 8, !tbaa !17
+  %107 = getelementptr inbounds %struct.hypre_CSRMatrix, %struct.hypre_CSRMatrix* %104, i64 0, i32 1
+  %108 = load i32*, i32** %107, align 8, !tbaa !16
+  %109 = getelementptr inbounds %struct.hypre_CSRMatrix, %struct.hypre_CSRMatrix* %104, i64 0, i32 9
+  %110 = load double*, double** %109, align 8, !tbaa !15
+  %111 = getelementptr inbounds %struct.hypre_CSRMatrix, %struct.hypre_CSRMatrix* %96, i64 0, i32 3
+  %112 = load i32, i32* %111, align 8, !tbaa !18
+  %113 = getelementptr inbounds %struct.hypre_CSRMatrix, %struct.hypre_CSRMatrix* %104, i64 0, i32 4
+  %114 = load i32, i32* %113, align 4, !tbaa !24
+  %115 = sext i32 %112 to i64
+  %116 = call i8* @hypre_CAlloc(i64 %115, i64 8, i32 0) #3
+  %117 = bitcast i8* %116 to double*
+  %118 = call i8* @hypre_CAlloc(i64 %115, i64 8, i32 0) #3
+  %119 = bitcast i8* %118 to double*
+  %120 = call i8* @hypre_CAlloc(i64 %115, i64 8, i32 0) #3
+  %121 = bitcast i8* %120 to double*
+  %122 = call i8* @hypre_CAlloc(i64 %115, i64 8, i32 0) #3
+  %123 = bitcast i8* %122 to double*
+  %124 = call i8* @hypre_CAlloc(i64 %115, i64 8, i32 0) #3
+  %125 = bitcast i8* %124 to double*
+  %126 = call i8* @hypre_CAlloc(i64 1, i64 4, i32 0) #3
+  %127 = bitcast i8* %126 to i32*
+  %128 = call i8* @hypre_CAlloc(i64 2, i64 4, i32 0) #3
+  %129 = bitcast i8* %128 to i32*
+  %130 = call i8* @hypre_CAlloc(i64 2, i64 4, i32 0) #3
+  %131 = bitcast i8* %130 to i32*
+  %132 = getelementptr inbounds i8, i8* %128, i64 4
+  %133 = bitcast i8* %132 to i32*
+  store i32 %61, i32* %133, align 4, !tbaa !19
+  %134 = icmp sgt i32 %61, 0
+  br i1 %134, label %135, label %148
+
+135:                                              ; preds = %74
+  %136 = zext i32 %61 to i64
+  br label %137
+
+137:                                              ; preds = %135, %145
+  %138 = phi i64 [ 0, %135 ], [ %146, %145 ]
+  %139 = getelementptr inbounds i32, i32* %1, i64 %138
+  %140 = load i32, i32* %139, align 4, !tbaa !19
+  %141 = icmp sgt i32 %140, 0
+  br i1 %141, label %142, label %145
+
+142:                                              ; preds = %137
+  %143 = load i32, i32* %127, align 4, !tbaa !19
+  %144 = add nsw i32 %143, 1
+  store i32 %144, i32* %127, align 4, !tbaa !19
+  br label %145
+
+145:                                              ; preds = %137, %142
+  %146 = add nuw nsw i64 %138, 1
+  %147 = icmp eq i64 %146, %136
+  br i1 %147, label %148, label %137, !llvm.loop !96
+
+148:                                              ; preds = %145, %74
+  %149 = icmp sgt i32 %4, 1
+  br i1 %149, label %150, label %206
+
+150:                                              ; preds = %148
+  %151 = getelementptr inbounds %struct.hypre_CSRMatrix, %struct.hypre_CSRMatrix* %41, i64 0, i32 4
+  %152 = load i32, i32* %151, align 4, !tbaa !24
+  %153 = sext i32 %152 to i64
+  %154 = call i8* @hypre_CAlloc(i64 %153, i64 4, i32 0) #3
+  %155 = bitcast i8* %154 to i32*
+  %156 = getelementptr inbounds %struct._hypre_ParCSRCommPkg, %struct._hypre_ParCSRCommPkg* %31, i64 0, i32 1
+  %157 = load i32, i32* %156, align 4, !tbaa !25
+  %158 = getelementptr inbounds %struct._hypre_ParCSRCommPkg, %struct._hypre_ParCSRCommPkg* %31, i64 0, i32 3
+  %159 = load i32*, i32** %158, align 8, !tbaa !27
+  %160 = sext i32 %157 to i64
+  %161 = getelementptr inbounds i32, i32* %159, i64 %160
+  %162 = load i32, i32* %161, align 4, !tbaa !19
+  %163 = sext i32 %162 to i64
+  %164 = call i8* @hypre_CAlloc(i64 %163, i64 4, i32 0) #3
+  %165 = bitcast i8* %164 to i32*
+  %166 = getelementptr inbounds %struct._hypre_ParCSRCommPkg, %struct._hypre_ParCSRCommPkg* %31, i64 0, i32 4
+  %167 = icmp sgt i32 %157, 0
+  br i1 %167, label %168, label %203
+
+168:                                              ; preds = %150
+  %169 = load i32*, i32** %158, align 8, !tbaa !27
+  %170 = zext i32 %157 to i64
+  br label %176
+
+171:                                              ; preds = %189
+  %172 = trunc i64 %197 to i32
+  br label %173
+
+173:                                              ; preds = %171, %176
+  %174 = phi i32 [ %178, %176 ], [ %172, %171 ]
+  %175 = icmp eq i64 %181, %170
+  br i1 %175, label %203, label %176, !llvm.loop !97
+
+176:                                              ; preds = %168, %173
+  %177 = phi i64 [ 0, %168 ], [ %181, %173 ]
+  %178 = phi i32 [ 0, %168 ], [ %174, %173 ]
+  %179 = getelementptr inbounds i32, i32* %169, i64 %177
+  %180 = load i32, i32* %179, align 4, !tbaa !19
+  %181 = add nuw nsw i64 %177, 1
+  %182 = getelementptr inbounds i32, i32* %169, i64 %181
+  %183 = load i32, i32* %182, align 4, !tbaa !19
+  %184 = icmp slt i32 %180, %183
+  br i1 %184, label %185, label %173
+
+185:                                              ; preds = %176
+  %186 = load i32*, i32** %166, align 8, !tbaa !29
+  %187 = sext i32 %180 to i64
+  %188 = sext i32 %178 to i64
+  br label %189
+
+189:                                              ; preds = %185, %189
+  %190 = phi i64 [ %188, %185 ], [ %197, %189 ]
+  %191 = phi i64 [ %187, %185 ], [ %199, %189 ]
+  %192 = getelementptr inbounds i32, i32* %186, i64 %191
+  %193 = load i32, i32* %192, align 4, !tbaa !19
+  %194 = sext i32 %193 to i64
+  %195 = getelementptr inbounds i32, i32* %5, i64 %194
+  %196 = load i32, i32* %195, align 4, !tbaa !19
+  %197 = add nsw i64 %190, 1
+  %198 = getelementptr inbounds i32, i32* %165, i64 %190
+  store i32 %196, i32* %198, align 4, !tbaa !19
+  %199 = add nsw i64 %191, 1
+  %200 = load i32, i32* %182, align 4, !tbaa !19
+  %201 = sext i32 %200 to i64
+  %202 = icmp slt i64 %199, %201
+  br i1 %202, label %189, label %171, !llvm.loop !98
+
+203:                                              ; preds = %173, %150
+  %204 = call %struct.hypre_ParCSRCommHandle* @hypre_ParCSRCommHandleCreate(i32 11, %struct._hypre_ParCSRCommPkg* %31, i8* %164, i8* %154) #3
+  %205 = call i32 @hypre_ParCSRCommHandleDestroy(%struct.hypre_ParCSRCommHandle* %204) #3
+  call void @hypre_Free(i8* %164, i32 0) #3
+  br label %206
+
+206:                                              ; preds = %148, %203
+  %207 = phi i32* [ %155, %203 ], [ null, %148 ]
+  %208 = getelementptr inbounds i8, i8* %130, i64 4
+  %209 = bitcast i8* %208 to i32*
+  store i32 %112, i32* %209, align 4, !tbaa !19
+  %210 = icmp sgt i32 %112, 0
+  br i1 %210, label %211, label %312
+
+211:                                              ; preds = %206
+  %212 = zext i32 %112 to i64
+  br label %213
+
+213:                                              ; preds = %211, %310
+  %214 = phi i64 [ 0, %211 ], [ %217, %310 ]
+  %215 = getelementptr inbounds i32, i32* %98, i64 %214
+  %216 = load i32, i32* %215, align 4, !tbaa !19
+  %217 = add nuw nsw i64 %214, 1
+  %218 = getelementptr inbounds i32, i32* %98, i64 %217
+  %219 = load i32, i32* %218, align 4, !tbaa !19
+  %220 = getelementptr inbounds double, double* %119, i64 %214
+  %221 = add nsw i32 %216, 1
+  %222 = icmp slt i32 %221, %219
+  br i1 %222, label %223, label %235
+
+223:                                              ; preds = %213
+  %224 = add i32 %216, 1
+  %225 = sext i32 %224 to i64
+  br label %226
+
+226:                                              ; preds = %223, %226
+  %227 = phi i64 [ %225, %223 ], [ %232, %226 ]
+  %228 = getelementptr inbounds double, double* %102, i64 %227
+  %229 = load double, double* %228, align 8, !tbaa !32
+  %230 = load double, double* %220, align 8, !tbaa !32
+  %231 = fadd double %229, %230
+  store double %231, double* %220, align 8, !tbaa !32
+  %232 = add nsw i64 %227, 1
+  %233 = trunc i64 %232 to i32
+  %234 = icmp eq i32 %219, %233
+  br i1 %234, label %235, label %226, !llvm.loop !99
+
+235:                                              ; preds = %226, %213
+  %236 = getelementptr inbounds i32, i32* %106, i64 %214
+  %237 = load i32, i32* %236, align 4, !tbaa !19
+  %238 = getelementptr inbounds i32, i32* %106, i64 %217
+  %239 = load i32, i32* %238, align 4, !tbaa !19
+  %240 = getelementptr inbounds double, double* %119, i64 %214
+  %241 = icmp slt i32 %237, %239
+  br i1 %241, label %242, label %253
+
+242:                                              ; preds = %235
+  %243 = sext i32 %237 to i64
+  %244 = sext i32 %239 to i64
+  br label %245
+
+245:                                              ; preds = %242, %245
+  %246 = phi i64 [ %243, %242 ], [ %251, %245 ]
+  %247 = getelementptr inbounds double, double* %110, i64 %246
+  %248 = load double, double* %247, align 8, !tbaa !32
+  %249 = load double, double* %240, align 8, !tbaa !32
+  %250 = fadd double %248, %249
+  store double %250, double* %240, align 8, !tbaa !32
+  %251 = add nsw i64 %246, 1
+  %252 = icmp eq i64 %251, %244
+  br i1 %252, label %253, label %245, !llvm.loop !100
+
+253:                                              ; preds = %245, %235
+  %254 = xor i32 %216, -1
+  %255 = add i32 %219, %254
+  %256 = sub i32 %255, %237
+  %257 = add i32 %256, %239
+  %258 = icmp eq i32 %257, 0
+  br i1 %258, label %264, label %259
+
+259:                                              ; preds = %253
+  %260 = sitofp i32 %257 to double
+  %261 = getelementptr inbounds double, double* %119, i64 %214
+  %262 = load double, double* %261, align 8, !tbaa !32
+  %263 = fdiv double %262, %260
+  store double %263, double* %261, align 8, !tbaa !32
+  br label %264
+
+264:                                              ; preds = %259, %253
+  %265 = getelementptr inbounds i32, i32* %85, i64 %214
+  %266 = load i32, i32* %265, align 4, !tbaa !19
+  %267 = getelementptr inbounds i32, i32* %85, i64 %217
+  %268 = load i32, i32* %267, align 4, !tbaa !19
+  %269 = getelementptr inbounds double, double* %117, i64 %214
+  %270 = icmp slt i32 %266, %268
+  br i1 %270, label %271, label %282
+
+271:                                              ; preds = %264
+  %272 = sext i32 %266 to i64
+  %273 = sext i32 %268 to i64
+  br label %274
+
+274:                                              ; preds = %271, %274
+  %275 = phi i64 [ %272, %271 ], [ %280, %274 ]
+  %276 = getelementptr inbounds double, double* %87, i64 %275
+  %277 = load double, double* %276, align 8, !tbaa !32
+  %278 = load double, double* %269, align 8, !tbaa !32
+  %279 = fadd double %277, %278
+  store double %279, double* %269, align 8, !tbaa !32
+  %280 = add nsw i64 %275, 1
+  %281 = icmp eq i64 %280, %273
+  br i1 %281, label %282, label %274, !llvm.loop !101
+
+282:                                              ; preds = %274, %264
+  %283 = getelementptr inbounds i32, i32* %91, i64 %214
+  %284 = load i32, i32* %283, align 4, !tbaa !19
+  %285 = getelementptr inbounds i32, i32* %91, i64 %217
+  %286 = load i32, i32* %285, align 4, !tbaa !19
+  %287 = getelementptr inbounds double, double* %117, i64 %214
+  %288 = icmp slt i32 %284, %286
+  br i1 %288, label %289, label %300
+
+289:                                              ; preds = %282
+  %290 = sext i32 %284 to i64
+  %291 = sext i32 %286 to i64
+  br label %292
+
+292:                                              ; preds = %289, %292
+  %293 = phi i64 [ %290, %289 ], [ %298, %292 ]
+  %294 = getelementptr inbounds double, double* %93, i64 %293
+  %295 = load double, double* %294, align 8, !tbaa !32
+  %296 = load double, double* %287, align 8, !tbaa !32
+  %297 = fadd double %295, %296
+  store double %297, double* %287, align 8, !tbaa !32
+  %298 = add nsw i64 %293, 1
+  %299 = icmp eq i64 %298, %291
+  br i1 %299, label %300, label %292, !llvm.loop !102
+
+300:                                              ; preds = %292, %282
+  %301 = getelementptr inbounds double, double* %119, i64 %214
+  %302 = load double, double* %301, align 8, !tbaa !32
+  %303 = getelementptr inbounds double, double* %117, i64 %214
+  %304 = load double, double* %303, align 8, !tbaa !32
+  %305 = fadd double %302, %304
+  %306 = fcmp une double %305, 0.000000e+00
+  br i1 %306, label %307, label %310
+
+307:                                              ; preds = %300
+  %308 = fdiv double %302, %305
+  %309 = getelementptr inbounds double, double* %121, i64 %214
+  store double %308, double* %309, align 8, !tbaa !32
+  br label %310
+
+310:                                              ; preds = %307, %300
+  %311 = icmp eq i64 %217, %212
+  br i1 %311, label %312, label %213, !llvm.loop !103
+
+312:                                              ; preds = %310, %206
+  %313 = icmp eq i32 %114, 0
+  br i1 %313, label %318, label %314
+
+314:                                              ; preds = %312
+  %315 = sext i32 %114 to i64
+  %316 = call i8* @hypre_CAlloc(i64 %315, i64 8, i32 0) #3
+  %317 = bitcast i8* %316 to double*
+  br label %318
+
+318:                                              ; preds = %314, %312
+  %319 = phi double* [ %317, %314 ], [ null, %312 ]
+  %320 = load %struct.hypre_ParCSRMatrix_struct*, %struct.hypre_ParCSRMatrix_struct** %14, align 8, !tbaa !20
+  %321 = getelementptr inbounds %struct.hypre_ParCSRMatrix_struct, %struct.hypre_ParCSRMatrix_struct* %320, i64 0, i32 16
+  %322 = load %struct._hypre_ParCSRCommPkg*, %struct._hypre_ParCSRCommPkg** %321, align 8, !tbaa !14
+  %323 = icmp eq %struct._hypre_ParCSRCommPkg* %322, null
+  br i1 %323, label %324, label %329
+
+324:                                              ; preds = %318
+  %325 = call i32 @hypre_MatvecCommPkgCreate(%struct.hypre_ParCSRMatrix_struct* %320) #3
+  %326 = load %struct.hypre_ParCSRMatrix_struct*, %struct.hypre_ParCSRMatrix_struct** %14, align 8, !tbaa !20
+  %327 = getelementptr inbounds %struct.hypre_ParCSRMatrix_struct, %struct.hypre_ParCSRMatrix_struct* %326, i64 0, i32 16
+  %328 = load %struct._hypre_ParCSRCommPkg*, %struct._hypre_ParCSRCommPkg** %327, align 8, !tbaa !14
+  br label %329
+
+329:                                              ; preds = %324, %318
+  %330 = phi %struct._hypre_ParCSRCommPkg* [ %322, %318 ], [ %328, %324 ]
+  %331 = getelementptr inbounds %struct._hypre_ParCSRCommPkg, %struct._hypre_ParCSRCommPkg* %330, i64 0, i32 1
+  %332 = load i32, i32* %331, align 4, !tbaa !25
+  %333 = getelementptr inbounds %struct._hypre_ParCSRCommPkg, %struct._hypre_ParCSRCommPkg* %330, i64 0, i32 3
+  %334 = load i32*, i32** %333, align 8, !tbaa !27
+  %335 = sext i32 %332 to i64
+  %336 = getelementptr inbounds i32, i32* %334, i64 %335
+  %337 = load i32, i32* %336, align 4, !tbaa !19
+  %338 = sext i32 %337 to i64
+  %339 = call i8* @hypre_CAlloc(i64 %338, i64 8, i32 0) #3
+  %340 = bitcast i8* %339 to double*
+  %341 = getelementptr inbounds %struct._hypre_ParCSRCommPkg, %struct._hypre_ParCSRCommPkg* %330, i64 0, i32 4
+  %342 = icmp sgt i32 %332, 0
+  br i1 %342, label %343, label %377
+
+343:                                              ; preds = %329
+  %344 = load i32*, i32** %333, align 8, !tbaa !27
+  %345 = zext i32 %332 to i64
+  br label %351
+
+346:                                              ; preds = %365
+  %347 = trunc i64 %373 to i32
+  br label %348
+
+348:                                              ; preds = %346, %351
+  %349 = phi i32 [ %353, %351 ], [ %347, %346 ]
+  %350 = icmp eq i64 %356, %345
+  br i1 %350, label %377, label %351, !llvm.loop !104
+
+351:                                              ; preds = %343, %348
+  %352 = phi i64 [ 0, %343 ], [ %356, %348 ]
+  %353 = phi i32 [ 0, %343 ], [ %349, %348 ]
+  %354 = getelementptr inbounds i32, i32* %344, i64 %352
+  %355 = load i32, i32* %354, align 4, !tbaa !19
+  %356 = add nuw nsw i64 %352, 1
+  %357 = getelementptr inbounds i32, i32* %344, i64 %356
+  %358 = load i32, i32* %357, align 4, !tbaa !19
+  %359 = icmp slt i32 %355, %358
+  br i1 %359, label %360, label %348
+
+360:                                              ; preds = %351
+  %361 = load i32*, i32** %341, align 8, !tbaa !29
+  %362 = sext i32 %355 to i64
+  %363 = sext i32 %353 to i64
+  %364 = sext i32 %358 to i64
+  br label %365
+
+365:                                              ; preds = %360, %365
+  %366 = phi i64 [ %363, %360 ], [ %373, %365 ]
+  %367 = phi i64 [ %362, %360 ], [ %375, %365 ]
+  %368 = getelementptr inbounds i32, i32* %361, i64 %367
+  %369 = load i32, i32* %368, align 4, !tbaa !19
+  %370 = sext i32 %369 to i64
+  %371 = getelementptr inbounds double, double* %121, i64 %370
+  %372 = load double, double* %371, align 8, !tbaa !32
+  %373 = add nsw i64 %366, 1
+  %374 = getelementptr inbounds double, double* %340, i64 %366
+  store double %372, double* %374, align 8, !tbaa !32
+  %375 = add nsw i64 %367, 1
+  %376 = icmp eq i64 %375, %364
+  br i1 %376, label %346, label %365, !llvm.loop !105
+
+377:                                              ; preds = %348, %329
+  %378 = bitcast double* %319 to i8*
+  %379 = call %struct.hypre_ParCSRCommHandle* @hypre_ParCSRCommHandleCreate(i32 1, %struct._hypre_ParCSRCommPkg* %330, i8* %339, i8* %378) #3
+  %380 = call i32 @hypre_ParCSRCommHandleDestroy(%struct.hypre_ParCSRCommHandle* %379) #3
+  %381 = icmp sgt i32 %61, 0
+  br i1 %381, label %382, label %384
+
+382:                                              ; preds = %377
+  %383 = zext i32 %61 to i64
+  br label %388
+
+384:                                              ; preds = %636, %377
+  %385 = icmp sgt i32 %112, 0
+  br i1 %385, label %386, label %642
+
+386:                                              ; preds = %384
+  %387 = zext i32 %112 to i64
+  br label %646
+
+388:                                              ; preds = %382, %636
+  %389 = phi i64 [ 0, %382 ], [ %638, %636 ]
+  %390 = phi i32 [ 0, %382 ], [ %637, %636 ]
+  %391 = getelementptr inbounds i32, i32* %1, i64 %389
+  %392 = load i32, i32* %391, align 4, !tbaa !19
+  %393 = icmp slt i32 %392, 0
+  br i1 %393, label %394, label %636
+
+394:                                              ; preds = %388
+  %395 = getelementptr inbounds i32, i32* %38, i64 %389
+  %396 = load i32, i32* %395, align 4, !tbaa !19
+  br i1 %149, label %397, label %552
+
+397:                                              ; preds = %394
+  %398 = getelementptr inbounds i32, i32* %53, i64 %389
+  %399 = load i32, i32* %398, align 4, !tbaa !19
+  %400 = add nuw nsw i64 %389, 1
+  %401 = getelementptr inbounds i32, i32* %53, i64 %400
+  %402 = load i32, i32* %401, align 4, !tbaa !19
+  %403 = getelementptr inbounds i32, i32* %5, i64 %389
+  %404 = sext i32 %390 to i64
+  %405 = getelementptr inbounds double, double* %125, i64 %404
+  %406 = icmp slt i32 %399, %402
+  br i1 %406, label %407, label %410
+
+407:                                              ; preds = %397
+  %408 = sext i32 %399 to i64
+  %409 = sext i32 %402 to i64
+  br label %422
+
+410:                                              ; preds = %452, %397
+  %411 = phi i32 [ %396, %397 ], [ %454, %452 ]
+  %412 = getelementptr inbounds i32, i32* %38, i64 %400
+  %413 = load i32, i32* %412, align 4, !tbaa !19
+  %414 = sext i32 %390 to i64
+  %415 = getelementptr inbounds double, double* %125, i64 %414
+  %416 = icmp slt i32 %411, %413
+  br i1 %416, label %417, label %473
+
+417:                                              ; preds = %410
+  %418 = getelementptr inbounds i32, i32* %5, i64 %389
+  %419 = load i32, i32* %418, align 4, !tbaa !19
+  %420 = sext i32 %411 to i64
+  %421 = sext i32 %413 to i64
+  br label %457
+
+422:                                              ; preds = %407, %452
+  %423 = phi i64 [ %408, %407 ], [ %455, %452 ]
+  %424 = phi i32 [ %396, %407 ], [ %454, %452 ]
+  %425 = getelementptr inbounds i32, i32* %51, i64 %423
+  %426 = load i32, i32* %425, align 4, !tbaa !19
+  %427 = sext i32 %424 to i64
+  %428 = getelementptr inbounds i32, i32* %40, i64 %427
+  %429 = load i32, i32* %428, align 4, !tbaa !19
+  %430 = icmp eq i32 %429, %426
+  br i1 %430, label %452, label %431
+
+431:                                              ; preds = %422
+  %432 = load i32, i32* %403, align 4, !tbaa !19
+  br label %433
+
+433:                                              ; preds = %431, %445
+  %434 = phi i64 [ %427, %431 ], [ %446, %445 ]
+  %435 = phi i32 [ %429, %431 ], [ %448, %445 ]
+  %436 = sext i32 %435 to i64
+  %437 = getelementptr inbounds i32, i32* %5, i64 %436
+  %438 = load i32, i32* %437, align 4, !tbaa !19
+  %439 = icmp eq i32 %432, %438
+  br i1 %439, label %440, label %445
+
+440:                                              ; preds = %433
+  %441 = getelementptr inbounds double, double* %36, i64 %434
+  %442 = load double, double* %441, align 8, !tbaa !32
+  %443 = load double, double* %405, align 8, !tbaa !32
+  %444 = fadd double %442, %443
+  store double %444, double* %405, align 8, !tbaa !32
+  br label %445
+
+445:                                              ; preds = %433, %440
+  %446 = add i64 %434, 1
+  %447 = getelementptr inbounds i32, i32* %40, i64 %446
+  %448 = load i32, i32* %447, align 4, !tbaa !19
+  %449 = icmp eq i32 %448, %426
+  br i1 %449, label %450, label %433, !llvm.loop !106
+
+450:                                              ; preds = %445
+  %451 = trunc i64 %446 to i32
+  br label %452
+
+452:                                              ; preds = %450, %422
+  %453 = phi i32 [ %424, %422 ], [ %451, %450 ]
+  %454 = add nsw i32 %453, 1
+  %455 = add nsw i64 %423, 1
+  %456 = icmp eq i64 %455, %409
+  br i1 %456, label %410, label %422, !llvm.loop !107
+
+457:                                              ; preds = %417, %470
+  %458 = phi i64 [ %420, %417 ], [ %471, %470 ]
+  %459 = getelementptr inbounds i32, i32* %40, i64 %458
+  %460 = load i32, i32* %459, align 4, !tbaa !19
+  %461 = sext i32 %460 to i64
+  %462 = getelementptr inbounds i32, i32* %5, i64 %461
+  %463 = load i32, i32* %462, align 4, !tbaa !19
+  %464 = icmp eq i32 %419, %463
+  br i1 %464, label %465, label %470
+
+465:                                              ; preds = %457
+  %466 = getelementptr inbounds double, double* %36, i64 %458
+  %467 = load double, double* %466, align 8, !tbaa !32
+  %468 = load double, double* %415, align 8, !tbaa !32
+  %469 = fadd double %467, %468
+  store double %469, double* %415, align 8, !tbaa !32
+  br label %470
+
+470:                                              ; preds = %457, %465
+  %471 = add nsw i64 %458, 1
+  %472 = icmp eq i64 %471, %421
+  br i1 %472, label %473, label %457, !llvm.loop !108
+
+473:                                              ; preds = %470, %410
+  %474 = getelementptr inbounds i32, i32* %45, i64 %389
+  %475 = load i32, i32* %474, align 4, !tbaa !19
+  %476 = getelementptr inbounds i32, i32* %59, i64 %389
+  %477 = load i32, i32* %476, align 4, !tbaa !19
+  %478 = getelementptr inbounds i32, i32* %59, i64 %400
+  %479 = load i32, i32* %478, align 4, !tbaa !19
+  %480 = getelementptr inbounds i32, i32* %5, i64 %389
+  %481 = sext i32 %390 to i64
+  %482 = getelementptr inbounds double, double* %125, i64 %481
+  %483 = icmp slt i32 %477, %479
+  br i1 %483, label %484, label %487
+
+484:                                              ; preds = %473
+  %485 = sext i32 %477 to i64
+  %486 = sext i32 %479 to i64
+  br label %499
+
+487:                                              ; preds = %529, %473
+  %488 = phi i32 [ %475, %473 ], [ %531, %529 ]
+  %489 = getelementptr inbounds i32, i32* %45, i64 %400
+  %490 = load i32, i32* %489, align 4, !tbaa !19
+  %491 = sext i32 %390 to i64
+  %492 = getelementptr inbounds double, double* %125, i64 %491
+  %493 = icmp slt i32 %488, %490
+  br i1 %493, label %494, label %550
+
+494:                                              ; preds = %487
+  %495 = getelementptr inbounds i32, i32* %5, i64 %389
+  %496 = load i32, i32* %495, align 4, !tbaa !19
+  %497 = sext i32 %488 to i64
+  %498 = sext i32 %490 to i64
+  br label %534
+
+499:                                              ; preds = %484, %529
+  %500 = phi i64 [ %485, %484 ], [ %532, %529 ]
+  %501 = phi i32 [ %475, %484 ], [ %531, %529 ]
+  %502 = getelementptr inbounds i32, i32* %57, i64 %500
+  %503 = load i32, i32* %502, align 4, !tbaa !19
+  %504 = sext i32 %501 to i64
+  %505 = getelementptr inbounds i32, i32* %47, i64 %504
+  %506 = load i32, i32* %505, align 4, !tbaa !19
+  %507 = icmp eq i32 %506, %503
+  br i1 %507, label %529, label %508
+
+508:                                              ; preds = %499
+  %509 = load i32, i32* %480, align 4, !tbaa !19
+  br label %510
+
+510:                                              ; preds = %508, %522
+  %511 = phi i64 [ %504, %508 ], [ %523, %522 ]
+  %512 = phi i32 [ %506, %508 ], [ %525, %522 ]
+  %513 = sext i32 %512 to i64
+  %514 = getelementptr inbounds i32, i32* %207, i64 %513
+  %515 = load i32, i32* %514, align 4, !tbaa !19
+  %516 = icmp eq i32 %509, %515
+  br i1 %516, label %517, label %522
+
+517:                                              ; preds = %510
+  %518 = getelementptr inbounds double, double* %43, i64 %511
+  %519 = load double, double* %518, align 8, !tbaa !32
+  %520 = load double, double* %482, align 8, !tbaa !32
+  %521 = fadd double %519, %520
+  store double %521, double* %482, align 8, !tbaa !32
+  br label %522
+
+522:                                              ; preds = %510, %517
+  %523 = add i64 %511, 1
+  %524 = getelementptr inbounds i32, i32* %47, i64 %523
+  %525 = load i32, i32* %524, align 4, !tbaa !19
+  %526 = icmp eq i32 %525, %503
+  br i1 %526, label %527, label %510, !llvm.loop !109
+
+527:                                              ; preds = %522
+  %528 = trunc i64 %523 to i32
+  br label %529
+
+529:                                              ; preds = %527, %499
+  %530 = phi i32 [ %501, %499 ], [ %528, %527 ]
+  %531 = add nsw i32 %530, 1
+  %532 = add nsw i64 %500, 1
+  %533 = icmp eq i64 %532, %486
+  br i1 %533, label %487, label %499, !llvm.loop !110
+
+534:                                              ; preds = %494, %547
+  %535 = phi i64 [ %497, %494 ], [ %548, %547 ]
+  %536 = getelementptr inbounds i32, i32* %47, i64 %535
+  %537 = load i32, i32* %536, align 4, !tbaa !19
+  %538 = sext i32 %537 to i64
+  %539 = getelementptr inbounds i32, i32* %207, i64 %538
+  %540 = load i32, i32* %539, align 4, !tbaa !19
+  %541 = icmp eq i32 %496, %540
+  br i1 %541, label %542, label %547
+
+542:                                              ; preds = %534
+  %543 = getelementptr inbounds double, double* %43, i64 %535
+  %544 = load double, double* %543, align 8, !tbaa !32
+  %545 = load double, double* %492, align 8, !tbaa !32
+  %546 = fadd double %544, %545
+  store double %546, double* %492, align 8, !tbaa !32
+  br label %547
+
+547:                                              ; preds = %534, %542
+  %548 = add nsw i64 %535, 1
+  %549 = icmp eq i64 %548, %498
+  br i1 %549, label %550, label %534, !llvm.loop !111
+
+550:                                              ; preds = %547, %487
+  %551 = add nsw i32 %390, 1
+  br label %636
+
+552:                                              ; preds = %394
+  %553 = add nuw nsw i64 %389, 1
+  %554 = getelementptr inbounds i32, i32* %38, i64 %553
+  %555 = load i32, i32* %554, align 4, !tbaa !19
+  %556 = sext i32 %390 to i64
+  %557 = getelementptr inbounds double, double* %125, i64 %556
+  %558 = icmp slt i32 %396, %555
+  br i1 %558, label %559, label %570
+
+559:                                              ; preds = %552
+  %560 = sext i32 %396 to i64
+  %561 = sext i32 %555 to i64
+  br label %562
+
+562:                                              ; preds = %559, %562
+  %563 = phi i64 [ %560, %559 ], [ %568, %562 ]
+  %564 = getelementptr inbounds double, double* %36, i64 %563
+  %565 = load double, double* %564, align 8, !tbaa !32
+  %566 = load double, double* %557, align 8, !tbaa !32
+  %567 = fadd double %565, %566
+  store double %567, double* %557, align 8, !tbaa !32
+  %568 = add nsw i64 %563, 1
+  %569 = icmp eq i64 %568, %561
+  br i1 %569, label %570, label %562, !llvm.loop !112
+
+570:                                              ; preds = %562, %552
+  %571 = getelementptr inbounds i32, i32* %45, i64 %389
+  %572 = load i32, i32* %571, align 4, !tbaa !19
+  %573 = getelementptr inbounds i32, i32* %45, i64 %553
+  %574 = load i32, i32* %573, align 4, !tbaa !19
+  %575 = sext i32 %390 to i64
+  %576 = getelementptr inbounds double, double* %125, i64 %575
+  %577 = icmp slt i32 %572, %574
+  br i1 %577, label %578, label %589
+
+578:                                              ; preds = %570
+  %579 = sext i32 %572 to i64
+  %580 = sext i32 %574 to i64
+  br label %581
+
+581:                                              ; preds = %578, %581
+  %582 = phi i64 [ %579, %578 ], [ %587, %581 ]
+  %583 = getelementptr inbounds double, double* %43, i64 %582
+  %584 = load double, double* %583, align 8, !tbaa !32
+  %585 = load double, double* %576, align 8, !tbaa !32
+  %586 = fadd double %584, %585
+  store double %586, double* %576, align 8, !tbaa !32
+  %587 = add nsw i64 %582, 1
+  %588 = icmp eq i64 %587, %580
+  br i1 %588, label %589, label %581, !llvm.loop !113
+
+589:                                              ; preds = %581, %570
+  %590 = sext i32 %390 to i64
+  %591 = getelementptr inbounds i32, i32* %98, i64 %590
+  %592 = load i32, i32* %591, align 4, !tbaa !19
+  %593 = add nsw i32 %390, 1
+  %594 = sext i32 %593 to i64
+  %595 = getelementptr inbounds i32, i32* %98, i64 %594
+  %596 = load i32, i32* %595, align 4, !tbaa !19
+  %597 = getelementptr inbounds double, double* %125, i64 %590
+  %598 = add nsw i32 %592, 1
+  %599 = icmp slt i32 %598, %596
+  br i1 %599, label %600, label %612
+
+600:                                              ; preds = %589
+  %601 = add i32 %592, 1
+  %602 = sext i32 %601 to i64
+  br label %603
+
+603:                                              ; preds = %600, %603
+  %604 = phi i64 [ %602, %600 ], [ %609, %603 ]
+  %605 = getelementptr inbounds double, double* %102, i64 %604
+  %606 = load double, double* %605, align 8, !tbaa !32
+  %607 = load double, double* %597, align 8, !tbaa !32
+  %608 = fsub double %607, %606
+  store double %608, double* %597, align 8, !tbaa !32
+  %609 = add nsw i64 %604, 1
+  %610 = trunc i64 %609 to i32
+  %611 = icmp eq i32 %596, %610
+  br i1 %611, label %612, label %603, !llvm.loop !114
+
+612:                                              ; preds = %603, %589
+  %613 = getelementptr inbounds i32, i32* %106, i64 %590
+  %614 = load i32, i32* %613, align 4, !tbaa !19
+  %615 = getelementptr inbounds i32, i32* %106, i64 %594
+  %616 = load i32, i32* %615, align 4, !tbaa !19
+  %617 = getelementptr inbounds double, double* %125, i64 %590
+  %618 = icmp slt i32 %614, %616
+  br i1 %618, label %619, label %630
+
+619:                                              ; preds = %612
+  %620 = sext i32 %614 to i64
+  %621 = sext i32 %616 to i64
+  br label %622
+
+622:                                              ; preds = %619, %622
+  %623 = phi i64 [ %620, %619 ], [ %628, %622 ]
+  %624 = getelementptr inbounds double, double* %110, i64 %623
+  %625 = load double, double* %624, align 8, !tbaa !32
+  %626 = load double, double* %617, align 8, !tbaa !32
+  %627 = fsub double %626, %625
+  store double %627, double* %617, align 8, !tbaa !32
+  %628 = add nsw i64 %623, 1
+  %629 = icmp eq i64 %628, %621
+  br i1 %629, label %630, label %622, !llvm.loop !115
+
+630:                                              ; preds = %622, %612
+  %631 = getelementptr inbounds double, double* %117, i64 %590
+  %632 = load double, double* %631, align 8, !tbaa !32
+  %633 = getelementptr inbounds double, double* %125, i64 %590
+  %634 = load double, double* %633, align 8, !tbaa !32
+  %635 = fsub double %634, %632
+  store double %635, double* %633, align 8, !tbaa !32
+  br label %636
+
+636:                                              ; preds = %388, %630, %550
+  %637 = phi i32 [ %551, %550 ], [ %593, %630 ], [ %390, %388 ]
+  %638 = add nuw nsw i64 %389, 1
+  %639 = icmp eq i64 %638, %383
+  br i1 %639, label %384, label %388, !llvm.loop !116
+
+640:                                              ; preds = %684, %674
+  %641 = icmp eq i64 %650, %387
+  br i1 %641, label %642, label %646, !llvm.loop !117
+
+642:                                              ; preds = %640, %384
+  %643 = icmp sgt i32 %112, 0
+  br i1 %643, label %644, label %787
+
+644:                                              ; preds = %642
+  %645 = zext i32 %112 to i64
+  br label %700
+
+646:                                              ; preds = %386, %640
+  %647 = phi i64 [ 0, %386 ], [ %650, %640 ]
+  %648 = getelementptr inbounds i32, i32* %98, i64 %647
+  %649 = load i32, i32* %648, align 4, !tbaa !19
+  %650 = add nuw nsw i64 %647, 1
+  %651 = getelementptr inbounds i32, i32* %98, i64 %650
+  %652 = load i32, i32* %651, align 4, !tbaa !19
+  %653 = getelementptr inbounds double, double* %123, i64 %647
+  %654 = add nsw i32 %649, 1
+  %655 = icmp slt i32 %654, %652
+  br i1 %655, label %656, label %674
+
+656:                                              ; preds = %646
+  %657 = add i32 %649, 1
+  %658 = sext i32 %657 to i64
+  br label %659
+
+659:                                              ; preds = %656, %659
+  %660 = phi i64 [ %658, %656 ], [ %671, %659 ]
+  %661 = getelementptr inbounds i32, i32* %100, i64 %660
+  %662 = load i32, i32* %661, align 4, !tbaa !19
+  %663 = getelementptr inbounds double, double* %102, i64 %660
+  %664 = load double, double* %663, align 8, !tbaa !32
+  %665 = sext i32 %662 to i64
+  %666 = getelementptr inbounds double, double* %121, i64 %665
+  %667 = load double, double* %666, align 8, !tbaa !32
+  %668 = fmul double %664, %667
+  %669 = load double, double* %653, align 8, !tbaa !32
+  %670 = fadd double %669, %668
+  store double %670, double* %653, align 8, !tbaa !32
+  %671 = add nsw i64 %660, 1
+  %672 = trunc i64 %671 to i32
+  %673 = icmp eq i32 %652, %672
+  br i1 %673, label %674, label %659, !llvm.loop !118
+
+674:                                              ; preds = %659, %646
+  %675 = getelementptr inbounds i32, i32* %106, i64 %647
+  %676 = load i32, i32* %675, align 4, !tbaa !19
+  %677 = getelementptr inbounds i32, i32* %106, i64 %650
+  %678 = load i32, i32* %677, align 4, !tbaa !19
+  %679 = getelementptr inbounds double, double* %123, i64 %647
+  %680 = icmp slt i32 %676, %678
+  br i1 %680, label %681, label %640
+
+681:                                              ; preds = %674
+  %682 = sext i32 %676 to i64
+  %683 = sext i32 %678 to i64
+  br label %684
+
+684:                                              ; preds = %681, %684
+  %685 = phi i64 [ %682, %681 ], [ %696, %684 ]
+  %686 = getelementptr inbounds i32, i32* %108, i64 %685
+  %687 = load i32, i32* %686, align 4, !tbaa !19
+  %688 = getelementptr inbounds double, double* %110, i64 %685
+  %689 = load double, double* %688, align 8, !tbaa !32
+  %690 = sext i32 %687 to i64
+  %691 = getelementptr inbounds double, double* %319, i64 %690
+  %692 = load double, double* %691, align 8, !tbaa !32
+  %693 = fmul double %689, %692
+  %694 = load double, double* %679, align 8, !tbaa !32
+  %695 = fadd double %694, %693
+  store double %695, double* %679, align 8, !tbaa !32
+  %696 = add nsw i64 %685, 1
+  %697 = icmp eq i64 %696, %683
+  br i1 %697, label %640, label %684, !llvm.loop !119
+
+698:                                              ; preds = %780, %771
+  %699 = icmp eq i64 %723, %645
+  br i1 %699, label %787, label %700, !llvm.loop !120
+
+700:                                              ; preds = %644, %698
+  %701 = phi i64 [ 0, %644 ], [ %723, %698 ]
+  %702 = getelementptr inbounds double, double* %125, i64 %701
+  %703 = load double, double* %702, align 8, !tbaa !32
+  %704 = getelementptr inbounds double, double* %123, i64 %701
+  %705 = load double, double* %704, align 8, !tbaa !32
+  %706 = fadd double %703, %705
+  %707 = fcmp une double %706, 0.000000e+00
+  %708 = fdiv double -1.000000e+00, %706
+  %709 = select i1 %707, double %708, double %706
+  %710 = getelementptr inbounds double, double* %117, i64 %701
+  %711 = load double, double* %710, align 8, !tbaa !32
+  %712 = getelementptr inbounds double, double* %119, i64 %701
+  %713 = load double, double* %712, align 8, !tbaa !32
+  %714 = fadd double %711, %713
+  %715 = fmul double %709, %714
+  %716 = getelementptr inbounds i32, i32* %98, i64 %701
+  %717 = load i32, i32* %716, align 4, !tbaa !19
+  %718 = sext i32 %717 to i64
+  %719 = getelementptr inbounds double, double* %102, i64 %718
+  store double %715, double* %719, align 8, !tbaa !32
+  %720 = fcmp une double %714, 0.000000e+00
+  %721 = fdiv double 1.000000e+00, %714
+  %722 = select i1 %720, double %721, double %714
+  %723 = add nuw nsw i64 %701, 1
+  %724 = getelementptr inbounds i32, i32* %98, i64 %723
+  %725 = load i32, i32* %724, align 4, !tbaa !19
+  %726 = add nsw i32 %717, 1
+  %727 = icmp slt i32 %726, %725
+  br i1 %727, label %728, label %739
+
+728:                                              ; preds = %700
+  %729 = add i32 %717, 1
+  %730 = sext i32 %729 to i64
+  br label %731
+
+731:                                              ; preds = %728, %731
+  %732 = phi i64 [ %730, %728 ], [ %736, %731 ]
+  %733 = getelementptr inbounds double, double* %102, i64 %732
+  %734 = load double, double* %733, align 8, !tbaa !32
+  %735 = fmul double %709, %734
+  store double %735, double* %733, align 8, !tbaa !32
+  %736 = add nsw i64 %732, 1
+  %737 = trunc i64 %736 to i32
+  %738 = icmp eq i32 %725, %737
+  br i1 %738, label %739, label %731, !llvm.loop !121
+
+739:                                              ; preds = %731, %700
+  %740 = getelementptr inbounds i32, i32* %106, i64 %701
+  %741 = load i32, i32* %740, align 4, !tbaa !19
+  %742 = getelementptr inbounds i32, i32* %106, i64 %723
+  %743 = load i32, i32* %742, align 4, !tbaa !19
+  %744 = icmp slt i32 %741, %743
+  br i1 %744, label %745, label %755
+
+745:                                              ; preds = %739
+  %746 = sext i32 %741 to i64
+  %747 = sext i32 %743 to i64
+  br label %748
+
+748:                                              ; preds = %745, %748
+  %749 = phi i64 [ %746, %745 ], [ %753, %748 ]
+  %750 = getelementptr inbounds double, double* %110, i64 %749
+  %751 = load double, double* %750, align 8, !tbaa !32
+  %752 = fmul double %709, %751
+  store double %752, double* %750, align 8, !tbaa !32
+  %753 = add nsw i64 %749, 1
+  %754 = icmp eq i64 %753, %747
+  br i1 %754, label %755, label %748, !llvm.loop !122
+
+755:                                              ; preds = %748, %739
+  %756 = getelementptr inbounds i32, i32* %85, i64 %701
+  %757 = load i32, i32* %756, align 4, !tbaa !19
+  %758 = getelementptr inbounds i32, i32* %85, i64 %723
+  %759 = load i32, i32* %758, align 4, !tbaa !19
+  %760 = icmp slt i32 %757, %759
+  br i1 %760, label %761, label %771
+
+761:                                              ; preds = %755
+  %762 = sext i32 %757 to i64
+  %763 = sext i32 %759 to i64
+  br label %764
+
+764:                                              ; preds = %761, %764
+  %765 = phi i64 [ %762, %761 ], [ %769, %764 ]
+  %766 = getelementptr inbounds double, double* %87, i64 %765
+  %767 = load double, double* %766, align 8, !tbaa !32
+  %768 = fmul double %722, %767
+  store double %768, double* %766, align 8, !tbaa !32
+  %769 = add nsw i64 %765, 1
+  %770 = icmp eq i64 %769, %763
+  br i1 %770, label %771, label %764, !llvm.loop !123
+
+771:                                              ; preds = %764, %755
+  %772 = getelementptr inbounds i32, i32* %91, i64 %701
+  %773 = load i32, i32* %772, align 4, !tbaa !19
+  %774 = getelementptr inbounds i32, i32* %91, i64 %723
+  %775 = load i32, i32* %774, align 4, !tbaa !19
+  %776 = icmp slt i32 %773, %775
+  br i1 %776, label %777, label %698
+
+777:                                              ; preds = %771
+  %778 = sext i32 %773 to i64
+  %779 = sext i32 %775 to i64
+  br label %780
+
+780:                                              ; preds = %777, %780
+  %781 = phi i64 [ %778, %777 ], [ %785, %780 ]
+  %782 = getelementptr inbounds double, double* %93, i64 %781
+  %783 = load double, double* %782, align 8, !tbaa !32
+  %784 = fmul double %722, %783
+  store double %784, double* %782, align 8, !tbaa !32
+  %785 = add nsw i64 %781, 1
+  %786 = icmp eq i64 %785, %779
+  br i1 %786, label %698, label %780, !llvm.loop !124
+
+787:                                              ; preds = %698, %642
+  %788 = load %struct.hypre_ParCSRMatrix_struct*, %struct.hypre_ParCSRMatrix_struct** %14, align 8, !tbaa !20
+  %789 = load %struct.hypre_ParCSRMatrix_struct*, %struct.hypre_ParCSRMatrix_struct** %15, align 8, !tbaa !20
+  %790 = call %struct.hypre_ParCSRMatrix_struct* @hypre_ParMatmul(%struct.hypre_ParCSRMatrix_struct* %788, %struct.hypre_ParCSRMatrix_struct* %789) #3
+  %791 = getelementptr inbounds %struct.hypre_ParCSRMatrix_struct, %struct.hypre_ParCSRMatrix_struct* %790, i64 0, i32 8
+  %792 = load %struct.hypre_CSRMatrix*, %struct.hypre_CSRMatrix** %791, align 8, !tbaa !10
+  %793 = getelementptr inbounds %struct.hypre_ParCSRMatrix_struct, %struct.hypre_ParCSRMatrix_struct* %790, i64 0, i32 9
+  %794 = load %struct.hypre_CSRMatrix*, %struct.hypre_CSRMatrix** %793, align 8, !tbaa !13
+  %795 = getelementptr inbounds %struct.hypre_CSRMatrix, %struct.hypre_CSRMatrix* %792, i64 0, i32 0
+  %796 = load i32*, i32** %795, align 8, !tbaa !17
+  %797 = getelementptr inbounds %struct.hypre_CSRMatrix, %struct.hypre_CSRMatrix* %792, i64 0, i32 1
+  %798 = load i32*, i32** %797, align 8, !tbaa !16
+  %799 = getelementptr inbounds %struct.hypre_CSRMatrix, %struct.hypre_CSRMatrix* %792, i64 0, i32 9
+  %800 = load double*, double** %799, align 8, !tbaa !15
+  %801 = getelementptr inbounds %struct.hypre_CSRMatrix, %struct.hypre_CSRMatrix* %794, i64 0, i32 0
+  %802 = load i32*, i32** %801, align 8, !tbaa !17
+  %803 = getelementptr inbounds %struct.hypre_CSRMatrix, %struct.hypre_CSRMatrix* %794, i64 0, i32 1
+  %804 = load i32*, i32** %803, align 8, !tbaa !16
+  %805 = getelementptr inbounds %struct.hypre_CSRMatrix, %struct.hypre_CSRMatrix* %794, i64 0, i32 9
+  %806 = load double*, double** %805, align 8, !tbaa !15
+  %807 = getelementptr inbounds %struct.hypre_CSRMatrix, %struct.hypre_CSRMatrix* %794, i64 0, i32 4
+  %808 = load i32, i32* %807, align 4, !tbaa !24
+  %809 = add nsw i32 %61, 1
+  %810 = sext i32 %809 to i64
+  %811 = call i8* @hypre_CAlloc(i64 %810, i64 4, i32 %21) #3
+  %812 = bitcast i8* %811 to i32*
+  %813 = call i8* @hypre_CAlloc(i64 %810, i64 4, i32 %21) #3
+  %814 = bitcast i8* %813 to i32*
+  %815 = load i32*, i32** %795, align 8, !tbaa !17
+  %816 = getelementptr inbounds i32, i32* %815, i64 %115
+  %817 = load i32, i32* %816, align 4, !tbaa !19
+  %818 = add nsw i32 %817, %79
+  %819 = load i32*, i32** %801, align 8, !tbaa !17
+  %820 = getelementptr inbounds i32, i32* %819, i64 %115
+  %821 = load i32, i32* %820, align 4, !tbaa !19
+  %822 = icmp eq i32 %818, 0
+  br i1 %822, label %829, label %823
+
+823:                                              ; preds = %787
+  %824 = sext i32 %818 to i64
+  %825 = call i8* @hypre_CAlloc(i64 %824, i64 4, i32 %21) #3
+  %826 = bitcast i8* %825 to i32*
+  %827 = call i8* @hypre_CAlloc(i64 %824, i64 8, i32 %21) #3
+  %828 = bitcast i8* %827 to double*
+  br label %829
+
+829:                                              ; preds = %823, %787
+  %830 = phi i32* [ %826, %823 ], [ null, %787 ]
+  %831 = phi double* [ %828, %823 ], [ null, %787 ]
+  %832 = icmp eq i32 %821, 0
+  br i1 %832, label %839, label %833
+
+833:                                              ; preds = %829
+  %834 = sext i32 %821 to i64
+  %835 = call i8* @hypre_CAlloc(i64 %834, i64 4, i32 %21) #3
+  %836 = bitcast i8* %835 to i32*
+  %837 = call i8* @hypre_CAlloc(i64 %834, i64 8, i32 %21) #3
+  %838 = bitcast i8* %837 to double*
+  br label %839
+
+839:                                              ; preds = %833, %829
+  %840 = phi i32* [ %836, %833 ], [ null, %829 ]
+  %841 = phi double* [ %838, %833 ], [ null, %829 ]
+  %842 = load i32, i32* %131, align 4, !tbaa !19
+  %843 = load i32, i32* %129, align 4, !tbaa !19
+  %844 = load i32, i32* %133, align 4, !tbaa !19
+  %845 = sext i32 %842 to i64
+  %846 = icmp slt i32 %843, %844
+  br i1 %846, label %847, label %932
+
+847:                                              ; preds = %839
+  %848 = getelementptr inbounds i32, i32* %802, i64 %845
+  %849 = load i32, i32* %848, align 4, !tbaa !19
+  %850 = getelementptr inbounds i32, i32* %796, i64 %845
+  %851 = load i32, i32* %850, align 4, !tbaa !19
+  %852 = sext i32 %843 to i64
+  %853 = sext i32 %844 to i64
+  br label %854
+
+854:                                              ; preds = %847, %923
+  %855 = phi i64 [ %852, %847 ], [ %928, %923 ]
+  %856 = phi i32 [ 0, %847 ], [ %927, %923 ]
+  %857 = phi i32 [ %842, %847 ], [ %926, %923 ]
+  %858 = phi i32 [ %849, %847 ], [ %925, %923 ]
+  %859 = phi i32 [ %851, %847 ], [ %924, %923 ]
+  %860 = getelementptr inbounds i32, i32* %1, i64 %855
+  %861 = load i32, i32* %860, align 4, !tbaa !19
+  %862 = icmp sgt i32 %861, 0
+  br i1 %862, label %863, label %869
+
+863:                                              ; preds = %854
+  %864 = add nsw i32 %856, 1
+  %865 = sext i32 %859 to i64
+  %866 = getelementptr inbounds i32, i32* %830, i64 %865
+  store i32 %856, i32* %866, align 4, !tbaa !19
+  %867 = add nsw i32 %859, 1
+  %868 = getelementptr inbounds double, double* %831, i64 %865
+  store double 1.000000e+00, double* %868, align 8, !tbaa !32
+  br label %923
+
+869:                                              ; preds = %854
+  %870 = sext i32 %857 to i64
+  %871 = getelementptr inbounds i32, i32* %796, i64 %870
+  %872 = load i32, i32* %871, align 4, !tbaa !19
+  %873 = add nsw i32 %857, 1
+  %874 = sext i32 %873 to i64
+  %875 = getelementptr inbounds i32, i32* %796, i64 %874
+  %876 = load i32, i32* %875, align 4, !tbaa !19
+  %877 = icmp slt i32 %872, %876
+  br i1 %877, label %878, label %897
+
+878:                                              ; preds = %869
+  %879 = sext i32 %859 to i64
+  %880 = sext i32 %872 to i64
+  br label %881
+
+881:                                              ; preds = %878, %881
+  %882 = phi i64 [ %880, %878 ], [ %891, %881 ]
+  %883 = phi i64 [ %879, %878 ], [ %889, %881 ]
+  %884 = getelementptr inbounds i32, i32* %798, i64 %882
+  %885 = load i32, i32* %884, align 4, !tbaa !19
+  %886 = getelementptr inbounds i32, i32* %830, i64 %883
+  store i32 %885, i32* %886, align 4, !tbaa !19
+  %887 = getelementptr inbounds double, double* %800, i64 %882
+  %888 = load double, double* %887, align 8, !tbaa !32
+  %889 = add nsw i64 %883, 1
+  %890 = getelementptr inbounds double, double* %831, i64 %883
+  store double %888, double* %890, align 8, !tbaa !32
+  %891 = add nsw i64 %882, 1
+  %892 = load i32, i32* %875, align 4, !tbaa !19
+  %893 = sext i32 %892 to i64
+  %894 = icmp slt i64 %891, %893
+  br i1 %894, label %881, label %895, !llvm.loop !125
+
+895:                                              ; preds = %881
+  %896 = trunc i64 %889 to i32
+  br label %897
+
+897:                                              ; preds = %895, %869
+  %898 = phi i32 [ %859, %869 ], [ %896, %895 ]
+  %899 = getelementptr inbounds i32, i32* %802, i64 %870
+  %900 = load i32, i32* %899, align 4, !tbaa !19
+  %901 = getelementptr inbounds i32, i32* %802, i64 %874
+  %902 = load i32, i32* %901, align 4, !tbaa !19
+  %903 = icmp slt i32 %900, %902
+  br i1 %903, label %904, label %923
+
+904:                                              ; preds = %897
+  %905 = sext i32 %858 to i64
+  %906 = sext i32 %900 to i64
+  br label %907
+
+907:                                              ; preds = %904, %907
+  %908 = phi i64 [ %906, %904 ], [ %917, %907 ]
+  %909 = phi i64 [ %905, %904 ], [ %915, %907 ]
+  %910 = getelementptr inbounds i32, i32* %804, i64 %908
+  %911 = load i32, i32* %910, align 4, !tbaa !19
+  %912 = getelementptr inbounds i32, i32* %840, i64 %909
+  store i32 %911, i32* %912, align 4, !tbaa !19
+  %913 = getelementptr inbounds double, double* %806, i64 %908
+  %914 = load double, double* %913, align 8, !tbaa !32
+  %915 = add nsw i64 %909, 1
+  %916 = getelementptr inbounds double, double* %841, i64 %909
+  store double %914, double* %916, align 8, !tbaa !32
+  %917 = add nsw i64 %908, 1
+  %918 = load i32, i32* %901, align 4, !tbaa !19
+  %919 = sext i32 %918 to i64
+  %920 = icmp slt i64 %917, %919
+  br i1 %920, label %907, label %921, !llvm.loop !126
+
+921:                                              ; preds = %907
+  %922 = trunc i64 %915 to i32
+  br label %923
+
+923:                                              ; preds = %921, %897, %863
+  %924 = phi i32 [ %867, %863 ], [ %898, %897 ], [ %898, %921 ]
+  %925 = phi i32 [ %858, %863 ], [ %858, %897 ], [ %922, %921 ]
+  %926 = phi i32 [ %857, %863 ], [ %873, %897 ], [ %873, %921 ]
+  %927 = phi i32 [ %864, %863 ], [ %856, %897 ], [ %856, %921 ]
+  %928 = add nsw i64 %855, 1
+  %929 = getelementptr inbounds i32, i32* %812, i64 %928
+  store i32 %924, i32* %929, align 4, !tbaa !19
+  %930 = getelementptr inbounds i32, i32* %814, i64 %928
+  store i32 %925, i32* %930, align 4, !tbaa !19
+  %931 = icmp eq i64 %928, %853
+  br i1 %931, label %932, label %854, !llvm.loop !127
+
+932:                                              ; preds = %923, %839
+  %933 = getelementptr inbounds %struct.hypre_ParCSRMatrix_struct, %struct.hypre_ParCSRMatrix_struct* %0, i64 0, i32 1
+  %934 = load i32, i32* %933, align 4, !tbaa !54
+  %935 = load i32, i32* %13, align 4, !tbaa !19
+  %936 = getelementptr inbounds %struct.hypre_ParCSRMatrix_struct, %struct.hypre_ParCSRMatrix_struct* %0, i64 0, i32 15, i64 0
+  %937 = sext i32 %61 to i64
+  %938 = getelementptr inbounds i32, i32* %812, i64 %937
+  %939 = load i32, i32* %938, align 4, !tbaa !19
+  %940 = getelementptr inbounds i32, i32* %814, i64 %937
+  %941 = load i32, i32* %940, align 4, !tbaa !19
+  %942 = call %struct.hypre_ParCSRMatrix_struct* @hypre_ParCSRMatrixCreate(i32 %17, i32 %934, i32 %935, i32* nonnull %936, i32* nonnull %3, i32 %808, i32 %939, i32 %941) #3
+  %943 = getelementptr inbounds %struct.hypre_ParCSRMatrix_struct, %struct.hypre_ParCSRMatrix_struct* %942, i64 0, i32 8
+  %944 = load %struct.hypre_CSRMatrix*, %struct.hypre_CSRMatrix** %943, align 8, !tbaa !10
+  %945 = getelementptr inbounds %struct.hypre_CSRMatrix, %struct.hypre_CSRMatrix* %944, i64 0, i32 9
+  store double* %831, double** %945, align 8, !tbaa !15
+  %946 = bitcast %struct.hypre_CSRMatrix* %944 to i8**
+  store i8* %811, i8** %946, align 8, !tbaa !17
+  %947 = getelementptr inbounds %struct.hypre_CSRMatrix, %struct.hypre_CSRMatrix* %944, i64 0, i32 1
+  store i32* %830, i32** %947, align 8, !tbaa !16
+  %948 = getelementptr inbounds %struct.hypre_ParCSRMatrix_struct, %struct.hypre_ParCSRMatrix_struct* %942, i64 0, i32 9
+  %949 = load %struct.hypre_CSRMatrix*, %struct.hypre_CSRMatrix** %948, align 8, !tbaa !13
+  %950 = getelementptr inbounds %struct.hypre_CSRMatrix, %struct.hypre_CSRMatrix* %949, i64 0, i32 9
+  store double* %841, double** %950, align 8, !tbaa !15
+  %951 = bitcast %struct.hypre_CSRMatrix* %949 to i8**
+  store i8* %813, i8** %951, align 8, !tbaa !17
+  %952 = getelementptr inbounds %struct.hypre_CSRMatrix, %struct.hypre_CSRMatrix* %949, i64 0, i32 1
+  store i32* %840, i32** %952, align 8, !tbaa !16
+  %953 = getelementptr inbounds %struct.hypre_ParCSRMatrix_struct, %struct.hypre_ParCSRMatrix_struct* %790, i64 0, i32 12
+  %954 = load i32*, i32** %953, align 8, !tbaa !55
+  %955 = getelementptr inbounds %struct.hypre_ParCSRMatrix_struct, %struct.hypre_ParCSRMatrix_struct* %942, i64 0, i32 12
+  store i32* %954, i32** %955, align 8, !tbaa !55
+  store i32* null, i32** %953, align 8, !tbaa !55
+  %956 = getelementptr inbounds %struct.hypre_CSRMatrix, %struct.hypre_CSRMatrix* %944, i64 0, i32 12
+  store i32 %21, i32* %956, align 4, !tbaa !11
+  %957 = getelementptr inbounds %struct.hypre_CSRMatrix, %struct.hypre_CSRMatrix* %949, i64 0, i32 12
+  store i32 %21, i32* %957, align 4, !tbaa !11
+  %958 = fcmp une double %7, 0.000000e+00
+  %959 = icmp sgt i32 %8, 0
+  %960 = select i1 %958, i1 true, i1 %959
+  br i1 %960, label %961, label %1042
+
+961:                                              ; preds = %932
+  %962 = getelementptr inbounds %struct.hypre_CSRMatrix, %struct.hypre_CSRMatrix* %949, i64 0, i32 0
+  %963 = call i32 @hypre_BoomerAMGInterpTruncation(%struct.hypre_ParCSRMatrix_struct* %942, double %7, i32 %8) #3
+  %964 = load i32*, i32** %962, align 8, !tbaa !17
+  %965 = load i32*, i32** %952, align 8, !tbaa !16
+  %966 = getelementptr inbounds i32, i32* %964, i64 %937
+  %967 = load i32, i32* %966, align 4, !tbaa !19
+  %968 = load i32*, i32** %955, align 8, !tbaa !55
+  %969 = icmp eq i32 %808, 0
+  br i1 %969, label %1042, label %970
+
+970:                                              ; preds = %961
+  %971 = sext i32 %808 to i64
+  %972 = call i8* @hypre_CAlloc(i64 %971, i64 4, i32 0) #3
+  %973 = bitcast i8* %972 to i32*
+  %974 = icmp sgt i32 %967, 0
+  br i1 %974, label %975, label %977
+
+975:                                              ; preds = %970
+  %976 = zext i32 %967 to i64
+  br label %981
+
+977:                                              ; preds = %981, %970
+  %978 = icmp sgt i32 %808, 0
+  br i1 %978, label %979, label %999
+
+979:                                              ; preds = %977
+  %980 = zext i32 %808 to i64
+  br label %989
+
+981:                                              ; preds = %975, %981
+  %982 = phi i64 [ 0, %975 ], [ %987, %981 ]
+  %983 = getelementptr inbounds i32, i32* %965, i64 %982
+  %984 = load i32, i32* %983, align 4, !tbaa !19
+  %985 = sext i32 %984 to i64
+  %986 = getelementptr inbounds i32, i32* %973, i64 %985
+  store i32 1, i32* %986, align 4, !tbaa !19
+  %987 = add nuw nsw i64 %982, 1
+  %988 = icmp eq i64 %987, %976
+  br i1 %988, label %977, label %981, !llvm.loop !128
+
+989:                                              ; preds = %979, %989
+  %990 = phi i64 [ 0, %979 ], [ %997, %989 ]
+  %991 = phi i32 [ 0, %979 ], [ %996, %989 ]
+  %992 = getelementptr inbounds i32, i32* %973, i64 %990
+  %993 = load i32, i32* %992, align 4, !tbaa !19
+  %994 = icmp ne i32 %993, 0
+  %995 = zext i1 %994 to i32
+  %996 = add nuw nsw i32 %991, %995
+  %997 = add nuw nsw i64 %990, 1
+  %998 = icmp eq i64 %997, %980
+  br i1 %998, label %999, label %989, !llvm.loop !129
+
+999:                                              ; preds = %989, %977
+  %1000 = phi i32 [ 0, %977 ], [ %996, %989 ]
+  %1001 = zext i32 %1000 to i64
+  %1002 = call i8* @hypre_CAlloc(i64 %1001, i64 4, i32 0) #3
+  %1003 = bitcast i8* %1002 to i32*
+  %1004 = call i8* @hypre_CAlloc(i64 %1001, i64 4, i32 0) #3
+  %1005 = bitcast i8* %1004 to i32*
+  %1006 = icmp sgt i32 %808, 0
+  br i1 %1006, label %1007, label %1027
+
+1007:                                             ; preds = %999
+  %1008 = zext i32 %808 to i64
+  br label %1009
+
+1009:                                             ; preds = %1007, %1023
+  %1010 = phi i64 [ 0, %1007 ], [ %1025, %1023 ]
+  %1011 = phi i32 [ 0, %1007 ], [ %1024, %1023 ]
+  %1012 = getelementptr inbounds i32, i32* %973, i64 %1010
+  %1013 = load i32, i32* %1012, align 4, !tbaa !19
+  %1014 = icmp eq i32 %1013, 0
+  br i1 %1014, label %1023, label %1015
+
+1015:                                             ; preds = %1009
+  %1016 = getelementptr inbounds i32, i32* %968, i64 %1010
+  %1017 = load i32, i32* %1016, align 4, !tbaa !19
+  %1018 = sext i32 %1011 to i64
+  %1019 = getelementptr inbounds i32, i32* %1003, i64 %1018
+  store i32 %1017, i32* %1019, align 4, !tbaa !19
+  %1020 = add nsw i32 %1011, 1
+  %1021 = getelementptr inbounds i32, i32* %1005, i64 %1018
+  %1022 = trunc i64 %1010 to i32
+  store i32 %1022, i32* %1021, align 4, !tbaa !19
+  br label %1023
+
+1023:                                             ; preds = %1009, %1015
+  %1024 = phi i32 [ %1020, %1015 ], [ %1011, %1009 ]
+  %1025 = add nuw nsw i64 %1010, 1
+  %1026 = icmp eq i64 %1025, %1008
+  br i1 %1026, label %1027, label %1009, !llvm.loop !130
+
+1027:                                             ; preds = %1023, %999
+  call void @hypre_Free(i8* %972, i32 0) #3
+  %1028 = icmp sgt i32 %967, 0
+  br i1 %1028, label %1029, label %1038
+
+1029:                                             ; preds = %1027
+  %1030 = zext i32 %967 to i64
+  br label %1031
+
+1031:                                             ; preds = %1029, %1031
+  %1032 = phi i64 [ 0, %1029 ], [ %1036, %1031 ]
+  %1033 = getelementptr inbounds i32, i32* %965, i64 %1032
+  %1034 = load i32, i32* %1033, align 4, !tbaa !19
+  %1035 = call i32 @hypre_BinarySearch(i32* %1005, i32 %1034, i32 %1000) #3
+  store i32 %1035, i32* %1033, align 4, !tbaa !19
+  %1036 = add nuw nsw i64 %1032, 1
+  %1037 = icmp eq i64 %1036, %1030
+  br i1 %1037, label %1038, label %1031, !llvm.loop !131
+
+1038:                                             ; preds = %1031, %1027
+  %1039 = bitcast i32* %968 to i8*
+  call void @hypre_Free(i8* %1039, i32 0) #3
+  %1040 = bitcast i32** %955 to i8**
+  store i8* %1002, i8** %1040, align 8, !tbaa !55
+  %1041 = getelementptr inbounds %struct.hypre_CSRMatrix, %struct.hypre_CSRMatrix* %949, i64 0, i32 4
+  store i32 %1000, i32* %1041, align 4, !tbaa !24
+  call void @hypre_Free(i8* %1004, i32 0) #3
+  br label %1042
+
+1042:                                             ; preds = %961, %1038, %932
+  %1043 = call i32 @hypre_MatvecCommPkgCreate(%struct.hypre_ParCSRMatrix_struct* %942) #3
+  store %struct.hypre_ParCSRMatrix_struct* %942, %struct.hypre_ParCSRMatrix_struct** %9, align 8, !tbaa !20
+  call void @hypre_Free(i8* %120, i32 0) #3
+  call void @hypre_Free(i8* %378, i32 0) #3
+  call void @hypre_Free(i8* %124, i32 0) #3
+  call void @hypre_Free(i8* %122, i32 0) #3
+  call void @hypre_Free(i8* %116, i32 0) #3
+  call void @hypre_Free(i8* %118, i32 0) #3
+  call void @hypre_Free(i8* %126, i32 0) #3
+  call void @hypre_Free(i8* %128, i32 0) #3
+  call void @hypre_Free(i8* %130, i32 0) #3
+  call void @hypre_Free(i8* %339, i32 0) #3
+  %1044 = load %struct.hypre_ParCSRMatrix_struct*, %struct.hypre_ParCSRMatrix_struct** %14, align 8, !tbaa !20
+  %1045 = call i32 @hypre_ParCSRMatrixDestroy(%struct.hypre_ParCSRMatrix_struct* %1044) #3
+  %1046 = load %struct.hypre_ParCSRMatrix_struct*, %struct.hypre_ParCSRMatrix_struct** %15, align 8, !tbaa !20
+  %1047 = call i32 @hypre_ParCSRMatrixDestroy(%struct.hypre_ParCSRMatrix_struct* %1046) #3
+  %1048 = call i32 @hypre_ParCSRMatrixDestroy(%struct.hypre_ParCSRMatrix_struct* %790) #3
+  %1049 = load i32, i32* @hypre__global_error, align 4, !tbaa !19
+  call void @llvm.lifetime.end.p0i8(i64 8, i8* nonnull %64) #3
+  call void @llvm.lifetime.end.p0i8(i64 8, i8* nonnull %63) #3
+  call void @llvm.lifetime.end.p0i8(i64 4, i8* nonnull %62) #3
+  call void @llvm.lifetime.end.p0i8(i64 4, i8* nonnull %33) #3
+  call void @llvm.lifetime.end.p0i8(i64 4, i8* nonnull %32) #3
+  ret i32 %1049
+}
+
+; Function Attrs: nounwind uwtable
+define dso_local i32 @hypre_BoomerAMGBuildModExtPEInterp(%struct.hypre_ParCSRMatrix_struct* %0, i32* %1, %struct.hypre_ParCSRMatrix_struct* %2, i32* %3, i32 %4, i32* nocapture readonly %5, i32 %6, double %7, i32 %8, %struct.hypre_ParCSRMatrix_struct** nocapture %9) local_unnamed_addr #0 {
+  %11 = getelementptr inbounds %struct.hypre_ParCSRMatrix_struct, %struct.hypre_ParCSRMatrix_struct* %0, i64 0, i32 8
+  %12 = load %struct.hypre_CSRMatrix*, %struct.hypre_CSRMatrix** %11, align 8, !tbaa !10
+  %13 = getelementptr inbounds %struct.hypre_CSRMatrix, %struct.hypre_CSRMatrix* %12, i64 0, i32 12
+  %14 = load i32, i32* %13, align 4, !tbaa !11
+  %15 = getelementptr inbounds %struct.hypre_ParCSRMatrix_struct, %struct.hypre_ParCSRMatrix_struct* %0, i64 0, i32 9
+  %16 = load %struct.hypre_CSRMatrix*, %struct.hypre_CSRMatrix** %15, align 8, !tbaa !13
+  %17 = getelementptr inbounds %struct.hypre_CSRMatrix, %struct.hypre_CSRMatrix* %16, i64 0, i32 12
+  %18 = load i32, i32* %17, align 4, !tbaa !11
+  %19 = icmp eq i32 %14, %18
+  br i1 %19, label %22, label %20
+
+20:                                               ; preds = %10
+  %21 = call i32 (i8*, ...) @hypre_printf(i8* getelementptr inbounds ([62 x i8], [62 x i8]* @.str, i64 0, i64 0), i32 %14, i32 %18) #3
+  br label %22
+
+22:                                               ; preds = %10, %20
+  %23 = call i32 @hypre_GetExecPolicy1(i32 %14) #3
+  %24 = icmp eq i32 %23, 0
+  br i1 %24, label %25, label %27
+
+25:                                               ; preds = %22
+  %26 = call i32 @hypre_BoomerAMGBuildModExtPEInterpHost(%struct.hypre_ParCSRMatrix_struct* %0, i32* %1, %struct.hypre_ParCSRMatrix_struct* %2, i32* %3, i32 %4, i32* %5, i32 undef, double %7, i32 %8, %struct.hypre_ParCSRMatrix_struct** %9)
+  br label %27
+
+27:                                               ; preds = %25, %22
+  %28 = phi i32 [ %26, %25 ], [ 0, %22 ]
+  ret i32 %28
+}
+
+declare dso_local i32 @hypre_printf(i8*, ...) local_unnamed_addr #2
+
+attributes #0 = { nounwind uwtable "frame-pointer"="none" "min-legal-vector-width"="0" "no-trapping-math"="true" "stack-protector-buffer-size"="8" "target-cpu"="x86-64" "target-features"="+cx8,+fxsr,+mmx,+sse,+sse2,+x87" "tune-cpu"="generic" }
+attributes #1 = { argmemonly mustprogress nofree nosync nounwind willreturn }
+attributes #2 = { "frame-pointer"="none" "no-trapping-math"="true" "stack-protector-buffer-size"="8" "target-cpu"="x86-64" "target-features"="+cx8,+fxsr,+mmx,+sse,+sse2,+x87" "tune-cpu"="generic" }
+attributes #3 = { nounwind }
+
+!llvm.module.flags = !{!0, !1}
+!llvm.ident = !{!2}
+
+!0 = !{i32 1, !"wchar_size", i32 4}
+!1 = !{i32 7, !"uwtable", i32 1}
+!2 = !{!"clang version 13.0.0"}
+!3 = !{!4, !5, i64 0}
+!4 = !{!"hypre_ParCSRMatrix_struct", !5, i64 0, !5, i64 4, !5, i64 8, !5, i64 12, !5, i64 16, !5, i64 20, !5, i64 24, !5, i64 28, !8, i64 32, !8, i64 40, !8, i64 48, !8, i64 56, !8, i64 64, !8, i64 72, !6, i64 80, !6, i64 88, !8, i64 96, !8, i64 104, !5, i64 112, !5, i64 116, !9, i64 120, !8, i64 128, !8, i64 136, !5, i64 144, !8, i64 152, !5, i64 160, !8, i64 168, !5, i64 176, !8, i64 184, !8, i64 192}
+!5 = !{!"int", !6, i64 0}
+!6 = !{!"omnipotent char", !7, i64 0}
+!7 = !{!"Simple C/C++ TBAA"}
+!8 = !{!"any pointer", !6, i64 0}
+!9 = !{!"double", !6, i64 0}
+!10 = !{!4, !8, i64 32}
+!11 = !{!12, !6, i64 84}
+!12 = !{!"", !8, i64 0, !8, i64 8, !8, i64 16, !5, i64 24, !5, i64 28, !5, i64 32, !8, i64 40, !8, i64 48, !5, i64 56, !8, i64 64, !8, i64 72, !5, i64 80, !6, i64 84}
+!13 = !{!4, !8, i64 40}
+!14 = !{!4, !8, i64 96}
+!15 = !{!12, !8, i64 64}
+!16 = !{!12, !8, i64 8}
+!17 = !{!12, !8, i64 0}
+!18 = !{!12, !5, i64 24}
+!19 = !{!5, !5, i64 0}
+!20 = !{!8, !8, i64 0}
+!21 = distinct !{!21, !22, !23}
+!22 = !{!"llvm.loop.mustprogress"}
+!23 = !{!"llvm.loop.unroll.disable"}
+!24 = !{!12, !5, i64 28}
+!25 = !{!26, !5, i64 4}
+!26 = !{!"_hypre_ParCSRCommPkg", !5, i64 0, !5, i64 4, !8, i64 8, !8, i64 16, !8, i64 24, !8, i64 32, !5, i64 40, !8, i64 48, !8, i64 56, !8, i64 64, !8, i64 72}
+!27 = !{!26, !8, i64 16}
+!28 = distinct !{!28, !22, !23}
+!29 = !{!26, !8, i64 24}
+!30 = distinct !{!30, !22, !23}
+!31 = distinct !{!31, !22, !23}
+!32 = !{!9, !9, i64 0}
+!33 = distinct !{!33, !22, !23}
+!34 = distinct !{!34, !22, !23}
+!35 = distinct !{!35, !22, !23}
+!36 = distinct !{!36, !22, !23}
+!37 = distinct !{!37, !22, !23}
+!38 = distinct !{!38, !22, !23}
+!39 = distinct !{!39, !22, !23}
+!40 = distinct !{!40, !22, !23}
+!41 = distinct !{!41, !22, !23}
+!42 = distinct !{!42, !22, !23}
+!43 = distinct !{!43, !22, !23}
+!44 = distinct !{!44, !22, !23}
+!45 = distinct !{!45, !22, !23}
+!46 = distinct !{!46, !22, !23}
+!47 = distinct !{!47, !22, !23}
+!48 = distinct !{!48, !22, !23}
+!49 = distinct !{!49, !22, !23}
+!50 = distinct !{!50, !22, !23}
+!51 = distinct !{!51, !22, !23}
+!52 = distinct !{!52, !22, !23}
+!53 = distinct !{!53, !22, !23}
+!54 = !{!4, !5, i64 4}
+!55 = !{!4, !8, i64 64}
+!56 = distinct !{!56, !22, !23}
+!57 = distinct !{!57, !22, !23}
+!58 = distinct !{!58, !22, !23}
+!59 = distinct !{!59, !22, !23}
+!60 = !{!12, !8, i64 16}
+!61 = distinct !{!61, !22, !23}
+!62 = distinct !{!62, !22, !23}
+!63 = distinct !{!63, !22, !23}
+!64 = distinct !{!64, !22, !23}
+!65 = distinct !{!65, !22, !23}
+!66 = distinct !{!66, !22, !23}
+!67 = distinct !{!67, !22, !23}
+!68 = distinct !{!68, !22, !23}
+!69 = distinct !{!69, !22, !23}
+!70 = distinct !{!70, !22, !23}
+!71 = distinct !{!71, !22, !23}
+!72 = distinct !{!72, !22, !23}
+!73 = distinct !{!73, !22, !23}
+!74 = distinct !{!74, !22, !23}
+!75 = distinct !{!75, !22, !23}
+!76 = distinct !{!76, !22, !23}
+!77 = distinct !{!77, !22, !23}
+!78 = distinct !{!78, !22, !23}
+!79 = distinct !{!79, !22, !23}
+!80 = distinct !{!80, !22, !23}
+!81 = distinct !{!81, !22, !23}
+!82 = distinct !{!82, !22, !23}
+!83 = distinct !{!83, !22, !23}
+!84 = distinct !{!84, !22, !23}
+!85 = distinct !{!85, !22, !23}
+!86 = distinct !{!86, !22, !23}
+!87 = distinct !{!87, !22, !23}
+!88 = distinct !{!88, !22, !23}
+!89 = distinct !{!89, !22, !23}
+!90 = distinct !{!90, !22, !23}
+!91 = distinct !{!91, !22, !23}
+!92 = distinct !{!92, !22, !23}
+!93 = distinct !{!93, !22, !23}
+!94 = distinct !{!94, !22, !23}
+!95 = distinct !{!95, !22, !23}
+!96 = distinct !{!96, !22, !23}
+!97 = distinct !{!97, !22, !23}
+!98 = distinct !{!98, !22, !23}
+!99 = distinct !{!99, !22, !23}
+!100 = distinct !{!100, !22, !23}
+!101 = distinct !{!101, !22, !23}
+!102 = distinct !{!102, !22, !23}
+!103 = distinct !{!103, !22, !23}
+!104 = distinct !{!104, !22, !23}
+!105 = distinct !{!105, !22, !23}
+!106 = distinct !{!106, !22, !23}
+!107 = distinct !{!107, !22, !23}
+!108 = distinct !{!108, !22, !23}
+!109 = distinct !{!109, !22, !23}
+!110 = distinct !{!110, !22, !23}
+!111 = distinct !{!111, !22, !23}
+!112 = distinct !{!112, !22, !23}
+!113 = distinct !{!113, !22, !23}
+!114 = distinct !{!114, !22, !23}
+!115 = distinct !{!115, !22, !23}
+!116 = distinct !{!116, !22, !23}
+!117 = distinct !{!117, !22, !23}
+!118 = distinct !{!118, !22, !23}
+!119 = distinct !{!119, !22, !23}
+!120 = distinct !{!120, !22, !23}
+!121 = distinct !{!121, !22, !23}
+!122 = distinct !{!122, !22, !23}
+!123 = distinct !{!123, !22, !23}
+!124 = distinct !{!124, !22, !23}
+!125 = distinct !{!125, !22, !23}
+!126 = distinct !{!126, !22, !23}
+!127 = distinct !{!127, !22, !23}
+!128 = distinct !{!128, !22, !23}
+!129 = distinct !{!129, !22, !23}
+!130 = distinct !{!130, !22, !23}
+!131 = distinct !{!131, !22, !23}

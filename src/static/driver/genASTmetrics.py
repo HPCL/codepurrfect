@@ -11,29 +11,28 @@ def runtool(proj_name : str, execpath : str, outpath : str) -> None:
     and store the results in *outpath*. 
     '''
     comp_db_path = myglobals.config_vars['comp_db_path']
-    build_path   = myglobals.config_vars["build-loc"][proj_name] 
     sys_includes = myglobals.config_vars["clang-includes"]
 
     comp_data = None 
-    is_include = lambda s : '-I/' in s 
+    # is_include = lambda s : '-I/' in s 
     with open(comp_db_path, 'r') as comp_db_r: 
         comp_data = json.load(comp_db_r)
 
     for item in comp_data: 
         filepath   = item["file"] 
 
-        commands_str = item["command"].split()
+        if 'arguments' in item.keys():
+            if item['arguments'][0] == 'clang':
+                item['arguments'] = item['arguments'][1:]
+        if 'command' in item.keys(): 
+            if item['command'][0] == 'clang': 
+                item['command']  = item['command'][1:]
 
-        includes = []
-
-        for elem in commands_str: 
-            if is_include(elem): 
-                includes.append(elem)
-
-        build_loc_str      = '-p=' + build_path 
+        build_loc_str      = '' # '-p=' + build_path 
         extra_includes_str = '--extra-arg-before=' + '-I' + sys_includes
 
-        command = [execpath] + [build_loc_str, extra_includes_str] + [filepath]
+        command = [execpath] + [extra_includes_str] + [filepath]
+        print("RUNNING COMMAND: ", command)
         subprocess.run(command)
 
     for item in comp_data: 

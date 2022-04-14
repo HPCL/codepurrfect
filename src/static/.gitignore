@@ -1,3 +1,6 @@
 *.csv
 *.ts 
+src/static/passes-pp/includes-cycles/build 
+build/* 
+*.pyc 
 
