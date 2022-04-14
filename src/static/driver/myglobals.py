@@ -56,6 +56,12 @@ def init():
                                 "cwe1055_metrics.csv"
                             ]
                             },
+            "cwe-407-no-switch-in-switch" : {
+                            "exe" : calc_ast_path("cwe-407-no-switch-in-switch"), 
+                            "extensions" : [
+                                "cwe407_metrics.csv"
+                            ]
+            },
             "gen-func-ranges" : { 
                             "exe" : calc_ast_path("gen-func-ranges"), 
                             "extensions" : [
