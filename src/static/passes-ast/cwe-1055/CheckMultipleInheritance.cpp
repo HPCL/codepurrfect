@@ -109,9 +109,6 @@ public:
             }
             
             
-        }else
-        {
-          outs() << "CLASS IS EMPTY \n"; 
         }
         
 
