@@ -45,3 +45,6 @@ src/static/data/petsc/*.txt
 # CMake generated functions 
 *.make 
 *.cmake 
+
+# Large files 
+*.pdf  
