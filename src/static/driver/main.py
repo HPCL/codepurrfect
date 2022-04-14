@@ -74,6 +74,8 @@ def parseCmdArgs() -> Tuple[CmdArgsTy, Dict[str, str]]:
                     return (CmdArgsTy.INIT(args.ast_pass), v_args)
                 if args.pp_pass: 
                     return (CmdArgsTy.INIT(args.pp_pass), v_args)
+                if args.ir_pass: 
+                    return (CmdArgsTy.INIT(args.ir_pass), v_args)
                 return (CmdArgsTy.INIT([]), v_args)
     if args.freshen: 
         return (CmdArgsTy.FRESH, v_args) 

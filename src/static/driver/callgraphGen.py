@@ -282,11 +282,10 @@ class CGenRunner():
         for f in os.listdir(frm):
             command = []
             if os.path.isfile(f): 
-                for e in extensions: 
-                    for to, e in zip(destinations, extensions):
-                        if e in f: 
+                for e in extensions:
+                    if e in f: 
+                        for to in destinations:
                             command = ["mv", f, to] 
-                        if command != []: 
                             subprocess.run(command)
         return
 

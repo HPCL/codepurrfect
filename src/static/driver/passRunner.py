@@ -232,7 +232,8 @@ class PassRunner:
                     with open(g_file, 'w') as g_file_w:
                         for pass_file in os.listdir(_out_dir): 
                             pass_file_path = '/'.join([_out_dir, pass_file])
-                            if os.path.isfile(pass_file_path):  
+                            if os.path.isfile(pass_file_path): 
+                                if extension in pass_file: 
                                     with open(pass_file_path, 'r') as pass_file_r: 
                                         f_contents = []
                                         if f_counts > 0: 
