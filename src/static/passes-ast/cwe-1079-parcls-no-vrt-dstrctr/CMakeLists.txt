@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.19)
+cmake_minimum_required(VERSION 3.16.3)
 project(cwe-1079-parcls-no-vrt-dstrctr)
 find_package(Clang REQUIRED)
 

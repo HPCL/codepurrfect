@@ -1,8 +1,8 @@
 cmake_minimum_required(VERSION 3.16.3)
-project(cwe-1055)
+project(cwe-1045)
 find_package(Clang REQUIRED)
 
-add_executable(${PROJECT_NAME} CheckMultipleInheritance.cpp utils.cpp)
+add_executable(${PROJECT_NAME} CheckDestructors.cpp utils.cpp)
 
 # The -fno-rtti flag is essential, do not remove; -O0 disables optimization
 set(CMAKE_CXX_FLAGS "-std=c++17 -Wall -g3 -O0 -fno-rtti ${LLVM_COMPILE_FLAGS}")
