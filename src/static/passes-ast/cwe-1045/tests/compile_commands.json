@@ -1,0 +1,22 @@
+[
+	{
+  		"directory": "/static/passes-ast/cwe-1045/tests",
+  		"command": "clang++ -std=c++20 /static/passes-ast/cwe-1045/tests/test.cpp",
+  		"file": "/static/passes-ast/cwe-1045/tests/test.cpp"
+	},
+	{
+		"directory": "/static/passes-ast/cwe-1045/tests",
+		"command": "clang++ -std=c++20 /static/passes-ast/cwe-1045/tests/test1.cpp",
+		"file": "/static/passes-ast/cwe-1045/tests/test1.cpp"
+  	},
+	{
+		"directory": "/static/passes-ast/cwe-1045/tests",
+		"command": "clang++ -std=c++20 /static/passes-ast/cwe-1045/tests/test2.cpp",
+		"file": "/static/passes-ast/cwe-1045/tests/test2.cpp"
+  	},
+	  {
+		"directory": "/static/passes-ast/cwe-1045/tests",
+		"command": "clang++ -std=c++20 /static/passes-ast/cwe-1045/tests/test3.cpp",
+		"file": "/static/passes-ast/cwe-1045/tests/test3.cpp"
+  	}
+]
