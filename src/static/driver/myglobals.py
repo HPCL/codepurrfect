@@ -9,7 +9,7 @@ def init():
     config_vars   = {
         "comp_db_path"   : cwd + "/compile_commands.json", 
         "store"          : cwd + "/.quality-uo",
-        "clang-includes" : "/tmp/clang_13/lib/clang/13.0.0/include", # assumes this is running in the provided docker container 
+        "clang-includes" : "/spack/opt/spack/linux-ubuntu20.04-x86_64/gcc-11.1.0/llvm-doe-13.0.0-56fgomxwayqvqq7l3kdsmoy4jweifepy/lib/clang/13.0.0/include", # assumes this is running in the provided docker container 
         "ir"           : {
             "CallgraphxSDK" : {
                                 "exe" :calc_ir_path("CallgraphxSDK"), 
@@ -54,6 +54,12 @@ def init():
                             "exe" :  calc_ast_path("cwe-1055"), 
                             "extensions" : [
                                 "cwe1055_metrics.csv"
+                            ]
+                            },
+            "cwe-1045" : {
+                            "exe" :  calc_ast_path("cwe-1045"), 
+                            "extensions" : [
+                                "cwe1045_metrics.csv"
                             ]
                             },
             "cwe-407-no-switch-in-switch" : {

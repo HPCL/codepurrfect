@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.19)
+cmake_minimum_required(VERSION 3.16.3)
 project(cwe-1087-cls-vrt-no-vrt-dstrctr)
 find_package(Clang REQUIRED)
 
