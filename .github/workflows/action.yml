@@ -1,0 +1,6 @@
+name: 'Quality-UO'
+description: 'Static Analysis Tool Docker Setup'
+runs: 
+  using: 'docker'
+  image: 'Dockerfile'
+  
