@@ -9,8 +9,8 @@ jobs:
     steps: 
       - name: Checkout 
         uses: actions/checkout@v1 
-      # - name: Docker image build step 
-      #   uses: './actions'  
+      - name: Docker image build step 
+        uses: './.github/workflows/actions'  
       #   id: static-tool
-      - run: ls -a $pwd
-      - run: ls -a './'
+      # - run: ls -a $pwd
+      # - run: ls -a './'
