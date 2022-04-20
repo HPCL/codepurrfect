@@ -13,4 +13,4 @@ jobs:
       #   uses: './actions'  
       #   id: static-tool
       - run: ls -a $pwd
-      - run: './'
+      - run: ls -a './'
