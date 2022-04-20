@@ -8,7 +8,7 @@ jobs:
     #   image: ecpe4s/llvm-doe-oneapi:2022-01-31
     steps: 
       - name: Checkout 
-        uses: actions/checkout 
+        uses: 'actions/checkout' 
       - name: Docker image build step 
-        uses: ./.github/workflows/actions 
+        uses: './.github/workflows/actions' 
         id: static-tool
