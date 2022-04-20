@@ -12,5 +12,5 @@ jobs:
       # - name: Docker image build step 
       #   uses: './actions'  
       #   id: static-tool
-      - run: ls $pwd
-      - run: .
+      - run: ls -a $pwd
+      - run: './'
