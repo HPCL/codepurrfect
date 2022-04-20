@@ -23,8 +23,8 @@ RUN apt-get update && \
     apt-get -y install cloc 
 
 
-ADD ../static /static 
-VOLUME /static 
+# ADD ../static /static 
+VOLUME ${PWD}/../static 
 
 
 
