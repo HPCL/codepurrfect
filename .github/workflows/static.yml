@@ -10,3 +10,12 @@ jobs:
 
       - name: Docker Image Build Step 
         uses: './.github/workflows/actions' 
+
+      - name: Tool Build Setup Step  
+        run: | 
+          docker exec uoquality mkdir static/build 
+          docker exec -w /static/build uoquality cmake .. 
+
+      - name: Build visit-switch
+        run: | 
+          docker exec -w /static/build uoquality make visit-switch 
