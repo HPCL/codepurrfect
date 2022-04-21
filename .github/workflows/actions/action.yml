@@ -3,4 +3,4 @@ description: 'Configure and Quality-UO Static Analysis Tool'
 runs: 
   using: 'docker'
   image: '../../../src/dockerStuff/Dockerfile' 
-  image-name: 'uoquality'
+  id: 'uoquality'
