@@ -2,10 +2,11 @@ on: [push]
 
 jobs: 
   Configure-Quality-UO-Tool: 
-    runs-on: ecpe4s/llvm-doe-oneapi:2022-01-31 
+    runs-on: ubuntu-latest 
     name: Configure and build static analysis tool 
     steps: 
       - name: Checkout Code 
         uses: actions/checkout@v1 
+
       - name: Docker Image Build Step 
-        uses: './.github/workflows/actions'   
+        uses: './.github/workflows/actions' 
