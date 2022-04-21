@@ -24,7 +24,7 @@ RUN apt-get update && \
 
 
 FROM installer as setup  
-ADD ../static /static 
+VOLUME ${PWD}/../static  
 RUN mkdir logs 
 VOLUME /logs   
 CMD /bin/bash 
