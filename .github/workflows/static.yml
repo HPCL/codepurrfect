@@ -14,8 +14,8 @@ jobs:
       - name: Tool Build Setup Step  
         run: | 
           docker exec uoquality mkdir static/build 
-          docker exec -w /static/build uoquality cmake .. 
+          docker exec -w /static/build `docker ps -q` cmake .. 
 
       - name: Build visit-switch
         run: | 
-          docker exec -w /static/build uoquality make visit-switch 
+          docker exec -w /static/build `docker ps -q` make visit-switch 
