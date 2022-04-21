@@ -1,4 +1,4 @@
-FROM ecpe4s/llvm-doe-oneapi:2022-01-31  
+FROM ecpe4s/llvm-doe-oneapi:2022-01-31 AS installer 
 
 RUN apt-get update && \
     apt-get install -y --no-install-recommends ca-certificates cmake \
@@ -23,17 +23,11 @@ RUN apt-get update && \
     apt-get -y install cloc 
 
 
-# ADD ../static /static 
-VOLUME ${PWD}/../static 
-
-
-
+FROM installer as setup  
+ADD ../static /static 
 RUN mkdir logs 
- 
-
-VOLUME /logs    
-    
-CMD /bin/bash
+VOLUME /logs   
+CMD /bin/bash 
 
 
 
