@@ -24,13 +24,13 @@ RUN apt-get update && \
 
 
 FROM installer as setup 
-ADD  ${PWD}/../static /static 
-VOLUME ${PWD}/../static  
+VOLUME ../static
+ADD  ../static /static   
 RUN mkdir logs 
 VOLUME /logs   
 ARG passname=all 
-RUN mkdir ${PWD}/../static/build; \
-    cd ${PWD}/../static/build; \
+RUN mkdir ../static/build; \
+    cd ../static/build; \
     cmake ..; \ 
     make ${passname}
 CMD /bin/bash 
