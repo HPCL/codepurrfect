@@ -8,5 +8,8 @@ inputs:
 runs: 
   using: 'docker'
   image: '../../../src/dockerStuff/Dockerfile' 
-  args: 
-    - ${{ inputs.passname }}
+  volumes: '../../../src/static:/static'
+  options: 
+    name: 'quality-uo'
+  # args: 
+  #   - ${{ inputs.passname }}
