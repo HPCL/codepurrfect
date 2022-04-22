@@ -74,7 +74,7 @@ def handleInitWithPasses(initL : Union[List[str], str], args : Dict[str, str]):
     if ir: 
         runner.move_output_files(_passes=ir_passes, pass_type="ir")
         runner.combine_output_files(passes=ir_passes, pass_type="ir")
-    # runner.post_process_pass() 
+    runner.post_process_pass() 
 
     
     
