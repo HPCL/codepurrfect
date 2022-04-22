@@ -23,10 +23,16 @@ RUN apt-get update && \
     apt-get -y install cloc 
 
 
-FROM installer as setup  
+FROM installer as setup 
+ADD  ${PWD}/../static /static 
 VOLUME ${PWD}/../static  
 RUN mkdir logs 
 VOLUME /logs   
+ARG passname=all 
+RUN mkdir ${PWD}/../static/build; \
+    cd ${PWD}/../static/build; \
+    cmake ..; \ 
+    make ${passname}
 CMD /bin/bash 
 
 
