@@ -24,8 +24,7 @@ RUN apt-get update && \
 
 
 FROM installer as setup 
-VOLUME ../static
-ADD  ../static /static   
+VOLUME ../static   
 RUN mkdir logs 
 VOLUME /logs   
 ARG passname=all 
