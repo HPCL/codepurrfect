@@ -1,6 +1,6 @@
 import os 
 from   callgraphGen    import CGenRunner 
-from   postprocessor   import post_process_callgraphs, post_func_files
+from   postprocessor   import post_process_callgraphs
 import myglobals
 from   multiprocessing import Pool 
 from   typing          import List 
@@ -104,6 +104,15 @@ class PassRunner:
 
         self.generator = cgGenerator
 
+        if ir_passes != []: 
+            if 'CallgraphxSDK' in ir_passes:
+                self.qmetrics_path = '/'.join([self.ir_res_path, 'CallgraphxSDK'])
+                self.call_res_path = '/'.join([self.ir_res_path, 'CallgraphxSDK'])
+                self.callfile      = '/'.join([self.ir_res_path, 'CallgraphxSDK', self.proj_name + '-' + 'callgraph.TabOne']) 
+                self.outfile       = '/'.join([self.ir_res_path, 'CallgraphxSDK',self.proj_name + '-' + 'cgmetrics.csv'])
+                self.qmfile        = '/'.join([self.ir_res_path, 'CallgraphxSDK',self.proj_name + '-' + 'quality.csv']) 
+                self.nodes_file    = '/'.join([self.ir_res_path, 'CallgraphxSDK',self.proj_name + '-' + 'funcnames.txt'])
+
     def run(self, pool : Pool, ast_passes : List[str] = [], pp_passes : List[str] = [], ir_passes : List[str] = []) -> None: 
         '''
         Generate data in parallel and store in 
@@ -195,18 +204,14 @@ class PassRunner:
             post_process_callgraphs(
                 proj_name=self.proj_name, 
                 call_res_path=self.call_res_path,
-                ast_res_path=self.ast_res_path,
-                pp_res_path=self.pp_res_path,
                 qmetrics_path=self.qmetrics_path,
                 callfile=self.callfile, 
                 outfile=self.outfile, 
                 qmfile=self.qmfile, 
                 nodes_file=self.nodes_file, 
-                ast_pass_names=self.ast_passes,
-                ast_output_dirs=self.ast_output_dirs, 
-                pp_pass_names=self.pp_passes, 
-                pp_output_dirs=self.pp_output_dirs
             )
+        else: 
+            pass 
 
 
 

@@ -1,0 +1,21 @@
+on: [push]
+
+jobs: 
+  Configure-Quality-UO-Tool: 
+    runs-on: ubuntu-latest 
+    name: Configure and build static analysis tool 
+    steps: 
+      - name: Checkout Code 
+        uses: actions/checkout@v1 
+
+      - name: Docker Image Build Step 
+        uses: './.github/workflows/actions' 
+
+      - name: Tool Build Setup Step  
+        run: | 
+          docker exec `docker ps -q` mkdir static/build 
+          docker exec -w /static/build `docker ps -q` cmake .. 
+
+      - name: Build visit-switch
+        run: | 
+          docker exec -w /static/build `docker ps -q` make visit-switch 
