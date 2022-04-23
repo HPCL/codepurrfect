@@ -8,8 +8,7 @@ jobs:
       image: ./src/dockerStuff/Dockerfile
       volumes: 
         - ./src/static:/static 
-      options: 
-        - name: 'quality-uo'
+      options: --name 'quality-uo'
     steps: 
       - name: Checkout Code 
         uses: actions/checkout@v1 
