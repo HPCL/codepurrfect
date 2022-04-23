@@ -5,9 +5,9 @@ jobs:
     runs-on: ubuntu-latest 
     name: Configure and build static analysis tool 
     container:
-      image: './src/dockerStuff/Dockerfile'
+      image: ./src/dockerStuff/Dockerfile
       volumes: 
-        - './src/static:/static'
+        - ./src/static:/static
       options: 
         name: 'quality-uo'
     steps: 
