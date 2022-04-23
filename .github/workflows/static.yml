@@ -7,7 +7,7 @@ jobs:
     container:
       image: ./src/dockerStuff/Dockerfile
       volumes: 
-        - ./src/static:/static
+        - ./src/static
       options: 
         name: 'quality-uo'
     steps: 
