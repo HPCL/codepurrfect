@@ -4,6 +4,9 @@ jobs:
   Configure-Quality-UO-Tool: 
     runs-on: ubuntu-latest 
     name: Configure and build static analysis tool 
+    volumes: '../../../src/static:/static'
+    options: 
+      name: 'quality-uo'
     steps: 
       - name: Checkout Code 
         uses: actions/checkout@v1 
