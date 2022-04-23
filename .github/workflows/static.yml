@@ -7,9 +7,10 @@ jobs:
     container:
       image: ./src/dockerStuff/Dockerfile
       volumes: 
-        - ./src/static
+        - ./src/static:/static 
       options: 
-        name: 'quality-uo'
+        name: 
+          - 'quality-uo'
     steps: 
       - name: Checkout Code 
         uses: actions/checkout@v1 
