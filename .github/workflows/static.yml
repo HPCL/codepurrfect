@@ -9,8 +9,7 @@ jobs:
       volumes: 
         - ./src/static:/static 
       options: 
-        name: 
-          - 'quality-uo'
+        - name: 'quality-uo'
     steps: 
       - name: Checkout Code 
         uses: actions/checkout@v1 
