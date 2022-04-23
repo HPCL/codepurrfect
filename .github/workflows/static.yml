@@ -5,7 +5,7 @@ jobs:
     runs-on: ubuntu-latest 
     name: Configure and build static analysis tool 
     container:
-      image: ./src/dockerStuff/Dockerfile
+      # image: ./src/dockerStuff/Dockerfile
       volumes: 
         - ./src/static:/static 
       options: --name 'quality-uo'
@@ -13,10 +13,10 @@ jobs:
       - name: Checkout Code 
         uses: actions/checkout@v1 
 
-      # - name: Docker Image Build Step 
-      #   uses: './.github/workflows/actions' 
-      #   # with: 
-      #   #   passname: 'visit-switch'
+      - name: Docker Image Build Step 
+        uses: './.github/workflows/actions' 
+        # with: 
+        #   passname: 'visit-switch'
 
       - name: Tool Build Setup Step  
         run: | 
