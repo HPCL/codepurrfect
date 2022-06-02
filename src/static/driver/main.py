@@ -18,6 +18,7 @@ from typing import List, Union, Tuple, Dict
 from adt import adt, Case 
 from initializer import handleInitWithPasses
 from metricThresholds import Reporter, match_metric_type
+from static.driver.CGRank import generate_ranking
 
 
 # Sum type for all the supported command line options. 
@@ -43,6 +44,7 @@ def parseCmdArgs() -> Tuple[CmdArgsTy, Dict[str, str]]:
                                                        + "e.g --init --ast_pass='visit-switch' ")
     parser.add_argument("-I", "--ir_pass", type=str, help="IR passes to run to collect metrics. To be run in combination with --init." 
                                                        + "e.g --init --ir_pass='Callgraph-xSDK' ")
+
     parser.add_argument("-A", "--all", help="Run all available passes. To be run in combination with --init. e.g: --init --all", action="store_true")
     parser.add_argument("-p", "--pp_pass", type=str, help="Preprocessor passes to run to collect metrics. To be run in combination with --init." 
                                                     + "e.g --init --pp_pass='includes-pass' ")
@@ -50,6 +52,8 @@ def parseCmdArgs() -> Tuple[CmdArgsTy, Dict[str, str]]:
     parser.add_argument("-r", "--report", help="Report funtion's metrics. Should be run in combination"  
                                                          + " with --commit *sha*, to return metrics in that commit.", action='store_true')
     parser.add_argument("-m", "--metric", type=str, help="Name of metric whose stats to report. To be used in combination with --report. e.g --report -m 'CC' ")
+    parser.add_argument("-s", "--sort_by", type=str, help="Name of method with which to rank functions. To be used in combination with --report. e.g --report -s 'centrality' ")
+
     parser.add_argument("-e", "--excess", type=str, help="Report software components (e.g functions) with excess value for metric. e.g --report -m 'CC' --excess")
     parser.add_argument("-c", "--commit", type=str, help="Commit sha in which to report function's metrics.")
     parser.add_argument("-t", "--trace", help="Return list of commits that modified argument function.")
@@ -113,22 +117,28 @@ def handleReport(report : Union[str, Tuple[str, str], Tuple[str, str, str]], v_a
         if v_args['pp_pass'] != None:
             pp_passes  = v_args['pp_pass'].split(',') if v_args['pp_pass'] else []
             print(pp_passes)
-        reporter = Reporter(pname, ast_passes=ast_passes, pp_passes=pp_passes)
-        if v_args['metric']: 
-            metric                       = report[1] 
-            metric_col_name, metric_type = match_metric_type(metric)
-            reporter.calc_metric_thresholds(metric_type=metric_type, metric=metric_col_name)
-            # print() 
-            # reporter.report_metric_thresholds()
-            if v_args['excess']:
-                print("TYPE: ", metric_type)
-                print("NAME: ", metric_col_name)
-                reporter.sort_data(metric_type, metric_col_name) 
-                print() 
-                reporter.report_sorted(region=v_args['excess'], ast_metric=v_args['metric'])
-            else: 
-                reporter.sort_data(metric_type, metric_col_name)
-                reporter.report_sorted(pp_metric=v_args['metric'])
+            reporter = Reporter(pname, ast_passes=ast_passes, pp_passes=pp_passes)
+            if v_args['metric']: 
+                metric                       = report[1] 
+                metric_col_name, metric_type = match_metric_type(metric)
+                reporter.calc_metric_thresholds(metric_type=metric_type, metric=metric_col_name)
+                # print() 
+                # reporter.report_metric_thresholds()
+                if v_args['excess']:
+                    print("TYPE: ", metric_type)
+                    print("NAME: ", metric_col_name)
+                    reporter.sort_data(metric_type, metric_col_name) 
+                    print() 
+                    reporter.report_sorted(region=v_args['excess'], ast_metric=v_args['metric'])
+                else: 
+                    reporter.sort_data(metric_type, metric_col_name)
+                    reporter.report_sorted(pp_metric=v_args['metric'])
+        if v_args['ir_pass']: 
+            ir_passes = v_args['ir_pass'].split(',') if v_args['ir_pass'] else [] 
+            if v_args['sort_by']: 
+                method    = report 
+                ranked_pd = generate_ranking(pname, method=method)  
+                print(ranked_pd.head())
         return 
 
 def handleTrace(funcname : str): 

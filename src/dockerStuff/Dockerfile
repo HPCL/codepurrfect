@@ -23,7 +23,8 @@ RUN apt-get update && \
     apt-get -y install cloc 
 
 
-FROM installer as setup    
+FROM installer as setup 
+ADD ../static /static    
 RUN mkdir logs 
 VOLUME ["/logs", "../static"]  
 # ARG passname=all 
