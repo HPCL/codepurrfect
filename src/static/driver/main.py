@@ -18,7 +18,7 @@ from typing import List, Union, Tuple, Dict
 from adt import adt, Case 
 from initializer import handleInitWithPasses
 from metricThresholds import Reporter, match_metric_type
-from static.driver.CGRank import generate_ranking
+from CGRank import generate_ranking
 
 
 # Sum type for all the supported command line options. 
