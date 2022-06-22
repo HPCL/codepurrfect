@@ -14,18 +14,39 @@ def make_nk_graph(cg_path):
 
     cg_path  -- Path to a .csv file containing the callgrahp's edgelist representation. 
     '''
+    # N.B it could be that the ordering of function names has changed during the back-and-forth translation into a graph
+    # potential fix (1): make filepath as node_value (or weight) of the node. Unfortunately, seems impossible to create node-weighted graphs this way in networkx 
+    # potential fix (2): make the weight of the edge (vi, vj) be the filepath of vi. Only endpoints (functions with no callees will not have associated filepaths. But this makes sense because that means they are external functions? Moreover, this means that they will not appear anywhere on the left hand side, and therefore will not cause any errors.)
+    # we implement potential fix (2). This means that edge attributes are now a pair of whether the call is direct or indirect, coupled with the pathname to the caller.
     G_type = nx.DiGraph() 
-    df     = pd.read_csv(cg_path, quotechar='!', names=['caller', 'callee',
-                                                         'calltype'])
-    G_p = nx.from_pandas_edgelist(df, source='caller', target='callee'
-                                    , edge_attr='calltype'
+    df     = pd.read_csv(cg_path, quotechar='!', names=['calling_function_name', 'callee_function_name', 'path_to_caller', 
+                                                         'direct?'])
+    G_p = nx.from_pandas_edgelist(df, source='calling_function_name', target='callee_function_name'
+                                    , edge_attr=['direct?', 'path_to_caller']
                                     , create_using=G_type)
     G   = nk.nxadapter.nx2nk(G_p)
-    G_node_names = list(G_p.nodes())
-    return G, G_node_names
+    G_node_names = G_p.nodes()
 
 
-def gen_cg_mtrcs_from_graph(graph, node_names):  
+    G_path_node_pairs =  dict(list(map(lambda x: (x[0], G_p.get_edge_data(*x)['path_to_caller']), G_p.edges())))
+
+    G_path_to_node_names = [] 
+
+    for n in G_node_names: 
+        try:
+            G_path_to_node_names.append(G_path_node_pairs[n])
+        except KeyError: 
+            G_path_to_node_names.append('N/A')
+
+
+
+    print("Size of list of node names: ", len(G_node_names))
+    print("Size of list of paths to nodes: ", len(G_path_to_node_names))
+
+    return G, G_node_names, G_path_to_node_names 
+
+        
+def gen_cg_mtrcs_from_graph(graph, node_names, node_file_paths):  
     '''
     Calculate graph-centrality scores: 
          - degreeIn 
@@ -42,6 +63,7 @@ def gen_cg_mtrcs_from_graph(graph, node_names):
     in_degs        = [0] * graph.numberOfNodes() 
     out_degs       = [0] * graph.numberOfNodes()
     names          = node_names 
+    g_nodes        = [] 
     avg_short_path = []
     is_isolated    = [0] * graph.numberOfNodes() 
     closeness      = [] 
@@ -54,6 +76,7 @@ def gen_cg_mtrcs_from_graph(graph, node_names):
         is_isolated[i]  = graph.isIsolated(i) 
         eccentricity_r[i] = nk.distance.Eccentricity.getValue(graph, i)[1]
         eccentricity_n[i] = nk.distance.Eccentricity.getValue(graph, i)[0]
+        g_nodes.append(i)
 
     closeness_centr = nk.centrality.Closeness(graph, 
                                               True, 
@@ -69,17 +92,17 @@ def gen_cg_mtrcs_from_graph(graph, node_names):
     between           = betweenness_centr.run() 
     betweenness       = between.scores() 
 
-
     to_return         = {
-        "Name"             : names, 
+        "Name"             : node_names, 
+        "Path_to_def"      : node_file_paths,
         "FanIn"            : in_degs, 
         "FanOut"           : out_degs, 
         "IsIsolated"       : is_isolated, 
         "AvgShortestPath"  : avg_short_path,
         "Closeness"        : closeness, 
         "Betweenness"      : betweenness,
-        "Eccentricity_R"     : eccentricity_r,
-        "Eccentricity_N"     : eccentricity_n
+        "Eccentricity_R"   : eccentricity_r,
+        "Eccentricity_N"   : eccentricity_n
     } 
 
     to_return_pd = pd.DataFrame(to_return)
@@ -92,12 +115,12 @@ def gen_callgraph_metrics(callgraph_path):
     Construct networkit callgraph, and 
     generate centrality metrics from the graph. 
 
-    Keyworkd arguments: 
+    Keyword arguments: 
 
     callgraph_path  -- Path to .csv file containing edge list view of graph
     '''
-    G, node_names = make_nk_graph(callgraph_path)
-    to_return_pd  = gen_cg_mtrcs_from_graph(G, node_names)
+    G, node_names, node_file_paths = make_nk_graph(callgraph_path)
+    to_return_pd  = gen_cg_mtrcs_from_graph(G, node_names, node_file_paths)
     return to_return_pd, G, node_names 
 
 
@@ -110,7 +133,7 @@ def post_process_callgraphs(proj_name, call_res_path
                                      ): 
 
     '''
-    Group generate files, and combine metrics data by classname, 
+    Group generated files, and combine metrics data by classname, 
     and write .csv files to appropriate output files. 
 
 

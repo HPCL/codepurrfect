@@ -214,8 +214,12 @@ struct CallgraphxSDK : public PassInfoMixin<CallgraphxSDK> {
                                                         // of c_name
                 {
                   count++;
-                  csv_file << F.getName().str() << "," 
-                            << c_name << ", DIRECT\n"; 
+                  csv_file << F.getName().str() 
+                           << "," 
+                           << c_name  
+                           << ","
+                           << source_file_name
+                           << ", DIRECT\n"; 
                             
                 }
                 else 
@@ -381,11 +385,13 @@ struct CallgraphxSDK : public PassInfoMixin<CallgraphxSDK> {
                     csv_file << ") :: ";
 
                     op_val -> getType() -> print(csv_file); 
-                    csv_file << "!, INDIRECT \n";
+                    csv_file << "!, " 
+                             << source_file_name 
+                             << "INDIRECT \n";
                   }else{
                     // continue popping stack until you find instr
                     // with tbaa
-                    csv_file << "fail, fail, FAILED \n"; 
+                    csv_file << "fail, fail, fail, FAILED \n"; 
                   }
                   }else{
                     // continue popping stack until you find instr 
