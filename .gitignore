@@ -51,3 +51,6 @@ src/static/data/petsc/*.txt
 
 # Large files 
 *.pdf  
+
+# MacOS 
+.DS_Store
