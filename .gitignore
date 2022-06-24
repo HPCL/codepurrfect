@@ -10,6 +10,8 @@
 *.o
 *.obj
 
+*build
+
 # Precompiled Headers
 *.gch
 *.pch
@@ -41,9 +43,6 @@
 
 # Generated Graphs 
 *.TabOne 
-
-# Generated name of functions 
-src/static/data/petsc/*.txt 
 
 # CMake generated functions 
 *.make 
