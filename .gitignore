@@ -1,5 +1,5 @@
 # VSCode 
-.vscode 
+*.vscode 
 
 # Prerequisites
 *.d
@@ -53,4 +53,4 @@ src/static/data/petsc/*.txt
 *.pdf  
 
 # MacOS 
-.DS_Store
+*.DS_Store
