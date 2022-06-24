@@ -1,5 +1,12 @@
 name: 'Quality-UO'
 description: 'Configure and Quality-UO Static Analysis Tool'
+inputs: 
+  passname: 
+    description: 'Name of pass to build' 
+    required: true 
+    default: all 
 runs: 
   using: 'docker'
   image: '../../../src/dockerStuff/Dockerfile' 
+  # args: 
+  #   - ${{ inputs.passname }}

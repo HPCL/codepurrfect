@@ -11,3 +11,5 @@ add_subdirectory(cwe-1055)
 add_subdirectory(cwe-1045)
 add_subdirectory(cwe-407-no-switch-in-switch)
 add_subdirectory(gen-func-ranges)
+# add_subdirectory(hello-world)
+
