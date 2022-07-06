@@ -20,7 +20,7 @@ def calc_file_loc(item : dict, outpath : str) -> None:
     Calculate lines of code in file and store results 
     in outpath
 
-    item    -- Entry in compilation databaes file (compile_commands.json) 
+    item    -- Entry in compilation database file (compile_commands.json) 
     dirpath -- Directory path to location of compile_commands.json 
     outpath -- Directory where generated files will be stored.
     '''
@@ -39,7 +39,7 @@ def gen_ll_from_file(item : dict, dirpath : str, outpath : str) -> None:
 
     Keyword arguments: 
 
-    item    -- Entry in compilation databaes file (compile_commands.json) 
+    item    -- Entry in compilation database file (compile_commands.json) 
     dirpath -- Directory path to location of compile_commands.json 
     outpath -- Directory where generated .ll file will be stored.
     '''
