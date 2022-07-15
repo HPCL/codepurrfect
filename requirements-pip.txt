@@ -1,12 +1,8 @@
-flake8
-pytest
 pandas 
 networkx 
-networkit
 Cython 
+networkit 
 jupyter 
 matplotlib 
 distfit 
 algebraic-data-types 
-
-

@@ -3,9 +3,9 @@ import os
 def init(): 
     global config_vars 
     cwd = os.getcwd()
-    calc_ast_path = lambda passname : '/'.join(['/static/build/passes-ast', passname, passname])
-    calc_pp_path  = lambda passname : '/'.join(['/static/build/passes-pp', passname, passname])
-    calc_ir_path  = lambda passname : '/'.join(['/static/build/passes-ir', passname, passname, "lib" + passname + ".so"])
+    calc_ast_path = lambda passname : '/'.join(['../build/passes-ast', passname, passname])
+    calc_pp_path  = lambda passname : '/'.join(['../build/passes-pp', passname, passname])
+    calc_ir_path  = lambda passname : '/'.join(['../build/passes-ir', passname, passname, "lib" + passname + ".so"])
     config_vars   = {
         "comp_db_path"   : cwd + "/compile_commands.json", 
         "store"          : cwd + "/.quality-uo",
